@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTROL ESTRICTO DE PESTAÑAS Y VISTAS */
+    /* PESTAÑAS Y CONTENEDORES */
     .tab-pane {
       display: none !important;
     }
@@ -17,7 +17,6 @@
       display: block !important;
     }
 
-    /* TARJETAS HERO */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -67,50 +66,56 @@
       margin: 15px 0 25px 0;
     }
 
-    .btn-reset-league {
+    .btn-reset-league, .btn-export-pdf {
       background: #ffffff;
       color: #444444;
       border: 2px solid #cccccc;
-      padding: 10px 24px;
-      font-size: 14px;
+      padding: 10px 20px;
+      font-size: 13px;
       font-weight: 700;
       border-radius: 30px;
       cursor: pointer;
       transition: all 0.25s ease;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      margin: 0 4px;
     }
 
-    .btn-reset-league:hover {
-      background-color: #f4f4f4;
-      color: #111111;
-      border-color: #777777;
+    .btn-export-pdf {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+    }
+
+    body.flag-theme .btn-export-pdf {
+      background: #A91C00;
+      border-color: #A91C00;
+    }
+
+    .btn-reset-league:hover, .btn-export-pdf:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     /* FILTROS DE CALENDARIO */
     .kfl-filter-bar {
       display: flex;
-      gap: 15px;
+      gap: 12px;
       justify-content: center;
       margin-bottom: 20px;
       flex-wrap: wrap;
     }
 
     .kfl-filter-select {
-      padding: 10px 16px;
+      padding: 8px 14px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
       background: #ffffff;
       font-weight: 600;
       color: #1e293b;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .kfl-filter-select:focus {
-      border-color: #19547E;
     }
 
     /* AGRUPACIÓN POR SEMANAS */
@@ -119,14 +124,13 @@
     }
 
     .kfl-week-title {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       color: #19547E;
       border-bottom: 2px solid #19547E;
       padding-bottom: 6px;
       margin-bottom: 16px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     body.flag-theme .kfl-week-title {
@@ -134,41 +138,60 @@
       border-color: #A91C00;
     }
 
-    /* TARJETAS DE PARTIDO */
-    .kfl-render-container {
-      width: 100%;
-      max-width: 1000px;
-      margin: 20px auto;
+    /* LAYOUT DE CARDS LADO A LADO (GRID) */
+    .kfl-grid-matches {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      gap: 16px;
     }
 
+    @media (max-width: 550px) {
+      .kfl-grid-matches {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* TARJETAS DE PARTIDO */
     .kfl-match-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
-      margin-bottom: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .kfl-match-header {
       background: #19547E;
       color: #ffffff;
-      padding: 10px 16px;
-      font-weight: bold;
-      text-transform: uppercase;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 13px;
-      text-align: center;
     }
 
     body.flag-theme .kfl-match-header {
       background: #A91C00;
     }
 
+    .kfl-info-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .kfl-icon-svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
     .kfl-match-body {
-      padding: 16px;
+      padding: 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -178,42 +201,82 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 35%;
+      width: 36%;
       text-align: center;
-      font-weight: bold;
-      font-size: 15px;
+      font-weight: 700;
+      font-size: 14px;
+      color: #0f172a;
     }
 
     .kfl-team-logo {
-      width: 55px;
-      height: 55px;
+      width: 48px;
+      height: 48px;
       object-fit: contain;
       margin-bottom: 6px;
     }
 
     .kfl-score-box {
-      width: 30%;
+      width: 28%;
       text-align: center;
     }
 
     .kfl-score-num {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 900;
-      color: #111827;
+      color: #0f172a;
     }
 
     .kfl-score-vs {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
       color: #94a3b8;
     }
 
     .kfl-score-status {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
       color: #16a34a;
       letter-spacing: 0.5px;
-      margin-bottom: 2px;
+    }
+
+    /* CARD ÚNICO JAMBOREE */
+    .kfl-jamboree-card {
+      grid-column: 1 / -1;
+      background: #f8fafc;
+      border: 1px dashed #19547E;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    body.flag-theme .kfl-jamboree-card {
+      border-color: #A91C00;
+    }
+
+    .kfl-jamboree-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #19547E;
+      margin-bottom: 4px;
+    }
+
+    body.flag-theme .kfl-jamboree-title {
+      color: #A91C00;
+    }
+
+    /* BYE WEEK (COMPACTO) */
+    .kfl-bye-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      border: 1px solid #e2e8f0;
     }
 
     /* TABLA DE POSICIONES */
@@ -224,51 +287,43 @@
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
       margin-top: 10px;
     }
 
     .kfl-table th {
       background: #19547E;
       color: #ffffff;
-      padding: 12px 10px;
-      font-size: 13px;
+      padding: 10px 8px;
+      font-size: 12px;
       text-transform: uppercase;
       cursor: pointer;
       user-select: none;
-    }
-
-    .kfl-table th:hover {
-      background: #133e5e;
     }
 
     body.flag-theme .kfl-table th {
       background: #A91C00;
     }
 
-    body.flag-theme .kfl-table th:hover {
-      background: #7d1500;
-    }
-
     .kfl-table td {
-      padding: 12px 10px;
+      padding: 10px 8px;
       text-align: center;
       border-bottom: 1px solid #f1f5f9;
-      font-size: 14px;
+      font-size: 13px;
       color: #334155;
     }
 
     .kfl-table-team-cell {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-align: left;
-      font-weight: bold;
+      font-weight: 700;
     }
 
     .kfl-table-team-logo {
-      width: 30px;
-      height: 30px;
+      width: 26px;
+      height: 26px;
       object-fit: contain;
     }
 
@@ -278,10 +333,36 @@
 
     .kfl-loading-spinner {
       text-align: center;
-      padding: 40px;
-      font-size: 16px;
-      font-weight: bold;
+      padding: 30px;
+      font-size: 15px;
+      font-weight: 700;
       color: #19547E;
+    }
+
+    /* ESTILOS DE IMPRESIÓN / EXPORTACIÓN PDF */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .header-nav, .leagues-hero-grid, .league-instruction-bar, .reset-selection-wrapper, .category-pills-wrapper, .sub-tabs-bar, .kfl-filter-bar, .site-footer {
+        display: none !important;
+      }
+      #leagueContentSection, .tab-pane.active, .tab-pane.active * {
+        visibility: visible;
+      }
+      #leagueContentSection {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .kfl-match-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
     }
   </style>
 </head>
@@ -335,9 +416,8 @@
     </div>
 
     <div class="reset-selection-wrapper" id="resetBtnWrapper">
-      <button class="btn-reset-league" onclick="resetLeagueSelection()">
-        🔄 Restablecer Selección / Ocultar
-      </button>
+      <button class="btn-reset-league" onclick="resetLeagueSelection()">🔄 Restablecer Selección</button>
+      <button class="btn-export-pdf" onclick="window.print()">📄 Exportar PDF / Imprimir</button>
     </div>
 
     <!-- SECCIÓN DESPLEGABLE -->
@@ -362,7 +442,6 @@
 
         <!-- CONTENEDORES DE SUB-PESTAÑAS -->
         <div class="tab-pane active" id="pane-calendario">
-          <!-- BARRA DE FILTROS -->
           <div class="kfl-filter-bar">
             <select id="filterWeek" class="kfl-filter-select" onchange="applyCalendarFilters()">
               <option value="ALL">Todas las Semanas</option>
@@ -399,7 +478,13 @@
   <script>
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
-    // RUTAS LOCALES DE LOGOS EN EL REPOSITORIO (CON FALLBACK A IMGUR)
+    // ICONOS SVG INLINE
+    const SVG_ICONS = {
+      calendar: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>`,
+      clock: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`,
+      pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
+    };
+
     const EQUIPOS_LOGOS = {
       "OWLS": "assets/img/logos/owls.png",
       "RAIDERS": "assets/img/logos/raiders.png",
@@ -444,11 +529,19 @@
     let activeCategory = 'varsity';
     let activeSubTab = 'calendario';
 
-    // SISTEMA DE CACHÉ EN MEMORIA PARA MÁXIMA VELOCIDAD
-    let rawDataCache = {
-      calendario: {},
-      posiciones: {}
-    };
+    // SISTEMA DE CACHÉ DE NAVEGADOR
+    function getStoredData(key) {
+      try {
+        const item = sessionStorage.getItem(key);
+        return item ? JSON.parse(item) : null;
+      } catch (e) { return null; }
+    }
+
+    function setStoredData(key, value) {
+      try {
+        sessionStorage.setItem(key, JSON.stringify(value));
+      } catch (e) {}
+    }
 
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
@@ -526,12 +619,14 @@
       }
     }
 
-    // 1. CARGA DE CALENDARIO (CON CACHÉ Y FILTROS POR SEMANA/EQUIPO)
+    // 1. CARGA RÁPIDA DE CALENDARIO CON CACHÉ DE SESIÓN
     function loadCalendarioData() {
-      const cacheKey = `${activeLeague}_${activeCategory}`;
-      if (rawDataCache.calendario[cacheKey]) {
-        populateCalendarFilters(rawDataCache.calendario[cacheKey]);
-        renderCalendar(rawDataCache.calendario[cacheKey]);
+      const cacheKey = `kfl_cal_${activeLeague}_${activeCategory}`;
+      const cached = getStoredData(cacheKey);
+
+      if (cached) {
+        populateCalendarFilters(cached);
+        renderCalendar(cached);
         return;
       }
 
@@ -544,7 +639,7 @@
         .then(res => res.json())
         .then(res => {
           const partidos = res.partidos || [];
-          rawDataCache.calendario[cacheKey] = partidos;
+          setStoredData(cacheKey, partidos);
           populateCalendarFilters(partidos);
           renderCalendar(partidos);
         })
@@ -566,8 +661,8 @@
     }
 
     function applyCalendarFilters() {
-      const cacheKey = `${activeLeague}_${activeCategory}`;
-      const partidos = rawDataCache.calendario[cacheKey] || [];
+      const cacheKey = `kfl_cal_${activeLeague}_${activeCategory}`;
+      const partidos = getStoredData(cacheKey) || [];
       const selectedWeek = document.getElementById('filterWeek').value;
       const selectedTeam = document.getElementById('filterTeam').value;
 
@@ -600,15 +695,42 @@
         html += `<div class="kfl-week-section">`;
         html += `<div class="kfl-week-title">${weekName}</div>`;
 
-        grouped[weekName].forEach(p => {
+        const weekGames = grouped[weekName];
+        const byeGames = weekGames.filter(g => g.isBye);
+        const regularGames = weekGames.filter(g => !g.isBye);
+
+        // Renderizar avisos de BYE/LIBRE compactos
+        if (byeGames.length > 0) {
+          byeGames.forEach(bg => {
+            html += `<div class="kfl-bye-badge">☕ EQUIPO LIBRE / BYE: <strong>${bg.home}</strong></div>`;
+          });
+        }
+
+        html += `<div class="kfl-grid-matches">`;
+
+        regularGames.forEach(p => {
+          if (p.isJamboree) {
+            html += `
+              <div class="kfl-jamboree-card">
+                <div class="kfl-jamboree-title">JAMBOREE KFL - TODOS JUEGAN</div>
+                <div style="font-size:13px; color:#64748b; font-weight:600; display:flex; justify-content:center; gap:12px; margin-top:6px;">
+                  <span>${SVG_ICONS.calendar} ${p.date || 'TBD'}</span>
+                  <span>${SVG_ICONS.clock} ${p.time || 'TBD'}</span>
+                  <span>${SVG_ICONS.pin} ${p.field || 'TBD'}</span>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
           const homeLogo = getTeamLogo(p.home);
           const awayLogo = getTeamLogo(p.away);
 
           html += `
             <div class="kfl-match-card">
               <div class="kfl-match-header">
-                <span>${p.date || 'FECHA POR CONFIRMAR'}</span>
-                <span>${p.field || 'TBD'}</span>
+                <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
+                <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
               </div>
               <div class="kfl-match-body">
                 <div class="kfl-team-box">
@@ -618,7 +740,7 @@
                 <div class="kfl-score-box">
                   ${p.hasScore 
                     ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
-                    : `<div class="kfl-score-vs">VS</div><div style="font-size:13px; color:#64748b; font-weight:600;">${p.time || 'TBD'}</div>`}
+                    : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
                 </div>
                 <div class="kfl-team-box">
                   <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png'}'">
@@ -629,17 +751,19 @@
           `;
         });
 
-        html += `</div>`;
+        html += `</div></div>`;
       }
 
       container.innerHTML = html;
     }
 
-    // 2. CARGA DE TABLA DE POSICIONES (CON CACHÉ, LOGOS Y SORT INTERACTIVO)
+    // 2. CARGA RÁPIDA DE TABLA DE POSICIONES
     function loadPosicionesData() {
-      const cacheKey = `${activeLeague}_${activeCategory}`;
-      if (rawDataCache.posiciones[cacheKey]) {
-        renderPosiciones(rawDataCache.posiciones[cacheKey]);
+      const cacheKey = `kfl_pos_${activeLeague}_${activeCategory}`;
+      const cached = getStoredData(cacheKey);
+
+      if (cached) {
+        renderPosiciones(cached);
         return;
       }
 
@@ -652,7 +776,7 @@
         .then(res => res.json())
         .then(res => {
           const tabla = res.tabla || [];
-          rawDataCache.posiciones[cacheKey] = tabla;
+          setStoredData(cacheKey, tabla);
           renderPosiciones(tabla);
         })
         .catch(err => {
@@ -717,8 +841,8 @@
     }
 
     function sortPosiciones(column) {
-      const cacheKey = `${activeLeague}_${activeCategory}`;
-      let tabla = rawDataCache.posiciones[cacheKey];
+      const cacheKey = `kfl_pos_${activeLeague}_${activeCategory}`;
+      let tabla = getStoredData(cacheKey);
       if (!tabla) return;
 
       if (sortState.col === column) {

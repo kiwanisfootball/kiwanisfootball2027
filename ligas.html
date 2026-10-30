@@ -9,16 +9,15 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTROL STRICTO DE PESTAÑAS (EVITA ACUMULACIÓN Y SCROLL LARGO) */
+    /* CONTROL ESTRICTO DE PESTAÑAS Y VISTAS */
     .tab-pane {
       display: none !important;
     }
-
     .tab-pane.active {
       display: block !important;
     }
 
-    /* ESTILOS DE LIGAS Y TARJETAS HERO */
+    /* TARJETAS HERO */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -88,7 +87,54 @@
       border-color: #777777;
     }
 
-    /* RENDERIZADO DE CONTENIDOS */
+    /* FILTROS DE CALENDARIO */
+    .kfl-filter-bar {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .kfl-filter-select {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .kfl-filter-select:focus {
+      border-color: #19547E;
+    }
+
+    /* AGRUPACIÓN POR SEMANAS */
+    .kfl-week-section {
+      margin-bottom: 30px;
+    }
+
+    .kfl-week-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #19547E;
+      border-bottom: 2px solid #19547E;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    body.flag-theme .kfl-week-title {
+      color: #A91C00;
+      border-color: #A91C00;
+    }
+
+    /* TARJETAS DE PARTIDO */
     .kfl-render-container {
       width: 100%;
       max-width: 1000px;
@@ -112,7 +158,9 @@
       text-transform: uppercase;
       display: flex;
       justify-content: space-between;
-      font-size: 14px;
+      align-items: center;
+      font-size: 13px;
+      text-align: center;
     }
 
     body.flag-theme .kfl-match-header {
@@ -137,8 +185,8 @@
     }
 
     .kfl-team-logo {
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       object-fit: contain;
       margin-bottom: 6px;
     }
@@ -154,11 +202,18 @@
       color: #111827;
     }
 
+    .kfl-score-vs {
+      font-size: 20px;
+      font-weight: 800;
+      color: #94a3b8;
+    }
+
     .kfl-score-status {
       font-size: 12px;
       font-weight: 800;
       color: #16a34a;
       letter-spacing: 0.5px;
+      margin-bottom: 2px;
     }
 
     /* TABLA DE POSICIONES */
@@ -179,10 +234,20 @@
       padding: 12px 10px;
       font-size: 13px;
       text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .kfl-table th:hover {
+      background: #133e5e;
     }
 
     body.flag-theme .kfl-table th {
       background: #A91C00;
+    }
+
+    body.flag-theme .kfl-table th:hover {
+      background: #7d1500;
     }
 
     .kfl-table td {
@@ -191,6 +256,20 @@
       border-bottom: 1px solid #f1f5f9;
       font-size: 14px;
       color: #334155;
+    }
+
+    .kfl-table-team-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .kfl-table-team-logo {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
     }
 
     .kfl-table tr:nth-child(even) {
@@ -283,6 +362,15 @@
 
         <!-- CONTENEDORES DE SUB-PESTAÑAS -->
         <div class="tab-pane active" id="pane-calendario">
+          <!-- BARRA DE FILTROS -->
+          <div class="kfl-filter-bar">
+            <select id="filterWeek" class="kfl-filter-select" onchange="applyCalendarFilters()">
+              <option value="ALL">Todas las Semanas</option>
+            </select>
+            <select id="filterTeam" class="kfl-filter-select" onchange="applyCalendarFilters()">
+              <option value="ALL">Todos los Equipos</option>
+            </select>
+          </div>
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
@@ -311,7 +399,18 @@
   <script>
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
+    // RUTAS LOCALES DE LOGOS EN EL REPOSITORIO (CON FALLBACK A IMGUR)
     const EQUIPOS_LOGOS = {
+      "OWLS": "assets/img/logos/owls.png",
+      "RAIDERS": "assets/img/logos/raiders.png",
+      "EAGLES": "assets/img/logos/eagles.png",
+      "KOLTS": "assets/img/logos/kolts.png",
+      "DRAGONS": "assets/img/logos/dragons.png",
+      "SPARTANS": "assets/img/logos/spartans.png",
+      "LIONS": "assets/img/logos/lions.png"
+    };
+
+    const FALLBACK_LOGOS = {
       "OWLS": "https://i.imgur.com/KRjk1AV.png",
       "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
       "EAGLES": "https://i.imgur.com/lxfq565.png",
@@ -320,6 +419,11 @@
       "SPARTANS": "https://i.imgur.com/JGvY0Zk.png",
       "LIONS": "https://i.imgur.com/XQaNhUb.png"
     };
+
+    function getTeamLogo(teamName) {
+      const cleanTeam = (teamName || "").toUpperCase().trim();
+      return EQUIPOS_LOGOS[cleanTeam] || FALLBACK_LOGOS[cleanTeam] || "https://i.imgur.com/wrPDjDN.png";
+    }
 
     let CATEGORIAS_EQUIPOS = {
       "contact": {
@@ -339,6 +443,12 @@
     let activeLeague = null;
     let activeCategory = 'varsity';
     let activeSubTab = 'calendario';
+
+    // SISTEMA DE CACHÉ EN MEMORIA PARA MÁXIMA VELOCIDAD
+    let rawDataCache = {
+      calendario: {},
+      posiciones: {}
+    };
 
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
@@ -393,12 +503,10 @@
     function selectSubTab(subTab) {
       activeSubTab = subTab;
 
-      // Desactivar todos los botones de pestañas
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
       const activeBtn = document.getElementById('btn-tab-' + subTab);
       if (activeBtn) activeBtn.classList.add('active');
 
-      // Ocultar todas las sub-pestañas y mostrar la activa
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
       const targetPane = document.getElementById('pane-' + subTab);
       if (targetPane) targetPane.classList.add('active');
@@ -410,15 +518,23 @@
       if (!activeLeague) return;
 
       if (activeSubTab === 'calendario') {
-        fetchCalendario();
+        loadCalendarioData();
       } else if (activeSubTab === 'posiciones') {
-        fetchPosiciones();
+        loadPosicionesData();
       } else if (activeSubTab === 'rosters') {
         renderRostersGrid();
       }
     }
 
-    function fetchCalendario() {
+    // 1. CARGA DE CALENDARIO (CON CACHÉ Y FILTROS POR SEMANA/EQUIPO)
+    function loadCalendarioData() {
+      const cacheKey = `${activeLeague}_${activeCategory}`;
+      if (rawDataCache.calendario[cacheKey]) {
+        populateCalendarFilters(rawDataCache.calendario[cacheKey]);
+        renderCalendar(rawDataCache.calendario[cacheKey]);
+        return;
+      }
+
       const container = document.getElementById('calendarioNativeContent');
       container.innerHTML = '<div class="kfl-loading-spinner">⚡ Cargando Calendario...</div>';
 
@@ -427,50 +543,106 @@
       fetch(url)
         .then(res => res.json())
         .then(res => {
-          if (!res.partidos || res.partidos.length === 0) {
-            container.innerHTML = '<p style="text-align:center; padding:30px;">No hay partidos registrados para esta categoría.</p>';
-            return;
-          }
-
-          let html = '';
-          res.partidos.forEach(p => {
-            const homeLogo = EQUIPOS_LOGOS[p.home] || 'https://i.imgur.com/wrPDjDN.png';
-            const awayLogo = EQUIPOS_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png';
-
-            html += `
-              <div class="kfl-match-card">
-                <div class="kfl-match-header">
-                  <span>${p.week} | ${p.date}</span>
-                  <span>${p.field}</span>
-                </div>
-                <div class="kfl-match-body">
-                  <div class="kfl-team-box">
-                    <img src="${homeLogo}" alt="${p.home}" class="kfl-team-logo">
-                    <span>${p.home}</span>
-                  </div>
-                  <div class="kfl-score-box">
-                    ${p.hasScore 
-                      ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
-                      : `<div class="kfl-score-num">VS</div><div style="font-size:13px; color:#666;">${p.time}</div>`}
-                  </div>
-                  <div class="kfl-team-box">
-                    <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo">
-                    <span>${p.away}</span>
-                  </div>
-                </div>
-              </div>
-            `;
-          });
-
-          container.innerHTML = html;
+          const partidos = res.partidos || [];
+          rawDataCache.calendario[cacheKey] = partidos;
+          populateCalendarFilters(partidos);
+          renderCalendar(partidos);
         })
         .catch(err => {
-          console.error("Error al cargar el calendario:", err);
-          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar el calendario. Por favor verifica la versión desplegada en Apps Script.</p>';
+          console.error("Error al cargar calendario:", err);
+          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar el calendario.</p>';
         });
     }
 
-    function fetchPosiciones() {
+    function populateCalendarFilters(partidos) {
+      const weekSelect = document.getElementById('filterWeek');
+      const teamSelect = document.getElementById('filterTeam');
+
+      const weeks = [...new Set(partidos.map(p => p.week).filter(Boolean))];
+      const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => t && t !== 'KFL' && t !== 'TODOS JUEGAN'))];
+
+      weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
+      teamSelect.innerHTML = '<option value="ALL">Todos los Equipos</option>' + teams.map(t => `<option value="${t}">${t}</option>`).join('');
+    }
+
+    function applyCalendarFilters() {
+      const cacheKey = `${activeLeague}_${activeCategory}`;
+      const partidos = rawDataCache.calendario[cacheKey] || [];
+      const selectedWeek = document.getElementById('filterWeek').value;
+      const selectedTeam = document.getElementById('filterTeam').value;
+
+      const filtered = partidos.filter(p => {
+        const matchWeek = selectedWeek === 'ALL' || p.week === selectedWeek;
+        const matchTeam = selectedTeam === 'ALL' || p.home === selectedTeam || p.away === selectedTeam;
+        return matchWeek && matchTeam;
+      });
+
+      renderCalendar(filtered);
+    }
+
+    function renderCalendar(partidos) {
+      const container = document.getElementById('calendarioNativeContent');
+      if (!partidos || partidos.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:30px;">No hay partidos para mostrar con los filtros seleccionados.</p>';
+        return;
+      }
+
+      // Agrupar por Semanas
+      const grouped = {};
+      partidos.forEach(p => {
+        const week = p.week || 'CALENDARIO';
+        if (!grouped[week]) grouped[week] = [];
+        grouped[week].push(p);
+      });
+
+      let html = '';
+      for (const weekName in grouped) {
+        html += `<div class="kfl-week-section">`;
+        html += `<div class="kfl-week-title">${weekName}</div>`;
+
+        grouped[weekName].forEach(p => {
+          const homeLogo = getTeamLogo(p.home);
+          const awayLogo = getTeamLogo(p.away);
+
+          html += `
+            <div class="kfl-match-card">
+              <div class="kfl-match-header">
+                <span>${p.date || 'FECHA POR CONFIRMAR'}</span>
+                <span>${p.field || 'TBD'}</span>
+              </div>
+              <div class="kfl-match-body">
+                <div class="kfl-team-box">
+                  <img src="${homeLogo}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.home] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                  <span>${p.home}</span>
+                </div>
+                <div class="kfl-score-box">
+                  ${p.hasScore 
+                    ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
+                    : `<div class="kfl-score-vs">VS</div><div style="font-size:13px; color:#64748b; font-weight:600;">${p.time || 'TBD'}</div>`}
+                </div>
+                <div class="kfl-team-box">
+                  <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                  <span>${p.away}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    // 2. CARGA DE TABLA DE POSICIONES (CON CACHÉ, LOGOS Y SORT INTERACTIVO)
+    function loadPosicionesData() {
+      const cacheKey = `${activeLeague}_${activeCategory}`;
+      if (rawDataCache.posiciones[cacheKey]) {
+        renderPosiciones(rawDataCache.posiciones[cacheKey]);
+        return;
+      }
+
       const container = document.getElementById('posicionesNativeContent');
       container.innerHTML = '<div class="kfl-loading-spinner">⚡ Cargando Posiciones...</div>';
 
@@ -479,56 +651,97 @@
       fetch(url)
         .then(res => res.json())
         .then(res => {
-          if (!res.tabla || res.tabla.length === 0) {
-            container.innerHTML = '<p style="text-align:center; padding:30px;">No hay tabla disponible aún.</p>';
-            return;
-          }
-
-          let html = `
-            <table class="kfl-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th style="text-align:left;">EQUIPO</th>
-                  <th>JJ</th>
-                  <th>JG</th>
-                  <th>JP</th>
-                  <th>JE</th>
-                  <th>PF</th>
-                  <th>PC</th>
-                  <th>DIF</th>
-                  <th>PTS</th>
-                </tr>
-              </thead>
-              <tbody>
-          `;
-
-          res.tabla.forEach((row, idx) => {
-            html += `
-              <tr>
-                <td><strong>${idx + 1}</strong></td>
-                <td style="text-align:left; font-weight:bold;">${row.equipo}</td>
-                <td>${row.jj}</td>
-                <td>${row.jg}</td>
-                <td>${row.jp}</td>
-                <td>${row.je}</td>
-                <td>${row.pf}</td>
-                <td>${row.pc}</td>
-                <td style="font-weight:bold; color:${row.dif >= 0 ? '#16a34a' : '#dc2626'}">${row.dif > 0 ? '+' + row.dif : row.dif}</td>
-                <td><strong>${row.pts}</strong></td>
-              </tr>
-            `;
-          });
-
-          html += '</tbody></table>';
-          container.innerHTML = html;
+          const tabla = res.tabla || [];
+          rawDataCache.posiciones[cacheKey] = tabla;
+          renderPosiciones(tabla);
         })
         .catch(err => {
-          console.error("Error al cargar las posiciones:", err);
-          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar la tabla de posiciones. Por favor verifica la versión desplegada en Apps Script.</p>';
+          console.error("Error al cargar posiciones:", err);
+          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar la tabla de posiciones.</p>';
         });
     }
 
+    let sortState = { col: 'pts', asc: false };
+
+    function renderPosiciones(tabla) {
+      const container = document.getElementById('posicionesNativeContent');
+      if (!tabla || tabla.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:30px;">No hay tabla disponible aún.</p>';
+        return;
+      }
+
+      let html = `
+        <table class="kfl-table" id="standingsTable">
+          <thead>
+            <tr>
+              <th onclick="sortPosiciones('rank')"># ↕</th>
+              <th onclick="sortPosiciones('equipo')" style="text-align:left;">EQUIPO ↕</th>
+              <th onclick="sortPosiciones('jj')">JJ ↕</th>
+              <th onclick="sortPosiciones('jg')">JG ↕</th>
+              <th onclick="sortPosiciones('jp')">JP ↕</th>
+              <th onclick="sortPosiciones('je')">JE ↕</th>
+              <th onclick="sortPosiciones('pf')">PF ↕</th>
+              <th onclick="sortPosiciones('pc')">PC ↕</th>
+              <th onclick="sortPosiciones('dif')">DIF ↕</th>
+              <th onclick="sortPosiciones('pts')">PTS ↕</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      tabla.forEach((row, idx) => {
+        const logoUrl = getTeamLogo(row.equipo);
+        html += `
+          <tr>
+            <td><strong>${idx + 1}</strong></td>
+            <td>
+              <div class="kfl-table-team-cell">
+                <img src="${logoUrl}" alt="${row.equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[row.equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <span>${row.equipo}</span>
+              </div>
+            </td>
+            <td>${row.jj}</td>
+            <td>${row.jg}</td>
+            <td>${row.jp}</td>
+            <td>${row.je}</td>
+            <td>${row.pf}</td>
+            <td>${row.pc}</td>
+            <td style="font-weight:bold; color:${row.dif >= 0 ? '#16a34a' : '#dc2626'}">${row.dif > 0 ? '+' + row.dif : row.dif}</td>
+            <td><strong>${row.pts}</strong></td>
+          </tr>
+        `;
+      });
+
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function sortPosiciones(column) {
+      const cacheKey = `${activeLeague}_${activeCategory}`;
+      let tabla = rawDataCache.posiciones[cacheKey];
+      if (!tabla) return;
+
+      if (sortState.col === column) {
+        sortState.asc = !sortState.asc;
+      } else {
+        sortState.col = column;
+        sortState.asc = false;
+      }
+
+      tabla.sort((a, b) => {
+        let valA = a[column];
+        let valB = b[column];
+
+        if (typeof valA === 'string') {
+          return sortState.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        }
+        return sortState.asc ? valA - valB : valB - valA;
+      });
+
+      renderPosiciones(tabla);
+    }
+
+    // 3. RENDERIZADO DE ROSTERS
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
@@ -542,11 +755,11 @@
       }
 
       equipos.forEach(equipo => {
-        const logoUrl = EQUIPOS_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png';
+        const logoUrl = getTeamLogo(equipo);
         const card = document.createElement('div');
         card.className = 'team-card-roster';
         card.innerHTML = `
-          <img src="${logoUrl}" alt="${equipo}">
+          <img src="${logoUrl}" alt="${equipo}" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
           <h4>${equipo}</h4>
         `;
         grid.appendChild(card);

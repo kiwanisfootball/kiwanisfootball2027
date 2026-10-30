@@ -7,6 +7,100 @@
   
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <!-- ESTILOS ESPECÍFICOS PARA CONTROL Y SIN EFECTO GREYED-OUT -->
+  <style>
+    /* 1. MANTENER SIEMPRE EL TONO DE COLOR ORIGINAL (SIN GREYED OUT) */
+    .league-hero-card img.hero-bg-img {
+      filter: none !important;
+      opacity: 1 !important;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .league-hero-card {
+      cursor: pointer;
+      border: 3px solid transparent;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .league-hero-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Borde temático activo al seleccionar sin desaturar la otra imagen */
+    .league-hero-card.selected-contact {
+      border-color: #19547E !important;
+      box-shadow: 0 0 20px rgba(25, 84, 126, 0.4);
+    }
+
+    .league-hero-card.selected-flag {
+      border-color: #A91C00 !important;
+      box-shadow: 0 0 20px rgba(169, 28, 0, 0.4);
+    }
+
+    /* 2. MENSAJE DE INSTRUCCIÓN Y BOTÓN DE RESTABLECER */
+    .league-instruction-bar {
+      text-align: center;
+      margin: 20px auto 10px auto;
+      padding: 14px 20px;
+      background-color: #f0f7ff;
+      border: 1px dashed #19547E;
+      border-radius: 12px;
+      max-width: 800px;
+      color: #19547E;
+      font-weight: 700;
+      font-size: 15px;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .reset-selection-wrapper {
+      display: none;
+      text-align: center;
+      margin: 15px 0 25px 0;
+    }
+
+    .btn-reset-league {
+      background: #ffffff;
+      color: #444444;
+      border: 2px solid #cccccc;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .btn-reset-league:hover {
+      background-color: #f4f4f4;
+      color: #111111;
+      border-color: #777777;
+      transform: translateY(-2px);
+    }
+
+    /* Transición suave para desplegar el contenido */
+    .animated-display {
+      animation: fadeInDown 0.4s ease forwards;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body class="contact-theme">
 
@@ -34,9 +128,9 @@
   </header>
 
   <main>
-    <!-- 2. TARJETAS HERO CON OVERLAY TRANSPARENTE & EFECTO GREYED OUT -->
+    <!-- 2. TARJETAS HERO DE LIGAS (AMBAS CON COLOR ORIGINAL) -->
     <section class="leagues-hero-grid">
-      <div class="league-hero-card contact-card active" id="cardContact" onclick="selectLeague('contact')">
+      <div class="league-hero-card contact-card" id="cardContact" onclick="selectLeague('contact')">
         <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino" class="hero-bg-img">
         <div class="hero-overlay">
           <h2>CONTACT FOOTBALL</h2>
@@ -44,7 +138,7 @@
         </div>
       </div>
 
-      <div class="league-hero-card flag-card inactive" id="cardFlag" onclick="selectLeague('flag')">
+      <div class="league-hero-card flag-card" id="cardFlag" onclick="selectLeague('flag')">
         <img src="assets/img/ligas-flag-football.jpg" alt="Flag Football Femenino" class="hero-bg-img">
         <div class="hero-overlay">
           <h2>FLAG FOOTBALL</h2>
@@ -53,60 +147,76 @@
       </div>
     </section>
 
-    <!-- 3. PÍLDORAS DE CATEGORÍA DE ANCHO Y ESTILO HOMOGÉNEO -->
-    <section class="category-pills-wrapper">
-      <button class="category-pill-btn active" onclick="selectCategory('varsity')">VARSITY</button>
-      <button class="category-pill-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
-      <button class="category-pill-btn" onclick="selectCategory('mini')">MINI</button>
-      <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
-    </section>
+    <!-- BARRA CON INSTRUCCIONES VISUALES -->
+    <div class="league-instruction-bar" id="instructionBar">
+      👇 haz clic en <strong>Contact Football</strong> o <strong>Flag Football</strong> para desplegar sus categorías, calendarios, rosters y estadísticas.
+    </div>
 
-    <!-- 4. CONTENEDOR PRINCIPAL CON SUB-PESTAÑAS -->
-    <section class="league-display-wrapper">
+    <!-- BOTÓN PARA RESTABLECER / OCULTAR DESPLIEGUE -->
+    <div class="reset-selection-wrapper" id="resetBtnWrapper">
+      <button class="btn-reset-league" onclick="resetLeagueSelection()">
+        🔄 Restablecer Selección / Ocultar
+      </button>
+    </div>
+
+    <!-- CONTENEDOR DESPLEGABLE (CATEGORÍAS + MÓDULOS DEL CMS) -->
+    <div id="leagueContentSection" style="display: none;">
       
-      <!-- 4 SUB-PESTAÑAS OFICIALES -->
-      <div class="sub-tabs-bar">
-        <button class="sub-tab-btn active" onclick="selectSubTab('calendario')">Calendario</button>
-        <button class="sub-tab-btn" onclick="selectSubTab('rosters')">Rosters</button>
-        <button class="sub-tab-btn" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
-        <button class="sub-tab-btn" onclick="selectSubTab('stats')">Estadísticas</button>
-      </div>
+      <!-- 3. PÍLDORAS DE CATEGORÍA -->
+      <section class="category-pills-wrapper">
+        <button class="category-pill-btn active" onclick="selectCategory('varsity')">VARSITY</button>
+        <button class="category-pill-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
+        <button class="category-pill-btn" onclick="selectCategory('mini')">MINI</button>
+        <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
+      </section>
 
-      <!-- VISTA 1: CALENDARIO -->
-      <div class="tab-pane active" id="pane-calendario">
-        <iframe id="iframeCalendario" class="external-frame" src=""></iframe>
-      </div>
-
-      <!-- VISTA 2: ROSTERS (EQUIPOS CARGADOS DINÁMICAMENTE) -->
-      <div class="tab-pane" id="pane-rosters">
-        <div class="rosters-grid" id="rostersGrid">
-          <!-- Se puebla automáticamente vía JS -->
+      <!-- 4. CONTENEDOR PRINCIPAL CON SUB-PESTAÑAS -->
+      <section class="league-display-wrapper">
+        
+        <!-- SUB-PESTAÑAS -->
+        <div class="sub-tabs-bar">
+          <button class="sub-tab-btn active" onclick="selectSubTab('calendario')">Calendario</button>
+          <button class="sub-tab-btn" onclick="selectSubTab('rosters')">Rosters</button>
+          <button class="sub-tab-btn" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
+          <button class="sub-tab-btn" onclick="selectSubTab('stats')">Estadísticas</button>
         </div>
-      </div>
 
-      <!-- VISTA 3: TABLA DE POSICIONES -->
-      <div class="tab-pane" id="pane-posiciones">
-        <iframe id="iframePosiciones" class="external-frame" src=""></iframe>
-      </div>
+        <!-- VISTA 1: CALENDARIO -->
+        <div class="tab-pane active" id="pane-calendario">
+          <iframe id="iframeCalendario" class="external-frame" src=""></iframe>
+        </div>
 
-      <!-- VISTA 4: ESTADÍSTICAS -->
-      <div class="tab-pane" id="pane-stats">
-        <iframe id="iframeStats" class="external-frame" src=""></iframe>
-      </div>
+        <!-- VISTA 2: ROSTERS (CARGADOS DESDE CMS / GOOGLE SHEETS) -->
+        <div class="tab-pane" id="pane-rosters">
+          <div class="rosters-grid" id="rostersGrid">
+            <!-- Se carga dinámicamente mediante JS -->
+          </div>
+        </div>
 
-    </section>
+        <!-- VISTA 3: TABLA DE POSICIONES -->
+        <div class="tab-pane" id="pane-posiciones">
+          <iframe id="iframePosiciones" class="external-frame" src=""></iframe>
+        </div>
+
+        <!-- VISTA 4: ESTADÍSTICAS -->
+        <div class="tab-pane" id="pane-stats">
+          <iframe id="iframeStats" class="external-frame" src=""></iframe>
+        </div>
+
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer">
     <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT LÓGICO Y RENDERIZADO DE DATOS -->
+  <!-- SCRIPT LÓGICO DE CONTROL Y CMS APPS SCRIPT -->
   <script>
-    // Configuración base de Apps Script (Tus deployments)
+    // URL Base del CMS de Apps Script
     const APPS_SCRIPT_BASE_URL = "https://script.google.com/macros/s/AKfycbwj6Dtr9D_nHfO0gg1EpSepSR6JKY_t0OfmXAAAvhuypF18RsG0UjVwbcKpM_ITjuEP7w/exec";
 
-    // Base de datos de logos de equipos (Centralizada para no editar código al agregar o quitar)
+    // Logos Centralizados
     const EQUIPOS_LOGOS = {
       "OWLS": "https://i.imgur.com/KRjk1AV.png",
       "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
@@ -117,8 +227,8 @@
       "LIONS": "https://i.imgur.com/XQaNhUb.png"
     };
 
-    // Equipos por Categoría (Se actualiza automáticamente desde Apps Script en producción)
-    const CATEGORIAS_EQUIPOS = {
+    // Estructura de Equipos por Categoría (Base de respaldo local)
+    let CATEGORIAS_EQUIPOS = {
       "contact": {
         "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "SPARTANS"],
         "juvenil": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS"],
@@ -133,8 +243,8 @@
       }
     };
 
-    // Estado activo
-    let activeLeague = 'contact';
+    // Estado activo inicial (Inicia replegado)
+    let activeLeague = null;
     let activeCategory = 'varsity';
     let activeSubTab = 'calendario';
 
@@ -145,31 +255,61 @@
       hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
     }
 
-    // 1. Cambiar Liga
+    // 1. Seleccionar Liga (Despliega la sección)
     function selectLeague(league) {
       activeLeague = league;
 
       const cardContact = document.getElementById('cardContact');
       const cardFlag = document.getElementById('cardFlag');
+      const contentSection = document.getElementById('leagueContentSection');
+      const resetBtnWrapper = document.getElementById('resetBtnWrapper');
+      const instructionBar = document.getElementById('instructionBar');
 
+      // Resalte visual con borde temático sin desaturar ninguna imagen
       if (league === 'contact') {
-        cardContact.classList.add('active');
-        cardContact.classList.remove('inactive');
-        cardFlag.classList.add('inactive');
-        cardFlag.classList.remove('active');
+        cardContact.classList.add('selected-contact');
+        cardFlag.classList.remove('selected-flag');
         document.body.className = 'contact-theme';
       } else {
-        cardFlag.classList.add('active');
-        cardFlag.classList.remove('inactive');
-        cardContact.classList.add('inactive');
-        cardContact.classList.remove('active');
+        cardFlag.classList.add('selected-flag');
+        cardContact.classList.remove('selected-contact');
         document.body.className = 'flag-theme';
       }
+
+      // Mostrar el contenido con animación
+      contentSection.style.display = 'block';
+      contentSection.classList.add('animated-display');
+      
+      // Mostrar botón de restablecer y ocultar la barra instruccional previa
+      resetBtnWrapper.style.display = 'block';
+      instructionBar.style.display = 'none';
 
       updateAllPanes();
     }
 
-    // 2. Cambiar Categoría
+    // 2. Restablecer Selección (Oculta y repliega)
+    function resetLeagueSelection() {
+      activeLeague = null;
+
+      const cardContact = document.getElementById('cardContact');
+      const cardFlag = document.getElementById('cardFlag');
+      const contentSection = document.getElementById('leagueContentSection');
+      const resetBtnWrapper = document.getElementById('resetBtnWrapper');
+      const instructionBar = document.getElementById('instructionBar');
+
+      // Quitar bordes de selección
+      cardContact.classList.remove('selected-contact');
+      cardFlag.classList.remove('selected-flag');
+
+      // Ocultar sección desplegable y botón de reseteo
+      contentSection.style.display = 'none';
+      resetBtnWrapper.style.display = 'none';
+      instructionBar.style.display = 'block';
+
+      document.body.className = 'contact-theme';
+    }
+
+    // 3. Cambiar Categoría
     function selectCategory(category) {
       activeCategory = category;
 
@@ -177,10 +317,12 @@
         btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
       });
 
-      updateAllPanes();
+      if (activeLeague) {
+        updateAllPanes();
+      }
     }
 
-    // 3. Cambiar Sub-pestaña
+    // 4. Cambiar Sub-pestaña (Calendario, Rosters, Posiciones, Stats)
     function selectSubTab(subTab) {
       activeSubTab = subTab;
 
@@ -189,20 +331,28 @@
       });
 
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-      document.getElementById('pane-' + subTab).classList.add('active');
+      const paneTarget = document.getElementById('pane-' + subTab);
+      if (paneTarget) {
+        paneTarget.classList.add('active');
+      }
 
-      updateAllPanes();
+      if (activeLeague) {
+        updateAllPanes();
+      }
     }
 
-    // 4. Actualizar iFrames y Rosters
+    // 5. Actualizar iFrames y Rosters vía Apps Script CMS
     function updateAllPanes() {
-      // Cargar Rosters
+      if (!activeLeague) return;
+
+      const catUpper = activeCategory.toUpperCase();
+
+      // Módulo Rosters
       if (activeSubTab === 'rosters') {
         renderRostersGrid();
       }
 
-      // Cargar URLs para iFrames
-      const catUpper = activeCategory.toUpperCase();
+      // Conexión dinámica a los iFrames con los parámetros del Apps Script
       const iframeCal = document.getElementById('iframeCalendario');
       const iframePos = document.getElementById('iframePosiciones');
       const iframeStat = document.getElementById('iframeStats');
@@ -218,13 +368,18 @@
       }
     }
 
-    // 5. Renderizar Rosters Dinámicos
+    // 6. Renderizar Rosters
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
 
-      const equipos = CATEGORIAS_EQUIPOS[activeLeague][activeCategory] || [];
+      const equipos = (CATEGORIAS_EQUIPOS[activeLeague] && CATEGORIAS_EQUIPOS[activeLeague][activeCategory]) || [];
       grid.innerHTML = '';
+
+      if (equipos.length === 0) {
+        grid.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">No hay equipos registrados para esta categoría.</p>';
+        return;
+      }
 
       equipos.forEach(equipo => {
         const logoUrl = EQUIPOS_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png';
@@ -240,15 +395,30 @@
       });
     }
 
-    // Abrir Roster del Equipo
+    // Abrir Modal de Roster desde Apps Script
     function openRosterModal(equipo) {
       const catUpper = activeCategory.toUpperCase();
-      const url = `${APPS_SCRIPT_BASE_URL}?categoria=${catUpper}&equipo=${equipo}`;
-      window.open(url, '_blank', 'width=900,height=750');
+      const url = `${APPS_SCRIPT_BASE_URL}?categoria=${catUpper}&equipo=${encodeURIComponent(equipo)}&liga=${activeLeague}`;
+      window.open(url, '_blank', 'width=950,height=800');
     }
 
-    // Carga inicial
-    updateAllPanes();
+    // Sincronizar dinámicamente equipos desde el CMS si la Web App tiene endpoint JSON
+    function syncCMSData() {
+      fetch(`${APPS_SCRIPT_BASE_URL}?modulo=equipos`)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.categorias) {
+            CATEGORIAS_EQUIPOS = data.categorias;
+            if (activeLeague) renderRostersGrid();
+          }
+        })
+        .catch(() => {
+          // Utiliza los equipos predeterminados si falla la conexión
+        });
+    }
+
+    // Intentar sincronización inicial
+    syncCMSData();
   </script>
 </body>
 </html>

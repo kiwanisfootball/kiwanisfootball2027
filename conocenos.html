@@ -18,69 +18,54 @@
   <div id="global-header"></div>
 
   <main>
-    <!-- 2. ENCABEZADO H1 CON RESEÑA INSTITUCIONAL -->
-    <section class="welcome-header gsap-reveal">
-      <div class="welcome-subtitle">CONÓCENOS</div>
-      <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
-      <p style="text-align: center; max-width: 820px; margin: 15px auto 0 auto; font-size: 16px; font-weight: 600; color: var(--texto-suave);">
-        Conoce la historia de la <strong>Kiwanis Football League</strong> desde sus inicios hasta la actualidad.
+    <!-- 2. ENCABEZADO H1 CON RESEÑA SOLICITADA -->
+    <section class="welcome-header gsap-reveal" style="text-align: center; padding: 40px 20px 10px 20px;">
+      <h1 class="welcome-title" style="font-size: clamp(32px, 5vw, 48px); margin: 0; color: var(--azul-kfl, #19547E);">CONÓCENOS</h1>
+      <p style="max-width: 820px; margin: 12px auto 0 auto; font-size: 16px; font-weight: 600; color: var(--texto-suave, #555);">
+        Conoce la historia de la Kiwanis Football League desde sus inicios hasta la actualidad.
       </p>
     </section>
 
-    <!-- 3. BLOQUE DESTACADO DE MÉTRICAS -->
-    <section class="section-container gsap-reveal" style="margin-top: 20px; margin-bottom: 40px;">
-      <div class="sponsors-grid" style="gap: 15px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    <!-- 3. PERFIL EJECUTIVO & RESEÑA INSTITUCIONAL DE LA LIGA -->
+    <section class="section-container gsap-reveal" style="max-width: 1200px; margin: 30px auto; padding: 0 20px;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; align-items: start;">
         
-        <div class="sponsor-card" style="flex: 1; flex-direction: column; height: auto; padding: 20px 15px; border-left: 4px solid var(--azul-kfl);">
-          <strong style="font-family: var(--fuente-titulos); font-size: 32px; color: var(--azul-kfl); line-height: 1;">1,600+</strong>
-          <span style="font-size: 13px; font-weight: 700; color: var(--texto-oscuro); text-transform: uppercase; margin-top: 4px;">Jugadores Activos</span>
-        </div>
-
-        <div class="sponsor-card" style="flex: 1; flex-direction: column; height: auto; padding: 20px 15px; border-left: 4px solid var(--rojo-kfl);">
-          <strong style="font-family: var(--fuente-titulos); font-size: 32px; color: var(--rojo-kfl); line-height: 1;">1,200+</strong>
-          <span style="font-size: 13px; font-weight: 700; color: var(--texto-oscuro); text-transform: uppercase; margin-top: 4px;">Coaches Certificados USA Football</span>
-        </div>
-
-        <div class="sponsor-card" style="flex: 1; flex-direction: column; height: auto; padding: 20px 15px; border-left: 4px solid var(--azul-kfl);">
-          <strong style="font-family: var(--fuente-titulos); font-size: 32px; color: var(--azul-kfl); line-height: 1;">58+ AÑOS</strong>
-          <span style="font-size: 13px; font-weight: 700; color: var(--texto-oscuro); text-transform: uppercase; margin-top: 4px;">Tradición y Liderazgo</span>
-        </div>
-
-        <div class="sponsor-card" style="flex: 1; flex-direction: column; height: auto; padding: 20px 15px; border-left: 4px solid var(--rojo-kfl);">
-          <strong style="font-family: var(--fuente-titulos); font-size: 32px; color: var(--rojo-kfl); line-height: 1;">PANAMA SHARKS</strong>
-          <span style="font-size: 13px; font-weight: 700; color: var(--texto-oscuro); text-transform: uppercase; margin-top: 4px;">Selección Nacional KFL</span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 4. PERFIL EJECUTIVO & RESEÑA HISTÓRICA CON ÉNFASIS SEO -->
-    <section class="president-wrapper gsap-reveal">
-      <div class="president-grid">
-        
-        <!-- Tarjeta Perfil Presidente -->
-        <div class="president-profile">
-          <img src="assets/img/conocenos-raul-mendez.jpg" alt="Raúl Méndez de Obarrio - Presidente KFL" class="president-photo">
-          <h2 class="president-name">RAÚL MÉNDEZ DE OBARRIO</h2>
-          <div class="president-role">PRESIDENTE DE LA LIGA</div>
-          <p class="president-bio-summary">
-            Líder comprometido con el desarrollo integral de la juventud panameña a través de la disciplina, el trabajo en equipo y la excelencia deportiva en la <strong>Kiwanis Football League</strong>.
+        <!-- Tarjeta Perfil Presidente: Raúl Méndez de Obarrio -->
+        <div class="president-profile" style="background: #ffffff; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; text-align: center;">
+          <img src="assets/img/conocenos-raul-mendez.jpg" alt="Raúl Méndez de Obarrio - Presidente KFL" class="president-photo" style="width: 100%; max-width: 280px; height: 280px; object-fit: cover; border-radius: 10px; margin: 0 auto 20px auto; display: block;">
+          <h2 class="president-name" style="font-size: 22px; color: var(--azul-kfl, #19547E); margin-bottom: 5px; font-weight: bold; text-transform: uppercase;">RAÚL MÉNDEZ DE OBARRIO</h2>
+          <div class="president-role" style="font-size: 14px; font-weight: 700; color: var(--rojo-kfl, #D32F2F); text-transform: uppercase; margin-bottom: 15px; letter-spacing: 0.5px;">Presidente actual de la liga KFL</div>
+          <p class="president-bio-summary" style="font-size: 15px; color: #4a5568; line-height: 1.6; margin: 0; text-align: justify;">
+            Como miembro del Club Kiwanis de Panamá, ha sido Presidente, Vicepresidente, Secretario, Vocal y Asesor de la Junta Directiva en varios periodos.
           </p>
         </div>
 
-        <!-- Tarjeta Historia Institucional -->
-        <div class="league-overview-content">
-          <h2 style="color: var(--azul-kfl); margin-bottom: 15px;">NUESTRA HISTORIA E IMPACTO</h2>
-          <p>
-            Desde 1967, el <strong>Club Kiwanis de Panamá</strong> ha impulsado el <strong>football americano</strong> y el <strong>flag football</strong> como plataformas de transformación social, formando atletas íntegros y líderes para el país.
-          </p>
-          <p>
-            Lo que comenzó como una liga intercolegial con pocos equipos ha evolucionado en una estructura profesional escolar dividida en dos grandes vertientes: <strong>Contact Football Masculino</strong> y <strong>Flag Football Femenino</strong>.
-          </p>
-          <p>
-            Con presencia en las categorías <strong>Micro (U10)</strong>, <strong>Mini (U13)</strong>, <strong>Juvenil (U16)</strong> y <strong>Varsity (U19)</strong>, garantizamos la formación continua desde edades tempranas con entrenadores certificados internacionalmente por <strong>USA Football</strong>.
-          </p>
-          <div class="about-image" style="margin-top: 20px; border-radius: 10px; overflow: hidden; max-height: 220px;">
+        <!-- Tarjeta Historia Institucional y Texto Descriptivo Completo -->
+        <div class="league-overview-content" style="background: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e2e8f0;">
+          <h2 style="color: var(--azul-kfl, #19547E); margin-top: 0; margin-bottom: 20px; font-size: 24px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid var(--azul-kfl, #19547E); padding-bottom: 10px;">Nuestra Historia e Impacto</h2>
+          
+          <div style="font-size: 15px; color: #2d3748; line-height: 1.7; display: flex; flex-direction: column; gap: 15px; text-align: justify;">
+            <p style="margin: 0;">
+              Nuestra Liga de Football Americano Kiwanis se ha convertido en un Programa Escolar Pionero. Ofrecemos dos ligas, la de <strong>Contact Masculino</strong> y la de <strong>Flag Femenino</strong>. Con categorías para football americano desde Micro, Mini, Juvenil y Varsity, y en flag football empezando desde Micro, Mini, Juvenil y Varsity. Nos enorgullece que actualmente contamos con un aproximado de <strong>1,600 jugadores</strong>.
+            </p>
+            <p style="margin: 0;">
+              En Football Americano, la categoría Micro va desde 7 a 9 años, la Mini desde 10 a 12, la Juvenil desde 13 a 15, y la Varsity desde 16 a 18 años. Para Flag Football empieza con la categoría Micro va desde 7 a 9 años, la categoría Mini desde 10 a 12, la Juvenil desde 13 a 15, y la Varsity que es desde 16 a 18 años. Para cada categoría la Liga tiene un promedio de tres meses, que están conformados por 12 partidos.
+            </p>
+            <p style="margin: 0;">
+              Contamos con un grupo de entrenadores entregados al deporte para los jóvenes jugadores. Hoy podemos decir con gran orgullo que tenemos <strong>120 entrenadores</strong> todos certificados por <strong>USA Football</strong>, entidad que regula las ligas de Youth Football de Estados Unidos.
+            </p>
+            <p style="margin: 0;">
+              <strong>Kiwanis es el único programa fuera de Estados Unidos que tiene todos sus entrenadores certificados</strong>, como exigencia para poder ser entrenador de cualquier equipo en las Ligas Kiwanis.
+            </p>
+            <p style="margin: 0;">
+              Todos los años conformamos una Selección con los mejores jugadores de las categorías Mini y Juvenil en ambas ligas para representar a Panamá en torneos internacionales conocidos como los <strong>“Panama Sharks”</strong>. Hemos viajado seis años seguidos a representar a nuestro país en Torneos Internacionales a: Cancún, Puerto Rico, Tampa Florida, Miami Florida, Las Vegas, Daytona Florida, México DF y se mantienen invictos en la categoría Juvenil.
+            </p>
+            <p style="margin: 0;">
+              No solo cumplimos con la comunidad al darle otra alternativa de deporte a nuestra juventud, los alejamos de las malas costumbres, sino que trabajamos de la mano con las escuelas participantes con la parte académica. Asesoramos a los jugadores, nos convertimos en sus consejeros, y creamos una gran familia.
+            </p>
+          </div>
+
+          <div class="about-image" style="margin-top: 25px; border-radius: 8px; overflow: hidden; max-height: 220px;">
             <img src="assets/img/conocenos-historia-kfl.jpg" alt="Historia Kiwanis Football League Panama" style="width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
@@ -88,84 +73,171 @@
       </div>
     </section>
 
-    <!-- 5. CRONOLOGÍA / TIMELINE CON ÉNFASIS SEO EQUILIBRADO -->
-    <section class="timeline-section gsap-reveal">
-      <h2 style="text-align: center; color: var(--rojo-kfl); margin-bottom: 40px; font-size: clamp(32px, 5vw, 46px);">
+    <!-- 4. CRONOLOGÍA / TIMELINE COMPLETO Y OPTIMIZADO -->
+    <section class="timeline-section gsap-reveal" style="max-width: 900px; margin: 50px auto; padding: 0 20px;">
+      <h2 style="text-align: center; color: var(--rojo-kfl, #D32F2F); margin-bottom: 35px; font-size: clamp(26px, 4vw, 36px); font-weight: bold; text-transform: uppercase;">
         CRONOLOGÍA DE HITOS HISTÓRICOS
       </h2>
 
-      <div class="timeline-line"></div>
-
-      <!-- HITO 1967 -->
-      <article class="timeline-item">
-        <div class="timeline-node"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">1967</div>
-          <p class="timeline-text">
-            <strong>Fundación de la Liga:</strong> El <strong>Club Kiwanis de Panamá</strong> organiza la primera temporada escolar de <strong>Contact Football</strong> en el país con la misión de promover valores a través del deporte.
+      <div class="timeline-container" style="display: flex; flex-direction: column; gap: 20px; position: relative;">
+        
+        <!-- 1967 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">1967</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Se funda <strong>El Club Kiwanis de Panamá</strong>, una sociedad civil sin fines de lucro fundada en Panamá por iniciativa del <strong>Arq. Gustavo Rosania</strong>.
           </p>
-        </div>
-      </article>
+        </article>
 
-      <!-- HITO 2000 -->
-      <article class="timeline-item">
-        <div class="timeline-node"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2000</div>
-          <p class="timeline-text">
-            <strong>Consolidación Escolar:</strong> Incorporación oficial de las categorías juveniles e infantiles (<strong>Micro</strong> y <strong>Mini</strong>) para crear un semillero deportivo continuo de <strong>alto rendimiento</strong>.
+        <!-- 1972 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">1972</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Con la administración del <strong>Ing. Mario Rognoni (QEPD)</strong>, el <strong>Club Kiwanis de Panamá</strong> organizó dos equipos juveniles de fútbol americano, para que participaran en el <strong>Canal Zone League</strong> donde jugaban diferentes equipos de las bases militares de los Estados Unidos acantonadas en Panamá.
           </p>
-        </div>
-      </article>
+        </article>
 
-      <!-- HITO 2012 -->
-      <article class="timeline-item">
-        <div class="timeline-node"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2012</div>
-          <p class="timeline-text">
-            <strong>Pioneros en Flag Football Femenino:</strong> Integración de la liga femenina de <strong>Flag Football</strong>, convirtiéndose en el <strong>torneo escolar</strong> más competitivo de la región.
+        <!-- 1977 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">1977</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Los <strong>Kiwanis Kolts</strong> se consagran bi-campeones del football americano y comienza el sueño de Panamá.
           </p>
-        </div>
-      </article>
+        </article>
 
-      <!-- HITO 2019 -->
-      <article class="timeline-item">
-        <div class="timeline-node"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2019</div>
-          <p class="timeline-text">
-            <strong>Hito Internacional Panama Sharks:</strong> La selección <strong>Panama Sharks U18</strong> participa en el prestigioso <strong>International Bowl</strong> organizado por <strong>USA Football</strong> en Texas, haciendo historia al vencer al combinado de Estados Unidos por marcador de <strong>30-25</strong>.
+        <!-- 1999 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">1999</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Con la firma de los <strong>Tratados Torrijos-Carter</strong>, se van los Americanos de Panamá. La Liga se debilita y se reducen los equipos. Cierra la liga de la Zona del Canal y se abre la Liga organizada por <strong>Panajuru</strong> que dura pocos años.
           </p>
-        </div>
-      </article>
+        </article>
 
-      <!-- HITO 2021 -->
-      <article class="timeline-item">
-        <div class="timeline-node"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2021</div>
-          <p class="timeline-text">
-            <strong>Certificación y Bioseguridad:</strong> Implementación del programa de certificación técnica para más de 1,200 coaches respaldado por <strong>USA Football</strong>.
+        <!-- 2000 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2000</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Bajo la Presidencia de <strong>Raúl Méndez de Obarrio</strong>, el <strong>Club Kiwanis</strong> retoma el deporte y la liga se juega con solo cuatro equipos de Panamá en la categoría mayor. Todos bajo el primer nombre “Kiwanis”: <strong>Kiwanis Kolts</strong>, <strong>Kiwanis Knights</strong>, <strong>Kiwanis Kobra</strong> y <strong>Kiwanis Kings</strong>.
           </p>
-        </div>
-      </article>
+        </article>
 
-      <!-- HITO 2025 -->
-      <article class="timeline-item">
-        <div class="timeline-node"></div>
-        <div class="timeline-card">
-          <div class="timeline-year">2025</div>
-          <p class="timeline-text">
-            <strong>Evolución IFAF & Nuevo Contendiente:</strong> La Liga de <strong>Flag Football Femenino</strong> migra oficialmente del formato 8v8 al estándar <strong>5v5 bajo reglamentación IFAF</strong> (International Federation of American Football). Paralelamente, debutan los <strong>Eagles del Colegio de Panamá</strong> en la división <strong>Varsity Contact</strong>.
+        <!-- 2001 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">2001</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Se hace una reingeniería de la Liga. Migra hacia una <strong>liga intercolegial</strong>.
           </p>
-        </div>
-      </article>
+        </article>
 
+        <!-- 2002 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2002</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Entran los <strong>Raiders del Colegio Brader</strong> y los <strong>Tigers del Instituto Don Bosco</strong>.
+          </p>
+        </article>
+
+        <!-- 2004 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">2004</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Entran los <strong>Spartans de La Salle</strong>.
+          </p>
+        </article>
+
+        <!-- 2005 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2005</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Entran los <strong>Titans</strong> de la comunidad hebrea liderizada por el <strong>Instituto Alberto Einstein</strong>.
+          </p>
+        </article>
+
+        <!-- 2007 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">2007</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Entran los <strong>Dragons</strong> de la escuela de <strong>Balboa Academy</strong>.
+          </p>
+        </article>
+
+        <!-- 2008 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2008</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Entran los <strong>Redskins del San Vicente de Paul</strong>. Se inaugura la <strong>Categoría Mini</strong> con 7 equipos: Kiwanis Kolts, AIP Fighting Owls, San Vicente Redskins, La Salle Spartans, Alberto Einstein Titans, Balboa Dragons y Brader Raiders.
+          </p>
+        </article>
+
+        <!-- 2009 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">2009</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Se inaugura la <strong>Categoría Micro</strong> con 10 equipos: El Chino Panameño, la AIP saca 2 equipos, Kolts, Raiders, Spartans, Titans, Balboa, Oxford, Red Lions y Redskins.
+          </p>
+        </article>
+
+        <!-- 2012 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2012</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Se inaugura la <strong>Categoría Varsity</strong>, con jugadores de 16 a 18 años de edad y peso ilimitado.
+          </p>
+        </article>
+
+        <!-- 2015 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">2015</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Se inaugura <strong>Flag Football Femenino</strong> en la <strong>Categoría Juvenil</strong> con la participación de 7 equipos.
+          </p>
+        </article>
+
+        <!-- 2016 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2016</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Se inaugura en <strong>Flag Femenino</strong> la <strong>Categoría Varsity</strong> con 7 equipos.
+          </p>
+        </article>
+
+        <!-- 2017 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">2017</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Se inaugura en <strong>Flag Femenino</strong> la <strong>Categoría Mini</strong>.
+          </p>
+        </article>
+
+        <!-- 2019 (HITO INTERNACIONAL PANAMA SHARKS) -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2019</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            Los <strong>Panama Sharks U18</strong> participaron del <strong>International Bowl</strong>, organizado por <strong>USA Football</strong> y hacen historia, ganándole al combinado de Estados Unidos por <strong>30-25</strong>.
+          </p>
+        </article>
+
+        <!-- 2021 -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--rojo-kfl, #D32F2F); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--rojo-kfl, #D32F2F); margin-bottom: 6px;">2021</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            La liga sigue creciendo. Se lanzan las <strong>Sharks de flag football femenino</strong> por primera vez en un partido Internacional con sede en Panamá contra Querétaro México.
+          </p>
+        </article>
+
+        <!-- 2025 (IFAF + EAGLES VARSITY CONTACT) -->
+        <article class="timeline-card" style="background: #ffffff; padding: 20px; border-radius: 10px; border-left: 5px solid var(--azul-kfl, #19547E); box-shadow: 0 3px 10px rgba(0,0,0,0.05);">
+          <div class="timeline-year" style="font-size: 22px; font-weight: bold; color: var(--azul-kfl, #19547E); margin-bottom: 6px;">2025</div>
+          <p class="timeline-text" style="font-size: 15px; color: #333; margin: 0; line-height: 1.5;">
+            La Liga de flag football femenino migra del formato 8vs8 a formato <strong>5v5 con reglamentación IFAF</strong> (International Federation of American Football) y debutan los <strong>Eagles del Colegio de Panamá</strong> en la categoría <strong>Varsity Contact</strong>.
+          </p>
+        </article>
+
+      </div>
     </section>
   </main>
 
-  <!-- 6. FOOTER NEGRO DINÁMICO -->
+  <!-- 5. FOOTER DINÁMICO (Inyectado por js/components.js) -->
   <div id="global-footer"></div>
 
   <!-- COMPONENTE NAVEGACIÓN + FOOTER DINÁMICO -->

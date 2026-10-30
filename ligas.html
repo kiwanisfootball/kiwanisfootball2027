@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* Estilos visuales sin escala de grises */
+    /* ESTILOS NATIVOS DE LA SECCIÓN LIGAS (SIN IFRAMES) */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -51,7 +51,6 @@
       font-weight: 700;
       font-size: 15px;
       display: block;
-      transition: all 0.3s ease;
     }
 
     .reset-selection-wrapper {
@@ -72,29 +71,129 @@
       transition: all 0.25s ease;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
     .btn-reset-league:hover {
       background-color: #f4f4f4;
       color: #111111;
       border-color: #777777;
-      transform: translateY(-2px);
     }
 
-    .animated-display {
-      animation: fadeInDown 0.4s ease forwards;
+    /* RENDERIZADO NATIVO DE CALENDARIO Y TABLAS */
+    .kfl-render-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 20px auto;
     }
 
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .kfl-match-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .kfl-match-header {
+      background: var(--azul-kfl, #19547E);
+      color: #ffffff;
+      padding: 10px 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+
+    body.flag-theme .kfl-match-header {
+      background: var(--rojo-kfl, #A91C00);
+    }
+
+    .kfl-match-body {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kfl-team-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 35%;
+      text-align: center;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .kfl-team-logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      margin-bottom: 6px;
+    }
+
+    .kfl-score-box {
+      width: 30%;
+      text-align: center;
+    }
+
+    .kfl-score-num {
+      font-size: 26px;
+      font-weight: 900;
+      color: #111827;
+    }
+
+    .kfl-score-status {
+      font-size: 12px;
+      font-weight: 800;
+      color: #16a34a;
+      letter-spacing: 0.5px;
+    }
+
+    /* TABLA DE POSICIONES NATIVA */
+    .kfl-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-top: 10px;
+    }
+
+    .kfl-table th {
+      background: var(--azul-kfl, #19547E);
+      color: #ffffff;
+      padding: 12px 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    body.flag-theme .kfl-table th {
+      background: var(--rojo-kfl, #A91C00);
+    }
+
+    .kfl-table td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .kfl-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .kfl-loading-spinner {
+      text-align: center;
+      padding: 40px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #19547E;
     }
   </style>
 </head>
@@ -173,24 +272,23 @@
           <button class="sub-tab-btn" onclick="selectSubTab('stats')">Estadísticas</button>
         </div>
 
-        <!-- VISTA 1: CALENDARIO -->
+        <!-- CONTENEDORES NATIVOS (SIN IFRAMES) -->
         <div class="tab-pane active" id="pane-calendario">
-          <iframe id="iframeCalendario" class="external-frame" src=""></iframe>
+          <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- VISTA 2: ROSTERS -->
         <div class="tab-pane" id="pane-rosters">
           <div class="rosters-grid" id="rostersGrid"></div>
         </div>
 
-        <!-- VISTA 3: POSICIONES -->
         <div class="tab-pane" id="pane-posiciones">
-          <iframe id="iframePosiciones" class="external-frame" src=""></iframe>
+          <div id="posicionesNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- VISTA 4: ESTADÍSTICAS -->
         <div class="tab-pane" id="pane-stats">
-          <iframe id="iframeStats" class="external-frame" src=""></iframe>
+          <div id="statsNativeContent" class="kfl-render-container">
+            <p style="text-align:center; padding:30px; color:#666;">Estadísticas en actualización...</p>
+          </div>
         </div>
 
       </section>
@@ -202,10 +300,9 @@
   </footer>
 
   <script>
-    // URL DEL CMS EXCLUSIVO DE CALENDARIOS Y POSICIONES (CONTACT)
-    const APPS_SCRIPT_CONTACT_CMS = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
+    // ENDPOINT EXCLUSIVO EN APPS SCRIPT
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
-    // LOGOS
     const EQUIPOS_LOGOS = {
       "OWLS": "https://i.imgur.com/KRjk1AV.png",
       "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
@@ -261,8 +358,6 @@
       }
 
       contentSection.style.display = 'block';
-      contentSection.classList.add('animated-display');
-      
       resetBtnWrapper.style.display = 'block';
       instructionBar.style.display = 'none';
 
@@ -271,79 +366,158 @@
 
     function resetLeagueSelection() {
       activeLeague = null;
-
-      const cardContact = document.getElementById('cardContact');
-      const cardFlag = document.getElementById('cardFlag');
-      const contentSection = document.getElementById('leagueContentSection');
-      const resetBtnWrapper = document.getElementById('resetBtnWrapper');
-      const instructionBar = document.getElementById('instructionBar');
-
-      cardContact.classList.remove('selected-contact');
-      cardFlag.classList.remove('selected-flag');
-
-      contentSection.style.display = 'none';
-      resetBtnWrapper.style.display = 'none';
-      instructionBar.style.display = 'block';
-
+      document.getElementById('cardContact').classList.remove('selected-contact');
+      document.getElementById('cardFlag').classList.remove('selected-flag');
+      document.getElementById('leagueContentSection').style.display = 'none';
+      document.getElementById('resetBtnWrapper').style.display = 'none';
+      document.getElementById('instructionBar').style.display = 'block';
       document.body.className = 'contact-theme';
     }
 
     function selectCategory(category) {
       activeCategory = category;
-
       document.querySelectorAll('.category-pill-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
       });
-
-      if (activeLeague) {
-        updateAllPanes();
-      }
+      if (activeLeague) updateAllPanes();
     }
 
     function selectSubTab(subTab) {
       activeSubTab = subTab;
-
       document.querySelectorAll('.sub-tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('onclick').includes(subTab));
       });
-
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-      const paneTarget = document.getElementById('pane-' + subTab);
-      if (paneTarget) {
-        paneTarget.classList.add('active');
-      }
+      const targetPane = document.getElementById('pane-' + subTab);
+      if (targetPane) targetPane.classList.add('active');
 
-      if (activeLeague) {
-        updateAllPanes();
-      }
+      if (activeLeague) updateAllPanes();
     }
 
-    // RUTEO DE URLS SEGÚN LA PESTAÑA Y CATEGORÍA SELECCIONADA
     function updateAllPanes() {
       if (!activeLeague) return;
 
-      const catUpper = activeCategory.toUpperCase();
-      const catLower = activeCategory.toLowerCase();
-
-      const iframeCal = document.getElementById('iframeCalendario');
-      const iframePos = document.getElementById('iframePosiciones');
-
-      if (activeLeague === 'contact') {
-        // Carga Calendario filtrado por la categoría activa (VARSITY, JUVENIL, MINI, MICRO)
-        if (iframeCal && activeSubTab === 'calendario') {
-          iframeCal.src = `${APPS_SCRIPT_CONTACT_CMS}?modulo=calendario&categoria=${catUpper}`;
-        }
-        // Carga Tabla de Posiciones de la categoría activa
-        if (iframePos && activeSubTab === 'posiciones') {
-          iframePos.src = `${APPS_SCRIPT_CONTACT_CMS}?modulo=tabla_${catLower}`;
-        }
-      }
-
-      if (activeSubTab === 'rosters') {
+      if (activeSubTab === 'calendario') {
+        fetchCalendario();
+      } else if (activeSubTab === 'posiciones') {
+        fetchPosiciones();
+      } else if (activeSubTab === 'rosters') {
         renderRostersGrid();
       }
     }
 
+    // 1. OBTENER Y RENDERIZAR CALENDARIO NATIVAMENTE
+    function fetchCalendario() {
+      const container = document.getElementById('calendarioNativeContent');
+      container.innerHTML = '<div class="kfl-loading-spinner">⚡ Cargando Calendario...</div>';
+
+      const url = `${APPS_SCRIPT_URL}?modulo=calendario&categoria=${activeCategory.toUpperCase()}&liga=${activeLeague}`;
+      
+      fetch(url)
+        .then(res => res.json())
+        .then(res => {
+          if (!res.partidos || res.partidos.length === 0) {
+            container.innerHTML = '<p style="text-align:center; padding:30px;">No hay partidos registrados para esta categoría.</p>';
+            return;
+          }
+
+          let html = '';
+          res.partidos.forEach(p => {
+            const homeLogo = EQUIPOS_LOGOS[p.home] || 'https://i.imgur.com/wrPDjDN.png';
+            const awayLogo = EQUIPOS_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png';
+
+            html += `
+              <div class="kfl-match-card">
+                <div class="kfl-match-header">
+                  <span>${p.week} | ${p.date}</span>
+                  <span>${p.field}</span>
+                </div>
+                <div class="kfl-match-body">
+                  <div class="kfl-team-box">
+                    <img src="${homeLogo}" alt="${p.home}" class="kfl-team-logo">
+                    <span>${p.home}</span>
+                  </div>
+                  <div class="kfl-score-box">
+                    ${p.hasScore 
+                      ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
+                      : `<div class="kfl-score-num">VS</div><div style="font-size:13px; color:#666;">${p.time}</div>`}
+                  </div>
+                  <div class="kfl-team-box">
+                    <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo">
+                    <span>${p.away}</span>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+
+          container.innerHTML = html;
+        })
+        .catch(err => {
+          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar el calendario.</p>';
+        });
+    }
+
+    // 2. OBTENER Y RENDERIZAR POSICIONES NATIVAMENTE
+    function fetchPosiciones() {
+      const container = document.getElementById('posicionesNativeContent');
+      container.innerHTML = '<div class="kfl-loading-spinner">⚡ Cargando Posiciones...</div>';
+
+      const url = `${APPS_SCRIPT_URL}?modulo=posiciones&categoria=${activeCategory.toUpperCase()}&liga=${activeLeague}`;
+
+      fetch(url)
+        .then(res => res.json())
+        .then(res => {
+          if (!res.tabla || res.tabla.length === 0) {
+            container.innerHTML = '<p style="text-align:center; padding:30px;">No hay tabla disponible aún.</p>';
+            return;
+          }
+
+          let html = `
+            <table class="kfl-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th style="text-align:left;">EQUIPO</th>
+                  <th>JJ</th>
+                  <th>JG</th>
+                  <th>JP</th>
+                  <th>JE</th>
+                  <th>PF</th>
+                  <th>PC</th>
+                  <th>DIF</th>
+                  <th>PTS</th>
+                </tr>
+              </thead>
+              <tbody>
+          `;
+
+          res.tabla.forEach((row, idx) => {
+            html += `
+              <tr>
+                <td><strong>${idx + 1}</strong></td>
+                <td style="text-align:left; font-weight:bold;">${row.equipo}</td>
+                <td>${row.jj}</td>
+                <td>${row.jg}</td>
+                <td>${row.jp}</td>
+                <td>${row.je}</td>
+                <td>${row.pf}</td>
+                <td>${row.pc}</td>
+                <td style="font-weight:bold; color:${row.dif >= 0 ? '#16a34a' : '#dc2626'}">${row.dif > 0 ? '+' + row.dif : row.dif}</td>
+                <td><strong>${row.pts}</strong></td>
+              </tr>
+            `;
+          });
+
+          html += '</tbody></table>';
+          container.innerHTML = html;
+        })
+        .catch(err => {
+          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar la tabla de posiciones.</p>';
+        });
+    }
+
+    // 3. RENDERIZAR ROSTERS NATIVAMENTE
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
@@ -352,7 +526,7 @@
       grid.innerHTML = '';
 
       if (equipos.length === 0) {
-        grid.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">No hay equipos registrados para esta categoría.</p>';
+        grid.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">No hay equipos registrados.</p>';
         return;
       }
 

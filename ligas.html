@@ -213,8 +213,8 @@
 
   <!-- SCRIPT LÓGICO DE CONTROL Y CMS APPS SCRIPT -->
   <script>
-    // URL Base del CMS de Apps Script
-    const APPS_SCRIPT_BASE_URL = "https://script.google.com/macros/s/AKfycbwj6Dtr9D_nHfO0gg1EpSepSR6JKY_t0OfmXAAAvhuypF18RsG0UjVwbcKpM_ITjuEP7w/exec";
+    // NUEVA URL Base del CMS de Apps Script
+    const APPS_SCRIPT_BASE_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
     // Logos Centralizados
     const EQUIPOS_LOGOS = {
@@ -227,7 +227,7 @@
       "LIONS": "https://i.imgur.com/XQaNhUb.png"
     };
 
-    // Estructura de Equipos por Categoría (Base de respaldo local)
+    // Estructura de Equipos por Categoría
     let CATEGORIAS_EQUIPOS = {
       "contact": {
         "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "SPARTANS"],
@@ -243,7 +243,7 @@
       }
     };
 
-    // Estado activo inicial (Inicia replegado)
+    // Estado activo inicial
     let activeLeague = null;
     let activeCategory = 'varsity';
     let activeSubTab = 'calendario';
@@ -265,7 +265,6 @@
       const resetBtnWrapper = document.getElementById('resetBtnWrapper');
       const instructionBar = document.getElementById('instructionBar');
 
-      // Resalte visual con borde temático sin desaturar ninguna imagen
       if (league === 'contact') {
         cardContact.classList.add('selected-contact');
         cardFlag.classList.remove('selected-flag');
@@ -276,18 +275,16 @@
         document.body.className = 'flag-theme';
       }
 
-      // Mostrar el contenido con animación
       contentSection.style.display = 'block';
       contentSection.classList.add('animated-display');
       
-      // Mostrar botón de restablecer y ocultar la barra instruccional previa
       resetBtnWrapper.style.display = 'block';
       instructionBar.style.display = 'none';
 
       updateAllPanes();
     }
 
-    // 2. Restablecer Selección (Oculta y repliega)
+    // 2. Restablecer Selección
     function resetLeagueSelection() {
       activeLeague = null;
 
@@ -297,11 +294,9 @@
       const resetBtnWrapper = document.getElementById('resetBtnWrapper');
       const instructionBar = document.getElementById('instructionBar');
 
-      // Quitar bordes de selección
       cardContact.classList.remove('selected-contact');
       cardFlag.classList.remove('selected-flag');
 
-      // Ocultar sección desplegable y botón de reseteo
       contentSection.style.display = 'none';
       resetBtnWrapper.style.display = 'none';
       instructionBar.style.display = 'block';
@@ -322,7 +317,7 @@
       }
     }
 
-    // 4. Cambiar Sub-pestaña (Calendario, Rosters, Posiciones, Stats)
+    // 4. Cambiar Sub-pestaña
     function selectSubTab(subTab) {
       activeSubTab = subTab;
 
@@ -341,18 +336,16 @@
       }
     }
 
-    // 5. Actualizar iFrames y Rosters vía Apps Script CMS
+    // 5. Actualizar iFrames y Rosters con la nueva URL
     function updateAllPanes() {
       if (!activeLeague) return;
 
       const catUpper = activeCategory.toUpperCase();
 
-      // Módulo Rosters
       if (activeSubTab === 'rosters') {
         renderRostersGrid();
       }
 
-      // Conexión dinámica a los iFrames con los parámetros del Apps Script
       const iframeCal = document.getElementById('iframeCalendario');
       const iframePos = document.getElementById('iframePosiciones');
       const iframeStat = document.getElementById('iframeStats');
@@ -395,14 +388,14 @@
       });
     }
 
-    // Abrir Modal de Roster desde Apps Script
+    // Abrir Modal de Roster apuntando al nuevo Apps Script
     function openRosterModal(equipo) {
       const catUpper = activeCategory.toUpperCase();
       const url = `${APPS_SCRIPT_BASE_URL}?categoria=${catUpper}&equipo=${encodeURIComponent(equipo)}&liga=${activeLeague}`;
       window.open(url, '_blank', 'width=950,height=800');
     }
 
-    // Sincronizar dinámicamente equipos desde el CMS si la Web App tiene endpoint JSON
+    // Sincronizar dinámicamente datos desde el CMS
     function syncCMSData() {
       fetch(`${APPS_SCRIPT_BASE_URL}?modulo=equipos`)
         .then(res => res.json())
@@ -413,11 +406,10 @@
           }
         })
         .catch(() => {
-          // Utiliza los equipos predeterminados si falla la conexión
+          // Usa la estructura local en caso de desconexión
         });
     }
 
-    // Intentar sincronización inicial
     syncCMSData();
   </script>
 </body>

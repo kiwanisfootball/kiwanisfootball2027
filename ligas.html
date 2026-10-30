@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ligas - Kiwanis Football League Panama</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+</head>
+<body class="gridiron-bg">
+
+  <!-- 1. HEADER NAVEGACIÓN -->
+  <header class="header-nav">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
+      </a>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="conocenos.html">CONÓCENOS</a></li>
+        <li><a href="ligas.html" class="active">LIGAS</a></li>
+        <li><a href="fotos.html">FOTOS</a></li>
+        <li><a href="mvp.html">MVP</a></li>
+        <li><a href="campeones.html">CAMPEONES</a></li>
+        <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
+        <li><a href="total-access.html">TOTAL ACCESS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 2. NIVELES DE SELECCIÓN DE LIGA (CONTACT VS FLAG) -->
+    <section class="leagues-selector-grid">
+      <div class="league-card-btn contact-card active" onclick="selectLeague('contact')">
+        <div class="league-card-content">
+          <h2>CONTACT FOOTBALL</h2>
+          <span>MASCULINO</span>
+        </div>
+      </div>
+
+      <div class="league-card-btn flag-card" onclick="selectLeague('flag')">
+        <div class="league-card-content">
+          <h2>FLAG FOOTBALL</h2>
+          <span>FEMENINO</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PILS DE CATEGORÍAS (DINÁMICAS POR LIGA) -->
+    <section class="category-tabs-wrapper" id="categoryTabsContainer">
+      <button class="category-tab-btn active" onclick="selectCategory('varsity')">VARSITY</button>
+      <button class="category-tab-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
+      <button class="category-tab-btn" onclick="selectCategory('mini')">MINI</button>
+      <button class="category-tab-btn" onclick="selectCategory('micro')">MICRO</button>
+    </section>
+
+    <!-- 4. CONTENEDOR PRINCIPAL DE CONTENIDO -->
+    <section class="league-display-container">
+      
+      <!-- SUB-PESTAÑAS (POSICIONES / CALENDARIO / ESTADÍSTICAS) -->
+      <div class="sub-tabs-wrapper">
+        <button class="sub-tab-btn active" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
+        <button class="sub-tab-btn" onclick="selectSubTab('calendario')">Calendario y Resultados</button>
+        <button class="sub-tab-btn" onclick="selectSubTab('stats')">Estadísticas de Jugadores</button>
+      </div>
+
+      <!-- VISTA: TABLA DE POSICIONES -->
+      <div class="sub-content-pane active" id="pane-posiciones">
+        <div class="category-pane active" id="category-content-area">
+          <p style="text-align: center; font-size: 15px; color: var(--texto-suave);">
+            Cargando información oficial para <strong id="activeLeagueLabel">CONTACT FOOTBALL - VARSITY</strong>...
+          </p>
+          <!-- Aquí puedes insertar los iFrames o contenedores de Google Sheets de cada liga -->
+        </div>
+      </div>
+
+      <!-- VISTA: CALENDARIO Y RESULTADOS -->
+      <div class="sub-content-pane" id="pane-calendario">
+        <div class="category-pane active">
+          <p style="text-align: center; color: var(--texto-suave);">
+            Calendario interactivo y marcadores actualizados.
+          </p>
+        </div>
+      </div>
+
+      <!-- VISTA: ESTADÍSTICAS -->
+      <div class="sub-content-pane" id="pane-stats">
+        <div class="category-pane active">
+          <p style="text-align: center; color: var(--texto-suave);">
+            Líderes de Rushing, Passing, Receiving y Defensive Stats.
+          </p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- SCRIPT DE CONTROL DINÁMICO DE ESTADOS Y UX -->
+  <script>
+    // Estado global de la vista
+    let currentLeague = 'contact';
+    let currentCategory = 'varsity';
+    let currentSubTab = 'posiciones';
+
+    // 1. Selector del Menú Móvil
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+    }
+
+    // 2. Cambiar entre Contact y Flag
+    function selectLeague(league) {
+      currentLeague = league;
+      
+      // Actualizar tarjetas de liga
+      document.querySelectorAll('.league-card-btn').forEach(btn => btn.classList.remove('active'));
+      if (league === 'contact') {
+        document.querySelector('.contact-card').classList.add('active');
+        document.body.classList.remove('flag-theme-active');
+      } else {
+        document.querySelector('.flag-card').classList.add('active');
+        document.body.classList.add('flag-theme-active');
+      }
+
+      updateViewContent();
+    }
+
+    // 3. Cambiar Categoría
+    function selectCategory(category) {
+      currentCategory = category;
+
+      document.querySelectorAll('.category-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase() === category) {
+          btn.classList.add('active');
+        }
+      });
+
+      updateViewContent();
+    }
+
+    // 4. Cambiar Sub-pestaña (Posiciones, Calendario, Stats)
+    function selectSubTab(subTab) {
+      currentSubTab = subTab;
+
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.querySelectorAll('.sub-content-pane').forEach(pane => pane.classList.remove('active'));
+      document.getElementById('pane-' + subTab).classList.add('active');
+    }
+
+    // 5. Actualizar la etiqueta y carga de datos
+    function updateViewContent() {
+      const label = document.getElementById('activeLeagueLabel');
+      if (label) {
+        label.textContent = `${currentLeague.toUpperCase()} FOOTBALL - ${currentCategory.toUpperCase()}`;
+      }
+    }
+  </script>
+</body>
+</html>

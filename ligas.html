@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 </head>
-<body class="gridiron-bg">
+<body>
 
   <!-- 1. HEADER NAVEGACIÓN -->
   <header class="header-nav">
@@ -34,67 +34,58 @@
   </header>
 
   <main>
-    <!-- 2. NIVELES DE SELECCIÓN DE LIGA (CONTACT VS FLAG) -->
-    <section class="leagues-selector-grid">
-      <div class="league-card-btn contact-card active" onclick="selectLeague('contact')">
-        <div class="league-card-content">
+    <!-- 2. BANNERS PRINCIPALES DE SELECCIÓN DE LIGA -->
+    <section class="leagues-hero-grid">
+      <div class="league-hero-btn contact-hero active" id="btnContact" onclick="switchLeague('contact')">
+        <div class="league-hero-overlay">
           <h2>CONTACT FOOTBALL</h2>
           <span>MASCULINO</span>
         </div>
       </div>
 
-      <div class="league-card-btn flag-card" onclick="selectLeague('flag')">
-        <div class="league-card-content">
+      <div class="league-hero-btn flag-hero" id="btnFlag" onclick="switchLeague('flag')">
+        <div class="league-hero-overlay">
           <h2>FLAG FOOTBALL</h2>
           <span>FEMENINO</span>
         </div>
       </div>
     </section>
 
-    <!-- 3. PILS DE CATEGORÍAS (DINÁMICAS POR LIGA) -->
-    <section class="category-tabs-wrapper" id="categoryTabsContainer">
-      <button class="category-tab-btn active" onclick="selectCategory('varsity')">VARSITY</button>
-      <button class="category-tab-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
-      <button class="category-tab-btn" onclick="selectCategory('mini')">MINI</button>
-      <button class="category-tab-btn" onclick="selectCategory('micro')">MICRO</button>
+    <!-- 3. PÍLDORAS HOMOGÉNEAS DE CATEGORÍA -->
+    <section class="category-pills-container">
+      <button class="category-pill-btn active" onclick="switchCategory('varsity')">VARSITY</button>
+      <button class="category-pill-btn" onclick="switchCategory('juvenil')">JUVENIL</button>
+      <button class="category-pill-btn" onclick="switchCategory('mini')">MINI</button>
+      <button class="category-pill-btn" onclick="switchCategory('micro')">MICRO</button>
     </section>
 
-    <!-- 4. CONTENEDOR PRINCIPAL DE CONTENIDO -->
-    <section class="league-display-container">
+    <!-- 4. CONTENIDO CON INDICADOR VISUAL DE ESTADO -->
+    <section class="league-content-wrapper">
       
-      <!-- SUB-PESTAÑAS (POSICIONES / CALENDARIO / ESTADÍSTICAS) -->
-      <div class="sub-tabs-wrapper">
-        <button class="sub-tab-btn active" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
-        <button class="sub-tab-btn" onclick="selectSubTab('calendario')">Calendario y Resultados</button>
-        <button class="sub-tab-btn" onclick="selectSubTab('stats')">Estadísticas de Jugadores</button>
+      <!-- Indicador Visual Activo -->
+      <div class="active-status-badge">
+        <span class="status-dot"></span>
+        <span id="activeLeagueBadge">CONTACT FOOTBALL — VARSITY</span>
       </div>
 
-      <!-- VISTA: TABLA DE POSICIONES -->
-      <div class="sub-content-pane active" id="pane-posiciones">
-        <div class="category-pane active" id="category-content-area">
-          <p style="text-align: center; font-size: 15px; color: var(--texto-suave);">
-            Cargando información oficial para <strong id="activeLeagueLabel">CONTACT FOOTBALL - VARSITY</strong>...
-          </p>
-          <!-- Aquí puedes insertar los iFrames o contenedores de Google Sheets de cada liga -->
-        </div>
+      <!-- Sub-pestañas -->
+      <div class="sub-tabs-container">
+        <button class="sub-tab-link active" onclick="switchSubTab('posiciones')">Posiciones</button>
+        <button class="sub-tab-link" onclick="switchSubTab('calendario')">Calendario</button>
+        <button class="sub-tab-link" onclick="switchSubTab('stats')">Estadísticas</button>
       </div>
 
-      <!-- VISTA: CALENDARIO Y RESULTADOS -->
-      <div class="sub-content-pane" id="pane-calendario">
-        <div class="category-pane active">
-          <p style="text-align: center; color: var(--texto-suave);">
-            Calendario interactivo y marcadores actualizados.
-          </p>
-        </div>
+      <!-- Paneles de Contenido -->
+      <div class="league-pane active" id="panePosiciones">
+        <p style="color: var(--texto-suave);">Cargando tabla de posiciones...</p>
       </div>
 
-      <!-- VISTA: ESTADÍSTICAS -->
-      <div class="sub-content-pane" id="pane-stats">
-        <div class="category-pane active">
-          <p style="text-align: center; color: var(--texto-suave);">
-            Líderes de Rushing, Passing, Receiving y Defensive Stats.
-          </p>
-        </div>
+      <div class="league-pane" id="paneCalendario">
+        <p style="color: var(--texto-suave);">Cargando calendario de partidos...</p>
+      </div>
+
+      <div class="league-pane" id="paneStats">
+        <p style="color: var(--texto-suave);">Cargando estadísticas de jugadores...</p>
       </div>
 
     </section>
@@ -104,67 +95,64 @@
     <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT DE CONTROL DINÁMICO DE ESTADOS Y UX -->
+  <!-- SCRIPT DE INTERACCIÓN -->
   <script>
-    // Estado global de la vista
-    let currentLeague = 'contact';
-    let currentCategory = 'varsity';
-    let currentSubTab = 'posiciones';
+    let state = {
+      league: 'contact',
+      category: 'varsity',
+      subTab: 'posiciones'
+    };
 
-    // 1. Selector del Menú Móvil
+    // Menú Hamburguesa
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
     if (hamburgerBtn) {
       hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
     }
 
-    // 2. Cambiar entre Contact y Flag
-    function selectLeague(league) {
-      currentLeague = league;
-      
-      // Actualizar tarjetas de liga
-      document.querySelectorAll('.league-card-btn').forEach(btn => btn.classList.remove('active'));
-      if (league === 'contact') {
-        document.querySelector('.contact-card').classList.add('active');
-        document.body.classList.remove('flag-theme-active');
-      } else {
-        document.querySelector('.flag-card').classList.add('active');
-        document.body.classList.add('flag-theme-active');
-      }
+    // Cambiar Liga (Contact / Flag)
+    function switchLeague(selectedLeague) {
+      state.league = selectedLeague;
 
-      updateViewContent();
+      document.getElementById('btnContact').classList.toggle('active', selectedLeague === 'contact');
+      document.getElementById('btnFlag').classList.toggle('active', selectedLeague === 'flag');
+      
+      document.body.classList.toggle('flag-theme-active', selectedLeague === 'flag');
+
+      updateVisualIndicator();
     }
 
-    // 3. Cambiar Categoría
-    function selectCategory(category) {
-      currentCategory = category;
+    // Cambiar Categoría
+    function switchCategory(selectedCategory) {
+      state.category = selectedCategory;
 
-      document.querySelectorAll('.category-tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.toLowerCase() === category) {
-          btn.classList.add('active');
-        }
+      document.querySelectorAll('.category-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === selectedCategory);
       });
 
-      updateViewContent();
+      updateVisualIndicator();
     }
 
-    // 4. Cambiar Sub-pestaña (Posiciones, Calendario, Stats)
-    function selectSubTab(subTab) {
-      currentSubTab = subTab;
+    // Cambiar Sub-pestaña
+    function switchSubTab(selectedSubTab) {
+      state.subTab = selectedSubTab;
 
-      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.sub-tab-link').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
 
-      document.querySelectorAll('.sub-content-pane').forEach(pane => pane.classList.remove('active'));
-      document.getElementById('pane-' + subTab).classList.add('active');
+      document.querySelectorAll('.league-pane').forEach(pane => pane.classList.remove('active'));
+      
+      if (selectedSubTab === 'posiciones') document.getElementById('panePosiciones').classList.add('active');
+      if (selectedSubTab === 'calendario') document.getElementById('paneCalendario').classList.add('active');
+      if (selectedSubTab === 'stats') document.getElementById('paneStats').classList.add('active');
     }
 
-    // 5. Actualizar la etiqueta y carga de datos
-    function updateViewContent() {
-      const label = document.getElementById('activeLeagueLabel');
-      if (label) {
-        label.textContent = `${currentLeague.toUpperCase()} FOOTBALL - ${currentCategory.toUpperCase()}`;
+    // Actualizar indicador visual de la liga y categoría activa
+    function updateVisualIndicator() {
+      const badge = document.getElementById('activeLeagueBadge');
+      if (badge) {
+        const leagueName = state.league === 'contact' ? 'CONTACT FOOTBALL' : 'FLAG FOOTBALL';
+        badge.textContent = `${leagueName} — ${state.category.toUpperCase()}`;
       }
     }
   </script>

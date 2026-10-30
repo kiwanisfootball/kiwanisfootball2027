@@ -9,7 +9,16 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* ESTILOS NATIVOS DE LA SECCIÓN LIGAS (SIN IFRAMES) */
+    /* CONTROL STRICTO DE PESTAÑAS (EVITA ACUMULACIÓN Y SCROLL LARGO) */
+    .tab-pane {
+      display: none !important;
+    }
+
+    .tab-pane.active {
+      display: block !important;
+    }
+
+    /* ESTILOS DE LIGAS Y TARJETAS HERO */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -79,7 +88,7 @@
       border-color: #777777;
     }
 
-    /* RENDERIZADO NATIVO DE CALENDARIO Y TABLAS */
+    /* RENDERIZADO DE CONTENIDOS */
     .kfl-render-container {
       width: 100%;
       max-width: 1000px;
@@ -96,7 +105,7 @@
     }
 
     .kfl-match-header {
-      background: var(--azul-kfl, #19547E);
+      background: #19547E;
       color: #ffffff;
       padding: 10px 16px;
       font-weight: bold;
@@ -107,7 +116,7 @@
     }
 
     body.flag-theme .kfl-match-header {
-      background: var(--rojo-kfl, #A91C00);
+      background: #A91C00;
     }
 
     .kfl-match-body {
@@ -152,7 +161,7 @@
       letter-spacing: 0.5px;
     }
 
-    /* TABLA DE POSICIONES NATIVA */
+    /* TABLA DE POSICIONES */
     .kfl-table {
       width: 100%;
       border-collapse: collapse;
@@ -165,7 +174,7 @@
     }
 
     .kfl-table th {
-      background: var(--azul-kfl, #19547E);
+      background: #19547E;
       color: #ffffff;
       padding: 12px 10px;
       font-size: 13px;
@@ -173,7 +182,7 @@
     }
 
     body.flag-theme .kfl-table th {
-      background: var(--rojo-kfl, #A91C00);
+      background: #A91C00;
     }
 
     .kfl-table td {
@@ -266,13 +275,13 @@
       <!-- SUB-PESTAÑAS -->
       <section class="league-display-wrapper">
         <div class="sub-tabs-bar">
-          <button class="sub-tab-btn active" onclick="selectSubTab('calendario')">Calendario</button>
-          <button class="sub-tab-btn" onclick="selectSubTab('rosters')">Rosters</button>
-          <button class="sub-tab-btn" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
-          <button class="sub-tab-btn" onclick="selectSubTab('stats')">Estadísticas</button>
+          <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
+          <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
+          <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
+          <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Estadísticas</button>
         </div>
 
-        <!-- CONTENEDORES NATIVOS (SIN IFRAMES) -->
+        <!-- CONTENEDORES DE SUB-PESTAÑAS -->
         <div class="tab-pane active" id="pane-calendario">
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
@@ -300,7 +309,6 @@
   </footer>
 
   <script>
-    // ENDPOINT EXCLUSIVO EN APPS SCRIPT
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
     const EQUIPOS_LOGOS = {
@@ -361,7 +369,7 @@
       resetBtnWrapper.style.display = 'block';
       instructionBar.style.display = 'none';
 
-      updateAllPanes();
+      updateActiveView();
     }
 
     function resetLeagueSelection() {
@@ -379,22 +387,26 @@
       document.querySelectorAll('.category-pill-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
       });
-      if (activeLeague) updateAllPanes();
+      if (activeLeague) updateActiveView();
     }
 
     function selectSubTab(subTab) {
       activeSubTab = subTab;
-      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('onclick').includes(subTab));
-      });
+
+      // Desactivar todos los botones de pestañas
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-tab-' + subTab);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      // Ocultar todas las sub-pestañas y mostrar la activa
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
       const targetPane = document.getElementById('pane-' + subTab);
       if (targetPane) targetPane.classList.add('active');
 
-      if (activeLeague) updateAllPanes();
+      if (activeLeague) updateActiveView();
     }
 
-    function updateAllPanes() {
+    function updateActiveView() {
       if (!activeLeague) return;
 
       if (activeSubTab === 'calendario') {
@@ -406,7 +418,6 @@
       }
     }
 
-    // 1. OBTENER Y RENDERIZAR CALENDARIO NATIVAMENTE
     function fetchCalendario() {
       const container = document.getElementById('calendarioNativeContent');
       container.innerHTML = '<div class="kfl-loading-spinner">⚡ Cargando Calendario...</div>';
@@ -454,11 +465,11 @@
           container.innerHTML = html;
         })
         .catch(err => {
-          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar el calendario.</p>';
+          console.error("Error al cargar el calendario:", err);
+          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar el calendario. Por favor verifica la versión desplegada en Apps Script.</p>';
         });
     }
 
-    // 2. OBTENER Y RENDERIZAR POSICIONES NATIVAMENTE
     function fetchPosiciones() {
       const container = document.getElementById('posicionesNativeContent');
       container.innerHTML = '<div class="kfl-loading-spinner">⚡ Cargando Posiciones...</div>';
@@ -513,11 +524,11 @@
           container.innerHTML = html;
         })
         .catch(err => {
-          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar la tabla de posiciones.</p>';
+          console.error("Error al cargar las posiciones:", err);
+          container.innerHTML = '<p style="color:red; text-align:center; padding:30px;">Error al cargar la tabla de posiciones. Por favor verifica la versión desplegada en Apps Script.</p>';
         });
     }
 
-    // 3. RENDERIZAR ROSTERS NATIVAMENTE
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;

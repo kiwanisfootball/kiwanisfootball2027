@@ -1,0 +1,76 @@
+/* css/ligas.css */
+
+.kfl-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* TABLA LOCAL */
+.kfl-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+.kfl-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 15px;
+}
+
+.kfl-table th {
+  background-color: #19547E;
+  color: #ffffff;
+  padding: 14px 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kfl-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #edf2f7;
+  color: #2d3748;
+}
+
+.kfl-table tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+.kfl-table tr:hover {
+  background-color: #e0f2fe;
+}
+
+/* ESTILOS DE ELEMENTOS DENTRO DE LA TABLA */
+.player-name-link {
+  color: #19547E;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.jersey-badge {
+  background-color: #19547E;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* ESTADO DE CARGA */
+.kfl-loading {
+  text-align: center;
+  padding: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #19547E;
+}

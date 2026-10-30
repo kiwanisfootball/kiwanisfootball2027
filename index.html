@@ -13,13 +13,16 @@
 </head>
 <body>
 
-  <!-- 1. HEADER NAVEGACIÓN -->
+  <!-- 1. HEADER NAVEGACIÓN CON MENÚ MÓVIL -->
   <header class="header-nav">
     <nav class="navbar">
       <a href="index.html" class="nav-logo">
         <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
       </a>
-      <ul class="nav-menu">
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+
+      <ul class="nav-menu" id="navMenu">
         <li><a href="index.html" class="active">HOME</a></li>
         <li><a href="conocenos.html">CONÓCENOS</a></li>
         <li><a href="ligas.html">LIGAS</a></li>
@@ -130,19 +133,19 @@
       </article>
     </section>
 
-    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW TIPO LIGA10 -->
+    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW RESPONSIVE (1200x250) -->
     <section class="promo-banner-section gsap-reveal">
       <div class="slider-container">
         
         <div class="slide active">
-          <a href="inscripcion.html">
-            <img src="https://i.imgur.com/wrPDjDN.png" alt="Inscripciones Abiertas KFL 2026">
+          <a href="contacto.html">
+            <img src="assets/img/banner-promo-1.jpg" alt="Anuncia Tu Marca Aquí - Espacio Publicitario KFL">
           </a>
         </div>
 
         <div class="slide">
-          <a href="ligas.html">
-            <img src="https://i.imgur.com/wrPDjDN.png" alt="Calendario de Partidos de la Semana">
+          <a href="inscripcion.html">
+            <img src="assets/img/banner-promo-2.jpg" alt="Inscripciones Abiertas Temporada 2026">
           </a>
         </div>
 
@@ -202,9 +205,17 @@
     <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT DE LÓGICA DE SLIDESHOW Y GSAP -->
+  <!-- SCRIPT DE NAVEGACIÓN MÓVIL, SLIDESHOW Y GSAP -->
   <script>
-    // 1. GSAP ScrollTrigger
+    // 1. Menú Hamburguesa Móvil
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('open');
+    });
+
+    // 2. GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.utils.toArray('.gsap-reveal').forEach((element) => {
@@ -221,7 +232,7 @@
       });
     });
 
-    // 2. Lógica del Slideshow Promocional
+    // 3. Slideshow Promocional
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
 
@@ -237,7 +248,6 @@
       showSlide(currentSlide);
     }
 
-    // Auto-avance cada 5 segundos
     setInterval(() => {
       moveSlide(1);
     }, 5000);

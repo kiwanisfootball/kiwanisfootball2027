@@ -1,0 +1,380 @@
+/* ==========================================================================
+   KIWANIS FOOTBALL LEAGUE - HOJA DE ESTILOS PRINCIPAL
+   ========================================================================== */
+
+/* 1. IMPORTACIÓN DE FUENTES & VARIABLES DE MARCA */
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,400&display=swap');
+
+:root {
+  --azul-kfl: #19547E;
+  --rojo-kfl: #A91C00;
+  --coral-kfl: #E85A6C;
+  --gris-fondo: #f8fafc;
+  --gris-borde: #e2e8f0;
+  --texto-oscuro: #0f172a;
+  --texto-suave: #475569;
+  
+  --fuente-titulos: 'Anton', sans-serif;
+  --fuente-cuerpo: 'Montserrat', sans-serif;
+}
+
+/* 2. RESET Y ESTILOS BASE */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--texto-oscuro);
+  font-family: var(--fuente-cuerpo);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--fuente-titulos);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+p {
+  color: var(--texto-suave);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 3. ENCABEZADO Y NAVEGACIÓN PRINCIPAL */
+.header-nav {
+  background-color: #ffffff;
+  border-bottom: 2px solid var(--gris-borde);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.nav-logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 18px;
+  list-style: none;
+}
+
+.nav-menu a {
+  color: var(--azul-kfl);
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease;
+}
+
+.nav-menu a:hover, 
+.nav-menu a.active {
+  color: var(--rojo-kfl);
+}
+
+/* 4. TICKER DE MARCADORES (ESTILO NFL) */
+.ticker-section {
+  background-color: var(--gris-fondo);
+  border-bottom: 1px solid var(--gris-borde);
+  padding: 10px 5%;
+}
+
+.ticker-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 4px;
+}
+
+.game-card {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 14px;
+  min-width: 175px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.game-team {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--azul-kfl);
+  margin-bottom: 3px;
+}
+
+.game-score {
+  color: var(--rojo-kfl);
+  font-weight: 900;
+}
+
+.game-status {
+  font-size: 10px;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-top: 4px;
+  text-align: right;
+  font-weight: 700;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 3px;
+}
+
+/* 5. TITULO DE BIENVENIDA INSTITUCIONAL */
+.welcome-header {
+  text-align: center;
+  margin: 40px 15px 25px 15px;
+}
+
+.welcome-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--texto-oscuro);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.welcome-subtitle::before, 
+.welcome-subtitle::after {
+  content: "";
+  width: 40px;
+  height: 3px;
+  background-color: var(--rojo-kfl);
+}
+
+.welcome-title {
+  font-size: clamp(32px, 5.5vw, 60px);
+  color: var(--azul-kfl);
+  margin-top: 5px;
+}
+
+/* 6. BLOQUE PRINCIPAL: FOTO + LEYENDA (SCREEN 1) */
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 768px) {
+  .about-section {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-card {
+  background-color: var(--coral-kfl);
+  color: #ffffff;
+  padding: 40px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.about-card h2 {
+  font-size: 34px;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.about-card p {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* 7. MÓDULO DE NOTICIAS Y CRÓNICAS (NFL / LIGA10) */
+.news-section {
+  max-width: 1200px;
+  margin: 0 auto 60px auto;
+  padding: 0 15px;
+}
+
+.section-headline {
+  font-size: 28px;
+  color: var(--azul-kfl);
+  margin-bottom: 20px;
+  border-bottom: 3px solid var(--azul-kfl);
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+@media (min-width: 900px) {
+  .news-grid {
+    grid-template-columns: 2.2fr 1fr;
+  }
+}
+
+.main-featured-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000000;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  border: 1px solid var(--gris-borde);
+}
+
+.main-featured-card img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: transform 0.4s ease;
+}
+
+.main-featured-card:hover img {
+  transform: scale(1.03);
+}
+
+.main-featured-content {
+  position: relative;
+  z-index: 2;
+  padding: 25px;
+  background: linear-gradient(0deg, rgba(15,23,42,0.95) 0%, rgba(15,23,42,0.4) 70%, rgba(0,0,0,0) 100%);
+  width: 100%;
+}
+
+.badge-category {
+  background-color: var(--rojo-kfl);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.main-news-title {
+  color: #ffffff;
+  font-size: clamp(22px, 3.2vw, 32px);
+  margin-bottom: 8px;
+}
+
+.main-news-desc {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.sidebar-feed {
+  background: var(--gris-fondo);
+  border: 1px solid var(--gris-borde);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.sidebar-feed h3 {
+  font-size: 20px;
+  color: var(--azul-kfl);
+  border-bottom: 2px solid var(--gris-borde);
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.feed-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--gris-borde);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.feed-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.feed-thumb {
+  width: 85px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.feed-tag {
+  font-size: 10px;
+  color: var(--rojo-kfl);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.feed-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto-oscuro);
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+/* 8. FOOTER INSTITUCIONAL */
+.site-footer {
+  background-color: #0d1117;
+  color: #ffffff;
+  text-align: center;
+  padding: 30px 15px;
+  margin-top: 40px;
+  font-size: 13px;
+}
+
+/* 9. CLASE UNIVERSAL GSAP PARA REVELADO EN SCROLL */
+.gsap-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}

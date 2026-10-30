@@ -1,14 +1,13 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE - HOJA DE ESTILOS PRINCIPAL
+   KIWANIS FOOTBALL LEAGUE - HOJA DE ESTILOS UNIFICADA
    ========================================================================== */
 
-/* 1. IMPORTACIÓN DE FUENTES & VARIABLES DE MARCA */
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:ital,wght@0,400;0,600;0,800;0,900;1,400&display=swap');
 
 :root {
   --azul-kfl: #19547E;
   --rojo-kfl: #A91C00;
-  --coral-kfl: #E85A6C;
+  --rojo-kfl-hover: #8C1700;
   --gris-fondo: #f8fafc;
   --gris-borde: #e2e8f0;
   --texto-oscuro: #0f172a;
@@ -18,7 +17,6 @@
   --fuente-cuerpo: 'Montserrat', sans-serif;
 }
 
-/* 2. RESET Y ESTILOS BASE */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -50,14 +48,13 @@ a {
   color: inherit;
 }
 
-/* 3. ENCABEZADO Y NAVEGACIÓN PRINCIPAL */
+/* 1. ENCABEZADO Y NAVEGACIÓN */
 .header-nav {
   background-color: #ffffff;
   border-bottom: 2px solid var(--gris-borde);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
 }
 
 .navbar {
@@ -90,16 +87,15 @@ a {
   transition: color 0.2s ease;
 }
 
-.nav-menu a:hover, 
-.nav-menu a.active {
+.nav-menu a:hover, .nav-menu a.active {
   color: var(--rojo-kfl);
 }
 
-/* 4. TICKER DE MARCADORES (ESTILO NFL) */
+/* 2. TICKER DE MARCADORES CON LOGOS (RESPONSIVE) */
 .ticker-section {
   background-color: var(--gris-fondo);
   border-bottom: 1px solid var(--gris-borde);
-  padding: 10px 5%;
+  padding: 10px 15px;
 }
 
 .ticker-container {
@@ -116,41 +112,55 @@ a {
   background: #ffffff;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  padding: 8px 14px;
-  min-width: 175px;
+  padding: 10px 14px;
+  min-width: 210px;
   flex-shrink: 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .game-team {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   font-size: 13px;
   font-weight: 800;
   color: var(--azul-kfl);
-  margin-bottom: 3px;
+  margin-bottom: 6px;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.team-logo-small {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
 .game-score {
   color: var(--rojo-kfl);
   font-weight: 900;
+  font-size: 14px;
 }
 
 .game-status {
   font-size: 10px;
   color: #64748b;
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 6px;
   text-align: right;
   font-weight: 700;
   border-top: 1px solid #f1f5f9;
-  padding-top: 3px;
+  padding-top: 4px;
 }
 
-/* 5. TITULO DE BIENVENIDA INSTITUCIONAL */
+/* 3. TITULO DE BIENVENIDA */
 .welcome-header {
   text-align: center;
-  margin: 40px 15px 25px 15px;
+  margin: 35px 15px 25px 15px;
 }
 
 .welcome-subtitle {
@@ -165,8 +175,7 @@ a {
   text-transform: uppercase;
 }
 
-.welcome-subtitle::before, 
-.welcome-subtitle::after {
+.welcome-subtitle::before, .welcome-subtitle::after {
   content: "";
   width: 40px;
   height: 3px;
@@ -174,17 +183,17 @@ a {
 }
 
 .welcome-title {
-  font-size: clamp(32px, 5.5vw, 60px);
+  font-size: clamp(30px, 5vw, 56px);
   color: var(--azul-kfl);
   margin-top: 5px;
 }
 
-/* 6. BLOQUE PRINCIPAL: FOTO + LEYENDA (SCREEN 1) */
+/* 4. BLOQUE PRINCIPAL: FOTO Y TARJETA ROJO KFL */
 .about-section {
   display: grid;
   grid-template-columns: 1fr;
   max-width: 1200px;
-  margin: 0 auto 50px auto;
+  margin: 0 auto 40px auto;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
@@ -205,13 +214,18 @@ a {
 }
 
 .about-card {
-  background-color: var(--coral-kfl);
+  background-color: var(--rojo-kfl); /* Rojo oficial KFL */
   color: #ffffff;
   padding: 40px 35px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.about-card:hover {
+  background-color: var(--rojo-kfl-hover); /* Tono rojo más profundo */
 }
 
 .about-card h2 {
@@ -226,7 +240,66 @@ a {
   line-height: 1.6;
 }
 
-/* 7. MÓDULO DE NOTICIAS Y CRÓNICAS (NFL / LIGA10) */
+/* 5. BANNER PROMOCIONAL / SLIDESHOW (ESTILO LIGA10) */
+.promo-banner-section {
+  max-width: 1200px;
+  margin: 0 auto 45px auto;
+  padding: 0 15px;
+}
+
+.slider-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  background: #000;
+}
+
+.slide {
+  display: none;
+  position: relative;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide a {
+  display: block;
+  width: 100%;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s;
+  z-index: 10;
+}
+
+.slider-btn:hover {
+  background: var(--rojo-kfl);
+}
+
+.slider-btn.prev { left: 15px; }
+.slider-btn.next { right: 15px; }
+
+/* 6. MÓDULO DE NOTICIAS */
 .news-section {
   max-width: 1200px;
   margin: 0 auto 60px auto;
@@ -304,11 +377,6 @@ a {
   margin-bottom: 8px;
 }
 
-.main-news-desc {
-  color: #cbd5e1;
-  font-size: 14px;
-}
-
 .sidebar-feed {
   background: var(--gris-fondo);
   border: 1px solid var(--gris-borde);
@@ -330,8 +398,6 @@ a {
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid var(--gris-borde);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 .feed-item:last-child {
@@ -363,7 +429,6 @@ a {
   margin-top: 2px;
 }
 
-/* 8. FOOTER INSTITUCIONAL */
 .site-footer {
   background-color: #0d1117;
   color: #ffffff;
@@ -373,7 +438,6 @@ a {
   font-size: 13px;
 }
 
-/* 9. CLASE UNIVERSAL GSAP PARA REVELADO EN SCROLL */
 .gsap-reveal {
   opacity: 0;
   transform: translateY(30px);

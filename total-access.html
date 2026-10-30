@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KFL Total Access - Kiwanis Football League Panama</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <style>
+    /* ESTILOS ESPECÍFICOS PARA TOTAL ACCESS */
+    .ta-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* BANNER HERO */
+    .ta-banner-wrapper {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+      margin-bottom: 25px;
+      background: #19547E;
+    }
+
+    .ta-banner-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* TARJETA DE RESEÑA INSTITUCIONAL */
+    .ta-about-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .ta-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+      border-bottom: 3px solid #19547E;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    .ta-description {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #334155;
+    }
+
+    .ta-description p {
+      margin-bottom: 14px;
+    }
+
+    .ta-description p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* BARRA DE REDES SOCIALES */
+    .ta-social-bar {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #edf2f7;
+      flex-wrap: wrap;
+    }
+
+    .ta-social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      color: #ffffff;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .ta-social-link:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .ta-social-link.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .ta-social-link.facebook { background: #1877f2; }
+    .ta-social-link.youtube { background: #ff0000; }
+
+    .ta-social-icon {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+    }
+
+    /* SECCIÓN DE VIDEOS EMBEDDED */
+    .ta-videos-section {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .ta-video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+      height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .ta-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body class="contact-theme">
+
+  <!-- HEADER NAVEGACIÓN -->
+  <header class="header-nav">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
+      </a>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="conocenos.html">CONÓCENOS</a></li>
+        <li><a href="ligas.html">LIGAS</a></li>
+        <li><a href="fotos.html">FOTOS</a></li>
+        <li><a href="mvp.html">MVP</a></li>
+        <li><a href="campeones.html">CAMPEONES</a></li>
+        <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
+        <li><a href="total-access.html" class="active">TOTAL ACCESS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="ta-container">
+
+    <!-- BANNER HERO -->
+    <div class="ta-banner-wrapper">
+      <img src="assets/img/total-access-banner.jpg" alt="KFL Total Access Banner" class="ta-banner-img" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+    </div>
+
+    <!-- RESEÑA INSTITUCIONAL -->
+    <section class="ta-about-card">
+      <h1 class="ta-title">KFL Total Access</h1>
+      
+      <div class="ta-description">
+        <p><strong>KFL Total Access</strong> es la fuente oficial de noticias, resúmenes e información sobre la Kiwanis Football League en la Ciudad de Panamá. Este programa, con cobertura durante todo el año, abarca las cuatro divisiones juveniles masculinas y femeninas de la liga: <strong>U10/Micro, U13/Mini, U16/Juvenil y U19/Varsity</strong>.</p>
+        
+        <p>Creado por <strong>Raúl Obarrio Méndez en 2018</strong>, KFL Total Access promueve y documenta a los atletas, entrenadores, equipos y tradiciones de la liga de fútbol americano de mayor trayectoria en Panamá. El programa es producido e impulsado por la <strong>Fundación American Football Films (FAFF)</strong>, una organización social y educativa sin fines de lucro dedicada al desarrollo juvenil a través del fútbol americano, los medios deportivos, el liderazgo y el servicio comunitario.</p>
+        
+        <p>A través de la cobertura de partidos, entrevistas, fotografía y narrativa digital, FAFF ayuda a preservar la historia de la liga y a expandir el interés por el fútbol americano en todo Panamá.</p>
+      </div>
+
+      <!-- REDES SOCIALES CON ICONOS SVG INLINE -->
+      <div class="ta-social-bar">
+        <a href="https://www.instagram.com/kfl_total_access/" target="_blank" rel="noopener noreferrer" class="ta-social-link instagram">
+          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          Instagram
+        </a>
+
+        <a href="http://facebook.com/profile.php?id=61580980794081" target="_blank" rel="noopener noreferrer" class="ta-social-link facebook">
+          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
+          Facebook
+        </a>
+
+        <a href="https://www.youtube.com/@KFLTotalAccess" target="_blank" rel="noopener noreferrer" class="ta-social-link youtube">
+          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          YouTube
+        </a>
+      </div>
+    </section>
+
+    <!-- BIBLIOTECA DE VIDEOS EMBEDDED -->
+    <section class="ta-videos-section">
+      <h2 class="ta-title">Últimos Episodios y Coberturas</h2>
+      
+      <div class="ta-video-container">
+        <!-- REPRODUCTOR EMBEDDED CANAL / PLAYLIST DE YOUTUBE -->
+        <iframe 
+          src="https://www.youtube.com/embed?listType=user_uploads&list=KFLTotalAccess" 
+          title="KFL Total Access YouTube Player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    if (hamburgerBtn) {
+      hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+    }
+  </script>
+</body>
+</html>

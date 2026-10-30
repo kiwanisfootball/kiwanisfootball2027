@@ -5,19 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kiwanis Football League Panama - Sitio Oficial</title>
   
-  <!-- Estilos CSS Principales -->
   <link rel="stylesheet" href="css/styles.css">
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
-  <!-- Librerías de GSAP para Animaciones -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
-  <!-- 1. HEADER Y MENÚ PRINCIPAL -->
+  <!-- 1. HEADER NAVEGACIÓN -->
   <header class="header-nav">
     <nav class="navbar">
       <a href="index.html" class="nav-logo">
@@ -38,42 +34,95 @@
   </header>
 
   <main>
-    <!-- 2. TICKER SUPERIOR DE MARCADORES -->
+    <!-- 2. TICKER DE MARCADORES CON LOGOS -->
     <section class="ticker-section gsap-reveal">
       <div class="ticker-container">
+        
         <article class="game-card">
-          <div class="game-team"><span>OWLS</span><span class="game-score">21</span></div>
-          <div class="game-team"><span>RAIDERS</span><span class="game-score">14</span></div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
+              <span>OWLS</span>
+            </div>
+            <span class="game-score">21</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/raiders.png" alt="Raiders" class="team-logo-small">
+              <span>RAIDERS</span>
+            </div>
+            <span class="game-score">14</span>
+          </div>
           <div class="game-status">FINAL - SEMANA 4</div>
         </article>
+
         <article class="game-card">
-          <div class="game-team"><span>EAGLES</span><span class="game-score">7</span></div>
-          <div class="game-team"><span>KOLTS</span><span class="game-score">12</span></div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/eagles.png" alt="Eagles" class="team-logo-small">
+              <span>EAGLES</span>
+            </div>
+            <span class="game-score">7</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/kolts.png" alt="Kolts" class="team-logo-small">
+              <span>KOLTS</span>
+            </div>
+            <span class="game-score">12</span>
+          </div>
           <div class="game-status">FINAL - SEMANA 4</div>
         </article>
+
         <article class="game-card">
-          <div class="game-team"><span>DRAGONS</span><span class="game-score">28</span></div>
-          <div class="game-team"><span>SPARTANS</span><span class="game-score">0</span></div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/dragons.png" alt="Dragons" class="team-logo-small">
+              <span>DRAGONS</span>
+            </div>
+            <span class="game-score">28</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/spartans.png" alt="Spartans" class="team-logo-small">
+              <span>SPARTANS</span>
+            </div>
+            <span class="game-score">0</span>
+          </div>
           <div class="game-status">FINAL - SEMANA 4</div>
         </article>
+
         <article class="game-card">
-          <div class="game-team"><span>LIONS</span><span class="game-score">14</span></div>
-          <div class="game-team"><span>OWLS</span><span class="game-score">14</span></div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/lions.png" alt="Lions" class="team-logo-small">
+              <span>LIONS</span>
+            </div>
+            <span class="game-score">14</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
+              <span>OWLS</span>
+            </div>
+            <span class="game-score">14</span>
+          </div>
           <div class="game-status">FINAL - SEMANA 4</div>
         </article>
+
       </div>
     </section>
 
-    <!-- 3. TITULO INSTITUCIONAL DE BIENVENIDA -->
+    <!-- 3. TITULO INSTITUCIONAL -->
     <section class="welcome-header gsap-reveal">
       <div class="welcome-subtitle">BIENVENIDOS A</div>
       <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
     </section>
 
-    <!-- 4. SECCIÓN ACERCA DE LA LIGA (FOTO + TARJETA CORAL) -->
+    <!-- 4. ACERCA DE LA LIGA (FOTO + TARJETA ROJO KFL) -->
     <section class="about-section gsap-reveal">
       <div class="about-image">
-        <img src="src/assets/banners/kfl-panama-flag-players.jpg" alt="Jugadores Kiwanis Football League Bandera Panama">
+        <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
       </div>
       <article class="about-card">
         <h2>ACERCA DE LA LIGA</h2>
@@ -81,12 +130,33 @@
       </article>
     </section>
 
-    <!-- 5. MÓDULO DE NOTICIAS Y CRÓNICAS DESTACADAS -->
+    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW TIPO LIGA10 -->
+    <section class="promo-banner-section gsap-reveal">
+      <div class="slider-container">
+        
+        <div class="slide active">
+          <a href="inscripcion.html">
+            <img src="https://i.imgur.com/wrPDjDN.png" alt="Inscripciones Abiertas KFL 2026">
+          </a>
+        </div>
+
+        <div class="slide">
+          <a href="ligas.html">
+            <img src="https://i.imgur.com/wrPDjDN.png" alt="Calendario de Partidos de la Semana">
+          </a>
+        </div>
+
+        <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+
+      </div>
+    </section>
+
+    <!-- 6. MÓDULO DE NOTICIAS -->
     <section class="news-section gsap-reveal">
       <h2 class="section-headline">NOTICIAS DESTACADAS</h2>
       <div class="news-grid">
         
-        <!-- Noticia Principal -->
         <article class="main-featured-card">
           <img src="https://i.imgur.com/wrPDjDN.png" alt="Noticia Principal KFL">
           <div class="main-featured-content">
@@ -96,7 +166,6 @@
           </div>
         </article>
 
-        <!-- Sidebar Noticioso -->
         <aside class="sidebar-feed">
           <h3>ÚLTIMAS NOTICIAS</h3>
           
@@ -129,16 +198,15 @@
     </section>
   </main>
 
-  <!-- 6. FOOTER INSTITUCIONAL -->
   <footer class="site-footer">
     <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT DE INICIALIZACIÓN DE GSAP SCROLLTRIGGER -->
+  <!-- SCRIPT DE LÓGICA DE SLIDESHOW Y GSAP -->
   <script>
+    // 1. GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animación suave de aparición al hacer scroll
     gsap.utils.toArray('.gsap-reveal').forEach((element) => {
       gsap.to(element, {
         scrollTrigger: {
@@ -152,6 +220,27 @@
         ease: 'power2.out'
       });
     });
+
+    // 2. Lógica del Slideshow Promocional
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) slide.classList.add('active');
+      });
+    }
+
+    function moveSlide(step) {
+      currentSlide = (currentSlide + step + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    // Auto-avance cada 5 segundos
+    setInterval(() => {
+      moveSlide(1);
+    }, 5000);
   </script>
 </body>
 </html>

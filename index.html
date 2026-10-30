@@ -204,7 +204,28 @@
       </div>
     </section>
 
-    <!-- 7. SECCIÓN DE PATROCINADORES -->
+    <!-- 7. FORMULARIO DE NEWSLETTER -->
+    <div class="newsletter-wrapper gsap-reveal">
+      <section class="newsletter-box">
+        <div class="newsletter-header">
+          <h2 class="newsletter-main-title">NO TE LO PUEDES PERDER</h2>
+        </div>
+        <p class="newsletter-subtitle">SUSCRÍBETE A NUESTRO NEWSLETTER Y ENTÉRATE DE TODAS NUESTRAS NOTICIAS</p>
+        
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+          <input 
+            type="email" 
+            class="newsletter-input" 
+            placeholder="Registra tu correo electrónico" 
+            title="Por favor ingresa un correo electrónico válido" 
+            required
+          >
+          <button type="submit" class="newsletter-btn">Suscríbete</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- 8. SECCIÓN DE PATROCINADORES -->
     <section class="sponsors-section gsap-reveal">
       <div class="sponsors-container">
         

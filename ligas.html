@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 </head>
-<body>
+<body class="contact-theme">
 
   <!-- 1. HEADER NAVEGACIÓN -->
   <header class="header-nav">
@@ -34,58 +34,64 @@
   </header>
 
   <main>
-    <!-- 2. BANNERS PRINCIPALES DE SELECCIÓN DE LIGA -->
+    <!-- 2. TARJETAS HERO CON OVERLAY TRANSPARENTE & EFECTO GREYED OUT -->
     <section class="leagues-hero-grid">
-      <div class="league-hero-btn contact-hero active" id="btnContact" onclick="switchLeague('contact')">
-        <div class="league-hero-overlay">
+      <div class="league-hero-card contact-card active" id="cardContact" onclick="selectLeague('contact')">
+        <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino" class="hero-bg-img">
+        <div class="hero-overlay">
           <h2>CONTACT FOOTBALL</h2>
           <span>MASCULINO</span>
         </div>
       </div>
 
-      <div class="league-hero-btn flag-hero" id="btnFlag" onclick="switchLeague('flag')">
-        <div class="league-hero-overlay">
+      <div class="league-hero-card flag-card inactive" id="cardFlag" onclick="selectLeague('flag')">
+        <img src="assets/img/ligas-flag-football.jpg" alt="Flag Football Femenino" class="hero-bg-img">
+        <div class="hero-overlay">
           <h2>FLAG FOOTBALL</h2>
           <span>FEMENINO</span>
         </div>
       </div>
     </section>
 
-    <!-- 3. PÍLDORAS HOMOGÉNEAS DE CATEGORÍA -->
-    <section class="category-pills-container">
-      <button class="category-pill-btn active" onclick="switchCategory('varsity')">VARSITY</button>
-      <button class="category-pill-btn" onclick="switchCategory('juvenil')">JUVENIL</button>
-      <button class="category-pill-btn" onclick="switchCategory('mini')">MINI</button>
-      <button class="category-pill-btn" onclick="switchCategory('micro')">MICRO</button>
+    <!-- 3. PÍLDORAS DE CATEGORÍA DE ANCHO Y ESTILO HOMOGÉNEO -->
+    <section class="category-pills-wrapper">
+      <button class="category-pill-btn active" onclick="selectCategory('varsity')">VARSITY</button>
+      <button class="category-pill-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
+      <button class="category-pill-btn" onclick="selectCategory('mini')">MINI</button>
+      <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
     </section>
 
-    <!-- 4. CONTENIDO CON INDICADOR VISUAL DE ESTADO -->
-    <section class="league-content-wrapper">
+    <!-- 4. CONTENEDOR PRINCIPAL CON SUB-PESTAÑAS -->
+    <section class="league-display-wrapper">
       
-      <!-- Indicador Visual Activo -->
-      <div class="active-status-badge">
-        <span class="status-dot"></span>
-        <span id="activeLeagueBadge">CONTACT FOOTBALL — VARSITY</span>
+      <!-- 4 SUB-PESTAÑAS OFICIALES -->
+      <div class="sub-tabs-bar">
+        <button class="sub-tab-btn active" onclick="selectSubTab('calendario')">Calendario</button>
+        <button class="sub-tab-btn" onclick="selectSubTab('rosters')">Rosters</button>
+        <button class="sub-tab-btn" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
+        <button class="sub-tab-btn" onclick="selectSubTab('stats')">Estadísticas</button>
       </div>
 
-      <!-- Sub-pestañas -->
-      <div class="sub-tabs-container">
-        <button class="sub-tab-link active" onclick="switchSubTab('posiciones')">Posiciones</button>
-        <button class="sub-tab-link" onclick="switchSubTab('calendario')">Calendario</button>
-        <button class="sub-tab-link" onclick="switchSubTab('stats')">Estadísticas</button>
+      <!-- VISTA 1: CALENDARIO -->
+      <div class="tab-pane active" id="pane-calendario">
+        <iframe id="iframeCalendario" class="external-frame" src=""></iframe>
       </div>
 
-      <!-- Paneles de Contenido -->
-      <div class="league-pane active" id="panePosiciones">
-        <p style="color: var(--texto-suave);">Cargando tabla de posiciones...</p>
+      <!-- VISTA 2: ROSTERS (EQUIPOS CARGADOS DINÁMICAMENTE) -->
+      <div class="tab-pane" id="pane-rosters">
+        <div class="rosters-grid" id="rostersGrid">
+          <!-- Se puebla automáticamente vía JS -->
+        </div>
       </div>
 
-      <div class="league-pane" id="paneCalendario">
-        <p style="color: var(--texto-suave);">Cargando calendario de partidos...</p>
+      <!-- VISTA 3: TABLA DE POSICIONES -->
+      <div class="tab-pane" id="pane-posiciones">
+        <iframe id="iframePosiciones" class="external-frame" src=""></iframe>
       </div>
 
-      <div class="league-pane" id="paneStats">
-        <p style="color: var(--texto-suave);">Cargando estadísticas de jugadores...</p>
+      <!-- VISTA 4: ESTADÍSTICAS -->
+      <div class="tab-pane" id="pane-stats">
+        <iframe id="iframeStats" class="external-frame" src=""></iframe>
       </div>
 
     </section>
@@ -95,13 +101,42 @@
     <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- SCRIPT DE INTERACCIÓN -->
+  <!-- SCRIPT LÓGICO Y RENDERIZADO DE DATOS -->
   <script>
-    let state = {
-      league: 'contact',
-      category: 'varsity',
-      subTab: 'posiciones'
+    // Configuración base de Apps Script (Tus deployments)
+    const APPS_SCRIPT_BASE_URL = "https://script.google.com/macros/s/AKfycbwj6Dtr9D_nHfO0gg1EpSepSR6JKY_t0OfmXAAAvhuypF18RsG0UjVwbcKpM_ITjuEP7w/exec";
+
+    // Base de datos de logos de equipos (Centralizada para no editar código al agregar o quitar)
+    const EQUIPOS_LOGOS = {
+      "OWLS": "https://i.imgur.com/KRjk1AV.png",
+      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
+      "EAGLES": "https://i.imgur.com/lxfq565.png",
+      "KOLTS": "https://i.imgur.com/id2gPdH.png",
+      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
+      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png",
+      "LIONS": "https://i.imgur.com/XQaNhUb.png"
     };
+
+    // Equipos por Categoría (Se actualiza automáticamente desde Apps Script en producción)
+    const CATEGORIAS_EQUIPOS = {
+      "contact": {
+        "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "SPARTANS"],
+        "juvenil": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS"],
+        "mini": ["OWLS", "RAIDERS", "EAGLES", "KOLTS"],
+        "micro": ["OWLS", "RAIDERS", "EAGLES"]
+      },
+      "flag": {
+        "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "LIONS"],
+        "juvenil": ["OWLS", "RAIDERS", "EAGLES", "KOLTS"],
+        "mini": ["OWLS", "RAIDERS", "EAGLES"],
+        "micro": ["OWLS", "RAIDERS"]
+      }
+    };
+
+    // Estado activo
+    let activeLeague = 'contact';
+    let activeCategory = 'varsity';
+    let activeSubTab = 'calendario';
 
     // Menú Hamburguesa
     const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -110,51 +145,110 @@
       hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
     }
 
-    // Cambiar Liga (Contact / Flag)
-    function switchLeague(selectedLeague) {
-      state.league = selectedLeague;
+    // 1. Cambiar Liga
+    function selectLeague(league) {
+      activeLeague = league;
 
-      document.getElementById('btnContact').classList.toggle('active', selectedLeague === 'contact');
-      document.getElementById('btnFlag').classList.toggle('active', selectedLeague === 'flag');
-      
-      document.body.classList.toggle('flag-theme-active', selectedLeague === 'flag');
+      const cardContact = document.getElementById('cardContact');
+      const cardFlag = document.getElementById('cardFlag');
 
-      updateVisualIndicator();
+      if (league === 'contact') {
+        cardContact.classList.add('active');
+        cardContact.classList.remove('inactive');
+        cardFlag.classList.add('inactive');
+        cardFlag.classList.remove('active');
+        document.body.className = 'contact-theme';
+      } else {
+        cardFlag.classList.add('active');
+        cardFlag.classList.remove('inactive');
+        cardContact.classList.add('inactive');
+        cardContact.classList.remove('active');
+        document.body.className = 'flag-theme';
+      }
+
+      updateAllPanes();
     }
 
-    // Cambiar Categoría
-    function switchCategory(selectedCategory) {
-      state.category = selectedCategory;
+    // 2. Cambiar Categoría
+    function selectCategory(category) {
+      activeCategory = category;
 
       document.querySelectorAll('.category-pill-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.toLowerCase() === selectedCategory);
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
       });
 
-      updateVisualIndicator();
+      updateAllPanes();
     }
 
-    // Cambiar Sub-pestaña
-    function switchSubTab(selectedSubTab) {
-      state.subTab = selectedSubTab;
+    // 3. Cambiar Sub-pestaña
+    function selectSubTab(subTab) {
+      activeSubTab = subTab;
 
-      document.querySelectorAll('.sub-tab-link').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(subTab));
+      });
 
-      document.querySelectorAll('.league-pane').forEach(pane => pane.classList.remove('active'));
-      
-      if (selectedSubTab === 'posiciones') document.getElementById('panePosiciones').classList.add('active');
-      if (selectedSubTab === 'calendario') document.getElementById('paneCalendario').classList.add('active');
-      if (selectedSubTab === 'stats') document.getElementById('paneStats').classList.add('active');
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      document.getElementById('pane-' + subTab).classList.add('active');
+
+      updateAllPanes();
     }
 
-    // Actualizar indicador visual de la liga y categoría activa
-    function updateVisualIndicator() {
-      const badge = document.getElementById('activeLeagueBadge');
-      if (badge) {
-        const leagueName = state.league === 'contact' ? 'CONTACT FOOTBALL' : 'FLAG FOOTBALL';
-        badge.textContent = `${leagueName} — ${state.category.toUpperCase()}`;
+    // 4. Actualizar iFrames y Rosters
+    function updateAllPanes() {
+      // Cargar Rosters
+      if (activeSubTab === 'rosters') {
+        renderRostersGrid();
+      }
+
+      // Cargar URLs para iFrames
+      const catUpper = activeCategory.toUpperCase();
+      const iframeCal = document.getElementById('iframeCalendario');
+      const iframePos = document.getElementById('iframePosiciones');
+      const iframeStat = document.getElementById('iframeStats');
+
+      if (iframeCal && activeSubTab === 'calendario') {
+        iframeCal.src = `${APPS_SCRIPT_BASE_URL}?modulo=calendario&categoria=${catUpper}&liga=${activeLeague}`;
+      }
+      if (iframePos && activeSubTab === 'posiciones') {
+        iframePos.src = `${APPS_SCRIPT_BASE_URL}?modulo=posiciones&categoria=${catUpper}&liga=${activeLeague}`;
+      }
+      if (iframeStat && activeSubTab === 'stats') {
+        iframeStat.src = `${APPS_SCRIPT_BASE_URL}?modulo=stats&categoria=${catUpper}&liga=${activeLeague}`;
       }
     }
+
+    // 5. Renderizar Rosters Dinámicos
+    function renderRostersGrid() {
+      const grid = document.getElementById('rostersGrid');
+      if (!grid) return;
+
+      const equipos = CATEGORIAS_EQUIPOS[activeLeague][activeCategory] || [];
+      grid.innerHTML = '';
+
+      equipos.forEach(equipo => {
+        const logoUrl = EQUIPOS_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png';
+        const card = document.createElement('div');
+        card.className = 'team-card-roster';
+        card.onclick = () => openRosterModal(equipo);
+
+        card.innerHTML = `
+          <img src="${logoUrl}" alt="${equipo}">
+          <h4>${equipo}</h4>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Abrir Roster del Equipo
+    function openRosterModal(equipo) {
+      const catUpper = activeCategory.toUpperCase();
+      const url = `${APPS_SCRIPT_BASE_URL}?categoria=${catUpper}&equipo=${equipo}`;
+      window.open(url, '_blank', 'width=900,height=750');
+    }
+
+    // Carga inicial
+    updateAllPanes();
   </script>
 </body>
 </html>

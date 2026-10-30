@@ -1,454 +1,451 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conócenos - Kiwanis Football League Panama</title>
-  
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/conocenos.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+/* ==========================================================================
+   CONÓCENOS PAGE STYLES - KIWANIS FOOTBALL LEAGUE PANAMA
+   ========================================================================== */
 
-  <!-- GSAP ScrollTrigger para animaciones -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-</head>
-<body>
+/* 1. HERO SECTION */
+.conocenos-hero {
+  text-align: center;
+  padding: 40px 20px 20px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
-  <!-- HEADER NAVEGACIÓN DINÁMICO -->
-  <div id="global-header"></div>
+.conocenos-hero h1 {
+  font-family: var(--fuente-titulos, 'Anton', 'Impact', sans-serif);
+  font-size: clamp(36px, 5vw, 52px);
+  color: var(--azul-kfl, #19547E);
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
-  <main>
-    <!-- 1. ENCABEZADO H1 CON RESEÑA DE PÁGINA -->
-    <section class="conocenos-hero gsap-reveal">
-      <h1>CONÓCENOS</h1>
-      <p>Conoce la historia de la Kiwanis Football League desde sus inicios hasta la actualidad.</p>
-    </section>
+.conocenos-hero p {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--texto-suave, #555555);
+  margin: 0 auto;
+  max-width: 750px;
+  line-height: 1.5;
+}
 
-    <!-- 2. CONTADORES / MÉTRICAS -->
-    <section class="counters-section gsap-reveal">
-      <div class="counters-grid">
-        <div class="counter-card">
-          <div class="counter-number"><span class="counter-val" data-target="58">0</span>+</div>
-          <div class="counter-label">Años de Tradición</div>
-        </div>
+/* 2. CONTADORES / MÉTRICAS */
+.counters-section {
+  max-width: 1150px;
+  margin: 25px auto 40px auto;
+  padding: 0 20px;
+}
 
-        <div class="counter-card">
-          <div class="counter-number"><span class="counter-val" data-target="120">0</span>+</div>
-          <div class="counter-label">Coaches Capacitados</div>
-        </div>
+.counters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
 
-        <div class="counter-card">
-          <div class="counter-number"><span class="counter-val" data-target="1600">0</span>+</div>
-          <div class="counter-label">Atletas Activos</div>
-        </div>
-      </div>
-    </section>
+.counter-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px 20px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  border-bottom: 4px solid var(--azul-kfl, #19547E);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-    <!-- 3. ESTRUCTURA EJECUTIVA Y RESEÑA HISTÓRICA (ALTÍSIMA LEGIBILIDAD) -->
-    <section class="president-overview-section gsap-reveal">
-      <div class="president-overview-grid">
-        
-        <!-- Columna Izquierda: Card Presentación Ejecutivo Raúl Méndez -->
-        <article class="executive-card">
-          <div class="executive-photo-wrap">
-            <img src="assets/img/conocenos-raul-mendez.jpg" alt="Raúl Méndez de Obarrio - Presidente KFL">
-          </div>
-          <h2 class="executive-name">RAÚL MÉNDEZ DE OBARRIO</h2>
-          <div class="executive-role">Presidente actual de la liga KFL</div>
-          <p class="executive-bio">
-            Como miembro del <strong>Club Kiwanis de Panamá</strong>, ha sido Presidente, Vicepresidente, Secretario, Vocal y Asesor de la Junta Directiva en varios periodos.
-          </p>
-        </article>
+.counter-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
 
-        <!-- Columna Derecha: Text Box Institucional con Máxima Nitidez -->
-        <article class="league-text-box">
-          <header>
-            <h2>ACERCA DE LA LIGA</h2>
-          </header>
+.counter-number {
+  font-family: var(--fuente-titulos, 'Anton', 'Impact', sans-serif);
+  font-size: 42px;
+  color: var(--azul-kfl, #19547E);
+  line-height: 1;
+  margin-bottom: 8px;
+  font-weight: 800;
+}
 
-          <div class="league-text-content">
-            <p>
-              Nuestra <strong>Liga de Football Americano Kiwanis</strong> se ha convertido en un <strong>Programa Escolar Pionero</strong>. Ofrecemos dos ligas, la de <strong>Contact Masculino</strong> y la de <strong>Flag Femenino</strong>. Con categorías para football americano desde <strong>Micro</strong>, <strong>Mini</strong>, <strong>Juvenil</strong> y <strong>Varsity</strong>, y en flag football empezando desde <strong>Micro</strong>, <strong>Mini</strong>, <strong>Juvenil</strong> y <strong>Varsity</strong>. Nos enorgullece que actualmente contamos con un aproximado de <strong>1,600 jugadores</strong>.
-            </p>
-            <p>
-              En Football Americano, la categoría <strong>Micro</strong> va desde 7 a 9 años, la <strong>Mini</strong> desde 10 a 12, la <strong>Juvenil</strong> desde 13 a 15, y la <strong>Varsity</strong> desde 16 a 18 años. Para Flag Football empieza con la categoría <strong>Micro</strong> va desde 7 a 9 años, la categoría <strong>Mini</strong> desde 10 a 12, la <strong>Juvenil</strong> desde 13 a 15, y la <strong>Varsity</strong> que es desde 16 a 18 años. Para cada categoría la Liga tiene un promedio de tres meses, que están conformados por 12 partidos.
-            </p>
-            <p>
-              Contamos con un grupo de entrenadores entregados al deporte para los jóvenes jugadores. Hoy podemos decir con gran orgullo que tenemos <strong>120 entrenadores</strong> todos certificados por <strong>USA Football</strong>, entidad que regula las ligas de <em>Youth Football</em> de Estados Unidos.
-            </p>
-            <p>
-              <strong>Kiwanis es el único programa fuera de Estados Unidos que tiene todos sus entrenadores certificados</strong>, como exigencia para poder ser entrenador de cualquier equipo en las Ligas Kiwanis.
-            </p>
-            <p>
-              Todos los años conformamos una Selección con los mejores jugadores de las categorías Mini y Juvenil en ambas ligas para representar a Panamá en torneos internacionales conocidos como los <strong>“Panama Sharks”</strong>. Hemos viajado seis años seguidos a representar a nuestro país en Torneos Internacionales a: Cancún, Puerto Rico, Tampa Florida, Miami Florida, Las Vegas, Daytona Florida, México DF y se mantienen invictos en la categoría Juvenil.
-            </p>
-            <p>
-              No solo cumplimos con la comunidad al darle otra alternativa de deporte a nuestra juventud, los alejamos de las malas costumbres, sino que trabajamos de la mano con las escuelas participantes con la parte académica. Asesoramos a los jugadores, nos convertimos en sus consejeros, y creamos una gran familia.
-            </p>
-          </div>
-        </article>
+.counter-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-      </div>
-    </section>
+/* 3. ESTRUCTURA UNIFICADA: CARD EJECUTIVO RAÚL MÉNDEZ + TEXT BOX ROJO KFL */
+.executive-league-section {
+  max-width: 1150px;
+  margin: 0 auto 50px auto;
+  padding: 0 20px;
+}
 
-    <!-- 4. BANNER NUESTRA HISTORIA -->
-    <section class="history-banner-container gsap-reveal">
-      <div class="history-banner-grid">
-        
-        <!-- Bloque Azul Institucional -->
-        <div class="history-banner-blue">
-          <div class="history-icon-box">
-            <svg viewBox="0 0 64 64">
-              <g transform="rotate(-30 32 32)">
-                <ellipse cx="32" cy="32" rx="26" ry="16" />
-                <line x1="16" y1="32" x2="48" y2="32" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" />
-                <line x1="24" y1="27" x2="24" y2="37" stroke="#ffffff" stroke-width="2" />
-                <line x1="32" y1="27" x2="32" y2="37" stroke="#ffffff" stroke-width="2" />
-                <line x1="40" y1="27" x2="40" y2="37" stroke="#ffffff" stroke-width="2" />
-              </g>
-            </svg>
-          </div>
-          <h2>NUESTRA HISTORIA</h2>
-          <p>
-            El <strong>Club Kiwanis de Panamá</strong> es una sociedad civil sin fines de lucro fundada en Panamá en el año 1967 por iniciativa del <strong>Arq. Gustavo Rosania</strong>, quien reunió a un grupo de empresarios con la visión de formar un Club Cívico afiliado a Kiwanis International.
-          </p>
-        </div>
+.executive-league-banner {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+}
 
-        <!-- Imagen de Historia -->
-        <div class="history-banner-image">
-          <img src="assets/img/conocenos-historia-kfl.jpg" alt="Historia de la Kiwanis Football League Panamá">
-        </div>
+@media (max-width: 900px) {
+  .executive-league-banner {
+    grid-template-columns: 1fr;
+  }
+}
 
-      </div>
-    </section>
+/* Columna Izquierda: Card Ejecutivo */
+.executive-card-side {
+  background: #ffffff;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-right: 1px solid #e2e8f0;
+}
 
-    <!-- 5. CRONOLOGÍA DE LA LIGA -->
-    <section class="timeline-section-wrapper gsap-reveal">
-      <h2 class="timeline-title-main">CRONOLOGÍA DE LA LIGA</h2>
+@media (max-width: 900px) {
+  .executive-card-side {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+  }
+}
 
-      <div class="timeline-viewport-container">
-        
-        <!-- Capas de Difuminación Lateral -->
-        <div class="tl-fade-overlay tl-fade-left" id="tlFadeLeft"></div>
-        <div class="tl-fade-overlay tl-fade-right" id="tlFadeRight"></div>
+.executive-photo-wrap {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
 
-        <!-- Botones Flotantes de Navegación -->
-        <button class="tl-float-btn prev-btn" id="tlPrevBtn" aria-label="Anterior">
-          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        </button>
-        <button class="tl-float-btn next-btn" id="tlNextBtn" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-        </button>
+.executive-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-        <!-- Track con Scroll Oculto -->
-        <div class="timeline-scroll-track" id="timelineTrack">
-          <div class="timeline-cards-row">
-            
-            <!-- 1967 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">1967</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                </div>
-              </div>
-              <p class="timeline-h-desc">Se funda <strong>El Club Kiwanis de Panamá</strong>, una sociedad civil sin fines de lucro fundada en Panamá por iniciativa del <strong>Arq. Gustavo Rosania</strong>.</p>
-            </article>
+.executive-name {
+  font-family: var(--fuente-titulos, 'Anton', 'Impact', sans-serif);
+  font-size: 24px;
+  color: var(--azul-kfl, #19547E);
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
 
-            <!-- 1972 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">1972</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
-                </div>
-              </div>
-              <p class="timeline-h-desc">Con la administración del <strong>Ing. Mario Rognoni (QEPD)</strong>, el Club Kiwanis de Panama organizó dos equipos juveniles de futbol americano, para que participaran en el <strong>Canal Zone League</strong> donde jugaban diferentes equipos de las bases militares de los Estados Unidos acantonadas en Panamá.</p>
-            </article>
+.executive-role {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rojo-kfl, #A91C00);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-            <!-- 1977 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">1977</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                </div>
-              </div>
-              <p class="timeline-h-desc">Los <strong>Kiwanis Kolts</strong> se consagran bi-campeones del football americano y comienza el sueño de Panamá.</p>
-            </article>
+.executive-bio {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4a5568;
+  margin: 0;
+  text-align: left;
+}
 
-            <!-- 1999 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">1999</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
-                </div>
-              </div>
-              <p class="timeline-h-desc">Con la firma de los <strong>Tratados Torrijos-Carter</strong>, se van los Americanos de Panamá. La Liga se debilita y se reducen los equipos. Cierra la liga de la Zona del Canal y se abre la Liga organizada por <strong>Panajuru</strong> que dura pocos años.</p>
-            </article>
+/* Columna Derecha: Text Box Rojo KFL con Texto Blanco Legible */
+.league-red-box {
+  background-color: var(--rojo-kfl, #A91C00);
+  color: #ffffff;
+  padding: 35px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-            <!-- 2000 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2000</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99z"/></svg>
-                </div>
-              </div>
-              <p class="timeline-h-desc">Bajo la Presidencia de <strong>Raúl Méndez de Obarrio</strong>, el Club Kiwanis retoma el deporte y la liga se juega con solo cuatro equipos de Panamá en la categoría mayor. Todos bajo el primer nombre “Kiwanis”: <strong>Kiwanis Kolts</strong>, <strong>Kiwanis Knights</strong>, <strong>Kiwanis Kobra</strong> y <strong>Kiwanis Kings</strong>.</p>
-            </article>
+@media (max-width: 600px) {
+  .league-red-box {
+    padding: 25px 20px;
+  }
+}
 
-            <!-- 2001 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2001</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-                </div>
-              </div>
-              <p class="timeline-h-desc">Se hace una reingeniería de la Liga. Migra hacia una <strong>liga intercolegial</strong>.</p>
-            </article>
+.league-red-box header h2 {
+  font-family: var(--fuente-titulos, 'Anton', 'Impact', sans-serif);
+  font-size: 28px;
+  color: #ffffff;
+  margin: 0 0 18px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 8px;
+}
 
-            <!-- 2002 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2002</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Entran los <strong>Raiders</strong> del Colegio Brader y los <strong>Tigers</strong> del Instituto Don Bosco.</p>
-            </article>
+.league-red-content {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: justify;
+}
 
-            <!-- 2004 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2004</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Entran los <strong>Spartans</strong> de La Salle.</p>
-            </article>
+.league-red-content p {
+  margin: 0;
+  color: #ffffff;
+}
 
-            <!-- 2005 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2005</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Entran los <strong>Titans</strong> de la comunidad hebrea liderizada por el <strong>Instituto Alberto Einstein</strong>.</p>
-            </article>
+.league-red-content strong {
+  color: #ffffff;
+  font-weight: 700;
+}
 
-            <!-- 2007 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2007</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Entran los <strong>Dragons</strong> de la escuela de <strong>Balboa Academy</strong>.</p>
-            </article>
+/* 4. BANNER "NUESTRA HISTORIA" (SIN SVG DE BALÓN) */
+.history-banner-container {
+  max-width: 1150px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
 
-            <!-- 2008 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2008</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Entran los <strong>Redskins</strong> del San Vicente de Paul. Se inaugura la <strong>Categoría Mini</strong> con 7 equipos: Kiwanis Kolts, AIP Fighting Owls, San Vicente Redskins, La Salle Spartans, Alberto Einstein Titans, Balboa Dragons y Brader Raiders.</p>
-            </article>
+.history-banner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 380px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
 
-            <!-- 2009 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2009</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Se inaugura la <strong>Categoría Micro</strong> con 10 equipos. El Chino Panameño, la AIP saca 2 equipos, Kolts, Raiders, Spartans, Titans, Balboa, Oxford, Red Lions y Redskins.</p>
-            </article>
+@media (max-width: 850px) {
+  .history-banner-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
-            <!-- 2012 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2012</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Se inaugura la <strong>Categoría Varsity</strong>, con jugadores de 16 a 18 años de edad y peso ilimitado.</p>
-            </article>
+.history-banner-blue {
+  background-color: var(--azul-kfl, #19547E);
+  color: #ffffff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 
-            <!-- 2015 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2015</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Se inaugura <strong>Flag Football Femenino</strong> en la <strong>Categoría Juvenil</strong> con la participación de 7 equipos.</p>
-            </article>
+.history-banner-blue h2 {
+  font-family: var(--fuente-titulos, 'Anton', 'Impact', sans-serif);
+  font-size: 34px;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
-            <!-- 2016 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2016</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Se inaugura en Flag Femenino la <strong>Categoría Varsity</strong> con 7 equipos.</p>
-            </article>
+.history-banner-blue p {
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0;
+  color: #f0f4f8;
+}
 
-            <!-- 2017 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2017</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Se inaugura en Flag Femenino la <strong>Categoría Mini</strong>.</p>
-            </article>
+.history-banner-image {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  overflow: hidden;
+}
 
-            <!-- 2019 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2019</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">Los <strong>Panama Sharks U18</strong>, participaron del <strong>International Bowl</strong>, organizado por <strong>USA Football</strong> y hacen historia, ganándole al combinado de estados unidos por <strong>30-25</strong>.</p>
-            </article>
+.history-banner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
-            <!-- 2021 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2021</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">La liga sigue creciendo. Se lanzan las <strong>Sharks de flag football femenino</strong> por primer vez en un partido Internacional con sede en Panamá contra Querétaro México.</p>
-            </article>
+/* 5. CRONOLOGÍA DE LA LIGA (HORIZONTAL) */
+.timeline-section-wrapper {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
 
-            <!-- 2025 -->
-            <article class="timeline-h-card">
-              <div class="timeline-card-header">
-                <div class="timeline-h-year">2025</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
-              </div>
-              <p class="timeline-h-desc">La Liga de flag football femenino migra del formato 8vs8 a formato <strong>5v5 con reglamentación IFAF</strong> (International Federation of American Football) y debutan los <strong>Eagles del Colegio de Panamá</strong> en la categoría <strong>Varsity Contact</strong>.</p>
-            </article>
+.timeline-title-main {
+  font-family: var(--fuente-titulos, 'Anton', 'Impact', sans-serif);
+  font-size: clamp(28px, 4vw, 38px);
+  color: var(--rojo-kfl, #A91C00);
+  margin: 0 0 25px 0;
+  text-transform: uppercase;
+  text-align: center;
+}
 
-          </div>
-        </div>
+.timeline-viewport-container {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f8fafc;
+  padding: 10px 0;
+}
 
-      </div>
-    </section>
-  </main>
+/* Difuminación Lateral */
+.tl-fade-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70px;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
 
-  <!-- FOOTER DINÁMICO -->
-  <div id="global-footer"></div>
+.tl-fade-left {
+  left: 0;
+  background: linear-gradient(to right, rgba(248, 250, 252, 1) 0%, rgba(248, 250, 252, 0) 100%);
+  opacity: 0;
+}
 
-  <script src="js/components.js"></script>
+.tl-fade-right {
+  right: 0;
+  background: linear-gradient(to left, rgba(248, 250, 252, 1) 0%, rgba(248, 250, 252, 0) 100%);
+  opacity: 1;
+}
 
-  <!-- SCRIPTS DE INTERACCIÓN Y CONTROLES -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // 1. Animaciones GSAP
-      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
+/* Botones Flotantes Pulidos estilo "Up" */
+.tl-float-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--azul-kfl, #19547E);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease, background-color 0.2s ease, transform 0.2s ease;
+}
 
-        gsap.utils.toArray('.gsap-reveal').forEach((element) => {
-          gsap.to(element, {
-            scrollTrigger: {
-              trigger: element,
-              start: 'top 88%',
-              toggleActions: 'play none none reverse'
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out'
-          });
-        });
-      }
+.tl-float-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+}
 
-      // 2. Contadores Numéricos
-      const counters = document.querySelectorAll('.counter-val');
-      let animated = false;
+.tl-float-btn:hover {
+  background-color: #103652;
+  transform: translateY(-50%) scale(1.06);
+}
 
-      function startCounters() {
-        counters.forEach(counter => {
-          const target = +counter.getAttribute('data-target');
-          const duration = 2000;
-          const stepTime = 20;
-          const steps = duration / stepTime;
-          const increment = target / steps;
-          let current = 0;
+.tl-float-btn.prev-btn {
+  left: 15px;
+  opacity: 0;
+  pointer-events: none;
+}
 
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              counter.textContent = target.toLocaleString();
-              clearInterval(timer);
-            } else {
-              counter.textContent = Math.ceil(current).toLocaleString();
-            }
-          }, stepTime);
-        });
-      }
+.tl-float-btn.next-btn {
+  right: 15px;
+  opacity: 1;
+  pointer-events: auto;
+}
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting && !animated) {
-            animated = true;
-            startCounters();
-          }
-        });
-      }, { threshold: 0.3 });
+/* Track de Scroll Horizontal */
+.timeline-scroll-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 25px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
-      const countersSection = document.querySelector('.counters-section');
-      if (countersSection) {
-        observer.observe(countersSection);
-      }
+.timeline-scroll-track::-webkit-scrollbar {
+  display: none;
+}
 
-      // 3. Control de Navegación del Timeline
-      const track = document.getElementById('timelineTrack');
-      const prevBtn = document.getElementById('tlPrevBtn');
-      const nextBtn = document.getElementById('tlNextBtn');
-      const fadeLeft = document.getElementById('tlFadeLeft');
-      const fadeRight = document.getElementById('tlFadeRight');
+.timeline-cards-row {
+  display: flex;
+  gap: 22px;
+  position: relative;
+  width: max-content;
+  align-items: stretch;
+}
 
-      function updateTimelineState() {
-        if (!track) return;
+/* Card Individual Fija */
+.timeline-h-card {
+  width: 310px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 22px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-        const scrollLeft = track.scrollLeft;
-        const maxScroll = track.scrollWidth - track.clientWidth;
+.timeline-h-card:hover {
+  border-color: var(--azul-kfl, #19547E);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
 
-        if (scrollLeft <= 10) {
-          prevBtn.style.opacity = '0';
-          prevBtn.style.pointerEvents = 'none';
-          fadeLeft.style.opacity = '0';
-        } else {
-          prevBtn.style.opacity = '1';
-          prevBtn.style.pointerEvents = 'auto';
-          fadeLeft.style.opacity = '1';
-        }
+.timeline-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f1f5f9;
+}
 
-        if (scrollLeft >= maxScroll - 10) {
-          nextBtn.style.opacity = '0';
-          nextBtn.style.pointerEvents = 'none';
-          fadeRight.style.opacity = '0';
-        } else {
-          nextBtn.style.opacity = '1';
-          nextBtn.style.pointerEvents = 'auto';
-          fadeRight.style.opacity = '1';
-        }
-      }
+.timeline-h-year {
+  font-family: var(--fuente-titulos, 'Anton', 'Impact', sans-serif);
+  font-size: 30px;
+  color: var(--azul-kfl, #19547E);
+  line-height: 1;
+  margin: 0;
+}
 
-      if (track && prevBtn && nextBtn) {
-        track.addEventListener('scroll', updateTimelineState);
+.timeline-h-card:nth-child(even) .timeline-h-year {
+  color: var(--rojo-kfl, #A91C00);
+}
 
-        nextBtn.addEventListener('click', () => {
-          track.scrollBy({ left: 350, behavior: 'smooth' });
-        });
+.timeline-badge-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(25, 84, 126, 0.08);
+  color: var(--azul-kfl, #19547E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-        prevBtn.addEventListener('click', () => {
-          track.scrollBy({ left: -350, behavior: 'smooth' });
-        });
+.timeline-h-card:nth-child(even) .timeline-badge-icon {
+  background: rgba(169, 28, 0, 0.08);
+  color: var(--rojo-kfl, #A91C00);
+}
 
-        updateTimelineState();
-      }
-    });
-  </script>
-</body>
-</html>
+.timeline-badge-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.timeline-h-desc {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.55;
+  margin: 0;
+}

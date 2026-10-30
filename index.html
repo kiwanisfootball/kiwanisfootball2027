@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <!-- 1. HEADER NAVEGACIÓN CON MENÚ MÓVIL -->
+  <!-- 1. HEADER NAVEGACIÓN -->
   <header class="header-nav">
     <nav class="navbar">
       <a href="index.html" class="nav-logo">
@@ -122,16 +122,18 @@
       <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
     </section>
 
-    <!-- 4. ACERCA DE LA LIGA (FOTO + TARJETA ROJO KFL) -->
-    <section class="about-section gsap-reveal">
-      <div class="about-image">
-        <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
-      </div>
-      <article class="about-card">
-        <h2>ACERCA DE LA LIGA</h2>
-        <p>Nuestra Liga de Football Americano Kiwanis se ha convertido en un Programa Escolar Pionero. Ofrecemos dos ligas, la de Contact Masculino y la de Flag Femenino. Con categorías para Contact desde Micro, Mini, Juvenil y Varsity, y en Flag empezando desde Micro, Mini, Juvenil y Varsity. Nos orgullece que actualmente contamos con un aproximado de 1,600 jugadores.</p>
-      </article>
-    </section>
+    <!-- 4. ACERCA DE LA LIGA (ENVOLTORIO A 1200PX) -->
+    <div class="about-wrapper gsap-reveal">
+      <section class="about-section">
+        <div class="about-image">
+          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
+        </div>
+        <article class="about-card">
+          <h2>ACERCA DE LA LIGA</h2>
+          <p>Nuestra Liga de Football Americano Kiwanis se ha convertido en un Programa Escolar Pionero. Ofrecemos dos ligas, la de Contact Masculino y la de Flag Femenino. Con categorías para Contact desde Micro, Mini, Juvenil y Varsity, y en Flag empezando desde Micro, Mini, Juvenil y Varsity. Nos orgullece que actualmente contamos con un aproximado de 1,600 jugadores.</p>
+        </article>
+      </section>
+    </div>
 
     <!-- 5. BANNER PROMOCIONAL / SLIDESHOW RESPONSIVE (1200x250) -->
     <section class="promo-banner-section gsap-reveal">
@@ -149,8 +151,8 @@
           </a>
         </div>
 
-        <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
-        <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+        <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
+        <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
 
       </div>
     </section>

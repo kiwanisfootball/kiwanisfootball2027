@@ -109,7 +109,7 @@
       fill: #ffffff;
     }
 
-    /* SECCIÓN DE VIDEOS EMBEDDED */
+    /* SECCIÓN DE VIDEOS EMBEDDED CON GRID HISTÓRICO */
     .ta-videos-section {
       background: #ffffff;
       border-radius: 16px;
@@ -119,14 +119,20 @@
       margin-bottom: 30px;
     }
 
+    /* REPRODUCTOR PRINCIPAL DESTACADO */
+    .ta-featured-player-wrapper {
+      margin-bottom: 30px;
+    }
+
     .ta-video-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* Relación de aspecto 16:9 */
+      padding-bottom: 56.25%; /* 16:9 */
       height: 0;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: #000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
     }
 
     .ta-video-container iframe {
@@ -136,6 +142,138 @@
       width: 100%;
       height: 100%;
       border: 0;
+    }
+
+    /* CUADRÍCULA / GRID DE VIDEOS */
+    .ta-video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .ta-video-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ta-video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .ta-card-thumb-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #0f172a;
+      overflow: hidden;
+    }
+
+    .ta-card-thumb {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .ta-video-card:hover .ta-card-thumb {
+      transform: scale(1.05);
+    }
+
+    .ta-card-play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background: rgba(25, 84, 126, 0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .ta-video-card:hover .ta-card-play-icon {
+      background: #19547E;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .ta-card-play-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+      margin-left: 2px;
+    }
+
+    .ta-card-content {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-grow: 1;
+    }
+
+    .ta-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .ta-card-date {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    /* BOTÓN CARGAR MÁS */
+    .ta-load-more-wrapper {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-load-more {
+      background: #ffffff;
+      color: #19547E;
+      border: 2px solid #19547E;
+      padding: 10px 28px;
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-load-more:hover {
+      background: #19547E;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
+    }
+
+    .btn-load-more:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
   </style>
 </head>
@@ -183,7 +321,7 @@
         <p>A través de la cobertura de partidos, entrevistas, fotografía y narrativa digital, FAFF ayuda a preservar la historia de la liga y a expandir el interés por el fútbol americano en todo Panamá.</p>
       </div>
 
-      <!-- REDES SOCIALES CON ICONOS SVG INLINE -->
+      <!-- REDES SOCIALES -->
       <div class="ta-social-bar">
         <a href="https://www.instagram.com/kfl_total_access/" target="_blank" rel="noopener noreferrer" class="ta-social-link instagram">
           <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -202,18 +340,33 @@
       </div>
     </section>
 
-    <!-- BIBLIOTECA DE VIDEOS EMBEDDED -->
+    <!-- BIBLIOTECA DE VIDEOS EMBEDDED CON GRID HISTÓRICO -->
     <section class="ta-videos-section">
       <h2 class="ta-title">Últimos Episodios y Coberturas</h2>
+
+      <!-- REPRODUCTOR DESTACADO -->
+      <div class="ta-featured-player-wrapper">
+        <div class="ta-video-container">
+          <iframe 
+            id="mainYouTubePlayer"
+            src="https://www.youtube.com/embed/videoseries?list=UUCfOFTqXpHgxkPo0Poc0Mew" 
+            title="KFL Total Access YouTube Player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <h3 style="font-size: 18px; font-weight: 800; color: #1e293b; margin-top: 25px; text-transform: uppercase;">Explorar Catálogo Histórico</h3>
       
-      <div class="ta-video-container">
-        <!-- REPRODUCTOR EMBEDDED DEL CANAL DE YOUTUBE -->
-        <iframe 
-          src="https://www.youtube.com/embed/videoseries?list=UUCfOFTqXpHgxkPo0Poc0Mew" 
-          title="KFL Total Access YouTube Player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen>
-        </iframe>
+      <!-- CONTENEDOR DEL GRID -->
+      <div class="ta-video-grid" id="youtubeVideoGrid">
+        <p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 20px;">Cargando catálogo de videos...</p>
+      </div>
+
+      <!-- BOTÓN CARGAR MÁS -->
+      <div class="ta-load-more-wrapper" id="loadMoreWrapper" style="display: none;">
+        <button class="btn-load-more" id="btnLoadMore" onclick="fetchYouTubeVideos()">Cargar Más Videos ➕</button>
       </div>
     </section>
 
@@ -224,10 +377,123 @@
   </footer>
 
   <script>
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navMenu = document.getElementById('navMenu');
-    if (hamburgerBtn) {
-      hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+    const YOUTUBE_API_KEY = 'AIzaSyBEjzSqVt1VdAZW8swDi215B4c4_IBnWR8';
+    const PLAYLIST_ID = 'UUCfOFTqXpHgxkPo0Poc0Mew';
+    let nextPageToken = '';
+    const maxResultsPerPage = 8;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+      }
+
+      fetchYouTubeVideos();
+    });
+
+    function fetchYouTubeVideos() {
+      const btnLoadMore = document.getElementById('btnLoadMore');
+      if (btnLoadMore) {
+        btnLoadMore.disabled = true;
+        btnLoadMore.textContent = 'Cargando...';
+      }
+
+      let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${maxResultsPerPage}&key=${YOUTUBE_API_KEY}`;
+      
+      if (nextPageToken) {
+        url += `&pageToken=${nextPageToken}`;
+      }
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.items || data.items.length === 0) {
+            if (!nextPageToken) {
+              document.getElementById('youtubeVideoGrid').innerHTML = '<p style="grid-column: 1/-1; text-align:center;">No se encontraron videos disponibles.</p>';
+            }
+            document.getElementById('loadMoreWrapper').style.display = 'none';
+            return;
+          }
+
+          nextPageToken = data.nextPageToken || '';
+          renderVideoCards(data.items);
+
+          const loadMoreWrapper = document.getElementById('loadMoreWrapper');
+          if (nextPageToken) {
+            loadMoreWrapper.style.display = 'block';
+            btnLoadMore.disabled = false;
+            btnLoadMore.textContent = 'Cargando Más Videos ➕';
+          } else {
+            loadMoreWrapper.style.display = 'none';
+          }
+        })
+        .catch(err => {
+          console.error('Error cargando YouTube API:', err);
+          renderFallbackNotice();
+        });
+    }
+
+    function renderVideoCards(items) {
+      const grid = document.getElementById('youtubeVideoGrid');
+      
+      if (!nextPageToken && grid.children.length > 0 && grid.children[0].tagName === 'P') {
+        grid.innerHTML = '';
+      }
+
+      items.forEach(item => {
+        const snippet = item.snippet;
+        const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
+        if (!videoId) return;
+
+        const title = snippet.title || 'Video KFL Total Access';
+        const thumb = (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url;
+        const pubDate = new Date(snippet.publishedAt).toLocaleDateString('es-PA', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        });
+
+        const card = document.createElement('div');
+        card.className = 'ta-video-card';
+        card.onclick = () => playVideoInMainPlayer(videoId);
+        card.innerHTML = `
+          <div class="ta-card-thumb-wrapper">
+            <img src="${thumb}" alt="${title}" class="ta-card-thumb" loading="lazy">
+            <div class="ta-card-play-icon">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <div class="ta-card-content">
+            <div class="ta-card-title">${title}</div>
+            <div class="ta-card-date">📅 ${pubDate}</div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function playVideoInMainPlayer(videoId) {
+      const player = document.getElementById('mainYouTubePlayer');
+      if (player) {
+        player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        window.scrollTo({
+          top: player.getBoundingClientRect().top + window.scrollY - 100,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    function renderFallbackNotice() {
+      const grid = document.getElementById('youtubeVideoGrid');
+      grid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
+          <p style="color: #475569; font-size: 14px; margin-bottom: 8px;">No se pudo conectar dinámicamente con el canal de YouTube.</p>
+          <a href="https://www.youtube.com/@KFLTotalAccess/videos" target="_blank" rel="noopener noreferrer" class="btn-load-more" style="display: inline-block; text-decoration: none; margin-top: 8px;">Ver Canal Completo en YouTube ↗</a>
+        </div>
+      `;
+      document.getElementById('loadMoreWrapper').style.display = 'none';
     }
   </script>
 </body>

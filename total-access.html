@@ -69,6 +69,17 @@
       margin-bottom: 0;
     }
 
+    .ta-backlink {
+      color: #19547E;
+      font-weight: 800;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .ta-backlink:hover {
+      color: #0f3652;
+    }
+
     /* REDES SOCIALES */
     .ta-social-bar {
       display: flex;
@@ -107,6 +118,64 @@
       width: 18px;
       height: 18px;
       fill: #ffffff;
+    }
+
+    /* SECCIÓN DE TRANSMISIÓN EN VIVO OFICIAL (DIRECT EMBED) */
+    .ta-live-stream-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      border: 2px solid #dc2626;
+      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.12);
+      margin-bottom: 30px;
+    }
+
+    .ta-live-badge-header {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #dc2626;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+
+    .ta-live-dot {
+      width: 8px;
+      height: 8px;
+      background: #ffffff;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.2); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .ta-live-video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .ta-live-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
 
     /* SECCIÓN DE VIDEOTECA */
@@ -217,6 +286,10 @@
       background: rgba(16, 185, 129, 0.95);
     }
 
+    .ta-card-tag.live-tag {
+      background: rgba(220, 38, 38, 0.95);
+    }
+
     .ta-card-play-icon {
       position: absolute;
       top: 50%;
@@ -302,6 +375,63 @@
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
+    }
+
+    /* SECCIÓN FINAL DE SUSCRIPCIÓN CON BOTÓN PÍLDORA Y CAMPANITA SVG */
+    .ta-subscribe-box {
+      background: linear-gradient(135deg, #19547E 0%, #0f3652 100%);
+      border-radius: 16px;
+      padding: 35px 25px;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(25, 84, 126, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .ta-subscribe-text {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.6;
+      max-width: 680px;
+      margin: 0 auto 22px auto;
+      color: #f1f5f9;
+    }
+
+    .ta-subscribe-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ff0000;
+      color: #ffffff;
+      padding: 12px 28px;
+      font-size: 15px;
+      font-weight: 800;
+      border-radius: 30px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    }
+
+    .ta-subscribe-btn:hover {
+      background: #cc0000;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.45);
+    }
+
+    .ta-bell-icon {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+      animation: ringBell 2.5s infinite ease-in-out;
+    }
+
+    @keyframes ringBell {
+      0%, 100% { transform: rotate(0); }
+      10%, 30% { transform: rotate(14deg); }
+      20%, 40% { transform: rotate(-14deg); }
+      50% { transform: rotate(0); }
     }
 
     /* MODAL REPRODUCTOR GRANDE */
@@ -413,7 +543,7 @@
       <div class="ta-description">
         <p><strong>KFL Total Access</strong> es la fuente oficial de noticias, resúmenes e información sobre la Kiwanis Football League en la Ciudad de Panamá. Este programa, con cobertura durante todo el año, abarca las cuatro divisiones juveniles masculinas y femeninas de la liga: <strong>U10/Micro, U13/Mini, U16/Juvenil y U19/Varsity</strong>.</p>
         
-        <p>Creado por <strong>Raúl Obarrio Méndez en 2018</strong>, KFL Total Access promueve y documenta a los atletas, entrenadores, equipos y tradiciones de la liga de fútbol americano de mayor trayectoria en Panamá. El programa es producido e impulsado por la <strong>Fundación American Football Films (FAFF)</strong>, una organización social y educativa sin fines de lucro dedicada al desarrollo juvenil a través del fútbol americano, los medios deportivos, el liderazgo y el servicio comunitario.</p>
+        <p>Creado por <strong>Raúl Obarrio Méndez en 2018</strong>, KFL Total Access promueve y documenta a los atletas, entrenadores, equipos y tradiciones de la liga de fútbol americano de mayor trayectoria en Panamá. El programa es producido e impulsado por la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" class="ta-backlink">Fundación American Football Films (FAFF)</a>, una organización social y educativa sin fines de lucro dedicada al desarrollo juvenil a través del fútbol americano, los medios deportivos, el liderazgo y el servicio comunitario.</p>
         
         <p>A través de la cobertura de partidos, entrevistas, fotografía y narrativa digital, FAFF ayuda a preservar la historia de la liga y a expandir el interés por el fútbol americano en todo Panamá.</p>
       </div>
@@ -437,6 +567,22 @@
       </div>
     </section>
 
+    <!-- CANAL DE TRANSMISIÓN EN VIVO DIRECTA (OFICIAL DE YOUTUBE) -->
+    <section class="ta-live-stream-card">
+      <div class="ta-live-badge-header">
+        <span class="ta-live-dot"></span> TRANSMISIÓN EN VIVO KFL
+      </div>
+      <div class="ta-live-video-container">
+        <!-- Reproductor de Live Stream del Canal (Cuando hay live se reproduce directo en la web) -->
+        <iframe 
+          src="https://www.youtube.com/embed/live_stream?channel=UCCfOFTqXpHgxkPo0Poc0Mew" 
+          title="KFL Total Access Live Stream"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
     <!-- VIDEOTECA EN GRILLA CON FILTROS CENTRADOS -->
     <section class="ta-gallery-section">
 
@@ -445,6 +591,7 @@
         <button class="ta-filter-btn active" onclick="filterVideos('all', this)">Todos los Videos</button>
         <button class="ta-filter-btn" onclick="filterVideos('show', this)">KFL Total Access Show</button>
         <button class="ta-filter-btn" onclick="filterVideos('games', this)">Partidos & Highlights</button>
+        <button class="ta-filter-btn" onclick="filterVideos('live', this)">🔴 Transmisiones en Vivo</button>
       </div>
 
       <!-- CONTENEDOR DEL GRID -->
@@ -454,6 +601,19 @@
       <div class="ta-load-more-wrapper" id="loadMoreWrapper" style="display: none;">
         <button class="btn-load-more" id="btnLoadMore" onclick="fetchYouTubeVideos()">Cargar Más Videos ➕</button>
       </div>
+    </section>
+
+    <!-- CAJA DE SUSCRIPCIÓN CON BOTÓN PÍLDORA Y CAMPANITA SVG -->
+    <section class="ta-subscribe-box">
+      <div class="ta-subscribe-text">
+        ¡Suscríbete a nuestro canal para enterarte cuando se sube cada resumen de partido, transmisión en vivo y episodio de KFL Total Access!
+      </div>
+      <a href="https://www.youtube.com/channel/UCCfOFTqXpHgxkPo0Poc0Mew?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="ta-subscribe-btn">
+        <svg class="ta-bell-icon" viewBox="0 0 24 24">
+          <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+        </svg>
+        Suscribirse en YouTube
+      </a>
     </section>
 
   </main>
@@ -490,11 +650,21 @@
       fetchYouTubeVideos();
     });
 
+    function getCategoryForTitle(title) {
+      const upper = title.toUpperCase();
+      if (upper.includes('EN VIVO') || upper.includes('LIVE') || upper.includes('DIRECTO') || upper.includes('TRANSMISION') || upper.includes('TRANSMISIÓN')) {
+        return 'live';
+      }
+      if (upper.includes('TOTAL ACCESS')) {
+        return 'show';
+      }
+      return 'games';
+    }
+
     function getFilteredCount(category) {
       return fetchedVideosList.filter(v => {
-        if (category === 'show') return v.category === 'show';
-        if (category === 'games') return v.category === 'games';
-        return true;
+        if (category === 'all') return true;
+        return v.category === category;
       }).length;
     }
 
@@ -531,7 +701,7 @@
             if (!videoId) return;
 
             const title = snippet.title || 'Video KFL';
-            const isShow = title.toUpperCase().includes('TOTAL ACCESS');
+            const cat = getCategoryForTitle(title);
 
             fetchedVideosList.push({
               id: videoId,
@@ -542,13 +712,13 @@
                 month: 'short',
                 day: 'numeric'
               }),
-              category: isShow ? 'show' : 'games'
+              category: cat
             });
           });
 
           renderGrid();
 
-          // Si ya acumulamos suficientes videos para la categoría seleccionada o se acabaron las páginas, salir del bucle
+          // Detener la búsqueda cuando se acumulen suficientes videos para la categoría activa
           if (currentFilter === 'all' || getFilteredCount(currentFilter) >= targetCount || !nextPageToken) {
             break;
           }
@@ -575,7 +745,6 @@
       if (btnElement) btnElement.classList.add('active');
       renderGrid();
 
-      // Si al cambiar de tab hay menos de 6 videos para esa categoría y hay más páginas disponibles en YouTube, cargar automáticamente más de la API
       if (getFilteredCount(category) < 6 && nextPageToken !== null) {
         fetchYouTubeVideos();
       }
@@ -586,9 +755,8 @@
       grid.innerHTML = '';
 
       const filtered = fetchedVideosList.filter(v => {
-        if (currentFilter === 'show') return v.category === 'show';
-        if (currentFilter === 'games') return v.category === 'games';
-        return true;
+        if (currentFilter === 'all') return true;
+        return v.category === currentFilter;
       });
 
       if (filtered.length === 0) {
@@ -601,9 +769,16 @@
         card.className = 'ta-video-card';
         card.onclick = () => openVideoModal(video.id);
 
-        const isShow = video.category === 'show';
-        const tagText = isShow ? 'Total Access Show' : 'PARTIDO / HIGHLIGHT';
-        const tagClass = isShow ? 'ta-card-tag' : 'ta-card-tag game-tag';
+        let tagText = 'PARTIDO / HIGHLIGHT';
+        let tagClass = 'ta-card-tag game-tag';
+
+        if (video.category === 'show') {
+          tagText = 'Total Access Show';
+          tagClass = 'ta-card-tag';
+        } else if (video.category === 'live') {
+          tagText = '🔴 EN VIVO / DIRECTO';
+          tagClass = 'ta-card-tag live-tag';
+        }
 
         card.innerHTML = `
           <div class="ta-card-thumb-wrapper">

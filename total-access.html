@@ -122,7 +122,7 @@
 
     /* BANNER DE TRANSMISIÓN EN VIVO AHORA (SOLO SE MUESTRA SI HAY UN LIVE ACTIVO) */
     .ta-live-stream-card {
-      display: none; /* Oculto por defecto */
+      display: none;
       background: #ffffff;
       border-radius: 16px;
       padding: 24px;
@@ -163,7 +163,7 @@
     .ta-live-video-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
+      padding-bottom: 56.25%;
       height: 0;
       border-radius: 12px;
       overflow: hidden;
@@ -345,7 +345,7 @@
       font-weight: 600;
     }
 
-    /* BOTÓN CARGAR MÁS */
+    /* BOTÓN MOSTRAR MÁS VIDEOS */
     .ta-load-more-wrapper {
       text-align: center;
       margin-top: 30px;
@@ -435,7 +435,7 @@
       50% { transform: rotate(0); }
     }
 
-    /* MODAL REPRODUCTOR GRANDE */
+    /* MODAL REPRODUCTOR GRANDE Y FALLBACK DE YOUTUBE */
     .ta-modal {
       display: none;
       position: fixed;
@@ -459,7 +459,7 @@
       position: relative;
       width: 100%;
       max-width: 900px;
-      background: #000000;
+      background: #0f172a;
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -474,7 +474,7 @@
       font-weight: bold;
       cursor: pointer;
       z-index: 10;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -491,7 +491,7 @@
     .ta-modal-iframe-wrapper {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
+      padding-bottom: 56.25%;
       height: 0;
     }
 
@@ -502,6 +502,33 @@
       width: 100%;
       height: 100%;
       border: 0;
+    }
+
+    .ta-modal-footer {
+      padding: 12px 20px;
+      background: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    .ta-modal-yt-link {
+      background: #ff0000;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .ta-modal-yt-link:hover {
+      background: #cc0000;
     }
   </style>
 </head>
@@ -590,13 +617,13 @@
       <!-- CONTENEDOR DEL GRID -->
       <div class="ta-video-grid" id="youtubeVideoGrid"></div>
 
-      <!-- BOTÓN CARGAR MÁS -->
+      <!-- BOTÓN MOSTRAR MÁS VIDEOS -->
       <div class="ta-load-more-wrapper" id="loadMoreWrapper" style="display: none;">
-        <button class="btn-load-more" id="btnLoadMore" onclick="fetchNextBatch()">Cargar Más Videos ➕</button>
+        <button class="btn-load-more" id="btnLoadMore" onclick="fetchNextBatch()">MOSTRAR MÁS VIDEOS +</button>
       </div>
     </section>
 
-    <!-- CAJA DE SUSCRIPCIÓN CON BOTÓN PÍLDORA Y CAMPANITA SVG -->
+    <!-- CAJA DE SUSCRIPCIÓN CON CAMPANITA -->
     <section class="ta-subscribe-box">
       <div class="ta-subscribe-text">
         ¡Suscríbete a nuestro canal para enterarte cuando se sube cada resumen de partido, transmisión en vivo y episodio de KFL Total Access!
@@ -617,6 +644,12 @@
       <span class="ta-modal-close" onclick="closeVideoModal(event)">&times;</span>
       <div class="ta-modal-iframe-wrapper">
         <iframe id="modalIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="ta-modal-footer">
+        <span style="font-size: 13px; color: #94a3b8;">¿El video no se reproduce en la web?</span>
+        <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="ta-modal-yt-link">
+          Ver directamente en YouTube ↗
+        </a>
       </div>
     </div>
   </div>
@@ -645,7 +678,18 @@
       loadCurrentFilterData();
     });
 
-    /* 1. DETECTOR DINÁMICO DE LIVE ACTIVO */
+    /* DETECTOR DE CATEGORÍA MÁS RIGUROSO */
+    function getCategoryForTitle(title) {
+      const upper = title.toUpperCase();
+      if (upper.includes('LIVESTREAM') || upper.includes('EN VIVO') || upper.includes('LIVE') || upper.includes('DIRECTO') || upper.includes('TRANSMISION') || upper.includes('TRANSMISIÓN')) {
+        return 'live';
+      }
+      if (upper.includes('TOTAL ACCESS')) {
+        return 'show';
+      }
+      return 'games';
+    }
+
     function checkActiveLiveStream() {
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&eventType=live&key=${YOUTUBE_API_KEY}`;
       fetch(url)
@@ -667,128 +711,142 @@
         .catch(() => {});
     }
 
-    /* 2. GESTIÓN DE CARGA SEGÚN PESTAÑA ACTIVA */
     function filterVideos(category, btnElement) {
       currentFilter = category;
       document.querySelectorAll('.ta-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
 
-      const grid = document.getElementById('youtubeVideoGrid');
-      grid.innerHTML = '';
-      
       loadCurrentFilterData();
     }
 
-    function loadCurrentFilterData() {
+    function getFilteredCount(category) {
+      if (category === 'live') return cacheCompletedLives.items.length;
+      return cacheUploads.items.filter(v => {
+        if (category === 'show') return v.category === 'show';
+        if (category === 'games') return v.category === 'games';
+        return true;
+      }).length;
+    }
+
+    async function loadCurrentFilterData() {
+      const grid = document.getElementById('youtubeVideoGrid');
+      grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:25px;">Cargando videos...</p>';
+
       if (currentFilter === 'live') {
-        if (cacheCompletedLives.items.length === 0 && cacheCompletedLives.hasMore) {
-          fetchCompletedLives();
-        } else {
-          renderGrid();
+        while (cacheCompletedLives.items.length < 8 && cacheCompletedLives.hasMore) {
+          await fetchCompletedLivesAsync();
         }
       } else {
-        if (cacheUploads.items.length === 0 && cacheUploads.hasMore) {
-          fetchUploadsBatch();
-        } else {
-          renderGrid();
+        while (getFilteredCount(currentFilter) < 8 && cacheUploads.hasMore) {
+          await fetchUploadsBatchAsync();
         }
       }
+      renderGrid();
     }
 
-    function fetchNextBatch() {
+    async function fetchNextBatch() {
+      const btn = document.getElementById('btnLoadMore');
+      if (btn) { btn.disabled = true; btn.textContent = 'CARGANDO...'; }
+
       if (currentFilter === 'live') {
-        fetchCompletedLives();
+        await fetchCompletedLivesAsync();
       } else {
-        fetchUploadsBatch();
+        const targetCount = getFilteredCount(currentFilter) + 8;
+        while (getFilteredCount(currentFilter) < targetCount && cacheUploads.hasMore) {
+          await fetchUploadsBatchAsync();
+        }
       }
+      renderGrid();
     }
 
-    /* CARGA DE VIDEOS NORMALES (UPLOADS) */
-    function fetchUploadsBatch() {
-      if (!cacheUploads.hasMore) return;
+    /* BUCLE PROMISIFICADO PARA CARGA DE UPLOADS SIN TRANCARSE */
+    function fetchUploadsBatchAsync() {
+      return new Promise((resolve) => {
+        if (!cacheUploads.hasMore) return resolve();
 
-      const btn = document.getElementById('btnLoadMore');
-      if (btn) { btn.disabled = true; btn.textContent = 'Cargando...'; }
+        let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=25&key=${YOUTUBE_API_KEY}`;
+        if (cacheUploads.pageToken) url += `&pageToken=${cacheUploads.pageToken}`;
 
-      let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=20&key=${YOUTUBE_API_KEY}`;
-      if (cacheUploads.pageToken) url += `&pageToken=${cacheUploads.pageToken}`;
+        fetch(url)
+          .then(res => res.json())
+          .then(data => {
+            if (!data.items || data.items.length === 0) {
+              cacheUploads.hasMore = false;
+              return resolve();
+            }
 
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          if (!data.items || data.items.length === 0) {
-            cacheUploads.hasMore = false;
-            updateLoadMoreButton();
-            return;
-          }
+            cacheUploads.pageToken = data.nextPageToken || '';
+            if (!data.nextPageToken) cacheUploads.hasMore = false;
 
-          cacheUploads.pageToken = data.nextPageToken || '';
-          if (!data.nextPageToken) cacheUploads.hasMore = false;
+            data.items.forEach(item => {
+              const snippet = item.snippet;
+              const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
+              if (!videoId) return;
 
-          data.items.forEach(item => {
-            const snippet = item.snippet;
-            const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
-            if (!videoId) return;
+              const title = snippet.title || 'Video KFL';
+              const cat = getCategoryForTitle(title);
 
-            const title = snippet.title || 'Video KFL';
-            const isShow = title.toUpperCase().includes('TOTAL ACCESS');
-
-            cacheUploads.items.push({
-              id: videoId,
-              title: title,
-              thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
-              date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
-              category: isShow ? 'show' : 'games'
+              cacheUploads.items.push({
+                id: videoId,
+                title: title,
+                thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
+                date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                category: cat
+              });
             });
-          });
 
-          renderGrid();
-        })
-        .catch(err => console.error(err));
+            resolve();
+          })
+          .catch(err => {
+            console.error(err);
+            resolve();
+          });
+      });
     }
 
-    /* CARGA ESPECÍFICA DE TRANSMISIONES EN VIVO COMPLETADAS (ENDPOINT DEDICADO YOUTUBE SEARCH) */
-    function fetchCompletedLives() {
-      if (!cacheCompletedLives.hasMore) return;
+    /* BUCLE PROMISIFICADO PARA LIVES COMPLETADOS */
+    function fetchCompletedLivesAsync() {
+      return new Promise((resolve) => {
+        if (!cacheCompletedLives.hasMore) return resolve();
 
-      const btn = document.getElementById('btnLoadMore');
-      if (btn) { btn.disabled = true; btn.textContent = 'Cargando Transmisiones...'; }
+        let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&eventType=completed&maxResults=12&order=date&key=${YOUTUBE_API_KEY}`;
+        if (cacheCompletedLives.pageToken) url += `&pageToken=${cacheCompletedLives.pageToken}`;
 
-      let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&eventType=completed&maxResults=12&order=date&key=${YOUTUBE_API_KEY}`;
-      if (cacheCompletedLives.pageToken) url += `&pageToken=${cacheCompletedLives.pageToken}`;
+        fetch(url)
+          .then(res => res.json())
+          .then(data => {
+            if (!data.items || data.items.length === 0) {
+              cacheCompletedLives.hasMore = false;
+              return resolve();
+            }
 
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          if (!data.items || data.items.length === 0) {
-            cacheCompletedLives.hasMore = false;
-            updateLoadMoreButton();
-            return;
-          }
+            cacheCompletedLives.pageToken = data.nextPageToken || '';
+            if (!data.nextPageToken) cacheCompletedLives.hasMore = false;
 
-          cacheCompletedLives.pageToken = data.nextPageToken || '';
-          if (!data.nextPageToken) cacheCompletedLives.hasMore = false;
+            data.items.forEach(item => {
+              const snippet = item.snippet;
+              const videoId = item.id ? item.id.videoId : null;
+              if (!videoId) return;
 
-          data.items.forEach(item => {
-            const snippet = item.snippet;
-            const videoId = item.id ? item.id.videoId : null;
-            if (!videoId) return;
-
-            cacheCompletedLives.items.push({
-              id: videoId,
-              title: snippet.title || 'Transmisión en Vivo KFL',
-              thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
-              date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
-              category: 'live'
+              cacheCompletedLives.items.push({
+                id: videoId,
+                title: snippet.title || 'Transmisión en Vivo KFL',
+                thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
+                date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                category: 'live'
+              });
             });
-          });
 
-          renderGrid();
-        })
-        .catch(err => console.error(err));
+            resolve();
+          })
+          .catch(err => {
+            console.error(err);
+            resolve();
+          });
+      });
     }
 
-    /* RENDERIZADO Y PAGINACIÓN */
+    /* RENDERIZADO DE CARDS CON ETIQUETAS CORRECTAS */
     function renderGrid() {
       const grid = document.getElementById('youtubeVideoGrid');
       grid.innerHTML = '';
@@ -822,7 +880,7 @@
           tagText = 'Total Access Show';
           tagClass = 'ta-card-tag';
         } else if (video.category === 'live') {
-          tagText = '🔴 TRANSMISIÓN EN VIVO';
+          tagText = '🔴 LIVESTREAM';
           tagClass = 'ta-card-tag live-tag';
         }
 
@@ -856,18 +914,22 @@
         loadMoreWrapper.style.display = 'block';
         if (btn) {
           btn.disabled = false;
-          btn.textContent = 'Mostrar Más Videos ➕';
+          btn.textContent = 'MOSTRAR MÁS VIDEOS +';
         }
       } else {
         loadMoreWrapper.style.display = 'none';
       }
     }
 
-    /* REPRODUCTOR EN MODAL */
+    /* REPRODUCTOR EN MODAL Y LINK DIRECTO A YOUTUBE */
     function openVideoModal(videoId) {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('modalIframe');
+      const directLink = document.getElementById('modalDirectLink');
+
       iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
     }

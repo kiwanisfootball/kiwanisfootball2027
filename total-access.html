@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* ESTILOS ESPECÍFICOS PARA TOTAL ACCESS */
+    /* CONTENEDOR GENERAL */
     .ta-container {
       max-width: 1100px;
       margin: 0 auto;
@@ -33,7 +33,7 @@
       object-fit: cover;
     }
 
-    /* TARJETA DE RESEÑA INSTITUCIONAL */
+    /* TARJETA RESEÑA */
     .ta-about-card {
       background: #ffffff;
       border-radius: 16px;
@@ -44,7 +44,7 @@
     }
 
     .ta-title {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 900;
       color: #19547E;
       text-transform: uppercase;
@@ -69,7 +69,7 @@
       margin-bottom: 0;
     }
 
-    /* BARRA DE REDES SOCIALES */
+    /* REDES SOCIALES */
     .ta-social-bar {
       display: flex;
       gap: 15px;
@@ -109,8 +109,8 @@
       fill: #ffffff;
     }
 
-    /* SECCIÓN DE VIDEOS EMBEDDED CON GRID HISTÓRICO */
-    .ta-videos-section {
+    /* SECCIÓN DE VIDEOTECA */
+    .ta-gallery-section {
       background: #ffffff;
       border-radius: 16px;
       padding: 30px;
@@ -119,37 +119,45 @@
       margin-bottom: 30px;
     }
 
-    /* REPRODUCTOR PRINCIPAL DESTACADO */
-    .ta-featured-player-wrapper {
-      margin-bottom: 30px;
+    /* FILTROS / PESTAÑAS DE CATEGORÍA */
+    .ta-filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
     }
 
-    .ta-video-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #000;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    .ta-filter-btn {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #cbd5e1;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 800;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
     }
 
-    .ta-video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+    .ta-filter-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
     }
 
-    /* CUADRÍCULA / GRID DE VIDEOS */
+    .ta-filter-btn.active {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+      box-shadow: 0 4px 10px rgba(25, 84, 126, 0.25);
+    }
+
+    /* GRILLA DE VIDEOS */
     .ta-video-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 20px;
-      margin-top: 20px;
     }
 
     .ta-video-card {
@@ -190,6 +198,25 @@
       transform: scale(1.05);
     }
 
+    .ta-card-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(25, 84, 126, 0.9);
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    .ta-card-tag.game-tag {
+      background: rgba(16, 185, 129, 0.9);
+    }
+
     .ta-card-play-icon {
       position: absolute;
       top: 50%;
@@ -197,12 +224,13 @@
       transform: translate(-50%, -50%);
       width: 44px;
       height: 44px;
-      background: rgba(25, 84, 126, 0.85);
+      background: rgba(0, 0, 0, 0.65);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.2s ease, transform 0.2s ease;
+      z-index: 2;
     }
 
     .ta-video-card:hover .ta-card-play-icon {
@@ -253,7 +281,7 @@
       background: #ffffff;
       color: #19547E;
       border: 2px solid #19547E;
-      padding: 10px 28px;
+      padding: 11px 32px;
       font-size: 14px;
       font-weight: 800;
       border-radius: 30px;
@@ -274,6 +302,75 @@
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
+    }
+
+    /* MODAL REPRODUCTOR GRANDE */
+    .ta-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .ta-modal.active {
+      display: flex;
+    }
+
+    .ta-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      background: #000000;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .ta-modal-close {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      color: #ffffff;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+      background: rgba(0,0,0,0.5);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .ta-modal-close:hover {
+      background: #dc2626;
+    }
+
+    .ta-modal-iframe-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+    }
+
+    .ta-modal-iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
   </style>
 </head>
@@ -340,29 +437,19 @@
       </div>
     </section>
 
-    <!-- BIBLIOTECA DE VIDEOS EMBEDDED CON GRID HISTÓRICO -->
-    <section class="ta-videos-section">
-      <h2 class="ta-title">Últimos Episodios y Coberturas</h2>
+    <!-- VIDEOTECA EN GRILLA CON FILTROS Y CARGAR MÁS -->
+    <section class="ta-gallery-section">
+      <h2 class="ta-title">Videoteca de Contenidos</h2>
 
-      <!-- REPRODUCTOR DESTACADO -->
-      <div class="ta-featured-player-wrapper">
-        <div class="ta-video-container">
-          <iframe 
-            id="mainYouTubePlayer"
-            src="https://www.youtube.com/embed/videoseries?list=UUCfOFTqXpHgxkPo0Poc0Mew" 
-            title="KFL Total Access YouTube Player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-          </iframe>
-        </div>
+      <!-- PESTAÑAS / FILTROS DE CATEGORÍA -->
+      <div class="ta-filter-bar">
+        <button class="ta-filter-btn active" onclick="filterVideos('all', this)">Todos los Videos</button>
+        <button class="ta-filter-btn" onclick="filterVideos('show', this)">📺 KFL Total Access (Show)</button>
+        <button class="ta-filter-btn" onclick="filterVideos('games', this)">🏈 Partidos & Highlights</button>
       </div>
 
-      <h3 style="font-size: 18px; font-weight: 800; color: #1e293b; margin-top: 25px; text-transform: uppercase;">Explorar Catálogo Histórico</h3>
-      
       <!-- CONTENEDOR DEL GRID -->
-      <div class="ta-video-grid" id="youtubeVideoGrid">
-        <p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 20px;">Cargando catálogo de videos...</p>
-      </div>
+      <div class="ta-video-grid" id="youtubeVideoGrid"></div>
 
       <!-- BOTÓN CARGAR MÁS -->
       <div class="ta-load-more-wrapper" id="loadMoreWrapper" style="display: none;">
@@ -372,6 +459,16 @@
 
   </main>
 
+  <!-- MODAL / REPRODUCTOR FLOTANTE EN GRANDE -->
+  <div class="ta-modal" id="videoModal" onclick="closeVideoModal(event)">
+    <div class="ta-modal-content">
+      <span class="ta-modal-close" onclick="closeVideoModal(event)">&times;</span>
+      <div class="ta-modal-iframe-wrapper">
+        <iframe id="modalIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
   </footer>
@@ -379,8 +476,11 @@
   <script>
     const YOUTUBE_API_KEY = 'AIzaSyBEjzSqVt1VdAZW8swDi215B4c4_IBnWR8';
     const PLAYLIST_ID = 'UUCfOFTqXpHgxkPo0Poc0Mew';
+    
     let nextPageToken = '';
-    const maxResultsPerPage = 8;
+    let fetchedVideosList = [];
+    let currentFilter = 'all';
+    const maxResultsPerPage = 12;
 
     document.addEventListener('DOMContentLoaded', () => {
       const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -400,7 +500,6 @@
       }
 
       let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${maxResultsPerPage}&key=${YOUTUBE_API_KEY}`;
-      
       if (nextPageToken) {
         url += `&pageToken=${nextPageToken}`;
       }
@@ -409,15 +508,35 @@
         .then(res => res.json())
         .then(data => {
           if (!data.items || data.items.length === 0) {
-            if (!nextPageToken) {
-              document.getElementById('youtubeVideoGrid').innerHTML = '<p style="grid-column: 1/-1; text-align:center;">No se encontraron videos disponibles.</p>';
-            }
             document.getElementById('loadMoreWrapper').style.display = 'none';
             return;
           }
 
           nextPageToken = data.nextPageToken || '';
-          renderVideoCards(data.items);
+          
+          // Procesar y guardar videos en memoria
+          data.items.forEach(item => {
+            const snippet = item.snippet;
+            const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
+            if (!videoId) return;
+
+            const title = snippet.title || 'Video KFL';
+            const isShow = title.toUpperCase().includes('TOTAL ACCESS');
+
+            fetchedVideosList.push({
+              id: videoId,
+              title: title,
+              thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
+              date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              }),
+              category: isShow ? 'show' : 'games'
+            });
+          });
+
+          renderGrid();
 
           const loadMoreWrapper = document.getElementById('loadMoreWrapper');
           if (nextPageToken) {
@@ -429,44 +548,52 @@
           }
         })
         .catch(err => {
-          console.error('Error cargando YouTube API:', err);
-          renderFallbackNotice();
+          console.error('Error al conectar con YouTube API:', err);
         });
     }
 
-    function renderVideoCards(items) {
+    function filterVideos(category, btnElement) {
+      currentFilter = category;
+      document.querySelectorAll('.ta-filter-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
+      renderGrid();
+    }
+
+    function renderGrid() {
       const grid = document.getElementById('youtubeVideoGrid');
-      
-      if (!nextPageToken && grid.children.length > 0 && grid.children[0].tagName === 'P') {
-        grid.innerHTML = '';
+      grid.innerHTML = '';
+
+      const filtered = fetchedVideosList.filter(v => {
+        if (currentFilter === 'show') return v.category === 'show';
+        if (currentFilter === 'games') return v.category === 'games';
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:20px;">No se encontraron videos en esta categoría.</p>';
+        return;
       }
 
-      items.forEach(item => {
-        const snippet = item.snippet;
-        const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
-        if (!videoId) return;
-
-        const title = snippet.title || 'Video KFL Total Access';
-        const thumb = (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url;
-        const pubDate = new Date(snippet.publishedAt).toLocaleDateString('es-PA', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        });
-
+      filtered.forEach(video => {
         const card = document.createElement('div');
         card.className = 'ta-video-card';
-        card.onclick = () => playVideoInMainPlayer(videoId);
+        card.onclick = () => openVideoModal(video.id);
+
+        const isShow = video.category === 'show';
+        const tagText = isShow ? 'SHOW TOTAL ACCESS' : 'PARTIDO / HIGHLIGHT';
+        const tagClass = isShow ? 'ta-card-tag' : 'ta-card-tag game-tag';
+
         card.innerHTML = `
           <div class="ta-card-thumb-wrapper">
-            <img src="${thumb}" alt="${title}" class="ta-card-thumb" loading="lazy">
+            <span class="${tagClass}">${tagText}</span>
+            <img src="${video.thumb}" alt="${video.title}" class="ta-card-thumb" loading="lazy">
             <div class="ta-card-play-icon">
               <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
           <div class="ta-card-content">
-            <div class="ta-card-title">${title}</div>
-            <div class="ta-card-date">📅 ${pubDate}</div>
+            <div class="ta-card-title">${video.title}</div>
+            <div class="ta-card-date">📅 ${video.date}</div>
           </div>
         `;
 
@@ -474,26 +601,23 @@
       });
     }
 
-    function playVideoInMainPlayer(videoId) {
-      const player = document.getElementById('mainYouTubePlayer');
-      if (player) {
-        player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-        window.scrollTo({
-          top: player.getBoundingClientRect().top + window.scrollY - 100,
-          behavior: 'smooth'
-        });
-      }
+    /* LÓGICA DEL REPRODUCTOR EN MODAL */
+    function openVideoModal(videoId) {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('modalIframe');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
-    function renderFallbackNotice() {
-      const grid = document.getElementById('youtubeVideoGrid');
-      grid.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 20px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
-          <p style="color: #475569; font-size: 14px; margin-bottom: 8px;">No se pudo conectar dinámicamente con el canal de YouTube.</p>
-          <a href="https://www.youtube.com/@KFLTotalAccess/videos" target="_blank" rel="noopener noreferrer" class="btn-load-more" style="display: inline-block; text-decoration: none; margin-top: 8px;">Ver Canal Completo en YouTube ↗</a>
-        </div>
-      `;
-      document.getElementById('loadMoreWrapper').style.display = 'none';
+    function closeVideoModal(event) {
+      if (event.target.id === 'videoModal' || event.target.classList.contains('ta-modal-close')) {
+        const modal = document.getElementById('videoModal');
+        const iframe = document.getElementById('modalIframe');
+        iframe.src = '';
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
     }
   </script>
 </body>

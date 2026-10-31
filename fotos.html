@@ -9,7 +9,6 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTENEDOR FOTOS */
     .fotos-container {
       max-width: 1100px;
       margin: 0 auto;
@@ -168,6 +167,31 @@
       font-size: 11px;
       text-transform: uppercase;
     }
+
+    /* BOTÓN CARGAR MÁS ÁLBUMES */
+    .albums-load-more-wrapper {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-load-more-albums {
+      background: #ffffff;
+      color: #19547E;
+      border: 2px solid #19547E;
+      padding: 11px 32px;
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+    }
+
+    .btn-load-more-albums:hover {
+      background: #19547E;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body class="contact-theme">
@@ -204,12 +228,18 @@
       </p>
       <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="btn-fb-main">
         <svg viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-        Ver Todos los Álbumes en Facebook ↗
+        Ver Todos en Facebook ↗
       </a>
     </section>
 
     <!-- GRILLA DINÁMICA DE ÁLBUMES -->
-    <section class="albums-grid" id="albumsGrid"></section>
+    <section class="albums-grid" id="albumsGrid">
+      <p style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 30px;">Cargando catálogo histórico de fotos...</p>
+    </section>
+
+    <div class="albums-load-more-wrapper" id="albumsLoadMoreWrapper" style="display: none;">
+      <button class="btn-load-more-albums" id="btnLoadMoreAlbums" onclick="fetchFacebookAlbums()">MOSTRAR MÁS ÁLBUMES +</button>
+    </div>
 
   </main>
 
@@ -218,82 +248,10 @@
   </footer>
 
   <script>
-    // Colección de Álbumes del Fan Page de KFL Total Access
-    // Para agregar un álbum nuevo, simplemente añade un nuevo objeto {...} a esta lista.
-    const fbAlbums = [
-      {
-        title: "U16 Juvenil / U10 Micro Flag (October 24)",
-        count: "78 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464871234_...jpg", // Coloca la URL de la portada o una de las fotos
-        link: "https://www.facebook.com/media/set/?set=a.122145241737032693&type=3"
-      },
-      {
-        title: "U10 Micro Contact Week 6 (Eagles vs Owls)",
-        count: "114 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464900000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "U13 Mini Contact Semifinal (Eagles vs Kolts)",
-        count: "98 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464800000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "U13 Mini Contact Semifinal (Owls vs Dragons)",
-        count: "112 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464700000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "Flag Juvenil y Flag Micro October 17",
-        count: "313 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464600000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "U13 Mini Contact Week 5 (Raiders vs Eagles)",
-        count: "104 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464500000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "U13 Mini Contact Week 5 (Dragons vs Owls)",
-        count: "113 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464400000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "U16 Flag Juvenil Week 4",
-        count: "82 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464300000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "Micro Contact Week 4 (Raiders vs Owls)",
-        count: "129 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464200000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "Micro Contact Week 3 (Owls vs Eagles)",
-        count: "85 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464100000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "KFL Flags (Micro / Juvenil) October 3",
-        count: "300 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/464000000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      },
-      {
-        title: "Mini Contact / Kolts vs Owls / Week 4",
-        count: "99 fotos",
-        cover: "https://scontent.fpty1-1.fna.fbcdn.net/v/t39.30808-6/463900000_...jpg",
-        link: "https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums"
-      }
-    ];
+    const PAGE_ID = '61580980794081';
+    // Inserte su App Access Token en formato: APP_ID|APP_SECRET
+    const FB_ACCESS_TOKEN = '2588585005300312|083ebe0bc770cb04b544f246424e8629'; 
+    let nextApiUrl = `https://graph.facebook.com/v18.0/${PAGE_ID}/albums?fields=name,count,link,cover_photo{source}&limit=12&access_token=${FB_ACCESS_TOKEN}`;
 
     document.addEventListener('DOMContentLoaded', () => {
       const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -302,31 +260,96 @@
         hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
       }
 
-      const grid = document.getElementById('albumsGrid');
-      
-      fbAlbums.forEach(album => {
-        const card = document.createElement('a');
-        card.className = 'album-card';
-        card.href = album.link;
-        card.target = '_blank';
-        card.rel = 'noopener noreferrer';
-
-        card.innerHTML = `
-          <div class="album-cover-wrapper">
-            <span class="album-badge-tag">Álbum KFL</span>
-            <img src="${album.cover}" alt="${album.title}" class="album-cover-img" loading="lazy" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-          </div>
-          <div class="album-info">
-            <div class="album-name">${album.title}</div>
-            <div class="album-footer-meta">
-              <span>📁 ${album.count}</span>
-              <span class="album-link-btn">Ver Fotos ↗</span>
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
+      if (FB_ACCESS_TOKEN && !FB_ACCESS_TOKEN.includes('TU_APP_ID')) {
+        fetchFacebookAlbums();
+      } else {
+        renderSetupGuide();
+      }
     });
+
+    function fetchFacebookAlbums() {
+      if (!nextApiUrl) return;
+
+      const btn = document.getElementById('btnLoadMoreAlbums');
+      if (btn) { btn.disabled = true; btn.textContent = 'CARGANDO...'; }
+
+      fetch(nextApiUrl)
+        .then(res => res.json())
+        .then(data => {
+          const grid = document.getElementById('albumsGrid');
+          
+          if (grid.children.length === 1 && grid.children[0].tagName === 'P') {
+            grid.innerHTML = '';
+          }
+
+          if (!data.data || data.data.length === 0) {
+            if (grid.children.length === 0) {
+              grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No se encontraron álbumes públicos.</p>';
+            }
+            document.getElementById('albumsLoadMoreWrapper').style.display = 'none';
+            return;
+          }
+
+          data.data.forEach(album => {
+            // Filtrar fotos de perfil/portada automáticas de Facebook si se desea
+            if (album.name === 'Profile pictures' || album.name === 'Cover photos') return;
+
+            const title = album.name || 'Álbum KFL';
+            const count = album.count ? `${album.count} fotos` : 'Ver galería';
+            const link = album.link || `https://www.facebook.com/profile.php?id=${PAGE_ID}&sk=photos_albums`;
+            const coverImg = album.cover_photo && album.cover_photo.source 
+              ? album.cover_photo.source 
+              : 'https://i.imgur.com/wrPDjDN.png';
+
+            const card = document.createElement('a');
+            card.className = 'album-card';
+            card.href = link;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+
+            card.innerHTML = `
+              <div class="album-cover-wrapper">
+                <span class="album-badge-tag">Álbum KFL</span>
+                <img src="${coverImg}" alt="${title}" class="album-cover-img" loading="lazy">
+              </div>
+              <div class="album-info">
+                <div class="album-name">${title}</div>
+                <div class="album-footer-meta">
+                  <span>📁 ${count}</span>
+                  <span class="album-link-btn">Ver Fotos ↗</span>
+                </div>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+
+          if (data.paging && data.paging.next) {
+            nextApiUrl = data.paging.next;
+            document.getElementById('albumsLoadMoreWrapper').style.display = 'block';
+            if (btn) { btn.disabled = false; btn.textContent = 'MOSTRAR MÁS ÁLBUMES +'; }
+          } else {
+            nextApiUrl = null;
+            document.getElementById('albumsLoadMoreWrapper').style.display = 'none';
+          }
+        })
+        .catch(err => {
+          console.error('Error al consultar Graph API:', err);
+          renderSetupGuide();
+        });
+    }
+
+    function renderSetupGuide() {
+      const grid = document.getElementById('albumsGrid');
+      grid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 30px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
+          <p style="color: #475569; font-size: 14px; margin-bottom: 12px;">Para sincronizar automáticamente las portadas reales y enlaces de los álbumes históricos de Facebook, ingresa tu App Access Token en la constante <code>FB_ACCESS_TOKEN</code>.</p>
+          <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="btn-fb-main">
+            Ver Álbumes Directamente en Facebook ↗
+          </a>
+        </div>
+      `;
+      document.getElementById('albumsLoadMoreWrapper').style.display = 'none';
+    }
   </script>
 </body>
 </html>

@@ -564,16 +564,16 @@
       <img src="assets/img/total-access-banner.jpg" alt="KFL Total Access Banner" class="ta-banner-img" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
     </div>
 
-    <!-- RESEÑA INSTITUCIONAL CON BACKLINK A FAFF -->
+    <!-- RESEÑA INSTITUCIONAL CON BACKLINK A FAFF Y FORMATO REFINADO -->
     <section class="ta-about-card">
       <h1 class="ta-title">KFL Total Access</h1>
       
       <div class="ta-description">
-        <p><strong>KFL Total Access</strong> es la fuente oficial de noticias, resúmenes e información sobre la Kiwanis Football League en la Ciudad de Panamá. Este programa, con cobertura durante todo el año, abarca las cuatro divisiones juveniles masculinas y femeninas de la liga: <strong>U10/Micro, U13/Mini, U16/Juvenil y U19/Varsity</strong>.</p>
+        <p><strong>KFL Total Access</strong> es la fuente oficial de noticias, resúmenes e información de la <strong>Kiwanis Football League (KFL)</strong> en la Ciudad de Panamá.</p>
         
-        <p>Creado por <strong>Raúl Obarrio Méndez en 2018</strong>, KFL Total Access promueve y documenta a los atletas, entrenadores, equipos y tradiciones de la liga de fútbol americano de mayor trayectoria en Panamá. El programa es producido e impulsado por la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" class="ta-backlink">Fundación American Football Films (FAFF)</a>, una organización social y educativa sin fines de lucro dedicada al desarrollo juvenil a través del fútbol americano, los medios deportivos, el liderazgo y el servicio comunitario.</p>
+        <p>Creado en 2018 por <strong>Raúl Méndez de Obarrio</strong> y producido por la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" class="ta-backlink"><strong>Fundación American Football Films (FAFF)</strong></a>, el programa ofrece cobertura todo el año de sus cuatro divisiones masculinas y femeninas: <strong>Micro, Mini, Juvenil y Varsity</strong>.</p>
         
-        <p>A través de la cobertura de partidos, entrevistas, fotografía y narrativa digital, FAFF ayuda a preservar la historia de la liga y a expandir el interés por el fútbol americano en todo Panamá.</p>
+        <p>Con sus transmisiones en vivo, entrevistas, fotos y todo tipo de contenido digital, se preserva la historia de la liga de fútbol americano con mayor historia y tradición del país e impulsa el deporte en Panamá.</p>
       </div>
 
       <!-- REDES SOCIALES -->
@@ -678,13 +678,13 @@
       loadCurrentFilterData();
     });
 
-    /* DETECTOR DE CATEGORÍA MÁS RIGUROSO */
-    function getCategoryForTitle(title) {
-      const upper = title.toUpperCase();
-      if (upper.includes('LIVESTREAM') || upper.includes('EN VIVO') || upper.includes('LIVE') || upper.includes('DIRECTO') || upper.includes('TRANSMISION') || upper.includes('TRANSMISIÓN')) {
+    /* DETECTOR RIGUROSO DE CATEGORÍA */
+    function getCategoryForTitle(title, description = '') {
+      const text = (title + ' ' + description).toUpperCase();
+      if (text.includes('STREAM') || text.includes('LIVESTREAM') || text.includes('EN VIVO') || text.includes('LIVE') || text.includes('DIRECTO') || text.includes('TRANSMISION') || text.includes('TRANSMISIÓN')) {
         return 'live';
       }
-      if (upper.includes('TOTAL ACCESS')) {
+      if (text.includes('TOTAL ACCESS')) {
         return 'show';
       }
       return 'games';
@@ -722,9 +722,10 @@
     function getFilteredCount(category) {
       if (category === 'live') return cacheCompletedLives.items.length;
       return cacheUploads.items.filter(v => {
+        if (v.category === 'live') return false; // Exclusión estricta de directos
         if (category === 'show') return v.category === 'show';
         if (category === 'games') return v.category === 'games';
-        return true;
+        return true; // 'all' incluye solo 'show' y 'games'
       }).length;
     }
 
@@ -759,7 +760,7 @@
       renderGrid();
     }
 
-    /* BUCLE PROMISIFICADO PARA CARGA DE UPLOADS SIN TRANCARSE */
+    /* CARGA DE UPLOADS REGULARES (CON FILTRADO ANTI-LIVESTREAM) */
     function fetchUploadsBatchAsync() {
       return new Promise((resolve) => {
         if (!cacheUploads.hasMore) return resolve();
@@ -784,7 +785,13 @@
               if (!videoId) return;
 
               const title = snippet.title || 'Video KFL';
-              const cat = getCategoryForTitle(title);
+              const description = snippet.description || '';
+              
+              // Si el snippet trae metadata explicita de directos, forzar 'live'
+              let cat = getCategoryForTitle(title, description);
+              if (snippet.liveBroadcastContent === 'completed' || snippet.liveBroadcastContent === 'live') {
+                cat = 'live';
+              }
 
               cacheUploads.items.push({
                 id: videoId,
@@ -804,7 +811,7 @@
       });
     }
 
-    /* BUCLE PROMISIFICADO PARA LIVES COMPLETADOS */
+    /* CARGA DE LIVES DESDE ENLACE ESPECÍFICO DE YOUTUBE SEARCH API */
     function fetchCompletedLivesAsync() {
       return new Promise((resolve) => {
         if (!cacheCompletedLives.hasMore) return resolve();
@@ -846,7 +853,7 @@
       });
     }
 
-    /* RENDERIZADO DE CARDS CON ETIQUETAS CORRECTAS */
+    /* RENDERIZADO EXCLUSIVO POR PESTAÑA */
     function renderGrid() {
       const grid = document.getElementById('youtubeVideoGrid');
       grid.innerHTML = '';
@@ -855,15 +862,17 @@
       if (currentFilter === 'live') {
         listToRender = cacheCompletedLives.items;
       } else {
+        // Exclusión estricta de cualquier transmisión en vivo en las pestañas "Todos los videos", "Show" y "Partidos & Highlights"
         listToRender = cacheUploads.items.filter(v => {
+          if (v.category === 'live') return false; 
           if (currentFilter === 'show') return v.category === 'show';
           if (currentFilter === 'games') return v.category === 'games';
-          return true;
+          return true; // 'all'
         });
       }
 
       if (listToRender.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:25px;">No se encontraron videos disponibles.</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:25px;">No se encontraron videos disponibles para esta categoría.</p>';
         updateLoadMoreButton();
         return;
       }
@@ -921,7 +930,7 @@
       }
     }
 
-    /* REPRODUCTOR EN MODAL Y LINK DIRECTO A YOUTUBE */
+    /* REPRODUCTOR EN MODAL Y ENLACE DIRECTO A YOUTUBE */
     function openVideoModal(videoId) {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('modalIframe');

@@ -119,20 +119,20 @@
       margin-bottom: 30px;
     }
 
-    /* FILTROS / PESTAÑAS DE CATEGORÍA */
+    /* FILTROS CENTRADOS */
     .ta-filter-bar {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 25px;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     .ta-filter-btn {
       background: #f1f5f9;
       color: #475569;
       border: 1px solid #cbd5e1;
-      padding: 9px 18px;
+      padding: 9px 20px;
       font-size: 13px;
       font-weight: 800;
       border-radius: 25px;
@@ -202,7 +202,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(25, 84, 126, 0.9);
+      background: rgba(25, 84, 126, 0.95);
       color: #ffffff;
       font-size: 10px;
       font-weight: 800;
@@ -214,7 +214,7 @@
     }
 
     .ta-card-tag.game-tag {
-      background: rgba(16, 185, 129, 0.9);
+      background: rgba(16, 185, 129, 0.95);
     }
 
     .ta-card-play-icon {
@@ -437,15 +437,14 @@
       </div>
     </section>
 
-    <!-- VIDEOTECA EN GRILLA CON FILTROS Y CARGAR MÁS -->
+    <!-- VIDEOTECA EN GRILLA CON FILTROS CENTRADOS -->
     <section class="ta-gallery-section">
-      <h2 class="ta-title">Videoteca de Contenidos</h2>
 
-      <!-- PESTAÑAS / FILTROS DE CATEGORÍA -->
+      <!-- PESTAÑAS / FILTROS CENTRADOS -->
       <div class="ta-filter-bar">
         <button class="ta-filter-btn active" onclick="filterVideos('all', this)">Todos los Videos</button>
-        <button class="ta-filter-btn" onclick="filterVideos('show', this)">📺 KFL Total Access (Show)</button>
-        <button class="ta-filter-btn" onclick="filterVideos('games', this)">🏈 Partidos & Highlights</button>
+        <button class="ta-filter-btn" onclick="filterVideos('show', this)">KFL Total Access Show</button>
+        <button class="ta-filter-btn" onclick="filterVideos('games', this)">Partidos & Highlights</button>
       </div>
 
       <!-- CONTENEDOR DEL GRID -->
@@ -480,7 +479,6 @@
     let nextPageToken = '';
     let fetchedVideosList = [];
     let currentFilter = 'all';
-    const maxResultsPerPage = 12;
 
     document.addEventListener('DOMContentLoaded', () => {
       const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -492,29 +490,41 @@
       fetchYouTubeVideos();
     });
 
-    function fetchYouTubeVideos() {
+    function getFilteredCount(category) {
+      return fetchedVideosList.filter(v => {
+        if (category === 'show') return v.category === 'show';
+        if (category === 'games') return v.category === 'games';
+        return true;
+      }).length;
+    }
+
+    async function fetchYouTubeVideos() {
       const btnLoadMore = document.getElementById('btnLoadMore');
       if (btnLoadMore) {
         btnLoadMore.disabled = true;
         btnLoadMore.textContent = 'Cargando...';
       }
 
-      let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=${maxResultsPerPage}&key=${YOUTUBE_API_KEY}`;
-      if (nextPageToken) {
-        url += `&pageToken=${nextPageToken}`;
-      }
+      const initialFilteredCount = getFilteredCount(currentFilter);
+      const targetCount = initialFilteredCount + 8;
 
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          if (!data.items || data.items.length === 0) {
-            document.getElementById('loadMoreWrapper').style.display = 'none';
-            return;
+      try {
+        while (nextPageToken !== null) {
+          let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${PLAYLIST_ID}&maxResults=25&key=${YOUTUBE_API_KEY}`;
+          if (nextPageToken) {
+            url += `&pageToken=${nextPageToken}`;
           }
 
-          nextPageToken = data.nextPageToken || '';
-          
-          // Procesar y guardar videos en memoria
+          const res = await fetch(url);
+          const data = await res.json();
+
+          if (!data.items || data.items.length === 0) {
+            nextPageToken = null;
+            break;
+          }
+
+          nextPageToken = data.nextPageToken || null;
+
           data.items.forEach(item => {
             const snippet = item.snippet;
             const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
@@ -538,18 +548,25 @@
 
           renderGrid();
 
-          const loadMoreWrapper = document.getElementById('loadMoreWrapper');
-          if (nextPageToken) {
-            loadMoreWrapper.style.display = 'block';
+          // Si ya acumulamos suficientes videos para la categoría seleccionada o se acabaron las páginas, salir del bucle
+          if (currentFilter === 'all' || getFilteredCount(currentFilter) >= targetCount || !nextPageToken) {
+            break;
+          }
+        }
+      } catch (err) {
+        console.error('Error al conectar con YouTube API:', err);
+      } finally {
+        const loadMoreWrapper = document.getElementById('loadMoreWrapper');
+        if (nextPageToken !== null) {
+          loadMoreWrapper.style.display = 'block';
+          if (btnLoadMore) {
             btnLoadMore.disabled = false;
             btnLoadMore.textContent = 'Cargando Más Videos ➕';
-          } else {
-            loadMoreWrapper.style.display = 'none';
           }
-        })
-        .catch(err => {
-          console.error('Error al conectar con YouTube API:', err);
-        });
+        } else {
+          loadMoreWrapper.style.display = 'none';
+        }
+      }
     }
 
     function filterVideos(category, btnElement) {
@@ -557,6 +574,11 @@
       document.querySelectorAll('.ta-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
       renderGrid();
+
+      // Si al cambiar de tab hay menos de 6 videos para esa categoría y hay más páginas disponibles en YouTube, cargar automáticamente más de la API
+      if (getFilteredCount(category) < 6 && nextPageToken !== null) {
+        fetchYouTubeVideos();
+      }
     }
 
     function renderGrid() {
@@ -570,7 +592,7 @@
       });
 
       if (filtered.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:20px;">No se encontraron videos en esta categoría.</p>';
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:20px;">Buscando episodios y contenidos...</p>';
         return;
       }
 
@@ -580,7 +602,7 @@
         card.onclick = () => openVideoModal(video.id);
 
         const isShow = video.category === 'show';
-        const tagText = isShow ? 'SHOW TOTAL ACCESS' : 'PARTIDO / HIGHLIGHT';
+        const tagText = isShow ? 'Total Access Show' : 'PARTIDO / HIGHLIGHT';
         const tagClass = isShow ? 'ta-card-tag' : 'ta-card-tag game-tag';
 
         card.innerHTML = `
@@ -601,7 +623,7 @@
       });
     }
 
-    /* LÓGICA DEL REPRODUCTOR EN MODAL */
+    /* REPRODUCTOR EN MODAL */
     function openVideoModal(videoId) {
       const modal = document.getElementById('videoModal');
       const iframe = document.getElementById('modalIframe');

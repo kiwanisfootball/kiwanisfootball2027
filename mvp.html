@@ -74,7 +74,7 @@
       font-weight: 800;
     }
 
-    /* ANIMACIÓN DEL TROFEO PRINCIPAL */
+    /* ANIMACIÓN DEL TROFEO PRINCIPAL EN BANNER */
     .mvp-trophy-wrapper {
       width: 140px;
       height: 140px;
@@ -505,7 +505,7 @@
   </footer>
 
   <script>
-    // URL CSV PUBLICADA DESDE GOOGLE SHEETS
+    // URL CSV PUBLICADA DIRECTA DESDE GOOGLE SHEETS
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?output=csv';
 
     const categoryMap = {
@@ -542,20 +542,19 @@
       });
     }
 
-    /* CARGADOR Y PARSER DIRECTO DE CSV */
+    /* CARGADOR Y PARSER TOLERANTE A ENCABEZADOS Y CELDAS COMBINADAS */
     async function loadMvpData() {
       try {
-        // Evitar caché de respuesta de Google Sheets
         const cacheBusterUrl = `${SHEET_CSV_URL}&_t=${Date.now()}`;
         const res = await fetch(cacheBusterUrl);
-        if (!res.ok) throw new Error('Error al conectar con Google Sheets');
+        if (!res.ok) throw new Error('Error conectando con Google Sheets');
         
         const csvText = await res.text();
         const rows = parseCSV(csvText);
 
         if (!rows || rows.length < 2) return;
 
-        // Limpiar mensajes predeterminados de carga
+        // Limpiar estado inicial
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el) el.innerHTML = '';
@@ -568,9 +567,16 @@
           const row = rows[i];
           if (!row || row.length === 0) continue;
 
-          // Omitir cabeceras
-          const firstCol = (row[0] || '').toLowerCase().trim();
-          if (firstCol === 'categoria' || firstCol === 'category' || firstCol === 'season') continue;
+          // Ignorar filas de encabezado (Categoría, Season, Año, Jugador, etc.)
+          const c0 = (row[0] || '').toLowerCase().trim();
+          const c1 = (row[1] || '').toLowerCase().trim();
+
+          if (
+            c0 === 'categoria' || c0 === 'category' || c0 === 'season' || c0 === 'año' || c0 === 'ano' || c0 === 'year' ||
+            c1 === 'season' || c1 === 'año' || c1 === 'ano' || c1 === 'year'
+          ) {
+            continue;
+          }
 
           let catRaw = '', seasonRaw = '', equipo = '', jugador = '';
 
@@ -580,17 +586,20 @@
             [seasonRaw, equipo, jugador] = row.map(c => c ? c.trim() : '');
           }
 
-          // Rellenar categoría si viene vacía (celdas combinadas)
+          // Mantener categoría si viene vacía (celdas combinadas)
           if (catRaw !== '') {
             currentCategory = catRaw;
           }
 
-          // Rellenar año si viene vacío (celdas combinadas / Co-MVPs)
+          // Mantener año si viene vacío (Co-MVPs / celdas combinadas)
           if (seasonRaw !== '') {
             currentSeason = seasonRaw;
           }
 
-          if (!jugador || jugador === '' || jugador.toLowerCase() === 'jugador') continue;
+          // Evitar insertar filas de títulos repetidas
+          if (!jugador || jugador === '' || jugador.toLowerCase() === 'jugador' || jugador.toLowerCase() === 'player') {
+            continue;
+          }
 
           const catKey = currentCategory.toUpperCase().trim().replace(/\s+/g, ' ');
           const targetId = categoryMap[catKey];
@@ -609,7 +618,7 @@
           }
         }
 
-        // Mensaje por si alguna tabla no recibió registros
+        // Si alguna tabla quedó vacía
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el && el.children.length === 0) {
@@ -618,7 +627,7 @@
         });
 
       } catch (err) {
-        console.error('Error cargando MVP desde Google Sheets:', err);
+        console.error('Error cargando datos MVP:', err);
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el) el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#ef4444;">Error al cargar datos desde Google Sheets.</td></tr>';
@@ -626,7 +635,7 @@
       }
     }
 
-    /* PARSER DE LÍNEAS CSV CON SOPORTE PARA COMILLAS */
+    /* PARSER MANUAL DE CSV RESPETANDO COMILLAS */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);

@@ -3,361 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KFL Total Access - Kiwanis Football League Panama</title>
+  <title>Ligas - Kiwanis Football League Panama</title>
   
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTENEDOR GENERAL */
-    .ta-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
+    /* PESTAÑAS Y VISTAS */
+    .tab-pane {
+      display: none !important;
+    }
+    .tab-pane.active {
+      display: block !important;
     }
 
-    /* BANNER HERO */
-    .ta-banner-wrapper {
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-      margin-bottom: 25px;
-      background: #19547E;
+    .league-hero-card img.hero-bg-img {
+      filter: none !important;
+      opacity: 1 !important;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
-    .ta-banner-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    /* TARJETA RESEÑA */
-    .ta-about-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 30px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-    }
-
-    .ta-title {
-      font-size: 26px;
-      font-weight: 900;
-      color: #19547E;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-      letter-spacing: 0.5px;
-      border-bottom: 3px solid #19547E;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-
-    .ta-description {
-      font-size: 15px;
-      line-height: 1.7;
-      color: #334155;
-    }
-
-    .ta-description p {
-      margin-bottom: 14px;
-    }
-
-    .ta-description p:last-child {
-      margin-bottom: 0;
-    }
-
-    .ta-backlink {
-      color: #19547E;
-      font-weight: 800;
-      text-decoration: underline;
-      transition: color 0.2s ease;
-    }
-
-    .ta-backlink:hover {
-      color: #0f3652;
-    }
-
-    /* REDES SOCIALES */
-    .ta-social-bar {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-      padding-top: 20px;
-      border-top: 1px solid #edf2f7;
-      flex-wrap: wrap;
-    }
-
-    .ta-social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 14px;
-      text-decoration: none;
-      color: #ffffff;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-
-    .ta-social-link:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
-    }
-
-    .ta-social-link.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-    .ta-social-link.facebook { background: #1877f2; }
-    .ta-social-link.youtube { background: #ff0000; }
-
-    .ta-social-icon {
-      width: 18px;
-      height: 18px;
-      fill: #ffffff;
-    }
-
-    /* BANNER DE TRANSMISIÓN EN VIVO AHORA (SOLO SE MUESTRA SI HAY UN LIVE ACTIVO) */
-    .ta-live-stream-card {
-      display: none;
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 24px;
-      border: 2px solid #dc2626;
-      box-shadow: 0 4px 15px rgba(220, 38, 38, 0.15);
-      margin-bottom: 30px;
-    }
-
-    .ta-live-badge-header {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #dc2626;
-      color: #ffffff;
-      font-size: 13px;
-      font-weight: 800;
-      padding: 6px 14px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
-    }
-
-    .ta-live-dot {
-      width: 8px;
-      height: 8px;
-      background: #ffffff;
-      border-radius: 50%;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.2); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .ta-live-video-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #000000;
-    }
-
-    .ta-live-video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* SECCIÓN DE VIDEOTECA */
-    .ta-gallery-section {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 30px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-    }
-
-    /* FILTROS CENTRADOS */
-    .ta-filter-bar {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .ta-filter-btn {
-      background: #f1f5f9;
-      color: #475569;
-      border: 1px solid #cbd5e1;
-      padding: 9px 20px;
-      font-size: 13px;
-      font-weight: 800;
-      border-radius: 25px;
+    
+    .league-hero-card {
       cursor: pointer;
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-    }
-
-    .ta-filter-btn:hover {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-
-    .ta-filter-btn.active {
-      background: #19547E;
-      color: #ffffff;
-      border-color: #19547E;
-      box-shadow: 0 4px 10px rgba(25, 84, 126, 0.25);
-    }
-
-    /* GRILLA DE VIDEOS */
-    .ta-video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .ta-video-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
+      border: 3px solid transparent;
+      border-radius: 16px;
       overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      display: flex;
-      flex-direction: column;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .ta-video-card:hover {
+    .league-hero-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
-    .ta-card-thumb-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      background: #0f172a;
-      overflow: hidden;
+    .league-hero-card.selected-contact {
+      border-color: #19547E !important;
+      box-shadow: 0 0 20px rgba(25, 84, 126, 0.4);
     }
 
-    .ta-card-thumb {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
+    .league-hero-card.selected-flag {
+      border-color: #A91C00 !important;
+      box-shadow: 0 0 20px rgba(169, 28, 0, 0.4);
     }
 
-    .ta-video-card:hover .ta-card-thumb {
-      transform: scale(1.05);
+    .league-instruction-bar {
+      text-align: center;
+      margin: 20px auto 10px auto;
+      padding: 14px 20px;
+      background-color: #f0f7ff;
+      border: 1px dashed #19547E;
+      border-radius: 12px;
+      max-width: 800px;
+      color: #19547E;
+      font-weight: 700;
+      font-size: 15px;
+      display: block;
     }
 
-    .ta-card-tag {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(25, 84, 126, 0.95);
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      z-index: 2;
+    .reset-selection-wrapper {
+      display: none;
+      text-align: center;
+      margin: 15px 0 25px 0;
     }
 
-    .ta-card-tag.game-tag {
-      background: rgba(16, 185, 129, 0.95);
-    }
-
-    .ta-card-tag.live-tag {
-      background: rgba(220, 38, 38, 0.95);
-    }
-
-    .ta-card-play-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 44px;
-      height: 44px;
-      background: rgba(0, 0, 0, 0.65);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s ease, transform 0.2s ease;
-      z-index: 2;
-    }
-
-    .ta-video-card:hover .ta-card-play-icon {
-      background: #19547E;
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-
-    .ta-card-play-icon svg {
-      width: 18px;
-      height: 18px;
-      fill: #ffffff;
-      margin-left: 2px;
-    }
-
-    .ta-card-content {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex-grow: 1;
-    }
-
-    .ta-card-title {
+    .btn-reset-league {
+      background: #ffffff;
+      color: #444444;
+      border: 2px solid #cccccc;
+      padding: 10px 24px;
       font-size: 13px;
       font-weight: 700;
-      color: #1e293b;
-      line-height: 1.4;
-      margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .ta-card-date {
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 600;
-    }
-
-    /* BOTÓN MOSTRAR MÁS VIDEOS */
-    .ta-load-more-wrapper {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .btn-load-more {
-      background: #ffffff;
-      color: #19547E;
-      border: 2px solid #19547E;
-      padding: 11px 32px;
-      font-size: 14px;
-      font-weight: 800;
       border-radius: 30px;
       cursor: pointer;
       transition: all 0.25s ease;
@@ -365,170 +80,509 @@
       letter-spacing: 0.5px;
     }
 
-    .btn-load-more:hover {
+    .btn-reset-league:hover {
+      background-color: #f4f4f4;
+      color: #111111;
+      border-color: #777777;
+    }
+
+    /* FILTROS Y BOTÓN DE IMPRESIÓN DENTRO DE CALENDARIO */
+    .kfl-filter-bar {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .kfl-filter-select {
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .btn-export-pdf {
       background: #19547E;
       color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
-    }
-
-    .btn-load-more:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* SECCIÓN DE SUSCRIPCIÓN CON CAMPANITA */
-    .ta-subscribe-box {
-      background: linear-gradient(135deg, #19547E 0%, #0f3652 100%);
-      border-radius: 16px;
-      padding: 35px 25px;
-      text-align: center;
-      color: #ffffff;
-      box-shadow: 0 6px 20px rgba(25, 84, 126, 0.2);
-      margin-bottom: 30px;
-    }
-
-    .ta-subscribe-text {
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1.6;
-      max-width: 680px;
-      margin: 0 auto 22px auto;
-      color: #f1f5f9;
-    }
-
-    .ta-subscribe-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #ff0000;
-      color: #ffffff;
-      padding: 12px 28px;
-      font-size: 15px;
-      font-weight: 800;
-      border-radius: 30px;
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
-    }
-
-    .ta-subscribe-btn:hover {
-      background: #cc0000;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.45);
-    }
-
-    .ta-bell-icon {
-      width: 20px;
-      height: 20px;
-      fill: #ffffff;
-      animation: ringBell 2.5s infinite ease-in-out;
-    }
-
-    @keyframes ringBell {
-      0%, 100% { transform: rotate(0); }
-      10%, 30% { transform: rotate(14deg); }
-      20%, 40% { transform: rotate(-14deg); }
-      50% { transform: rotate(0); }
-    }
-
-    /* MODAL REPRODUCTOR GRANDE Y FALLBACK DE YOUTUBE */
-    .ta-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(5px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .ta-modal.active {
-      display: flex;
-    }
-
-    .ta-modal-content {
-      position: relative;
-      width: 100%;
-      max-width: 900px;
-      background: #0f172a;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .ta-modal-close {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      color: #ffffff;
-      font-size: 28px;
-      font-weight: bold;
+      border: none;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
       cursor: pointer;
-      z-index: 10;
-      background: rgba(0,0,0,0.6);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .ta-modal-close:hover {
-      background: #dc2626;
-    }
-
-    .ta-modal-iframe-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-    }
-
-    .ta-modal-iframe-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .ta-modal-footer {
-      padding: 12px 20px;
-      background: #1e293b;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #ffffff;
-    }
-
-    .ta-modal-yt-link {
-      background: #ff0000;
-      color: #ffffff;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 800;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: background 0.2s;
     }
 
-    .ta-modal-yt-link:hover {
-      background: #cc0000;
+    body.flag-theme .btn-export-pdf {
+      background: #A91C00;
+    }
+
+    .btn-export-pdf:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO */
+    .sub-tabs-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .sub-tab-btn {
+      padding: 10px 20px;
+      background: #f1f5f9;
+      border: 2px solid transparent;
+      color: #334155;
+      font-weight: 700;
+      font-size: 13px;
+      border-radius: 30px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+    }
+
+    .sub-tab-btn.active {
+      background: #19547E;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
+    }
+
+    body.flag-theme .sub-tab-btn.active {
+      background: #A91C00;
+      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.25);
+    }
+
+    /* CONTENEDORES Y ESTRUCTURA DE CARDS */
+    .kfl-render-container {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding-bottom: 60px;
+    }
+
+    .kfl-week-section {
+      margin-bottom: 28px;
+    }
+
+    .kfl-week-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #19547E;
+      border-bottom: 2px solid #19547E;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    body.flag-theme .kfl-week-title {
+      color: #A91C00;
+      border-color: #A91C00;
+    }
+
+    /* GRID RESPONSIVE DE 2 COLUMNAS */
+    .kfl-grid-matches {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      width: 100%;
+    }
+
+    @media (max-width: 720px) {
+      .kfl-grid-matches {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .kfl-match-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .kfl-match-header {
+      background: #19547E;
+      color: #ffffff;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
+    }
+
+    body.flag-theme .kfl-match-header {
+      background: #A91C00;
+    }
+
+    .kfl-info-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .kfl-icon-svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .kfl-match-body {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kfl-team-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 36%;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #0f172a;
+    }
+
+    .kfl-team-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      margin-bottom: 6px;
+    }
+
+    .kfl-score-box {
+      width: 28%;
+      text-align: center;
+    }
+
+    .kfl-score-num {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .kfl-score-vs {
+      font-size: 18px;
+      font-weight: 800;
+      color: #94a3b8;
+    }
+
+    .kfl-score-status {
+      font-size: 11px;
+      font-weight: 800;
+      color: #16a34a;
+      letter-spacing: 0.5px;
+    }
+
+    .kfl-single-match-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .kfl-jamboree-body-text {
+      font-size: 16px;
+      font-weight: 900;
+      color: #19547E;
+      text-align: center;
+      padding: 22px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    body.flag-theme .kfl-jamboree-body-text {
+      color: #A91C00;
+    }
+
+    .kfl-bye-card-wrapper {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .kfl-bye-card {
+      width: 100%;
+      max-width: 440px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+    }
+
+    .kfl-bye-header {
+      background: #19547E;
+      color: #ffffff;
+      padding: 8px 14px;
+      font-weight: 800;
+      font-size: 12px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    body.flag-theme .kfl-bye-header {
+      background: #A91C00;
+    }
+
+    .kfl-bye-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .kfl-bye-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .kfl-bye-team-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: #1e293b;
+      text-transform: uppercase;
+    }
+
+    /* TABLA DE POSICIONES */
+    .kfl-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+      margin-top: 10px;
+      margin-bottom: 40px;
+    }
+
+    .kfl-table th {
+      background: #19547E;
+      color: #ffffff;
+      padding: 10px 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    body.flag-theme .kfl-table th {
+      background: #A91C00;
+    }
+
+    .kfl-table td {
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 13px;
+      color: #334155;
+    }
+
+    /* COLUMNA DE EQUIPOS AJUSTADA AL CONTENIDO */
+    .kfl-table td.team-col-cell, .kfl-table th.team-col-cell {
+      width: 1% !important;
+      white-space: nowrap !important;
+      text-align: left !important;
+    }
+
+    .kfl-table-team-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-align: left;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .kfl-table-team-logo {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .kfl-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* ESTILOS CMS DE ESTADÍSTICAS */
+    .stats-section-inner {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+      margin-bottom: 40px;
+    }
+
+    /* PÍLDORAS DE ESTADÍSTICAS TEMÁTICAS (CONTACT: AZUL KFL | FLAG: ROJO) */
+    .stats-buttons-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-type-btn {
+      padding: 10px 24px;
+      background: #19547E;
+      border: none;
+      color: #ffffff;
+      border-radius: 30px;
+      font-family: 'Avenir', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      opacity: 0.75;
+      box-shadow: none;
+    }
+
+    body.flag-theme .stat-type-btn {
+      background: #A91C00;
+    }
+
+    .stat-type-btn.active-stat {
+      opacity: 1;
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #19547E;
+      transform: translateY(-1px);
+    }
+
+    body.flag-theme .stat-type-btn.active-stat {
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #A91C00;
+    }
+
+    .stat-type-btn:hover {
+      opacity: 1;
+    }
+
+    .search-box-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-stats-input {
+      padding: 9px 14px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Avenir', sans-serif;
+      outline: none;
+      background: #f8fafc;
+    }
+
+    .search-stats-input:focus {
+      background: #ffffff;
+      border-color: #19547E;
+    }
+
+    /* BANNER DE NOTA DE ACTUALIZACIÓN EN NEGRO Y DESTACADO */
+    .kfl-last-update-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #f1f5f9;
+      color: #0f172a;
+      border: 2px solid #cbd5e1;
+      padding: 14px 22px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      text-align: center;
+    }
+
+    .kfl-update-svg {
+      width: 20px;
+      height: 20px;
+      fill: #0f172a;
+      flex-shrink: 0;
+    }
+
+    /* PAGINACIÓN INTERNA (10 EN 10) */
+    .kfl-pagination-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .kfl-page-btn {
+      padding: 6px 12px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .kfl-page-btn.active-page {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+    }
+
+    body.flag-theme .kfl-page-btn.active-page {
+      background: #A91C00;
+      border-color: #A91C00;
+    }
+
+    .kfl-page-btn:hover:not(:disabled) {
+      background: #e2e8f0;
+    }
+
+    .kfl-page-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @page {
+      size: letter portrait;
+      margin: 0.2in;
     }
   </style>
 </head>
@@ -546,411 +600,919 @@
       <ul class="nav-menu" id="navMenu">
         <li><a href="index.html">HOME</a></li>
         <li><a href="conocenos.html">CONÓCENOS</a></li>
-        <li><a href="ligas.html">LIGAS</a></li>
+        <li><a href="ligas.html" class="active">LIGAS</a></li>
         <li><a href="fotos.html">FOTOS</a></li>
         <li><a href="mvp.html">MVP</a></li>
         <li><a href="campeones.html">CAMPEONES</a></li>
         <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
-        <li><a href="total-access.html" class="active">TOTAL ACCESS</a></li>
+        <li><a href="total-access.html">TOTAL ACCESS</a></li>
         <li><a href="contacto.html">CONTACTO</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="ta-container">
+  <main>
+    <!-- TARJETAS HERO -->
+    <section class="leagues-hero-grid">
+      <div class="league-hero-card contact-card" id="cardContact" onclick="selectLeague('contact')">
+        <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino" class="hero-bg-img">
+        <div class="hero-overlay">
+          <h2>CONTACT FOOTBALL</h2>
+          <span>MASCULINO</span>
+        </div>
+      </div>
 
-    <!-- BANNER HERO -->
-    <div class="ta-banner-wrapper">
-      <img src="assets/img/total-access-banner.jpg" alt="KFL Total Access Banner" class="ta-banner-img" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+      <div class="league-hero-card flag-card" id="cardFlag" onclick="selectLeague('flag')">
+        <img src="assets/img/ligas-flag-football.jpg" alt="Flag Football Femenino" class="hero-bg-img">
+        <div class="hero-overlay">
+          <h2>FLAG FOOTBALL</h2>
+          <span>FEMENINO</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="league-instruction-bar" id="instructionBar">
+      👇 haz clic en <strong>Contact Football</strong> o <strong>Flag Football</strong> para desplegar sus categorías, calendarios, rosters y estadísticas.
     </div>
 
-    <!-- RESEÑA INSTITUCIONAL CON BACKLINK A FAFF Y FORMATO REFINADO -->
-    <section class="ta-about-card">
-      <h1 class="ta-title">KFL Total Access</h1>
+    <div class="reset-selection-wrapper" id="resetBtnWrapper">
+      <button class="btn-reset-league" onclick="resetLeagueSelection()">🔄 Restablecer Selección</button>
+    </div>
+
+    <!-- SECCIÓN DESPLEGABLE -->
+    <div id="leagueContentSection" style="display: none;">
       
-      <div class="ta-description">
-        <p><strong>KFL Total Access</strong> es la fuente oficial de noticias, resúmenes e información de la <strong>Kiwanis Football League (KFL)</strong> en la Ciudad de Panamá.</p>
-        
-        <p>Creado en 2018 por <strong>Raúl Méndez de Obarrio</strong> y producido por la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" class="ta-backlink"><strong>Fundación American Football Films (FAFF)</strong></a>, el programa ofrece cobertura todo el año de sus cuatro divisiones masculinas y femeninas: <strong>Micro, Mini, Juvenil y Varsity</strong>.</p>
-        
-        <p>Con sus transmisiones en vivo, entrevistas, fotos y todo tipo de contenido digital, se preserva la historia de la liga de fútbol americano con mayor historia y tradición del país e impulsa el deporte en Panamá.</p>
-      </div>
+      <!-- PÍLDORAS DE CATEGORÍA -->
+      <section class="category-pills-wrapper">
+        <button class="category-pill-btn active" onclick="selectCategory('varsity')">VARSITY</button>
+        <button class="category-pill-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
+        <button class="category-pill-btn" onclick="selectCategory('mini')">MINI</button>
+        <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
+      </section>
 
-      <!-- REDES SOCIALES -->
-      <div class="ta-social-bar">
-        <a href="https://www.instagram.com/kfl_total_access/" target="_blank" rel="noopener noreferrer" class="ta-social-link instagram">
-          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Instagram
-        </a>
+      <!-- SUB-PESTAÑAS -->
+      <section class="league-display-wrapper">
+        <div class="sub-tabs-bar">
+          <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
+          <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
+          <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
+          <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Estadísticas</button>
+        </div>
 
-        <a href="http://facebook.com/profile.php?id=61580980794081" target="_blank" rel="noopener noreferrer" class="ta-social-link facebook">
-          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-          Facebook
-        </a>
+        <!-- CALENDARIO -->
+        <div class="tab-pane active" id="pane-calendario">
+          <div class="kfl-filter-bar">
+            <select id="filterWeek" class="kfl-filter-select" onchange="applyCalendarFilters()">
+              <option value="ALL">Todas las Semanas</option>
+            </select>
+            <select id="filterTeam" class="kfl-filter-select" onchange="applyCalendarFilters()">
+              <option value="ALL">Todos los Equipos</option>
+            </select>
+            <button class="btn-export-pdf" onclick="window.print()">📄 Imprimir Calendario</button>
+          </div>
+          <div id="calendarioNativeContent" class="kfl-render-container"></div>
+        </div>
 
-        <a href="https://www.youtube.com/@KFLTotalAccess" target="_blank" rel="noopener noreferrer" class="ta-social-link youtube">
-          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          YouTube
-        </a>
-      </div>
-    </section>
+        <!-- ROSTERS -->
+        <div class="tab-pane" id="pane-rosters">
+          <div class="kfl-render-container">
+            <div class="rosters-grid" id="rostersGrid"></div>
+          </div>
+        </div>
 
-    <!-- BANNER DINÁMICO DE TRANSMISIÓN EN VIVO AHORA -->
-    <section class="ta-live-stream-card" id="liveStreamBanner">
-      <div class="ta-live-badge-header">
-        <span class="ta-live-dot"></span> TRANSMISIÓN EN VIVO AHORA
-      </div>
-      <div class="ta-live-video-container" id="liveStreamContainer"></div>
-    </section>
+        <!-- TABLA DE POSICIONES -->
+        <div class="tab-pane" id="pane-posiciones">
+          <div id="posicionesNativeContent" class="kfl-render-container"></div>
+        </div>
 
-    <!-- VIDEOTECA EN GRILLA CON FILTROS CENTRADOS -->
-    <section class="ta-gallery-section">
+        <!-- ESTADÍSTICAS (CMS CONECTADO A WEB_FINAL Y PAGINACIÓN 10 EN 10) -->
+        <div class="tab-pane" id="pane-stats">
+          <div class="kfl-render-container stats-section-inner">
+            
+            <!-- BANNER DE ÚLTIMA ACTUALIZACIÓN (TEXTO Y SVG EN NEGRO) -->
+            <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
+              <svg class="kfl-update-svg" viewBox="0 0 24 24">
+                <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+              </svg>
+              <span id="kflLastUpdateLabel">Sincronizando última actualización...</span>
+            </div>
 
-      <!-- PESTAÑAS / FILTROS CENTRADOS -->
-      <div class="ta-filter-bar">
-        <button class="ta-filter-btn active" onclick="filterVideos('all', this)">Todos los Videos</button>
-        <button class="ta-filter-btn" onclick="filterVideos('show', this)">KFL Total Access Show</button>
-        <button class="ta-filter-btn" onclick="filterVideos('games', this)">Partidos & Highlights</button>
-        <button class="ta-filter-btn" onclick="filterVideos('live', this)">🔴 Transmisiones en Vivo</button>
-      </div>
+            <!-- BOTONES DE TIPOS DE STATS (PÍLDORAS) -->
+            <div class="stats-buttons-grid">
+              <button onclick="filtrarTipoStat('RUSHING', this)" class="stat-type-btn active-stat" id="btn-stat-rushing">Rushing Stats</button>
+              <button onclick="filtrarTipoStat('PASSING', this)" class="stat-type-btn" id="btn-stat-passing">Passing Stats</button>
+              <button onclick="filtrarTipoStat('RECEIVING', this)" class="stat-type-btn" id="btn-stat-receiving">Receiving Stats</button>
+              <button onclick="filtrarTipoStat('DEFENSIVE', this)" class="stat-type-btn" id="btn-stat-defensive">Defensive Stats</button>
+            </div>
 
-      <!-- CONTENEDOR DEL GRID -->
-      <div class="ta-video-grid" id="youtubeVideoGrid"></div>
+            <!-- BUSCADOR INSTANTÁNEO -->
+            <div class="search-box-stats">
+              <span style="font-weight: 800; font-size: 13px; color: #334155; text-transform: uppercase;">Buscar Jugador/Equipo:</span>
+              <input type="text" id="searchStatInput" class="search-stats-input" onkeyup="filtrarTablaStats()" placeholder="Escribe aquí...">
+            </div>
 
-      <!-- BOTÓN MOSTRAR MÁS VIDEOS -->
-      <div class="ta-load-more-wrapper" id="loadMoreWrapper" style="display: none;">
-        <button class="btn-load-more" id="btnLoadMore" onclick="fetchNextBatch()">MOSTRAR MÁS VIDEOS +</button>
-      </div>
-    </section>
+            <!-- TABLA DE STATS -->
+            <div style="overflow-x: auto;">
+              <table class="kfl-table" id="statsTable">
+                <thead>
+                  <tr id="statsTableHeaderRow">
+                    <th style="text-align: center;">Rank</th>
+                    <th style="text-align: left;">Jugador</th>
+                    <th class="team-col-cell">Equipo</th>
+                    <th style="text-align: center;">Carries</th>
+                    <th style="text-align: center;">Yards</th>
+                    <th style="text-align: center;">Avg</th>
+                    <th style="text-align: center;">TD</th>
+                    <th style="text-align: center;">Lng</th>
+                    <th style="text-align: center;">Fum</th>
+                  </tr>
+                </thead>
+                <tbody id="statsTableBody">
+                  <tr><td colspan="10" style="text-align: center; padding: 30px; color: #64748b;">Cargando estadísticas...</td></tr>
+                </tbody>
+              </table>
+            </div>
 
-    <!-- CAJA DE SUSCRIPCIÓN CON CAMPANITA -->
-    <section class="ta-subscribe-box">
-      <div class="ta-subscribe-text">
-        ¡Suscríbete a nuestro canal para enterarte cuando se sube cada resumen de partido, transmisión en vivo y episodio de KFL Total Access!
-      </div>
-      <a href="https://www.youtube.com/channel/UCCfOFTqXpHgxkPo0Poc0Mew?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="ta-subscribe-btn">
-        <svg class="ta-bell-icon" viewBox="0 0 24 24">
-          <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
-        </svg>
-        Suscribirse en YouTube
-      </a>
-    </section>
+            <!-- BARRA DE PAGINACIÓN DE 10 EN 10 -->
+            <div class="kfl-pagination-bar" id="statsPaginationBar"></div>
 
-  </main>
+          </div>
+        </div>
 
-  <!-- MODAL / REPRODUCTOR FLOTANTE EN GRANDE -->
-  <div class="ta-modal" id="videoModal" onclick="closeVideoModal(event)">
-    <div class="ta-modal-content">
-      <span class="ta-modal-close" onclick="closeVideoModal(event)">&times;</span>
-      <div class="ta-modal-iframe-wrapper">
-        <iframe id="modalIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-      <div class="ta-modal-footer">
-        <span style="font-size: 13px; color: #94a3b8;">¿El video no se reproduce en la web?</span>
-        <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="ta-modal-yt-link">
-          Ver directamente en YouTube ↗
-        </a>
-      </div>
+      </section>
     </div>
-  </div>
+  </main>
 
   <footer class="site-footer">
     <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
   </footer>
 
   <script>
-    const YOUTUBE_API_KEY = 'AIzaSyBEjzSqVt1VdAZW8swDi215B4c4_IBnWR8';
-    const CHANNEL_ID = 'UCCfOFTqXpHgxkPo0Poc0Mew';
-    const UPLOADS_PLAYLIST_ID = 'UUCfOFTqXpHgxkPo0Poc0Mew';
-    
-    let cacheUploads = { items: [], pageToken: '', hasMore: true };
-    let cacheCompletedLives = { items: [], pageToken: '', hasMore: true };
-    let currentFilter = 'all';
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
+
+    /* Enlaces CSV por Liga y Categoría (Preparado para separar Contact y Flag en el futuro) */
+    const STATS_CSV_LINKS = {
+      "contact": {
+        "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
+        "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
+        "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
+        "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
+      },
+      "flag": {
+        "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
+        "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
+        "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
+        "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
+      }
+    };
+
+    let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
+    let tipoStatActivo = 'RUSHING';
+    let paginaActualStats = 1;
+    const filasPorPagina = 10;
+
+    const SVG_ICONS = {
+      calendar: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>`,
+      clock: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`,
+      pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
+    };
+
+    const EQUIPOS_LOGOS = {
+      "OWLS": "assets/img/logos/owls.png",
+      "RAIDERS": "assets/img/logos/raiders.png",
+      "EAGLES": "assets/img/logos/eagles.png",
+      "KOLTS": "assets/img/logos/kolts.png",
+      "DRAGONS": "assets/img/logos/dragons.png",
+      "SPARTANS": "assets/img/logos/spartans.png",
+      "LIONS": "assets/img/logos/lions.png"
+    };
+
+    const FALLBACK_LOGOS = {
+      "OWLS": "https://i.imgur.com/KRjk1AV.png",
+      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
+      "EAGLES": "https://i.imgur.com/lxfq565.png",
+      "KOLTS": "https://i.imgur.com/id2gPdH.png",
+      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
+      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png",
+      "LIONS": "https://i.imgur.com/XQaNhUb.png"
+    };
+
+    function getTeamLogo(teamName) {
+      const cleanTeam = (teamName || "").toUpperCase().trim();
+      return EQUIPOS_LOGOS[cleanTeam] || FALLBACK_LOGOS[cleanTeam] || "https://i.imgur.com/wrPDjDN.png";
+    }
+
+    let CATEGORIAS_EQUIPOS = {
+      "contact": {
+        "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "SPARTANS"],
+        "juvenil": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS"],
+        "mini": ["OWLS", "RAIDERS", "EAGLES", "KOLTS"],
+        "micro": ["OWLS", "RAIDERS", "EAGLES"]
+      },
+      "flag": {
+        "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "LIONS"],
+        "juvenil": ["OWLS", "RAIDERS", "EAGLES", "KOLTS"],
+        "mini": ["OWLS", "RAIDERS", "EAGLES"],
+        "micro": ["OWLS", "RAIDERS"]
+      }
+    };
+
+    let activeLeague = null;
+    let activeCategory = 'varsity';
+    let activeSubTab = 'calendario';
+
+    function getMasterDB() {
+      try {
+        const data = sessionStorage.getItem('kfl_master_db');
+        return data ? JSON.parse(data) : null;
+      } catch (e) { return null; }
+    }
+
+    function setMasterDB(data) {
+      try {
+        sessionStorage.setItem('kfl_master_db', JSON.stringify(data));
+      } catch (e) {}
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
+      fetchMasterDB();
       const hamburgerBtn = document.getElementById('hamburgerBtn');
       const navMenu = document.getElementById('navMenu');
       if (hamburgerBtn) {
         hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
       }
-
-      checkActiveLiveStream();
-      loadCurrentFilterData();
     });
 
-    /* DETECTOR RIGUROSO DE CATEGORÍA */
-    function getCategoryForTitle(title, description = '') {
-      const text = (title + ' ' + description).toUpperCase();
-      if (text.includes('STREAM') || text.includes('LIVESTREAM') || text.includes('EN VIVO') || text.includes('LIVE') || text.includes('DIRECTO') || text.includes('TRANSMISION') || text.includes('TRANSMISIÓN')) {
-        return 'live';
-      }
-      if (text.includes('TOTAL ACCESS')) {
-        return 'show';
-      }
-      return 'games';
-    }
-
-    function checkActiveLiveStream() {
-      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&eventType=live&key=${YOUTUBE_API_KEY}`;
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          if (data.items && data.items.length > 0) {
-            const liveVideoId = data.items[0].id.videoId;
-            const container = document.getElementById('liveStreamContainer');
-            container.innerHTML = `
-              <iframe src="https://www.youtube.com/embed/${liveVideoId}?autoplay=1" 
-                title="KFL Live Stream" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-            `;
-            document.getElementById('liveStreamBanner').style.display = 'block';
-          }
-        })
-        .catch(() => {});
-    }
-
-    function filterVideos(category, btnElement) {
-      currentFilter = category;
-      document.querySelectorAll('.ta-filter-btn').forEach(btn => btn.classList.remove('active'));
-      if (btnElement) btnElement.classList.add('active');
-
-      loadCurrentFilterData();
-    }
-
-    function getFilteredCount(category) {
-      if (category === 'live') return cacheCompletedLives.items.length;
-      return cacheUploads.items.filter(v => {
-        if (v.category === 'live') return false; // Exclusión estricta de directos
-        if (category === 'show') return v.category === 'show';
-        if (category === 'games') return v.category === 'games';
-        return true; // 'all' incluye solo 'show' y 'games'
-      }).length;
-    }
-
-    async function loadCurrentFilterData() {
-      const grid = document.getElementById('youtubeVideoGrid');
-      grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:25px;">Cargando videos...</p>';
-
-      if (currentFilter === 'live') {
-        while (cacheCompletedLives.items.length < 8 && cacheCompletedLives.hasMore) {
-          await fetchCompletedLivesAsync();
-        }
-      } else {
-        while (getFilteredCount(currentFilter) < 8 && cacheUploads.hasMore) {
-          await fetchUploadsBatchAsync();
-        }
-      }
-      renderGrid();
-    }
-
-    async function fetchNextBatch() {
-      const btn = document.getElementById('btnLoadMore');
-      if (btn) { btn.disabled = true; btn.textContent = 'CARGANDO...'; }
-
-      if (currentFilter === 'live') {
-        await fetchCompletedLivesAsync();
-      } else {
-        const targetCount = getFilteredCount(currentFilter) + 8;
-        while (getFilteredCount(currentFilter) < targetCount && cacheUploads.hasMore) {
-          await fetchUploadsBatchAsync();
-        }
-      }
-      renderGrid();
-    }
-
-    /* CARGA DE UPLOADS REGULARES (CON FILTRADO ANTI-LIVESTREAM) */
-    function fetchUploadsBatchAsync() {
-      return new Promise((resolve) => {
-        if (!cacheUploads.hasMore) return resolve();
-
-        let url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${UPLOADS_PLAYLIST_ID}&maxResults=25&key=${YOUTUBE_API_KEY}`;
-        if (cacheUploads.pageToken) url += `&pageToken=${cacheUploads.pageToken}`;
-
-        fetch(url)
-          .then(res => res.json())
-          .then(data => {
-            if (!data.items || data.items.length === 0) {
-              cacheUploads.hasMore = false;
-              return resolve();
-            }
-
-            cacheUploads.pageToken = data.nextPageToken || '';
-            if (!data.nextPageToken) cacheUploads.hasMore = false;
-
-            data.items.forEach(item => {
-              const snippet = item.snippet;
-              const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
-              if (!videoId) return;
-
-              const title = snippet.title || 'Video KFL';
-              const description = snippet.description || '';
-              
-              // Si el snippet trae metadata explicita de directos, forzar 'live'
-              let cat = getCategoryForTitle(title, description);
-              if (snippet.liveBroadcastContent === 'completed' || snippet.liveBroadcastContent === 'live') {
-                cat = 'live';
-              }
-
-              cacheUploads.items.push({
-                id: videoId,
-                title: title,
-                thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
-                date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
-                category: cat
-              });
-            });
-
-            resolve();
-          })
-          .catch(err => {
-            console.error(err);
-            resolve();
-          });
-      });
-    }
-
-    /* CARGA DE LIVES DESDE ENLACE ESPECÍFICO DE YOUTUBE SEARCH API */
-    function fetchCompletedLivesAsync() {
-      return new Promise((resolve) => {
-        if (!cacheCompletedLives.hasMore) return resolve();
-
-        let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&eventType=completed&maxResults=12&order=date&key=${YOUTUBE_API_KEY}`;
-        if (cacheCompletedLives.pageToken) url += `&pageToken=${cacheCompletedLives.pageToken}`;
-
-        fetch(url)
-          .then(res => res.json())
-          .then(data => {
-            if (!data.items || data.items.length === 0) {
-              cacheCompletedLives.hasMore = false;
-              return resolve();
-            }
-
-            cacheCompletedLives.pageToken = data.nextPageToken || '';
-            if (!data.nextPageToken) cacheCompletedLives.hasMore = false;
-
-            data.items.forEach(item => {
-              const snippet = item.snippet;
-              const videoId = item.id ? item.id.videoId : null;
-              if (!videoId) return;
-
-              cacheCompletedLives.items.push({
-                id: videoId,
-                title: snippet.title || 'Transmisión en Vivo KFL',
-                thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
-                date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
-                category: 'live'
-              });
-            });
-
-            resolve();
-          })
-          .catch(err => {
-            console.error(err);
-            resolve();
-          });
-      });
-    }
-
-    /* RENDERIZADO EXCLUSIVO POR PESTAÑA */
-    function renderGrid() {
-      const grid = document.getElementById('youtubeVideoGrid');
-      grid.innerHTML = '';
-
-      let listToRender = [];
-      if (currentFilter === 'live') {
-        listToRender = cacheCompletedLives.items;
-      } else {
-        // Exclusión estricta de cualquier transmisión en vivo en las pestañas "Todos los videos", "Show" y "Partidos & Highlights"
-        listToRender = cacheUploads.items.filter(v => {
-          if (v.category === 'live') return false; 
-          if (currentFilter === 'show') return v.category === 'show';
-          if (currentFilter === 'games') return v.category === 'games';
-          return true; // 'all'
-        });
-      }
-
-      if (listToRender.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:25px;">No se encontraron videos disponibles para esta categoría.</p>';
-        updateLoadMoreButton();
+    function fetchMasterDB(callback) {
+      if (getMasterDB()) {
+        if (callback) callback();
         return;
       }
 
-      listToRender.forEach(video => {
-        const card = document.createElement('div');
-        card.className = 'ta-video-card';
-        card.onclick = () => openVideoModal(video.id);
+      fetch(`${APPS_SCRIPT_URL}?modulo=all_data`)
+        .then(res => res.json())
+        .then(db => {
+          setMasterDB(db);
+          if (callback) callback();
+        })
+        .catch(err => {
+          console.error("Error cargando base de datos KFL:", err);
+        });
+    }
 
-        let tagText = 'PARTIDO / HIGHLIGHT';
-        let tagClass = 'ta-card-tag game-tag';
+    function selectLeague(league) {
+      activeLeague = league;
 
-        if (video.category === 'show') {
-          tagText = 'Total Access Show';
-          tagClass = 'ta-card-tag';
-        } else if (video.category === 'live') {
-          tagText = '🔴 LIVESTREAM';
-          tagClass = 'ta-card-tag live-tag';
-        }
+      const cardContact = document.getElementById('cardContact');
+      const cardFlag = document.getElementById('cardFlag');
+      const contentSection = document.getElementById('leagueContentSection');
+      const resetBtnWrapper = document.getElementById('resetBtnWrapper');
+      const instructionBar = document.getElementById('instructionBar');
 
-        card.innerHTML = `
-          <div class="ta-card-thumb-wrapper">
-            <span class="${tagClass}">${tagText}</span>
-            <img src="${video.thumb}" alt="${video.title}" class="ta-card-thumb" loading="lazy">
-            <div class="ta-card-play-icon">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="ta-card-content">
-            <div class="ta-card-title">${video.title}</div>
-            <div class="ta-card-date">📅 ${video.date}</div>
-          </div>
-        `;
+      if (league === 'contact') {
+        cardContact.classList.add('selected-contact');
+        cardFlag.classList.remove('selected-flag');
+        document.body.className = 'contact-theme';
+      } else {
+        cardFlag.classList.add('selected-flag');
+        cardContact.classList.remove('selected-contact');
+        document.body.className = 'flag-theme';
+      }
 
-        grid.appendChild(card);
+      contentSection.style.display = 'block';
+      resetBtnWrapper.style.display = 'block';
+      instructionBar.style.display = 'none';
+
+      updateActiveView();
+    }
+
+    function resetLeagueSelection() {
+      activeLeague = null;
+      document.getElementById('cardContact').classList.remove('selected-contact');
+      document.getElementById('cardFlag').classList.remove('selected-flag');
+      document.getElementById('leagueContentSection').style.display = 'none';
+      document.getElementById('resetBtnWrapper').style.display = 'none';
+      document.getElementById('instructionBar').style.display = 'block';
+      document.body.className = 'contact-theme';
+    }
+
+    function selectCategory(category) {
+      activeCategory = category;
+      document.querySelectorAll('.category-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
+      });
+      
+      // Resetear a RUSHING al cambiar de categoría
+      tipoStatActivo = 'RUSHING';
+      document.querySelectorAll('.stat-type-btn').forEach(b => {
+        b.classList.toggle('active-stat', b.id === 'btn-stat-rushing');
       });
 
-      updateLoadMoreButton();
+      if (activeLeague) updateActiveView();
     }
 
-    function updateLoadMoreButton() {
-      const loadMoreWrapper = document.getElementById('loadMoreWrapper');
-      const btn = document.getElementById('btnLoadMore');
+    function selectSubTab(subTab) {
+      activeSubTab = subTab;
 
-      let hasMore = (currentFilter === 'live') ? cacheCompletedLives.hasMore : cacheUploads.hasMore;
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-tab-' + subTab);
+      if (activeBtn) activeBtn.classList.add('active');
 
-      if (hasMore) {
-        loadMoreWrapper.style.display = 'block';
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = 'MOSTRAR MÁS VIDEOS +';
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      const targetPane = document.getElementById('pane-' + subTab);
+      if (targetPane) targetPane.classList.add('active');
+
+      if (activeLeague) updateActiveView();
+    }
+
+    function updateActiveView() {
+      if (!activeLeague) return;
+
+      const db = getMasterDB();
+      if (!db) {
+        fetchMasterDB(() => updateActiveView());
+        return;
+      }
+
+      if (activeSubTab === 'calendario') {
+        loadCalendarioData();
+      } else if (activeSubTab === 'posiciones') {
+        loadPosicionesData();
+      } else if (activeSubTab === 'rosters') {
+        renderRostersGrid();
+      } else if (activeSubTab === 'stats') {
+        loadStatsData();
+      }
+    }
+
+    function loadCalendarioData() {
+      const db = getMasterDB();
+      const catData = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
+
+      populateCalendarFilters(catData);
+      renderCalendar(catData);
+    }
+
+    function populateCalendarFilters(partidos) {
+      const weekSelect = document.getElementById('filterWeek');
+      const teamSelect = document.getElementById('filterTeam');
+
+      const weeks = [...new Set(partidos.map(p => p.week).filter(Boolean))];
+      const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => t && t !== 'KFL' && t !== 'TODOS JUEGAN'))];
+
+      weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
+      teamSelect.innerHTML = '<option value="ALL">Todos los Equipos</option>' + teams.map(t => `<option value="${t}">${t}</option>`).join('');
+    }
+
+    function applyCalendarFilters() {
+      const db = getMasterDB();
+      const partidos = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
+      const selectedWeek = document.getElementById('filterWeek').value;
+      const selectedTeam = document.getElementById('filterTeam').value;
+
+      const filtered = partidos.filter(p => {
+        const matchWeek = selectedWeek === 'ALL' || p.week === selectedWeek;
+        const matchTeam = selectedTeam === 'ALL' || p.home === selectedTeam || p.away === selectedTeam;
+        return matchWeek && matchTeam;
+      });
+
+      renderCalendar(filtered);
+    }
+
+    function renderCalendar(partidos) {
+      const container = document.getElementById('calendarioNativeContent');
+      if (!partidos || partidos.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:30px;">No hay partidos registrados para esta vista.</p>';
+        return;
+      }
+
+      const grouped = {};
+      partidos.forEach(p => {
+        const week = p.week || 'CALENDARIO';
+        if (!grouped[week]) grouped[week] = [];
+        grouped[week].push(p);
+      });
+
+      let html = '';
+      for (const weekName in grouped) {
+        html += `<div class="kfl-week-section">`;
+        html += `<div class="kfl-week-title">${weekName}</div>`;
+
+        const weekGames = grouped[weekName];
+        const byeGames = weekGames.filter(g => g.isBye);
+        const regularGames = weekGames.filter(g => !g.isBye);
+
+        if (regularGames.length === 1 && (regularGames[0].isJamboree || weekName.includes("FINAL") || weekName.includes("SEMI"))) {
+          const p = regularGames[0];
+          if (p.isJamboree) {
+            const titleJam = (p.home && p.home !== "KFL") ? `${p.home} - TODOS JUEGAN` : `${weekName} - TODOS JUEGAN`;
+
+            html += `
+              <div class="kfl-single-match-wrapper">
+                <div class="kfl-match-card" style="width:100%; max-width:580px;">
+                  <div class="kfl-match-header">
+                    <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
+                    <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
+                  </div>
+                  <div class="kfl-jamboree-body-text">
+                    ${titleJam}
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            const homeLogo = getTeamLogo(p.home);
+            const awayLogo = getTeamLogo(p.away);
+
+            html += `
+              <div class="kfl-single-match-wrapper">
+                <div class="kfl-match-card" style="width:100%; max-width:580px;">
+                  <div class="kfl-match-header">
+                    <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
+                    <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
+                  </div>
+                  <div class="kfl-match-body">
+                    <div class="kfl-team-box">
+                      <img src="${homeLogo}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.home] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                      <span>${p.home}</span>
+                    </div>
+                    <div class="kfl-score-box">
+                      ${p.hasScore 
+                        ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
+                        : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
+                    </div>
+                    <div class="kfl-team-box">
+                      <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                      <span>${p.away}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }
+        } else {
+          html += `<div class="kfl-grid-matches">`;
+          regularGames.forEach(p => {
+            const homeLogo = getTeamLogo(p.home);
+            const awayLogo = getTeamLogo(p.away);
+
+            html += `
+              <div class="kfl-match-card">
+                <div class="kfl-match-header">
+                  <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
+                  <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
+                </div>
+                <div class="kfl-match-body">
+                  <div class="kfl-team-box">
+                    <img src="${homeLogo}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.home] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                    <span>${p.home}</span>
+                  </div>
+                  <div class="kfl-score-box">
+                    ${p.hasScore 
+                      ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
+                      : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
+                  </div>
+                  <div class="kfl-team-box">
+                    <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                    <span>${p.away}</span>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+
+          if (byeGames.length > 0) {
+            byeGames.forEach(bg => {
+              const byeLogo = getTeamLogo(bg.home);
+              html += `
+                <div class="kfl-bye-card-wrapper">
+                  <div class="kfl-bye-card">
+                    <div class="kfl-bye-header">BYE WEEK</div>
+                    <div class="kfl-bye-body">
+                      <img src="${byeLogo}" alt="${bg.home}" class="kfl-bye-logo" onerror="this.src='${FALLBACK_LOGOS[bg.home] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                      <span class="kfl-bye-team-name">${bg.home}</span>
+                    </div>
+                  </div>
+                </div>
+              `;
+            });
+          }
+
+          html += `</div>`;
         }
+
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function loadPosicionesData() {
+      const db = getMasterDB();
+      const catTabla = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].tabla : [];
+
+      renderPosiciones(catTabla);
+    }
+
+    let sortState = { col: 'pts', asc: false };
+
+    function renderPosiciones(tabla) {
+      const container = document.getElementById('posicionesNativeContent');
+      if (!tabla || tabla.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:30px;">No hay tabla disponible aún.</p>';
+        return;
+      }
+
+      let html = `
+        <table class="kfl-table" id="standingsTable">
+          <thead>
+            <tr>
+              <th onclick="sortPosiciones('rank')"># ↕</th>
+              <th onclick="sortPosiciones('equipo')" class="team-col-cell" style="text-align:left;">EQUIPO ↕</th>
+              <th onclick="sortPosiciones('jj')">JJ ↕</th>
+              <th onclick="sortPosiciones('jg')">JG ↕</th>
+              <th onclick="sortPosiciones('jp')">JP ↕</th>
+              <th onclick="sortPosiciones('je')">JE ↕</th>
+              <th onclick="sortPosiciones('pf')">PF ↕</th>
+              <th onclick="sortPosiciones('pc')">PC ↕</th>
+              <th onclick="sortPosiciones('dif')">DIF ↕</th>
+              <th onclick="sortPosiciones('pts')">PTS ↕</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      tabla.forEach((row, idx) => {
+        const logoUrl = getTeamLogo(row.equipo);
+        html += `
+          <tr>
+            <td><strong>${idx + 1}</strong></td>
+            <td class="team-col-cell">
+              <div class="kfl-table-team-cell">
+                <img src="${logoUrl}" alt="${row.equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[row.equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <span>${row.equipo}</span>
+              </div>
+            </td>
+            <td>${row.jj}</td>
+            <td>${row.jg}</td>
+            <td>${row.jp}</td>
+            <td>${row.je}</td>
+            <td>${row.pf}</td>
+            <td>${row.pc}</td>
+            <td style="font-weight:bold; color:${row.dif >= 0 ? '#16a34a' : '#dc2626'}">${row.dif > 0 ? '+' + row.dif : row.dif}</td>
+            <td><strong>${row.pts}</strong></td>
+          </tr>
+        `;
+      });
+
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function sortPosiciones(column) {
+      const db = getMasterDB();
+      let tabla = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].tabla : [];
+      if (!tabla || tabla.length === 0) return;
+
+      if (sortState.col === column) {
+        sortState.asc = !sortState.asc;
       } else {
-        loadMoreWrapper.style.display = 'none';
+        sortState.col = column;
+        sortState.asc = false;
+      }
+
+      tabla.sort((a, b) => {
+        let valA = a[column];
+        let valB = b[column];
+
+        if (typeof valA === 'string') {
+          return sortState.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+        }
+        return sortState.asc ? valA - valB : valB - valA;
+      });
+
+      renderPosiciones(tabla);
+    }
+
+    function renderRostersGrid() {
+      const grid = document.getElementById('rostersGrid');
+      if (!grid) return;
+
+      const equipos = (CATEGORIAS_EQUIPOS[activeLeague] && CATEGORIAS_EQUIPOS[activeLeague][activeCategory]) || [];
+      grid.innerHTML = '';
+
+      if (equipos.length === 0) {
+        grid.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">No hay equipos registrados.</p>';
+        return;
+      }
+
+      equipos.forEach(equipo => {
+        const logoUrl = getTeamLogo(equipo);
+        const card = document.createElement('div');
+        card.className = 'team-card-roster';
+        card.innerHTML = `
+          <img src="${logoUrl}" alt="${equipo}" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+          <h4>${equipo}</h4>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // LÓGICA CMS DE ESTADÍSTICAS CON ENLACES SEPARADOS POR LIGA
+    function loadStatsData() {
+      const linksLiga = STATS_CSV_LINKS[activeLeague];
+      const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
+
+      if (!csvUrl) {
+        document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
+        document.getElementById('statsPaginationBar').innerHTML = '';
+        document.getElementById('kflLastUpdateLabel').textContent = 'ÚLTIMA ACTUALIZACIÓN: NO DISPONIBLE';
+        return;
+      }
+
+      document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas de WEB_FINAL...</td></tr>`;
+
+      fetch(csvUrl)
+        .then(res => res.text())
+        .then(texto => {
+          const resultadoParseado = parsearWebFinalCSV(texto);
+          seccionesStatsGlobal = resultadoParseado.secciones;
+          
+          let rawUpdate = resultadoParseado.ultimaActualizacion || "NO REGISTRADA";
+          let formattedUpdate = formatearHora12h(rawUpdate);
+          document.getElementById('kflLastUpdateLabel').textContent = formattedUpdate;
+
+          paginaActualStats = 1;
+          renderizarSeccionActivaStats();
+        })
+        .catch(err => {
+          console.error("Error cargando CSV de Stats:", err);
+          document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #dc2626;">Error al cargar las estadísticas.</td></tr>`;
+        });
+    }
+
+    function formatearHora12h(textoFecha) {
+      try {
+        let match = textoFecha.match(/(\d{2}\/\d{2}\/\d{4})\s+(\d{2}):(\d{2})/);
+        if (match) {
+          let fecha = match[1];
+          let horas = parseInt(match[2], 10);
+          let minutos = match[3];
+          let ampm = horas >= 12 ? 'PM' : 'AM';
+          horas = horas % 12;
+          horas = horas ? horas : 12;
+          return `ÚLTIMA ACTUALIZACIÓN: ${fecha} ${horas}:${minutos} ${ampm}`;
+        }
+      } catch(e) {}
+      return textoFecha.toUpperCase();
+    }
+
+    function parsearWebFinalCSV(texto) {
+      const lineas = texto.split('\n');
+      let secciones = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
+      let seccionActual = null;
+      let headersActuales = [];
+      let ultimaActualizacion = "";
+
+      for (let i = 0; i < lineas.length; i++) {
+        let linea = lineas[i].trim();
+        if (!linea) continue;
+        let cols = linea.split(',').map(c => c.trim().replace(/"/g, ''));
+        let lineaUnida = cols.join(' ').toUpperCase();
+
+        if (i === 0 || lineaUnida.includes('ACTUALIZACIÓN') || lineaUnida.includes('ACTUALIZACION')) {
+          ultimaActualizacion = lineaUnida;
+        }
+
+        if (cols[0] === 'START' || lineaUnida.includes('START')) {
+          let nombreSec = (cols[1] || lineaUnida).toUpperCase();
+          if (nombreSec.includes('RUSH')) seccionActual = 'RUSHING';
+          else if (nombreSec.includes('PASS')) seccionActual = 'PASSING';
+          else if (nombreSec.includes('RECEIV')) seccionActual = 'RECEIVING';
+          else if (nombreSec.includes('DEFENS') || nombreSec.includes('TACKLE')) seccionActual = 'DEFENSIVE';
+          headersActuales = [];
+          continue;
+        }
+
+        if (cols[0] === 'END' || lineaUnida.includes('END')) {
+          seccionActual = null;
+          headersActuales = [];
+          continue;
+        }
+
+        if (!seccionActual) {
+          if (lineaUnida.includes('RUSHING')) seccionActual = 'RUSHING';
+          else if (lineaUnida.includes('PASSING')) seccionActual = 'PASSING';
+          else if (lineaUnida.includes('RECEIVING')) seccionActual = 'RECEIVING';
+          else if (lineaUnida.includes('DEFENSIVE') || lineaUnida.includes('TACKLE')) seccionActual = 'DEFENSIVE';
+        }
+
+        if (seccionActual) {
+          if (headersActuales.length === 0 && (lineaUnida.includes('JUGADOR') || lineaUnida.includes('PLAYER') || lineaUnida.includes('RANK'))) {
+            headersActuales = cols.map(h => h.toUpperCase());
+            continue;
+          }
+
+          if (headersActuales.length > 0) {
+            let obj = {};
+            headersActuales.forEach((h, idx) => {
+              obj[h] = cols[idx] || '';
+            });
+            if (obj['JUGADOR'] && obj['JUGADOR'] !== 'JUGADOR' && obj['JUGADOR'] !== 'PLAYER') {
+              secciones[seccionActual].push(obj);
+            }
+          }
+        }
+      }
+      return { secciones, ultimaActualizacion };
+    }
+
+    function renderizarSeccionActivaStats() {
+      const datosSeccion = seccionesStatsGlobal[tipoStatActivo] || [];
+      const tbody = document.getElementById('statsTableBody');
+      const theadRow = document.getElementById('statsTableHeaderRow');
+
+      if (tipoStatActivo === 'RUSHING') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th class="team-col-cell">Equipo</th>
+          <th style="text-align: center;">Carries</th>
+          <th style="text-align: center;">Yards</th>
+          <th style="text-align: center;">Avg</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Lng</th>
+          <th style="text-align: center;">Fum</th>
+        `;
+      } else if (tipoStatActivo === 'PASSING') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th class="team-col-cell">Equipo</th>
+          <th style="text-align: center;">Comp</th>
+          <th style="text-align: center;">Att</th>
+          <th style="text-align: center;">Comp %</th>
+          <th style="text-align: center;">Yards</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Int</th>
+          <th style="text-align: center;">Sack</th>
+        `;
+      } else if (tipoStatActivo === 'RECEIVING') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th class="team-col-cell">Equipo</th>
+          <th style="text-align: center;">Rec</th>
+          <th style="text-align: center;">Yards</th>
+          <th style="text-align: center;">Avg</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Lng</th>
+          <th style="text-align: center;">Fum</th>
+        `;
+      } else if (tipoStatActivo === 'DEFENSIVE') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th class="team-col-cell">Equipo</th>
+          <th style="text-align: center;">Total</th>
+          <th style="text-align: center;">Sack</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Int</th>
+          <th style="text-align: center;">FF</th>
+          <th style="text-align: center;">FR</th>
+        `;
+      }
+
+      renderizarTablaStatsPaginada(datosSeccion);
+    }
+
+    function renderizarTablaStatsPaginada(datos) {
+      const tbody = document.getElementById('statsTableBody');
+      const paginationBar = document.getElementById('statsPaginationBar');
+      tbody.innerHTML = '';
+      paginationBar.innerHTML = '';
+
+      if (datos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">No hay registros disponibles para ${tipoStatActivo}.</td></tr>`;
+        return;
+      }
+
+      const totalPaginas = Math.ceil(datos.length / filasPorPagina);
+      if (paginaActualStats > totalPaginas) paginaActualStats = totalPaginas;
+      if (paginaActualStats < 1) paginaActualStats = 1;
+
+      const inicio = (paginaActualStats - 1) * filasPorPagina;
+      const fin = inicio + filasPorPagina;
+      const datosPagina = datos.slice(inicio, fin);
+
+      datosPagina.forEach((row, indexRelativo) => {
+        const indiceReal = inicio + indexRelativo;
+        const jugador = row.JUGADOR || row.PLAYER || row.NOMBRE || row.NAME || "-";
+        const equipo = (row.EQUIPO || row.TEAM || row.CLUB || "").toUpperCase();
+        const logoUrl = getTeamLogo(equipo);
+
+        let tr = document.createElement('tr');
+        
+        if (tipoStatActivo === 'RUSHING' || tipoStatActivo === 'RECEIVING') {
+          const c1 = row.CARRIES || row.REC || row.CARRY || "0";
+          const c2 = row.YARDS || row.YARDAS || row.YDS || "0";
+          const c3 = row.AVG || row.PROMEDIO || "0.0";
+          const c4 = row.TD || row.TDS || "0";
+          const c5 = row.LNG || row.LONG || "0";
+          const c6 = row.FUM || row.FUMBLES || "0";
+
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
+            <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
+            <td class="team-col-cell">
+              <div class="kfl-table-team-cell">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <span>${equipo}</span>
+              </div>
+            </td>
+            <td style="text-align: center;">${c1}</td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${c2}</td>
+            <td style="text-align: center;">${c3}</td>
+            <td style="text-align: center; font-weight: 700;">${c4}</td>
+            <td style="text-align: center;">${c5}</td>
+            <td style="text-align: center;">${c6}</td>
+          `;
+        } else if (tipoStatActivo === 'PASSING') {
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
+            <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
+            <td class="team-col-cell">
+              <div class="kfl-table-team-cell">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <span>${equipo}</span>
+              </div>
+            </td>
+            <td style="text-align: center;">${row.COMP || "0"}</td>
+            <td style="text-align: center;">${row.ATT || "0"}</td>
+            <td style="text-align: center;">${row["COMP %"] || row.COMP_PERC || "0.0%"}</td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || row.YDS || "0"}</td>
+            <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
+            <td style="text-align: center;">${row.INT || "0"}</td>
+            <td style="text-align: center;">${row.SACK || row.SACKS || "0"}</td>
+          `;
+        } else if (tipoStatActivo === 'DEFENSIVE') {
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
+            <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
+            <td class="team-col-cell">
+              <div class="kfl-table-team-cell">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <span>${equipo}</span>
+              </div>
+            </td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.TOTAL || row.TACKLES || "0"}</td>
+            <td style="text-align: center;">${row.SACK || row.SACKS || "0"}</td>
+            <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
+            <td style="text-align: center;">${row.INT || "0"}</td>
+            <td style="text-align: center;">${row.FF || "0"}</td>
+            <td style="text-align: center;">${row.FR || "0"}</td>
+          `;
+        }
+
+        tbody.appendChild(tr);
+      });
+
+      if (totalPaginas > 1) {
+        let pagHtml = `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats - 1})" ${paginaActualStats === 1 ? 'disabled' : ''}>&laquo; Ant</button>`;
+        
+        for (let p = 1; p <= totalPaginas; p++) {
+          pagHtml += `<button class="kfl-page-btn ${p === paginaActualStats ? 'active-page' : ''}" onclick="cambiarPaginaStats(${p})">${p}</button>`;
+        }
+
+        pagHtml += `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats + 1})" ${paginaActualStats === totalPaginas ? 'disabled' : ''}>Sig &raquo;</button>`;
+        paginationBar.innerHTML = pagHtml;
       }
     }
 
-    /* REPRODUCTOR EN MODAL Y ENLACE DIRECTO A YOUTUBE */
-    function openVideoModal(videoId) {
-      const modal = document.getElementById('videoModal');
-      const iframe = document.getElementById('modalIframe');
-      const directLink = document.getElementById('modalDirectLink');
-
-      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-      directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
-
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+    function cambiarPaginaStats(nuevaPagina) {
+      paginaActualStats = nuevaPagina;
+      renderizarSeccionActivaStats();
+      document.getElementById('statsTable').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function closeVideoModal(event) {
-      if (event.target.id === 'videoModal' || event.target.classList.contains('ta-modal-close')) {
-        const modal = document.getElementById('videoModal');
-        const iframe = document.getElementById('modalIframe');
-        iframe.src = '';
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
+    function filtrarTablaStats() {
+      const filtro = document.getElementById('searchStatInput').value.toLowerCase();
+      const datosOriginales = seccionesStatsGlobal[tipoStatActivo] || [];
+      const filtrados = datosOriginales.filter(item => {
+        const textValues = Object.values(item).join(' ').toLowerCase();
+        return textValues.includes(filtro);
+      });
+      paginaActualStats = 1;
+      renderizarTablaStatsPaginada(filtrados);
+    }
+
+    function filtrarTipoStat(tipo, btn) {
+      document.querySelectorAll('.stat-type-btn').forEach(b => b.classList.remove('active-stat'));
+      btn.classList.add('active-stat');
+      tipoStatActivo = tipo;
+      paginaActualStats = 1;
+      document.getElementById('searchStatInput').value = '';
+      renderizarSeccionActivaStats();
     }
   </script>
 </body>

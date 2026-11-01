@@ -372,18 +372,27 @@
       color: #334155;
     }
 
+    /* COLUMNA DE EQUIPOS AJUSTADA AL CONTENIDO */
+    .kfl-table td.team-col-cell, .kfl-table th.team-col-cell {
+      width: 1% !important;
+      white-space: nowrap !important;
+      text-align: left !important;
+    }
+
     .kfl-table-team-cell {
       display: flex;
       align-items: center;
       gap: 8px;
       text-align: left;
       font-weight: 700;
+      white-space: nowrap;
     }
 
     .kfl-table-team-logo {
       width: 26px;
       height: 26px;
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     .kfl-table tr:nth-child(even) {
@@ -464,15 +473,30 @@
       border-color: #19547E;
     }
 
-    /* BARRA DE ÚLTIMA ACTUALIZACIÓN */
-    .kfl-last-update-bar {
-      text-align: right;
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 700;
-      margin-bottom: 12px;
+    /* BANNER ROJO DE ÚLTIMA ACTUALIZACIÓN (DESTACADO Y CENTRADO) */
+    .kfl-last-update-banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: #A91C00;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.2);
+      text-align: center;
+    }
+
+    .kfl-update-svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+      flex-shrink: 0;
     }
 
     /* PAGINACIÓN INTERNA (10 EN 10) */
@@ -703,8 +727,13 @@
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container stats-section-inner">
             
-            <!-- INDICADOR DE ÚLTIMA ACTUALIZACIÓN -->
-            <div class="kfl-last-update-bar" id="kflLastUpdateLabel">🔄 Sincronizando última actualización...</div>
+            <!-- BANNER ROJO DE ÚLTIMA ACTUALIZACIÓN (CELDA A1 DEL SHEET EN FORMATO 12H) -->
+            <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
+              <svg class="kfl-update-svg" viewBox="0 0 24 24">
+                <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
+              </svg>
+              <span id="kflLastUpdateLabel">Sincronizando última actualización...</span>
+            </div>
 
             <!-- BOTONES DE TIPOS DE STATS -->
             <div class="stats-buttons-grid">
@@ -727,7 +756,7 @@
                   <tr id="statsTableHeaderRow">
                     <th style="text-align: center;">Rank</th>
                     <th style="text-align: left;">Jugador</th>
-                    <th style="text-align: left;">Equipo</th>
+                    <th class="team-col-cell">Equipo</th>
                     <th style="text-align: center;">Carries</th>
                     <th style="text-align: center;">Yards</th>
                     <th style="text-align: center;">Avg</th>
@@ -1121,7 +1150,7 @@
           <thead>
             <tr>
               <th onclick="sortPosiciones('rank')"># ↕</th>
-              <th onclick="sortPosiciones('equipo')" style="text-align:left;">EQUIPO ↕</th>
+              <th onclick="sortPosiciones('equipo')" class="team-col-cell" style="text-align:left;">EQUIPO ↕</th>
               <th onclick="sortPosiciones('jj')">JJ ↕</th>
               <th onclick="sortPosiciones('jg')">JG ↕</th>
               <th onclick="sortPosiciones('jp')">JP ↕</th>
@@ -1140,7 +1169,7 @@
         html += `
           <tr>
             <td><strong>${idx + 1}</strong></td>
-            <td>
+            <td class="team-col-cell">
               <div class="kfl-table-team-cell">
                 <img src="${logoUrl}" alt="${row.equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[row.equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
                 <span>${row.equipo}</span>
@@ -1211,12 +1240,12 @@
       });
     }
 
-    // LÓGICA CMS DE ESTADÍSTICAS LEYENDO LA ESTRUCTURA DE WEB_FINAL
+    // LÓGICA CMS DE ESTADÍSTICAS LEYENDO LA ESTRUCTURA DE WEB_FINAL Y CELDA A1 (12H)
     function loadStatsData() {
       if (activeLeague !== 'contact') {
         document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
         document.getElementById('statsPaginationBar').innerHTML = '';
-        document.getElementById('kflLastUpdateLabel').textContent = '';
+        document.getElementById('kflLastUpdateLabel').textContent = 'ÚLTIMA ACTUALIZACIÓN: NO DISPONIBLE';
         return;
       }
 
@@ -1228,13 +1257,16 @@
       fetch(csvUrl)
         .then(res => res.text())
         .then(texto => {
-          seccionesStatsGlobal = parsearWebFinalCSV(texto);
+          const resultadoParseado = parsearWebFinalCSV(texto);
+          seccionesStatsGlobal = resultadoParseado.secciones;
+          
+          // Extraer y formatear la celda A1 (Última actualización de 24h a 12h AM/PM)
+          let rawUpdate = resultadoParseado.ultimaActualizacion || "NO REGISTRADA";
+          let formattedUpdate = formatearHora12h(rawUpdate);
+          document.getElementById('kflLastUpdateLabel').textContent = formattedUpdate;
+
           paginaActualStats = 1;
           renderizarSeccionActivaStats();
-          
-          // Mostrar última actualización de fecha simulada o real del fetch
-          const fechaActual = new Date().toLocaleString('es-PA', { dateStyle: 'medium', timeStyle: 'short' });
-          document.getElementById('kflLastUpdateLabel').textContent = `🔄 Última actualización: ${fechaActual}`;
         })
         .catch(err => {
           console.error("Error cargando CSV de Stats:", err);
@@ -1242,17 +1274,40 @@
         });
     }
 
+    function formatearHora12h(textoFecha) {
+      // Intenta convertir un formato tipo "24/06/2026 21:17" o "ÚLTIMA ACTUALIZACIÓN: 24/06/2026 21:17" a 12h
+      try {
+        let match = textoFecha.match(/(\d{2}\/\d{2}\/\d{4})\s+(\d{2}):(\d{2})/);
+        if (match) {
+          let fecha = match[1];
+          let horas = parseInt(match[2], 10);
+          let minutos = match[3];
+          let ampm = horas >= 12 ? 'PM' : 'AM';
+          horas = horas % 12;
+          horas = horas ? horas : 12; // la hora '0' debe ser '12'
+          return `ÚLTIMA ACTUALIZACIÓN: ${fecha} ${horas}:${minutos} ${ampm}`;
+        }
+      } catch(e) {}
+      return textoFecha.toUpperCase();
+    }
+
     function parsearWebFinalCSV(texto) {
       const lineas = texto.split('\n');
       let secciones = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
       let seccionActual = null;
       let headersActuales = [];
+      let ultimaActualizacion = "";
 
       for (let i = 0; i < lineas.length; i++) {
         let linea = lineas[i].trim();
         if (!linea) continue;
         let cols = linea.split(',').map(c => c.trim().replace(/"/g, ''));
         let lineaUnida = cols.join(' ').toUpperCase();
+
+        // Capturar la celda A1 o línea de actualización si existe al inicio
+        if (i === 0 || lineaUnida.includes('ACTUALIZACIÓN') || lineaUnida.includes('ACTUALIZACION')) {
+          ultimaActualizacion = lineaUnida;
+        }
 
         if (cols[0] === 'START' || lineaUnida.includes('START')) {
           let nombreSec = (cols[1] || lineaUnida).toUpperCase();
@@ -1270,7 +1325,6 @@
           continue;
         }
 
-        // Si no hay etiquetas START/END pero detectamos palabras clave de sección de forma flexible
         if (!seccionActual) {
           if (lineaUnida.includes('RUSHING')) seccionActual = 'RUSHING';
           else if (lineaUnida.includes('PASSING')) seccionActual = 'PASSING';
@@ -1295,7 +1349,7 @@
           }
         }
       }
-      return secciones;
+      return { secciones, ultimaActualizacion };
     }
 
     function renderizarSeccionActivaStats() {
@@ -1307,7 +1361,7 @@
         theadRow.innerHTML = `
           <th style="text-align: center;">Rank</th>
           <th style="text-align: left;">Jugador</th>
-          <th style="text-align: left;">Equipo</th>
+          <th class="team-col-cell">Equipo</th>
           <th style="text-align: center;">Carries</th>
           <th style="text-align: center;">Yards</th>
           <th style="text-align: center;">Avg</th>
@@ -1319,7 +1373,7 @@
         theadRow.innerHTML = `
           <th style="text-align: center;">Rank</th>
           <th style="text-align: left;">Jugador</th>
-          <th style="text-align: left;">Equipo</th>
+          <th class="team-col-cell">Equipo</th>
           <th style="text-align: center;">Comp</th>
           <th style="text-align: center;">Att</th>
           <th style="text-align: center;">Comp %</th>
@@ -1332,7 +1386,7 @@
         theadRow.innerHTML = `
           <th style="text-align: center;">Rank</th>
           <th style="text-align: left;">Jugador</th>
-          <th style="text-align: left;">Equipo</th>
+          <th class="team-col-cell">Equipo</th>
           <th style="text-align: center;">Rec</th>
           <th style="text-align: center;">Yards</th>
           <th style="text-align: center;">Avg</th>
@@ -1344,7 +1398,7 @@
         theadRow.innerHTML = `
           <th style="text-align: center;">Rank</th>
           <th style="text-align: left;">Jugador</th>
-          <th style="text-align: left;">Equipo</th>
+          <th class="team-col-cell">Equipo</th>
           <th style="text-align: center;">Total</th>
           <th style="text-align: center;">Sack</th>
           <th style="text-align: center;">TD</th>
@@ -1395,8 +1449,8 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td style="text-align: left;">
-              <div style="display: flex; align-items: center; gap: 8px;">
+            <td class="team-col-cell">
+              <div class="kfl-table-team-cell">
                 <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
                 <span style="font-weight: 700; color: #334155;">${equipo}</span>
               </div>
@@ -1412,8 +1466,8 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td style="text-align: left;">
-              <div style="display: flex; align-items: center; gap: 8px;">
+            <td class="team-col-cell">
+              <div class="kfl-table-team-cell">
                 <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
                 <span style="font-weight: 700; color: #334155;">${equipo}</span>
               </div>
@@ -1430,8 +1484,8 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td style="text-align: left;">
-              <div style="display: flex; align-items: center; gap: 8px;">
+            <td class="team-col-cell">
+              <div class="kfl-table-team-cell">
                 <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
                 <span style="font-weight: 700; color: #334155;">${equipo}</span>
               </div>

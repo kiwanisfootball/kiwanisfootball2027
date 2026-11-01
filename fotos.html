@@ -39,7 +39,7 @@
 
     .fotos-subtitle {
       font-size: 15px;
-      color: #64748b;
+      color: #334155;
       max-width: 680px;
       margin: 0 auto 15px auto;
       line-height: 1.6;
@@ -72,31 +72,17 @@
       fill: #ffffff;
     }
 
-    /* CONTENEDOR DEL PLUGIN OFICIAL DE FACEBOOK */
-    .fb-embed-card {
+    .fotos-embed-wrapper {
       background: #ffffff;
       border-radius: 16px;
       padding: 25px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 600px;
-    }
-
-    .fb-page-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
+      min-height: 500px;
     }
   </style>
 </head>
 <body class="contact-theme">
-
-  <!-- CARGA DEL SDK DE FACEBOOK -->
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0"></script>
 
   <!-- HEADER NAVEGACIÓN -->
   <header class="header-nav">
@@ -124,33 +110,20 @@
   <main class="fotos-container">
 
     <section class="fotos-header-card">
-      <h1 class="fotos-title">Galería de Fotos KFL</h1>
+      <h1 class="fotos-title">Álbumes de Fotos KFL</h1>
       <p class="fotos-subtitle">
-        Sigue la cobertura fotográfica de la Kiwanis Football League directamente desde Facebook, impulsada por <strong>KFL Total Access</strong> y la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" style="color: #19547E; font-weight:800; text-decoration:underline;">Fundación American Football Films (FAFF)</a>.
+        Galerías fotográficas oficial de la Kiwanis Football League en tiempo real, impulsadas por <strong>KFL Total Access</strong> y la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" style="color: #19547E; font-weight:800; text-decoration:underline;">Fundación American Football Films (FAFF)</a>.
       </p>
       <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="btn-fb-main">
         <svg viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-        Ver Todos los Álbumes en Facebook ↗
+        Ver Todos en Facebook ↗
       </a>
     </section>
 
-    <!-- COMPONENTE OFICIAL DE FACEBOOK -->
-    <section class="fb-embed-card">
-      <div class="fb-page-wrapper">
-        <div class="fb-page" 
-          data-href="https://www.facebook.com/profile.php?id=61580980794081" 
-          data-tabs="timeline" 
-          data-width="500" 
-          data-height="700" 
-          data-small-header="false" 
-          data-adapt-container-width="true" 
-          data-hide-cover="false" 
-          data-show-facepile="true">
-          <blockquote cite="https://www.facebook.com/profile.php?id=61580980794081" class="fb-xfbml-parse-ignore">
-            <a href="https://www.facebook.com/profile.php?id=61580980794081">KFL Total Access</a>
-          </blockquote>
-        </div>
-      </div>
+    <!-- INCRUSTACIÓN DINÁMICA AUTOMÁTICA -->
+    <section class="fotos-embed-wrapper">
+      <!-- WIDGET AUTOMÁTICO (SOCIABLEKIT CON ID 61580980794081) -->
+      <div class="sociablekit-facebook-page-photo-albums" data-embed-id="INSERTE_AQUI_EL_EMBED_ID"></div>
     </section>
 
   </main>
@@ -168,5 +141,8 @@
       }
     });
   </script>
+
+  <!-- SCRIPT PROVEEDOR AUTOMÁTICO -->
+  <script src="https://www.sociablekit.com/app/embed/facebook-page-photo-albums/widget.js" async defer></script>
 </body>
 </html>

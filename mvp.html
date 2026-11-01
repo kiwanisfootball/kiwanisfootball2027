@@ -16,74 +16,67 @@
       padding: 20px;
     }
 
-    /* BANNER HERO */
-    .mvp-banner-wrapper {
+    /* HERO BANNER CON IMAGEN DE FONDO Y TEXTO SUPERPUESTO */
+    .mvp-hero-banner {
+      position: relative;
       width: 100%;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-      margin-bottom: 25px;
-      background: #19547E;
-    }
-
-    .mvp-banner-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    /* TARJETA DE RESEÑA CON ANIMACIÓN DEL TROFEO */
-    .mvp-about-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 35px 30px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      background: linear-gradient(rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.78)), 
+                  url('assets/img/mvp-banner.jpg') center/cover no-repeat;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
       margin-bottom: 30px;
+      padding: 45px 35px;
+      color: #ffffff;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 30px;
-      position: relative;
-      overflow: hidden;
     }
 
-    .mvp-about-content {
-      flex: 1;
+    .mvp-hero-content {
+      max-width: 720px;
+      z-index: 2;
     }
 
-    .mvp-title {
-      font-size: 28px;
+    .mvp-hero-title {
+      font-family: 'Impact', 'Bebas Neue', 'Oswald', sans-serif;
+      font-size: 42px;
       font-weight: 900;
-      color: #19547E;
+      color: #ffffff;
       text-transform: uppercase;
+      letter-spacing: 1.5px;
       margin-bottom: 15px;
-      letter-spacing: 0.5px;
-      border-bottom: 3px solid #19547E;
-      display: inline-block;
-      padding-bottom: 5px;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      line-height: 1.1;
     }
 
-    .mvp-description {
-      font-size: 15px;
-      line-height: 1.7;
-      color: #334155;
+    .mvp-hero-description {
+      font-size: 16px;
+      line-height: 1.65;
+      color: #f8fafc;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
     }
 
-    /* ANIMACIÓN TROFEO SVG */
+    .mvp-hero-description strong {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    /* ANIMACIÓN DEL TROFEO SVG DENTRO DEL BANNER */
     .mvp-trophy-wrapper {
-      width: 150px;
+      width: 160px;
       flex-shrink: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
+      z-index: 2;
     }
 
     .mvp-trophy-img {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.4));
+      filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.6));
       animation: floatTrophy 3.5s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite alternate;
     }
 
@@ -98,46 +91,52 @@
 
     @keyframes pulseGlow {
       0% {
-        filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.3));
+        filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.4));
       }
       100% {
-        filter: drop-shadow(0 0 25px rgba(234, 179, 8, 0.75));
+        filter: drop-shadow(0 0 28px rgba(234, 179, 8, 0.85));
       }
     }
 
-    /* BARRA DE FILTROS (BOTONES PÍLDORA) */
+    /* BOTONES DE FILTRO ESTILO SCREENSHOT 1 */
     .mvp-filter-bar {
       display: flex;
-      gap: 12px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 35px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .mvp-filter-btn {
-      background: #f1f5f9;
-      color: #475569;
-      border: 1px solid #cbd5e1;
-      padding: 10px 22px;
-      font-size: 13px;
-      font-weight: 800;
-      border-radius: 25px;
+      flex: 1;
+      min-width: 130px;
+      max-width: 200px;
+      background: #f0f4f8;
+      color: #19547E;
+      border: 1px solid #dbe2ea;
+      padding: 14px 18px;
+      font-family: 'Impact', 'Bebas Neue', 'Oswald', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.25s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
     }
 
     .mvp-filter-btn:hover {
       background: #e2e8f0;
-      color: #0f172a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     .mvp-filter-btn.active {
       background: #19547E;
       color: #ffffff;
       border-color: #19547E;
-      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
+      box-shadow: 0 6px 16px rgba(25, 84, 126, 0.35);
     }
 
     /* SECCIÓN DE TABLAS Y CATEGORÍAS */
@@ -146,13 +145,14 @@
       border-radius: 16px;
       padding: 30px;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       margin-bottom: 30px;
     }
 
     .mvp-category-header {
-      font-size: 20px;
-      font-weight: 900;
+      font-family: 'Impact', 'Bebas Neue', 'Oswald', sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.5px;
       color: #19547E;
       text-transform: uppercase;
       margin-bottom: 20px;
@@ -174,17 +174,17 @@
       border: 1px solid #e2e8f0;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     .mvp-table-title {
       background: #19547E;
       color: #ffffff;
       padding: 12px 16px;
-      font-size: 15px;
-      font-weight: 800;
+      font-family: 'Impact', 'Bebas Neue', 'Oswald', sans-serif;
+      font-size: 18px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.8px;
       text-align: center;
     }
 
@@ -193,7 +193,7 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 13px;
+      font-size: 13.5px;
     }
 
     .mvp-table th {
@@ -201,12 +201,12 @@
       color: #475569;
       font-weight: 800;
       text-transform: uppercase;
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-bottom: 1px solid #e2e8f0;
     }
 
     .mvp-table td {
-      padding: 10px 14px;
+      padding: 11px 14px;
       border-bottom: 1px solid #edf2f7;
       color: #1e293b;
       font-weight: 600;
@@ -229,13 +229,22 @@
       font-weight: 800;
     }
 
-    @media (max-width: 640px) {
-      .mvp-about-card {
+    @media (max-width: 768px) {
+      .mvp-hero-banner {
         flex-direction: column-reverse;
         text-align: center;
+        padding: 35px 20px;
       }
       .mvp-trophy-wrapper {
-        width: 110px;
+        width: 120px;
+      }
+      .mvp-hero-title {
+        font-size: 32px;
+      }
+      .mvp-filter-btn {
+        min-width: 45%;
+        font-size: 18px;
+        padding: 12px 10px;
       }
     }
   </style>
@@ -267,16 +276,11 @@
 
   <main class="mvp-container">
 
-    <!-- BANNER HERO -->
-    <div class="mvp-banner-wrapper">
-      <img src="assets/img/mvp-banner.jpg" alt="Most Valuable Players Banner" class="mvp-banner-img" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-    </div>
-
-    <!-- RESEÑA INSTITUCIONAL Y TROFEO SVG ANIMADO -->
-    <section class="mvp-about-card">
-      <div class="mvp-about-content">
-        <h1 class="mvp-title">Most Valuable Players</h1>
-        <p class="mvp-description">
+    <!-- HERO BANNER CON FONDO E INFORMACIÓN SUPERPUESTA -->
+    <section class="mvp-hero-banner">
+      <div class="mvp-hero-content">
+        <h1 class="mvp-hero-title">Most Valuable Players</h1>
+        <p class="mvp-hero-description">
           El <strong>MVP (Most Valuable Player)</strong> es el máximo reconocimiento que entrega la <strong>Kiwanis Football League</strong> a sus atletas, por su excepcional desempeño durante la temporada regular de sus respectivas categorías.
         </p>
       </div>
@@ -285,26 +289,26 @@
       </div>
     </section>
 
-    <!-- BARRA DE FILTROS EN PÍLDORA -->
+    <!-- BARRA DE FILTROS EN ESTILO TARJETA RECTANGULAR REDONDEADA -->
     <div class="mvp-filter-bar">
-      <button class="mvp-filter-btn active" onclick="filterCategory('all', this)">Todas las Categorías</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('micro', this)">Micro</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('mini', this)">Mini</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('juvenil', this)">Juvenil</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('varsity', this)">Varsity</button>
+      <button class="mvp-filter-btn active" onclick="filterCategory('all', this)">TODOS</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('varsity', this)">VARSITY</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('juvenil', this)">JUVENIL</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('mini', this)">MINI</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('micro', this)">MICRO</button>
     </div>
 
     <!-- CONTENEDOR DE TABLAS POR CATEGORÍA -->
     <div id="mvpTablesContainer">
       
-      <!-- MICRO -->
-      <section class="mvp-category-section" data-category="micro">
+      <!-- VARSITY -->
+      <section class="mvp-category-section" data-category="varsity">
         <div class="mvp-category-header">
-          <span>🏈</span> Categoría Micro (U10)
+          <span>🔥</span> Categoría Varsity (U19)
         </div>
         <div class="mvp-tables-grid">
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Micro Contact</div>
+            <div class="mvp-table-title">Varsity Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -313,38 +317,14 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-micro-contact">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- MINI -->
-      <section class="mvp-category-section" data-category="mini">
-        <div class="mvp-category-header">
-          <span>🏆</span> Categoría Mini (U13)
-        </div>
-        <div class="mvp-tables-grid">
-          <div class="mvp-table-card">
-            <div class="mvp-table-title">Mini Contact</div>
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-mini-contact">
+              <tbody id="table-varsity-contact">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
           </div>
 
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Mini Flag</div>
+            <div class="mvp-table-title">Varsity Flag</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -353,7 +333,7 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-mini-flag">
+              <tbody id="table-varsity-flag">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
@@ -401,14 +381,14 @@
         </div>
       </section>
 
-      <!-- VARSITY -->
-      <section class="mvp-category-section" data-category="varsity">
+      <!-- MINI -->
+      <section class="mvp-category-section" data-category="mini">
         <div class="mvp-category-header">
-          <span>🔥</span> Categoría Varsity (U19)
+          <span>🏆</span> Categoría Mini (U13)
         </div>
         <div class="mvp-tables-grid">
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Varsity Contact</div>
+            <div class="mvp-table-title">Mini Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -417,14 +397,14 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-varsity-contact">
+              <tbody id="table-mini-contact">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
           </div>
 
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Varsity Flag</div>
+            <div class="mvp-table-title">Mini Flag</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -433,7 +413,31 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-varsity-flag">
+              <tbody id="table-mini-flag">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- MICRO -->
+      <section class="mvp-category-section" data-category="micro">
+        <div class="mvp-category-header">
+          <span>🏈</span> Categoría Micro (U10)
+        </div>
+        <div class="mvp-tables-grid">
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Micro Contact</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-micro-contact">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
@@ -450,7 +454,7 @@
   </footer>
 
   <script>
-    // URL CSV OFICIAL DE GOOGLE SHEETS DE KFL MVP
+    // URL CSV OFICIAL DE GOOGLE SHEETS
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRca5KGv4YDKluS3_IMFyoS5f2WAKU_22_Gh0bjshtP0d_XQdaUQKPEvIUR9jat8ukNR1z8yULVN-DF/pub?output=csv';
 
     const categoryMap = {
@@ -493,13 +497,12 @@
         const res = await fetch(csvUrl);
         const csvText = await res.text();
         
-        // Vacía los mensajes de carga predeterminados
+        // Vacía los contenidos de carga predeterminados
         Object.values(categoryMap).forEach(targetId => {
           const el = document.getElementById(targetId);
           if (el) el.innerHTML = '';
         });
 
-        // Parsea filas respetando valores entre comillas y espacios
         const lines = csvText.split(/\r?\n/);
         const rows = lines.map(line => {
           const result = [];
@@ -520,7 +523,7 @@
           return result;
         });
 
-        // Itera omitiendo la fila 0 de encabezados
+        // Iterar omitiendo encabezados
         for (let i = 1; i < rows.length; i++) {
           const [cat, season, equipo, jugador] = rows[i];
           if (!cat || !season || !jugador) continue;
@@ -542,11 +545,11 @@
           }
         }
 
-        // Mensaje por si alguna categoría aún no tiene registros
+        // Si alguna tabla no recibió registros
         Object.values(categoryMap).forEach(targetId => {
           const el = document.getElementById(targetId);
           if (el && el.children.length === 0) {
-            el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Sin registros registrados aún.</td></tr>';
+            el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Sin registros publicados aún.</td></tr>';
           }
         });
 

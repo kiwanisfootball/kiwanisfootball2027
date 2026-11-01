@@ -44,7 +44,6 @@
       line-height: 1.6;
     }
 
-    /* CONTENEDOR DE SELECCIÓN DE MODALIDAD (BLOQUEO POST-PASSWORD) */
     #modalitySelector {
       display: none;
       max-width: 800px;
@@ -93,25 +92,12 @@
       fill: #ffffff;
     }
 
-    .btn-contact-theme {
-      background: #19547E;
-    }
-    .btn-contact-theme:hover {
-      background: #144265;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(25, 84, 126, 0.3);
-    }
+    .btn-contact-theme { background: #19547E; }
+    .btn-contact-theme:hover { background: #144265; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(25, 84, 126, 0.3); }
 
-    .btn-flag-theme {
-      background: #C53030;
-    }
-    .btn-flag-theme:hover {
-      background: #9b2c2c;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(197, 48, 48, 0.3);
-    }
+    .btn-flag-theme { background: #C53030; }
+    .btn-flag-theme:hover { background: #9b2c2c; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(197, 48, 48, 0.3); }
 
-    /* FORMULARIO OCULTO HASTA SELECCIONAR MODALIDAD */
     #inscripcionContent {
       display: none;
     }
@@ -171,6 +157,13 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
+    }
+
+    /* Rejilla optimizada a 3 columnas para los acudientes */
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
     }
 
     .form-group {
@@ -246,7 +239,6 @@
       cursor: pointer;
     }
 
-    /* CAJAS DE CERTIFICACIONES Y CONSENTIMIENTOS */
     .legal-box {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -286,21 +278,23 @@
       cursor: pointer;
     }
 
+    /* Nota del seguro más grande y detallada */
     .insurance-note {
       background: #eff6ff;
-      border: 1px solid #bfdbfe;
+      border: 2px solid #bfdbfe;
       color: #1e40af;
-      padding: 14px;
-      border-radius: 10px;
-      font-size: 13.5px;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 14.5px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      line-height: 1.6;
     }
 
     .submit-btn {
       width: 100%;
-      background: #C53030; /* Rojo KFL para Flag */
+      background: #C53030;
       color: #ffffff;
       border: none;
       padding: 16px;
@@ -341,6 +335,10 @@
       cursor: pointer;
     }
     .back-link:hover { text-decoration: underline; }
+
+    @media (max-width: 900px) {
+      .form-grid-3 { grid-template-columns: 1fr; }
+    }
 
     @media (max-width: 768px) {
       .inscripcion-container { padding: 15px 10px; }
@@ -384,18 +382,16 @@
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
 
-    <!-- 2. SELECTOR DE MODALIDAD (POST-PASSWORD) -->
+    <!-- 2. SELECTOR DE MODALIDAD -->
     <div id="modalitySelector">
       <h2 class="selector-title">Selecciona el Registro</h2>
       <p class="selector-desc">Elige la modalidad para la cual deseas realizar la inscripción de la jugadora:</p>
       
-      <!-- Botón Contact Football (Azul KFL) -->
       <button onclick="selectModality('contact')" class="modality-choice-btn btn-contact-theme">
         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
         Registro Contact Football
       </button>
 
-      <!-- Botón Flag Football (Rojo KFL) -->
       <button onclick="selectModality('flag')" class="modality-choice-btn btn-flag-theme">
         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
         Registro Flag Football Femenino
@@ -418,53 +414,46 @@
         <div class="form-card">
           <h3 class="form-section-title">1. Información de la Jugadora</h3>
           <div class="form-grid">
-            
             <div class="form-group">
               <label class="form-label">Nombre Completo</label>
               <input type="text" id="nombre" class="form-input" placeholder="EJ. ANA SOFÍA PÉREZ" required>
             </div>
-
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
               <input type="text" id="cedula" class="form-input" placeholder="EJ. 8-123-4567" required>
             </div>
-
             <div class="form-group">
               <label class="form-label">Email de Contacto</label>
               <input type="email" id="emailJugador" class="form-input" placeholder="correo@ejemplo.com" required>
             </div>
-
             <div class="form-group">
-              <label class="form-label">Corregimiento / Área de Residencia</label>
+              <label class="form-label">Corregimiento / Área</label>
               <select id="corregimiento" class="form-select" required>
                 <option value="">Selecciona tu área / corregimiento</option>
               </select>
             </div>
-
             <div class="form-group">
               <label class="form-label">Categoría</label>
               <select id="categoria" class="form-select" onchange="updateTeams()" required>
                 <option value="">Selecciona una categoría</option>
               </select>
             </div>
-
             <div class="form-group">
               <label class="form-label">Equipo</label>
               <select id="equipo" class="form-select" required>
                 <option value="">Primero selecciona una categoría</option>
               </select>
             </div>
-
           </div>
         </div>
 
-        <!-- INFORMACIÓN DE LOS PADRES / TUTORES -->
+        <!-- INFORMACIÓN DE LOS ACUDIENTES (DISTRIBUCIÓN OPTIMIZADA EN 3 COLUMNAS) -->
         <div class="form-card">
           <h3 class="form-section-title">2. Información de los Acudientes</h3>
           
           <!-- PADRE / TUTOR -->
           <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
-          <div class="form-grid" style="margin-bottom: 25px;">
+          <div class="form-grid-3" style="margin-bottom: 25px;">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
               <input type="text" id="padreNombre" class="form-input" placeholder="EJ. JUAN PÉREZ">
@@ -472,9 +461,8 @@
             <div class="form-group">
               <label class="form-label">Teléfono de Contacto</label>
               <input type="tel" id="padreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
-              <span class="form-note">Usado para cualquier urgencia médica o logística.</span>
             </div>
-            <div class="form-group" style="grid-column: 1 / -1;">
+            <div class="form-group">
               <label class="form-label">Email</label>
               <input type="email" id="padreEmail" class="form-input" placeholder="padre@ejemplo.com" style="text-transform: none;">
             </div>
@@ -482,7 +470,7 @@
 
           <!-- MADRE / TUTORA -->
           <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
-          <div class="form-grid">
+          <div class="form-grid-3">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
               <input type="text" id="madreNombre" class="form-input" placeholder="EJ. MARÍA RODRÍGUEZ">
@@ -490,9 +478,8 @@
             <div class="form-group">
               <label class="form-label">Teléfono de Contacto</label>
               <input type="tel" id="madreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
-              <span class="form-note">Usado para cualquier urgencia médica o logística.</span>
             </div>
-            <div class="form-group" style="grid-column: 1 / -1;">
+            <div class="form-group">
               <label class="form-label">Email</label>
               <input type="email" id="madreEmail" class="form-input" placeholder="madre@ejemplo.com" style="text-transform: none;">
             </div>
@@ -505,17 +492,15 @@
           <h3 class="form-section-title">3. Documentación y Certificaciones</h3>
           <div class="form-grid" style="margin-bottom: 25px;">
             
-            <!-- CÉDULA / PASAPORTE -->
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
               <div class="file-upload-box" onclick="document.getElementById('cedulaFile').click()">
                 <span class="file-upload-label" id="cedulaLabel">📎 Adjuntar documento (PDF, JPG o PNG)</span>
                 <input type="file" id="cedulaFile" accept=".pdf,image/jpeg,image/png" onchange="validateAndLabelFile('cedulaFile', 'cedulaLabel')">
               </div>
-              <span class="form-note">Nota: Si es cédula juvenil, por favor incluir ambas caras en el archivo.</span>
+              <span class="form-note">Nota: Si es cédula juvenil, incluir ambas caras en el archivo.</span>
             </div>
 
-            <!-- CERTIFICADO DE BUENA SALUD -->
             <div class="form-group">
               <label class="form-label">Certificado de Buena Salud</label>
               <div class="file-upload-box" onclick="document.getElementById('medicoFile').click()">
@@ -526,12 +511,12 @@
 
           </div>
 
-          <!-- NOTA DEL SEGURO -->
+          <!-- NOTA DEL SEGURO AMPLIADA Y MEJORADA -->
           <div class="insurance-note">
-            🛡️ NOTA: La Liga de Flag Football Femenino Kiwanis cuenta con un seguro hasta $500.00 por jugadora por temporada.
+            🛡️ <strong>NOTA IMPORTANTE SOBRE EL SEGURO:</strong> La Liga de Flag Football Femenino Kiwanis cuenta con cobertura de seguro de hasta <strong>$700.00</strong> por jugadora por temporada. El uso de este seguro está sujeto a la evaluación y determinación exclusiva del paramédico asignado por la liga durante los días de juego, por lo que su utilización no es obligatoria si así se determina clínicamente.
           </div>
 
-          <!-- CERTIFICACIÓN DE JUGADORAS -->
+          <!-- CERTIFICACIÓN DE JUGADORAS (TEXTO CORREGIDO) -->
           <div class="legal-box">
             <p class="legal-text">
               <strong>CERTIFICACIÓN DE JUGADORAS:</strong><br>
@@ -539,11 +524,11 @@
             </p>
             <div class="legal-checkbox-wrapper">
               <input type="checkbox" id="certJugadora" required>
-              <label for="certJugadora" class="legal-checkbox-label">Certifico y acepto los términos de la jugadora descrita anteriormente.</label>
+              <label for="certJugadora" class="legal-checkbox-label">Certifico y acepto los términos descritos anteriormente.</label>
             </div>
           </div>
 
-          <!-- CERTIFICACIÓN DE ACUDIENTE -->
+          <!-- CERTIFICACIÓN DE ACUDIENTE (TEXTO CORREGIDO) -->
           <div class="legal-box">
             <p class="legal-text">
               <strong>CERTIFICACIÓN DE ACUDIENTE:</strong><br>
@@ -553,7 +538,7 @@
             </p>
             <div class="legal-checkbox-wrapper">
               <input type="checkbox" id="certAcudiente" required>
-              <label for="certAcudiente" class="legal-checkbox-label">Certifico, acepto y exonero bajo los términos del acudiente responsable.</label>
+              <label for="certAcudiente" class="legal-checkbox-label">He leído y acepto los términos descritos anteriormente, certificando la participación de mi acudido.</label>
             </div>
           </div>
 
@@ -595,7 +580,6 @@
         ]
       },
 
-      // Equipos específicos para Flag Femenino
       categoriasEquipos: {
         "Micro Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
         "Mini Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
@@ -642,13 +626,6 @@
     function selectModality(modality) {
       document.getElementById('modalitySelector').style.display = 'none';
       document.getElementById('inscripcionContent').style.display = 'block';
-      
-      if (modality === 'contact') {
-        // Aquí podrías adaptar títulos si configuras después Contact Football
-        console.log("Seleccionado Contact Football");
-      } else {
-        console.log("Seleccionado Flag Football Femenino");
-      }
     }
 
     function goBackToSelector() {
@@ -704,7 +681,7 @@
         const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
         
         if (!validTypes.includes(file.type)) {
-          alert('⚠️ Formato no permitido. Por favor sube únicamente archivos en PDF, JPG o PNG (se prohíben documentos de Word u otros formatos).');
+          alert('⚠️ Formato no permitido. Por favor sube únicamente archivos en PDF, JPG o PNG.');
           input.value = '';
           label.innerText = '📎 Adjuntar documento (PDF, JPG o PNG)';
           return;
@@ -739,12 +716,10 @@
         madreEmail: document.getElementById('madreEmail').value.trim()
       };
 
-      console.log("Datos listos para enviar a Google Sheets:", formData);
-
       setTimeout(() => {
         alertBox.style.display = 'block';
         alertBox.className = 'alert-msg success';
-        alertBox.innerText = '¡Inscripción de Flag Femenino guardada correctamente y notificación enviada a kflpty@gmail.com!';
+        alertBox.innerText = '¡Inscripción guardada correctamente y notificación enviada a kflpty@gmail.com!';
         
         btn.disabled = false;
         btn.innerText = 'ENVIAR / ACTUALIZAR REGISTRO';

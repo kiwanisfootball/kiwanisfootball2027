@@ -9,12 +9,13 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTENEDOR PRINCIPAL - IGUAL A TOTAL ACCESS */
+    /* CONTENEDOR PRINCIPAL - ANCHO EXACTO DE TOTAL ACCESS (1100px) */
     .mvp-container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 20px 15px;
+      padding: 20px;
       font-family: 'Avenir', sans-serif;
+      box-sizing: border-box;
     }
 
     /* HERO BANNER CENTRADO CON FONDO DE MARCA */
@@ -35,10 +36,11 @@
       justify-content: center;
       text-align: center;
       gap: 20px;
+      box-sizing: border-box;
     }
 
     .mvp-hero-content {
-      max-width: 760px;
+      max-width: 780px;
       margin: 0 auto;
       z-index: 2;
     }
@@ -133,7 +135,7 @@
       100% { transform: scale(1.2); opacity: 0.95; }
     }
 
-    /* BOTONES DE FILTRO ESTILO TOTAL ACCESS */
+    /* BOTONES DE FILTRO (ANTON) */
     .mvp-filter-bar {
       display: flex;
       gap: 12px;
@@ -182,6 +184,7 @@
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       margin-bottom: 25px;
+      box-sizing: border-box;
     }
 
     .mvp-category-header {
@@ -198,7 +201,7 @@
       gap: 10px;
     }
 
-    /* TROFEO SVG EN CABECERAS DE TABLA */
+    /* ICONO TROFEO SVG RENDERIZADO EN TITULOS DE CATEGORÍA */
     .cat-header-icon {
       height: 26px;
       width: auto;
@@ -212,7 +215,7 @@
       gap: 20px;
     }
 
-    /* TARJETAS Y TABLAS EN AVENIR */
+    /* TARJETAS Y TABLAS (AVENIR) */
     .mvp-table-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -497,8 +500,8 @@
   </footer>
 
   <script>
-    // URL CSV PUBLICADA DESDE GOOGLE SHEETS
-    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?output=csv';
+    // URL BASE PUBLICADA DE GOOGLE SHEETS
+    const BASE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?output=csv';
 
     const categoryMap = {
       'MICRO CONTACT': 'table-micro-contact',
@@ -509,6 +512,16 @@
       'VARSITY CONTACT': 'table-varsity-contact',
       'VARSITY FLAG': 'table-varsity-flag'
     };
+
+    const tabsMap = [
+      { name: 'Micro Contact', targetId: 'table-micro-contact' },
+      { name: 'Mini Contact', targetId: 'table-mini-contact' },
+      { name: 'Mini Flag', targetId: 'table-mini-flag' },
+      { name: 'Juvenil Contact', targetId: 'table-juvenil-contact' },
+      { name: 'Juvenil Flag', targetId: 'table-juvenil-flag' },
+      { name: 'Varsity Contact', targetId: 'table-varsity-contact' },
+      { name: 'Varsity Flag', targetId: 'table-varsity-flag' }
+    ];
 
     document.addEventListener('DOMContentLoaded', () => {
       const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -534,94 +547,150 @@
       });
     }
 
-    /* LECTOR Y PARSER DE GOOGLE SHEETS */
+    /* SISTEMA DE CARGA HÍBRIDO (PESTAÑAS INDIVIDUALES O HOJA CONSOLIDADA) */
     async function loadMvpData() {
-      try {
-        const res = await fetch(SHEET_CSV_URL);
-        if (!res.ok) throw new Error('Error al conectar con Google Sheets');
-        
-        const csvText = await res.text();
-        const rows = parseCSV(csvText);
+      let loadedAnyTab = false;
 
-        if (!rows || rows.length < 2) return;
+      // 1. Intentar descargar cada pestaña configurada
+      const tabPromises = tabsMap.map(async (tab) => {
+        const tabUrl = `${BASE_SHEET_CSV_URL}&sheet=${encodeURIComponent(tab.name)}`;
+        try {
+          const res = await fetch(tabUrl);
+          if (!res.ok) return { targetId: tab.targetId, rows: [] };
+          const csvText = await res.text();
+          const rows = parseCSV(csvText);
+          return { targetId: tab.targetId, rows: rows };
+        } catch (e) {
+          return { targetId: tab.targetId, rows: [] };
+        }
+      });
 
-        // Vacía los estados de carga
-        Object.values(categoryMap).forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = '';
-        });
+      const tabResults = await Promise.all(tabPromises);
 
-        let lastCategory = '';
-        let lastSeason = '';
-
-        for (let i = 1; i < rows.length; i++) {
-          const row = rows[i];
-          if (!row || row.length === 0) continue;
-
-          let cat = '', season = '', equipo = '', jugador = '';
-
-          if (row.length >= 4) {
-            cat = row[0] || '';
-            season = row[1] || '';
-            equipo = row[2] || '';
-            jugador = row[3] || '';
-          } else if (row.length === 3) {
-            season = row[0] || '';
-            equipo = row[1] || '';
-            jugador = row[2] || '';
-          }
-
-          // Propagar Categoría si viene vacía (celda combinada)
-          if (cat && cat.trim() !== '') {
-            lastCategory = cat.trim();
-          } else {
-            cat = lastCategory;
-          }
-
-          // Propagar Año (Season) si viene vacío (celda combinada / Co-MVP)
-          if (season && season.trim() !== '') {
-            lastSeason = season.trim();
-          } else {
-            season = lastSeason;
-          }
-
-          if (!jugador || jugador.trim() === '') continue;
-
-          const cleanCatKey = cat.toUpperCase().trim().replace(/\s+/g, ' ');
-          const targetId = categoryMap[cleanCatKey];
-
-          if (targetId) {
-            const tbody = document.getElementById(targetId);
-            if (tbody) {
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                <td>${season}</td>
-                <td>${equipo || '-'}</td>
-                <td class="mvp-player-name">${jugador}</td>
-              `;
-              tbody.appendChild(tr);
-            }
+      tabResults.forEach(({ targetId, rows }) => {
+        if (rows && rows.length > 1) {
+          const validRows = rows.filter(r => r && r.length >= 2);
+          if (validRows.length > 1) {
+            renderTabTable(targetId, rows);
+            loadedAnyTab = true;
           }
         }
+      });
 
-        // Mensajes por si una tabla no tiene registros
-        Object.values(categoryMap).forEach(id => {
-          const el = document.getElementById(id);
-          if (el && el.children.length === 0) {
-            el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Sin registros publicados aún.</td></tr>';
+      // 2. Si la hoja fue publicada como un solo documento consolidado, procesar la hoja general
+      if (!loadedAnyTab) {
+        try {
+          const res = await fetch(BASE_SHEET_CSV_URL);
+          if (res.ok) {
+            const csvText = await res.text();
+            const rows = parseCSV(csvText);
+            renderConsolidatedData(rows);
           }
-        });
-
-      } catch (err) {
-        console.error('Error cargando MVP desde Google Sheets:', err);
-        Object.values(categoryMap).forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#ef4444;">Error al cargar datos.</td></tr>';
-        });
+        } catch (err) {
+          console.error('Error al descargar los datos del Google Sheet:', err);
+        }
       }
     }
 
-    /* PARSER MANUAL DE CSV RESPETANDO COMILLAS Y COMAS */
+    function renderTabTable(targetId, rows) {
+      const tbody = document.getElementById(targetId);
+      if (!tbody) return;
+
+      tbody.innerHTML = '';
+      let lastSeason = '';
+      let hasData = false;
+
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || row.length < 2) continue;
+
+        let season = row[0] ? row[0].trim() : '';
+        let equipo = row[1] ? row[1].trim() : '';
+        let jugador = row[2] ? row[2].trim() : '';
+
+        // Mantener el año anterior si la celda viene vacía por Co-MVP o celdas combinadas
+        if (season) {
+          lastSeason = season;
+        } else {
+          season = lastSeason;
+        }
+
+        if (!jugador && equipo) {
+          jugador = equipo;
+          equipo = '-';
+        }
+
+        if (!jugador) continue;
+        hasData = true;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${season}</td>
+          <td>${equipo || '-'}</td>
+          <td class="mvp-player-name">${jugador}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      if (!hasData) {
+        tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Sin registros publicados aún.</td></tr>';
+      }
+    }
+
+    function renderConsolidatedData(rows) {
+      if (!rows || rows.length < 2) return;
+
+      Object.values(categoryMap).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '';
+      });
+
+      let lastCat = '';
+      let lastSeason = '';
+
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || row.length < 3) continue;
+
+        let cat = '', season = '', equipo = '', jugador = '';
+
+        if (row.length >= 4) {
+          [cat, season, equipo, jugador] = row.map(c => c ? c.trim() : '');
+        } else {
+          [season, equipo, jugador] = row.map(c => c ? c.trim() : '');
+        }
+
+        if (cat) lastCat = cat; else cat = lastCat;
+        if (season) lastSeason = season; else season = lastSeason;
+
+        if (!jugador) continue;
+
+        const cleanKey = cat.toUpperCase().trim().replace(/\s+/g, ' ');
+        const targetId = categoryMap[cleanKey];
+
+        if (targetId) {
+          const tbody = document.getElementById(targetId);
+          if (tbody) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${season}</td>
+              <td>${equipo || '-'}</td>
+              <td class="mvp-player-name">${jugador}</td>
+            `;
+            tbody.appendChild(tr);
+          }
+        }
+      }
+
+      Object.values(categoryMap).forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.children.length === 0) {
+          el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Sin registros publicados aún.</td></tr>';
+        }
+      });
+    }
+
+    /* PARSER MANUAL DE CSV RESPETANDO COMILLAS Y COMAS INTERNAS */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);

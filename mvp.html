@@ -9,16 +9,17 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTENEDOR PRINCIPAL - ANCHO EXACTO DE TOTAL ACCESS (1000px) */
+    /* CONTENEDOR PRINCIPAL - 1100px EXACTO (HOMOGÉNEO CON CONÓCENOS) */
     .mvp-container {
-      max-width: 1000px;
+      max-width: 1100px;
+      width: 100%;
       margin: 0 auto;
       padding: 20px;
       font-family: 'Avenir', sans-serif;
       box-sizing: border-box;
     }
 
-    /* HERO BANNER CENTRADO ESTILO TOTAL ACCESS */
+    /* HERO BANNER CENTRADO */
     .mvp-hero-banner {
       position: relative;
       width: 100%;
@@ -28,7 +29,7 @@
                   url('assets/img/mvp-banner.jpg') center/cover no-repeat;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
       margin-bottom: 25px;
-      padding: 45px 25px;
+      padding: 50px 30px;
       color: #ffffff;
       display: flex;
       flex-direction: column;
@@ -40,14 +41,15 @@
     }
 
     .mvp-hero-content {
-      max-width: 760px;
+      max-width: 850px;
+      width: 100%;
       margin: 0 auto;
       z-index: 2;
     }
 
     .mvp-hero-title {
       font-family: 'Anton', sans-serif;
-      font-size: 42px;
+      font-size: 44px;
       font-weight: 400;
       color: #ffffff;
       text-transform: uppercase;
@@ -60,7 +62,7 @@
 
     .mvp-hero-description {
       font-family: 'Avenir', sans-serif;
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.65;
       color: #f8fafc;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
@@ -138,7 +140,7 @@
     /* BOTONES DE FILTRO EN ANTON */
     .mvp-filter-bar {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 25px;
       justify-content: center;
       flex-wrap: wrap;
@@ -148,14 +150,14 @@
 
     .mvp-filter-btn {
       flex: 1;
-      min-width: 120px;
-      max-width: 180px;
+      min-width: 130px;
+      max-width: 200px;
       background: #f0f4f8;
       color: #19547E;
       border: 1px solid #cbd5e1;
-      padding: 12px 16px;
+      padding: 14px 18px;
       font-family: 'Anton', sans-serif;
-      font-size: 20px;
+      font-size: 22px;
       letter-spacing: 1px;
       text-transform: uppercase;
       border-radius: 12px;
@@ -182,7 +184,7 @@
     .mvp-category-section {
       background: #ffffff;
       border-radius: 16px;
-      padding: 25px;
+      padding: 30px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       margin-bottom: 25px;
@@ -196,7 +198,7 @@
       letter-spacing: 0.5px;
       color: #19547E;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       padding-bottom: 8px;
       border-bottom: 2px solid #e2e8f0;
       display: flex;
@@ -214,8 +216,8 @@
 
     .mvp-tables-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
     }
 
     /* TARJETAS Y TABLAS EN AVENIR */
@@ -231,9 +233,9 @@
     .mvp-table-title {
       background: #19547E;
       color: #ffffff;
-      padding: 10px 14px;
+      padding: 12px 16px;
       font-family: 'Avenir', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -244,7 +246,7 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 13px;
+      font-size: 13.5px;
       font-family: 'Avenir', sans-serif;
     }
 
@@ -252,16 +254,16 @@
       background: #f8fafc;
       color: #475569;
       font-family: 'Avenir', sans-serif;
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
-      padding: 10px 12px;
+      padding: 11px 14px;
       border-bottom: 1px solid #e2e8f0;
       letter-spacing: 0.5px;
     }
 
     .mvp-table td {
-      padding: 10px 12px;
+      padding: 11px 14px;
       border-bottom: 1px solid #edf2f7;
       color: #1e293b;
       font-weight: 600;
@@ -287,9 +289,9 @@
 
     @media (max-width: 768px) {
       .mvp-container { padding: 15px 10px; }
-      .mvp-hero-banner { padding: 30px 15px; }
-      .mvp-hero-title { font-size: 32px; }
-      .mvp-filter-btn { min-width: 45%; font-size: 17px; padding: 10px 8px; }
+      .mvp-hero-banner { padding: 35px 20px; }
+      .mvp-hero-title { font-size: 34px; }
+      .mvp-filter-btn { min-width: 45%; font-size: 18px; padding: 12px 10px; }
     }
   </style>
 </head>
@@ -503,7 +505,7 @@
   </footer>
 
   <script>
-    // URL CSV PUBLICADA DE GOOGLE SHEETS
+    // URL CSV PUBLICADA DESDE GOOGLE SHEETS
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?output=csv';
 
     const categoryMap = {
@@ -540,15 +542,12 @@
       });
     }
 
-    function normalizeCategory(str) {
-      if (!str) return '';
-      return str.toString().trim().toUpperCase().replace(/\s+/g, ' ');
-    }
-
-    /* CARGADOR Y PARSER UNIFICADO PARA GOOGLE SHEETS CSV */
+    /* CARGADOR Y PARSER DIRECTO DE CSV */
     async function loadMvpData() {
       try {
-        const res = await fetch(SHEET_CSV_URL);
+        // Evitar caché de respuesta de Google Sheets
+        const cacheBusterUrl = `${SHEET_CSV_URL}&_t=${Date.now()}`;
+        const res = await fetch(cacheBusterUrl);
         if (!res.ok) throw new Error('Error al conectar con Google Sheets');
         
         const csvText = await res.text();
@@ -556,7 +555,7 @@
 
         if (!rows || rows.length < 2) return;
 
-        // Limpia el estado de carga predeterminado
+        // Limpiar mensajes predeterminados de carga
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el) el.innerHTML = '';
@@ -569,9 +568,9 @@
           const row = rows[i];
           if (!row || row.length === 0) continue;
 
-          // Ignorar fila 0 o encabezados de columna
-          const firstCol = (row[0] || '').toLowerCase();
-          if (firstCol.includes('categoria') || firstCol.includes('category')) continue;
+          // Omitir cabeceras
+          const firstCol = (row[0] || '').toLowerCase().trim();
+          if (firstCol === 'categoria' || firstCol === 'category' || firstCol === 'season') continue;
 
           let catRaw = '', seasonRaw = '', equipo = '', jugador = '';
 
@@ -581,19 +580,19 @@
             [seasonRaw, equipo, jugador] = row.map(c => c ? c.trim() : '');
           }
 
-          // Mantener la categoría actual si la celda viene vacía (celdas combinadas)
+          // Rellenar categoría si viene vacía (celdas combinadas)
           if (catRaw !== '') {
             currentCategory = catRaw;
           }
 
-          // Mantener el año actual si la celda viene vacía (Co-MVPs o celdas combinadas)
+          // Rellenar año si viene vacío (celdas combinadas / Co-MVPs)
           if (seasonRaw !== '') {
             currentSeason = seasonRaw;
           }
 
           if (!jugador || jugador === '' || jugador.toLowerCase() === 'jugador') continue;
 
-          const catKey = normalizeCategory(currentCategory);
+          const catKey = currentCategory.toUpperCase().trim().replace(/\s+/g, ' ');
           const targetId = categoryMap[catKey];
 
           if (targetId) {
@@ -610,7 +609,7 @@
           }
         }
 
-        // Si alguna tabla quedó sin registros, colocar mensaje de estado
+        // Mensaje por si alguna tabla no recibió registros
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el && el.children.length === 0) {
@@ -627,7 +626,7 @@
       }
     }
 
-    /* PARSER MANUAL DE CSV RESPETANDO COMILLAS Y COMAS */
+    /* PARSER DE LÍNEAS CSV CON SOPORTE PARA COMILLAS */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);

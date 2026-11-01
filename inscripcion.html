@@ -44,7 +44,6 @@
       line-height: 1.6;
     }
 
-    /* SELECTOR DE MODALIDAD (BOTONES LADO A LADO) */
     #modalitySelector {
       display: none;
       max-width: 900px;
@@ -140,7 +139,6 @@
       font-weight: 600;
     }
 
-    /* AVISO DE PRIVACIDAD */
     .privacy-notice {
       background: #f8fafc;
       border-left: 4px solid #19547E;
@@ -206,6 +204,7 @@
       font-weight: 600;
     }
 
+    /* ESTILO UNIFICADO Y HOMOGÉNEO PARA TODOS LOS INPUTS Y SELECTS */
     .form-input, .form-select {
       width: 100%;
       padding: 12px 16px;
@@ -219,6 +218,20 @@
       transition: all 0.25s ease;
       box-sizing: border-box;
       text-transform: uppercase;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+
+    /* Inputs que no son select no necesitan flecha */
+    input.form-input {
+      background-image: none;
+      padding-right: 16px;
     }
 
     .form-input[type="email"] {
@@ -226,7 +239,7 @@
     }
 
     .form-input:focus, .form-select:focus {
-      background: #ffffff;
+      background-color: #ffffff;
       border-color: #19547E;
       box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
     }
@@ -425,12 +438,12 @@
     <div id="passwordGate">
       <h2 class="gate-title">Acceso Restringido</h2>
       <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
-      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none;">
+      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none; background-image: none;">
       <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px; background: #19547E;">Ingresar</button>
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
 
-    <!-- 2. SELECTOR DE MODALIDAD (BOTONES LADO A LADO) -->
+    <!-- 2. SELECTOR DE MODALIDAD -->
     <div id="modalitySelector">
       <h2 class="selector-title">Selecciona el Registro</h2>
       <p class="selector-desc">Elige la modalidad para la cual deseas realizar la inscripción:</p>
@@ -448,7 +461,7 @@
       </div>
     </div>
 
-    <!-- 3. CONTENIDO DEL FORMULARIO -->
+    <!-- 3. CONTENIDO DEL FORMULARIO (novalidate para evitar tooltips gigantes) -->
     <div id="inscripcionContent">
 
       <a class="back-link" onclick="goBackToSelector()">← Volver a selección de modalidad</a>
@@ -463,17 +476,17 @@
         🔒 <strong>Aviso de Privacidad:</strong> Todos los datos suministrados en este formulario son revisados única y exclusivamente por el personal administrativo de la <strong>Kiwanis Football League</strong>. La información es utilizada estrictamente para validar temas de edad, elegibilidad de equipos y conformación de la base de datos de emergencia médica.
       </div>
 
-      <!-- SECCIÓN DE PAGO E INCLUSIONES -->
+      <!-- SECCIÓN DE COSTO DE INSCRIPCIÓN -->
       <div class="payment-card" id="paymentCardInfo">
-        <div class="payment-title">💳 Detalles de la Inversión e Inscripción</div>
+        <div class="payment-title">💳 Costo de Inscripción</div>
         <ul class="payment-list">
           <li>Costo de inscripción: <strong id="costoInscripcionTxt">$275.00 dólares</strong>.</li>
-          <li>Incluye: <strong id="incluyeItemsTxt">equipamiento completo de protección, jersey de juego, arbitraje especializado y acceso a la póliza colectiva de la liga</strong>.</li>
-          <li><strong>Importante:</strong> Se debe estar <strong>paz y salvo</strong> con la Tesorería de la Liga para poder hacer uso efectivo de estos beneficios y disputar los encuentros oficiales.</li>
+          <li>Incluye: <strong id="incluyeItemsTxt">2 jersey de juego, equipamiento completo de protección (casco, hombreras, protector bucal), acceso a la póliza colectiva de la liga</strong>.</li>
+          <li><strong>Importante:</strong> Se debe estar <strong>paz y salvo</strong> con la Liga para poder hacer uso efectivo de estos beneficios y disputar los encuentros oficiales.</li>
         </ul>
       </div>
 
-      <form id="athleteForm" onsubmit="handleFormSubmit(event)">
+      <form id="athleteForm" novalidate onsubmit="handleFormSubmit(event)">
         
         <!-- INFORMACIÓN DEL ATLETA -->
         <div class="form-card">
@@ -498,30 +511,28 @@
               </select>
             </div>
             
-            <!-- COLEGIO / UNIVERSIDAD CON BUSCADOR PREDICTIVO (DATALIST) -->
+            <!-- COLEGIO / UNIVERSIDAD (DATALIST) -->
             <div class="form-group">
               <label class="form-label">Colegio o Universidad</label>
-              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="ESCRIBE O SELECCIONA TU CENTRO EDUCATIVO" required>
-              <datalist id="colegiosList">
-                <!-- Se poblarán dinámicamente desde JS priorizando KFL -->
-              </datalist>
+              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="ESCRIBE O SELECCIONA TU CENTRO EDUCATIVO" required style="background-image: none; padding-right: 16px;">
+              <datalist id="colegiosList"></datalist>
             </div>
 
             <div class="form-group">
               <label class="form-label">Grado / Nivel Académico</label>
               <select id="grado" class="form-select" required>
                 <option value="">Selecciona el grado</option>
-                <option value="2DO GRADO">2do Grado</option>
-                <option value="3ER GRADO">3er Grado</option>
-                <option value="4TO GRADO">4to Grado</option>
-                <option value="5TO GRADO">5to Grado</option>
-                <option value="6TO GRADO">6to Grado</option>
-                <option value="7MO GRADO">7mo Grado</option>
-                <option value="8VO GRADO">8vo Grado</option>
-                <option value="9NO GRADO">9no Grado</option>
-                <option value="10MO GRADO">10mo Grado</option>
-                <option value="11VO GRADO">11vo Grado</option>
-                <option value="12MO GRADO">12mo Grado</option>
+                <option value="2.° GRADO">2.° Grado</option>
+                <option value="3.° GRADO">3.° Grado</option>
+                <option value="4.° GRADO">4.° Grado</option>
+                <option value="5.° GRADO">5.° Grado</option>
+                <option value="6.° GRADO">6.° Grado</option>
+                <option value="7.° GRADO">7.° Grado</option>
+                <option value="8.° GRADO">8.° Grado</option>
+                <option value="9.° GRADO">9.° Grado</option>
+                <option value="10.° GRADO">10.° Grado</option>
+                <option value="11.° GRADO">11.° Grado</option>
+                <option value="12.° GRADO">12.° Grado</option>
                 <option value="UNIVERSIDAD">Universidad</option>
               </select>
             </div>
@@ -620,7 +631,7 @@
             <p class="legal-text">
               <strong>CERTIFICACIÓN DE ACUDIENTE:</strong><br>
               Certifico que he dado mi consentimiento al atleta descrito anteriormente a participar en la liga. He dado mi consentimiento para la firma de este certificado y declaro que la información aquí dada es cierta y verdadera. He revisado el informe médico adjunto y certifico que el atleta está física y mentalmente capacitado para participar. Entiendo que el participante podría sufrir algún tipo de lesión severa.<br><br>
-              LA LIGA KIWANIS, EL CLUB KIWANIS DE PANAMÁ y a LOS ENTRENADORES DEL EQUIPO NO SERÁN RESPONSABLES POR NINGÚN ACCIDENTE QUE OCURRA DURANTE LAS PRÁCTICAS O JUEGOS.<br><br>
+              LA LIGA KIWANIS, EL CLUB KIWANIS DE PANAMÁ Y A LOS ENTRENADORES DEL EQUIPO NO SERÁN RESPONSABLES POR NINGÚN ACCIDENTE QUE OCURRA DURANTE LAS PRÁCTICAS O JUEGOS.<br><br>
               YO EXONERO DE CUALQUIER RESPONSABILIDAD A LA LIGA KIWANIS, A LOS ENTRENADORES Y AL CLUB KIWANIS DE PANAMÁ Y SUS SOCIOS O MIEMBROS POR CUALQUIER ACCIDENTE QUE PUDIERA SUFRIR MI HIJO(A) O ACUDIDO(A) DURANTE SU PARTICIPACIÓN EN ESTA LIGA.
             </p>
             <div class="legal-checkbox-wrapper">
@@ -667,14 +678,13 @@
         ]
       },
 
-      // Colegios KFL primero, luego colegios privados, públicos y universidades
       colegios: [
-        // Colegios KFL (Prioridad)
+        // Colegios KFL
         "ACADEMIA INTERAMERICANA DE PANAMÁ (AIP)",
         "COLEGIO BRADER",
         "BALBOA ACADEMY",
         "KIWANIS KOLTS",
-        // Otros colegios privados principales
+        // Otros Colegios Privados
         "INTERNATIONAL SCHOOL OF PANAMA (ISP)",
         "THE METROPOLITAN SCHOOL OF PANAMA (MET)",
         "KING'S COLLEGE PANAMA",
@@ -704,25 +714,25 @@
         "INSTITUTO JUSTO AROSEMENA (IJA)",
         "INSTITUTO ATENEA",
         "INSTITUTO CULTURAL DE PANAMÁ",
-        // Colegios Públicos Principales
+        // Colegios Públicos
         "INSTITUTO NACIONAL",
         "COLEGIO JOSÉ DANIEL CRESPO",
         "COLEGIO MOISÉS CASTILLO OCAÑA",
         "INSTITUTO JOSÉ DOLORES MOSCOTE",
         "COLEGIO ELENA CHÁVEZ DE PINTO",
-        // Universidades
+        // Universidades (incluyendo ULACIT correcta)
+        "UNIVERSIDAD LATINOAMERICANA DE CIENCIA Y TECNOLOGÍA (ULACIT)",
         "UNIVERSIDAD DE PANAMÁ (UP)",
         "UNIVERSIDAD TECNOLÓGICA DE PANAMÁ (UTP)",
         "UNIVERSIDAD CATÓLICA SANTA MARÍA LA ANTIGUA (USMA)",
-        "UNIVERSIDAD LATINA DE PANAMÁ",
-        "UNIVERSIDAD ULACIT"
+        "UNIVERSIDAD LATINA DE PANAMÁ"
       ],
 
       modalidades: {
         contact: {
           titulo: "Registro Contact Football",
           costo: "$275.00 dólares",
-          incluye: "equipamiento completo de protección, jersey de juego, arbitraje especializado y acceso a la póliza colectiva de la liga",
+          incluye: "2 jersey de juego, equipamiento completo de protección (casco, hombreras, protector bucal), acceso a la póliza colectiva de la liga",
           categoriasEquipos: {
             "Micro Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
             "Mini Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
@@ -733,7 +743,7 @@
         flag: {
           titulo: "Registro Flag Football Femenino",
           costo: "$150.00 dólares",
-          incluye: "dos jersey de juego, flags para los partidos, mouthpiece (protector bucal) y acceso a la póliza colectiva de la liga",
+          incluye: "2 jersey de juego, flags para los partidos, protector bucal, acceso a la póliza colectiva de la liga",
           categoriasEquipos: {
             "Micro Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
             "Mini Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
@@ -791,7 +801,6 @@
       document.getElementById('costoInscripcionTxt').innerText = config.costo;
       document.getElementById('incluyeItemsTxt').innerText = config.incluye;
 
-      // Adaptar textos según el género / modalidad
       if (modality === 'flag') {
         document.getElementById('secTitleAtleta').innerText = "1. Información de la Jugadora";
         document.getElementById('legalAtletaText').innerHTML = "<strong>CERTIFICACIÓN DE JUGADORAS:</strong><br>Certifico que he sido escogida para jugar en la Liga de Flag Femenina Kiwanis. He sido examinada por un médico y estoy capacitada para jugar Flag Football. Acepto seguir las reglas de la Liga y entiendo que el objeto principal es el de entrenar y jugar bajo las condiciones más seguras posibles.";
@@ -817,7 +826,6 @@
     }
 
     function initDropdowns() {
-      // Corregimientos
       const corregimientoSelect = document.getElementById('corregimiento');
       for (const [distrito, lista] of Object.entries(KFL_CONFIG.distritosCorregimientos)) {
         const group = document.createElement('optgroup');
@@ -831,7 +839,6 @@
         corregimientoSelect.appendChild(group);
       }
 
-      // Colegios (Datalist predictivo)
       const datalist = document.getElementById('colegiosList');
       KFL_CONFIG.colegios.forEach(col => {
         const opt = document.createElement('option');
@@ -878,6 +885,23 @@
 
     function handleFormSubmit(event) {
       event.preventDefault();
+      
+      // Validación manual sin tooltips molestos del navegador
+      const requiredInputs = document.querySelectorAll('#athleteForm [required]');
+      for (let input of requiredInputs) {
+        if (!input.value.trim()) {
+          alert('⚠️ Por favor completa todos los campos obligatorios antes de enviar.');
+          input.focus();
+          return;
+        }
+      }
+
+      const certAtleta = document.getElementById('certAtleta').checked;
+      const certAcudiente = document.getElementById('certAcudiente').checked;
+      if (!certAtleta || !certAcudiente) {
+        alert('⚠️ Debes aceptar ambas certificaciones legales para completar el registro.');
+        return;
+      }
       
       const btn = document.getElementById('formSubmitBtn');
       const alertBox = document.getElementById('formAlert');

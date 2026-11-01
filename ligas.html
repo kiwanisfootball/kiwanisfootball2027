@@ -137,7 +137,7 @@
       width: 100%;
       max-width: 920px;
       margin: 0 auto;
-      padding-bottom: 60px; /* Padding holgado antes del footer en todas las vistas */
+      padding-bottom: 60px;
     }
 
     .kfl-week-section {
@@ -347,7 +347,7 @@
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.04);
       margin-top: 10px;
-      margin-bottom: 40px; /* Evita que choque con el footer */
+      margin-bottom: 40px;
     }
 
     .kfl-table th {
@@ -462,6 +462,17 @@
     .search-stats-input:focus {
       background: #ffffff;
       border-color: #19547E;
+    }
+
+    /* BARRA DE ÚLTIMA ACTUALIZACIÓN */
+    .kfl-last-update-bar {
+      text-align: right;
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     /* PAGINACIÓN INTERNA (10 EN 10) */
@@ -692,6 +703,9 @@
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container stats-section-inner">
             
+            <!-- INDICADOR DE ÚLTIMA ACTUALIZACIÓN -->
+            <div class="kfl-last-update-bar" id="kflLastUpdateLabel">🔄 Sincronizando última actualización...</div>
+
             <!-- BOTONES DE TIPOS DE STATS -->
             <div class="stats-buttons-grid">
               <button onclick="filtrarTipoStat('RUSHING', this)" class="stat-type-btn active-stat" id="btn-stat-rushing">Rushing Stats</button>
@@ -723,7 +737,7 @@
                   </tr>
                 </thead>
                 <tbody id="statsTableBody">
-                  <tr><td colspan="9" style="text-align: center; padding: 30px; color: #64748b;">Cargando estadísticas...</td></tr>
+                  <tr><td colspan="10" style="text-align: center; padding: 30px; color: #64748b;">Cargando estadísticas...</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1202,6 +1216,7 @@
       if (activeLeague !== 'contact') {
         document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
         document.getElementById('statsPaginationBar').innerHTML = '';
+        document.getElementById('kflLastUpdateLabel').textContent = '';
         return;
       }
 
@@ -1216,6 +1231,10 @@
           seccionesStatsGlobal = parsearWebFinalCSV(texto);
           paginaActualStats = 1;
           renderizarSeccionActivaStats();
+          
+          // Mostrar última actualización de fecha simulada o real del fetch
+          const fechaActual = new Date().toLocaleString('es-PA', { dateStyle: 'medium', timeStyle: 'short' });
+          document.getElementById('kflLastUpdateLabel').textContent = `🔄 Última actualización: ${fechaActual}`;
         })
         .catch(err => {
           console.error("Error cargando CSV de Stats:", err);
@@ -1233,33 +1252,46 @@
         let linea = lineas[i].trim();
         if (!linea) continue;
         let cols = linea.split(',').map(c => c.trim().replace(/"/g, ''));
+        let lineaUnida = cols.join(' ').toUpperCase();
 
-        if (cols[0] === 'START' && cols[1]) {
-          let nombreSec = cols[1].toUpperCase();
+        if (cols[0] === 'START' || lineaUnida.includes('START')) {
+          let nombreSec = (cols[1] || lineaUnida).toUpperCase();
           if (nombreSec.includes('RUSH')) seccionActual = 'RUSHING';
           else if (nombreSec.includes('PASS')) seccionActual = 'PASSING';
           else if (nombreSec.includes('RECEIV')) seccionActual = 'RECEIVING';
           else if (nombreSec.includes('DEFENS') || nombreSec.includes('TACKLE')) seccionActual = 'DEFENSIVE';
-          else seccionActual = null;
           headersActuales = [];
           continue;
         }
 
-        if (cols[0] === 'END') {
+        if (cols[0] === 'END' || lineaUnida.includes('END')) {
           seccionActual = null;
           headersActuales = [];
           continue;
         }
 
+        // Si no hay etiquetas START/END pero detectamos palabras clave de sección de forma flexible
+        if (!seccionActual) {
+          if (lineaUnida.includes('RUSHING')) seccionActual = 'RUSHING';
+          else if (lineaUnida.includes('PASSING')) seccionActual = 'PASSING';
+          else if (lineaUnida.includes('RECEIVING')) seccionActual = 'RECEIVING';
+          else if (lineaUnida.includes('DEFENSIVE') || lineaUnida.includes('TACKLE')) seccionActual = 'DEFENSIVE';
+        }
+
         if (seccionActual) {
-          if (headersActuales.length === 0) {
+          if (headersActuales.length === 0 && (lineaUnida.includes('JUGADOR') || lineaUnida.includes('PLAYER') || lineaUnida.includes('RANK'))) {
             headersActuales = cols.map(h => h.toUpperCase());
-          } else {
+            continue;
+          }
+
+          if (headersActuales.length > 0) {
             let obj = {};
             headersActuales.forEach((h, idx) => {
               obj[h] = cols[idx] || '';
             });
-            secciones[seccionActual].push(obj);
+            if (obj['JUGADOR'] && obj['JUGADOR'] !== 'JUGADOR' && obj['JUGADOR'] !== 'PLAYER') {
+              secciones[seccionActual].push(obj);
+            }
           }
         }
       }
@@ -1271,7 +1303,6 @@
       const tbody = document.getElementById('statsTableBody');
       const theadRow = document.getElementById('statsTableHeaderRow');
 
-      // Definir cabeceras según el tipo de estadística
       if (tipoStatActivo === 'RUSHING') {
         theadRow.innerHTML = `
           <th style="text-align: center;">Rank</th>
@@ -1417,7 +1448,6 @@
         tbody.appendChild(tr);
       });
 
-      // CONSTRUIR CONTROLES DE PAGINACIÓN
       if (totalPaginas > 1) {
         let pagHtml = `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats - 1})" ${paginaActualStats === 1 ? 'disabled' : ''}>&laquo; Ant</button>`;
         

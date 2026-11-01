@@ -44,6 +44,74 @@
       line-height: 1.6;
     }
 
+    /* CONTENEDOR DE SELECCIÓN DE MODALIDAD (BLOQUEO POST-PASSWORD) */
+    #modalitySelector {
+      display: none;
+      max-width: 800px;
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .selector-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 32px;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .selector-desc {
+      font-size: 15px;
+      color: #64748b;
+      margin-bottom: 30px;
+    }
+
+    .modality-choice-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      padding: 22px;
+      border-radius: 14px;
+      border: none;
+      color: #ffffff;
+      font-family: 'Anton', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      text-decoration: none;
+    }
+
+    .modality-choice-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+    }
+
+    .btn-contact-theme {
+      background: #19547E;
+    }
+    .btn-contact-theme:hover {
+      background: #144265;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(25, 84, 126, 0.3);
+    }
+
+    .btn-flag-theme {
+      background: #C53030;
+    }
+    .btn-flag-theme:hover {
+      background: #9b2c2c;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(197, 48, 48, 0.3);
+    }
+
+    /* FORMULARIO OCULTO HASTA SELECCIONAR MODALIDAD */
     #inscripcionContent {
       display: none;
     }
@@ -139,10 +207,9 @@
       outline: none;
       transition: all 0.25s ease;
       box-sizing: border-box;
-      text-transform: uppercase; /* FUERZA MAYÚSCULAS EN PANTALLA */
+      text-transform: uppercase;
     }
 
-    /* Excepción para los inputs de email para que no se vean forzados feos si escriben en minúscula */
     .form-input[type="email"] {
       text-transform: none;
     }
@@ -179,34 +246,61 @@
       cursor: pointer;
     }
 
-    .consent-box {
+    /* CAJAS DE CERTIFICACIONES Y CONSENTIMIENTOS */
+    .legal-box {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
       padding: 20px;
       border-radius: 12px;
-      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+
+    .legal-text {
+      font-size: 13.5px;
+      color: #334155;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    .legal-checkbox-wrapper {
       display: flex;
       align-items: flex-start;
       gap: 12px;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 12px;
     }
 
-    .consent-box input[type="checkbox"] {
+    .legal-checkbox-wrapper input[type="checkbox"] {
       width: 20px;
       height: 20px;
       margin-top: 2px;
       cursor: pointer;
     }
 
-    .consent-text {
+    .legal-checkbox-label {
       font-size: 14px;
-      color: #334155;
-      font-weight: 600;
-      line-height: 1.5;
+      color: #1e293b;
+      font-weight: 700;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    .insurance-note {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     .submit-btn {
       width: 100%;
-      background: #19547E;
+      background: #C53030; /* Rojo KFL para Flag */
       color: #ffffff;
       border: none;
       padding: 16px;
@@ -217,11 +311,11 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(25, 84, 126, 0.25);
+      box-shadow: 0 4px 15px rgba(197, 48, 48, 0.25);
     }
 
     .submit-btn:hover {
-      background: #144265;
+      background: #9b2c2c;
       transform: translateY(-2px);
     }
 
@@ -236,6 +330,17 @@
     }
     .alert-msg.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
     .alert-msg.error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #19547E;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .back-link:hover { text-decoration: underline; }
 
     @media (max-width: 768px) {
       .inscripcion-container { padding: 15px 10px; }
@@ -275,28 +380,48 @@
       <h2 class="gate-title">Acceso Restringido</h2>
       <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
       <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none;">
-      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px;">Ingresar</button>
+      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px; background: #19547E;">Ingresar</button>
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
 
-    <!-- 2. CONTENIDO DEL FORMULARIO DE INSCRIPCIÓN -->
+    <!-- 2. SELECTOR DE MODALIDAD (POST-PASSWORD) -->
+    <div id="modalitySelector">
+      <h2 class="selector-title">Selecciona el Registro</h2>
+      <p class="selector-desc">Elige la modalidad para la cual deseas realizar la inscripción de la jugadora:</p>
+      
+      <!-- Botón Contact Football (Azul KFL) -->
+      <button onclick="selectModality('contact')" class="modality-choice-btn btn-contact-theme">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+        Registro Contact Football
+      </button>
+
+      <!-- Botón Flag Football (Rojo KFL) -->
+      <button onclick="selectModality('flag')" class="modality-choice-btn btn-flag-theme">
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+        Registro Flag Football Femenino
+      </button>
+    </div>
+
+    <!-- 3. CONTENIDO DEL FORMULARIO DE FLAG FOOTBALL -->
     <div id="inscripcionContent">
 
+      <a class="back-link" onclick="goBackToSelector()">← Volver a selección de modalidad</a>
+
       <section class="inscripcion-hero">
-        <h1 class="inscripcion-hero-title">Registro de Jugadores</h1>
+        <h1 class="inscripcion-hero-title">Registro Flag Femenino</h1>
         <p class="inscripcion-hero-subtitle">Temporada <span id="currentYearDisplay"></span> | Kiwanis Football League Panama</p>
       </section>
 
       <form id="athleteForm" onsubmit="handleFormSubmit(event)">
         
-        <!-- INFORMACIÓN DEL JUGADOR(A) -->
+        <!-- INFORMACIÓN DE LA JUGADORA -->
         <div class="form-card">
-          <h3 class="form-section-title">1. Información del Jugador(a)</h3>
+          <h3 class="form-section-title">1. Información de la Jugadora</h3>
           <div class="form-grid">
             
             <div class="form-group">
               <label class="form-label">Nombre Completo</label>
-              <input type="text" id="nombre" class="form-input" placeholder="EJ. CARLOS PÉREZ" required>
+              <input type="text" id="nombre" class="form-input" placeholder="EJ. ANA SOFÍA PÉREZ" required>
             </div>
 
             <div class="form-group">
@@ -375,10 +500,10 @@
 
         </div>
 
-        <!-- DOCUMENTACIÓN Y CONSENTIMIENTO -->
+        <!-- DOCUMENTACIÓN Y CERTIFICACIONES LEGALES -->
         <div class="form-card">
-          <h3 class="form-section-title">3. Documentación y Consentimiento</h3>
-          <div class="form-grid">
+          <h3 class="form-section-title">3. Documentación y Certificaciones</h3>
+          <div class="form-grid" style="margin-bottom: 25px;">
             
             <!-- CÉDULA / PASAPORTE -->
             <div class="form-group">
@@ -401,13 +526,37 @@
 
           </div>
 
-          <!-- CAMPO DE CONSENTIMIENTO -->
-          <div class="consent-box">
-            <input type="checkbox" id="consentimiento" required>
-            <label for="consentimiento" class="consent-text">
-              Como acudiente legal / responsable, <strong>estoy de acuerdo con que el menor pueda jugar y participar activamente en la liga</strong>, eximiendo a la organización de riesgos accidentales propios de la disciplina bajo los términos del reglamento oficial.
-            </label>
+          <!-- NOTA DEL SEGURO -->
+          <div class="insurance-note">
+            🛡️ NOTA: La Liga de Flag Football Femenino Kiwanis cuenta con un seguro hasta $500.00 por jugadora por temporada.
           </div>
+
+          <!-- CERTIFICACIÓN DE JUGADORAS -->
+          <div class="legal-box">
+            <p class="legal-text">
+              <strong>CERTIFICACIÓN DE JUGADORAS:</strong><br>
+              Certifico que he sido escogida para jugar en la Liga de Flag Femenina Kiwanis. He sido examinada por un médico y estoy capacitada para jugar Flag Football. Acepto seguir las reglas de la Liga de Flag Femenina Kiwanis y entiendo que el objeto de la Liga es el de enseñarme como jugar bajo las condiciones más seguras posibles.
+            </p>
+            <div class="legal-checkbox-wrapper">
+              <input type="checkbox" id="certJugadora" required>
+              <label for="certJugadora" class="legal-checkbox-label">Certifico y acepto los términos de la jugadora descrita anteriormente.</label>
+            </div>
+          </div>
+
+          <!-- CERTIFICACIÓN DE ACUDIENTE -->
+          <div class="legal-box">
+            <p class="legal-text">
+              <strong>CERTIFICACIÓN DE ACUDIENTE:</strong><br>
+              Certifico que he dado mi consentimiento a la jugadora descrita anteriormente a participar en la Liga de Flag Femenina Kiwanis. He dado mi consentimiento a la jugadora para la firma de este certificado y declaro que la información aquí dada es cierta y verdadera. He revisado el informe médico adjunto, y certifico que la información dada es cierta y que la jugadora está físicamente y mentalmente capacitada para participar en la Liga. Entiendo que la participante podría sufrir algún tipo de lesión que podría ser severa.<br><br>
+              LA LIGA DE FLAG FEMENINO KIWANIS, EL CLUB KIWANIS DE PANAMA, LOS ENTRENADORES DEL EQUIPO NO SERÁN RESPONSABLE POR NINGUN ACCIDENTE QUE OCURRA DURANTE LAS PRACTICAS O JUEGOS.<br><br>
+              YO EXONERO DE CUALQUIER RESPONSABILIDAD A LA LIGA DE FLAG FOOTBALL FEMENINA KIWANIS, A LOS ENTRENADORES Y AL CLUB KIWANIS DE PANAMA Y SUS SOCIOS O MIEMBROS POR CUALQUIER ACCIDENTE QUE PUDIERA SUFRIR MI HIJA O ACUDIDA DURANTE SU PARTICIPACION EN ESTA LIGA.
+            </p>
+            <div class="legal-checkbox-wrapper">
+              <input type="checkbox" id="certAcudiente" required>
+              <label for="certAcudiente" class="legal-checkbox-label">Certifico, acepto y exonero bajo los términos del acudiente responsable.</label>
+            </div>
+          </div>
+
         </div>
 
         <button type="submit" class="submit-btn" id="formSubmitBtn">Enviar / Actualizar Registro</button>
@@ -446,13 +595,11 @@
         ]
       },
 
+      // Equipos específicos para Flag Femenino
       categoriasEquipos: {
-        "Micro Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
-        "Mini Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
+        "Micro Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
         "Mini Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
-        "Juvenil Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
         "Juvenil Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
-        "Varsity Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
         "Varsity Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"]
       }
     };
@@ -469,7 +616,7 @@
       }
 
       if (sessionStorage.getItem('kfl_auth') === 'granted') {
-        unlockPage();
+        showModalitySelector();
       }
 
       initDropdowns();
@@ -479,18 +626,34 @@
       const pass = document.getElementById('accessPassword').value;
       const alertBox = document.getElementById('gateAlert');
       
-      // Contraseña actualizada a kiwanis2027 en minúsculas
       if (pass === 'kiwanis2027') {
         sessionStorage.setItem('kfl_auth', 'granted');
-        unlockPage();
+        showModalitySelector();
       } else {
         alertBox.style.display = 'block';
       }
     }
 
-    function unlockPage() {
+    function showModalitySelector() {
       document.getElementById('passwordGate').style.display = 'none';
+      document.getElementById('modalitySelector').style.display = 'block';
+    }
+
+    function selectModality(modality) {
+      document.getElementById('modalitySelector').style.display = 'none';
       document.getElementById('inscripcionContent').style.display = 'block';
+      
+      if (modality === 'contact') {
+        // Aquí podrías adaptar títulos si configuras después Contact Football
+        console.log("Seleccionado Contact Football");
+      } else {
+        console.log("Seleccionado Flag Football Femenino");
+      }
+    }
+
+    function goBackToSelector() {
+      document.getElementById('inscripcionContent').style.display = 'none';
+      document.getElementById('modalitySelector').style.display = 'block';
     }
 
     function initDropdowns() {
@@ -560,8 +723,8 @@
       btn.disabled = true;
       btn.innerText = 'GUARDANDO REGISTRO...';
 
-      // RECOLECTAR Y CONVERTIR TODO A MAYÚSCULAS CERRADAS (EXCEPTO EMAILS)
       const formData = {
+        modalidad: "FLAG FOOTBALL FEMENINO",
         nombre: document.getElementById('nombre').value.trim().toUpperCase(),
         cedula: document.getElementById('cedula').value.trim().toUpperCase(),
         emailJugador: document.getElementById('emailJugador').value.trim(),
@@ -576,12 +739,12 @@
         madreEmail: document.getElementById('madreEmail').value.trim()
       };
 
-      console.log("Datos listos para enviar a Google Sheets en MAYÚSCULAS:", formData);
+      console.log("Datos listos para enviar a Google Sheets:", formData);
 
       setTimeout(() => {
         alertBox.style.display = 'block';
         alertBox.className = 'alert-msg success';
-        alertBox.innerText = '¡Inscripción guardada correctamente en mayúsculas y notificación enviada a kflpty@gmail.com!';
+        alertBox.innerText = '¡Inscripción de Flag Femenino guardada correctamente y notificación enviada a kflpty@gmail.com!';
         
         btn.disabled = false;
         btn.innerText = 'ENVIAR / ACTUALIZAR REGISTRO';

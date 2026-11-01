@@ -29,14 +29,14 @@
                   url('assets/img/mvp-banner.jpg') center/cover no-repeat;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
       margin-bottom: 25px;
-      padding: 40px 25px 35px 25px;
+      padding: 35px 25px 30px 25px;
       color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      gap: 12px;
+      gap: 8px;
       box-sizing: border-box;
     }
 
@@ -49,12 +49,12 @@
 
     .mvp-hero-title {
       font-family: 'Anton', sans-serif;
-      font-size: 42px;
+      font-size: 40px;
       font-weight: 400;
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      margin-top: 6px;
+      margin-top: 10px;
       margin-bottom: 12px;
       text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
       line-height: 1.1;
@@ -75,23 +75,24 @@
       font-weight: 800;
     }
 
-    /* ANIMACIÓN DEL TROFEO PRINCIPAL - ESCALA PROPORCIONADA */
+    /* ANIMACIÓN DEL TROFEO PRINCIPAL - ESCALA COMPACTA (80px) */
     .mvp-trophy-wrapper {
-      width: 95px;
-      height: 95px;
+      width: 80px;
+      height: 80px;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
       z-index: 2;
       perspective: 800px;
+      margin-bottom: 5px;
     }
 
     .mvp-trophy-wrapper::before {
       content: '';
       position: absolute;
-      width: 90px;
-      height: 90px;
+      width: 75px;
+      height: 75px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(234, 179, 8, 0.45) 0%, rgba(234, 179, 8, 0) 70%);
       animation: pulseAura 3s ease-in-out infinite alternate;
@@ -101,7 +102,8 @@
     .mvp-trophy-img {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.65));
+      max-height: 80px;
+      filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.65));
       animation: buildTrophy 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
                  floatTrophy 3.8s ease-in-out 1.4s infinite alternate;
       transform-origin: center bottom;
@@ -110,13 +112,13 @@
     @keyframes buildTrophy {
       0% {
         opacity: 0;
-        transform: translateY(35px) scale(0.3) rotateX(45deg);
+        transform: translateY(25px) scale(0.3) rotateX(45deg);
         filter: drop-shadow(0 0 0px rgba(234, 179, 8, 0));
       }
       60% {
         opacity: 1;
-        transform: translateY(-6px) scale(1.08) rotateX(0deg);
-        filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.9));
+        transform: translateY(-5px) scale(1.08) rotateX(0deg);
+        filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.9));
       }
       80% {
         transform: translateY(2px) scale(0.96);
@@ -124,13 +126,13 @@
       100% {
         opacity: 1;
         transform: translateY(0) scale(1);
-        filter: drop-shadow(0 0 14px rgba(234, 179, 8, 0.65));
+        filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.65));
       }
     }
 
     @keyframes floatTrophy {
       0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(-8px) rotate(2deg); filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.85)); }
+      100% { transform: translateY(-6px) rotate(2deg); filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.85)); }
     }
 
     @keyframes pulseAura {
@@ -506,18 +508,16 @@
   </footer>
 
   <script>
-    // ENLACE CSV PUBLICADO DESDE GOOGLE SHEETS
-    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?output=csv';
-
-    const categoryMap = {
-      'MICRO CONTACT': 'table-micro-contact',
-      'MINI CONTACT': 'table-mini-contact',
-      'MINI FLAG': 'table-mini-flag',
-      'JUVENIL CONTACT': 'table-juvenil-contact',
-      'JUVENIL FLAG': 'table-juvenil-flag',
-      'VARSITY CONTACT': 'table-varsity-contact',
-      'VARSITY FLAG': 'table-varsity-flag'
-    };
+    // MAPEO DIRECTO DE URLs INDIVIDUALES POR PESTAÑA CON GID
+    const TAB_URLS = [
+      { targetId: 'table-micro-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=0&single=true&output=csv' },
+      { targetId: 'table-mini-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1354661673&single=true&output=csv' },
+      { targetId: 'table-mini-flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv' },
+      { targetId: 'table-juvenil-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1923785476&single=true&output=csv' },
+      { targetId: 'table-juvenil-flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv' },
+      { targetId: 'table-varsity-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv' },
+      { targetId: 'table-varsity-flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv' }
+    ];
 
     document.addEventListener('DOMContentLoaded', () => {
       const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -543,119 +543,102 @@
       });
     }
 
-    /* MOTOR ROBUSTO DE LECTURA Y MAPEO DE FILAS */
+    /* MOTOR DE CARGA PARALELA POR PESTAÑAS (CSV POR GID) */
     async function loadMvpData() {
-      try {
-        const cacheBusterUrl = `${SHEET_CSV_URL}&_t=${Date.now()}`;
-        const res = await fetch(cacheBusterUrl);
-        if (!res.ok) throw new Error('No se pudo conectar con Google Sheets');
-        
-        const csvText = await res.text();
-        const rows = parseCSV(csvText);
+      // Limpia mensajes iniciales de "Cargando..."
+      TAB_URLS.forEach(tab => {
+        const el = document.getElementById(tab.targetId);
+        if (el) el.innerHTML = '';
+      });
 
-        if (!rows || rows.length < 2) return;
-
-        // Limpiar indicadores de carga en todas las tablas
-        Object.values(categoryMap).forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = '';
-        });
-
-        let currentCategory = '';
-        let currentSeason = '';
-
-        for (let i = 0; i < rows.length; i++) {
-          const row = rows[i];
-          if (!row || row.length === 0) continue;
-
-          // Limpieza general de celdas
-          const cleanRow = row.map(c => (c || '').trim());
+      // Consultar cada pestaña individualmente en paralelo
+      const fetchPromises = TAB_URLS.map(async (tab) => {
+        try {
+          const cacheBusterUrl = `${tab.url}&_t=${Date.now()}`;
+          const res = await fetch(cacheBusterUrl);
+          if (!res.ok) throw new Error(`HTTP error ${res.status}`);
           
-          const c0 = cleanRow[0].toLowerCase();
-          const c1 = (cleanRow[1] || '').toLowerCase();
+          const csvText = await res.text();
+          const rows = parseCSV(csvText);
 
-          // Ignorar encabezaados (Categoría, Season, Año, Jugador, etc.)
-          if (
-            c0.includes('categor') || c0.includes('season') || c0.includes('año') || c0.includes('ano') || c0.includes('year') ||
-            c1.includes('season') || c1.includes('año') || c1.includes('ano')
-          ) {
-            continue;
-          }
+          renderSingleTable(tab.targetId, rows);
+        } catch (err) {
+          console.error(`Error al cargar ${tab.targetId}:`, err);
+          renderEmptyState(tab.targetId, 'Error al cargar datos desde Google Sheets.');
+        }
+      });
 
-          let catRaw = '', seasonRaw = '', equipo = '', jugador = '';
+      await Promise.all(fetchPromises);
+    }
 
-          // Detección flexible de columnas
-          const matchesCategoryName = Object.keys(categoryMap).some(k => cleanRow[0].toUpperCase().includes(k.split(' ')[0]));
+    function renderSingleTable(targetId, rows) {
+      const tbody = document.getElementById(targetId);
+      if (!tbody) return;
 
-          if (cleanRow.length >= 4 || matchesCategoryName) {
-            catRaw = cleanRow[0];
-            seasonRaw = cleanRow[1];
-            equipo = cleanRow[2];
-            jugador = cleanRow[3];
-          } else {
-            seasonRaw = cleanRow[0];
-            equipo = cleanRow[1];
-            jugador = cleanRow[2];
-          }
+      if (!rows || rows.length < 1) {
+        renderEmptyState(targetId, 'Sin registros publicados aún.');
+        return;
+      }
 
-          if (catRaw !== '') {
-            currentCategory = catRaw;
-          }
+      let lastSeason = '';
+      let hasData = false;
 
-          if (seasonRaw !== '') {
-            currentSeason = seasonRaw;
-          }
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        if (!row || row.length < 2) continue;
 
-          if (!jugador || jugador === '' || jugador.toLowerCase() === 'jugador' || jugador.toLowerCase() === 'player') {
-            continue;
-          }
+        // Limpiar celdas
+        const cleanRow = row.map(c => (c || '').trim());
+        const c0 = cleanRow[0].toLowerCase();
+        const c1 = (cleanRow[1] || '').toLowerCase();
 
-          // Mapear la categoría a la tabla HTML correspondiente
-          const normCat = currentCategory.toUpperCase().trim().replace(/\s+/g, ' ');
-          let targetId = categoryMap[normCat];
-
-          // Búsqueda aproximada si el nombre en la hoja varía ligeramente
-          if (!targetId) {
-            for (const [key, id] of Object.entries(categoryMap)) {
-              if (normCat.includes(key) || key.includes(normCat)) {
-                targetId = id;
-                break;
-              }
-            }
-          }
-
-          if (targetId) {
-            const tbody = document.getElementById(targetId);
-            if (tbody) {
-              const tr = document.createElement('tr');
-              tr.innerHTML = `
-                <td>${currentSeason}</td>
-                <td>${equipo || '-'}</td>
-                <td class="mvp-player-name">${jugador}</td>
-              `;
-              tbody.appendChild(tr);
-            }
-          }
+        // Omitir cabecera (Season, Equipo, Jugador, Año, etc.)
+        if (
+          c0.includes('season') || c0.includes('año') || c0.includes('ano') || c0.includes('year') ||
+          c1.includes('season') || c1.includes('año') || c1.includes('ano')
+        ) {
+          continue;
         }
 
-        // Si alguna tabla no recibió registros en la hoja de cálculo
-        Object.values(categoryMap).forEach(id => {
-          const el = document.getElementById(id);
-          if (el && el.children.length === 0) {
-            el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Sin registros publicados aún.</td></tr>';
-          }
-        });
+        let season = cleanRow[0] || '';
+        let equipo = cleanRow[1] || '';
+        let jugador = cleanRow[2] || '';
 
-      } catch (err) {
-        console.error('Error cargando MVP desde Google Sheets:', err);
-        Object.values(categoryMap).forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#ef4444;">Error al cargar datos desde Google Sheets.</td></tr>';
-        });
+        // Mantener año si viene vacío por celda combinada (Co-MVP)
+        if (season !== '') {
+          lastSeason = season;
+        } else {
+          season = lastSeason;
+        }
+
+        if (!jugador || jugador === '' || jugador.toLowerCase() === 'jugador' || jugador.toLowerCase() === 'player') {
+          continue;
+        }
+
+        hasData = true;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${season}</td>
+          <td>${equipo || '-'}</td>
+          <td class="mvp-player-name">${jugador}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      if (!hasData) {
+        renderEmptyState(targetId, 'Sin registros publicados aún.');
       }
     }
 
-    /* PARSER MANUAL DE CSV RESPETANDO COMILLAS INTERNAS */
+    function renderEmptyState(targetId, message) {
+      const tbody = document.getElementById(targetId);
+      if (tbody) {
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">${message}</td></tr>`;
+      }
+    }
+
+    /* PARSER MANUAL DE CSV CON MANEJO DE COMILLAS */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);

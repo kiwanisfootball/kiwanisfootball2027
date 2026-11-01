@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reglamento Oficial 2026 - Kiwanis Football League Panama</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <style>
+    /* CONTENEDOR PRINCIPAL - 1100px EXACTO */
+    .reglamento-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: 'Avenir', sans-serif;
+      box-sizing: border-box;
+    }
+
+    /* HERO BANNER */
+    .reglamento-hero {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+                  url('assets/img/reglamento-banner.jpg') center/cover no-repeat;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      margin-bottom: 30px;
+      padding: 40px 25px;
+      color: #ffffff;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .reglamento-hero-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 38px;
+      font-weight: 400;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .reglamento-hero-subtitle {
+      font-size: 16px;
+      color: #cbd5e1;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .reglamento-quote {
+      font-style: italic;
+      font-size: 14.5px;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #f1f5f9;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 15px 20px;
+      border-left: 4px solid #19547E;
+      border-radius: 0 8px 8px 0;
+      line-height: 1.6;
+    }
+
+    /* BUSCADOR INTERNO */
+    .search-box-container {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 600px;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-family: 'Avenir', sans-serif;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: all 0.25s ease;
+    }
+
+    .search-input:focus {
+      border-color: #19547E;
+      box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
+    }
+
+    /* ÍNDICE Y CONTENIDO */
+    .reglamento-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    /* ÍNDICE LATERAL FIJO */
+    .toc-sidebar {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      position: sticky;
+      top: 90px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .toc-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 18px;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 13.5px;
+    }
+
+    .toc-list li {
+      margin-bottom: 8px;
+    }
+
+    .toc-list a {
+      color: #475569;
+      text-decoration: none;
+      font-weight: 600;
+      display: block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .toc-list a:hover {
+      background: #f1f5f9;
+      color: #19547E;
+      padding-left: 12px;
+    }
+
+    .toc-sublist {
+      list-style: none;
+      padding-left: 15px;
+      margin-top: 4px;
+    }
+
+    .toc-sublist a {
+      font-weight: 400;
+      color: #64748b;
+      font-size: 12.5px;
+    }
+
+    /* CUERPO DEL REGLAMENTO */
+    .reglamento-content {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 35px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .reglamento-section-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 24px;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-top: 35px;
+      margin-bottom: 15px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .reglamento-section-title:first-of-type {
+      margin-top: 0;
+    }
+
+    .reglamento-subsection-title {
+      font-family: 'Avenir', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: #334155;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    .reglamento-paragraph {
+      font-family: 'Avenir', sans-serif;
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #334155;
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    .dedicatoria-box {
+      background: #f8fafc;
+      border-left: 4px solid #C53030;
+      padding: 15px 20px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 30px;
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    /* TABLAS DE PESOS Y BALONES */
+    .reglamento-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13.5px;
+    }
+
+    .reglamento-table th, .reglamento-table td {
+      border: 1px solid #cbd5e1;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .reglamento-table th {
+      background: #19547E;
+      color: #ffffff;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .reglamento-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    @media (max-width: 900px) {
+      .reglamento-layout {
+        grid-template-columns: 1fr;
+      }
+      .toc-sidebar {
+        position: relative;
+        top: 0;
+        max-height: 300px;
+      }
+      .reglamento-content {
+        padding: 20px 15px;
+      }
+    }
+  </style>
+</head>
+<body class="contact-theme">
+
+  <!-- HEADER NAVEGACIÓN -->
+  <header class="header-nav">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
+      </a>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="conocenos.html">CONÓCENOS</a></li>
+        <li><a href="ligas.html">LIGAS</a></li>
+        <li><a href="fotos.html">FOTOS</a></li>
+        <li><a href="mvp.html">MVP</a></li>
+        <li><a href="campeones.html">CAMPEONES</a></li>
+        <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
+        <li><a href="total-access.html">TOTAL ACCESS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="reglamento-container">
+
+    <!-- HERO BANNER -->
+    <section class="reglamento-hero">
+      <h1 class="reglamento-hero-title">Reglamento Oficial KFL 2026</h1>
+      <p class="reglamento-hero-subtitle">Contact Football y Flag Femenino | Club Kiwanis de Panamá</p>
+      
+      <div class="reglamento-quote">
+        "Prometemos que trabajaremos juntos en equipo. El respetar y el seguir todas las reglas. Siempre esforzándonos ganar, pero sobre todo jugando limpio. Ganemos o perdamos haremos nuestro mejor esfuerzo del buen deporte, para la gloria del Football y él honor de nuestro equipo."
+      </div>
+    </section>
+
+    <!-- DEDICATORIA -->
+    <div class="dedicatoria-box">
+      <strong>DEDICADO ESPECIALMENTE A:</strong> Todos los Entrenadores y Administradores de la Liga de Football Americano Kiwanis. Usted proporciona la primera experiencia verdadera en el Football para los niños que usted entrena. Recuerde lo importante que esta experiencia será para ellos, tanto ahora como en el futuro. Mantengan el juego seguro y divertido para ellos, y se lo recompensarán en los años por venir.
+    </div>
+
+    <!-- BUSCADOR -->
+    <div class="search-box-container">
+      <input type="text" id="searchRegulations" class="search-input" placeholder="🔍 Buscar artículo, regla, categoría o palabra clave..." onkeyup="filterRegulations()">
+    </div>
+
+    <!-- LAYOUT PRINCIPAL (ÍNDICE + CONTENIDO) -->
+    <div class="reglamento-layout">
+      
+      <!-- ÍNDICE LATERAL INTERACTIVO -->
+      <aside class="toc-sidebar">
+        <div class="toc-title">Contenido</div>
+        <ul class="toc-list">
+          <li><a href="#sec-1">1. Introducción</a></li>
+          <li>
+            <a href="#sec-2">2. Estructura KFL</a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-2-1">2.1. Definiciones</a></li>
+              <li><a href="#sec-2-2">2.2. Participación</a></li>
+              <li><a href="#sec-2-3">2.3. Cumplimiento</a></li>
+              <li><a href="#sec-2-4">2.4. Revisión Anual</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#sec-3">3. Reglas Generales</a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-3-1">3.1. Introducción</a></li>
+              <li><a href="#sec-3-4">3.4. Entrenadores</a></li>
+              <li><a href="#sec-3-5">3.5. Código Conducta</a></li>
+              <li><a href="#sec-3-7">3.7. Inscripción</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#sec-4">4. Liga de Contacto</a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-4-1">4.1. Equipos</a></li>
+              <li><a href="#sec-4-13">4.13. Edades y Peso</a></li>
+              <li><a href="#sec-4-16">4.16. Jugadas Mínimas</a></li>
+              <li><a href="#sec-4-29">4.29. Mercy Rule</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#sec-5">5. Liga de Flag Femenino</a>
+            <ul class="toc-sublist">
+              <li><a href="#sec-5-1">5.1. Conformación</a></li>
+              <li><a href="#sec-5-11">5.11. Reglas de Juego</a></li>
+            </ul>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- TEXTO COMPLETO DEL REGLAMENTO -->
+      <div class="reglamento-content" id="reglamentoContent">
+
+        <!-- SECCIÓN 1 -->
+        <div class="reglamento-block" id="sec-1">
+          <h2 class="reglamento-section-title">1. Introducción</h2>
+          <p class="reglamento-paragraph">1. La misión de la Liga de Football Americano Kiwanis (en adelante KFL) es que los jóvenes que participan en el deporte de Football Americano jueguen en un ambiente seguro y se diviertan.</p>
+          <p class="reglamento-paragraph">2. Las reglas de las actividades de la KFL están publicadas en el presente reglamento y tienen que ser practicadas minuciosamente. Infringir estas reglas podrá ocasionar medidas disciplinarias, según evaluación de la Comisión de Disciplina.</p>
+          <p class="reglamento-paragraph">3. Cada familia y cada adulto voluntario del programa debe procurar estar cubierto por pólizas de seguro médico de algún tipo, que incluyan coberturas para riesgos de los participantes.</p>
+          <p class="reglamento-paragraph">4. Las actividades de la KFL están abiertas solo para niños(as) y jóvenes.</p>
+          <p class="reglamento-paragraph">5. El Reglamento de la KFL está diseñado para mantener a cada equipo u organización, actualizado en todos los asuntos administrativos de los torneos. Este Reglamento no se debe convertir en propiedad personal. El presente Reglamento es propiedad de la KFL y el Club Kiwanis de Panamá.</p>
+          <p class="reglamento-paragraph">6. La KFL es un programa deportivo para beneficio de los jóvenes participantes. Desde 1972 la filosofía de este programa ha sido que los asuntos académicos y deportivos vayan de la mano. A todo nivel la KFL busca desarrollar a los jóvenes, para que aprendan no solo lo fundamental en football americano, sino que también le den importancia a la educación dentro de una atmósfera donde se pueda desarrollar la actividad mental, cuerpo y carácter y por supuesto teniendo tiempo de diversión.</p>
+          <p class="reglamento-paragraph">7. El objetivo principal de la KFL es inspirar a la juventud, dejando de lado la raza, él credo, religión, clase social o nacionalidad del participante, para practicar los ideales del buen deporte, escolaridad y ejercicio físico.</p>
+          <p class="reglamento-paragraph">8. La KFL se esfuerza en hacer los juegos divertidos para los jóvenes. Los entrenadores deben tener siempre en mente las edades de los participantes. Este programa también va más allá, incluye lecciones como disciplina para trabajo de equipo, concentración amistad, liderazgo, buen deporte y la práctica de valores.</p>
+          <p class="reglamento-paragraph">9. Con dichas metas en mente y proveyendo esta oportunidad a los jóvenes para participar en un medio ambiente organizado y supervisado, con énfasis en una máxima seguridad y participación, la KFL les ofrece a los jóvenes una experiencia única.</p>
+          <p class="reglamento-paragraph">10. La KFL será administrada por el Club Kiwanis de Panamá, a través de la Comisión de Football Americano.</p>
+          <p class="reglamento-paragraph">11. El presente reglamento contiene normas generales aplicables tanto a football contacto como a flag football, así como normas específicas para cada una de esas modalidades. En consecuencia, las disposiciones establecidas para flag football solo aplicarán a esa modalidad y no podrán usarse como criterio para football contacto. De igual forma, las disposiciones establecidas para football contacto solo aplicarán a esa modalidad y no podrán usarse como criterio para flag football. La interpretación y aplicación del reglamento deberá hacerse según la modalidad que corresponda.</p>
+        </div>
+
+        <!-- SECCIÓN 2 -->
+        <div class="reglamento-block" id="sec-2">
+          <h2 class="reglamento-section-title">2. Estructura de la Liga de Football Americano Kiwanis (KFL)</h2>
+          <p class="reglamento-paragraph">12. La Comisión de Football Americano del Club Kiwanis de Panamá es el grupo de socios del Club Kiwanis de Panamá que organizan la Liga de Football Americano Kiwanis (KFL)...</p>
+          
+          <div id="sec-2-1">
+            <h3 class="reglamento-subsection-title">2.1. Definiciones</h3>
+            <p class="reglamento-paragraph">28. <strong>Liga:</strong> La KFL se define como torneos de equipos de la misma edad y peso (jugando dentro de divisiones) y regidos por un horario, con un mínimo de cuatro (4) equipos participantes de la misma división de edad y peso, en un torneo.</p>
+            <p class="reglamento-paragraph">29. <strong>Organización:</strong> Una Organización se define como un grupo de voluntarios de entrenadores, padres de familia, y otras personas, respaldados en la mayoría de las ocasiones por un Colegio o Escuela, organizados para apoyar a los Equipos participantes en la KFL.</p>
+            <p class="reglamento-paragraph">30. <strong>División:</strong> Categorías de peso y edad (Varsity, Juvenil, Mini y Micro).</p>
+          </div>
+
+          <div id="sec-2-2">
+            <h3 class="reglamento-subsection-title">2.2. Participación en las Ligas KFL</h3>
+            <p class="reglamento-paragraph">31. Ningún Equipo o Programa permitirá participar a personas declaradas culpables de cometer delitos de cualquier tipo.</p>
+          </div>
+
+          <div id="sec-2-3">
+            <h3 class="reglamento-subsection-title">2.3. Política de Cumplimiento y Sanciones</h3>
+            <p class="reglamento-paragraph">33. La Junta Directiva de la Comisión de la KFL será responsable de resolver disputas y hacer cumplir las reglas.</p>
+            <p class="reglamento-paragraph">34. Ofensas realizadas por miembros del Coaching Staff, Familiares, Fanáticos y cualquier adulto serán severamente sancionadas (suspensiones por peleas, arriesgar jóvenes, lenguaje vulgar, etc.).</p>
+          </div>
+
+          <div id="sec-2-4">
+            <h3 class="reglamento-subsection-title">2.4. Revisión Anual Obligatoria</h3>
+            <p class="reglamento-paragraph">37. Todas las reglas de la KFL serán revisadas anualmente junto a los Entrenadores y miembros de la Comisión.</p>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 3 -->
+        <div class="reglamento-block" id="sec-3">
+          <h2 class="reglamento-section-title">3. Reglas y Normas Generales de la KFL</h2>
+          <div id="sec-3-1">
+            <h3 class="reglamento-subsection-title">3.1. Introducción</h3>
+            <p class="reglamento-paragraph">39. Las temporadas de la KFL iniciarán desde el 1ero de Enero de cada año.</p>
+          </div>
+          <div id="sec-3-4">
+            <h3 class="reglamento-subsection-title">3.4. Requisitos para los Entrenadores</h3>
+            <p class="reglamento-paragraph">50. Todos los Entrenadores deben estar registrados, certificados por USA Football y brindar copia de cédula/pasaporte.</p>
+          </div>
+          <div id="sec-3-5">
+            <h3 class="reglamento-subsection-title">3.5. Código de Conducta de los Entrenadores</h3>
+            <p class="reglamento-paragraph">62. Prohibido fumar, beber alcohol o consumir estupefacientes en el campo de práctica y juego. Aceptar decisiones arbitrales.</p>
+          </div>
+          <div id="sec-3-7">
+            <h3 class="reglamento-subsection-title">3.7. Requisitos para Inscripción de los Jugadores</h3>
+            <p class="reglamento-paragraph">81. Se requerirá autorización escrita de los padres (exoneración de responsabilidad), certificado médico de buena salud y cédula juvenil o pasaporte original.</p>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 4 -->
+        <div class="reglamento-block" id="sec-4">
+          <h2 class="reglamento-section-title">4. Reglas y Normas de la Liga de Football (Contacto)</h2>
+          <p class="reglamento-paragraph">96. Bajo las reglas de la National Federation of High School (NFHS).</p>
+          
+          <div id="sec-4-1">
+            <h3 class="reglamento-subsection-title">4.1. Conformación de Equipos y Rosters</h3>
+            <p class="reglamento-paragraph">98. Varsity: 26 a 45 jugadores. Mini y Juvenil: 26 a 36 jugadores. Micro: 16 a 28 jugadores.</p>
+          </div>
+
+          <div id="sec-4-13">
+            <h3 class="reglamento-subsection-title">4.13. Edades y Peso</h3>
+            <table class="reglamento-table">
+              <thead>
+                <tr>
+                  <th>División</th>
+                  <th>Edades</th>
+                  <th>Rango de Peso / Certificación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Varsity</strong></td>
+                  <td>Mayor de 15 años</td>
+                  <td>No aplica (Peso ilimitado)</td>
+                </tr>
+                <tr>
+                  <td><strong>Juvenil</strong></td>
+                  <td>11 – 14 años</td>
+                  <td>Mínimo 140 lbs (Ilimitado) / 80-165 lbs / X-Man hasta 175 lbs</td>
+                </tr>
+                <tr>
+                  <td><strong>Mini</strong></td>
+                  <td>10 – 12 años</td>
+                  <td>70 – 130 lbs (X-Man hasta 140 lbs)</td>
+                </tr>
+                <tr>
+                  <td><strong>Micro</strong></td>
+                  <td>8 – 10 años</td>
+                  <td>Máximo 90 lbs (X-Man hasta 100 lbs)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="sec-4-16">
+            <h3 class="reglamento-subsection-title">4.16. Jugadas Mínimas (Mini y Juvenil)</h3>
+            <p class="reglamento-paragraph">165. Mínimo de jugadas obligatorias: Mini y Juvenil: 3 jugadas. Micro: 5 jugadas.</p>
+          </div>
+
+          <div id="sec-4-29">
+            <h3 class="reglamento-subsection-title">4.29. Anotación Abultada (Mercy Rule)</h3>
+            <p class="reglamento-paragraph">193. Si un equipo va arriba por 28 puntos o más a partir de la segunda mitad, el reloj corre continuamente, la defensa no puede avanzar intercepciones y el equipo perdedor inicia en su yarda 40.</p>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 5 -->
+        <div class="reglamento-block" id="sec-5">
+          <h2 class="reglamento-section-title">5. Reglas para la Liga de Flag Femenino KFL</h2>
+          <div id="sec-5-1">
+            <h3 class="reglamento-subsection-title">5.1. Reglas de Conformación de Equipos</h3>
+            <p class="reglamento-paragraph">218. Carácter estrictamente escolar. Representan oficialmente a sus planteles educativos. A partir de 2026 no se permiten jugadoras refuerzo de otras escuelas (salvo la excepción histórica del equipo abierto Kiwanis Kolts).</p>
+          </div>
+          <div id="sec-5-11">
+            <h3 class="reglamento-subsection-title">5.11. Reglas de Juegos</h3>
+            <p class="reglamento-paragraph">243. Modalidad de cinco contra cinco (5 vs. 5) bajo la reglamentación oficial de Flag Football de la IFAF.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+      }
+    });
+
+    /* FILTRO DE BÚSQUEDA INSTÁNTANEA */
+    function filterRegulations() {
+      const input = document.getElementById('searchRegulations').value.toLowerCase();
+      const blocks = document.querySelectorAll('.reglamento-block');
+
+      blocks.forEach(block => {
+        const text = block.innerText.toLowerCase();
+        if (text.includes(input)) {
+          block.style.display = 'block';
+        } else {
+          block.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

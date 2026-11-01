@@ -175,16 +175,25 @@
       border-color: #94a3b8;
     }
 
-    .mvp-modality-btn.active {
+    /* Activo Contact (Azul KFL) */
+    .mvp-modality-btn.active.contact-theme-btn {
       background: #19547E;
       color: #ffffff;
       border-color: #19547E;
       box-shadow: 0 6px 20px rgba(25, 84, 126, 0.35);
     }
 
-    /* BARRA DE FILTROS DE CATEGORÍA (OCULTA HASTA SELECCIONAR MODALIDAD) */
+    /* Activo Flag (Rojo KFL) */
+    .mvp-modality-btn.active.flag-theme-btn {
+      background: #C53030;
+      color: #ffffff;
+      border-color: #C53030;
+      box-shadow: 0 6px 20px rgba(197, 48, 48, 0.35);
+    }
+
+    /* BARRA DE FILTROS DE CATEGORÍA */
     .mvp-filter-bar {
-      display: none; /* Se activa por JS al elegir Contact o Flag */
+      display: none;
       gap: 12px;
       margin-bottom: 25px;
       justify-content: center;
@@ -216,14 +225,19 @@
     .mvp-filter-btn:hover {
       background: #e2e8f0;
       transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
-    .mvp-filter-btn.active {
+    /* Estado activo de filtros según la modalidad actual */
+    .mvp-filter-btn.active.contact-active {
       background: #19547E;
       color: #ffffff;
       border-color: #19547E;
-      box-shadow: 0 6px 16px rgba(25, 84, 126, 0.3);
+    }
+
+    .mvp-filter-btn.active.flag-active {
+      background: #C53030;
+      color: #ffffff;
+      border-color: #C53030;
     }
 
     @keyframes fadeIn {
@@ -233,7 +247,7 @@
 
     /* SECCIÓN DE CATEGORÍAS */
     .mvp-category-section {
-      display: none; /* Ocultas por defecto hasta filtrar */
+      display: none;
       background: #ffffff;
       border-radius: 16px;
       padding: 30px;
@@ -265,14 +279,12 @@
       vertical-align: middle;
     }
 
-    /* CONTENEDOR DE TABLA INDIVIDUAL CENTRADO Y ANCHO */
     .mvp-single-table-container {
-      max-width: 800px; /* Ancho generoso y equitativo */
+      max-width: 800px;
       margin: 0 auto;
       width: 100%;
     }
 
-    /* TARJETAS Y TABLAS EN AVENIR */
     .mvp-table-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -282,6 +294,7 @@
       font-family: 'Avenir', sans-serif;
     }
 
+    /* TÍTULOS DE TABLA DINÁMICOS (Azul para Contact, Rojo para Flag) */
     .mvp-table-title {
       background: #19547E;
       color: #ffffff;
@@ -292,6 +305,11 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       text-align: center;
+      transition: background 0.3s ease;
+    }
+
+    .mvp-table-title.flag-header {
+      background: #C53030 !important;
     }
 
     .mvp-table {
@@ -303,21 +321,14 @@
       table-layout: fixed;
     }
 
-    /* COLUMNAS AMPLIAS Y PROPORCIONADAS */
     .mvp-table th:nth-child(1),
-    .mvp-table td:nth-child(1) {
-      width: 18%; /* Season */
-    }
+    .mvp-table td:nth-child(1) { width: 18%; }
 
     .mvp-table th:nth-child(2),
-    .mvp-table td:nth-child(2) {
-      width: 41%; /* Equipo */
-    }
+    .mvp-table td:nth-child(2) { width: 41%; }
 
     .mvp-table th:nth-child(3),
-    .mvp-table td:nth-child(3) {
-      width: 41%; /* Jugador */
-    }
+    .mvp-table td:nth-child(3) { width: 41%; }
 
     .mvp-table th {
       background: #f8fafc;
@@ -340,6 +351,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      vertical-align: middle;
     }
 
     .mvp-table tr:last-child td {
@@ -359,7 +371,6 @@
       font-weight: 800;
     }
 
-    /* MENSAJE INICIAL DE SELECCIÓN */
     .mvp-select-prompt {
       text-align: center;
       padding: 40px 20px;
@@ -415,7 +426,7 @@
       <div class="mvp-hero-content">
         <h1 class="mvp-hero-title">Most Valuable Players</h1>
         <p class="mvp-hero-description">
-          El <strong>MVP (Most Valuable Player)</strong> es el máximo reconocimiento que entrega la <strong>Kiwanis Football League</strong> a seus atletas, por su excepcional desempeño durante la temporada regular de sus respectivas categorías.
+          El <strong>MVP (Most Valuable Player)</strong> es el máximo reconocimiento que entrega la <strong>Kiwanis Football League</strong> a sus atletas, por su excepcional desempeño durante la temporada regular de sus respectivas categorías.
         </p>
       </div>
     </section>
@@ -426,15 +437,15 @@
       <button class="mvp-modality-btn" id="btnFlag" onclick="selectModality('flag', this)">Flag Football</button>
     </div>
 
-    <!-- 2. FILTROS DE CATEGORÍA (PÍLDORAS) -->
+    <!-- 2. FILTROS DE CATEGORÍA -->
     <div class="mvp-filter-bar" id="filterBar">
       <button class="mvp-filter-btn active" id="filter-varsity" onclick="filterCategory('varsity', this)">VARSITY</button>
       <button class="mvp-filter-btn" id="filter-juvenil" onclick="filterCategory('juvenil', this)">JUVENIL</button>
       <button class="mvp-filter-btn" id="filter-mini" onclick="filterCategory('mini', this)">MINI</button>
-      <button class="mvp-filter-btn" id="filter-micro" id="btnMicroFilter" onclick="filterCategory('micro', this)">MICRO</button>
+      <button class="mvp-filter-btn" id="filter-micro" onclick="filterCategory('micro', this)">MICRO</button>
     </div>
 
-    <!-- MENSAJE INICIAL ANTES DE ELEGIR MODALIDAD -->
+    <!-- MENSAJE INICIAL -->
     <div id="selectPrompt" class="mvp-select-prompt">
       👆 Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.
     </div>
@@ -551,7 +562,6 @@
   </footer>
 
   <script>
-    // MAPEO DE GIDS PARA CONTACT Y FLAG
     const SHEETS_CONFIG = {
       contact: {
         varsity: { targetId: 'table-varsity', titleId: 'title-varsity', titleText: 'Varsity Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv' },
@@ -563,7 +573,7 @@
         varsity: { targetId: 'table-varsity', titleId: 'title-varsity', titleText: 'Varsity Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv' },
         juvenil: { targetId: 'table-juvenil', titleId: 'title-juvenil', titleText: 'Juvenil Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv' },
         mini: { targetId: 'table-mini', titleId: 'title-mini', titleText: 'Mini Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv' },
-        micro: null // Micro no tiene Flag
+        micro: null
       }
     };
 
@@ -578,20 +588,40 @@
       }
     });
 
-    // 1. SELECCIONAR MODALIDAD (Contact o Flag)
     function selectModality(modality, btnElement) {
       currentModality = modality;
 
-      // Estilos de botones principales
-      document.querySelectorAll('.mvp-modality-btn').forEach(btn => btn.classList.remove('active'));
-      btnElement.classList.add('active');
+      // Actualizar clases temáticas en los botones principales
+      document.querySelectorAll('.mvp-modality-btn').forEach(btn => {
+        btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
+      });
 
-      // Mostrar barra de filtros y contenedor de tablas, ocultar prompt
+      if (modality === 'contact') {
+        btnElement.classList.add('active', 'contact-theme-btn');
+      } else {
+        btnElement.classList.add('active', 'flag-theme-btn');
+      }
+
+      // Actualizar estilo visual de los filtros activos
+      document.querySelectorAll('.mvp-filter-btn').forEach(btn => {
+        btn.classList.remove('contact-active', 'flag-active');
+        if (modality === 'contact') btn.classList.add('contact-active');
+        else btn.classList.add('flag-active');
+      });
+
+      // Actualizar color de las cabeceras de las tablas
+      document.querySelectorAll('.mvp-table-title').forEach(title => {
+        if (modality === 'flag') {
+          title.classList.add('flag-header');
+        } else {
+          title.classList.remove('flag-header');
+        }
+      });
+
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
       document.getElementById('mvpTablesContainer').style.display = 'block';
 
-      // Gestionar disponibilidad del botón Micro (Flag no tiene Micro)
       const microBtn = document.getElementById('filter-micro');
       if (modality === 'flag') {
         microBtn.style.display = 'none';
@@ -605,7 +635,6 @@
       loadModalityData();
     }
 
-    // 2. FILTRAR POR CATEGORÍA
     function filterCategory(category, btnElement) {
       currentCategory = category;
 
@@ -622,7 +651,6 @@
       });
     }
 
-    // 3. CARGAR DATOS DESDE GOOGLE SHEETS SEGÚN MODALIDAD
     async function loadModalityData() {
       if (!currentModality) return;
 
@@ -631,7 +659,6 @@
       for (const [catKey, config] of Object.entries(modalityMap)) {
         if (!config) continue;
 
-        // Actualizar título de la tarjeta (ej. "Varsity Contact" o "Varsity Flag")
         document.getElementById(config.titleId).innerText = config.titleText;
         const tbody = document.getElementById(config.targetId);
         if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>';
@@ -652,6 +679,7 @@
       }
     }
 
+    /* RENDERIZADO INTELIGENTE CON AGRUPACIÓN DE AÑOS (CO-MVP) */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -662,8 +690,10 @@
       }
 
       tbody.innerHTML = '';
+      
+      // 1. Filtrar filas válidas ignorando cabeceras
+      const validRows = [];
       let lastSeason = '';
-      let hasData = false;
 
       for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
@@ -694,19 +724,49 @@
           continue;
         }
 
-        hasData = true;
-
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${season}</td>
-          <td title="${equipo}">${equipo || '-'}</td>
-          <td class="mvp-player-name" title="${jugador}">${jugador}</td>
-        `;
-        tbody.appendChild(tr);
+        validRows.push({ season, equipo, jugador });
       }
 
-      if (!hasData) {
+      if (validRows.length === 0) {
         renderEmptyState(targetId, 'Sin registros publicados aún.');
+        return;
+      }
+
+      // 2. Agrupar filas consecutivas que comparten el mismo año (Co-MVPs)
+      let i = 0;
+      while (i < validRows.length) {
+        let currentSeason = validRows[i].season;
+        let group = [validRows[i]];
+        
+        // Buscar cuántas filas seguidas tienen exactamente el mismo season
+        let j = i + 1;
+        while (j < validRows.length && validRows[j].season === currentSeason) {
+          group.push(validRows[j]);
+          j++;
+        }
+
+        // Construir filas HTML con rowspan para el año compartido
+        for (let k = 0; k < group.length; k++) {
+          const tr = document.createElement('tr');
+          
+          // Si es el primer elemento del grupo, ponemos la celda del season con rowspan
+          if (k === 0) {
+            tr.innerHTML = `
+              <td rowspan="${group.length}" style="vertical-align: middle; font-weight: 800;">${currentSeason}</td>
+              <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
+              <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
+            `;
+          } else {
+            // Para los siguientes Co-MVPs del mismo año, omitimos la celda del season
+            tr.innerHTML = `
+              <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
+              <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
+            `;
+          }
+          tbody.appendChild(tr);
+        }
+
+        i = j; // Avanzar al siguiente grupo
       }
     }
 
@@ -717,7 +777,6 @@
       }
     }
 
-    /* PARSER MANUAL DE CSV */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);

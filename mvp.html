@@ -175,7 +175,6 @@
       border-color: #94a3b8;
     }
 
-    /* Activo Contact (Azul KFL) */
     .mvp-modality-btn.active.contact-theme-btn {
       background: #19547E;
       color: #ffffff;
@@ -183,7 +182,6 @@
       box-shadow: 0 6px 20px rgba(25, 84, 126, 0.35);
     }
 
-    /* Activo Flag (Rojo KFL) */
     .mvp-modality-btn.active.flag-theme-btn {
       background: #C53030;
       color: #ffffff;
@@ -227,7 +225,6 @@
       transform: translateY(-2px);
     }
 
-    /* Estado activo de filtros según la modalidad actual */
     .mvp-filter-btn.active.contact-active {
       background: #19547E;
       color: #ffffff;
@@ -294,7 +291,6 @@
       font-family: 'Avenir', sans-serif;
     }
 
-    /* TÍTULOS DE TABLA DINÁMICOS (Azul para Contact, Rojo para Flag) */
     .mvp-table-title {
       background: #19547E;
       color: #ffffff;
@@ -358,12 +354,16 @@
       border-bottom: none;
     }
 
-    .mvp-table tr:nth-child(even) {
+    /* CONTROL DE CEBRADO POR BLOQUES (EVITA CORTES EN ROWSPAN) */
+    .mvp-table tr.block-even {
       background-color: #f8fafc;
+    }
+    .mvp-table tr.block-odd {
+      background-color: #ffffff;
     }
 
     .mvp-table tr:hover {
-      background-color: #f1f5f9;
+      background-color: #f1f5f9 !important;
     }
 
     .mvp-player-name {
@@ -591,7 +591,6 @@
     function selectModality(modality, btnElement) {
       currentModality = modality;
 
-      // Actualizar clases temáticas en los botones principales
       document.querySelectorAll('.mvp-modality-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
       });
@@ -602,14 +601,12 @@
         btnElement.classList.add('active', 'flag-theme-btn');
       }
 
-      // Actualizar estilo visual de los filtros activos
       document.querySelectorAll('.mvp-filter-btn').forEach(btn => {
         btn.classList.remove('contact-active', 'flag-active');
         if (modality === 'contact') btn.classList.add('contact-active');
         else btn.classList.add('flag-active');
       });
 
-      // Actualizar color de las cabeceras de las tablas
       document.querySelectorAll('.mvp-table-title').forEach(title => {
         if (modality === 'flag') {
           title.classList.add('flag-header');
@@ -679,7 +676,7 @@
       }
     }
 
-    /* RENDERIZADO INTELIGENTE CON AGRUPACIÓN DE AÑOS (CO-MVP) */
+    /* RENDERIZADO CON CEBRADO UNIFORME POR BLOQUES (SOPORTA CUALQUIER CANTIDAD DE CO-MVPS) */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -691,7 +688,6 @@
 
       tbody.innerHTML = '';
       
-      // 1. Filtrar filas válidas ignorando cabeceras
       const validRows = [];
       let lastSeason = '';
 
@@ -732,24 +728,26 @@
         return;
       }
 
-      // 2. Agrupar filas consecutivas que comparten el mismo año (Co-MVPs)
       let i = 0;
+      let blockIndex = 0; // Controla la alternancia de color por año/bloque
+
       while (i < validRows.length) {
         let currentSeason = validRows[i].season;
         let group = [validRows[i]];
         
-        // Buscar cuántas filas seguidas tienen exactamente el mismo season
         let j = i + 1;
         while (j < validRows.length && validRows[j].season === currentSeason) {
           group.push(validRows[j]);
           j++;
         }
 
-        // Construir filas HTML con rowspan para el año compartido
+        // Asignar clase de cebrado basada en el índice del bloque (par/impar)
+        const blockClass = (blockIndex % 2 === 0) ? 'block-even' : 'block-odd';
+
         for (let k = 0; k < group.length; k++) {
           const tr = document.createElement('tr');
+          tr.className = blockClass; // Todo el bloque (sea 1 jugador o 2+ Co-MVPs) comparte el mismo fondo exacto
           
-          // Si es el primer elemento del grupo, ponemos la celda del season con rowspan
           if (k === 0) {
             tr.innerHTML = `
               <td rowspan="${group.length}" style="vertical-align: middle; font-weight: 800;">${currentSeason}</td>
@@ -757,7 +755,6 @@
               <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
             `;
           } else {
-            // Para los siguientes Co-MVPs del mismo año, omitimos la celda del season
             tr.innerHTML = `
               <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
               <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
@@ -766,7 +763,8 @@
           tbody.appendChild(tr);
         }
 
-        i = j; // Avanzar al siguiente grupo
+        blockIndex++;
+        i = j;
       }
     }
 

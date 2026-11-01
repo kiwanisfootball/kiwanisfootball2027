@@ -159,7 +159,7 @@
       border-color: #A91C00;
     }
 
-    /* GRID RESPONSIVE DE 2 COLUMNAS (MÁXIMO 2 POR FILA) */
+    /* GRID RESPONSIVE DE 2 COLUMNAS */
     .kfl-grid-matches {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -173,7 +173,6 @@
       }
     }
 
-    /* TARJETAS DE PARTIDO NORMALES */
     .kfl-match-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -262,7 +261,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* CARD DE JAMBOREE CON CABECERA AZUL COMPLETA Y DIBUJO CENTRADO */
     .kfl-single-match-wrapper {
       display: flex;
       justify-content: center;
@@ -283,7 +281,6 @@
       color: #A91C00;
     }
 
-    /* CARD DE BYE WEEK CENTRADO CON HEADER AZUL Y LOGO DE EQUIPO */
     .kfl-bye-card-wrapper {
       grid-column: 1 / -1;
       display: flex;
@@ -391,15 +388,75 @@
       background-color: #f8fafc;
     }
 
-    .kfl-loading-spinner {
-      text-align: center;
-      padding: 30px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #19547E;
+    /* ESTILOS CMS DE ESTADÍSTICAS */
+    .stats-section-inner {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
     }
 
-    /* REGLAS DE IMPRESIÓN RESTRINGIDAS A 1 PÁGINA (LETTER 8.5" x 11") */
+    .stats-buttons-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-type-btn {
+      padding: 10px 18px;
+      background: #ffffff;
+      border: 2px solid #19547E;
+      color: #19547E;
+      border-radius: 8px;
+      font-family: 'Anton', sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    body.flag-theme .stat-type-btn {
+      border-color: #A91C00;
+      color: #A91C00;
+    }
+
+    .stat-type-btn.active-stat, .stat-type-btn:hover {
+      background: #19547E;
+      color: #ffffff;
+    }
+
+    body.flag-theme .stat-type-btn.active-stat, body.flag-theme .stat-type-btn:hover {
+      background: #A91C00;
+    }
+
+    .search-box-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-stats-input {
+      padding: 9px 14px;
+      width: 100%;
+      max-width: 300px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Avenir', sans-serif;
+      outline: none;
+      background: #f8fafc;
+    }
+
+    .search-stats-input:focus {
+      background: #ffffff;
+      border-color: #19547E;
+    }
+
     @page {
       size: letter portrait;
       margin: 0.2in;
@@ -570,17 +627,56 @@
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
+        <!-- ROSTERS -->
         <div class="tab-pane" id="pane-rosters">
           <div class="rosters-grid" id="rostersGrid"></div>
         </div>
 
+        <!-- TABLA DE POSICIONES -->
         <div class="tab-pane" id="pane-posiciones">
           <div id="posicionesNativeContent" class="kfl-render-container"></div>
         </div>
 
+        <!-- ESTADÍSTICAS (CMS CONECTADO A CSV) -->
         <div class="tab-pane" id="pane-stats">
-          <div id="statsNativeContent" class="kfl-render-container">
-            <p style="text-align:center; padding:30px; color:#666;">Estadísticas en actualización...</p>
+          <div class="kfl-render-container stats-section-inner">
+            
+            <!-- BOTONES DE TIPOS DE STATS -->
+            <div class="stats-buttons-grid">
+              <button onclick="filtrarTipoStat('rushing', this)" class="stat-type-btn active-stat">Rushing Stats</button>
+              <button onclick="filtrarTipoStat('passing', this)" class="stat-type-btn">Passing Stats</button>
+              <button onclick="filtrarTipoStat('receiving', this)" class="stat-type-btn">Receiving Stats</button>
+              <button onclick="filtrarTipoStat('defensive', this)" class="stat-type-btn">Defensive Stats</button>
+            </div>
+
+            <!-- BUSCADOR INSTANTÁNEO -->
+            <div class="search-box-stats">
+              <span style="font-weight: 800; font-size: 13px; color: #334155; text-transform: uppercase;">Buscar Jugador/Equipo:</span>
+              <input type="text" id="searchStatInput" class="search-stats-input" onkeyup="filtrarTablaStats()" placeholder="Escribe aquí...">
+            </div>
+
+            <!-- TABLA DE STATS -->
+            <div style="overflow-x: auto;">
+              <table class="kfl-table" id="statsTable">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">Rank</th>
+                    <th style="text-align: left;">Jugador</th>
+                    <th style="text-align: left;">Equipo</th>
+                    <th style="text-align: center;">Carries</th>
+                    <th style="text-align: center;">Yards</th>
+                    <th style="text-align: center;">Avg</th>
+                    <th style="text-align: center;">TD</th>
+                    <th style="text-align: center;">Lng</th>
+                    <th style="text-align: center;">Fum</th>
+                  </tr>
+                </thead>
+                <tbody id="statsTableBody">
+                  <tr><td colspan="9" style="text-align: center; padding: 30px; color: #64748b;">Cargando estadísticas...</td></tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
         </div>
 
@@ -594,6 +690,16 @@
 
   <script>
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
+
+    // Enlaces CSV de Stats por categoría de Contact
+    const STATS_CSV_LINKS = {
+      "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
+      "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
+      "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
+      "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
+    };
+
+    let datosStatsGlobal = [];
 
     const SVG_ICONS = {
       calendar: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>`,
@@ -658,7 +764,6 @@
       } catch (e) {}
     }
 
-    // DISPARO DE 1 SOLA PETICIÓN DE DESCARGA EN SEGUNDO PLANO
     document.addEventListener('DOMContentLoaded', () => {
       fetchMasterDB();
       const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -758,10 +863,11 @@
         loadPosicionesData();
       } else if (activeSubTab === 'rosters') {
         renderRostersGrid();
+      } else if (activeSubTab === 'stats') {
+        loadStatsData();
       }
     }
 
-    // LECTURA NATIVA INSTANTÁNEA (0 MS)
     function loadCalendarioData() {
       const db = getMasterDB();
       const catData = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
@@ -819,7 +925,6 @@
         const byeGames = weekGames.filter(g => g.isBye);
         const regularGames = weekGames.filter(g => !g.isBye);
 
-        // JAMBOREE O PARTIDO ÚNICO / FINAL CENTRADO
         if (regularGames.length === 1 && (regularGames[0].isJamboree || weekName.includes("FINAL") || weekName.includes("SEMI"))) {
           const p = regularGames[0];
           if (p.isJamboree) {
@@ -869,7 +974,6 @@
             `;
           }
         } else {
-          // GRID DE PARTIDOS REGULARES DE 2 COLUMNAS
           html += `<div class="kfl-grid-matches">`;
           regularGames.forEach(p => {
             const homeLogo = getTeamLogo(p.home);
@@ -900,7 +1004,6 @@
             `;
           });
 
-          // CARD DE BYE WEEK CENTRADO CON HEADER AZUL Y LOGO CENTRADO
           if (byeGames.length > 0) {
             byeGames.forEach(bg => {
               const byeLogo = getTeamLogo(bg.home);
@@ -927,7 +1030,6 @@
       container.innerHTML = html;
     }
 
-    // LECTURA INSTANTÁNEA DE TABLA DE POSICIONES
     function loadPosicionesData() {
       const db = getMasterDB();
       const catTabla = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].tabla : [];
@@ -1037,6 +1139,98 @@
         `;
         grid.appendChild(card);
       });
+    }
+
+    // LÓGICA CMS DE ESTADÍSTICAS CONECTADO A CSV
+    function loadStatsData() {
+      // Solo aplicamos CSV dinámico si es Contact Football por ahora
+      if (activeLeague !== 'contact') {
+        document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
+        return;
+      }
+
+      const csvUrl = STATS_CSV_LINKS[activeCategory];
+      if (!csvUrl) return;
+
+      document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas...</td></tr>`;
+
+      fetch(csvUrl)
+        .then(res => res.text())
+        .then(texto => {
+          datosStatsGlobal = parsearCSV(texto);
+          renderizarTablaStats(datosStatsGlobal);
+        })
+        .catch(err => {
+          console.error("Error cargando CSV de Stats:", err);
+          document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #dc2626;">Error al cargar las estadísticas.</td></tr>`;
+        });
+    }
+
+    function parsearCSV(texto) {
+      const lineas = texto.split('\n');
+      const resultado = [];
+      if (lineas.length === 0) return resultado;
+      const headers = lineas[0].split(',');
+
+      for (let i = 1; i < lineas.length; i++) {
+        if (!lineas[i].trim()) continue;
+        const fila = lineas[i].split(',');
+        let obj = {};
+        headers.forEach((h, index) => {
+          obj[h.trim().replace(/"/g, '')] = fila[index] ? fila[index].trim().replace(/"/g, '') : '';
+        });
+        resultado.push(obj);
+      }
+      return resultado;
+    }
+
+    function renderizarTablaStats(datos) {
+      const tbody = document.getElementById('statsTableBody');
+      tbody.innerHTML = '';
+
+      if (datos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">No hay registros disponibles.</td></tr>`;
+        return;
+      }
+
+      datos.forEach((row, index) => {
+        const equipoUpper = (row.EQUIPO || row.Team || "").toUpperCase();
+        const logoUrl = getTeamLogo(equipoUpper);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align: center; font-weight: 700; color: #64748b;">${index + 1}</td>
+          <td style="font-weight: 700; color: #1e293b; text-align: left;">${row.JUGADOR || row.Player || "-"}</td>
+          <td style="text-align: left;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <img src="${logoUrl}" alt="${equipoUpper}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+              <span style="font-weight: 700; color: #334155;">${equipoUpper}</span>
+            </div>
+          </td>
+          <td style="text-align: center;">${row.CARRIES || row.Carries || "0"}</td>
+          <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || row.Yards || "0"}</td>
+          <td style="text-align: center;">${row.AVG || row.Avg || "0.0"}</td>
+          <td style="text-align: center; font-weight: 700;">${row.TD || row.Td || "0"}</td>
+          <td style="text-align: center;">${row.LNG || row.Lng || "0"}</td>
+          <td style="text-align: center;">${row.FUM || row.Fum || "0"}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filtrarTablaStats() {
+      const filtro = document.getElementById('searchStatInput').value.toLowerCase();
+      const filtrados = datosStatsGlobal.filter(item => {
+        const jugador = (item.JUGADOR || item.Player || "").toLowerCase();
+        const equipo = (item.EQUIPO || item.Team || "").toLowerCase();
+        return jugador.includes(filtro) || equipo.includes(filtro);
+      });
+      renderizarTablaStats(filtrados);
+    }
+
+    function filtrarTipoStat(tipo, btn) {
+      document.querySelectorAll('.stat-type-btn').forEach(b => b.classList.remove('active-stat'));
+      btn.classList.add('active-stat');
     }
   </script>
 </body>

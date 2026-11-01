@@ -159,7 +159,6 @@
       gap: 20px;
     }
 
-    /* Rejilla optimizada a 3 columnas para los acudientes */
     .form-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -239,6 +238,50 @@
       cursor: pointer;
     }
 
+    /* TARJETA DE PAGO E INSCRIPCIÓN */
+    .payment-card {
+      background: #f0fdf4;
+      border: 2px solid #bbf7d0;
+      color: #166534;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 30px;
+    }
+
+    .payment-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 20px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .payment-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    .payment-list li {
+      margin-bottom: 6px;
+    }
+
+    .insurance-note {
+      background: #eff6ff;
+      border: 2px solid #bfdbfe;
+      color: #1e40af;
+      padding: 18px;
+      border-radius: 12px;
+      font-size: 14.5px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
     .legal-box {
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -278,23 +321,9 @@
       cursor: pointer;
     }
 
-    /* Nota del seguro más grande y detallada */
-    .insurance-note {
-      background: #eff6ff;
-      border: 2px solid #bfdbfe;
-      color: #1e40af;
-      padding: 18px;
-      border-radius: 12px;
-      font-size: 14.5px;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 25px;
-      line-height: 1.6;
-    }
-
     .submit-btn {
       width: 100%;
-      background: #C53030;
+      background: #19547E;
       color: #ffffff;
       border: none;
       padding: 16px;
@@ -305,11 +334,11 @@
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(197, 48, 48, 0.25);
+      box-shadow: 0 4px 15px rgba(25, 84, 126, 0.25);
     }
 
     .submit-btn:hover {
-      background: #9b2c2c;
+      background: #144265;
       transform: translateY(-2px);
     }
 
@@ -385,38 +414,48 @@
     <!-- 2. SELECTOR DE MODALIDAD -->
     <div id="modalitySelector">
       <h2 class="selector-title">Selecciona el Registro</h2>
-      <p class="selector-desc">Elige la modalidad para la cual deseas realizar la inscripción de la jugadora:</p>
+      <p class="selector-desc">Elige la modalidad para la cual deseas realizar la inscripción:</p>
       
       <button onclick="selectModality('contact')" class="modality-choice-btn btn-contact-theme">
         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-        Registro Contact Football
+        Registro Contact Football ($275.00)
       </button>
 
       <button onclick="selectModality('flag')" class="modality-choice-btn btn-flag-theme">
         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-        Registro Flag Football Femenino
+        Registro Flag Football Femenino ($150.00)
       </button>
     </div>
 
-    <!-- 3. CONTENIDO DEL FORMULARIO DE FLAG FOOTBALL -->
+    <!-- 3. CONTENIDO DEL FORMULARIO -->
     <div id="inscripcionContent">
 
       <a class="back-link" onclick="goBackToSelector()">← Volver a selección de modalidad</a>
 
       <section class="inscripcion-hero">
-        <h1 class="inscripcion-hero-title">Registro Flag Femenino</h1>
+        <h1 class="inscripcion-hero-title" id="formHeroTitle">Registro de Jugador(a)</h1>
         <p class="inscripcion-hero-subtitle">Temporada <span id="currentYearDisplay"></span> | Kiwanis Football League Panama</p>
       </section>
 
+      <!-- SECCIÓN DE PAGO E INCLUSIONES -->
+      <div class="payment-card" id="paymentCardInfo">
+        <div class="payment-title">💳 Detalles de la Inversión e Inscripción</div>
+        <ul class="payment-list">
+          <li>Costo de inscripción: <strong id="costoInscripcionTxt">$150.00 dólares</strong>.</li>
+          <li>Incluye: <strong id="incluyeItemsTxt">dos jersey de juego, flags para los partidos, mouthpiece (protector bucal) y acceso a la póliza colectiva de la liga</strong>.</li>
+          <li><strong>Importante:</strong> Se debe estar <strong>paz y salvo</strong> con la tesorería de la liga para poder hacer uso efectivo de estos beneficios y disputar los encuentros oficiales.</li>
+        </ul>
+      </div>
+
       <form id="athleteForm" onsubmit="handleFormSubmit(event)">
         
-        <!-- INFORMACIÓN DE LA JUGADORA -->
+        <!-- INFORMACIÓN DEL JUGADOR(A) -->
         <div class="form-card">
-          <h3 class="form-section-title">1. Información de la Jugadora</h3>
+          <h3 class="form-section-title">1. Información del Atleta</h3>
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Nombre Completo</label>
-              <input type="text" id="nombre" class="form-input" placeholder="EJ. ANA SOFÍA PÉREZ" required>
+              <input type="text" id="nombre" class="form-input" placeholder="EJ. CARLOS PÉREZ" required>
             </div>
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
@@ -430,6 +469,31 @@
               <label class="form-label">Corregimiento / Área</label>
               <select id="corregimiento" class="form-select" required>
                 <option value="">Selecciona tu área / corregimiento</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Colegio / Universidad</label>
+              <select id="colegio" class="form-select" onchange="checkOtroColegio()" required>
+                <option value="">Selecciona tu colegio o universidad</option>
+              </select>
+              <input type="text" id="otroColegioInput" class="form-input" placeholder="ESCRIBE EL NOMBRE DEL COLEGIO" style="display:none; margin-top: 10px;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Grado / Nivel Académico</label>
+              <select id="grado" class="form-select" required>
+                <option value="">Selecciona el grado</option>
+                <option value="2DO GRADO">2do Grado</option>
+                <option value="3ER GRADO">3er Grado</option>
+                <option value="4TO GRADO">4to Grado</option>
+                <option value="5TO GRADO">5to Grado</option>
+                <option value="6TO GRADO">6to Grado</option>
+                <option value="7MO GRADO">7mo Grado</option>
+                <option value="8VO GRADO">8vo Grado</option>
+                <option value="9NO GRADO">9no Grado</option>
+                <option value="10MO GRADO">10mo Grado</option>
+                <option value="11VO GRADO">11vo Grado</option>
+                <option value="12MO GRADO">12mo Grado</option>
+                <option value="UNIVERSIDAD">Universidad</option>
               </select>
             </div>
             <div class="form-group">
@@ -447,11 +511,10 @@
           </div>
         </div>
 
-        <!-- INFORMACIÓN DE LOS ACUDIENTES (DISTRIBUCIÓN OPTIMIZADA EN 3 COLUMNAS) -->
+        <!-- INFORMACIÓN DE LOS ACUDIENTES -->
         <div class="form-card">
           <h3 class="form-section-title">2. Información de los Acudientes</h3>
           
-          <!-- PADRE / TUTOR -->
           <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
           <div class="form-grid-3" style="margin-bottom: 25px;">
             <div class="form-group">
@@ -468,7 +531,6 @@
             </div>
           </div>
 
-          <!-- MADRE / TUTORA -->
           <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
           <div class="form-grid-3">
             <div class="form-group">
@@ -484,14 +546,12 @@
               <input type="email" id="madreEmail" class="form-input" placeholder="madre@ejemplo.com" style="text-transform: none;">
             </div>
           </div>
-
         </div>
 
-        <!-- DOCUMENTACIÓN Y CERTIFICACIONES LEGALES -->
+        <!-- DOCUMENTACIÓN Y CERTIFICACIONES -->
         <div class="form-card">
           <h3 class="form-section-title">3. Documentación y Certificaciones</h3>
           <div class="form-grid" style="margin-bottom: 25px;">
-            
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
               <div class="file-upload-box" onclick="document.getElementById('cedulaFile').click()">
@@ -500,7 +560,6 @@
               </div>
               <span class="form-note">Nota: Si es cédula juvenil, incluir ambas caras en el archivo.</span>
             </div>
-
             <div class="form-group">
               <label class="form-label">Certificado de Buena Salud</label>
               <div class="file-upload-box" onclick="document.getElementById('medicoFile').click()">
@@ -508,37 +567,36 @@
                 <input type="file" id="medicoFile" accept=".pdf,image/jpeg,image/png" onchange="validateAndLabelFile('medicoFile', 'medicoLabel')" required>
               </div>
             </div>
-
           </div>
 
-          <!-- NOTA DEL SEGURO AMPLIADA Y MEJORADA -->
+          <!-- NOTA DEL SEGURO -->
           <div class="insurance-note">
-            🛡️ <strong>NOTA IMPORTANTE SOBRE EL SEGURO:</strong> La Liga de Flag Football Femenino Kiwanis cuenta con cobertura de seguro de hasta <strong>$700.00</strong> por jugadora por temporada. El uso de este seguro está sujeto a la evaluación y determinación exclusiva del paramédico asignado por la liga durante los días de juego, por lo que su utilización no es obligatoria si así se determina clínicamente.
+            🛡️ <strong>NOTA IMPORTANTE SOBRE EL SEGURO:</strong> La liga cuenta con cobertura de seguro de hasta <strong>$700.00</strong> por jugador(a) por temporada. El uso de este seguro está sujeto a la evaluación y determinación exclusiva del paramédico asignado por la liga durante los días de juego, por lo que su utilización no es obligatoria si así se determina clínicamente.
           </div>
 
-          <!-- CERTIFICACIÓN DE JUGADORAS (TEXTO CORREGIDO) -->
+          <!-- CERTIFICACIÓN DE ATLETA -->
           <div class="legal-box">
             <p class="legal-text">
-              <strong>CERTIFICACIÓN DE JUGADORAS:</strong><br>
-              Certifico que he sido escogida para jugar en la Liga de Flag Femenina Kiwanis. He sido examinada por un médico y estoy capacitada para jugar Flag Football. Acepto seguir las reglas de la Liga de Flag Femenina Kiwanis y entiendo que el objeto de la Liga es el de enseñarme como jugar bajo las condiciones más seguras posibles.
+              <strong>CERTIFICACIÓN DE ATLETA:</strong><br>
+              Certifico que he sido escogido(a) para jugar en la Kiwanis Football League. He sido examinado(a) por un médico y estoy capacitado(a) para jugar. Acepto seguir las reglas de la liga y entiendo que el objeto principal es el de entrenar y jugar bajo las condiciones más seguras posibles.
             </p>
             <div class="legal-checkbox-wrapper">
-              <input type="checkbox" id="certJugadora" required>
-              <label for="certJugadora" class="legal-checkbox-label">Certifico y acepto los términos descritos anteriormente.</label>
+              <input type="checkbox" id="certAtleta" required>
+              <label for="certAtleta" class="legal-checkbox-label">Certifico y acepto los términos descritos anteriormente.</label>
             </div>
           </div>
 
-          <!-- CERTIFICACIÓN DE ACUDIENTE (TEXTO CORREGIDO) -->
+          <!-- CERTIFICACIÓN DE ACUDIENTE -->
           <div class="legal-box">
             <p class="legal-text">
               <strong>CERTIFICACIÓN DE ACUDIENTE:</strong><br>
-              Certifico que he dado mi consentimiento a la jugadora descrita anteriormente a participar en la Liga de Flag Femenina Kiwanis. He dado mi consentimiento a la jugadora para la firma de este certificado y declaro que la información aquí dada es cierta y verdadera. He revisado el informe médico adjunto, y certifico que la información dada es cierta y que la jugadora está físicamente y mentalmente capacitada para participar en la Liga. Entiendo que la participante podría sufrir algún tipo de lesión que podría ser severa.<br><br>
-              LA LIGA DE FLAG FEMENINO KIWANIS, EL CLUB KIWANIS DE PANAMA, LOS ENTRENADORES DEL EQUIPO NO SERÁN RESPONSABLE POR NINGUN ACCIDENTE QUE OCURRA DURANTE LAS PRACTICAS O JUEGOS.<br><br>
-              YO EXONERO DE CUALQUIER RESPONSABILIDAD A LA LIGA DE FLAG FOOTBALL FEMENINA KIWANIS, A LOS ENTRENADORES Y AL CLUB KIWANIS DE PANAMA Y SUS SOCIOS O MIEMBROS POR CUALQUIER ACCIDENTE QUE PUDIERA SUFRIR MI HIJA O ACUDIDA DURANTE SU PARTICIPACION EN ESTA LIGA.
+              Certifico que he dado mi consentimiento al atleta descrito(a) anteriormente a participar en la liga. He dado mi consentimiento para la firma de este certificado y declaro que la información aquí dada es cierta y verdadera. He revisado el informe médico adjunto y certifico que el atleta está física y mentalmente capacitado(a) para participar. Entiendo que el participante podría sufrir algún tipo de lesión severa.<br><br>
+              LA LIGA KIWANIS, EL CLUB KIWANIS DE PANAMÁ Y A LOS ENTRENADORES DEL EQUIPO NO SERÁN RESPONSABLES POR NINGÚN ACCIDENTE QUE OCURRA DURANTE LAS PRÁCTICAS O JUEGOS.<br><br>
+              YO EXONERO DE CUALQUIER RESPONSABILIDAD A LA LIGA KIWANIS, A LOS ENTRENADORES Y AL CLUB KIWANIS DE PANAMÁ Y SUS SOCIOS O MIEMBROS POR CUALQUIER ACCIDENTE QUE PUDIERA SUFRIR MI HIJO(A) O ACUDIDO(A) DURANTE SU PARTICIPACIÓN EN ESTA LIGA.
             </p>
             <div class="legal-checkbox-wrapper">
               <input type="checkbox" id="certAcudiente" required>
-              <label for="certAcudiente" class="legal-checkbox-label">He leído y acepto los términos descritos anteriormente, certificando la participación de mi acudido.</label>
+              <label for="certAcudiente" class="legal-checkbox-label">He leído y acepto los términos descritos anteriormente, certificando la participación de mi acudido(a).</label>
             </div>
           </div>
 
@@ -580,13 +638,48 @@
         ]
       },
 
-      categoriasEquipos: {
-        "Micro Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
-        "Mini Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
-        "Juvenil Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
-        "Varsity Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"]
+      colegios: [
+        "Academia Interamericana de Panamá",
+        "Colegio Brader",
+        "Colegio de Panamá",
+        "Colegio Real",
+        "Colegio De La Salle",
+        "Balboa Academy",
+        "Colegio Javier",
+        "Colegio San Agustín",
+        "International School of Panama (ISP)",
+        "The Panama American School (PAS)",
+        "Boston School",
+        "OTRO"
+      ],
+
+      modalidades: {
+        contact: {
+          titulo: "Registro Contact Football",
+          costo: "$275.00 dólares",
+          incluye: "equipamiento completo de protección, jersey de juego, arbitraje, arbitraje especializado y acceso a la póliza colectiva de la liga",
+          categoriasEquipos: {
+            "Micro Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
+            "Mini Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
+            "Juvenil Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
+            "Varsity Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"]
+          }
+        },
+        flag: {
+          titulo: "Registro Flag Football Femenino",
+          costo: "$150.00 dólares",
+          incluye: "dos jersey de juego, flags para los partidos, mouthpiece (protector bucal) y acceso a la póliza colectiva de la liga",
+          categoriasEquipos: {
+            "Micro Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
+            "Mini Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
+            "Juvenil Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"],
+            "Varsity Flag": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts", "Eagles Flag"]
+          }
+        }
       }
     };
+
+    let modalidadActual = 'flag';
 
     document.addEventListener('DOMContentLoaded', () => {
       const currentYear = new Date().getFullYear();
@@ -624,8 +717,25 @@
     }
 
     function selectModality(modality) {
+      modalidadActual = modality;
       document.getElementById('modalitySelector').style.display = 'none';
       document.getElementById('inscripcionContent').style.display = 'block';
+
+      const config = KFL_CONFIG.modalidades[modality];
+      document.getElementById('formHeroTitle').innerText = config.titulo;
+      document.getElementById('costoInscripcionTxt').innerText = config.costo;
+      document.getElementById('incluyeItemsTxt').innerText = config.incluye;
+
+      // Actualizar categorías según la modalidad
+      const categoriaSelect = document.getElementById('categoria');
+      categoriaSelect.innerHTML = '<option value="">Selecciona una categoría</option>';
+      Object.keys(config.categoriasEquipos).forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        categoriaSelect.appendChild(opt);
+      });
+      document.getElementById('equipo').innerHTML = '<option value="">Primero selecciona una categoría</option>';
     }
 
     function goBackToSelector() {
@@ -634,6 +744,7 @@
     }
 
     function initDropdowns() {
+      // Corregimientos
       const corregimientoSelect = document.getElementById('corregimiento');
       for (const [distrito, lista] of Object.entries(KFL_CONFIG.distritosCorregimientos)) {
         const group = document.createElement('optgroup');
@@ -647,23 +758,38 @@
         corregimientoSelect.appendChild(group);
       }
 
-      const categoriaSelect = document.getElementById('categoria');
-      Object.keys(KFL_CONFIG.categoriasEquipos).forEach(cat => {
+      // Colegios
+      const colegioSelect = document.getElementById('colegio');
+      KFL_CONFIG.colegios.forEach(col => {
         const opt = document.createElement('option');
-        opt.value = cat;
-        opt.textContent = cat;
-        categoriaSelect.appendChild(opt);
+        opt.value = col;
+        opt.textContent = col;
+        colegioSelect.appendChild(opt);
       });
+    }
+
+    function checkOtroColegio() {
+      const colegioSelect = document.getElementById('colegio').value;
+      const otroInput = document.getElementById('otroColegioInput');
+      if (colegioSelect === 'OTRO') {
+        otroInput.style.display = 'block';
+        otroInput.required = true;
+      } else {
+        otroInput.style.display = 'none';
+        otroInput.required = false;
+        otroInput.value = '';
+      }
     }
 
     function updateTeams() {
       const catSelect = document.getElementById('categoria').value;
       const equipoSelect = document.getElementById('equipo');
+      const equiposMap = KFL_CONFIG.modalidades[modalidadActual].categoriasEquipos;
       
       equipoSelect.innerHTML = '<option value="">Selecciona un equipo</option>';
       
-      if (catSelect && KFL_CONFIG.categoriasEquipos[catSelect]) {
-        KFL_CONFIG.categoriasEquipos[catSelect].forEach(eq => {
+      if (catSelect && equiposMap[catSelect]) {
+        equiposMap[catSelect].forEach(eq => {
           const opt = document.createElement('option');
           opt.value = eq;
           opt.textContent = eq;
@@ -700,12 +826,19 @@
       btn.disabled = true;
       btn.innerText = 'GUARDANDO REGISTRO...';
 
+      let colegioFinal = document.getElementById('colegio').value;
+      if (colegioFinal === 'OTRO') {
+        colegioFinal = document.getElementById('otroColegioInput').value.trim().toUpperCase();
+      }
+
       const formData = {
-        modalidad: "FLAG FOOTBALL FEMENINO",
+        modalidad: modalidadActual.toUpperCase(),
         nombre: document.getElementById('nombre').value.trim().toUpperCase(),
         cedula: document.getElementById('cedula').value.trim().toUpperCase(),
         emailJugador: document.getElementById('emailJugador').value.trim(),
         corregimiento: document.getElementById('corregimiento').value,
+        colegio: colegioFinal,
+        grado: document.getElementById('grado').value,
         categoria: document.getElementById('categoria').value,
         equipo: document.getElementById('equipo').value,
         padreNombre: document.getElementById('padreNombre').value.trim().toUpperCase(),

@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTENEDOR PRINCIPAL - 1100px EXACTO (HOMOGÉNEO CON CONÓCENOS Y LIGAS) */
+    /* CONTENEDOR PRINCIPAL - 1100px EXACTO */
     .mvp-container {
       max-width: 1100px;
       width: 100%;
@@ -75,7 +75,7 @@
       font-weight: 800;
     }
 
-    /* ANIMACIÓN DEL TROFEO PRINCIPAL - ESCALA COMPACTA (80px) */
+    /* ANIMACIÓN DEL TROFEO PRINCIPAL (80px) */
     .mvp-trophy-wrapper {
       width: 80px;
       height: 80px;
@@ -209,7 +209,6 @@
       gap: 10px;
     }
 
-    /* ICONO TROFEO SVG EN CABECERAS */
     .cat-header-icon {
       height: 24px;
       width: auto;
@@ -217,10 +216,18 @@
       vertical-align: middle;
     }
 
+    /* GRID DE TABLAS: ALINEACIÓN SUPERIOR (EVITA ALTURAS FORZADAS) */
     .mvp-tables-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 25px;
+      align-items: start; /* FIX: Evita que tablas con menos filas se estiren */
+    }
+
+    /* FIX: MICRO CONTACT SINGLE CARD (MAX WIDTH PARA NO OCUPAR EL 100%) */
+    .single-card-grid {
+      display: grid;
+      grid-template-columns: minmax(320px, 520px); /* Ancho controlado e idéntico */
     }
 
     /* TARJETAS Y TABLAS EN AVENIR */
@@ -251,6 +258,23 @@
       text-align: left;
       font-size: 13.5px;
       font-family: 'Avenir', sans-serif;
+      table-layout: fixed; /* FIX: Mantiene anchos de columna estrictos */
+    }
+
+    /* ANCHOS DE COLUMNAS PROPORCIONALES */
+    .mvp-table th:nth-child(1),
+    .mvp-table td:nth-child(1) {
+      width: 20%; /* Season */
+    }
+
+    .mvp-table th:nth-child(2),
+    .mvp-table td:nth-child(2) {
+      width: 40%; /* Equipo */
+    }
+
+    .mvp-table th:nth-child(3),
+    .mvp-table td:nth-child(3) {
+      width: 40%; /* Jugador */
     }
 
     .mvp-table th {
@@ -260,17 +284,21 @@
       font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
-      padding: 11px 14px;
+      padding: 11px 12px;
       border-bottom: 1px solid #e2e8f0;
       letter-spacing: 0.5px;
     }
 
     .mvp-table td {
-      padding: 11px 14px;
+      padding: 11px 12px;
       border-bottom: 1px solid #edf2f7;
       color: #1e293b;
       font-weight: 600;
       font-family: 'Avenir', sans-serif;
+      /* FIX: CORTE CON PUNTOS SUSPENSIVOS SI EL NOMBRE ES MUY LARGO */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .mvp-table tr:last-child td {
@@ -295,6 +323,7 @@
       .mvp-hero-banner { padding: 30px 15px; }
       .mvp-hero-title { font-size: 34px; }
       .mvp-filter-btn { min-width: 45%; font-size: 18px; padding: 12px 10px; }
+      .single-card-grid { grid-template-columns: 100%; }
     }
   </style>
 </head>
@@ -474,13 +503,13 @@
         </div>
       </section>
 
-      <!-- MICRO -->
+      <!-- MICRO (CON CLASE ESPECÍFICA PARA ANCHO CONTROLADO) -->
       <section class="mvp-category-section" data-category="micro">
         <div class="mvp-category-header">
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
           Categoría Micro
         </div>
-        <div class="mvp-tables-grid">
+        <div class="mvp-tables-grid single-card-grid">
           <div class="mvp-table-card">
             <div class="mvp-table-title">Micro Contact</div>
             <table class="mvp-table">
@@ -620,8 +649,8 @@
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>${season}</td>
-          <td>${equipo || '-'}</td>
-          <td class="mvp-player-name">${jugador}</td>
+          <td title="${equipo}">${equipo || '-'}</td>
+          <td class="mvp-player-name" title="${jugador}">${jugador}</td>
         `;
         tbody.appendChild(tr);
       }

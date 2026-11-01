@@ -137,7 +137,7 @@
       width: 100%;
       max-width: 920px;
       margin: 0 auto;
-      padding-bottom: 50px; /* Padding holGado antes del footer en todas las vistas */
+      padding-bottom: 60px; /* Padding holgado antes del footer en todas las vistas */
     }
 
     .kfl-week-section {
@@ -337,7 +337,7 @@
       text-transform: uppercase;
     }
 
-    /* TABLA DE POSICIONES */
+    /* TABLA DE POSICIONES CON PADDING INFERIOR ADECUADO */
     .kfl-table {
       width: 100%;
       border-collapse: collapse;
@@ -347,7 +347,7 @@
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.04);
       margin-top: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 40px; /* Evita que choque con el footer */
     }
 
     .kfl-table th {
@@ -397,6 +397,7 @@
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+      margin-bottom: 40px;
     }
 
     .stats-buttons-grid {
@@ -687,16 +688,16 @@
           <div id="posicionesNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ESTADÍSTICAS (CMS CONECTADO A WEB_FINAL Y PAGINACIÓN DE 10 EN 10) -->
+        <!-- ESTADÍSTICAS (CMS CONECTADO A WEB_FINAL Y PAGINACIÓN 10 EN 10) -->
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container stats-section-inner">
             
             <!-- BOTONES DE TIPOS DE STATS -->
             <div class="stats-buttons-grid">
-              <button onclick="filtrarTipoStat('rushing', this)" class="stat-type-btn active-stat">Rushing Stats</button>
-              <button onclick="filtrarTipoStat('passing', this)" class="stat-type-btn">Passing Stats</button>
-              <button onclick="filtrarTipoStat('receiving', this)" class="stat-type-btn">Receiving Stats</button>
-              <button onclick="filtrarTipoStat('defensive', this)" class="stat-type-btn">Defensive Stats</button>
+              <button onclick="filtrarTipoStat('RUSHING', this)" class="stat-type-btn active-stat" id="btn-stat-rushing">Rushing Stats</button>
+              <button onclick="filtrarTipoStat('PASSING', this)" class="stat-type-btn" id="btn-stat-passing">Passing Stats</button>
+              <button onclick="filtrarTipoStat('RECEIVING', this)" class="stat-type-btn" id="btn-stat-receiving">Receiving Stats</button>
+              <button onclick="filtrarTipoStat('DEFENSIVE', this)" class="stat-type-btn" id="btn-stat-defensive">Defensive Stats</button>
             </div>
 
             <!-- BUSCADOR INSTANTÁNEO -->
@@ -709,7 +710,7 @@
             <div style="overflow-x: auto;">
               <table class="kfl-table" id="statsTable">
                 <thead>
-                  <tr>
+                  <tr id="statsTableHeaderRow">
                     <th style="text-align: center;">Rank</th>
                     <th style="text-align: left;">Jugador</th>
                     <th style="text-align: left;">Equipo</th>
@@ -744,7 +745,6 @@
   <script>
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
-    /* Enlaces CSV apuntando a la pestaña WEB_FINAL o con sus respectivos gids oficiales */
     const STATS_CSV_LINKS = {
       "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
       "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
@@ -752,7 +752,8 @@
       "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
     };
 
-    let datosStatsGlobal = [];
+    let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
+    let tipoStatActivo = 'RUSHING';
     let paginaActualStats = 1;
     const filasPorPagina = 10;
 
@@ -1196,10 +1197,10 @@
       });
     }
 
-    // LÓGICA CMS DE ESTADÍSTICAS CON LECTURA DE WEB_FINAL Y PAGINACIÓN DE 10 EN 10
+    // LÓGICA CMS DE ESTADÍSTICAS LEYENDO LA ESTRUCTURA DE WEB_FINAL
     function loadStatsData() {
       if (activeLeague !== 'contact') {
-        document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
+        document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
         document.getElementById('statsPaginationBar').innerHTML = '';
         return;
       }
@@ -1207,38 +1208,122 @@
       const csvUrl = STATS_CSV_LINKS[activeCategory];
       if (!csvUrl) return;
 
-      document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas de WEB_FINAL...</td></tr>`;
+      document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas de WEB_FINAL...</td></tr>`;
 
       fetch(csvUrl)
         .then(res => res.text())
         .then(texto => {
-          datosStatsGlobal = parsearCSVFlexible(texto);
+          seccionesStatsGlobal = parsearWebFinalCSV(texto);
           paginaActualStats = 1;
-          renderizarTablaStatsPaginada(datosStatsGlobal);
+          renderizarSeccionActivaStats();
         })
         .catch(err => {
           console.error("Error cargando CSV de Stats:", err);
-          document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #dc2626;">Error al cargar las estadísticas.</td></tr>`;
+          document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #dc2626;">Error al cargar las estadísticas.</td></tr>`;
         });
     }
 
-    function parsearCSVFlexible(texto) {
+    function parsearWebFinalCSV(texto) {
       const lineas = texto.split('\n');
-      const resultado = [];
-      if (lineas.length === 0) return resultado;
-      
-      const headers = lineas[0].split(',').map(h => h.trim().replace(/"/g, '').toUpperCase());
+      let secciones = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
+      let seccionActual = null;
+      let headersActuales = [];
 
-      for (let i = 1; i < lineas.length; i++) {
-        if (!lineas[i].trim()) continue;
-        const fila = lineas[i].split(',').map(val => val ? val.trim().replace(/"/g, '') : '');
-        let obj = {};
-        headers.forEach((h, index) => {
-          obj[h] = fila[index] || '';
-        });
-        resultado.push(obj);
+      for (let i = 0; i < lineas.length; i++) {
+        let linea = lineas[i].trim();
+        if (!linea) continue;
+        let cols = linea.split(',').map(c => c.trim().replace(/"/g, ''));
+
+        if (cols[0] === 'START' && cols[1]) {
+          let nombreSec = cols[1].toUpperCase();
+          if (nombreSec.includes('RUSH')) seccionActual = 'RUSHING';
+          else if (nombreSec.includes('PASS')) seccionActual = 'PASSING';
+          else if (nombreSec.includes('RECEIV')) seccionActual = 'RECEIVING';
+          else if (nombreSec.includes('DEFENS') || nombreSec.includes('TACKLE')) seccionActual = 'DEFENSIVE';
+          else seccionActual = null;
+          headersActuales = [];
+          continue;
+        }
+
+        if (cols[0] === 'END') {
+          seccionActual = null;
+          headersActuales = [];
+          continue;
+        }
+
+        if (seccionActual) {
+          if (headersActuales.length === 0) {
+            headersActuales = cols.map(h => h.toUpperCase());
+          } else {
+            let obj = {};
+            headersActuales.forEach((h, idx) => {
+              obj[h] = cols[idx] || '';
+            });
+            secciones[seccionActual].push(obj);
+          }
+        }
       }
-      return resultado;
+      return secciones;
+    }
+
+    function renderizarSeccionActivaStats() {
+      const datosSeccion = seccionesStatsGlobal[tipoStatActivo] || [];
+      const tbody = document.getElementById('statsTableBody');
+      const theadRow = document.getElementById('statsTableHeaderRow');
+
+      // Definir cabeceras según el tipo de estadística
+      if (tipoStatActivo === 'RUSHING') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th style="text-align: left;">Equipo</th>
+          <th style="text-align: center;">Carries</th>
+          <th style="text-align: center;">Yards</th>
+          <th style="text-align: center;">Avg</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Lng</th>
+          <th style="text-align: center;">Fum</th>
+        `;
+      } else if (tipoStatActivo === 'PASSING') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th style="text-align: left;">Equipo</th>
+          <th style="text-align: center;">Comp</th>
+          <th style="text-align: center;">Att</th>
+          <th style="text-align: center;">Comp %</th>
+          <th style="text-align: center;">Yards</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Int</th>
+          <th style="text-align: center;">Sack</th>
+        `;
+      } else if (tipoStatActivo === 'RECEIVING') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th style="text-align: left;">Equipo</th>
+          <th style="text-align: center;">Rec</th>
+          <th style="text-align: center;">Yards</th>
+          <th style="text-align: center;">Avg</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Lng</th>
+          <th style="text-align: center;">Fum</th>
+        `;
+      } else if (tipoStatActivo === 'DEFENSIVE') {
+        theadRow.innerHTML = `
+          <th style="text-align: center;">Rank</th>
+          <th style="text-align: left;">Jugador</th>
+          <th style="text-align: left;">Equipo</th>
+          <th style="text-align: center;">Total</th>
+          <th style="text-align: center;">Sack</th>
+          <th style="text-align: center;">TD</th>
+          <th style="text-align: center;">Int</th>
+          <th style="text-align: center;">FF</th>
+          <th style="text-align: center;">FR</th>
+        `;
+      }
+
+      renderizarTablaStatsPaginada(datosSeccion);
     }
 
     function renderizarTablaStatsPaginada(datos) {
@@ -1248,7 +1333,7 @@
       paginationBar.innerHTML = '';
 
       if (datos.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">No hay registros disponibles en WEB_FINAL.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">No hay registros disponibles para ${tipoStatActivo}.</td></tr>`;
         return;
       }
 
@@ -1264,36 +1349,75 @@
         const indiceReal = inicio + indexRelativo;
         const jugador = row.JUGADOR || row.PLAYER || row.NOMBRE || row.NAME || "-";
         const equipo = (row.EQUIPO || row.TEAM || row.CLUB || "").toUpperCase();
-        const carries = row.CARRIES || row.CARRY || row.ATT || row.ACARREOS || "0";
-        const yards = row.YARDS || row.YARDAS || row.YDS || row.YDS_NET || "0";
-        const avg = row.AVG || row.PROMEDIO || "0.0";
-        const td = row.TD || row.TDS || row.TOUCHDOWNS || "0";
-        const lng = row.LNG || row.LONG || row.LG || "0";
-        const fum = row.FUM || row.FUMBLES || row.FUMBLE || "0";
-
         const logoUrl = getTeamLogo(equipo);
 
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
-          <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-          <td style="text-align: left;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-              <span style="font-weight: 700; color: #334155;">${equipo}</span>
-            </div>
-          </td>
-          <td style="text-align: center;">${carries}</td>
-          <td style="text-align: center; font-weight: 700; color: #19547E;">${yards}</td>
-          <td style="text-align: center;">${avg}</td>
-          <td style="text-align: center; font-weight: 700;">${td}</td>
-          <td style="text-align: center;">${lng}</td>
-          <td style="text-align: center;">${fum}</td>
-        `;
+        let tr = document.createElement('tr');
+        
+        if (tipoStatActivo === 'RUSHING' || tipoStatActivo === 'RECEIVING') {
+          const c1 = row.CARRIES || row.REC || row.CARRY || "0";
+          const c2 = row.YARDS || row.YARDAS || row.YDS || "0";
+          const c3 = row.AVG || row.PROMEDIO || "0.0";
+          const c4 = row.TD || row.TDS || "0";
+          const c5 = row.LNG || row.LONG || "0";
+          const c6 = row.FUM || row.FUMBLES || "0";
+
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
+            <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
+            <td style="text-align: left;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                <span style="font-weight: 700; color: #334155;">${equipo}</span>
+              </div>
+            </td>
+            <td style="text-align: center;">${c1}</td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${c2}</td>
+            <td style="text-align: center;">${c3}</td>
+            <td style="text-align: center; font-weight: 700;">${c4}</td>
+            <td style="text-align: center;">${c5}</td>
+            <td style="text-align: center;">${c6}</td>
+          `;
+        } else if (tipoStatActivo === 'PASSING') {
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
+            <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
+            <td style="text-align: left;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                <span style="font-weight: 700; color: #334155;">${equipo}</span>
+              </div>
+            </td>
+            <td style="text-align: center;">${row.COMP || "0"}</td>
+            <td style="text-align: center;">${row.ATT || "0"}</td>
+            <td style="text-align: center;">${row["COMP %"] || row.COMP_PERC || "0.0%"}</td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || row.YDS || "0"}</td>
+            <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
+            <td style="text-align: center;">${row.INT || "0"}</td>
+            <td style="text-align: center;">${row.SACK || row.SACKS || "0"}</td>
+          `;
+        } else if (tipoStatActivo === 'DEFENSIVE') {
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
+            <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
+            <td style="text-align: left;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                <span style="font-weight: 700; color: #334155;">${equipo}</span>
+              </div>
+            </td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.TOTAL || row.TACKLES || "0"}</td>
+            <td style="text-align: center;">${row.SACK || row.SACKS || "0"}</td>
+            <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
+            <td style="text-align: center;">${row.INT || "0"}</td>
+            <td style="text-align: center;">${row.FF || "0"}</td>
+            <td style="text-align: center;">${row.FR || "0"}</td>
+          `;
+        }
+
         tbody.appendChild(tr);
       });
 
-      // CONSTRUIR CONTROLES DE PAGINACIÓN (10 EN 10)
+      // CONSTRUIR CONTROLES DE PAGINACIÓN
       if (totalPaginas > 1) {
         let pagHtml = `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats - 1})" ${paginaActualStats === 1 ? 'disabled' : ''}>&laquo; Ant</button>`;
         
@@ -1308,14 +1432,14 @@
 
     function cambiarPaginaStats(nuevaPagina) {
       paginaActualStats = nuevaPagina;
-      renderizarTablaStatsPaginada(datosStatsGlobal);
-      // Opcional: scroll suave hacia arriba de la tabla
+      renderizarSeccionActivaStats();
       document.getElementById('statsTable').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function filtrarTablaStats() {
       const filtro = document.getElementById('searchStatInput').value.toLowerCase();
-      const filtrados = datosStatsGlobal.filter(item => {
+      const datosOriginales = seccionesStatsGlobal[tipoStatActivo] || [];
+      const filtrados = datosOriginales.filter(item => {
         const textValues = Object.values(item).join(' ').toLowerCase();
         return textValues.includes(filtro);
       });
@@ -1326,7 +1450,10 @@
     function filtrarTipoStat(tipo, btn) {
       document.querySelectorAll('.stat-type-btn').forEach(b => b.classList.remove('active-stat'));
       btn.classList.add('active-stat');
-      // Aquí se pueden rutear diferentes gids o pestañas de stats si las separas por tipo
+      tipoStatActivo = tipo;
+      paginaActualStats = 1;
+      document.getElementById('searchStatInput').value = '';
+      renderizarSeccionActivaStats();
     }
   </script>
 </body>

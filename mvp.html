@@ -140,27 +140,70 @@
       100% { transform: scale(1.18); opacity: 0.95; }
     }
 
-    /* BOTONES DE FILTRO EN ANTON */
-    .mvp-filter-bar {
+    /* SELECTORES PRINCIPALES DE MODALIDAD (CONTACT / FLAG) */
+    .mvp-modality-bar {
       display: flex;
-      gap: 14px;
+      gap: 20px;
+      margin-bottom: 25px;
+      justify-content: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .mvp-modality-btn {
+      flex: 1;
+      max-width: 480px;
+      background: #f8fafc;
+      color: #19547E;
+      border: 2px solid #cbd5e1;
+      padding: 16px 24px;
+      font-family: 'Anton', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .mvp-modality-btn:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+      border-color: #94a3b8;
+    }
+
+    .mvp-modality-btn.active {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+      box-shadow: 0 6px 20px rgba(25, 84, 126, 0.35);
+    }
+
+    /* BARRA DE FILTROS DE CATEGORÍA (OCULTA HASTA SELECCIONAR MODALIDAD) */
+    .mvp-filter-bar {
+      display: none; /* Se activa por JS al elegir Contact o Flag */
+      gap: 12px;
       margin-bottom: 25px;
       justify-content: center;
       flex-wrap: wrap;
       width: 100%;
       box-sizing: border-box;
+      animation: fadeIn 0.3s ease-in-out;
     }
 
     .mvp-filter-btn {
       flex: 1;
-      min-width: 130px;
-      max-width: 200px;
+      min-width: 120px;
+      max-width: 180px;
       background: #f0f4f8;
       color: #19547E;
       border: 1px solid #cbd5e1;
-      padding: 14px 18px;
+      padding: 12px 16px;
       font-family: 'Anton', sans-serif;
-      font-size: 22px;
+      font-size: 20px;
       letter-spacing: 1px;
       text-transform: uppercase;
       border-radius: 12px;
@@ -183,8 +226,14 @@
       box-shadow: 0 6px 16px rgba(25, 84, 126, 0.3);
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* SECCIÓN DE CATEGORÍAS */
     .mvp-category-section {
+      display: none; /* Ocultas por defecto hasta filtrar */
       background: #ffffff;
       border-radius: 16px;
       padding: 30px;
@@ -216,18 +265,11 @@
       vertical-align: middle;
     }
 
-    /* GRID DE TABLAS: ALINEACIÓN SUPERIOR (EVITA ALTURAS FORZADAS) */
-    .mvp-tables-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-      align-items: start; /* FIX: Evita que tablas con menos filas se estiren */
-    }
-
-    /* FIX: MICRO CONTACT SINGLE CARD (MAX WIDTH PARA NO OCUPAR EL 100%) */
-    .single-card-grid {
-      display: grid;
-      grid-template-columns: minmax(320px, 520px); /* Ancho controlado e idéntico */
+    /* CONTENEDOR DE TABLA INDIVIDUAL CENTRADO Y ANCHO */
+    .mvp-single-table-container {
+      max-width: 800px; /* Ancho generoso y equitativo */
+      margin: 0 auto;
+      width: 100%;
     }
 
     /* TARJETAS Y TABLAS EN AVENIR */
@@ -256,46 +298,45 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      font-size: 13.5px;
+      font-size: 14px;
       font-family: 'Avenir', sans-serif;
-      table-layout: fixed; /* FIX: Mantiene anchos de columna estrictos */
+      table-layout: fixed;
     }
 
-    /* ANCHOS DE COLUMNAS PROPORCIONALES */
+    /* COLUMNAS AMPLIAS Y PROPORCIONADAS */
     .mvp-table th:nth-child(1),
     .mvp-table td:nth-child(1) {
-      width: 20%; /* Season */
+      width: 18%; /* Season */
     }
 
     .mvp-table th:nth-child(2),
     .mvp-table td:nth-child(2) {
-      width: 40%; /* Equipo */
+      width: 41%; /* Equipo */
     }
 
     .mvp-table th:nth-child(3),
     .mvp-table td:nth-child(3) {
-      width: 40%; /* Jugador */
+      width: 41%; /* Jugador */
     }
 
     .mvp-table th {
       background: #f8fafc;
       color: #475569;
       font-family: 'Avenir', sans-serif;
-      font-size: 12px;
+      font-size: 12.5px;
       font-weight: 800;
       text-transform: uppercase;
-      padding: 11px 12px;
+      padding: 12px 16px;
       border-bottom: 1px solid #e2e8f0;
       letter-spacing: 0.5px;
     }
 
     .mvp-table td {
-      padding: 11px 12px;
+      padding: 12px 16px;
       border-bottom: 1px solid #edf2f7;
       color: #1e293b;
       font-weight: 600;
       font-family: 'Avenir', sans-serif;
-      /* FIX: CORTE CON PUNTOS SUSPENSIVOS SI EL NOMBRE ES MUY LARGO */
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -318,12 +359,23 @@
       font-weight: 800;
     }
 
+    /* MENSAJE INICIAL DE SELECCIÓN */
+    .mvp-select-prompt {
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 18px;
+      color: #64748b;
+      font-family: 'Avenir', sans-serif;
+      font-weight: 600;
+    }
+
     @media (max-width: 768px) {
       .mvp-container { padding: 15px 10px; }
       .mvp-hero-banner { padding: 30px 15px; }
       .mvp-hero-title { font-size: 34px; }
-      .mvp-filter-btn { min-width: 45%; font-size: 18px; padding: 12px 10px; }
-      .single-card-grid { grid-template-columns: 100%; }
+      .mvp-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
+      .mvp-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
+      .mvp-filter-btn { min-width: 45%; font-size: 18px; padding: 10px 8px; }
     }
   </style>
 </head>
@@ -363,22 +415,32 @@
       <div class="mvp-hero-content">
         <h1 class="mvp-hero-title">Most Valuable Players</h1>
         <p class="mvp-hero-description">
-          El <strong>MVP (Most Valuable Player)</strong> es el máximo reconocimiento que entrega la <strong>Kiwanis Football League</strong> a sus atletas, por su excepcional desempeño durante la temporada regular de sus respectivas categorías.
+          El <strong>MVP (Most Valuable Player)</strong> es el máximo reconocimiento que entrega la <strong>Kiwanis Football League</strong> a seus atletas, por su excepcional desempeño durante la temporada regular de sus respectivas categorías.
         </p>
       </div>
     </section>
 
-    <!-- FILTROS PÍLDORA -->
-    <div class="mvp-filter-bar">
-      <button class="mvp-filter-btn active" onclick="filterCategory('all', this)">TODOS</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('varsity', this)">VARSITY</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('juvenil', this)">JUVENIL</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('mini', this)">MINI</button>
-      <button class="mvp-filter-btn" onclick="filterCategory('micro', this)">MICRO</button>
+    <!-- 1. BOTONES PRINCIPALES DE MODALIDAD -->
+    <div class="mvp-modality-bar">
+      <button class="mvp-modality-btn" id="btnContact" onclick="selectModality('contact', this)">Contact Football</button>
+      <button class="mvp-modality-btn" id="btnFlag" onclick="selectModality('flag', this)">Flag Football</button>
+    </div>
+
+    <!-- 2. FILTROS DE CATEGORÍA (PÍLDORAS) -->
+    <div class="mvp-filter-bar" id="filterBar">
+      <button class="mvp-filter-btn active" id="filter-varsity" onclick="filterCategory('varsity', this)">VARSITY</button>
+      <button class="mvp-filter-btn" id="filter-juvenil" onclick="filterCategory('juvenil', this)">JUVENIL</button>
+      <button class="mvp-filter-btn" id="filter-mini" onclick="filterCategory('mini', this)">MINI</button>
+      <button class="mvp-filter-btn" id="filter-micro" id="btnMicroFilter" onclick="filterCategory('micro', this)">MICRO</button>
+    </div>
+
+    <!-- MENSAJE INICIAL ANTES DE ELEGIR MODALIDAD -->
+    <div id="selectPrompt" class="mvp-select-prompt">
+      👆 Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.
     </div>
 
     <!-- CONTENEDOR DE TABLAS POR CATEGORÍA -->
-    <div id="mvpTablesContainer">
+    <div id="mvpTablesContainer" style="display: none;">
       
       <!-- VARSITY -->
       <section class="mvp-category-section" data-category="varsity">
@@ -386,9 +448,9 @@
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
           Categoría Varsity
         </div>
-        <div class="mvp-tables-grid">
+        <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Varsity Contact</div>
+            <div class="mvp-table-title" id="title-varsity">Varsity Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -397,23 +459,7 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-varsity-contact">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mvp-table-card">
-            <div class="mvp-table-title">Varsity Flag</div>
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-varsity-flag">
+              <tbody id="table-varsity">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
@@ -427,9 +473,9 @@
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
           Categoría Juvenil
         </div>
-        <div class="mvp-tables-grid">
+        <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Juvenil Contact</div>
+            <div class="mvp-table-title" id="title-juvenil">Juvenil Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -438,23 +484,7 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-juvenil-contact">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mvp-table-card">
-            <div class="mvp-table-title">Juvenil Flag</div>
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-juvenil-flag">
+              <tbody id="table-juvenil">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
@@ -468,9 +498,9 @@
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
           Categoría Mini
         </div>
-        <div class="mvp-tables-grid">
+        <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Mini Contact</div>
+            <div class="mvp-table-title" id="title-mini">Mini Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -479,23 +509,7 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-mini-contact">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="mvp-table-card">
-            <div class="mvp-table-title">Mini Flag</div>
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-mini-flag">
+              <tbody id="table-mini">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
@@ -503,15 +517,15 @@
         </div>
       </section>
 
-      <!-- MICRO (CON CLASE ESPECÍFICA PARA ANCHO CONTROLADO) -->
+      <!-- MICRO -->
       <section class="mvp-category-section" data-category="micro">
         <div class="mvp-category-header">
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
           Categoría Micro
         </div>
-        <div class="mvp-tables-grid single-card-grid">
+        <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title">Micro Contact</div>
+            <div class="mvp-table-title" id="title-micro">Micro Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -520,7 +534,7 @@
                   <th>Jugador</th>
                 </tr>
               </thead>
-              <tbody id="table-micro-contact">
+              <tbody id="table-micro">
                 <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
               </tbody>
             </table>
@@ -537,16 +551,24 @@
   </footer>
 
   <script>
-    // MAPEO DIRECTO DE URLs INDIVIDUALES POR PESTAÑA CON GID
-    const TAB_URLS = [
-      { targetId: 'table-micro-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=0&single=true&output=csv' },
-      { targetId: 'table-mini-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1354661673&single=true&output=csv' },
-      { targetId: 'table-mini-flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv' },
-      { targetId: 'table-juvenil-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1923785476&single=true&output=csv' },
-      { targetId: 'table-juvenil-flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv' },
-      { targetId: 'table-varsity-contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv' },
-      { targetId: 'table-varsity-flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv' }
-    ];
+    // MAPEO DE GIDS PARA CONTACT Y FLAG
+    const SHEETS_CONFIG = {
+      contact: {
+        varsity: { targetId: 'table-varsity', titleId: 'title-varsity', titleText: 'Varsity Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv' },
+        juvenil: { targetId: 'table-juvenil', titleId: 'title-juvenil', titleText: 'Juvenil Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1923785476&single=true&output=csv' },
+        mini: { targetId: 'table-mini', titleId: 'title-mini', titleText: 'Mini Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1354661673&single=true&output=csv' },
+        micro: { targetId: 'table-micro', titleId: 'title-micro', titleText: 'Micro Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=0&single=true&output=csv' }
+      },
+      flag: {
+        varsity: { targetId: 'table-varsity', titleId: 'title-varsity', titleText: 'Varsity Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv' },
+        juvenil: { targetId: 'table-juvenil', titleId: 'title-juvenil', titleText: 'Juvenil Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv' },
+        mini: { targetId: 'table-mini', titleId: 'title-mini', titleText: 'Mini Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv' },
+        micro: null // Micro no tiene Flag
+      }
+    };
+
+    let currentModality = null;
+    let currentCategory = 'varsity';
 
     document.addEventListener('DOMContentLoaded', () => {
       const hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -554,17 +576,45 @@
       if (hamburgerBtn) {
         hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
       }
-
-      loadMvpData();
     });
 
+    // 1. SELECCIONAR MODALIDAD (Contact o Flag)
+    function selectModality(modality, btnElement) {
+      currentModality = modality;
+
+      // Estilos de botones principales
+      document.querySelectorAll('.mvp-modality-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      // Mostrar barra de filtros y contenedor de tablas, ocultar prompt
+      document.getElementById('selectPrompt').style.display = 'none';
+      document.getElementById('filterBar').style.display = 'flex';
+      document.getElementById('mvpTablesContainer').style.display = 'block';
+
+      // Gestionar disponibilidad del botón Micro (Flag no tiene Micro)
+      const microBtn = document.getElementById('filter-micro');
+      if (modality === 'flag') {
+        microBtn.style.display = 'none';
+        if (currentCategory === 'micro') {
+          filterCategory('varsity', document.getElementById('filter-varsity'));
+        }
+      } else {
+        microBtn.style.display = 'block';
+      }
+
+      loadModalityData();
+    }
+
+    // 2. FILTRAR POR CATEGORÍA
     function filterCategory(category, btnElement) {
+      currentCategory = category;
+
       document.querySelectorAll('.mvp-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
 
       const sections = document.querySelectorAll('.mvp-category-section');
       sections.forEach(sec => {
-        if (category === 'all' || sec.getAttribute('data-category') === category) {
+        if (sec.getAttribute('data-category') === category) {
           sec.style.display = 'block';
         } else {
           sec.style.display = 'none';
@@ -572,35 +622,37 @@
       });
     }
 
-    /* MOTOR DE CARGA PARALELA POR PESTAÑAS (CSV POR GID) */
-    async function loadMvpData() {
-      // Limpia mensajes iniciales de "Cargando..."
-      TAB_URLS.forEach(tab => {
-        const el = document.getElementById(tab.targetId);
-        if (el) el.innerHTML = '';
-      });
+    // 3. CARGAR DATOS DESDE GOOGLE SHEETS SEGÚN MODALIDAD
+    async function loadModalityData() {
+      if (!currentModality) return;
 
-      // Consultar cada pestaña individualmente en paralelo
-      const fetchPromises = TAB_URLS.map(async (tab) => {
+      const modalityMap = SHEETS_CONFIG[currentModality];
+
+      for (const [catKey, config] of Object.entries(modalityMap)) {
+        if (!config) continue;
+
+        // Actualizar título de la tarjeta (ej. "Varsity Contact" o "Varsity Flag")
+        document.getElementById(config.titleId).innerText = config.titleText;
+        const tbody = document.getElementById(config.targetId);
+        if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>';
+
         try {
-          const cacheBusterUrl = `${tab.url}&_t=${Date.now()}`;
+          const cacheBusterUrl = `${config.url}&_t=${Date.now()}`;
           const res = await fetch(cacheBusterUrl);
           if (!res.ok) throw new Error(`HTTP error ${res.status}`);
           
           const csvText = await res.text();
           const rows = parseCSV(csvText);
 
-          renderSingleTable(tab.targetId, rows);
+          renderTableRows(config.targetId, rows);
         } catch (err) {
-          console.error(`Error al cargar ${tab.targetId}:`, err);
-          renderEmptyState(tab.targetId, 'Error al cargar datos desde Google Sheets.');
+          console.error(`Error al cargar ${config.targetId}:`, err);
+          renderEmptyState(config.targetId, 'Error al cargar datos desde Google Sheets.');
         }
-      });
-
-      await Promise.all(fetchPromises);
+      }
     }
 
-    function renderSingleTable(targetId, rows) {
+    function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
 
@@ -609,6 +661,7 @@
         return;
       }
 
+      tbody.innerHTML = '';
       let lastSeason = '';
       let hasData = false;
 
@@ -616,12 +669,10 @@
         const row = rows[i];
         if (!row || row.length < 2) continue;
 
-        // Limpiar celdas
         const cleanRow = row.map(c => (c || '').trim());
         const c0 = cleanRow[0].toLowerCase();
         const c1 = (cleanRow[1] || '').toLowerCase();
 
-        // Omitir cabecera (Season, Equipo, Jugador, Año, etc.)
         if (
           c0.includes('season') || c0.includes('año') || c0.includes('ano') || c0.includes('year') ||
           c1.includes('season') || c1.includes('año') || c1.includes('ano')
@@ -633,7 +684,6 @@
         let equipo = cleanRow[1] || '';
         let jugador = cleanRow[2] || '';
 
-        // Mantener año si viene vacío por celda combinada (Co-MVP)
         if (season !== '') {
           lastSeason = season;
         } else {
@@ -667,7 +717,7 @@
       }
     }
 
-    /* PARSER MANUAL DE CSV CON MANEJO DE COMILLAS */
+    /* PARSER MANUAL DE CSV */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);

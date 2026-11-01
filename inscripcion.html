@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscripción Oficial - Kiwanis Football League Panama</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <style>
+    .inscripcion-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: 'Avenir', sans-serif;
+      box-sizing: border-box;
+    }
+
+    /* PANTALLA DE ACCESO POR CONTRASEÑA */
+    #passwordGate {
+      max-width: 500px;
+      margin: 60px auto;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    }
+
+    .gate-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 28px;
+      color: #19547E;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .gate-desc {
+      font-size: 14.5px;
+      color: #64748b;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    /* FORMULARIO PRINCIPAL (OCULTO HASTA PONER CONTRASEÑA) */
+    #inscripcionContent {
+      display: none;
+    }
+
+    .inscripcion-hero {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+                  url('assets/img/inscripcion-banner.jpg') center/cover no-repeat;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      margin-bottom: 30px;
+      padding: 40px 25px;
+      color: #ffffff;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .inscripcion-hero-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 38px;
+      font-weight: 400;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .inscripcion-hero-subtitle {
+      font-size: 16px;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    .form-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 35px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      margin-bottom: 30px;
+    }
+
+    .form-section-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #334155;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: 'Avenir', sans-serif;
+      font-size: 14.5px;
+      color: #1e293b;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .form-input:focus, .form-select:focus {
+      background: #ffffff;
+      border-color: #19547E;
+      box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
+    }
+
+    .file-upload-box {
+      border: 2px dashed #cbd5e1;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .file-upload-box:hover {
+      border-color: #19547E;
+      background: #f1f5f9;
+    }
+
+    .file-upload-box input {
+      display: none;
+    }
+
+    .file-upload-label {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #19547E;
+      color: #ffffff;
+      border: none;
+      padding: 16px;
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(25, 84, 126, 0.25);
+    }
+
+    .submit-btn:hover {
+      background: #144265;
+      transform: translateY(-2px);
+    }
+
+    .alert-msg {
+      display: none;
+      margin-top: 15px;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .alert-msg.success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    .alert-msg.error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+    @media (max-width: 768px) {
+      .inscripcion-container { padding: 15px 10px; }
+      .form-card { padding: 20px 15px; }
+    }
+  </style>
+</head>
+<body class="contact-theme">
+
+  <!-- HEADER NAVEGACIÓN -->
+  <header class="header-nav">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
+      </a>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="conocenos.html">CONÓCENOS</a></li>
+        <li><a href="ligas.html">LIGAS</a></li>
+        <li><a href="fotos.html">FOTOS</a></li>
+        <li><a href="mvp.html">MVP</a></li>
+        <li><a href="campeones.html">CAMPEONES</a></li>
+        <li><a href="inscripcion.html" class="active">INSCRIPCIÓN</a></li>
+        <li><a href="total-access.html">TOTAL ACCESS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="inscripcion-container">
+
+    <!-- 1. PANTALLA DE ACCESO POR CONTRASEÑA -->
+    <div id="passwordGate">
+      <h2 class="gate-title">Acceso Restringido</h2>
+      <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
+      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center;">
+      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px;">Ingresar</button>
+      <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
+    </div>
+
+    <!-- 2. CONTENIDO DEL FORMULARIO DE INSCRIPCIÓN -->
+    <div id="inscripcionContent">
+
+      <section class="inscripcion-hero">
+        <h1 class="inscripcion-hero-title">Registro de Atletas 2026</h1>
+        <p class="inscripcion-hero-subtitle">Kiwanis Football League Panama | Formulario Oficial de Inscripción</p>
+      </section>
+
+      <form id="athleteForm" onsubmit="handleFormSubmit(event)">
+        
+        <!-- DATOS GENERALES -->
+        <div class="form-card">
+          <h3 class="form-section-title">1. Información del Atleta</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Nombre Completo</label>
+              <input type="text" id="nombre" class="form-input" placeholder="Ej. Carlos Pérez" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cédula Juvenil / Pasaporte (ID)</label>
+              <input type="text" id="cedula" class="form-input" placeholder="Ej. 8-123-4567 (Sirve para actualizar tus datos luego)" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Categoría</label>
+              <select id="categoria" class="form-select" required>
+                <option value="">Selecciona una categoría</option>
+                <option value="Micro Contact">Micro Contact</option>
+                <option value="Mini Contact">Mini Contact</option>
+                <option value="Mini Flag">Mini Flag</option>
+                <option value="Juvenil Contact">Juvenil Contact</option>
+                <option value="Juvenil Flag">Juvenil Flag</option>
+                <option value="Varsity Contact">Varsity Contact</option>
+                <option value="Varsity Flag">Varsity Flag</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Equipo / Colegio</label>
+              <input type="text" id="equipo" class="form-input" placeholder="Ej. Balboa Academy Dragons" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCUMENTACIÓN Y ARCHIVOS -->
+        <div class="form-card">
+          <h3 class="form-section-title">2. Documentos Adjuntos</h3>
+          <div class="form-grid">
+            
+            <!-- CÉDULA AMBAS CARAS EN UN SOLO CAMPO -->
+            <div class="form-group">
+              <label class="form-label">Cédula o Pasaporte (Ambas Caras)</label>
+              <div class="file-upload-box" onclick="document.getElementById('cedulaFile').click()">
+                <span class="file-upload-label" id="cedulaLabel">📎 Sube frontal y trasera (Imágenes o PDF)</span>
+                <input type="file" id="cedulaFile" accept="image/*,.pdf" multiple onchange="updateFileLabel('cedulaFile', 'cedulaLabel')">
+              </div>
+            </div>
+
+            <!-- CERTIFICADO MÉDICO (OPCIONAL/EDITABLE) -->
+            <div class="form-group">
+              <label class="form-label">Certificado Médico (Opcional por ahora)</label>
+              <div class="file-upload-box" onclick="document.getElementById('medicoFile').click()">
+                <span class="file-upload-label" id="medicoLabel">📎 Sube tu certificado de buena salud</span>
+                <input type="file" id="medicoFile" accept="image/*,.pdf" onchange="updateFileLabel('medicoFile', 'medicoLabel')">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="formSubmitBtn">Enviar / Actualizar Registro</button>
+        <div id="formAlert" class="alert-msg"></div>
+
+      </form>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const navMenu = document.getElementById('navMenu');
+      if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+      }
+
+      // Validar si ya había ingresado la contraseña en esta sesión
+      if (sessionStorage.getItem('kfl_auth') === 'granted') {
+        unlockPage();
+      }
+    });
+
+    // 1. VERIFICAR CONTRASEÑA
+    function verifyPassword() {
+      const pass = document.getElementById('accessPassword').value;
+      const alertBox = document.getElementById('gateAlert');
+      
+      // Contraseña de ejemplo (cámbiala por la que prefieras)
+      if (pass === 'Kiwanis2026*') {
+        sessionStorage.setItem('kfl_auth', 'granted');
+        unlockPage();
+      } else {
+        alertBox.style.display = 'block';
+      }
+    }
+
+    function unlockPage() {
+      document.getElementById('passwordGate').style.display = 'none';
+      document.getElementById('inscripcionContent').style.display = 'block';
+    }
+
+    // Actualizar nombre de archivos seleccionados
+    function updateFileLabel(inputId, labelId) {
+      const input = document.getElementById(inputId);
+      const label = document.getElementById(labelId);
+      if (input.files.length > 0) {
+        label.innerText = `📁 ${input.files.length} archivo(s) seleccionado(s)`;
+      }
+    }
+
+    // 2 y 4. ENVÍO Y EDICIÓN DE DATOS
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      
+      const btn = document.getElementById('formSubmitBtn');
+      const alertBox = document.getElementById('formAlert');
+      
+      btn.disabled = true;
+      btn.innerText = 'GUARDANDO REGISTRO...';
+
+      // Simulación de envío hacia el Google Sheet / Apps Script
+      setTimeout(() => {
+        alertBox.style.display = 'block';
+        alertBox.className = 'alert-msg success';
+        alertBox.innerText = '¡Inscripción guardada correctamente! Si te faltaba el certificado médico, puedes volver a ingresar con tu cédula y actualizarlo.';
+        
+        btn.disabled = false;
+        btn.innerText = 'ENVIAR / ACTUALIZAR REGISTRO';
+      }, 1200);
+    }
+  </script>
+</body>
+</html>

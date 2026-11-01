@@ -18,7 +18,6 @@
       box-sizing: border-box;
     }
 
-    /* PANTALLA DE ACCESO POR CONTRASEÑA */
     #passwordGate {
       max-width: 500px;
       margin: 60px auto;
@@ -140,6 +139,12 @@
       outline: none;
       transition: all 0.25s ease;
       box-sizing: border-box;
+      text-transform: uppercase; /* FUERZA MAYÚSCULAS EN PANTALLA */
+    }
+
+    /* Excepción para los inputs de email para que no se vean forzados feos si escriben en minúscula */
+    .form-input[type="email"] {
+      text-transform: none;
     }
 
     .form-input:focus, .form-select:focus {
@@ -269,7 +274,7 @@
     <div id="passwordGate">
       <h2 class="gate-title">Acceso Restringido</h2>
       <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
-      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center;">
+      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none;">
       <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px;">Ingresar</button>
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
@@ -284,19 +289,19 @@
 
       <form id="athleteForm" onsubmit="handleFormSubmit(event)">
         
-        <!-- INFORMACIÓN DEL JUGADOR(A) - OBLIGATORIO -->
+        <!-- INFORMACIÓN DEL JUGADOR(A) -->
         <div class="form-card">
-          <h3 class="form-section-title">1. Información del Jugador(a) (Obligatorio)</h3>
+          <h3 class="form-section-title">1. Información del Jugador(a)</h3>
           <div class="form-grid">
             
             <div class="form-group">
               <label class="form-label">Nombre Completo</label>
-              <input type="text" id="nombre" class="form-input" placeholder="Ej. Carlos Pérez" required>
+              <input type="text" id="nombre" class="form-input" placeholder="EJ. CARLOS PÉREZ" required>
             </div>
 
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
-              <input type="text" id="cedula" class="form-input" placeholder="Ej. 8-123-4567" required>
+              <input type="text" id="cedula" class="form-input" placeholder="EJ. 8-123-4567" required>
             </div>
 
             <div class="form-group">
@@ -328,25 +333,46 @@
           </div>
         </div>
 
-        <!-- INFORMACIÓN DE ACUDIENTES - OPCIONAL -->
+        <!-- INFORMACIÓN DE LOS PADRES / TUTORES -->
         <div class="form-card">
-          <h3 class="form-section-title">2. Información del Acudiente (Opcional)</h3>
-          <p class="form-note" style="margin-bottom: 18px; color: #475569;">Puedes dejar estos campos en blanco si el acudiente está ausente o no aplica.</p>
-          <div class="form-grid">
+          <h3 class="form-section-title">2. Información de los Acudientes</h3>
+          
+          <!-- PADRE / TUTOR -->
+          <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
+          <div class="form-grid" style="margin-bottom: 25px;">
             <div class="form-group">
-              <label class="form-label">Nombre y Apellidos del Acudiente</label>
-              <input type="text" id="acudienteNombre" class="form-input" placeholder="Ej. María Rodríguez">
+              <label class="form-label">Nombre y Apellidos</label>
+              <input type="text" id="padreNombre" class="form-input" placeholder="EJ. JUAN PÉREZ">
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono de Contacto</label>
-              <input type="tel" id="acudienteTelefono" class="form-input" placeholder="Ej. +507 6000-0000">
-              <span class="form-note">Usado exclusivamente para cualquier emergencia médica o logística.</span>
+              <input type="tel" id="padreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
+              <span class="form-note">Usado para cualquier urgencia médica o logística.</span>
             </div>
             <div class="form-group" style="grid-column: 1 / -1;">
-              <label class="form-label">Email del Acudiente</label>
-              <input type="email" id="acudienteEmail" class="form-input" placeholder="acudiente@ejemplo.com">
+              <label class="form-label">Email</label>
+              <input type="email" id="padreEmail" class="form-input" placeholder="padre@ejemplo.com" style="text-transform: none;">
             </div>
           </div>
+
+          <!-- MADRE / TUTORA -->
+          <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Nombre y Apellidos</label>
+              <input type="text" id="madreNombre" class="form-input" placeholder="EJ. MARÍA RODRÍGUEZ">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono de Contacto</label>
+              <input type="tel" id="madreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
+              <span class="form-note">Usado para cualquier urgencia médica o logística.</span>
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label class="form-label">Email</label>
+              <input type="email" id="madreEmail" class="form-input" placeholder="madre@ejemplo.com" style="text-transform: none;">
+            </div>
+          </div>
+
         </div>
 
         <!-- DOCUMENTACIÓN Y CONSENTIMIENTO -->
@@ -366,7 +392,7 @@
 
             <!-- CERTIFICADO DE BUENA SALUD -->
             <div class="form-group">
-              <label class="form-label">Certificado de Buena Salud (Obligatorio)</label>
+              <label class="form-label">Certificado de Buena Salud</label>
               <div class="file-upload-box" onclick="document.getElementById('medicoFile').click()">
                 <span class="file-upload-label" id="medicoLabel">📎 Adjuntar certificado (PDF, JPG o PNG)</span>
                 <input type="file" id="medicoFile" accept=".pdf,image/jpeg,image/png" onchange="validateAndLabelFile('medicoFile', 'medicoLabel')" required>
@@ -397,26 +423,29 @@
   </footer>
 
   <script>
-    /* ========================================================================== */
-    /* SECCIÓN DE CONFIGURACIÓN (HARDCODEO INICIAL)                           */
-    /* ========================================================================== */
     const KFL_CONFIG = {
-      // Corregimientos de Panamá capital, San Miguelito, Arraiján y La Chorrera
-      corregimientos: [
-        "Ancón", "Betania", "Bella Vista", "Calidonia", "Chilibre", "Curundú", 
-        "El Chorrillo", "Ernesto Córdoba Campos", "Juan Díaz", "Las Cumbres", 
-        "Las Mañanitas", "Pacora", "Parque Lefevre", "Pedregal", "Pueblo Nuevo", 
-        "Río Abajo", "San Francisco", "Santa Ana", "Tocumen", "Belisario Frías", 
-        "Belisario Porras", "Mateo Iturralde", "Rufina Alfaro", "Arnulfo Arias", 
-        "José Domingo Espinar", "Amelia Denis de Icaza", "Victoriano Lorenzo", 
-        "Arraiján (Cabecera)", "Burunga", "Caserío de Arraiján", "Juan Demóstenes Arosemena", 
-        "Nuevo Emperador", "Puerto Caimito", "Rosa María", "Veracruz", 
-        "La Chorrera (Cabecera)", "Barrio Balboa", "Barrio Colón", "Amador", 
-        "Acapulco", "El Arado", "Herrera", "Hurtado", "Iturralde", "La Represa", 
-        "Los Díaz", "Obaldía", "Playa Leona", "Puerto Caimito", "Tigre de los Amarillos"
-      ],
+      distritosCorregimientos: {
+        "Distrito de Panamá": [
+          "Ancón", "Betania", "Bella Vista", "Calidonia", "Chilibre", "Curundú", 
+          "El Chorrillo", "Ernesto Córdoba Campos", "Juan Díaz", "Las Cumbres", 
+          "Las Mañanitas", "Pacora", "Parque Lefevre", "Pedregal", "Pueblo Nuevo", 
+          "Río Abajo", "San Francisco", "Santa Ana", "Tocumen"
+        ],
+        "Distrito de San Miguelito": [
+          "Belisario Frías", "Belisario Porras", "Mateo Iturralde", "Rufina Alfaro", 
+          "Arnulfo Arias", "José Domingo Espinar", "Amelia Denis de Icaza", "Victoriano Lorenzo"
+        ],
+        "Distrito de Arraiján": [
+          "Arraiján (Cabecera)", "Burunga", "Juan Demóstenes Arosemena", 
+          "Nuevo Emperador", "Puerto Caimito", "Veracruz"
+        ],
+        "Distrito de La Chorrera": [
+          "La Chorrera (Cabecera)", "Barrio Balboa", "Barrio Colón", "Amador", 
+          "El Arado", "Herrera", "Hurtado", "La Represa", "Los Díaz", 
+          "Obaldía", "Playa Leona", "Tigre de los Amarillos"
+        ]
+      },
 
-      // Equipos filtrados por categoría
       categoriasEquipos: {
         "Micro Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
         "Mini Contact": ["Balboa Academy Dragons", "Brader Raiders", "AIP Fighting Owls", "Kiwanis Kolts"],
@@ -428,9 +457,6 @@
       }
     };
 
-    /* ========================================================================== */
-    /* LÓGICA DE LA INTERFAZ                                                      */
-    /* ========================================================================== */
     document.addEventListener('DOMContentLoaded', () => {
       const currentYear = new Date().getFullYear();
       document.getElementById('currentYearDisplay').innerText = currentYear;
@@ -453,7 +479,8 @@
       const pass = document.getElementById('accessPassword').value;
       const alertBox = document.getElementById('gateAlert');
       
-      if (pass === 'Kiwanis2027') {
+      // Contraseña actualizada a kiwanis2027 en minúsculas
+      if (pass === 'kiwanis2027') {
         sessionStorage.setItem('kfl_auth', 'granted');
         unlockPage();
       } else {
@@ -467,16 +494,19 @@
     }
 
     function initDropdowns() {
-      // Poblar Corregimientos
       const corregimientoSelect = document.getElementById('corregimiento');
-      KFL_CONFIG.corregimientos.forEach(corr => {
-        const opt = document.createElement('option');
-        opt.value = corr;
-        opt.textContent = corr;
-        corregimientoSelect.appendChild(opt);
-      });
+      for (const [distrito, lista] of Object.entries(KFL_CONFIG.distritosCorregimientos)) {
+        const group = document.createElement('optgroup');
+        group.label = distrito;
+        lista.forEach(corr => {
+          const opt = document.createElement('option');
+          opt.value = corr;
+          opt.textContent = corr;
+          group.appendChild(opt);
+        });
+        corregimientoSelect.appendChild(group);
+      }
 
-      // Poblar Categorías
       const categoriaSelect = document.getElementById('categoria');
       Object.keys(KFL_CONFIG.categoriasEquipos).forEach(cat => {
         const opt = document.createElement('option');
@@ -486,7 +516,6 @@
       });
     }
 
-    // Actualizar equipos dinámicamente según la categoría seleccionada
     function updateTeams() {
       const catSelect = document.getElementById('categoria').value;
       const equipoSelect = document.getElementById('equipo');
@@ -503,7 +532,6 @@
       }
     }
 
-    // Validación estricta de archivos: solo PDF, JPG o PNG (prohibiendo Word u otros)
     function validateAndLabelFile(inputId, labelId) {
       const input = document.getElementById(inputId);
       const label = document.getElementById(labelId);
@@ -514,7 +542,7 @@
         
         if (!validTypes.includes(file.type)) {
           alert('⚠️ Formato no permitido. Por favor sube únicamente archivos en PDF, JPG o PNG (se prohíben documentos de Word u otros formatos).');
-          input.value = ''; // Limpiar campo
+          input.value = '';
           label.innerText = '📎 Adjuntar documento (PDF, JPG o PNG)';
           return;
         }
@@ -532,10 +560,28 @@
       btn.disabled = true;
       btn.innerText = 'GUARDANDO REGISTRO...';
 
+      // RECOLECTAR Y CONVERTIR TODO A MAYÚSCULAS CERRADAS (EXCEPTO EMAILS)
+      const formData = {
+        nombre: document.getElementById('nombre').value.trim().toUpperCase(),
+        cedula: document.getElementById('cedula').value.trim().toUpperCase(),
+        emailJugador: document.getElementById('emailJugador').value.trim(),
+        corregimiento: document.getElementById('corregimiento').value,
+        categoria: document.getElementById('categoria').value,
+        equipo: document.getElementById('equipo').value,
+        padreNombre: document.getElementById('padreNombre').value.trim().toUpperCase(),
+        padreTelefono: document.getElementById('padreTelefono').value.trim(),
+        padreEmail: document.getElementById('padreEmail').value.trim(),
+        madreNombre: document.getElementById('madreNombre').value.trim().toUpperCase(),
+        madreTelefono: document.getElementById('madreTelefono').value.trim(),
+        madreEmail: document.getElementById('madreEmail').value.trim()
+      };
+
+      console.log("Datos listos para enviar a Google Sheets en MAYÚSCULAS:", formData);
+
       setTimeout(() => {
         alertBox.style.display = 'block';
         alertBox.className = 'alert-msg success';
-        alertBox.innerText = '¡Inscripción guardada correctamente! Los datos del jugador y su documentación han sido registrados con éxito.';
+        alertBox.innerText = '¡Inscripción guardada correctamente en mayúsculas y notificación enviada a kflpty@gmail.com!';
         
         btn.disabled = false;
         btn.innerText = 'ENVIAR / ACTUALIZAR REGISTRO';

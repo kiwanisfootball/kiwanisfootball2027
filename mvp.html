@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* CONTENEDOR PRINCIPAL - 1100px EXACTO (HOMOGÉNEO CON CONÓCENOS) */
+    /* CONTENEDOR PRINCIPAL - 1100px EXACTO (HOMOGÉNEO CON CONÓCENOS Y LIGAS) */
     .mvp-container {
       max-width: 1100px;
       width: 100%;
@@ -29,14 +29,14 @@
                   url('assets/img/mvp-banner.jpg') center/cover no-repeat;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
       margin-bottom: 25px;
-      padding: 50px 30px;
+      padding: 40px 25px 35px 25px;
       color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      gap: 20px;
+      gap: 12px;
       box-sizing: border-box;
     }
 
@@ -49,12 +49,13 @@
 
     .mvp-hero-title {
       font-family: 'Anton', sans-serif;
-      font-size: 44px;
+      font-size: 42px;
       font-weight: 400;
       color: #ffffff;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      margin-bottom: 14px;
+      margin-top: 6px;
+      margin-bottom: 12px;
       text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
       line-height: 1.1;
       display: inline-block;
@@ -74,10 +75,10 @@
       font-weight: 800;
     }
 
-    /* ANIMACIÓN DEL TROFEO PRINCIPAL EN BANNER */
+    /* ANIMACIÓN DEL TROFEO PRINCIPAL - ESCALA PROPORCIONADA */
     .mvp-trophy-wrapper {
-      width: 140px;
-      height: 140px;
+      width: 95px;
+      height: 95px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -89,8 +90,8 @@
     .mvp-trophy-wrapper::before {
       content: '';
       position: absolute;
-      width: 130px;
-      height: 130px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(234, 179, 8, 0.45) 0%, rgba(234, 179, 8, 0) 70%);
       animation: pulseAura 3s ease-in-out infinite alternate;
@@ -100,7 +101,7 @@
     .mvp-trophy-img {
       width: 100%;
       height: auto;
-      filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.65));
+      filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.65));
       animation: buildTrophy 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
                  floatTrophy 3.8s ease-in-out 1.4s infinite alternate;
       transform-origin: center bottom;
@@ -109,32 +110,32 @@
     @keyframes buildTrophy {
       0% {
         opacity: 0;
-        transform: translateY(50px) scale(0.3) rotateX(45deg);
+        transform: translateY(35px) scale(0.3) rotateX(45deg);
         filter: drop-shadow(0 0 0px rgba(234, 179, 8, 0));
       }
       60% {
         opacity: 1;
-        transform: translateY(-8px) scale(1.1) rotateX(0deg);
-        filter: drop-shadow(0 0 25px rgba(234, 179, 8, 0.9));
+        transform: translateY(-6px) scale(1.08) rotateX(0deg);
+        filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.9));
       }
       80% {
-        transform: translateY(3px) scale(0.96);
+        transform: translateY(2px) scale(0.96);
       }
       100% {
         opacity: 1;
         transform: translateY(0) scale(1);
-        filter: drop-shadow(0 0 16px rgba(234, 179, 8, 0.65));
+        filter: drop-shadow(0 0 14px rgba(234, 179, 8, 0.65));
       }
     }
 
     @keyframes floatTrophy {
       0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(-10px) rotate(2deg); filter: drop-shadow(0 0 24px rgba(234, 179, 8, 0.85)); }
+      100% { transform: translateY(-8px) rotate(2deg); filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.85)); }
     }
 
     @keyframes pulseAura {
       0% { transform: scale(0.85); opacity: 0.5; }
-      100% { transform: scale(1.2); opacity: 0.95; }
+      100% { transform: scale(1.18); opacity: 0.95; }
     }
 
     /* BOTONES DE FILTRO EN ANTON */
@@ -206,9 +207,9 @@
       gap: 10px;
     }
 
-    /* ICONO TROFEO SVG EN CABECERAS DE CATEGORÍA */
+    /* ICONO TROFEO SVG EN CABECERAS */
     .cat-header-icon {
-      height: 26px;
+      height: 24px;
       width: auto;
       filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.5));
       vertical-align: middle;
@@ -289,7 +290,7 @@
 
     @media (max-width: 768px) {
       .mvp-container { padding: 15px 10px; }
-      .mvp-hero-banner { padding: 35px 20px; }
+      .mvp-hero-banner { padding: 30px 15px; }
       .mvp-hero-title { font-size: 34px; }
       .mvp-filter-btn { min-width: 45%; font-size: 18px; padding: 12px 10px; }
     }
@@ -352,7 +353,7 @@
       <section class="mvp-category-section" data-category="varsity">
         <div class="mvp-category-header">
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Varsity (U19)
+          Categoría Varsity
         </div>
         <div class="mvp-tables-grid">
           <div class="mvp-table-card">
@@ -393,7 +394,7 @@
       <section class="mvp-category-section" data-category="juvenil">
         <div class="mvp-category-header">
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Juvenil (U16)
+          Categoría Juvenil
         </div>
         <div class="mvp-tables-grid">
           <div class="mvp-table-card">
@@ -434,7 +435,7 @@
       <section class="mvp-category-section" data-category="mini">
         <div class="mvp-category-header">
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Mini (U13)
+          Categoría Mini
         </div>
         <div class="mvp-tables-grid">
           <div class="mvp-table-card">
@@ -475,7 +476,7 @@
       <section class="mvp-category-section" data-category="micro">
         <div class="mvp-category-header">
           <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Micro (U10)
+          Categoría Micro
         </div>
         <div class="mvp-tables-grid">
           <div class="mvp-table-card">
@@ -505,12 +506,12 @@
   </footer>
 
   <script>
-    // URL CSV PUBLICADA DIRECTA DESDE GOOGLE SHEETS
+    // ENLACE CSV PUBLICADO DESDE GOOGLE SHEETS
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?output=csv';
 
     const categoryMap = {
-      'Micro Contact': 'table-micro-contact',
-      'Mini Contact': 'table-mini-contact',
+      'MICRO CONTACT': 'table-micro-contact',
+      'MINI CONTACT': 'table-mini-contact',
       'MINI FLAG': 'table-mini-flag',
       'JUVENIL CONTACT': 'table-juvenil-contact',
       'JUVENIL FLAG': 'table-juvenil-flag',
@@ -542,19 +543,19 @@
       });
     }
 
-    /* CARGADOR Y PARSER TOLERANTE A ENCABEZADOS Y CELDAS COMBINADAS */
+    /* MOTOR ROBUSTO DE LECTURA Y MAPEO DE FILAS */
     async function loadMvpData() {
       try {
         const cacheBusterUrl = `${SHEET_CSV_URL}&_t=${Date.now()}`;
         const res = await fetch(cacheBusterUrl);
-        if (!res.ok) throw new Error('Error conectando con Google Sheets');
+        if (!res.ok) throw new Error('No se pudo conectar con Google Sheets');
         
         const csvText = await res.text();
         const rows = parseCSV(csvText);
 
         if (!rows || rows.length < 2) return;
 
-        // Limpiar estado inicial
+        // Limpiar indicadores de carga en todas las tablas
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el) el.innerHTML = '';
@@ -567,42 +568,61 @@
           const row = rows[i];
           if (!row || row.length === 0) continue;
 
-          // Ignorar filas de encabezado (Categoría, Season, Año, Jugador, etc.)
-          const c0 = (row[0] || '').toLowerCase().trim();
-          const c1 = (row[1] || '').toLowerCase().trim();
+          // Limpieza general de celdas
+          const cleanRow = row.map(c => (c || '').trim());
+          
+          const c0 = cleanRow[0].toLowerCase();
+          const c1 = (cleanRow[1] || '').toLowerCase();
 
+          // Ignorar encabezaados (Categoría, Season, Año, Jugador, etc.)
           if (
-            c0 === 'categoria' || c0 === 'category' || c0 === 'season' || c0 === 'año' || c0 === 'ano' || c0 === 'year' ||
-            c1 === 'season' || c1 === 'año' || c1 === 'ano' || c1 === 'year'
+            c0.includes('categor') || c0.includes('season') || c0.includes('año') || c0.includes('ano') || c0.includes('year') ||
+            c1.includes('season') || c1.includes('año') || c1.includes('ano')
           ) {
             continue;
           }
 
           let catRaw = '', seasonRaw = '', equipo = '', jugador = '';
 
-          if (row.length >= 4) {
-            [catRaw, seasonRaw, equipo, jugador] = row.map(c => c ? c.trim() : '');
-          } else if (row.length === 3) {
-            [seasonRaw, equipo, jugador] = row.map(c => c ? c.trim() : '');
+          // Detección flexible de columnas
+          const matchesCategoryName = Object.keys(categoryMap).some(k => cleanRow[0].toUpperCase().includes(k.split(' ')[0]));
+
+          if (cleanRow.length >= 4 || matchesCategoryName) {
+            catRaw = cleanRow[0];
+            seasonRaw = cleanRow[1];
+            equipo = cleanRow[2];
+            jugador = cleanRow[3];
+          } else {
+            seasonRaw = cleanRow[0];
+            equipo = cleanRow[1];
+            jugador = cleanRow[2];
           }
 
-          // Mantener categoría si viene vacía (celdas combinadas)
           if (catRaw !== '') {
             currentCategory = catRaw;
           }
 
-          // Mantener año si viene vacío (Co-MVPs / celdas combinadas)
           if (seasonRaw !== '') {
             currentSeason = seasonRaw;
           }
 
-          // Evitar insertar filas de títulos repetidas
           if (!jugador || jugador === '' || jugador.toLowerCase() === 'jugador' || jugador.toLowerCase() === 'player') {
             continue;
           }
 
-          const catKey = currentCategory.toUpperCase().trim().replace(/\s+/g, ' ');
-          const targetId = categoryMap[catKey];
+          // Mapear la categoría a la tabla HTML correspondiente
+          const normCat = currentCategory.toUpperCase().trim().replace(/\s+/g, ' ');
+          let targetId = categoryMap[normCat];
+
+          // Búsqueda aproximada si el nombre en la hoja varía ligeramente
+          if (!targetId) {
+            for (const [key, id] of Object.entries(categoryMap)) {
+              if (normCat.includes(key) || key.includes(normCat)) {
+                targetId = id;
+                break;
+              }
+            }
+          }
 
           if (targetId) {
             const tbody = document.getElementById(targetId);
@@ -618,7 +638,7 @@
           }
         }
 
-        // Si alguna tabla quedó vacía
+        // Si alguna tabla no recibió registros en la hoja de cálculo
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el && el.children.length === 0) {
@@ -627,7 +647,7 @@
         });
 
       } catch (err) {
-        console.error('Error cargando datos MVP:', err);
+        console.error('Error cargando MVP desde Google Sheets:', err);
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el) el.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#ef4444;">Error al cargar datos desde Google Sheets.</td></tr>';
@@ -635,7 +655,7 @@
       }
     }
 
-    /* PARSER MANUAL DE CSV RESPETANDO COMILLAS */
+    /* PARSER MANUAL DE CSV RESPETANDO COMILLAS INTERNAS */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);

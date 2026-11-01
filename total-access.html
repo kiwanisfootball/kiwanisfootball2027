@@ -86,6 +86,96 @@
       border-color: #777777;
     }
 
+    /* PÍLDORAS DE CATEGORÍA UNIFICADAS (ESTILO PÍLDORA CON COLOR COMPLETO DE LIGA) */
+    .category-pills-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill-btn {
+      padding: 10px 26px;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      color: #334155;
+      font-weight: 800;
+      font-size: 13px;
+      border-radius: 30px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+
+    body.contact-theme .category-pill-btn.active {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.3);
+    }
+
+    body.flag-theme .category-pill-btn.active {
+      background: #A91C00;
+      color: #ffffff;
+      border-color: #A91C00;
+      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.3);
+    }
+
+    .category-pill-btn:hover:not(.active) {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO DE DONDE ESTAMOS */
+    .sub-tabs-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 15px;
+    }
+
+    .sub-tab-btn {
+      padding: 8px 18px;
+      background: transparent;
+      border: none;
+      color: #64748b;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+
+    .sub-tab-btn.active {
+      color: #19547E;
+    }
+
+    body.flag-theme .sub-tab-btn.active {
+      color: #A91C00;
+    }
+
+    .sub-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -17px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #19547E;
+      border-radius: 3px 3px 0 0;
+    }
+
+    body.flag-theme .sub-tab-btn.active::after {
+      background: #A91C00;
+    }
+
     /* FILTROS Y BOTÓN DE IMPRESIÓN DENTRO DE CALENDARIO */
     .kfl-filter-bar {
       display: flex;
@@ -130,39 +220,6 @@
     .btn-export-pdf:hover {
       opacity: 0.9;
       transform: translateY(-1px);
-    }
-
-    /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO */
-    .sub-tabs-bar {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
-
-    .sub-tab-btn {
-      padding: 10px 20px;
-      background: #f1f5f9;
-      border: 2px solid transparent;
-      color: #334155;
-      font-weight: 700;
-      font-size: 13px;
-      border-radius: 30px;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-    }
-
-    .sub-tab-btn.active {
-      background: #19547E;
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
-    }
-
-    body.flag-theme .sub-tab-btn.active {
-      background: #A91C00;
-      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.25);
     }
 
     /* CONTENEDORES Y ESTRUCTURA DE CARDS */
@@ -442,7 +499,7 @@
       margin-bottom: 40px;
     }
 
-    /* PÍLDORAS DE ESTADÍSTICAS TEMÁTICAS (CONTACT: AZUL KFL | FLAG: ROJO) */
+    /* PÍLDORAS DE ESTADÍSTICAS TEMÁTICAS */
     .stats-buttons-grid {
       display: flex;
       justify-content: center;
@@ -511,30 +568,29 @@
       border-color: #19547E;
     }
 
-    /* BANNER DE NOTA DE ACTUALIZACIÓN EN NEGRO Y DESTACADO */
+    /* BANNER DE NOTA DE ACTUALIZACIÓN EN NEGRO PURO (GRANDE, CENTRADO, SIN FONDO ROJO) */
     .kfl-last-update-banner {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      background: #f1f5f9;
-      color: #0f172a;
-      border: 2px solid #cbd5e1;
-      padding: 14px 22px;
-      border-radius: 10px;
-      font-size: 15px;
+      gap: 12px;
+      background: transparent;
+      color: #000000;
+      padding: 10px 20px;
+      border-radius: 0;
+      font-size: 16px;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      box-shadow: none;
       text-align: center;
     }
 
     .kfl-update-svg {
-      width: 20px;
-      height: 20px;
-      fill: #0f172a;
+      width: 22px;
+      height: 22px;
+      fill: #000000;
       flex-shrink: 0;
     }
 
@@ -642,7 +698,7 @@
     <!-- SECCIÓN DESPLEGABLE -->
     <div id="leagueContentSection" style="display: none;">
       
-      <!-- PÍLDORAS DE CATEGORÍA -->
+      <!-- PÍLDORAS DE CATEGORÍA UNIFICADAS -->
       <section class="category-pills-wrapper">
         <button class="category-pill-btn active" onclick="selectCategory('varsity')">VARSITY</button>
         <button class="category-pill-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
@@ -650,7 +706,7 @@
         <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
       </section>
 
-      <!-- SUB-PESTAÑAS -->
+      <!-- SUB-PESTAÑAS CON INDICADOR VISUAL CLARO -->
       <section class="league-display-wrapper">
         <div class="sub-tabs-bar">
           <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
@@ -689,7 +745,7 @@
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container stats-section-inner">
             
-            <!-- BANNER DE ÚLTIMA ACTUALIZACIÓN (TEXTO Y SVG EN NEGRO) -->
+            <!-- BANNER DE ÚLTIMA ACTUALIZACIÓN (TEXTO Y SVG NEGRO, SIN FONDO ROJO) -->
             <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
               <svg class="kfl-update-svg" viewBox="0 0 24 24">
                 <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
@@ -750,7 +806,6 @@
   <script>
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
-    /* Enlaces CSV por Liga y Categoría (Preparado para separar Contact y Flag en el futuro) */
     const STATS_CSV_LINKS = {
       "contact": {
         "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
@@ -1426,7 +1481,7 @@
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
-                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
                 <span>${equipo}</span>
               </div>
             </td>
@@ -1443,7 +1498,7 @@
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
-                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
                 <span>${equipo}</span>
               </div>
             </td>
@@ -1461,7 +1516,7 @@
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
-                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
                 <span>${equipo}</span>
               </div>
             </td>

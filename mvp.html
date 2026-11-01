@@ -1,4 +1,508 @@
-<script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Most Valuable Players - Kiwanis Football League Panama</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <style>
+    /* CONTENEDOR PRINCIPAL */
+    .mvp-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: 'Avenir', sans-serif;
+    }
+
+    /* HERO BANNER CENTRADO CON FONDO DE MARCA */
+    .mvp-hero-banner {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.82)), 
+                  url('assets/img/mvp-banner.jpg') center/cover no-repeat;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+      margin-bottom: 30px;
+      padding: 50px 30px;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 25px;
+    }
+
+    .mvp-hero-content {
+      max-width: 780px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .mvp-hero-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 44px;
+      font-weight: 400;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+      line-height: 1.1;
+      display: inline-block;
+    }
+
+    .mvp-hero-description {
+      font-family: 'Avenir', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #f8fafc;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+      margin: 0 auto;
+    }
+
+    .mvp-hero-description strong {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    /* ANIMACIÓN DE ENSAMBLAJE Y DESTELLO DEL TROFEO SVG */
+    .mvp-trophy-wrapper {
+      width: 150px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      perspective: 800px;
+    }
+
+    .mvp-trophy-wrapper::before {
+      content: '';
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(234, 179, 8, 0.45) 0%, rgba(234, 179, 8, 0) 70%);
+      animation: pulseAura 3s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    .mvp-trophy-img {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.65));
+      animation: buildTrophy 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+                 floatTrophy 3.8s ease-in-out 1.4s infinite alternate;
+      transform-origin: center bottom;
+    }
+
+    @keyframes buildTrophy {
+      0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.3) rotateX(45deg);
+        filter: drop-shadow(0 0 0px rgba(234, 179, 8, 0));
+      }
+      60% {
+        opacity: 1;
+        transform: translateY(-10px) scale(1.1) rotateX(0deg);
+        filter: drop-shadow(0 0 30px rgba(234, 179, 8, 0.9));
+      }
+      80% {
+        transform: translateY(4px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 0 18px rgba(234, 179, 8, 0.65));
+      }
+    }
+
+    @keyframes floatTrophy {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-12px) rotate(2deg);
+        filter: drop-shadow(0 0 28px rgba(234, 179, 8, 0.85));
+      }
+    }
+
+    @keyframes pulseAura {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1.25);
+        opacity: 0.95;
+      }
+    }
+
+    /* BOTONES DE FILTRO EN ANTON */
+    .mvp-filter-bar {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 35px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .mvp-filter-btn {
+      flex: 1;
+      min-width: 130px;
+      max-width: 200px;
+      background: #f0f4f8;
+      color: #19547E;
+      border: 1px solid #dbe2ea;
+      padding: 14px 18px;
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .mvp-filter-btn:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .mvp-filter-btn.active {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+      box-shadow: 0 6px 16px rgba(25, 84, 126, 0.35);
+    }
+
+    /* SECCIÓN DE CATEGORÍAS EN ANTON */
+    .mvp-category-section {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 30px;
+    }
+
+    .mvp-category-header {
+      font-family: 'Anton', sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.5px;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mvp-tables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    /* TARJETAS Y TABLAS EN AVENIR */
+    .mvp-table-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      font-family: 'Avenir', sans-serif;
+    }
+
+    .mvp-table-title {
+      background: #19547E;
+      color: #ffffff;
+      padding: 12px 16px;
+      font-family: 'Avenir', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .mvp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13.5px;
+      font-family: 'Avenir', sans-serif;
+    }
+
+    .mvp-table th {
+      background: #f8fafc;
+      color: #475569;
+      font-family: 'Avenir', sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 11px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      letter-spacing: 0.5px;
+    }
+
+    .mvp-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid #edf2f7;
+      color: #1e293b;
+      font-weight: 600;
+      font-family: 'Avenir', sans-serif;
+    }
+
+    .mvp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .mvp-table tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .mvp-table tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    .mvp-player-name {
+      color: #19547E;
+      font-weight: 800;
+    }
+
+    @media (max-width: 768px) {
+      .mvp-hero-banner {
+        padding: 35px 20px;
+      }
+      .mvp-hero-title {
+        font-size: 34px;
+      }
+      .mvp-filter-btn {
+        min-width: 45%;
+        font-size: 18px;
+        padding: 12px 10px;
+      }
+    }
+  </style>
+</head>
+<body class="contact-theme">
+
+  <!-- HEADER NAVEGACIÓN -->
+  <header class="header-nav">
+    <nav class="navbar">
+      <a href="index.html" class="nav-logo">
+        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
+      </a>
+
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="conocenos.html">CONÓCENOS</a></li>
+        <li><a href="ligas.html">LIGAS</a></li>
+        <li><a href="fotos.html">FOTOS</a></li>
+        <li><a href="mvp.html" class="active">MVP</a></li>
+        <li><a href="campeones.html">CAMPEONES</a></li>
+        <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
+        <li><a href="total-access.html">TOTAL ACCESS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="mvp-container">
+
+    <!-- HERO BANNER CENTRADO -->
+    <section class="mvp-hero-banner">
+      <div class="mvp-trophy-wrapper">
+        <img src="assets/img/mvp-art.svg" alt="KFL MVP Trophy" class="mvp-trophy-img" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+      </div>
+
+      <div class="mvp-hero-content">
+        <h1 class="mvp-hero-title">Most Valuable Players</h1>
+        <p class="mvp-hero-description">
+          El <strong>MVP (Most Valuable Player)</strong> es el máximo reconocimiento que entrega la <strong>Kiwanis Football League</strong> a sus atletas, por su excepcional desempeño durante la temporada regular de sus respectivas categorías.
+        </p>
+      </div>
+    </section>
+
+    <!-- FILTROS PÍLDORA -->
+    <div class="mvp-filter-bar">
+      <button class="mvp-filter-btn active" onclick="filterCategory('all', this)">TODOS</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('varsity', this)">VARSITY</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('juvenil', this)">JUVENIL</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('mini', this)">MINI</button>
+      <button class="mvp-filter-btn" onclick="filterCategory('micro', this)">MICRO</button>
+    </div>
+
+    <!-- CONTENEDOR DE TABLAS POR CATEGORÍA -->
+    <div id="mvpTablesContainer">
+      
+      <!-- VARSITY -->
+      <section class="mvp-category-section" data-category="varsity">
+        <div class="mvp-category-header">
+          <span>🔥</span> Categoría Varsity (U19)
+        </div>
+        <div class="mvp-tables-grid">
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Varsity Contact</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-varsity-contact">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Varsity Flag</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-varsity-flag">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- JUVENIL -->
+      <section class="mvp-category-section" data-category="juvenil">
+        <div class="mvp-category-header">
+          <span>⚡</span> Categoría Juvenil (U16)
+        </div>
+        <div class="mvp-tables-grid">
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Juvenil Contact</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-juvenil-contact">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Juvenil Flag</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-juvenil-flag">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- MINI -->
+      <section class="mvp-category-section" data-category="mini">
+        <div class="mvp-category-header">
+          <span>🏆</span> Categoría Mini (U13)
+        </div>
+        <div class="mvp-tables-grid">
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Mini Contact</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-mini-contact">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Mini Flag</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-mini-flag">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- MICRO -->
+      <section class="mvp-category-section" data-category="micro">
+        <div class="mvp-category-header">
+          <span>🏈</span> Categoría Micro (U10)
+        </div>
+        <div class="mvp-tables-grid">
+          <div class="mvp-table-card">
+            <div class="mvp-table-title">Micro Contact</div>
+            <table class="mvp-table">
+              <thead>
+                <tr>
+                  <th>Season</th>
+                  <th>Equipo</th>
+                  <th>Jugador</th>
+                </tr>
+              </thead>
+              <tbody id="table-micro-contact">
+                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
     // URL CSV PUBLICADA DESDE GOOGLE SHEETS
     const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?output=csv';
 
@@ -36,7 +540,7 @@
       });
     }
 
-    /* CARGADOR Y PROCESADOR DE CSV CON SOPORTE PARA CELDAS COMBINADAS (CO-MVP) */
+    /* CARGADOR Y PARSER MULTI-COLUMNA ROBUSTO PARA GOOGLE SHEETS */
     async function loadMvpData() {
       try {
         const res = await fetch(SHEET_CSV_URL);
@@ -47,35 +551,35 @@
 
         if (rows.length < 2) return;
 
-        // Limpia los mensajes "Cargando registros..."
+        // Vacía los mensajes de carga predeterminados
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el) el.innerHTML = '';
         });
 
-        // Detecta si la primera columna es "Categoria" o si es hoja directa
-        const isSingleSheet = rows[0][0].toLowerCase().includes('categoria');
-        
         let lastSeenCategory = '';
         let lastSeenSeason = '';
 
-        const startRow = 1; // Omitir cabecera
-
-        for (let i = startRow; i < rows.length; i++) {
+        for (let i = 1; i < rows.length; i++) {
           const row = rows[i];
           if (!row || row.length < 3) continue;
 
           let cat = '', season = '', equipo = '', jugador = '';
 
-          if (isSingleSheet) {
+          if (row.length >= 4) {
             [cat, season, equipo, jugador] = row;
-            if (cat && cat.trim() !== '') lastSeenCategory = cat.trim();
-            else cat = lastSeenCategory;
           } else {
             [season, equipo, jugador] = row;
           }
 
-          // SI EL AÑO VIENE VACÍO POR CELDA COMBINADA (CO-MVP), USAR EL ÚLTIMO AÑO LEÍDO
+          // Rellenar categoría si viene vacía por celda combinada
+          if (cat && cat.trim() !== '') {
+            lastSeenCategory = cat.trim();
+          } else {
+            cat = lastSeenCategory;
+          }
+
+          // Rellenar año si viene vacío por celda combinada (Co-MVP)
           if (season && season.trim() !== '') {
             lastSeenSeason = season.trim();
           } else {
@@ -84,8 +588,7 @@
 
           if (!jugador || jugador.trim() === '') continue;
 
-          // Mapeo e inyección en HTML
-          const catKey = isSingleSheet ? cat.toUpperCase() : 'TODOS';
+          const catKey = cat ? cat.toUpperCase() : '';
           const targetId = categoryMap[catKey];
 
           if (targetId) {
@@ -102,7 +605,7 @@
           }
         }
 
-        // Si alguna tabla quedó sin filas, colocar mensaje informativo
+        // Mensaje por si alguna tabla no tiene registros aún
         Object.values(categoryMap).forEach(id => {
           const el = document.getElementById(id);
           if (el && el.children.length === 0) {
@@ -119,7 +622,7 @@
       }
     }
 
-    /* PARSER MANUAL DE LÍNEAS CSV */
+    /* PARSER MANUAL DE CSV */
     function parseCSV(text) {
       if (!text) return [];
       const lines = text.split(/\r?\n/);
@@ -143,3 +646,5 @@
       });
     }
   </script>
+</body>
+</html>

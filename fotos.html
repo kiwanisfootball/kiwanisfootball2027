@@ -9,28 +9,30 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
+    /* CONTENEDOR FOTOS */
     .fotos-container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 20px;
     }
 
+    /* TARJETA RESEÑA */
     .fotos-header-card {
       background: #ffffff;
       border-radius: 16px;
-      padding: 30px;
+      padding: 35px 30px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       text-align: center;
     }
 
     .fotos-title {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 900;
       color: #19547E;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       letter-spacing: 0.5px;
       border-bottom: 3px solid #19547E;
       display: inline-block;
@@ -39,46 +41,126 @@
 
     .fotos-subtitle {
       font-size: 15px;
+      line-height: 1.7;
       color: #334155;
-      max-width: 680px;
-      margin: 0 auto 15px auto;
-      line-height: 1.6;
+      max-width: 750px;
+      margin: 0 auto 22px auto;
     }
 
-    .btn-fb-main {
+    .fotos-backlink {
+      color: #19547E;
+      font-weight: 800;
+      text-decoration: underline;
+      transition: color 0.2s ease;
+    }
+
+    .fotos-backlink:hover {
+      color: #0f3652;
+    }
+
+    /* BOTÓN PRINCIPAL A FACEBOOK */
+    .btn-fb-official {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       background: #1877f2;
       color: #ffffff;
       font-weight: 800;
-      font-size: 13px;
-      padding: 10px 22px;
-      border-radius: 25px;
+      font-size: 15px;
+      padding: 12px 30px;
+      border-radius: 30px;
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      transition: transform 0.2s ease, background-color 0.2s ease;
+      transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.3);
     }
 
-    .btn-fb-main:hover {
+    .btn-fb-official:hover {
       background: #1464cc;
       transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(24, 119, 242, 0.4);
     }
 
-    .btn-fb-main svg {
-      width: 16px;
-      height: 16px;
+    .btn-fb-official svg {
+      width: 20px;
+      height: 20px;
       fill: #ffffff;
     }
 
-    .fotos-embed-wrapper {
+    /* SECCIÓN DE DIVISIONES Y GALERÍAS */
+    .fotos-categories-section {
       background: #ffffff;
       border-radius: 16px;
-      padding: 25px;
+      padding: 30px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      min-height: 500px;
+      margin-bottom: 30px;
+    }
+
+    .fotos-categories-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .fotos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .foto-cat-card {
+      background: linear-gradient(135deg, #19547E 0%, #0f3652 100%);
+      border-radius: 14px;
+      padding: 24px;
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 160px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .foto-cat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(25, 84, 126, 0.3);
+    }
+
+    .foto-cat-badge {
+      font-size: 11px;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 12px;
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .foto-cat-name {
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .foto-cat-action {
+      font-size: 12px;
+      font-weight: 800;
+      color: #38bdf8;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
   </style>
 </head>
@@ -109,21 +191,72 @@
 
   <main class="fotos-container">
 
+    <!-- CABECERA PRINCIPAL -->
     <section class="fotos-header-card">
-      <h1 class="fotos-title">Álbumes de Fotos KFL</h1>
+      <h1 class="fotos-title">Galería de Fotos KFL</h1>
       <p class="fotos-subtitle">
-        Galerías fotográficas oficial de la Kiwanis Football League en tiempo real, impulsadas por <strong>KFL Total Access</strong> y la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" style="color: #19547E; font-weight:800; text-decoration:underline;">Fundación American Football Films (FAFF)</a>.
+        Revive las coberturas fotográficas oficiales de cada jornada, categoría y evento de la Kiwanis Football League, producidas por <strong>KFL Total Access</strong> y la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" class="fotos-backlink">Fundación American Football Films (FAFF)</a>.
       </p>
-      <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="btn-fb-main">
+      
+      <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="btn-fb-official">
         <svg viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
-        Ver Todos en Facebook ↗
+        Ver Todos los Álbumes en Facebook ↗
       </a>
     </section>
 
-    <!-- INCRUSTACIÓN DINÁMICA AUTOMÁTICA -->
-    <section class="fotos-embed-wrapper">
-      <!-- WIDGET AUTOMÁTICO (SOCIABLEKIT CON ID 61580980794081) -->
-      <div class="sociablekit-facebook-page-photo-albums" data-embed-id="INSERTE_AQUI_EL_EMBED_ID"></div>
+    <!-- ACCESOS POR CATEGORÍA Y JORNADA -->
+    <section class="fotos-categories-section">
+      <h2 class="fotos-categories-title">Galerías por Categoría</h2>
+
+      <div class="fotos-grid">
+        <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="foto-cat-card">
+          <div>
+            <span class="foto-cat-badge">Contacto Juvenil</span>
+            <div class="foto-cat-name">Álbumes U19 Varsity</div>
+          </div>
+          <div class="foto-cat-action">Explorar Fotos en Facebook ↗</div>
+        </a>
+
+        <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="foto-cat-card">
+          <div>
+            <span class="foto-cat-badge">Contacto Intermedio</span>
+            <div class="foto-cat-name">Álbumes U16 Juvenil</div>
+          </div>
+          <div class="foto-cat-action">Explorar Fotos en Facebook ↗</div>
+        </a>
+
+        <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="foto-cat-card">
+          <div>
+            <span class="foto-cat-badge">Contacto Infantil</span>
+            <div class="foto-cat-name">Álbumes U13 Mini</div>
+          </div>
+          <div class="foto-cat-action">Explorar Fotos en Facebook ↗</div>
+        </a>
+
+        <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="foto-cat-card">
+          <div>
+            <span class="foto-cat-badge">Contacto Inicial</span>
+            <div class="foto-cat-name">Álbumes U10 Micro</div>
+          </div>
+          <div class="foto-cat-action">Explorar Fotos en Facebook ↗</div>
+        </a>
+
+        <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="foto-cat-card">
+          <div>
+            <span class="foto-cat-badge">Femenino & Juvenil</span>
+            <div class="foto-cat-name">Álbumes Flag Football</div>
+          </div>
+          <div class="foto-cat-action">Explorar Fotos en Facebook ↗</div>
+        </a>
+
+        <a href="https://www.facebook.com/profile.php?id=61580980794081&sk=photos_albums" target="_blank" rel="noopener noreferrer" class="foto-cat-card">
+          <div>
+            <span class="foto-cat-badge">Eventos Especiales</span>
+            <div class="foto-cat-name">Finales y Premiaciones</div>
+          </div>
+          <div class="foto-cat-action">Explorar Fotos en Facebook ↗</div>
+        </a>
+      </div>
     </section>
 
   </main>
@@ -141,8 +274,5 @@
       }
     });
   </script>
-
-  <!-- SCRIPT PROVEEDOR AUTOMÁTICO -->
-  <script src="https://www.sociablekit.com/app/embed/facebook-page-photo-albums/widget.js" async defer></script>
 </body>
 </html>

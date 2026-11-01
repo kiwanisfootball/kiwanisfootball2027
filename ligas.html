@@ -137,6 +137,7 @@
       width: 100%;
       max-width: 920px;
       margin: 0 auto;
+      padding-bottom: 50px; /* Padding holGado antes del footer en todas las vistas */
     }
 
     .kfl-week-section {
@@ -346,6 +347,7 @@
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 10px rgba(0,0,0,0.04);
       margin-top: 10px;
+      margin-bottom: 20px;
     }
 
     .kfl-table th {
@@ -406,16 +408,18 @@
     }
 
     .stat-type-btn {
-      padding: 10px 18px;
+      padding: 10px 22px;
       background: #ffffff;
       border: 2px solid #19547E;
       color: #19547E;
-      border-radius: 8px;
-      font-family: 'Anton', sans-serif;
-      font-size: 15px;
+      border-radius: 30px;
+      font-family: 'Avenir', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
       letter-spacing: 0.5px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
     }
 
     body.flag-theme .stat-type-btn {
@@ -426,10 +430,12 @@
     .stat-type-btn.active-stat, .stat-type-btn:hover {
       background: #19547E;
       color: #ffffff;
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
     }
 
     body.flag-theme .stat-type-btn.active-stat, body.flag-theme .stat-type-btn:hover {
       background: #A91C00;
+      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.25);
     }
 
     .search-box-stats {
@@ -455,6 +461,48 @@
     .search-stats-input:focus {
       background: #ffffff;
       border-color: #19547E;
+    }
+
+    /* PAGINACIÓN INTERNA (10 EN 10) */
+    .kfl-pagination-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .kfl-page-btn {
+      padding: 6px 12px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .kfl-page-btn.active-page {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+    }
+
+    body.flag-theme .kfl-page-btn.active-page {
+      background: #A91C00;
+      border-color: #A91C00;
+    }
+
+    .kfl-page-btn:hover:not(:disabled) {
+      background: #e2e8f0;
+    }
+
+    .kfl-page-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
 
     @page {
@@ -629,7 +677,9 @@
 
         <!-- ROSTERS -->
         <div class="tab-pane" id="pane-rosters">
-          <div class="rosters-grid" id="rostersGrid"></div>
+          <div class="kfl-render-container">
+            <div class="rosters-grid" id="rostersGrid"></div>
+          </div>
         </div>
 
         <!-- TABLA DE POSICIONES -->
@@ -637,7 +687,7 @@
           <div id="posicionesNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ESTADÍSTICAS (CMS CONECTADO A CSV) -->
+        <!-- ESTADÍSTICAS (CMS CONECTADO A WEB_FINAL Y PAGINACIÓN DE 10 EN 10) -->
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container stats-section-inner">
             
@@ -677,6 +727,9 @@
               </table>
             </div>
 
+            <!-- BARRA DE PAGINACIÓN DE 10 EN 10 -->
+            <div class="kfl-pagination-bar" id="statsPaginationBar"></div>
+
           </div>
         </div>
 
@@ -691,7 +744,7 @@
   <script>
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
-    // Enlaces CSV de Stats por categoría de Contact
+    /* Enlaces CSV apuntando a la pestaña WEB_FINAL o con sus respectivos gids oficiales */
     const STATS_CSV_LINKS = {
       "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
       "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
@@ -700,6 +753,8 @@
     };
 
     let datosStatsGlobal = [];
+    let paginaActualStats = 1;
+    const filasPorPagina = 10;
 
     const SVG_ICONS = {
       calendar: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>`,
@@ -1141,24 +1196,25 @@
       });
     }
 
-    // LÓGICA CMS DE ESTADÍSTICAS CONECTADO A CSV
+    // LÓGICA CMS DE ESTADÍSTICAS CON LECTURA DE WEB_FINAL Y PAGINACIÓN DE 10 EN 10
     function loadStatsData() {
-      // Solo aplicamos CSV dinámico si es Contact Football por ahora
       if (activeLeague !== 'contact') {
         document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
+        document.getElementById('statsPaginationBar').innerHTML = '';
         return;
       }
 
       const csvUrl = STATS_CSV_LINKS[activeCategory];
       if (!csvUrl) return;
 
-      document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas...</td></tr>`;
+      document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas de WEB_FINAL...</td></tr>`;
 
       fetch(csvUrl)
         .then(res => res.text())
         .then(texto => {
-          datosStatsGlobal = parsearCSV(texto);
-          renderizarTablaStats(datosStatsGlobal);
+          datosStatsGlobal = parsearCSVFlexible(texto);
+          paginaActualStats = 1;
+          renderizarTablaStatsPaginada(datosStatsGlobal);
         })
         .catch(err => {
           console.error("Error cargando CSV de Stats:", err);
@@ -1166,71 +1222,111 @@
         });
     }
 
-    function parsearCSV(texto) {
+    function parsearCSVFlexible(texto) {
       const lineas = texto.split('\n');
       const resultado = [];
       if (lineas.length === 0) return resultado;
-      const headers = lineas[0].split(',');
+      
+      const headers = lineas[0].split(',').map(h => h.trim().replace(/"/g, '').toUpperCase());
 
       for (let i = 1; i < lineas.length; i++) {
         if (!lineas[i].trim()) continue;
-        const fila = lineas[i].split(',');
+        const fila = lineas[i].split(',').map(val => val ? val.trim().replace(/"/g, '') : '');
         let obj = {};
         headers.forEach((h, index) => {
-          obj[h.trim().replace(/"/g, '')] = fila[index] ? fila[index].trim().replace(/"/g, '') : '';
+          obj[h] = fila[index] || '';
         });
         resultado.push(obj);
       }
       return resultado;
     }
 
-    function renderizarTablaStats(datos) {
+    function renderizarTablaStatsPaginada(datos) {
       const tbody = document.getElementById('statsTableBody');
+      const paginationBar = document.getElementById('statsPaginationBar');
       tbody.innerHTML = '';
+      paginationBar.innerHTML = '';
 
       if (datos.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">No hay registros disponibles.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 25px; color: #64748b;">No hay registros disponibles en WEB_FINAL.</td></tr>`;
         return;
       }
 
-      datos.forEach((row, index) => {
-        const equipoUpper = (row.EQUIPO || row.Team || "").toUpperCase();
-        const logoUrl = getTeamLogo(equipoUpper);
+      const totalPaginas = Math.ceil(datos.length / filasPorPagina);
+      if (paginaActualStats > totalPaginas) paginaActualStats = totalPaginas;
+      if (paginaActualStats < 1) paginaActualStats = 1;
+
+      const inicio = (paginaActualStats - 1) * filasPorPagina;
+      const fin = inicio + filasPorPagina;
+      const datosPagina = datos.slice(inicio, fin);
+
+      datosPagina.forEach((row, indexRelativo) => {
+        const indiceReal = inicio + indexRelativo;
+        const jugador = row.JUGADOR || row.PLAYER || row.NOMBRE || row.NAME || "-";
+        const equipo = (row.EQUIPO || row.TEAM || row.CLUB || "").toUpperCase();
+        const carries = row.CARRIES || row.CARRY || row.ATT || row.ACARREOS || "0";
+        const yards = row.YARDS || row.YARDAS || row.YDS || row.YDS_NET || "0";
+        const avg = row.AVG || row.PROMEDIO || "0.0";
+        const td = row.TD || row.TDS || row.TOUCHDOWNS || "0";
+        const lng = row.LNG || row.LONG || row.LG || "0";
+        const fum = row.FUM || row.FUMBLES || row.FUMBLE || "0";
+
+        const logoUrl = getTeamLogo(equipo);
 
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td style="text-align: center; font-weight: 700; color: #64748b;">${index + 1}</td>
-          <td style="font-weight: 700; color: #1e293b; text-align: left;">${row.JUGADOR || row.Player || "-"}</td>
+          <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
+          <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
           <td style="text-align: left;">
             <div style="display: flex; align-items: center; gap: 8px;">
-              <img src="${logoUrl}" alt="${equipoUpper}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-              <span style="font-weight: 700; color: #334155;">${equipoUpper}</span>
+              <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+              <span style="font-weight: 700; color: #334155;">${equipo}</span>
             </div>
           </td>
-          <td style="text-align: center;">${row.CARRIES || row.Carries || "0"}</td>
-          <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || row.Yards || "0"}</td>
-          <td style="text-align: center;">${row.AVG || row.Avg || "0.0"}</td>
-          <td style="text-align: center; font-weight: 700;">${row.TD || row.Td || "0"}</td>
-          <td style="text-align: center;">${row.LNG || row.Lng || "0"}</td>
-          <td style="text-align: center;">${row.FUM || row.Fum || "0"}</td>
+          <td style="text-align: center;">${carries}</td>
+          <td style="text-align: center; font-weight: 700; color: #19547E;">${yards}</td>
+          <td style="text-align: center;">${avg}</td>
+          <td style="text-align: center; font-weight: 700;">${td}</td>
+          <td style="text-align: center;">${lng}</td>
+          <td style="text-align: center;">${fum}</td>
         `;
         tbody.appendChild(tr);
       });
+
+      // CONSTRUIR CONTROLES DE PAGINACIÓN (10 EN 10)
+      if (totalPaginas > 1) {
+        let pagHtml = `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats - 1})" ${paginaActualStats === 1 ? 'disabled' : ''}>&laquo; Ant</button>`;
+        
+        for (let p = 1; p <= totalPaginas; p++) {
+          pagHtml += `<button class="kfl-page-btn ${p === paginaActualStats ? 'active-page' : ''}" onclick="cambiarPaginaStats(${p})">${p}</button>`;
+        }
+
+        pagHtml += `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats + 1})" ${paginaActualStats === totalPaginas ? 'disabled' : ''}>Sig &raquo;</button>`;
+        paginationBar.innerHTML = pagHtml;
+      }
+    }
+
+    function cambiarPaginaStats(nuevaPagina) {
+      paginaActualStats = nuevaPagina;
+      renderizarTablaStatsPaginada(datosStatsGlobal);
+      // Opcional: scroll suave hacia arriba de la tabla
+      document.getElementById('statsTable').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function filtrarTablaStats() {
       const filtro = document.getElementById('searchStatInput').value.toLowerCase();
       const filtrados = datosStatsGlobal.filter(item => {
-        const jugador = (item.JUGADOR || item.Player || "").toLowerCase();
-        const equipo = (item.EQUIPO || item.Team || "").toLowerCase();
-        return jugador.includes(filtro) || equipo.includes(filtro);
+        const textValues = Object.values(item).join(' ').toLowerCase();
+        return textValues.includes(filtro);
       });
-      renderizarTablaStats(filtrados);
+      paginaActualStats = 1;
+      renderizarTablaStatsPaginada(filtrados);
     }
 
     function filtrarTipoStat(tipo, btn) {
       document.querySelectorAll('.stat-type-btn').forEach(b => b.classList.remove('active-stat'));
       btn.classList.add('active-stat');
+      // Aquí se pueden rutear diferentes gids o pestañas de stats si las separas por tipo
     }
   </script>
 </body>

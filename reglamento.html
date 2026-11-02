@@ -92,48 +92,58 @@
       box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
     }
 
-    /* ÍNDICE SUPERIOR MODULAR (TARJETAS DE NAVEGACIÓN) */
+/* ÍNDICE SUPERIOR EN FORMATO PÍLDORA (HOMOGÉNEO Y UNA SOLA LÍNEA) */
     .toc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
       margin-bottom: 35px;
     }
 
     .toc-card {
       background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 18px;
+      border: 2px solid #cbd5e1;
+      border-radius: 50px;
+      padding: 12px 18px;
       text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
       transition: all 0.25s ease;
       text-decoration: none;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      overflow: hidden;
     }
 
     .toc-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: #19547E;
-      box-shadow: 0 6px 15px rgba(25, 84, 126, 0.1);
-      background: #f8fafc;
+      background: #f1f5f9;
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.15);
     }
 
     .toc-card-title {
       font-family: 'Anton', sans-serif;
-      font-size: 17px;
+      font-size: 15px;
       color: #19547E;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
+      letter-spacing: 0.4px;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
     }
 
     .toc-card-desc {
-      font-size: 13px;
+      font-size: 11px;
       color: #64748b;
       font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100%;
     }
 
     /* CUERPO PRINCIPAL DEL REGLAMENTO */
@@ -252,7 +262,7 @@
       <input type="text" id="searchRegulations" class="search-input" placeholder="🔍 Escribe una palabra clave (ej. x-man, mercy rule, peso, entrenadores...)" onkeyup="filterRegulations()">
     </div>
 
-    <!-- ÍNDICE SUPERIOR EN TARJETAS (MODULAR Y LIMPIO) -->
+<!-- ÍNDICE SUPERIOR EN PÍLDORAS -->
     <div class="toc-grid">
       <a href="#sec-1" class="toc-card">
         <div class="toc-card-title">1. Introducción</div>
@@ -260,19 +270,19 @@
       </a>
       <a href="#sec-2" class="toc-card">
         <div class="toc-card-title">2. Estructura KFL</div>
-        <div class="toc-card-desc">Definiciones y cumplimiento</div>
+        <div class="toc-card-desc">Definiciones y normas</div>
       </a>
       <a href="#sec-3" class="toc-card">
         <div class="toc-card-title">3. Reglas Generales</div>
         <div class="toc-card-desc">Entrenadores y conducta</div>
       </a>
       <a href="#sec-4" class="toc-card">
-        <div class="toc-card-title">4. Liga de Contacto</div>
-        <div class="toc-card-desc">Pesos, roster y partidos</div>
+        <div class="toc-card-title">4. Liga de Football Americano</div>
+        <div class="toc-card-desc">Conformación de rosters, pesos y otros</div>
       </a>
       <a href="#sec-5" class="toc-card">
-        <div class="toc-card-title">5. Flag Femenino</div>
-        <div class="toc-card-desc">Normas escolares y 5 vs 5</div>
+        <div class="toc-card-title">5. Liga de Flag Football Femenino</div>
+        <div class="toc-card-desc">Conformación de rosters, refuerzos y otros.5</div>
       </a>
     </div>
 

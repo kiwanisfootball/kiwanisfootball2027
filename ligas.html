@@ -86,6 +86,96 @@
       border-color: #777777;
     }
 
+    /* PÍLDORAS DE CATEGORÍA (ESTILO VERDADERO DE PÍLDORA) */
+    .category-pills-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill-btn {
+      padding: 8px 22px;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      color: #334155;
+      font-weight: 800;
+      font-size: 13px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      letter-spacing: 0.5px;
+    }
+
+    body.contact-theme .category-pill-btn.active {
+      background: #19547E;
+      color: #ffffff;
+      border-color: #19547E;
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.3);
+    }
+
+    body.flag-theme .category-pill-btn.active {
+      background: #A91C00;
+      color: #ffffff;
+      border-color: #A91C00;
+      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.3);
+    }
+
+    .category-pill-btn:hover:not(.active) {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO DE DONDE ESTAMOS */
+    .sub-tabs-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 12px;
+    }
+
+    .sub-tab-btn {
+      padding: 8px 18px;
+      background: transparent;
+      border: none;
+      color: #64748b;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+
+    .sub-tab-btn.active {
+      color: #19547E;
+    }
+
+    body.flag-theme .sub-tab-btn.active {
+      color: #A91C00;
+    }
+
+    .sub-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: #19547E;
+      border-radius: 3px 3px 0 0;
+    }
+
+    body.flag-theme .sub-tab-btn.active::after {
+      background: #A91C00;
+    }
+
     /* FILTROS Y BOTÓN DE IMPRESIÓN DENTRO DE CALENDARIO */
     .kfl-filter-bar {
       display: flex;
@@ -337,7 +427,7 @@
       text-transform: uppercase;
     }
 
-    /* TABLA DE POSICIONES CON PADDING INFERIOR ADECUADO */
+    /* TABLA DE POSICIONES */
     .kfl-table {
       width: 100%;
       border-collapse: collapse;
@@ -409,6 +499,7 @@
       margin-bottom: 40px;
     }
 
+    /* PÍLDORAS DE ESTADÍSTICAS */
     .stats-buttons-grid {
       display: flex;
       justify-content: center;
@@ -418,34 +509,38 @@
     }
 
     .stat-type-btn {
-      padding: 10px 22px;
-      background: #ffffff;
-      border: 2px solid #19547E;
-      color: #19547E;
+      padding: 10px 24px;
+      background: #19547E;
+      border: none;
+      color: #ffffff;
       border-radius: 30px;
       font-family: 'Avenir', sans-serif;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
       letter-spacing: 0.5px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-transform: uppercase;
+      opacity: 0.75;
+      box-shadow: none;
     }
 
     body.flag-theme .stat-type-btn {
-      border-color: #A91C00;
-      color: #A91C00;
-    }
-
-    .stat-type-btn.active-stat, .stat-type-btn:hover {
-      background: #19547E;
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
-    }
-
-    body.flag-theme .stat-type-btn.active-stat, body.flag-theme .stat-type-btn:hover {
       background: #A91C00;
-      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.25);
+    }
+
+    .stat-type-btn.active-stat {
+      opacity: 1;
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #19547E;
+      transform: translateY(-1px);
+    }
+
+    body.flag-theme .stat-type-btn.active-stat {
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #A91C00;
+    }
+
+    .stat-type-btn:hover {
+      opacity: 1;
     }
 
     .search-box-stats {
@@ -473,29 +568,29 @@
       border-color: #19547E;
     }
 
-    /* BANNER ROJO DE ÚLTIMA ACTUALIZACIÓN (DESTACADO Y CENTRADO) */
+    /* BANNER DE NOTA DE ACTUALIZACIÓN EN NEGRO PURO (TEXTO E ICONO NEGROS, SIN FONDO ROJO) */
     .kfl-last-update-banner {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
-      background: #A91C00;
-      color: #ffffff;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 800;
+      background: transparent;
+      color: #000000;
+      padding: 6px 15px;
+      border-radius: 0;
+      font-size: 16px;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 22px;
-      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.2);
+      box-shadow: none;
       text-align: center;
     }
 
     .kfl-update-svg {
-      width: 18px;
-      height: 18px;
-      fill: #ffffff;
+      width: 22px;
+      height: 22px;
+      fill: #000000;
       flex-shrink: 0;
     }
 
@@ -544,83 +639,6 @@
     @page {
       size: letter portrait;
       margin: 0.2in;
-    }
-
-    @media print {
-      html, body {
-        height: 100%;
-        overflow: hidden;
-        background: #ffffff !important;
-      }
-
-      body * {
-        visibility: hidden;
-      }
-
-      .header-nav, .leagues-hero-grid, .league-instruction-bar, .reset-selection-wrapper, .category-pills-wrapper, .sub-tabs-bar, .kfl-filter-bar, .site-footer {
-        display: none !important;
-      }
-
-      #leagueContentSection, #pane-calendario, #calendarioNativeContent, #calendarioNativeContent * {
-        visibility: visible;
-      }
-
-      #leagueContentSection {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      .kfl-week-section {
-        margin-bottom: 8px !important;
-        page-break-inside: avoid;
-      }
-
-      .kfl-week-title {
-        font-size: 11px !important;
-        margin-bottom: 4px !important;
-        padding-bottom: 2px !important;
-      }
-
-      .kfl-grid-matches {
-        gap: 6px !important;
-      }
-
-      .kfl-match-card, .kfl-bye-card {
-        box-shadow: none !important;
-        border: 1px solid #94a3b8 !important;
-        page-break-inside: avoid;
-      }
-
-      .kfl-match-header, .kfl-bye-header {
-        padding: 2px 6px !important;
-        font-size: 8px !important;
-      }
-
-      .kfl-match-body, .kfl-bye-body {
-        padding: 4px 6px !important;
-      }
-
-      .kfl-team-logo, .kfl-bye-logo {
-        width: 20px !important;
-        height: 20px !important;
-      }
-
-      .kfl-team-box, .kfl-bye-team-name {
-        font-size: 9px !important;
-      }
-
-      .kfl-score-num {
-        font-size: 12px !important;
-      }
-
-      .kfl-jamboree-body-text {
-        padding: 8px 0 !important;
-        font-size: 11px !important;
-      }
     }
   </style>
 </head>
@@ -688,7 +706,7 @@
         <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
       </section>
 
-      <!-- SUB-PESTAÑAS -->
+      <!-- SUB-PESTAÑAS CON INDICADOR VISUAL CLARO -->
       <section class="league-display-wrapper">
         <div class="sub-tabs-bar">
           <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
@@ -723,11 +741,11 @@
           <div id="posicionesNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ESTADÍSTICAS (CMS CONECTADO A WEB_FINAL Y PAGINACIÓN 10 EN 10) -->
+        <!-- ESTADÍSTICAS -->
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container stats-section-inner">
             
-            <!-- BANNER ROJO DE ÚLTIMA ACTUALIZACIÓN (CELDA A1 DEL SHEET EN FORMATO 12H) -->
+            <!-- BANNER DE ÚLTIMA ACTUALIZACIÓN EN NEGRO PURO -->
             <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
               <svg class="kfl-update-svg" viewBox="0 0 24 24">
                 <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
@@ -735,7 +753,7 @@
               <span id="kflLastUpdateLabel">Sincronizando última actualización...</span>
             </div>
 
-            <!-- BOTONES DE TIPOS DE STATS -->
+            <!-- BOTONES DE TIPOS DE STATS (PÍLDORAS) -->
             <div class="stats-buttons-grid">
               <button onclick="filtrarTipoStat('RUSHING', this)" class="stat-type-btn active-stat" id="btn-stat-rushing">Rushing Stats</button>
               <button onclick="filtrarTipoStat('PASSING', this)" class="stat-type-btn" id="btn-stat-passing">Passing Stats</button>
@@ -789,10 +807,18 @@
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
     const STATS_CSV_LINKS = {
-      "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
-      "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
-      "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
-      "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
+      "contact": {
+        "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
+        "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
+        "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
+        "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
+      },
+      "flag": {
+        "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
+        "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
+        "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
+        "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
+      }
     };
 
     let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
@@ -806,24 +832,25 @@
       pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
     };
 
+    /* RUTAS EXACTAS DE LOGOS EN ASSETS/LOGOS/ */
     const EQUIPOS_LOGOS = {
-      "OWLS": "assets/img/logos/owls.png",
-      "RAIDERS": "assets/img/logos/raiders.png",
-      "EAGLES": "assets/img/logos/eagles.png",
-      "KOLTS": "assets/img/logos/kolts.png",
-      "DRAGONS": "assets/img/logos/dragons.png",
-      "SPARTANS": "assets/img/logos/spartans.png",
-      "LIONS": "assets/img/logos/lions.png"
+      "DRAGONS": "assets/logos/dragons.png",
+      "EAGLES": "assets/logos/eagles.png",
+      "KOLTS": "assets/logos/kolts.png",
+      "LIONS": "assets/logos/lions.png",
+      "OWLS": "assets/logos/owls.png",
+      "RAIDERS": "assets/logos/raiders.png",
+      "SPARTANS": "assets/logos/spartans.png"
     };
 
     const FALLBACK_LOGOS = {
-      "OWLS": "https://i.imgur.com/KRjk1AV.png",
-      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
+      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
       "EAGLES": "https://i.imgur.com/lxfq565.png",
       "KOLTS": "https://i.imgur.com/id2gPdH.png",
-      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
-      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png",
-      "LIONS": "https://i.imgur.com/XQaNhUb.png"
+      "LIONS": "https://i.imgur.com/XQaNhUb.png",
+      "OWLS": "https://i.imgur.com/KRjk1AV.png",
+      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
+      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png"
     };
 
     function getTeamLogo(teamName) {
@@ -930,6 +957,13 @@
       document.querySelectorAll('.category-pill-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
       });
+      
+      // Resetear a RUSHING al cambiar de categoría
+      tipoStatActivo = 'RUSHING';
+      document.querySelectorAll('.stat-type-btn').forEach(b => {
+        b.classList.toggle('active-stat', b.id === 'btn-stat-rushing');
+      });
+
       if (activeLeague) updateActiveView();
     }
 
@@ -1240,17 +1274,17 @@
       });
     }
 
-    // LÓGICA CMS DE ESTADÍSTICAS LEYENDO LA ESTRUCTURA DE WEB_FINAL Y CELDA A1 (12H)
+    // LÓGICA CMS DE ESTADÍSTICAS CON ENLACES SEPARADOS POR LIGA
     function loadStatsData() {
-      if (activeLeague !== 'contact') {
+      const linksLiga = STATS_CSV_LINKS[activeLeague];
+      const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
+
+      if (!csvUrl) {
         document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
         document.getElementById('statsPaginationBar').innerHTML = '';
         document.getElementById('kflLastUpdateLabel').textContent = 'ÚLTIMA ACTUALIZACIÓN: NO DISPONIBLE';
         return;
       }
-
-      const csvUrl = STATS_CSV_LINKS[activeCategory];
-      if (!csvUrl) return;
 
       document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas de WEB_FINAL...</td></tr>`;
 
@@ -1260,7 +1294,6 @@
           const resultadoParseado = parsearWebFinalCSV(texto);
           seccionesStatsGlobal = resultadoParseado.secciones;
           
-          // Extraer y formatear la celda A1 (Última actualización de 24h a 12h AM/PM)
           let rawUpdate = resultadoParseado.ultimaActualizacion || "NO REGISTRADA";
           let formattedUpdate = formatearHora12h(rawUpdate);
           document.getElementById('kflLastUpdateLabel').textContent = formattedUpdate;
@@ -1275,7 +1308,6 @@
     }
 
     function formatearHora12h(textoFecha) {
-      // Intenta convertir un formato tipo "24/06/2026 21:17" o "ÚLTIMA ACTUALIZACIÓN: 24/06/2026 21:17" a 12h
       try {
         let match = textoFecha.match(/(\d{2}\/\d{2}\/\d{4})\s+(\d{2}):(\d{2})/);
         if (match) {
@@ -1284,7 +1316,7 @@
           let minutos = match[3];
           let ampm = horas >= 12 ? 'PM' : 'AM';
           horas = horas % 12;
-          horas = horas ? horas : 12; // la hora '0' debe ser '12'
+          horas = horas ? horas : 12;
           return `ÚLTIMA ACTUALIZACIÓN: ${fecha} ${horas}:${minutos} ${ampm}`;
         }
       } catch(e) {}
@@ -1304,7 +1336,6 @@
         let cols = linea.split(',').map(c => c.trim().replace(/"/g, ''));
         let lineaUnida = cols.join(' ').toUpperCase();
 
-        // Capturar la celda A1 o línea de actualización si existe al inicio
         if (i === 0 || lineaUnida.includes('ACTUALIZACIÓN') || lineaUnida.includes('ACTUALIZACION')) {
           ultimaActualizacion = lineaUnida;
         }
@@ -1452,7 +1483,7 @@
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
                 <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                <span style="font-weight: 700; color: #334155;">${equipo}</span>
+                <span>${equipo}</span>
               </div>
             </td>
             <td style="text-align: center;">${c1}</td>
@@ -1469,7 +1500,7 @@
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
                 <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                <span style="font-weight: 700; color: #334155;">${equipo}</span>
+                <span>${equipo}</span>
               </div>
             </td>
             <td style="text-align: center;">${row.COMP || "0"}</td>
@@ -1487,7 +1518,7 @@
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
                 <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                <span style="font-weight: 700; color: #334155;">${equipo}</span>
+                <span>${equipo}</span>
               </div>
             </td>
             <td style="text-align: center; font-weight: 700; color: #19547E;">${row.TOTAL || row.TACKLES || "0"}</td>

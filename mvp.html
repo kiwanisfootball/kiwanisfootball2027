@@ -244,7 +244,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* CONTENEDOR DIRECTO SOBRE EL BG (SIN TARJETA BLANCA EXTERNA) */
+    /* ARQUITECTURA IDÉNTICA A LA TABLA DE STATS */
     .mvp-category-section {
       display: none;
       margin-bottom: 35px;
@@ -258,51 +258,53 @@
       width: 100%;
     }
 
-    .mvp-table-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      font-family: 'Avenir', sans-serif !important;
-    }
-
-    .mvp-table {
+    .kfl-table {
       width: 100%;
       border-collapse: collapse;
-      text-align: left;
-      font-size: 14px;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-top: 10px;
+      margin-bottom: 20px;
       font-family: 'Avenir', sans-serif !important;
       table-layout: fixed;
     }
 
-    .mvp-table th:nth-child(1),
-    .mvp-table td:nth-child(1) { width: 18%; }
+    .kfl-table th:nth-child(1),
+    .kfl-table td:nth-child(1) { width: 22%; }
 
-    .mvp-table th:nth-child(2),
-    .mvp-table td:nth-child(2) { width: 41%; }
+    .kfl-table th:nth-child(2),
+    .kfl-table td:nth-child(2) { width: 39%; }
 
-    .mvp-table th:nth-child(3),
-    .mvp-table td:nth-child(3) { width: 41%; }
+    .kfl-table th:nth-child(3),
+    .kfl-table td:nth-child(3) { width: 39%; }
 
-    /* HEADERS DE TABLA ESTRICTAMENTE EN AVENIR (NEGRITA) */
-    .mvp-table th {
-      background: #f8fafc;
-      color: #475569;
+    .kfl-table th {
+      background: #19547E;
+      color: #ffffff;
+      padding: 14px 16px;
       font-family: 'Avenir', sans-serif !important;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       text-transform: uppercase;
-      padding: 14px 16px;
-      border-bottom: 2px solid #cbd5e1;
       letter-spacing: 0.5px;
+      text-align: left;
+      cursor: default;
     }
 
-    .mvp-table td {
+    body.flag-theme-active .kfl-table th {
+      background: #C53030 !important;
+    }
+
+    .kfl-table td {
       padding: 14px 16px;
-      border-bottom: 1px solid #e2e8f0;
-      color: #1e293b;
+      text-align: left;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
       font-weight: 600;
+      color: #334155;
       font-family: 'Avenir', sans-serif !important;
       white-space: nowrap;
       overflow: hidden;
@@ -311,14 +313,35 @@
       background: #ffffff;
     }
 
-    /* SEPARACIÓN CLARA ENTRE AÑOS (LÍNEA INFERIOR MÁS FUERTE EN EL ÚLTIMO TR DE CADA GRUPO) */
-    .mvp-table tr.year-group-end td {
-      border-bottom: 2px solid #94a3b8 !important;
+    .kfl-table tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    .kfl-table-team-cell {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-align: left;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .kfl-table-team-logo {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+      flex-shrink: 0;
     }
 
     .mvp-player-name {
       color: #19547E;
       font-weight: 800;
+    }
+
+    body.flag-theme-active .mvp-player-name {
+      color: #C53030;
     }
 
     .mvp-select-prompt {
@@ -400,80 +423,72 @@
       <!-- VARSITY -->
       <section class="mvp-category-section" data-category="varsity" style="display: none;">
         <div class="mvp-single-table-container">
-          <div class="mvp-table-card">
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-varsity">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <table class="kfl-table">
+            <thead>
+              <tr>
+                <th>Season</th>
+                <th>Equipo</th>
+                <th>Jugador</th>
+              </tr>
+            </thead>
+            <tbody id="table-varsity">
+              <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
       <!-- JUVENIL -->
       <section class="mvp-category-section" data-category="juvenil" style="display: none;">
         <div class="mvp-single-table-container">
-          <div class="mvp-table-card">
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-juvenil">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <table class="kfl-table">
+            <thead>
+              <tr>
+                <th>Season</th>
+                <th>Equipo</th>
+                <th>Jugador</th>
+              </tr>
+            </thead>
+            <tbody id="table-juvenil">
+              <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
       <!-- MINI -->
       <section class="mvp-category-section" data-category="mini" style="display: none;">
         <div class="mvp-single-table-container">
-          <div class="mvp-table-card">
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-mini">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <table class="kfl-table">
+            <thead>
+              <tr>
+                <th>Season</th>
+                <th>Equipo</th>
+                <th>Jugador</th>
+              </tr>
+            </thead>
+            <tbody id="table-mini">
+              <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
       <!-- MICRO -->
       <section class="mvp-category-section" data-category="micro" style="display: none;">
         <div class="mvp-single-table-container">
-          <div class="mvp-table-card">
-            <table class="mvp-table">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th>Equipo</th>
-                  <th>Jugador</th>
-                </tr>
-              </thead>
-              <tbody id="table-micro">
-                <tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <table class="kfl-table">
+            <thead>
+              <tr>
+                <th>Season</th>
+                <th>Equipo</th>
+                <th>Jugador</th>
+              </tr>
+            </thead>
+            <tbody id="table-micro">
+              <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -510,7 +525,7 @@
     });
   </script>
 
-  <!-- LÓGICA DE MVP -->
+  <!-- LÓGICA DE MVP & MAPEO DE LOGOS -->
   <script>
     const SHEETS_CONFIG = {
       contact: {
@@ -527,6 +542,58 @@
       }
     };
 
+    /* MAPEO DE NOMBRES LARGOS DE EQUIPOS A LOGOS DE LA CARPETA ASSETS/LOGOS */
+    const TEAM_LOGOS_MAP = {
+      "A.I.P FIGHTING OWLS": "assets/logos/owls.png",
+      "OWLS": "assets/logos/owls.png",
+      "BRADER RAIDERS": "assets/logos/raiders.png",
+      "RAIDERS": "assets/logos/raiders.png",
+      "KIWANIS KOLTS": "assets/logos/kolts.png",
+      "KOLTS": "assets/logos/kolts.png",
+      "LA SALLE SPARTANS": "assets/logos/spartans.png",
+      "SPARTANS": "assets/logos/spartans.png",
+      "BALBOA DRAGONS": "assets/logos/dragons.png",
+      "DRAGONS": "assets/logos/dragons.png",
+      "METS EAGLES": "assets/logos/eagles.png",
+      "EAGLES": "assets/logos/eagles.png",
+      "ESCLAVAS": "assets/logos/esclavas.png",
+      "PANTERS": "assets/logos/panters.png",
+      "BLACK TIGERS": "assets/logos/black-tigers.png"
+    };
+
+    const FALLBACK_LOGOS = {
+      "OWLS": "https://i.imgur.com/KRjk1AV.png",
+      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
+      "KOLTS": "https://i.imgur.com/id2gPdH.png",
+      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png",
+      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
+      "EAGLES": "https://i.imgur.com/lxfq565.png"
+    };
+
+    function getTeamLogoAndShortName(fullTeamName) {
+      const clean = (fullTeamName || "").toUpperCase().trim();
+      let shortName = clean;
+      let logoUrl = "https://i.imgur.com/wrPDjDN.png";
+
+      for (const [key, path] of Object.entries(TEAM_LOGOS_MAP)) {
+        if (clean.includes(key)) {
+          logoUrl = path;
+          // Extraer nombre corto principal
+          if (key.includes("OWLS")) shortName = "OWLS";
+          else if (key.includes("RAIDERS")) shortName = "RAIDERS";
+          else if (key.includes("KOLTS")) shortName = "KOLTS";
+          else if (key.includes("SPARTANS")) shortName = "SPARTANS";
+          else if (key.includes("DRAGONS")) shortName = "DRAGONS";
+          else if (key.includes("EAGLES")) shortName = "EAGLES";
+          else if (key.includes("ESCLAVAS")) shortName = "ESCLAVAS";
+          else if (key.includes("PANTERS")) shortName = "PANTERS";
+          else if (key.includes("BLACK TIGERS")) shortName = "BLACK TIGERS";
+          break;
+        }
+      }
+      return { shortName, logoUrl, fallbackUrl: FALLBACK_LOGOS[shortName] || "https://i.imgur.com/wrPDjDN.png" };
+    }
+
     let currentModality = null;
     let currentCategory = null;
 
@@ -540,8 +607,10 @@
 
       if (modality === 'contact') {
         btnElement.classList.add('active', 'contact-theme-btn');
+        document.body.classList.remove('flag-theme-active');
       } else {
         btnElement.classList.add('active', 'flag-theme-btn');
+        document.body.classList.add('flag-theme-active');
       }
 
       document.querySelectorAll('.mvp-filter-btn').forEach(btn => {
@@ -596,7 +665,7 @@
         if (!config) continue;
 
         const tbody = document.getElementById(config.targetId);
-        if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>';
+        if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>';
 
         try {
           const cacheBusterUrl = `${config.url}&_t=${Date.now()}`;
@@ -614,7 +683,7 @@
       }
     }
 
-    /* RENDERIZADO CON ROWSPAN PERFECTO PARA CO-MVPS Y LÍNEA DIVISORA POR AÑO */
+    /* RENDERIZADO CON ROWSPAN Y LOGOS EN TABLAS ESTILO STATS */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -679,22 +748,25 @@
 
         for (let k = 0; k < group.length; k++) {
           const tr = document.createElement('tr');
+          const teamInfo = getTeamLogoAndShortName(group[k].equipo);
           
-          // Añadir clase separadora al último elemento del grupo de año
-          if (k === group.length - 1) {
-            tr.className = 'year-group-end';
-          }
-          
+          const teamCellHtml = `
+            <div class="kfl-table-team-cell">
+              <img src="${teamInfo.logoUrl}" alt="${teamInfo.shortName}" class="kfl-table-team-logo" onerror="this.src='${teamInfo.fallbackUrl}'">
+              <span>${teamInfo.shortName}</span>
+            </div>
+          `;
+
           if (k === 0) {
             tr.innerHTML = `
               <td rowspan="${group.length}" style="font-weight: 800; vertical-align: middle;">${currentSeason}</td>
-              <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
-              <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
+              <td>${teamCellHtml}</td>
+              <td class="mvp-player-name">${group[k].jugador}</td>
             `;
           } else {
             tr.innerHTML = `
-              <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
-              <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
+              <td>${teamCellHtml}</td>
+              <td class="mvp-player-name">${group[k].jugador}</td>
             `;
           }
           tbody.appendChild(tr);
@@ -707,7 +779,7 @@
     function renderEmptyState(targetId, message) {
       const tbody = document.getElementById(targetId);
       if (tbody) {
-        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8;">${message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">${message}</td></tr>`;
       }
     }
 

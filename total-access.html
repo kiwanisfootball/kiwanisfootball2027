@@ -534,28 +534,8 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER NAVEGACIÓN -->
-  <header class="header-nav">
-    <nav class="navbar">
-      <a href="index.html" class="nav-logo">
-        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
-      </a>
-
-      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
-
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="conocenos.html">CONÓCENOS</a></li>
-        <li><a href="ligas.html">LIGAS</a></li>
-        <li><a href="fotos.html">FOTOS</a></li>
-        <li><a href="mvp.html">MVP</a></li>
-        <li><a href="campeones.html">CAMPEONES</a></li>
-        <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
-        <li><a href="total-access.html" class="active">TOTAL ACCESS</a></li>
-        <li><a href="contacto.html">CONTACTO</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- HEADER GLOBAL INYECTADO -->
+  <header class="header-nav" id="globalNav"></header>
 
   <main class="ta-container">
 
@@ -654,10 +634,39 @@
     </div>
   </div>
 
-  <footer class="site-footer">
-    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
-  </footer>
+  <!-- FOOTER GLOBAL INYECTADO -->
+  <div id="globalFooter"></div>
 
+  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inyectar Navbar desde nav.html
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalNav').innerHTML = data;
+          
+          // Activar menú hamburguesa dinámicamente tras cargar
+          const hamburgerBtn = document.getElementById('hamburgerBtn');
+          const navMenu = document.getElementById('navMenu');
+          if (hamburgerBtn && navMenu) {
+            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+          }
+        });
+
+      // Inyectar Footer desde footer.html
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalFooter').innerHTML = data;
+        });
+
+      checkActiveLiveStream();
+      loadCurrentFilterData();
+    });
+  </script>
+
+  <!-- LÓGICA DE YOUTUBE & TOTAL ACCESS -->
   <script>
     const YOUTUBE_API_KEY = 'AIzaSyBEjzSqVt1VdAZW8swDi215B4c4_IBnWR8';
     const CHANNEL_ID = 'UCCfOFTqXpHgxkPo0Poc0Mew';
@@ -666,17 +675,6 @@
     let cacheUploads = { items: [], pageToken: '', hasMore: true };
     let cacheCompletedLives = { items: [], pageToken: '', hasMore: true };
     let currentFilter = 'all';
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const navMenu = document.getElementById('navMenu');
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-      }
-
-      checkActiveLiveStream();
-      loadCurrentFilterData();
-    });
 
     /* DETECTOR RIGUROSO DE CATEGORÍA */
     function getCategoryForTitle(title, description = '') {
@@ -787,7 +785,6 @@
               const title = snippet.title || 'Video KFL';
               const description = snippet.description || '';
               
-              // Si el snippet trae metadata explicita de directos, forzar 'live'
               let cat = getCategoryForTitle(title, description);
               if (snippet.liveBroadcastContent === 'completed' || snippet.liveBroadcastContent === 'live') {
                 cat = 'live';
@@ -862,7 +859,6 @@
       if (currentFilter === 'live') {
         listToRender = cacheCompletedLives.items;
       } else {
-        // Exclusión estricta de cualquier transmisión en vivo en las pestañas "Todos los videos", "Show" y "Partidos & Highlights"
         listToRender = cacheUploads.items.filter(v => {
           if (v.category === 'live') return false; 
           if (currentFilter === 'show') return v.category === 'show';

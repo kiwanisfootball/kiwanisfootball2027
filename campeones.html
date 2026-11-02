@@ -244,7 +244,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ARQUITECTURA IDÉNTICA A LA TABLA DE STATS Y MVP */
+    /* ARQUITECTURA DE TABLA CON ANCHOS EXACTOS E IGUALITARIOS PARA CAMPEÓN Y SUBCAMPEÓN */
     .champs-category-section {
       display: none;
       margin-bottom: 35px;
@@ -272,6 +272,7 @@
       table-layout: fixed;
     }
 
+    /* ANCHOS EXACTOS: SEASON 22%, CAMPEÓN 39%, SUBCAMPEÓN 39% */
     .kfl-table th:nth-child(1),
     .kfl-table td:nth-child(1) { width: 22%; }
 
@@ -347,7 +348,7 @@
     }
 
     body.flag-theme-active .champs-team-name {
-      color: #1e293b; /* Mantener limpio o destacar si se desea */
+      color: #1e293b;
     }
 
     /* MENSAJES INICIALES */
@@ -400,7 +401,7 @@
       <div class="champs-hero-content">
         <h1 class="champs-hero-title">Campeones KFL</h1>
         <p class="champs-hero-description">
-          Vitrina histórica de la <strong>Kiwanis Football League</strong>. Explora todos los equipos campeones y subcampeones que han dejado su legado en la historia del emparrillado panameño.
+          Vitrina histórica de la <strong>Kiwanis Football League</strong>. Explora todos los equipos campeones y subcampeones que han dejado su legado a lo largo de los años.
         </p>
       </div>
     </section>
@@ -538,23 +539,19 @@
     });
   </script>
 
-  <!-- LÓGICA DE CAMPEONES & MAPEO DE LOGOS -->
+  <!-- LÓGICA DE CAMPEONES CON LAS URLS CONECTADAS -->
   <script>
-    /* 
-      TODO: Reemplaza estas URLs con los enlaces CSV publicados de tus hojas de Campeones 
-      (Formato: &output=csv)
-    */
     const SHEETS_CONFIG = {
       contact: {
-        varsity: { targetId: 'table-varsity', url: 'AQUÍ_URL_CSV_VARSITY_CONTACT' },
-        juvenil: { targetId: 'table-juvenil', url: 'AQUÍ_URL_CSV_JUVENIL_CONTACT' },
-        mini: { targetId: 'table-mini', url: 'AQUÍ_URL_CSV_MINI_CONTACT' },
-        micro: { targetId: 'table-micro', url: 'AQUÍ_URL_CSV_MICRO_CONTACT' }
+        varsity: { targetId: 'table-varsity', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1851185525&single=true&output=csv' },
+        juvenil: { targetId: 'table-juvenil', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1923785476&single=true&output=csv' },
+        mini: { targetId: 'table-mini', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1354661673&single=true&output=csv' },
+        micro: { targetId: 'table-micro', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=0&single=true&output=csv' }
       },
       flag: {
-        varsity: { targetId: 'table-varsity', url: 'AQUÍ_URL_CSV_VARSITY_FLAG' },
-        juvenil: { targetId: 'table-juvenil', url: 'AQUÍ_URL_CSV_JUVENIL_FLAG' },
-        mini: { targetId: 'table-mini', url: 'AQUÍ_URL_CSV_MINI_FLAG' },
+        varsity: { targetId: 'table-varsity', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1617652434&single=true&output=csv' },
+        juvenil: { targetId: 'table-juvenil', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1984583554&single=true&output=csv' },
+        mini: { targetId: 'table-mini', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1736736585&single=true&output=csv' },
         micro: null
       }
     };
@@ -680,7 +677,7 @@
       const modalityMap = SHEETS_CONFIG[currentModality];
 
       for (const [catKey, config] of Object.entries(modalityMap)) {
-        if (!config || !config.url || config.url.includes('AQUÍ_URL')) continue;
+        if (!config || !config.url) continue;
 
         const tbody = document.getElementById(config.targetId);
         if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>';

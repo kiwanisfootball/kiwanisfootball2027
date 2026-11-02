@@ -244,7 +244,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ARQUITECTURA DE TABLA CON ANCHOS EXACTOS E IGUALITARIOS PARA CAMPEÓN Y SUBCAMPEÓN */
+    /* ARQUITECTURA DE TABLA CON ANCHOS EXACTOS E IGUALITARIOS */
     .champs-category-section {
       display: none;
       margin-bottom: 35px;
@@ -272,7 +272,6 @@
       table-layout: fixed;
     }
 
-    /* ANCHOS EXACTOS: SEASON 22%, CAMPEÓN 39%, SUBCAMPEÓN 39% */
     .kfl-table th:nth-child(1),
     .kfl-table td:nth-child(1) { width: 22%; }
 
@@ -539,7 +538,7 @@
     });
   </script>
 
-  <!-- LÓGICA DE CAMPEONES CON LAS URLS CONECTADAS -->
+  <!-- LÓGICA DE CAMPEONES & MAPEO DE LOGOS -->
   <script>
     const SHEETS_CONFIG = {
       contact: {
@@ -552,11 +551,11 @@
         varsity: { targetId: 'table-varsity', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1617652434&single=true&output=csv' },
         juvenil: { targetId: 'table-juvenil', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1984583554&single=true&output=csv' },
         mini: { targetId: 'table-mini', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1736736585&single=true&output=csv' },
-        micro: null
+        micro: { targetId: 'table-micro', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1922547672&single=true&output=csv' }
       }
     };
 
-    /* MAPEO DE NOMBRES LARGOS A LOGOS */
+    /* MAPEO DE NOMBRES LARGOS A LOGOS (INCLUYENDO ESCLAVAS, SAINTS, LIONS, KOBRAS, ETC.) */
     const TEAM_LOGOS_MAP = {
       "A.I.P FIGHTING OWLS": "assets/logos/owls.png",
       "OWLS": "assets/logos/owls.png",
@@ -571,10 +570,14 @@
       "METS EAGLES": "assets/logos/eagles.png",
       "EAGLES": "assets/logos/eagles.png",
       "ESCLAVAS": "assets/logos/esclavas.png",
+      "SLAVES": "assets/logos/esclavas.png",
+      "SAINTS": "assets/logos/saints.png",
+      "LIONS": "assets/logos/lions.png",
       "PANTERS": "assets/logos/panters.png",
       "PANTHER": "assets/logos/panters.png",
       "ATENEA": "assets/logos/panters.png",
-      "BLACK TIGERS": "assets/logos/black-tigers.png"
+      "BLACK TIGERS": "assets/logos/black-tigers.png",
+      "KOBRAS": "assets/logos/kobras.png"
     };
 
     const FALLBACK_LOGOS = {
@@ -600,9 +603,12 @@
           else if (key.includes("SPARTANS")) keyMatched = "SPARTANS";
           else if (key.includes("DRAGONS")) keyMatched = "DRAGONS";
           else if (key.includes("EAGLES")) keyMatched = "EAGLES";
-          else if (key.includes("ESCLAVAS")) keyMatched = "ESCLAVAS";
+          else if (key.includes("ESCLAVAS") || key.includes("SLAVES")) keyMatched = "ESCLAVAS";
+          else if (key.includes("SAINTS")) keyMatched = "SAINTS";
+          else if (key.includes("LIONS")) keyMatched = "LIONS";
           else if (key.includes("PANTERS") || key.includes("PANTHER") || key.includes("ATENEA")) keyMatched = "PANTERS";
           else if (key.includes("BLACK TIGERS")) keyMatched = "BLACK TIGERS";
+          else if (key.includes("KOBRAS")) keyMatched = "KOBRAS";
           break;
         }
       }
@@ -643,12 +649,9 @@
         sec.style.display = 'none';
       });
 
+      // Micro Flag habilitado correctamente
       const microBtn = document.getElementById('filter-micro');
-      if (modality === 'flag') {
-        microBtn.style.display = 'none';
-      } else {
-        microBtn.style.display = 'block';
-      }
+      if (microBtn) microBtn.style.display = 'block';
 
       loadModalityData();
     }

@@ -14,8 +14,8 @@
 </head>
 <body>
 
-  <!-- 1. HEADER DINÁMICO (Inyectado por js/components.js) -->
-  <div id="global-header"></div>
+  <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
+  <header class="header-nav" id="globalNav"></header>
 
   <main>
     <!-- 2. TICKER DE MARCADORES CON LOGOS -->
@@ -129,7 +129,7 @@
         </div>
 
         <div class="slide">
-          <a href="inscripcion.html">
+          <a href="registro-jugadores.html">
             <img src="assets/img/banner-promo-2.jpg" alt="Inscripciones Abiertas Temporada 2026">
           </a>
         </div>
@@ -249,11 +249,52 @@
     </section>
   </main>
 
-  <!-- 9. FOOTER DINÁMICO (Inyectado por js/components.js) -->
-  <div id="global-footer"></div>
+  <!-- 9. FOOTER GLOBAL (Inyectado automáticamente) -->
+  <div id="globalFooter"></div>
 
-  <!-- COMPONENTE NAVEGACIÓN + FOOTER DÍNÁMICO -->
-  <script src="js/components.js"></script>
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inyectar Navbar desde nav.html
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalNav').innerHTML = data;
+          
+          // Activar menú hamburguesa dinámicamente tras cargar
+          const hamburgerBtn = document.getElementById('hamburgerBtn');
+          const navMenu = document.getElementById('navMenu');
+          if (hamburgerBtn && navMenu) {
+            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+          }
+        });
+
+      // Inyectar Footer desde footer.html
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalFooter').innerHTML = data;
+        });
+
+      // Botón volver arriba
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
 
   <!-- SCRIPTS ESPECÍFICOS DE LA PÁGINA (GSAP + SLIDESHOW) -->
   <script>

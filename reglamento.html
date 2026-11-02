@@ -92,10 +92,10 @@
       box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
     }
 
-/* ÍNDICE SUPERIOR EN FORMATO PÍLDORA (HOMOGÉNEO Y UNA SOLA LÍNEA) */
+/* ÍNDICE SUPERIOR EN FORMATO PÍLDORA (MULTIPÁGINA / SALTO DE LÍNEA AUTOMÁTICO) */
     .toc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 12px;
       margin-bottom: 35px;
     }
@@ -104,7 +104,7 @@
       background: #ffffff;
       border: 2px solid #cbd5e1;
       border-radius: 50px;
-      padding: 12px 18px;
+      padding: 12px 16px;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.03);
       transition: all 0.25s ease;
@@ -113,7 +113,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      height: auto;
+      min-height: 72px;
+      box-sizing: border-box;
     }
 
     .toc-card:hover {
@@ -125,14 +127,12 @@
 
     .toc-card-title {
       font-family: 'Anton', sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       color: #19547E;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
       margin-bottom: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.2;
       width: 100%;
     }
 
@@ -140,9 +140,7 @@
       font-size: 11px;
       color: #64748b;
       font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.2;
       width: 100%;
     }
 

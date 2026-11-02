@@ -15,7 +15,7 @@
       width: 100%;
       margin: 0 auto;
       padding: 20px;
-      font-family: 'Avenir', sans-serif;
+      font-family: 'Avenir', sans-serif !important;
       box-sizing: border-box;
     }
 
@@ -244,42 +244,16 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SECCIÓN DE CATEGORÍAS */
+    /* CONTENEDOR DIRECTO SOBRE EL BG (SIN TARJETA BLANCA EXTERNA) */
     .mvp-category-section {
       display: none;
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 30px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin-bottom: 25px;
+      margin-bottom: 35px;
       width: 100%;
       box-sizing: border-box;
     }
 
-    .mvp-category-header {
-      font-family: 'Anton', sans-serif !important;
-      font-size: 24px;
-      letter-spacing: 0.5px;
-      color: #19547E;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #e2e8f0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cat-header-icon {
-      height: 24px;
-      width: auto;
-      filter: drop-shadow(0 2px 4px rgba(234, 179, 8, 0.5));
-      vertical-align: middle;
-    }
-
     .mvp-single-table-container {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
       width: 100%;
     }
@@ -289,16 +263,16 @@
       border: 1px solid #e2e8f0;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       font-family: 'Avenir', sans-serif !important;
     }
 
     .mvp-table-title {
       background: #19547E;
       color: #ffffff;
-      padding: 12px 16px;
+      padding: 14px 18px;
       font-family: 'Anton', sans-serif !important;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -350,18 +324,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       vertical-align: middle;
+      background: #ffffff;
     }
 
-    /* SEPARACIÓN CLARA ENTRE AÑOS Y BLOQUES */
-    .mvp-table tr.block-separator td {
-      border-bottom: 2.5px solid #cbd5e1 !important;
-    }
-
-    .mvp-table tr.block-even {
-      background-color: #f8fafc;
-    }
-    .mvp-table tr.block-odd {
-      background-color: #ffffff;
+    /* SEPARACIÓN CLARA Y LÍNEA DIVISORA COMPLETA ENTRE AÑOS */
+    .mvp-table tr.year-row-separator td {
+      border-bottom: 2px solid #cbd5e1 !important;
     }
 
     .mvp-player-name {
@@ -447,10 +415,6 @@
 
       <!-- VARSITY -->
       <section class="mvp-category-section" data-category="varsity" style="display: none;">
-        <div class="mvp-category-header">
-          <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Varsity
-        </div>
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
             <div class="mvp-table-title" id="title-varsity">Varsity Contact</div>
@@ -472,10 +436,6 @@
 
       <!-- JUVENIL -->
       <section class="mvp-category-section" data-category="juvenil" style="display: none;">
-        <div class="mvp-category-header">
-          <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Juvenil
-        </div>
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
             <div class="mvp-table-title" id="title-juvenil">Juvenil Contact</div>
@@ -497,10 +457,6 @@
 
       <!-- MINI -->
       <section class="mvp-category-section" data-category="mini" style="display: none;">
-        <div class="mvp-category-header">
-          <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Mini
-        </div>
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
             <div class="mvp-table-title" id="title-mini">Mini Contact</div>
@@ -522,10 +478,6 @@
 
       <!-- MICRO -->
       <section class="mvp-category-section" data-category="micro" style="display: none;">
-        <div class="mvp-category-header">
-          <img src="assets/img/mvp-art.svg" alt="Trofeo KFL" class="cat-header-icon" onerror="this.style.display='none'">
-          Categoría Micro
-        </div>
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
             <div class="mvp-table-title" id="title-micro">Micro Contact</div>
@@ -600,7 +552,7 @@
 
     function selectModality(modality, btnElement) {
       currentModality = modality;
-      currentCategory = null; // Reiniciar categoría al cambiar de modalidad
+      currentCategory = null;
 
       document.querySelectorAll('.mvp-modality-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
@@ -631,7 +583,6 @@
       document.getElementById('mvpTablesContainer').style.display = 'block';
       document.getElementById('categoryPrompt').style.display = 'block';
 
-      // Ocultar todas las secciones de categorías hasta que el usuario elija una
       document.querySelectorAll('.mvp-category-section').forEach(sec => {
         sec.style.display = 'none';
       });
@@ -692,7 +643,7 @@
       }
     }
 
-    /* RENDERIZADO CON SEPARACIÓN CLARA ENTRE AÑOS Y SIN HOVER */
+    /* RENDERIZADO LIMPIO SIN ROWSPAN Y CON LÍNEA DIVISORA COMPLETA ENTRE AÑOS */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -740,13 +691,11 @@
       }
 
       if (validRows.length === 0) {
-        renderEmptyState(validRows, 'Sin registros publicados aún.');
+        renderEmptyState(targetId, 'Sin registros publicados aún.');
         return;
       }
 
       let i = 0;
-      let blockIndex = 0;
-
       while (i < validRows.length) {
         let currentSeason = validRows[i].season;
         let group = [validRows[i]];
@@ -757,26 +706,25 @@
           j++;
         }
 
-        const blockClass = (blockIndex % 2 === 0) ? 'block-even' : 'block-odd';
         const isLastBlock = (j >= validRows.length);
 
         for (let k = 0; k < group.length; k++) {
           const tr = document.createElement('tr');
-          // Añadir clase de separador en la última fila del grupo para destacar la separación de años
-          let rowClasses = blockClass;
+          
+          // Si es la última subfila de este año y no es el último bloque general, le aplicamos la línea divisoria fuerte
           if (k === group.length - 1 && !isLastBlock) {
-            rowClasses += ' block-separator';
+            tr.className = 'year-row-separator';
           }
-          tr.className = rowClasses;
           
           if (k === 0) {
             tr.innerHTML = `
-              <td rowspan="${group.length}" style="vertical-align: middle; font-weight: 800;">${currentSeason}</td>
+              <td style="font-weight: 800;">${currentSeason}</td>
               <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
               <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
             `;
           } else {
             tr.innerHTML = `
+              <td style="color: transparent; user-select: none;">${currentSeason}</td>
               <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
               <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
             `;
@@ -784,7 +732,6 @@
           tbody.appendChild(tr);
         }
 
-        blockIndex++;
         i = j;
       }
     }

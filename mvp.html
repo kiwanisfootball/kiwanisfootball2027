@@ -281,6 +281,7 @@
     .kfl-table th:nth-child(3),
     .kfl-table td:nth-child(3) { width: 39%; }
 
+    /* HEADERS ESTRICTAMENTE EN AVENIR (IGUAL QUE STATS) */
     .kfl-table th {
       background: #19547E;
       color: #ffffff;
@@ -336,12 +337,9 @@
     }
 
     .mvp-player-name {
-      color: #19547E;
+      color: #1e293b;
       font-weight: 800;
-    }
-
-    body.flag-theme-active .mvp-player-name {
-      color: #C53030;
+      font-family: 'Avenir', sans-serif !important;
     }
 
     .mvp-select-prompt {
@@ -542,7 +540,7 @@
       }
     };
 
-    /* MAPEO DE NOMBRES LARGOS DE EQUIPOS A LOGOS DE LA CARPETA ASSETS/LOGOS */
+    /* LÓGICA DE MAPEO DE NOMBRES LARGOS A LOGOS */
     const TEAM_LOGOS_MAP = {
       "A.I.P FIGHTING OWLS": "assets/logos/owls.png",
       "OWLS": "assets/logos/owls.png",
@@ -570,28 +568,27 @@
       "EAGLES": "https://i.imgur.com/lxfq565.png"
     };
 
-    function getTeamLogoAndShortName(fullTeamName) {
+    function getTeamLogoInfo(fullTeamName) {
       const clean = (fullTeamName || "").toUpperCase().trim();
-      let shortName = clean;
       let logoUrl = "https://i.imgur.com/wrPDjDN.png";
+      let keyMatched = "";
 
       for (const [key, path] of Object.entries(TEAM_LOGOS_MAP)) {
         if (clean.includes(key)) {
           logoUrl = path;
-          // Extraer nombre corto principal
-          if (key.includes("OWLS")) shortName = "OWLS";
-          else if (key.includes("RAIDERS")) shortName = "RAIDERS";
-          else if (key.includes("KOLTS")) shortName = "KOLTS";
-          else if (key.includes("SPARTANS")) shortName = "SPARTANS";
-          else if (key.includes("DRAGONS")) shortName = "DRAGONS";
-          else if (key.includes("EAGLES")) shortName = "EAGLES";
-          else if (key.includes("ESCLAVAS")) shortName = "ESCLAVAS";
-          else if (key.includes("PANTERS")) shortName = "PANTERS";
-          else if (key.includes("BLACK TIGERS")) shortName = "BLACK TIGERS";
+          if (key.includes("OWLS")) keyMatched = "OWLS";
+          else if (key.includes("RAIDERS")) keyMatched = "RAIDERS";
+          else if (key.includes("KOLTS")) keyMatched = "KOLTS";
+          else if (key.includes("SPARTANS")) keyMatched = "SPARTANS";
+          else if (key.includes("DRAGONS")) keyMatched = "DRAGONS";
+          else if (key.includes("EAGLES")) keyMatched = "EAGLES";
+          else if (key.includes("ESCLAVAS")) keyMatched = "ESCLAVAS";
+          else if (key.includes("PANTERS")) keyMatched = "PANTERS";
+          else if (key.includes("BLACK TIGERS")) keyMatched = "BLACK TIGERS";
           break;
         }
       }
-      return { shortName, logoUrl, fallbackUrl: FALLBACK_LOGOS[shortName] || "https://i.imgur.com/wrPDjDN.png" };
+      return { logoUrl, fallbackUrl: FALLBACK_LOGOS[keyMatched] || "https://i.imgur.com/wrPDjDN.png" };
     }
 
     let currentModality = null;
@@ -683,7 +680,7 @@
       }
     }
 
-    /* RENDERIZADO CON ROWSPAN Y LOGOS EN TABLAS ESTILO STATS */
+    /* RENDERIZADO CON ROWSPAN Y NOMBRES LARGOS + LOGOS ASOCIADOS */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -748,12 +745,13 @@
 
         for (let k = 0; k < group.length; k++) {
           const tr = document.createElement('tr');
-          const teamInfo = getTeamLogoAndShortName(group[k].equipo);
+          const fullTeamName = group[k].equipo || '-';
+          const teamInfo = getTeamLogoInfo(fullTeamName);
           
           const teamCellHtml = `
             <div class="kfl-table-team-cell">
-              <img src="${teamInfo.logoUrl}" alt="${teamInfo.shortName}" class="kfl-table-team-logo" onerror="this.src='${teamInfo.fallbackUrl}'">
-              <span>${teamInfo.shortName}</span>
+              <img src="${teamInfo.logoUrl}" alt="${fullTeamName}" class="kfl-table-team-logo" onerror="this.src='${teamInfo.fallbackUrl}'">
+              <span>${fullTeamName}</span>
             </div>
           `;
 

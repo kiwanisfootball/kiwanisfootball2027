@@ -281,7 +281,6 @@
     .kfl-table th:nth-child(3),
     .kfl-table td:nth-child(3) { width: 39%; }
 
-    /* HEADERS ESTRICTAMENTE EN AVENIR (IGUAL QUE STATS) */
     .kfl-table th {
       background: #19547E;
       color: #ffffff;
@@ -311,11 +310,15 @@
       overflow: hidden;
       text-overflow: ellipsis;
       vertical-align: middle;
-      background: #ffffff;
     }
 
-    .kfl-table tr:nth-child(even) td {
-      background-color: #f8fafc;
+    /* CEBRADO UNIFORME POR BLOQUE COMPLETO DE AÑO (INCLUSO CON ROWSPAN) */
+    .kfl-table tr.block-even td {
+      background-color: #ffffff !important;
+    }
+
+    .kfl-table tr.block-odd td {
+      background-color: #f8fafc !important;
     }
 
     .kfl-table-team-cell {
@@ -327,6 +330,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      font-family: 'Avenir', sans-serif !important;
     }
 
     .kfl-table-team-logo {
@@ -337,27 +341,33 @@
     }
 
     .mvp-player-name {
-      color: #1e293b;
+      color: #334155;
       font-weight: 800;
       font-family: 'Avenir', sans-serif !important;
     }
 
-    .mvp-select-prompt {
-      text-align: center;
-      padding: 40px 20px;
-      font-size: 18px;
-      color: #64748b;
-      font-family: 'Avenir', sans-serif !important;
-      font-weight: 600;
-    }
-
+    /* MENSAJES INICIALES UNIFICADOS EN AVENIR Y PROPORCIONALES */
+    .mvp-select-prompt,
     .mvp-category-prompt {
       text-align: center;
-      padding: 30px 20px;
+      padding: 35px 20px;
       font-size: 16px;
       color: #64748b;
       font-family: 'Avenir', sans-serif !important;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .prompt-icon-svg {
+      width: 18px;
+      height: 18px;
+      fill: #64748b;
+      vertical-align: middle;
+      flex-shrink: 0;
     }
 
     @media (max-width: 768px) {
@@ -405,17 +415,19 @@
       <button class="mvp-filter-btn" id="filter-micro" onclick="filterCategory('micro', this)">MICRO</button>
     </div>
 
-    <!-- MENSAJE INICIAL -->
+    <!-- MENSAJE INICIAL CON SVG PROPORCIONAL -->
     <div id="selectPrompt" class="mvp-select-prompt">
-      👆 Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.
+      <svg class="prompt-icon-svg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+      <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
     </div>
 
     <!-- CONTENEDOR DE TABLAS POR CATEGORÍA -->
     <div id="mvpTablesContainer" style="display: none;">
       
-      <!-- MENSAJE INICIAL DE CATEGORÍA -->
+      <!-- MENSAJE INICIAL DE CATEGORÍA CON SVG PROPORCIONAL -->
       <div id="categoryPrompt" class="mvp-category-prompt">
-        👈 Selecciona una categoría arriba para visualizar los MVP correspondientes.
+        <svg class="prompt-icon-svg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+        <span>Selecciona una categoría arriba para visualizar los MVP correspondientes.</span>
       </div>
 
       <!-- VARSITY -->
@@ -540,7 +552,7 @@
       }
     };
 
-    /* LÓGICA DE MAPEO DE NOMBRES LARGOS A LOGOS */
+    /* LÓGICA DE MAPEO DE NOMBRES LARGOS A LOGOS (INCLUYENDO PANTHERS / ATENEA) */
     const TEAM_LOGOS_MAP = {
       "A.I.P FIGHTING OWLS": "assets/logos/owls.png",
       "OWLS": "assets/logos/owls.png",
@@ -556,6 +568,8 @@
       "EAGLES": "assets/logos/eagles.png",
       "ESCLAVAS": "assets/logos/esclavas.png",
       "PANTERS": "assets/logos/panters.png",
+      "PANTHER": "assets/logos/panters.png",
+      "ATENEA": "assets/logos/panters.png",
       "BLACK TIGERS": "assets/logos/black-tigers.png"
     };
 
@@ -583,7 +597,7 @@
           else if (key.includes("DRAGONS")) keyMatched = "DRAGONS";
           else if (key.includes("EAGLES")) keyMatched = "EAGLES";
           else if (key.includes("ESCLAVAS")) keyMatched = "ESCLAVAS";
-          else if (key.includes("PANTERS")) keyMatched = "PANTERS";
+          else if (key.includes("PANTERS") || key.includes("PANTHER") || key.includes("ATENEA")) keyMatched = "PANTERS";
           else if (key.includes("BLACK TIGERS")) keyMatched = "BLACK TIGERS";
           break;
         }
@@ -619,7 +633,7 @@
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
       document.getElementById('mvpTablesContainer').style.display = 'block';
-      document.getElementById('categoryPrompt').style.display = 'block';
+      document.getElementById('categoryPrompt').style.display = 'flex';
 
       document.querySelectorAll('.mvp-category-section').forEach(sec => {
         sec.style.display = 'none';
@@ -680,7 +694,7 @@
       }
     }
 
-    /* RENDERIZADO CON ROWSPAN Y NOMBRES LARGOS + LOGOS ASOCIADOS */
+    /* RENDERIZADO CON CEBRADO UNIFORME POR BLOQUE COMPLETO DE AÑO (ROWSPAN) */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -733,6 +747,8 @@
       }
 
       let i = 0;
+      let blockIndex = 0;
+
       while (i < validRows.length) {
         let currentSeason = validRows[i].season;
         let group = [validRows[i]];
@@ -743,8 +759,12 @@
           j++;
         }
 
+        const blockClass = (blockIndex % 2 === 0) ? 'block-even' : 'block-odd';
+
         for (let k = 0; k < group.length; k++) {
           const tr = document.createElement('tr');
+          tr.className = blockClass;
+
           const fullTeamName = group[k].equipo || '-';
           const teamInfo = getTeamLogoInfo(fullTeamName);
           
@@ -770,6 +790,7 @@
           tbody.appendChild(tr);
         }
 
+        blockIndex++;
         i = j;
       }
     }

@@ -166,28 +166,8 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER NAVEGACIÓN -->
-  <header class="header-nav">
-    <nav class="navbar">
-      <a href="index.html" class="nav-logo">
-        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
-      </a>
-
-      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
-
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="conocenos.html">CONÓCENOS</a></li>
-        <li><a href="ligas.html">LIGAS</a></li>
-        <li><a href="fotos.html" class="active">FOTOS</a></li>
-        <li><a href="mvp.html">MVP</a></li>
-        <li><a href="campeones.html">CAMPEONES</a></li>
-        <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
-        <li><a href="total-access.html">TOTAL ACCESS</a></li>
-        <li><a href="contacto.html">CONTACTO</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- HEADER GLOBAL INYECTADO -->
+  <header class="header-nav" id="globalNav"></header>
 
   <main class="fotos-container">
 
@@ -261,17 +241,50 @@
 
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
-  </footer>
+  <!-- FOOTER GLOBAL INYECTADO -->
+  <div id="globalFooter"></div>
 
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) Y VOLVER ARRIBA -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const navMenu = document.getElementById('navMenu');
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-      }
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inyectar Navbar desde nav.html
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalNav').innerHTML = data;
+          
+          // Activar menú hamburguesa dinámicamente tras cargar
+          const hamburgerBtn = document.getElementById('hamburgerBtn');
+          const navMenu = document.getElementById('navMenu');
+          if (hamburgerBtn && navMenu) {
+            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+          }
+        });
+
+      // Inyectar Footer desde footer.html
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalFooter').innerHTML = data;
+        });
+
+      // Botón volver arriba
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
   </script>
 </body>

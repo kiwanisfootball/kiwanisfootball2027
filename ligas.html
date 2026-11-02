@@ -86,7 +86,7 @@
       border-color: #777777;
     }
 
-    /* PÍLDORAS DE CATEGORÍA (ESTILO VERDADERO DE PÍLDORA) */
+    /* PÍLDORAS DE CATEGORÍA */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
@@ -128,7 +128,7 @@
       background: #f8fafc;
     }
 
-    /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO DE DONDE ESTAMOS */
+    /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO */
     .sub-tabs-bar {
       display: flex;
       justify-content: center;
@@ -176,7 +176,7 @@
       background: #A91C00;
     }
 
-    /* FILTROS Y BOTÓN DE IMPRESIÓN DENTRO DE CALENDARIO */
+    /* FILTROS Y BOTÓN DE IMPRESIÓN */
     .kfl-filter-bar {
       display: flex;
       gap: 12px;
@@ -222,7 +222,6 @@
       transform: translateY(-1px);
     }
 
-    /* CONTENEDORES Y ESTRUCTURA DE CARDS */
     .kfl-render-container {
       width: 100%;
       max-width: 920px;
@@ -250,7 +249,6 @@
       border-color: #A91C00;
     }
 
-    /* GRID RESPONSIVE DE 2 COLUMNAS */
     .kfl-grid-matches {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -462,7 +460,6 @@
       color: #334155;
     }
 
-    /* COLUMNA DE EQUIPOS AJUSTADA AL CONTENIDO */
     .kfl-table td.team-col-cell, .kfl-table th.team-col-cell {
       width: 1% !important;
       white-space: nowrap !important;
@@ -499,7 +496,6 @@
       margin-bottom: 40px;
     }
 
-    /* PÍLDORAS DE ESTADÍSTICAS */
     .stats-buttons-grid {
       display: flex;
       justify-content: center;
@@ -568,7 +564,7 @@
       border-color: #19547E;
     }
 
-    /* BANNER DE NOTA DE ACTUALIZACIÓN EN NEGRO PURO (TEXTO E ICONO NEGROS, SIN FONDO ROJO) */
+    /* BANNER DE NOTA DE ACTUALIZACIÓN EN NEGRO PURO */
     .kfl-last-update-banner {
       display: flex;
       align-items: center;
@@ -594,7 +590,6 @@
       flex-shrink: 0;
     }
 
-    /* PAGINACIÓN INTERNA (10 EN 10) */
     .kfl-pagination-bar {
       display: flex;
       justify-content: center;
@@ -799,8 +794,24 @@
     </div>
   </main>
 
+  <!-- FOOTER UNIFICADO IDÉNTICO AL INDEX -->
   <footer class="site-footer">
-    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
+    <div class="footer-social">
+      <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+        <svg class="social-icon" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+      </a>
+    </div>
+    
+    <div class="footer-copy">&copy; Kiwanis Football League 2026</div>
+    <div class="footer-desc">Liga de Football Americano y Flag Football organizada por el Club Kiwanis de Panamá.</div>
+    <div class="footer-rights">TODOS LOS DERECHOS RESERVADOS.</div>
+    
+    <div class="footer-logo">
+      <img src="https://i.imgur.com/wrPDjDN.png" alt="KFL Logo">
+    </div>
   </footer>
 
   <script>
@@ -832,7 +843,6 @@
       pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
     };
 
-    /* RUTAS EXACTAS DE LOGOS EN ASSETS/LOGOS/ */
     const EQUIPOS_LOGOS = {
       "DRAGONS": "assets/logos/dragons.png",
       "EAGLES": "assets/logos/eagles.png",
@@ -958,7 +968,6 @@
         btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
       });
       
-      // Resetear a RUSHING al cambiar de categoría
       tipoStatActivo = 'RUSHING';
       document.querySelectorAll('.stat-type-btn').forEach(b => {
         b.classList.toggle('active-stat', b.id === 'btn-stat-rushing');
@@ -1274,7 +1283,6 @@
       });
     }
 
-    // LÓGICA CMS DE ESTADÍSTICAS CON ENLACES SEPARADOS POR LIGA
     function loadStatsData() {
       const linksLiga = STATS_CSV_LINKS[activeLeague];
       const csvUrl = linksLiga ? linksLiga[activeCategory] : null;

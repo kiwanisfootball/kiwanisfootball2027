@@ -21,15 +21,11 @@
       <p class="footer-rights">TODOS LOS DERECHOS RESERVADOS.</p>
     </div>
 
-    <!-- Logo inferior y botón único de scroll up -->
+    <!-- Logo inferior centrado -->
     <div class="footer-bottom-row">
-      <div class="footer-spacer"></div>
       <div class="footer-logo-container">
         <img src="https://i.imgur.com/wrPDjDN.png" alt="KFL Logo" class="footer-brand-logo">
       </div>
-      <button id="scrollToTopBtn" class="scroll-top-btn" aria-label="Volver arriba">
-        <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-      </button>
     </div>
 
   </div>
@@ -43,6 +39,10 @@
     font-family: 'Avenir', sans-serif !important;
     box-sizing: border-box;
     width: 100%;
+  }
+
+  .site-footer * {
+    font-family: 'Avenir', sans-serif !important;
   }
 
   .footer-container {
@@ -88,7 +88,6 @@
 
   .footer-title-copy {
     color: #ffffff;
-    font-family: 'Avenir', sans-serif !important;
     font-size: 14px;
     font-weight: 800;
     letter-spacing: 0.5px;
@@ -96,42 +95,32 @@
   }
 
   .footer-desc {
-    font-size: 13px;
+    font-size: 14px;
     color: #94a3b8;
     line-height: 1.4;
     margin: 0;
-    font-family: 'Avenir', sans-serif !important;
   }
 
   .footer-rights {
-    font-size: 10.5px;
-    letter-spacing: 1.5px;
-    color: #64748b;
-    font-weight: 700;
+    font-size: 14px;
+    color:  #94a3b8;
     margin-top: 2px;
-    font-family: 'Avenir', sans-serif !important;
   }
 
   .footer-bottom-row {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-top: 8px;
     padding: 0 10px;
     box-sizing: border-box;
-    position: relative;
-  }
-
-  .footer-spacer {
-    width: 36px;
   }
 
   .footer-logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
   }
 
   .footer-brand-logo {
@@ -140,44 +129,9 @@
     object-fit: contain;
   }
 
-  .scroll-top-btn {
-    width: 36px;
-    height: 36px;
-    background-color: #19547E;
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    flex-shrink: 0;
-  }
-
-  .scroll-top-btn:hover {
-    background-color: #144061;
-    transform: translateY(-2px);
-  }
-
   .backlink-discreto {
     color: inherit;
     text-decoration: none;
     cursor: text;
   }
 </style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const scrollBtn = document.getElementById("scrollToTopBtn");
-    if (scrollBtn) {
-      scrollBtn.addEventListener("click", function() {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      });
-    }
-  });
-</script>

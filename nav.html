@@ -1,24 +1,116 @@
-<header class="header-nav">
-  <nav class="navbar">
-    <a href="index.html" class="nav-logo">
-      <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
-    </a>
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
+  </a>
 
-    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
 
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="conocenos.html">CONÓCENOS</a></li>
-      <li><a href="ligas.html">LIGAS</a></li>
-      <li><a href="registro-jugadores.html">REGISTRO DE JUGADORES</a></li>
-      <li><a href="fotos.html">FOTOS</a></li>
-      <li><a href="mvp.html">MVP</a></li>
-      <li><a href="campeones.html">CAMPEONES</a></li>
-      <li><a href="total-access.html">TOTAL ACCESS</a></li>
-      <li><a href="reglamento.html">REGLAMENTO</a></li>
-      <li><a href="portal-coaches.html">PORTAL DE COACHES</a></li>
-      <li><a href="contacto.html">CONTACTO</a></li>
-      <li><a href="faq.html">PREGUNTAS FRECUENTES</a></li>
-    </ul>
-  </nav>
-</header>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="conocenos.html">CONÓCENOS</a></li>
+    <li><a href="ligas.html">LIGAS</a></li>
+    <li><a href="registro.html">REGISTRO</a></li>
+    <li><a href="fotos.html">FOTOS</a></li>
+    <li><a href="mvp.html">MVP</a></li>
+    <li><a href="campeones.html">CAMPEONES</a></li>
+    <li><a href="total-access.html">TOTAL ACCESS</a></li>
+    <li><a href="reglamento.html">REGLAMENTO</a></li>
+    <li><a href="coaches.html">PORTAL DE COACHES</a></li>
+    <li><a href="contacto.html">CONTACTO</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+  </ul>
+</nav>
+
+<style>
+  /* ESTILOS GLOBALES DEL NAV EN UNA SOLA LÍNEA */
+  .header-nav {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .navbar {
+    max-width: 1350px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .nav-logo img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu li a {
+    font-family: 'Avenir', sans-serif !important;
+    font-size: 12px;
+    font-weight: 800;
+    color: #19547E;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+    letter-spacing: 0.3px;
+  }
+
+  .nav-menu li a:hover {
+    color: #C53030;
+  }
+
+  .hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #19547E;
+    cursor: pointer;
+  }
+
+  /* RESPONSIVE PARA MÓVILES */
+  @media (max-width: 1200px) {
+    .hamburger-btn {
+      display: block;
+    }
+
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .nav-menu.open {
+      display: flex;
+    }
+
+    .nav-menu li {
+      padding: 8px 0;
+    }
+
+    .nav-menu li a {
+      font-size: 14px;
+    }
+  }
+</style>

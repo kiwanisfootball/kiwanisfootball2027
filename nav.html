@@ -1,25 +1,165 @@
-<footer class="site-footer">
-  <div class="footer-container">
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
+  </a>
+
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
+
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="index.html" data-page="index.html">HOME</a></li>
+    <li><a href="conocenos.html" data-page="conocenos.html">CONÓCENOS</a></li>
+    <li><a href="ligas.html" data-page="ligas.html">LIGAS</a></li>
+    <li><a href="registro.html" data-page="registro.html">REGISTRO</a></li>
+    <li><a href="fotos.html" data-page="fotos.html">FOTOS</a></li>
+    <li><a href="mvp.html" data-page="mvp.html">MVP</a></li>
+    <li><a href="campeones.html" data-page="campeones.html">CAMPEONES</a></li>
+    <li><a href="total-access.html" data-page="total-access.html">TOTAL ACCESS</a></li>
+    <li><a href="reglamento.html" data-page="reglamento.html">REGLAMENTO</a></li>
+    <li><a href="coaches.html" data-page="coaches.html">PORTAL DE COACHES</a></li>
+    <li><a href="contacto.html" data-page="contacto.html">CONTACTO</a></li>
+    <li><a href="faq.html" data-page="faq.html">FAQ</a></li>
+  </ul>
+</nav>
+
+<style>
+  /* ESTILOS GLOBALES DEL NAV */
+  .header-nav {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .navbar {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  /* LOGO: Movido unos 20px a la izquierda de forma moderada y agrandado un 10% */
+  .nav-logo {
+    margin-left: -20px; 
+    flex-shrink: 0;
+  }
+
+  .nav-logo img {
+    height: 50px; 
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* MENÚ: Centrado con distribución proporcional y flexible */
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 6px;
+    margin: 0 15px;
+    padding: 0;
+  }
+
+  .nav-menu li {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* BOTONES DEL MENÚ: Ancho relativo, centrados y con área de clic cómoda */
+  .nav-menu li a {
+    font-family: 'Avenir', sans-serif !important;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #19547E;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    padding: 8px 10px;
+    text-align: center;
+    width: 100%;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .nav-menu li a:hover {
+    background-color: #f1f5f9;
+    color: #19547E; 
+  }
+
+  /* ESTILO DE LA PÁGINA ACTIVA (Fondo azul institucional y texto blanco como indicabas) */
+  .nav-menu li a.active {
+    background-color: #19547E !important;
+    color: #ffffff !important;
+  }
+
+  .hamburger-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #19547E;
+    cursor: pointer;
+  }
+
+  /* RESPONSIVE MÓVILES */
+  @media (max-width: 1250px) {
+    .nav-logo {
+      margin-left: 0;
+    }
+
+    .hamburger-btn {
+      display: block;
+    }
+
+    .nav-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      text-align: center;
+      margin: 0;
+    }
+
+    .nav-menu.open {
+      display: flex;
+    }
+
+    .nav-menu li {
+      padding: 6px 15px;
+      width: 100%;
+    }
+
+    .nav-menu li a {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+</style>
+
+<script>
+  // Script para detectar la página actual y aplicarle la clase activa
+  document.addEventListener("DOMContentLoaded", function() {
+    const currentPath = window.location.pathname.split("/").pop() || "index.html";
+    const menuLinks = document.querySelectorAll('.nav-menu li a');
     
-    <!-- Información institucional y backlinking discreto -->
-    <div class="footer-info">
-      <p>
-        &copy; 2026 <a href="https://www.instagram.com/kiwanispma" class="backlink-discreto" target="_blank" rel="noopener">Club Kiwanis de Panamá</a>. Todos los derechos reservados.
-      </p>
-    </div>
-
-    <!-- Redes Sociales (Solo Instagram y YouTube en blanco) -->
-    <div class="footer-socials">
-      <a href="https://www.instagram.com/kiwanisfootball" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="#ffffff" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        <span>Instagram</span>
-      </a>
-
-      <a href="https://www.youtube.com/@kiwanisfootball" target="_blank" rel="noopener" aria-label="YouTube">
-        <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24"><path fill="#ffffff" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        <span>YouTube</span>
-      </a>
-    </div>
-
-  </div>
-</footer>
+    menuLinks.forEach(link => {
+      const linkPage = link.getAttribute('data-page');
+      if (linkPage === currentPath) {
+        link.classList.add('active');
+      }
+    });
+  });
+</script>

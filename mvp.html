@@ -267,23 +267,6 @@
       font-family: 'Avenir', sans-serif !important;
     }
 
-    .mvp-table-title {
-      background: #19547E;
-      color: #ffffff;
-      padding: 14px 18px;
-      font-family: 'Anton', sans-serif !important;
-      font-size: 18px;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-align: center;
-      transition: background 0.3s ease;
-    }
-
-    .mvp-table-title.flag-header {
-      background: #C53030 !important;
-    }
-
     .mvp-table {
       width: 100%;
       border-collapse: collapse;
@@ -302,15 +285,16 @@
     .mvp-table th:nth-child(3),
     .mvp-table td:nth-child(3) { width: 41%; }
 
+    /* HEADERS DE TABLA ESTRICTAMENTE EN AVENIR (NEGRITA) */
     .mvp-table th {
       background: #f8fafc;
       color: #475569;
-      font-family: 'Anton', sans-serif !important;
-      font-size: 13px;
-      font-weight: 400;
+      font-family: 'Avenir', sans-serif !important;
+      font-size: 12.5px;
+      font-weight: 800;
       text-transform: uppercase;
-      padding: 12px 16px;
-      border-bottom: 1px solid #e2e8f0;
+      padding: 14px 16px;
+      border-bottom: 2px solid #cbd5e1;
       letter-spacing: 0.5px;
     }
 
@@ -327,9 +311,9 @@
       background: #ffffff;
     }
 
-    /* SEPARACIÓN CLARA Y LÍNEA DIVISORA COMPLETA ENTRE AÑOS */
-    .mvp-table tr.year-row-separator td {
-      border-bottom: 2px solid #cbd5e1 !important;
+    /* SEPARACIÓN CLARA ENTRE AÑOS (LÍNEA INFERIOR MÁS FUERTE EN EL ÚLTIMO TR DE CADA GRUPO) */
+    .mvp-table tr.year-group-end td {
+      border-bottom: 2px solid #94a3b8 !important;
     }
 
     .mvp-player-name {
@@ -417,7 +401,6 @@
       <section class="mvp-category-section" data-category="varsity" style="display: none;">
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title" id="title-varsity">Varsity Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -438,7 +421,6 @@
       <section class="mvp-category-section" data-category="juvenil" style="display: none;">
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title" id="title-juvenil">Juvenil Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -459,7 +441,6 @@
       <section class="mvp-category-section" data-category="mini" style="display: none;">
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title" id="title-mini">Mini Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -480,7 +461,6 @@
       <section class="mvp-category-section" data-category="micro" style="display: none;">
         <div class="mvp-single-table-container">
           <div class="mvp-table-card">
-            <div class="mvp-table-title" id="title-micro">Micro Contact</div>
             <table class="mvp-table">
               <thead>
                 <tr>
@@ -534,15 +514,15 @@
   <script>
     const SHEETS_CONFIG = {
       contact: {
-        varsity: { targetId: 'table-varsity', titleId: 'title-varsity', titleText: 'Varsity Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv' },
-        juvenil: { targetId: 'table-juvenil', titleId: 'title-juvenil', titleText: 'Juvenil Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1923785476&single=true&output=csv' },
-        mini: { targetId: 'table-mini', titleId: 'title-mini', titleText: 'Mini Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1354661673&single=true&output=csv' },
-        micro: { targetId: 'table-micro', titleId: 'title-micro', titleText: 'Micro Contact', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=0&single=true&output=csv' }
+        varsity: { targetId: 'table-varsity', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv' },
+        juvenil: { targetId: 'table-juvenil', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1923785476&single=true&output=csv' },
+        mini: { targetId: 'table-mini', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1354661673&single=true&output=csv' },
+        micro: { targetId: 'table-micro', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=0&single=true&output=csv' }
       },
       flag: {
-        varsity: { targetId: 'table-varsity', titleId: 'title-varsity', titleText: 'Varsity Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv' },
-        juvenil: { targetId: 'table-juvenil', titleId: 'title-juvenil', titleText: 'Juvenil Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv' },
-        mini: { targetId: 'table-mini', titleId: 'title-mini', titleText: 'Mini Flag', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv' },
+        varsity: { targetId: 'table-varsity', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv' },
+        juvenil: { targetId: 'table-juvenil', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv' },
+        mini: { targetId: 'table-mini', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv' },
         micro: null
       }
     };
@@ -568,14 +548,6 @@
         btn.classList.remove('active', 'contact-active', 'flag-active');
         if (modality === 'contact') btn.classList.add('contact-active');
         else btn.classList.add('flag-active');
-      });
-
-      document.querySelectorAll('.mvp-table-title').forEach(title => {
-        if (modality === 'flag') {
-          title.classList.add('flag-header');
-        } else {
-          title.classList.remove('flag-header');
-        }
       });
 
       document.getElementById('selectPrompt').style.display = 'none';
@@ -623,7 +595,6 @@
       for (const [catKey, config] of Object.entries(modalityMap)) {
         if (!config) continue;
 
-        document.getElementById(config.titleId).innerText = config.titleText;
         const tbody = document.getElementById(config.targetId);
         if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8;">Cargando registros...</td></tr>';
 
@@ -643,7 +614,7 @@
       }
     }
 
-    /* RENDERIZADO LIMPIO SIN ROWSPAN Y CON LÍNEA DIVISORA COMPLETA ENTRE AÑOS */
+    /* RENDERIZADO CON ROWSPAN PERFECTO PARA CO-MVPS Y LÍNEA DIVISORA POR AÑO */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -706,25 +677,22 @@
           j++;
         }
 
-        const isLastBlock = (j >= validRows.length);
-
         for (let k = 0; k < group.length; k++) {
           const tr = document.createElement('tr');
           
-          // Si es la última subfila de este año y no es el último bloque general, le aplicamos la línea divisoria fuerte
-          if (k === group.length - 1 && !isLastBlock) {
-            tr.className = 'year-row-separator';
+          // Añadir clase separadora al último elemento del grupo de año
+          if (k === group.length - 1) {
+            tr.className = 'year-group-end';
           }
           
           if (k === 0) {
             tr.innerHTML = `
-              <td style="font-weight: 800;">${currentSeason}</td>
+              <td rowspan="${group.length}" style="font-weight: 800; vertical-align: middle;">${currentSeason}</td>
               <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
               <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
             `;
           } else {
             tr.innerHTML = `
-              <td style="color: transparent; user-select: none;">${currentSeason}</td>
               <td title="${group[k].equipo}">${group[k].equipo || '-'}</td>
               <td class="mvp-player-name" title="${group[k].jugador}">${group[k].jugador}</td>
             `;

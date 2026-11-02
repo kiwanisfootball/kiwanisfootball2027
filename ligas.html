@@ -86,46 +86,53 @@
       border-color: #777777;
     }
 
-    /* PÍLDORAS DE CATEGORÍA */
+    /* PÍLDORAS DE CATEGORÍA (MÁS GRANDES Y LEGIBLES) */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 14px;
       margin-bottom: 25px;
       flex-wrap: wrap;
     }
 
     .category-pill-btn {
-      padding: 8px 22px;
+      padding: 12px 28px;
       background: #ffffff;
-      border: 2px solid #cbd5e1;
-      color: #334155;
-      font-weight: 800;
-      font-size: 13px;
-      border-radius: 50px;
+      border: none;
+      color: #ffffff;
+      font-family: 'Anton', sans-serif;
+      font-weight: 400;
+      font-size: 17px;
+      border-radius: 30px;
       cursor: pointer;
       text-transform: uppercase;
       transition: all 0.2s ease;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
+      opacity: 0.75;
+      box-shadow: none;
     }
 
-    body.contact-theme .category-pill-btn.active {
+    body.contact-theme .category-pill-btn {
       background: #19547E;
-      color: #ffffff;
-      border-color: #19547E;
-      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.3);
+    }
+
+    body.flag-theme .category-pill-btn {
+      background: #A91C00;
+    }
+
+    .category-pill-btn.active {
+      opacity: 1;
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #19547E;
+      transform: translateY(-1px);
     }
 
     body.flag-theme .category-pill-btn.active {
-      background: #A91C00;
-      color: #ffffff;
-      border-color: #A91C00;
-      box-shadow: 0 4px 12px rgba(169, 28, 0, 0.3);
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #A91C00;
     }
 
-    .category-pill-btn:hover:not(.active) {
-      border-color: #94a3b8;
-      background: #f8fafc;
+    .category-pill-btn:hover {
+      opacity: 1;
+      transform: translateY(-1px);
     }
 
     /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO */
@@ -486,16 +493,7 @@
       background-color: #f8fafc;
     }
 
-    /* ESTILOS CMS DE ESTADÍSTICAS */
-    .stats-section-inner {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-      margin-bottom: 40px;
-    }
-
+    /* ESTILOS DE ESTADÍSTICAS (REPOSA DIRECTAMENTE SOBRE EL BG) */
     .stats-buttons-grid {
       display: flex;
       justify-content: center;
@@ -687,7 +685,7 @@
           <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
           <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
           <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
-          <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Estadísticas</button>
+          <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Stats</button>
         </div>
 
         <!-- CALENDARIO -->
@@ -716,9 +714,9 @@
           <div id="posicionesNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ESTADÍSTICAS -->
+        <!-- STATS -->
         <div class="tab-pane" id="pane-stats">
-          <div class="kfl-render-container stats-section-inner">
+          <div class="kfl-render-container">
             
             <!-- BANNER DE ÚLTIMA ACTUALIZACIÓN EN NEGRO PURO -->
             <div class="kfl-last-update-banner" id="kflLastUpdateBanner">

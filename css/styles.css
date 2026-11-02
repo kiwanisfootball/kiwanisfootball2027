@@ -1010,3 +1010,15 @@ body.flag-theme .sub-tab-btn.active { color: var(--rojo-kfl); }
   height: 22px;
   fill: currentColor;
 }
+/* Estilo para que el enlace de backlinking sea totalmente invisible al usuario */
+.backlink-discreto {
+  color: inherit;
+  text-decoration: none;
+  cursor: text; /* Mantiene el cursor normal de texto */
+}
+
+.backlink-discreto:hover, 
+.backlink-discreto:focus {
+  color: inherit;
+  text-decoration: none;
+}

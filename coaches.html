@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Coaches - Kiwanis Football League</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <style>
+    .portal-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: 'Avenir', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .portal-hero {
+      background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+                  url('assets/img/coaches-banner.jpg') center/cover no-repeat;
+      border-radius: 16px;
+      padding: 40px 30px;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .portal-hero h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 36px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .portal-hero p {
+      font-size: 15px;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    /* LOGIN CARD */
+    .auth-card, .dashboard-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      margin-bottom: 30px;
+    }
+
+    .auth-card h2, .dashboard-card h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 800;
+      font-size: 13px;
+      color: #334155;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: #19547E;
+      box-shadow: 0 0 0 3px rgba(25, 84, 126, 0.1);
+    }
+
+    .btn-kfl {
+      background-color: #19547E;
+      color: #ffffff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .btn-kfl:hover {
+      background-color: #144061;
+      transform: translateY(-1px);
+    }
+
+    /* GRID DE FUNCIONALIDADES (ROSTER Y REGISTROS) */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 25px;
+    }
+
+    @media (max-width: 900px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .roster-grid-simulator {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    .roster-grid-simulator th, .roster-grid-simulator td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .roster-grid-simulator th {
+      background-color: #f8fafc;
+      color: #19547E;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11.5px;
+    }
+
+    .roster-grid-simulator input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: 'Avenir', sans-serif;
+      font-size: 13px;
+    }
+
+    .info-box {
+      background: #f8fafc;
+      border-left: 4px solid #19547E;
+      padding: 15px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13.5px;
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV MAESTRO -->
+  <header class="header-nav" id="globalNav"></header>
+
+  <main class="portal-container">
+
+    <section class="portal-hero">
+      <h1>Portal de Coaches KFL</h1>
+      <p>Gestión de Rosters, Control de Categorías y Monitoreo de Inscripciones</p>
+    </section>
+
+    <!-- SECCIÓN 1: ACCESO (PASSWORD) -->
+    <section class="auth-card" id="loginSection">
+      <h2>Acceso Exclusivo para Entrenadores</h2>
+      <div class="info-box">
+        Ingresa la contraseña asignada por la administración de la liga para acceder a la gestión de tu equipo y categoría correspondiente.
+      </div>
+      <form id="coachLoginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="coachPassword">Contraseña de Acceso:</label>
+          <input type="password" id="coachPassword" class="form-control" placeholder="Ingresa tu clave de equipo..." required>
+        </div>
+        <button type="submit" class="btn-kfl">Entrar al Sistema</button>
+      </form>
+    </section>
+
+    <!-- SECCIÓN 2: PANEL DE CONTROL (OCULTO HASTA AUTENTICAR) -->
+    <div id="dashboardSection" style="display: none;">
+      
+      <div class="dashboard-grid">
+        
+        <!-- EDITOR DE ROSTER TIPO HOJA DE CÁLCULO -->
+        <div class="dashboard-card" style="margin-bottom: 0;">
+          <h2>Gestión de Roster - <span id="teamCategoryLabel">Equipo / Categoría</span></h2>
+          <p style="font-size: 13.5px; color: #64748b; margin-bottom: 15px;">
+            Introduce o edita los datos de las jugadoras directamente en formato tabular.
+          </p>
+
+          <div style="overflow-x: auto;">
+            <table class="roster-grid-simulator" id="editableRosterTable">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">#</th>
+                  <th>Nombre Completo de la Jugadora</th>
+                  <th style="width: 90px;">Dorsal</th>
+                  <th style="width: 110px;">Cédula / Pasaporte</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><input type="text" value="Ej. María Pérez" placeholder="Nombre..."></td>
+                  <td><input type="text" value="12"></td>
+                  <td><input type="text" value="8-123-456"></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><input type="text" placeholder="Nombre..."></td>
+                  <td><input type="text"></td>
+                  <td><input type="text"></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><input type="text" placeholder="Nombre..."></td>
+                  <td><input type="text"></td>
+                  <td><input type="text"></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><input type="text" placeholder="Nombre..."></td>
+                  <td><input type="text"></td>
+                  <td><input type="text"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button type="button" class="btn-kfl" onclick="submitRoster()">Confirmar y Enviar Roster a la Liga</button>
+        </div>
+
+        <!-- VISOR DE REGISTROS DE LA CATEGORÍA (REGISTRO.HTML) -->
+        <div class="dashboard-card" style="margin-bottom: 0;">
+          <h2>Registros de Categoría</h2>
+          <p style="font-size: 13.5px; color: #64748b; margin-bottom: 15px;">
+            Estado actual de inscripciones validadas en plataforma general.
+          </p>
+
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 15px; text-align: center; margin-bottom: 15px;">
+            <span style="font-size: 12px; color: #64748b; font-weight: 700; text-transform: uppercase; display: block;">Total Inscritos en Categoría</span>
+            <span style="font-size: 28px; font-family: 'Anton', sans-serif; color: #19547E;">24 / 25 Máx</span>
+          </div>
+
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #334155;">
+            <li style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+              <span>Ana Sofía G.</span> <strong style="color: #10b981;">Validado</strong>
+            </li>
+            <li style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+              <span>Lucía Morales</span> <strong style="color: #10b981;">Validado</strong>
+            </li>
+            <li style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
+              <span>Valeria Ríos</span> <strong style="color: #f59e0b;">Pendiente Pago</strong>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER MAESTRO -->
+  <div id="globalFooter"></div>
+
+  <!-- SCRIPTS DE INYECCIÓN Y LÓGICA -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch('nav.html').then(res => res.text()).then(data => {
+        document.getElementById('globalNav').innerHTML = data;
+      });
+      fetch('footer.html').then(res => res.text()).then(data => {
+        document.getElementById('globalFooter').innerHTML = data;
+      });
+    });
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const pass = document.getElementById('coachPassword').value;
+      if(pass.trim() !== "") {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('dashboardSection').style.display = 'block';
+        document.getElementById('teamCategoryLabel').innerText = "Kolts - Flag Femenino Mini (Simulado)";
+      } else {
+        alert("Por favor ingresa una contraseña válida.");
+      }
+    }
+
+    function submitRoster() {
+      alert("¡Roster confirmado y enviado exitosamente a la liga! Se ha generado la notificación al comisionado y el registro de auditoría.");
+    }
+  </script>
+</body>
+</html>

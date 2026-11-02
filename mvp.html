@@ -140,7 +140,7 @@
       100% { transform: scale(1.18); opacity: 0.95; }
     }
 
-    /* SELECTORES PRINCIPALES DE MODALIDAD (CONTACT / FLAG) */
+    /* SELECTORES PRINCIPALES DE MODALIDAD (ESTILO PÍLDORA) */
     .mvp-modality-bar {
       display: flex;
       gap: 20px;
@@ -153,15 +153,15 @@
     .mvp-modality-btn {
       flex: 1;
       max-width: 480px;
-      background: #f8fafc;
-      color: #19547E;
+      background: #ffffff;
+      color: #334155;
       border: 2px solid #cbd5e1;
       padding: 16px 24px;
       font-family: 'Anton', sans-serif;
-      font-size: 24px;
-      letter-spacing: 1.5px;
+      font-size: 22px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      border-radius: 14px;
+      border-radius: 50px;
       cursor: pointer;
       transition: all 0.25s ease;
       text-align: center;
@@ -171,7 +171,6 @@
     .mvp-modality-btn:hover {
       background: #f1f5f9;
       transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
       border-color: #94a3b8;
     }
 
@@ -205,15 +204,15 @@
       flex: 1;
       min-width: 120px;
       max-width: 180px;
-      background: #f0f4f8;
-      color: #19547E;
-      border: 1px solid #cbd5e1;
-      padding: 12px 16px;
+      background: #ffffff;
+      color: #334155;
+      border: 2px solid #cbd5e1;
+      padding: 10px 16px;
       font-family: 'Anton', sans-serif;
-      font-size: 20px;
-      letter-spacing: 1px;
+      font-size: 18px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
-      border-radius: 12px;
+      border-radius: 50px;
       cursor: pointer;
       transition: all 0.25s ease;
       text-align: center;
@@ -221,20 +220,23 @@
     }
 
     .mvp-filter-btn:hover {
-      background: #e2e8f0;
+      background: #f1f5f9;
       transform: translateY(-2px);
+      border-color: #94a3b8;
     }
 
     .mvp-filter-btn.active.contact-active {
       background: #19547E;
       color: #ffffff;
       border-color: #19547E;
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.3);
     }
 
     .mvp-filter-btn.active.flag-active {
       background: #C53030;
       color: #ffffff;
       border-color: #C53030;
+      box-shadow: 0 4px 12px rgba(197, 48, 48, 0.3);
     }
 
     @keyframes fadeIn {
@@ -295,11 +297,11 @@
       background: #19547E;
       color: #ffffff;
       padding: 12px 16px;
-      font-family: 'Avenir', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
+      font-family: 'Anton', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 1px;
       text-align: center;
       transition: background 0.3s ease;
     }
@@ -329,9 +331,9 @@
     .mvp-table th {
       background: #f8fafc;
       color: #475569;
-      font-family: 'Avenir', sans-serif;
-      font-size: 12.5px;
-      font-weight: 800;
+      font-family: 'Anton', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
       text-transform: uppercase;
       padding: 12px 16px;
       border-bottom: 1px solid #e2e8f0;
@@ -340,7 +342,7 @@
 
     .mvp-table td {
       padding: 12px 16px;
-      border-bottom: 1px solid #edf2f7;
+      border-bottom: 1px solid #e2e8f0;
       color: #1e293b;
       font-weight: 600;
       font-family: 'Avenir', sans-serif;
@@ -350,11 +352,7 @@
       vertical-align: middle;
     }
 
-    .mvp-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    /* CONTROL DE CEBRADO POR BLOQUES (EVITA CORTES EN ROWSPAN) */
+    /* CONTROL DE CEBRADO Y HOVER UNIFICADO POR BLOQUE (ROWSPAN) */
     .mvp-table tr.block-even {
       background-color: #f8fafc;
     }
@@ -362,8 +360,17 @@
       background-color: #ffffff;
     }
 
-    .mvp-table tr:hover {
-      background-color: #f1f5f9 !important;
+    /* Solución definitiva para que el hover cubra todo el bloque del año en Co-MVPs */
+    .mvp-table tbody tr.block-even:hover,
+    .mvp-table tbody tr.block-even:hover td,
+    .mvp-table tbody tr.block-even:hover th {
+      background-color: #e2e8f0 !important;
+    }
+
+    .mvp-table tbody tr.block-odd:hover,
+    .mvp-table tbody tr.block-odd:hover td,
+    .mvp-table tbody tr.block-odd:hover th {
+      background-color: #e2e8f0 !important;
     }
 
     .mvp-player-name {
@@ -386,34 +393,14 @@
       .mvp-hero-title { font-size: 34px; }
       .mvp-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
       .mvp-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
-      .mvp-filter-btn { min-width: 45%; font-size: 18px; padding: 10px 8px; }
+      .mvp-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
     }
   </style>
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER NAVEGACIÓN -->
-  <header class="header-nav">
-    <nav class="navbar">
-      <a href="index.html" class="nav-logo">
-        <img src="https://i.imgur.com/wrPDjDN.png" alt="Kiwanis Football League Panama">
-      </a>
-
-      <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
-
-      <ul class="nav-menu" id="navMenu">
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="conocenos.html">CONÓCENOS</a></li>
-        <li><a href="ligas.html">LIGAS</a></li>
-        <li><a href="fotos.html">FOTOS</a></li>
-        <li><a href="mvp.html" class="active">MVP</a></li>
-        <li><a href="campeones.html">CAMPEONES</a></li>
-        <li><a href="inscripcion.html">INSCRIPCIÓN</a></li>
-        <li><a href="total-access.html">TOTAL ACCESS</a></li>
-        <li><a href="contacto.html">CONTACTO</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- HEADER GLOBAL INYECTADO -->
+  <header class="header-nav" id="globalNav"></header>
 
   <main class="mvp-container">
 
@@ -557,10 +544,36 @@
 
   </main>
 
-  <footer class="site-footer">
-    <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
-  </footer>
+  <!-- FOOTER GLOBAL INYECTADO -->
+  <div id="globalFooter"></div>
 
+  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inyectar Navbar desde nav.html
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalNav').innerHTML = data;
+          
+          // Activar menú hamburguesa dinámicamente tras cargar
+          const hamburgerBtn = document.getElementById('hamburgerBtn');
+          const navMenu = document.getElementById('navMenu');
+          if (hamburgerBtn && navMenu) {
+            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+          }
+        });
+
+      // Inyectar Footer desde footer.html
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalFooter').innerHTML = data;
+        });
+    });
+  </script>
+
+  <!-- LÓGICA DE MVP -->
   <script>
     const SHEETS_CONFIG = {
       contact: {
@@ -579,14 +592,6 @@
 
     let currentModality = null;
     let currentCategory = 'varsity';
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const navMenu = document.getElementById('navMenu');
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-      }
-    });
 
     function selectModality(modality, btnElement) {
       currentModality = modality;
@@ -676,7 +681,7 @@
       }
     }
 
-    /* RENDERIZADO CON CEBRADO UNIFORME POR BLOQUES (SOPORTA CUALQUIER CANTIDAD DE CO-MVPS) */
+    /* RENDERIZADO CON CEBRADO Y HOVER UNIFICADO POR BLOQUE */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
@@ -729,7 +734,7 @@
       }
 
       let i = 0;
-      let blockIndex = 0; // Controla la alternancia de color por año/bloque
+      let blockIndex = 0;
 
       while (i < validRows.length) {
         let currentSeason = validRows[i].season;
@@ -741,12 +746,11 @@
           j++;
         }
 
-        // Asignar clase de cebrado basada en el índice del bloque (par/impar)
         const blockClass = (blockIndex % 2 === 0) ? 'block-even' : 'block-odd';
 
         for (let k = 0; k < group.length; k++) {
           const tr = document.createElement('tr');
-          tr.className = blockClass; // Todo el bloque (sea 1 jugador o 2+ Co-MVPs) comparte el mismo fondo exacto
+          tr.className = blockClass;
           
           if (k === 0) {
             tr.innerHTML = `

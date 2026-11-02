@@ -23,6 +23,7 @@
 
     <!-- Logo inferior y botón de scroll up -->
     <div class="footer-bottom-row">
+      <div class="footer-spacer"></div>
       <div class="footer-logo-container">
         <img src="https://i.imgur.com/wrPDjDN.png" alt="KFL Logo" class="footer-brand-logo">
       </div>
@@ -35,12 +36,11 @@
 </footer>
 
 <style>
-  /* ESTILOS ORIGINALES RESTAURADOS PARA EL FOOTER */
   .site-footer {
     background-color: #0b0f19;
     color: #94a3b8;
     padding: 40px 20px 30px 20px;
-    font-family: 'Avenir', sans-serif;
+    font-family: 'Avenir', sans-serif !important;
     box-sizing: border-box;
     width: 100%;
   }
@@ -55,7 +55,6 @@
     gap: 20px;
   }
 
-  /* Botones redondos de redes sociales */
   .footer-socials {
     display: flex;
     gap: 15px;
@@ -80,7 +79,6 @@
     transform: translateY(-2px);
   }
 
-  /* Textos principales */
   .footer-main-text {
     display: flex;
     flex-direction: column;
@@ -88,11 +86,13 @@
     max-width: 700px;
   }
 
+  /* FUENTE CORREGIDA A AVENIR BOLD Y MÁS PEQUEÑO */
   .footer-title-copy {
     color: #ffffff;
-    font-family: 'Anton', sans-serif;
-    font-size: 20px;
-    letter-spacing: 1px;
+    font-family: 'Avenir', sans-serif !important;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
     margin: 0;
   }
 
@@ -101,6 +101,7 @@
     color: #94a3b8;
     line-height: 1.5;
     margin: 0;
+    font-family: 'Avenir', sans-serif !important;
   }
 
   .footer-rights {
@@ -109,9 +110,9 @@
     color: #64748b;
     font-weight: 700;
     margin-top: 5px;
+    font-family: 'Avenir', sans-serif !important;
   }
 
-  /* Fila inferior (Logo y Botón Subir) */
   .footer-bottom-row {
     width: 100%;
     display: flex;
@@ -120,11 +121,18 @@
     margin-top: 15px;
     padding: 0 10px;
     box-sizing: border-box;
+    position: relative;
+  }
+
+  .footer-spacer {
+    width: 40px;
   }
 
   .footer-logo-container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-grow: 1;
   }
 
   .footer-brand-logo {
@@ -146,6 +154,7 @@
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     transition: background-color 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
   }
 
   .scroll-top-btn:hover {
@@ -153,7 +162,6 @@
     transform: translateY(-2px);
   }
 
-  /* Backlink discreto (invariable visualmente) */
   .backlink-discreto {
     color: inherit;
     text-decoration: none;
@@ -162,7 +170,6 @@
 </style>
 
 <script>
-  // Funcionalidad del botón de scroll hacia arriba
   document.addEventListener("DOMContentLoaded", function() {
     const scrollBtn = document.getElementById("scrollToTopBtn");
     if (scrollBtn) {

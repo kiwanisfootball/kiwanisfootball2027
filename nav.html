@@ -33,18 +33,19 @@
   }
 
   .navbar {
-    max-width: 1380px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 10px 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
   }
 
-  /* LOGO: Crecido un 10% (aprox 50px de alto) y desplazado entre 30 a 50px a la izquierda */
+  /* LOGO: Movido unos 20px a la izquierda de forma moderada y agrandado un 10% */
   .nav-logo {
-    margin-left: -40px; 
+    margin-left: -20px; 
+    flex-shrink: 0;
   }
 
   .nav-logo img {
@@ -53,51 +54,50 @@
     object-fit: contain;
   }
 
+  /* MENÚ: Centrado con distribución proporcional y flexible */
   .nav-menu {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 0;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 6px;
+    margin: 0 15px;
     padding: 0;
   }
 
   .nav-menu li {
-    position: relative;
-    height: 100%;
+    flex: 1;
     display: flex;
-    align-items: center;
+    justify-content: center;
   }
 
+  /* BOTONES DEL MENÚ: Ancho relativo, centrados y con área de clic cómoda */
   .nav-menu li a {
     font-family: 'Avenir', sans-serif !important;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 800;
     color: #19547E;
     text-decoration: none;
     text-transform: uppercase;
     white-space: nowrap;
-    letter-spacing: 0.3px;
-    padding: 8px 0;
-    transition: opacity 0.2s ease;
+    letter-spacing: 0.2px;
+    padding: 8px 10px;
+    text-align: center;
+    width: 100%;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* Hover sin cambiar a rojo (solo un ligero cambio de opacidad para mantener tu gusto) */
   .nav-menu li a:hover {
-    opacity: 0.75;
+    background-color: #f1f5f9;
     color: #19547E; 
   }
 
-  /* SUBRAYADO / INDICADOR DE PÁGINA ACTIVA */
-  .nav-menu li a.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #19547E;
-    border-radius: 2px;
+  /* ESTILO DE LA PÁGINA ACTIVA (Fondo azul institucional y texto blanco como indicabas) */
+  .nav-menu li a.active {
+    background-color: #19547E !important;
+    color: #ffffff !important;
   }
 
   .hamburger-btn {
@@ -110,7 +110,7 @@
   }
 
   /* RESPONSIVE MÓVILES */
-  @media (max-width: 1200px) {
+  @media (max-width: 1250px) {
     .nav-logo {
       margin-left: 0;
     }
@@ -130,6 +130,7 @@
       box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       padding: 15px 0;
       text-align: center;
+      margin: 0;
     }
 
     .nav-menu.open {
@@ -137,22 +138,19 @@
     }
 
     .nav-menu li {
-      padding: 8px 0;
-      justify-content: center;
+      padding: 6px 15px;
+      width: 100%;
     }
 
     .nav-menu li a {
       font-size: 14px;
-    }
-
-    .nav-menu li a.active::after {
-      display: none; /* En móvil se puede omitir o ajustar si deseas */
+      padding: 10px;
     }
   }
 </style>
 
 <script>
-  // Script automático para detectar la página actual y agregar la clase 'active'
+  // Script para detectar la página actual y aplicarle la clase activa
   document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname.split("/").pop() || "index.html";
     const menuLinks = document.querySelectorAll('.nav-menu li a');

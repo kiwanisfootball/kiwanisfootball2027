@@ -16,13 +16,12 @@
       max-width: 850px;
       width: 100%;
       margin: 40px auto;
-      padding: 0 20px;
+      padding: 40px;
       font-family: 'Avenir', sans-serif;
       box-sizing: border-box;
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
-      padding: 40px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }
 
@@ -90,7 +89,7 @@
       fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
       fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
 
-      // 2. Leer el parámetro 'slug' de la URL (ej: ?slug=2026-10-26-aip-y-eagles...)
+      // 2. Leer el parámetro 'slug' de la URL
       const urlParams = new URLSearchParams(window.location.search);
       const slug = urlParams.get('slug');
 
@@ -102,7 +101,6 @@
     });
 
     async function cargarContenidoMarkdown(slugArchivo) {
-      // Ruta física del archivo en tu repositorio de GitHub dentro de la carpeta blog/
       const urlMarkdown = `blog/${slugArchivo}.md`;
       const container = document.getElementById('articleBody');
       const loader = document.getElementById('loadingText');
@@ -111,8 +109,6 @@
         let respuesta = await fetch(urlMarkdown);
         if (respuesta.ok) {
           let textoMd = await respuesta.text();
-          
-          // Limpiar el frontmatter (los metadatos YAML superiores que crea Decap CMS entre "---")
           let contenidoLimpio = textoMd.replace(/^---[\s\S]*?---/, '');
           
           loader.style.display = 'none';

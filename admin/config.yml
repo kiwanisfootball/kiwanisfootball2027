@@ -3,7 +3,8 @@ backend:
   repo: kiwanisfootball/kiwanisfootball2027
   branch: main
   base_url: https://kfl-decap-oauth.vercel.app
-  auth_endpoint: /api/auth
+  auth_endpoint: api/auth
+  site_domain: kiwanisfootball2027.vercel.app
 
 media_folder: "assets/uploads/blog"
 public_folder: "/assets/uploads/blog"
@@ -16,8 +17,9 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha de Publicación", name: "date", widget: "datetime" }
+      - { label: "Fecha de Publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ" }
       - { label: "Imagen de Portada", name: "coverImage", widget: "image" }
       - { label: "Autor", name: "author", widget: "hidden", default: "kiwanisfootball" }
       - { label: "Resumen", name: "excerpt", widget: "text", required: false }
-      - { label: "Cuerpo del Artículo", name: "body", widget: "markdown" }
+      - { label: "Categoría", name: "category", widget: "select", options: ["Liga", "Equipos", "Comunicados", "Eventos"] }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }

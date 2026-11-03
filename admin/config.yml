@@ -2,6 +2,8 @@ backend:
   name: github
   repo: kiwanisfootball/kiwanisfootball2027
   branch: main
+  base_url: https://kfl-decap-oauth.vercel.app
+  auth_endpoint: /api/auth
 
 media_folder: "assets/uploads/blog"
 public_folder: "/assets/uploads/blog"

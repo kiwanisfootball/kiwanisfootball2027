@@ -9,17 +9,39 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
+    :root {
+      --kfl-blue: #19547E;
+      --kfl-blue-hover: #144061;
+      --kfl-dark: #0b0f19;
+      --kfl-card-bg: #ffffff;
+      --kfl-border: #e2e8f0;
+      --kfl-border-table: #cbd5e1;
+      --kfl-text-muted: #64748b;
+      --kfl-text-dark: #1e293b;
+      --kfl-danger: #c53030;
+      --kfl-success: #10b981;
+      --kfl-warning: #f59e0b;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f8fafc;
+      color: var(--kfl-text-dark);
+      font-family: 'Avenir', sans-serif !important;
+    }
+
     .portal-container {
-      max-width: 1100px;
+      max-width: 1200px;
       width: 100%;
       margin: 40px auto;
       padding: 0 20px;
-      font-family: 'Avenir', sans-serif;
       box-sizing: border-box;
     }
 
+    /* HERO DEL PORTAL */
     .portal-hero {
-      background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+      background: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.92)), 
                   url('assets/img/coaches-banner.jpg') center/cover no-repeat;
       border-radius: 16px;
       padding: 40px 30px;
@@ -31,36 +53,68 @@
 
     .portal-hero h1 {
       font-family: 'Anton', sans-serif;
-      font-size: 36px;
+      font-size: 38px;
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 10px;
+      margin: 0 0 10px 0;
     }
 
     .portal-hero p {
       font-size: 15px;
       color: #cbd5e1;
       font-weight: 600;
+      margin: 0;
     }
 
-    /* LOGIN CARD */
+    /* TARJETAS PRINCIPALES */
     .auth-card, .dashboard-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
+      background: var(--kfl-card-bg);
+      border: 1px solid var(--kfl-border);
       border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      padding: 35px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
       margin-bottom: 30px;
     }
 
     .auth-card h2, .dashboard-card h2 {
       font-family: 'Anton', sans-serif;
-      font-size: 22px;
-      color: #19547E;
+      font-size: 24px;
+      color: var(--kfl-blue);
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-top: 0;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
     }
 
+    .info-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--kfl-blue);
+      padding: 15px;
+      border-radius: 0 8px 8px 0;
+      font-size: 13.5px;
+      color: #475569;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .deadline-banner {
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      border-left: 4px solid var(--kfl-danger);
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #991b1b;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .deadline-banner.active {
+      display: block;
+    }
+
+    /* FORMULARIO DE ACCESO */
     .form-group {
       margin-bottom: 20px;
     }
@@ -69,205 +123,462 @@
       display: block;
       font-weight: 800;
       font-size: 13px;
-      color: #334155;
+      color: var(--kfl-text-dark);
       text-transform: uppercase;
       margin-bottom: 8px;
+      letter-spacing: 0.5px;
     }
 
     .form-control {
       width: 100%;
       padding: 12px 16px;
-      border: 1px solid #cbd5e1;
+      border: 1px solid var(--kfl-border-table);
       border-radius: 10px;
       font-size: 14px;
       outline: none;
       box-sizing: border-box;
-      transition: border-color 0.2s;
+      font-family: 'Avenir', sans-serif;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .form-control:focus {
-      border-color: #19547E;
-      box-shadow: 0 0 0 3px rgba(25, 84, 126, 0.1);
+      border-color: var(--kfl-blue);
+      box-shadow: 0 0 0 3px rgba(25, 84, 126, 0.12);
     }
 
+    /* BOTONES */
     .btn-kfl {
-      background-color: #19547E;
+      background-color: var(--kfl-blue);
       color: #ffffff;
       border: none;
-      padding: 12px 25px;
-      font-size: 14px;
+      padding: 12px 24px;
+      font-size: 13.5px;
       font-weight: 800;
       text-transform: uppercase;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       transition: background-color 0.2s, transform 0.1s;
     }
 
-    .btn-kfl:hover {
-      background-color: #144061;
+    .btn-kfl:hover:not(:disabled) {
+      background-color: var(--kfl-blue-hover);
       transform: translateY(-1px);
     }
 
-    /* GRID DE FUNCIONALIDADES (ROSTER Y REGISTROS) */
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 25px;
+    .btn-kfl:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+      transform: none;
     }
 
-    @media (max-width: 900px) {
+    .btn-secondary {
+      background-color: #f1f5f9;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background-color: #e2e8f0;
+    }
+
+    .btn-danger-outline {
+      background: transparent;
+      border: 1px solid #fca5a5;
+      color: var(--kfl-danger);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .btn-danger-outline:hover:not(:disabled) {
+      background: #fee2e2;
+    }
+
+    /* ESTRUCTURA DASHBOARD */
+    .dashboard-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      border-bottom: 1px solid var(--kfl-border);
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+
+    .coach-profile-tag {
+      font-size: 14px;
+      color: var(--kfl-text-muted);
+    }
+
+    .coach-profile-tag strong {
+      color: var(--kfl-text-dark);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2.3fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
       .dashboard-grid {
         grid-template-columns: 1fr;
       }
     }
 
+    /* TABLA SIMULADORA DE HOJA DE CÁLCULO */
+    .table-actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--kfl-border-table);
+      border-radius: 10px;
+      background: #ffffff;
+      margin-bottom: 20px;
+    }
+
     .roster-grid-simulator {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
-      margin-bottom: 20px;
       font-size: 13px;
+      white-space: nowrap;
     }
 
-    .roster-grid-simulator th, .roster-grid-simulator td {
-      border: 1px solid #cbd5e1;
-      padding: 8px 10px;
+    .roster-grid-simulator th, 
+    .roster-grid-simulator td {
+      border: 1px solid var(--kfl-border-table);
+      padding: 6px 10px;
       text-align: left;
     }
 
     .roster-grid-simulator th {
-      background-color: #f8fafc;
-      color: #19547E;
+      background-color: #f1f5f9;
+      color: var(--kfl-blue);
       font-weight: 800;
       text-transform: uppercase;
-      font-size: 11.5px;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 2;
     }
 
-    .roster-grid-simulator input {
+    .roster-grid-simulator td input {
       width: 100%;
       border: none;
       background: transparent;
       outline: none;
-      font-family: 'Avenir', sans-serif;
+      font-family: 'Avenir', sans-serif !important;
+      font-size: 13px;
+      color: #1e293b;
+      padding: 4px 2px;
+      box-sizing: border-box;
+    }
+
+    .roster-grid-simulator td input:focus {
+      background: #eff6ff;
+      border-radius: 4px;
+    }
+
+    .col-idx {
+      width: 35px;
+      text-align: center;
+      background-color: #f8fafc;
+      font-weight: 700;
+      color: var(--kfl-text-muted);
+    }
+
+    .col-small {
+      width: 70px;
+    }
+
+    .col-photo-badge {
+      text-align: center;
+      width: 90px;
+    }
+
+    .badge-photo-yes {
+      background-color: #dcfce7;
+      color: #166534;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+
+    .badge-photo-no {
+      background-color: #f1f5f9;
+      color: #64748b;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+
+    /* VISOR DE REGISTROS DE LA CATEGORÍA */
+    .reg-summary-card {
+      background: #f8fafc;
+      border: 1px solid var(--kfl-border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .reg-summary-title {
+      font-size: 11.5px;
+      color: var(--kfl-text-muted);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .reg-counter {
+      font-family: 'Anton', sans-serif;
+      font-size: 30px;
+      color: var(--kfl-blue);
+      line-height: 1;
+    }
+
+    .registros-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 480px;
+      overflow-y: auto;
+    }
+
+    .registro-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 13px;
     }
 
-    .info-box {
-      background: #f8fafc;
-      border-left: 4px solid #19547E;
-      padding: 15px;
-      border-radius: 0 8px 8px 0;
+    .registro-item:last-child {
+      border-bottom: none;
+    }
+
+    .badge-status {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .badge-validado {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+
+    .badge-pendiente {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+
+    /* ESTADOS Y NOTIFICACIONES FLOTANTES */
+    .status-msg {
+      padding: 12px 16px;
+      border-radius: 8px;
       font-size: 13.5px;
-      color: #475569;
-      line-height: 1.5;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      display: none;
+      font-weight: 600;
+    }
+
+    .status-msg.success {
+      display: block;
+      background-color: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+
+    .status-msg.error {
+      display: block;
+      background-color: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    .spinner-inline {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV MAESTRO -->
+  <!-- HEADER MAESTRO -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="portal-container">
-
+    
+    <!-- BANNER HERO -->
     <section class="portal-hero">
       <h1>Portal de Coaches KFL</h1>
       <p>Gestión de Rosters, Control de Categorías y Monitoreo de Inscripciones</p>
     </section>
 
-    <!-- SECCIÓN 1: ACCESO (PASSWORD) -->
+    <!-- BANNER DE FECHA LÍMITE EXPIRADA -->
+    <div id="deadlineWarning" class="deadline-banner">
+      ⚠️ <strong>Período Cerrado:</strong> La fecha límite para actualización de rosters ha vencido (<span id="deadlineDisplay"></span>). El sistema se encuentra en modo solo lectura.
+    </div>
+
+    <!-- SECCIÓN 1: LOGIN POR CONTRASEÑA -->
     <section class="auth-card" id="loginSection">
       <h2>Acceso Exclusivo para Entrenadores</h2>
       <div class="info-box">
-        Ingresa la contraseña asignada por la administración de la liga para acceder a la gestión de tu equipo y categoría correspondiente.
+        Ingresa la contraseña asignada por la administración de la liga para gestionar el Roster oficial de tu equipo y ver el estado de los aspirantes inscritos.
       </div>
-      <form id="coachLoginForm" onsubmit="handleLogin(event)">
+
+      <div id="loginFeedback" class="status-msg"></div>
+
+      <form id="coachLoginForm" onsubmit="handleLoginSubmit(event)">
         <div class="form-group">
           <label for="coachPassword">Contraseña de Acceso:</label>
-          <input type="password" id="coachPassword" class="form-control" placeholder="Ingresa tu clave de equipo..." required>
+          <input 
+            type="password" 
+            id="coachPassword" 
+            class="form-control" 
+            placeholder="Ingresa tu clave de equipo..." 
+            required 
+            autocomplete="current-password"
+          >
         </div>
-        <button type="submit" class="btn-kfl">Entrar al Sistema</button>
+        <button type="submit" class="btn-kfl" id="btnLogin">
+          <span id="btnLoginText">Entrar al Sistema</span>
+        </button>
       </form>
     </section>
 
-    <!-- SECCIÓN 2: PANEL DE CONTROL (OCULTO HASTA AUTENTICAR) -->
+    <!-- SECCIÓN 2: PANEL DE CONTROL (DASHBOARD) -->
     <div id="dashboardSection" style="display: none;">
       
-      <div class="dashboard-grid">
-        
-        <!-- EDITOR DE ROSTER TIPO HOJA DE CÁLCULO -->
-        <div class="dashboard-card" style="margin-bottom: 0;">
-          <h2>Gestión de Roster - <span id="teamCategoryLabel">Equipo / Categoría</span></h2>
-          <p style="font-size: 13.5px; color: #64748b; margin-bottom: 15px;">
-            Introduce o edita los datos de las jugadoras directamente en formato tabular.
-          </p>
-
-          <div style="overflow-x: auto;">
-            <table class="roster-grid-simulator" id="editableRosterTable">
-              <thead>
-                <tr>
-                  <th style="width: 50px;">#</th>
-                  <th>Nombre Completo de la Jugadora</th>
-                  <th style="width: 90px;">Dorsal</th>
-                  <th style="width: 110px;">Cédula / Pasaporte</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td><input type="text" value="Ej. María Pérez" placeholder="Nombre..."></td>
-                  <td><input type="text" value="12"></td>
-                  <td><input type="text" value="8-123-456"></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td><input type="text" placeholder="Nombre..."></td>
-                  <td><input type="text"></td>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td><input type="text" placeholder="Nombre..."></td>
-                  <td><input type="text"></td>
-                  <td><input type="text"></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td><input type="text" placeholder="Nombre..."></td>
-                  <td><input type="text"></td>
-                  <td><input type="text"></td>
-                </tr>
-              </tbody>
-            </table>
+      <div class="dashboard-card">
+        <div class="dashboard-header-bar">
+          <div>
+            <h2 id="teamCategoryLabel">Cargando Equipo...</h2>
+            <div class="coach-profile-tag">
+              Coach: <strong id="coachNameLabel">---</strong> | Categoría: <strong id="categoryNameLabel">---</strong>
+            </div>
           </div>
-
-          <button type="button" class="btn-kfl" onclick="submitRoster()">Confirmar y Enviar Roster a la Liga</button>
+          <div>
+            <button type="button" class="btn-secondary" onclick="cerrarSesion()">Cerrar Sesión</button>
+          </div>
         </div>
 
-        <!-- VISOR DE REGISTROS DE LA CATEGORÍA (REGISTRO.HTML) -->
-        <div class="dashboard-card" style="margin-bottom: 0;">
-          <h2>Registros de Categoría</h2>
-          <p style="font-size: 13.5px; color: #64748b; margin-bottom: 15px;">
-            Estado actual de inscripciones validadas en plataforma general.
-          </p>
+        <div id="saveFeedback" class="status-msg"></div>
 
-          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 15px; text-align: center; margin-bottom: 15px;">
-            <span style="font-size: 12px; color: #64748b; font-weight: 700; text-transform: uppercase; display: block;">Total Inscritos en Categoría</span>
-            <span style="font-size: 28px; font-family: 'Anton', sans-serif; color: #19547E;">24 / 25 Máx</span>
+        <div class="dashboard-grid">
+          
+          <!-- COLUMNA IZQUIERDA: SIMULADOR DE HOJA DE CÁLCULO -->
+          <div>
+            <div class="table-actions-bar">
+              <div>
+                <p style="font-size: 13.5px; color: var(--kfl-text-muted); margin: 0;">
+                  Edita las celdas directamente. La foto y validación institucional son gestionadas exclusivamente por la liga.
+                </p>
+              </div>
+              <div>
+                <button type="button" class="btn-secondary" id="btnAddRowBtn" onclick="agregarFilaVacia()">+ Agregar Fila</button>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="roster-grid-simulator" id="rosterTable">
+                <thead>
+                  <tr>
+                    <th class="col-idx">#</th>
+                    <th style="min-width: 140px;">Nombre</th>
+                    <th style="min-width: 140px;">Apellido</th>
+                    <th class="col-small">Jersey #</th>
+                    <th style="min-width: 120px;">Cédula</th>
+                    <th style="min-width: 110px;">F. Nacimiento</th>
+                    <th style="min-width: 90px;">Posición</th>
+                    <th class="col-photo-badge">Foto (Liga)</th>
+                    <th style="width: 50px; text-align: center;">Acción</th>
+                  </tr>
+                </thead>
+                <tbody id="rosterTableBody">
+                  <!-- Inyectado dinámicamente -->
+                </tbody>
+              </table>
+            </div>
+
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+              <button type="button" class="btn-kfl" id="btnSubmitRoster" onclick="enviarRosterAlBackend()">
+                <span id="btnSubmitRosterText">Confirmar y Enviar Roster a la Liga</span>
+              </button>
+              <span id="rosterCountStatus" style="font-size: 13px; color: var(--kfl-text-muted); font-weight: 700;">
+                0 jugadoras/jugadores listados
+              </span>
+            </div>
           </div>
 
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 13px; color: #334155;">
-            <li style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-              <span>Ana Sofía G.</span> <strong style="color: #10b981;">Validado</strong>
-            </li>
-            <li style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-              <span>Lucía Morales</span> <strong style="color: #10b981;">Validado</strong>
-            </li>
-            <li style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;">
-              <span>Valeria Ríos</span> <strong style="color: #f59e0b;">Pendiente Pago</strong>
-            </li>
-          </ul>
+          <!-- COLUMNA DERECHA: REGISTROS DE ASPIRANTES -->
+          <div>
+            <div class="auth-card" style="padding: 25px; margin-bottom: 0;">
+              <h2 style="font-size: 20px;">Aspirantes Registrados</h2>
+              <p style="font-size: 12.5px; color: var(--kfl-text-muted); margin-bottom: 15px;">
+                Inscripciones recibidas en la web general para tu categoría.
+              </p>
+
+              <div class="reg-summary-card">
+                <span class="reg-summary-title">Total Registrados</span>
+                <span class="reg-counter" id="totalCategoryCount">0</span>
+              </div>
+
+              <div id="loadingRegistros" style="text-align: center; font-size: 13px; color: var(--kfl-text-muted); padding: 10px;">
+                Consultando registros...
+              </div>
+
+              <ul class="registros-list" id="categoryRegistrationsList">
+                <!-- Se llena dinámicamente -->
+              </ul>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -279,31 +590,381 @@
   <!-- FOOTER MAESTRO -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPTS DE INYECCIÓN Y LÓGICA -->
+  <!-- LÓGICA DE INTEGRACIÓN Y COMUNICACIÓN SERVERLESS -->
   <script>
+    // URL productiva de tu Web App de Google Apps Script
+    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec";
+
+    // Estado en memoria de la sesión
+    let currentUser = null;
+    let isLockedSession = false;
+
     document.addEventListener("DOMContentLoaded", function() {
-      fetch('nav.html').then(res => res.text()).then(data => {
-        document.getElementById('globalNav').innerHTML = data;
-      });
-      fetch('footer.html').then(res => res.text()).then(data => {
-        document.getElementById('globalFooter').innerHTML = data;
-      });
+      // 1. Inyección de componentes globales maestros
+      fetch('nav.html')
+        .then(res => res.text())
+        .then(data => { document.getElementById('globalNav').innerHTML = data; })
+        .catch(() => console.warn('nav.html cargará en entorno local/despliegue'));
+
+      fetch('footer.html')
+        .then(res => res.text())
+        .then(data => { document.getElementById('globalFooter').innerHTML = data; })
+        .catch(() => console.warn('footer.html cargará en entorno local/despliegue'));
+
+      // 2. Comprobar si hay sesión previa guardada en sessionStorage
+      verificarSesionExistente();
     });
 
-    function handleLogin(e) {
+    /**
+     * INICIO DE SESIÓN
+     */
+    async function handleLoginSubmit(e) {
       e.preventDefault();
-      const pass = document.getElementById('coachPassword').value;
-      if(pass.trim() !== "") {
-        document.getElementById('loginSection').style.display = 'none';
-        document.getElementById('dashboardSection').style.display = 'block';
-        document.getElementById('teamCategoryLabel').innerText = "Kolts - Flag Femenino Mini (Simulado)";
-      } else {
-        alert("Por favor ingresa una contraseña válida.");
+      const passwordInput = document.getElementById('coachPassword').value.trim();
+      const feedback = document.getElementById('loginFeedback');
+      const btn = document.getElementById('btnLogin');
+      const btnText = document.getElementById('btnLoginText');
+
+      feedback.className = 'status-msg';
+      feedback.style.display = 'none';
+
+      if (!passwordInput) return;
+
+      btn.disabled = true;
+      btnText.innerHTML = '<span class="spinner-inline"></span> Verificando...';
+
+      try {
+        // Petición POST simple para mitigar preflight CORS en Google Apps Script
+        const response = await fetch(GAS_API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'login',
+            password: passwordInput
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          currentUser = result.user;
+          currentUser.password = passwordInput;
+          isLockedSession = Boolean(result.isLocked);
+
+          // Guardar en sessionStorage para no perder la sesión al recargar
+          sessionStorage.setItem('kfl_coach_session', JSON.stringify({
+            user: currentUser,
+            isLocked: isLockedSession,
+            deadline: result.deadline
+          }));
+
+          inicializarDashboard(result.deadline);
+        } else {
+          feedback.textContent = result.message || 'Contraseña incorrecta.';
+          feedback.className = 'status-msg error';
+          feedback.style.display = 'block';
+        }
+      } catch (err) {
+        console.error(err);
+        feedback.textContent = 'Error de conexión con el servidor. Revisa tu conexión a internet.';
+        feedback.className = 'status-msg error';
+        feedback.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btnText.textContent = 'Entrar al Sistema';
       }
     }
 
-    function submitRoster() {
-      alert("¡Roster confirmado y enviado exitosamente a la liga! Se ha generado la notificación al comisionado y el registro de auditoría.");
+    /**
+     * INICIALIZAR EL DASHBOARD CON LOS DATOS DEL COACH
+     */
+    async function inicializarDashboard(deadlineString) {
+      document.getElementById('loginSection').style.display = 'none';
+      document.getElementById('dashboardSection').style.display = 'block';
+
+      document.getElementById('teamCategoryLabel').innerText = `${currentUser.equipo} - ${currentUser.categoria}`;
+      document.getElementById('coachNameLabel').innerText = currentUser.coach || 'Entrenador';
+      document.getElementById('categoryNameLabel').innerText = currentUser.categoria;
+
+      // Si la fecha límite expiró, activar modo solo lectura
+      if (isLockedSession) {
+        const deadlineWarning = document.getElementById('deadlineWarning');
+        document.getElementById('deadlineDisplay').innerText = deadlineString || 'Fecha vencida';
+        deadlineWarning.classList.add('active');
+        document.getElementById('btnSubmitRoster').disabled = true;
+        document.getElementById('btnAddRowBtn').disabled = true;
+      }
+
+      // Cargar en paralelo el Roster del equipo y los Registros de la categoría
+      await Promise.all([
+        cargarRosterActual(),
+        cargarRegistrosCategoria()
+      ]);
+    }
+
+    /**
+     * CARGAR ROSTER ACTUAL DEL EQUIPO DESDE GOOGLE SHEETS
+     */
+    async function cargarRosterActual() {
+      const tbody = document.getElementById('rosterTableBody');
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 25px; color: var(--kfl-text-muted);">Cargando Roster oficial desde Google Sheets...</td></tr>';
+
+      try {
+        const url = `${GAS_API_URL}?action=getTeamRoster&sheetName=${encodeURIComponent(currentUser.sheetName)}&password=${encodeURIComponent(currentUser.password)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        tbody.innerHTML = '';
+
+        if (data.status === 'success' && data.roster && data.roster.length > 0) {
+          data.roster.forEach((jugador, i) => {
+            agregarFila(jugador, i + 1);
+          });
+        } else {
+          // Si no tiene registros previos, inicializar con 5 filas vacías
+          for (let i = 1; i <= 5; i++) {
+            agregarFila({}, i);
+          }
+        }
+        actualizarContadorRoster();
+      } catch (e) {
+        console.error(e);
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster. Agregando filas limpias para edición manual.</td></tr>';
+        for (let i = 1; i <= 5; i++) {
+          agregarFila({}, i);
+        }
+        actualizarContadorRoster();
+      }
+    }
+
+    /**
+     * CARGAR REGISTROS GENERALES DE LA CATEGORÍA
+     */
+    async function cargarRegistrosCategoria() {
+      const listContainer = document.getElementById('categoryRegistrationsList');
+      const loader = document.getElementById('loadingRegistros');
+      const totalCount = document.getElementById('totalCategoryCount');
+
+      loader.style.display = 'block';
+      listContainer.innerHTML = '';
+
+      try {
+        const url = `${GAS_API_URL}?action=getCategoryRegistrations&categoria=${encodeURIComponent(currentUser.categoria)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        loader.style.display = 'none';
+
+        if (data.status === 'success' && data.registros && data.registros.length > 0) {
+          totalCount.innerText = data.total;
+          let html = '';
+          data.registros.forEach(r => {
+            const isVal = String(r.estado).toLowerCase().includes('val');
+            html += `
+              <li class="registro-item">
+                <span>${r.nombre}</span>
+                <span class="badge-status ${isVal ? 'badge-validado' : 'badge-pendiente'}">
+                  ${r.estado}
+                </span>
+              </li>
+            `;
+          });
+          listContainer.innerHTML = html;
+        } else {
+          totalCount.innerText = '0';
+          listContainer.innerHTML = '<li style="text-align:center; padding: 15px; color: var(--kfl-text-muted); font-size: 13px;">No hay registros en esta categoría aún.</li>';
+        }
+      } catch (err) {
+        console.error(err);
+        loader.style.display = 'none';
+        listContainer.innerHTML = '<li style="text-align:center; padding: 15px; color: var(--kfl-danger); font-size: 13px;">Error al conectar con la lista de registros.</li>';
+      }
+    }
+
+    /**
+     * RENDERIZAR FILA DE ROSTER (COLUMNAS KFL 1 A 10)
+     */
+    function agregarFila(datos = {}, index = null) {
+      const tbody = document.getElementById('rosterTableBody');
+      const tr = document.createElement('tr');
+      const rowNum = index || (tbody.children.length + 1);
+
+      const readonlyAttr = isLockedSession ? 'readonly' : '';
+      const disabledAttr = isLockedSession ? 'disabled' : '';
+
+      tr.innerHTML = `
+        <td class="col-idx">${rowNum}</td>
+        <td><input type="text" class="cell-nombre" value="${escaparHtml(datos.nombre || '')}" placeholder="Nombre" ${readonlyAttr}></td>
+        <td><input type="text" class="cell-apellido" value="${escaparHtml(datos.apellido || '')}" placeholder="Apellido" ${readonlyAttr}></td>
+        <td><input type="text" class="cell-jersey" value="${escaparHtml(datos.jersey || '')}" placeholder="#" style="text-align:center;" ${readonlyAttr}></td>
+        <td><input type="text" class="cell-cedula" value="${escaparHtml(datos.cedula || '')}" placeholder="8-000-000" ${readonlyAttr}></td>
+        <td><input type="text" class="cell-nacimiento" value="${escaparHtml(datos.fechaNacimiento || '')}" placeholder="DD/MM/AAAA" ${readonlyAttr}></td>
+        <td><input type="text" class="cell-posicion" value="${escaparHtml(datos.posicion || '')}" placeholder="QB, WR, etc." ${readonlyAttr}></td>
+        <td class="col-photo-badge">
+          ${datos.tieneFoto 
+            ? '<span class="badge-photo-yes">Asignada</span>' 
+            : '<span class="badge-photo-no">Pendiente</span>'}
+        </td>
+        <td style="text-align: center;">
+          <button type="button" class="btn-danger-outline" onclick="eliminarFila(this)" ${disabledAttr} title="Eliminar fila">✕</button>
+        </td>
+      `;
+
+      tbody.appendChild(tr);
+      actualizarIndices();
+    }
+
+    function agregarFilaVacia() {
+      if (isLockedSession) return;
+      agregarFila({}, null);
+      actualizarContadorRoster();
+    }
+
+    function eliminarFila(btn) {
+      if (isLockedSession) return;
+      const row = btn.closest('tr');
+      row.remove();
+      actualizarIndices();
+      actualizarContadorRoster();
+    }
+
+    function actualizarIndices() {
+      const rows = document.querySelectorAll('#rosterTableBody tr');
+      rows.forEach((row, i) => {
+        const idxCell = row.querySelector('.col-idx');
+        if (idxCell) idxCell.innerText = i + 1;
+      });
+    }
+
+    function actualizarContadorRoster() {
+      const rows = document.querySelectorAll('#rosterTableBody tr');
+      let totalConNombre = 0;
+      rows.forEach(r => {
+        const nom = r.querySelector('.cell-nombre')?.value.trim();
+        const ced = r.querySelector('.cell-cedula')?.value.trim();
+        if (nom || ced) totalConNombre++;
+      });
+      document.getElementById('rosterCountStatus').innerText = `${totalConNombre} jugadoras/jugadores registrados`;
+    }
+
+    /**
+     * ENVIAR ROSTER AL BACKEND EN GOOGLE SHEETS
+     */
+    async function enviarRosterAlBackend() {
+      if (isLockedSession) {
+        alert('El período de edición ha finalizado. No es posible enviar cambios.');
+        return;
+      }
+
+      const rows = document.querySelectorAll('#rosterTableBody tr');
+      const jugadores = [];
+
+      rows.forEach(row => {
+        const nombre = row.querySelector('.cell-nombre')?.value.trim();
+        const apellido = row.querySelector('.cell-apellido')?.value.trim();
+        const jersey = row.querySelector('.cell-jersey')?.value.trim();
+        const cedula = row.querySelector('.cell-cedula')?.value.trim();
+        const fechaNacimiento = row.querySelector('.cell-nacimiento')?.value.trim();
+        const posicion = row.querySelector('.cell-posicion')?.value.trim();
+
+        // Solo agregar si tiene nombre o cédula
+        if (nombre || cedula) {
+          jugadores.push({
+            nombre,
+            apellido,
+            jersey,
+            cedula,
+            fechaNacimiento,
+            posicion
+          });
+        }
+      });
+
+      if (jugadores.length === 0) {
+        if (!confirm('¿Estás seguro de que deseas enviar un Roster completamente vacío?')) {
+          return;
+        }
+      }
+
+      const btn = document.getElementById('btnSubmitRoster');
+      const btnText = document.getElementById('btnSubmitRosterText');
+      const feedback = document.getElementById('saveFeedback');
+
+      btn.disabled = true;
+      btnText.innerHTML = '<span class="spinner-inline"></span> Sincronizando y Notificando...';
+      feedback.style.display = 'none';
+
+      try {
+        const payload = {
+          action: 'saveRoster',
+          password: currentUser.password,
+          sheetName: currentUser.sheetName,
+          players: jugadores,
+          logDetails: `Envío de Roster oficial con ${jugadores.length} jugadores por Coach ${currentUser.coach}`
+        };
+
+        const res = await fetch(GAS_API_URL, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+
+        if (result.status === 'success') {
+          feedback.textContent = result.message || '¡Roster confirmado y enviado exitosamente a la liga!';
+          feedback.className = 'status-msg success';
+          feedback.style.display = 'block';
+          actualizarContadorRoster();
+          window.scrollTo({ top: 180, behavior: 'smooth' });
+        } else {
+          feedback.textContent = result.message || 'Error al procesar el roster.';
+          feedback.className = 'status-msg error';
+          feedback.style.display = 'block';
+        }
+      } catch (err) {
+        console.error(err);
+        feedback.textContent = 'Error de conexión al enviar el roster. Inténtalo de nuevo.';
+        feedback.className = 'status-msg error';
+        feedback.style.display = 'block';
+      } finally {
+        btn.disabled = false;
+        btnText.textContent = 'Confirmar y Enviar Roster a la Liga';
+      }
+    }
+
+    /**
+     * GESTIÓN DE SESIÓN
+     */
+    function verificarSesionExistente() {
+      const stored = sessionStorage.getItem('kfl_coach_session');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          currentUser = parsed.user;
+          isLockedSession = Boolean(parsed.isLocked);
+          inicializarDashboard(parsed.deadline);
+        } catch (e) {
+          sessionStorage.removeItem('kfl_coach_session');
+        }
+      }
+    }
+
+    function cerrarSesion() {
+      sessionStorage.removeItem('kfl_coach_session');
+      currentUser = null;
+      document.getElementById('dashboardSection').style.display = 'none';
+      document.getElementById('loginSection').style.display = 'block';
+      document.getElementById('coachPassword').value = '';
+      document.getElementById('deadlineWarning').classList.remove('active');
+    }
+
+    function escaparHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
   </script>
 </body>

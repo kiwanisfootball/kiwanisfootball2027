@@ -3,13 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noticias - Kiwanis Football League</title>
+  <title>Noticias y Artículos - Kiwanis Football League</title>
   
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
-
-  <!-- Librería para convertir Markdown a HTML en el navegador -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <style>
     .blog-container {
@@ -21,7 +18,7 @@
       box-sizing: border-box;
     }
 
-    /* ESTILO DE TÍTULO IDÉNTICO AL REFERIDO (FONDO LIMPIO) */
+    /* ESTILO DE TÍTULO LIMPIO (COMO EL SCREENSHOT SOLICITADO) */
     .section-header-clean {
       text-align: center;
       margin-bottom: 40px;
@@ -43,11 +40,12 @@
       font-weight: 600;
     }
 
-    /* LISTADO DE POSTS */
+    /* GRID DE PUBLICACIONES */
     #lista-posts {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 25px;
+      margin-bottom: 50px;
     }
 
     .post-card {
@@ -89,49 +87,16 @@
       color: #94a3b8;
       font-weight: 700;
       text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
     }
 
-    /* VISTA DE DETALLE (LECTOR INTERNO EN LA MISMA PÁGINA) */
-    #detalle-post {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 40px;
-      display: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    }
-
-    .btn-volver {
-      background: #f1f5f9;
-      color: #19547E;
-      border: none;
-      padding: 8px 16px;
+    .leer-mas-link {
       font-size: 12px;
       font-weight: 800;
-      text-transform: uppercase;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 25px;
-      transition: background 0.2s;
-    }
-
-    .btn-volver:hover {
-      background: #e2e8f0;
-    }
-
-    .contenido-md h1, .contenido-md h2, .contenido-md h3 {
-      font-family: 'Anton', sans-serif;
       color: #19547E;
-      margin-top: 25px;
-      margin-bottom: 15px;
       text-transform: uppercase;
-    }
-
-    .contenido-md p {
-      font-size: 15px;
-      color: #334155;
-      line-height: 1.7;
-      margin-bottom: 15px;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -142,21 +107,15 @@
 
   <main class="blog-container">
 
-    <!-- TÍTULO ESTILO REFERENCIA -->
+    <!-- TÍTULO PRINCIPAL -->
     <div class="section-header-clean">
       <h1>Noticias y Artículos KFL</h1>
       <p>Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football</p>
     </div>
 
-    <!-- VISTA 1: LISTADO DE POSTS -->
+    <!-- CONTENEDOR DEL LISTADO DE POSTS (CARGADOS DESDE GITHUB) -->
     <div id="lista-posts">
-      <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando publicaciones...</p>
-    </div>
-
-    <!-- VISTA 2: LECTOR INTERNO DEL ARTÍCULO (TODO EN LA MISMA PÁGINA) -->
-    <div id="detalle-post">
-      <button class="btn-volver" onclick="mostrarLista()">← Volver al listado</button>
-      <div id="contenidoHtml" class="contenido-md"></div>
+      <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando publicaciones desde el repositorio...</p>
     </div>
 
   </main>
@@ -166,82 +125,57 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Cargar Nav y Footer maestros
+      // 1. Inyectar Nav y Footer maestros
       fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
       fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
 
-      // Cargar los artículos generados por Decap CMS desde la carpeta /blog/
-      cargarPostsDesdeDecap();
+      // 2. Cargar automáticamente los artículos de la carpeta blog/ en GitHub
+      cargarPostsDesdeGitHub();
     });
 
-    // Lista de archivos .md generados por Decap CMS
-    // NOTA: Asegúrate de agregar aquí las rutas de los archivos .md que vayas creando en la carpeta "blog/" de tu repositorio.
-    const listaDeArticulos = [
-      {
-        titulo: "Inicia la gran temporada 2026 de la KFL",
-        fecha: "26/10/2026",
-        categoria: "contact football",
-        extracto: "Todo listo para el kickoff oficial con más de 30 equipos inscritos...",
-        archivoMd: "blog/aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026.md"
-      }
-    ];
-
-    function cargarPostsDesdeDecap() {
+    async function cargarPostsDesdeGitHub() {
       const contenedor = document.getElementById('lista-posts');
-      
-      if(listaDeArticulos.length === 0) {
-        contenedor.innerHTML = '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No hay publicaciones disponibles todavía.</p>';
-        return;
-      }
-
-      let html = "";
-      listaDeArticulos.forEach((post, index) => {
-        html += `
-          <div class="post-card" onclick="leerArticulo('${post.archivoMd}')">
-            <div>
-              <span class="post-meta">${post.fecha} • ${post.categoria}</span>
-              <h3>${post.titulo}</h3>
-              <p>${post.extracto}</p>
-            </div>
-            <span style="font-size: 12px; font-weight: 800; color: #19547E; text-transform: uppercase;">Leer artículo →</span>
-          </div>
-        `;
-      });
-
-      contenedor.innerHTML = html;
-    }
-
-    async function leerArticulo(urlMarkdown) {
-      const listaDiv = document.getElementById('lista-posts');
-      const detalleDiv = document.getElementById('detalle-post');
-      const contenidoDiv = document.getElementById('contenidoHtml');
-
-      listaDiv.style.display = 'none';
-      detalleDiv.style.display = 'block';
+      const repo = "kiwanisfootball/kiwanisfootball2027"; // Tu repositorio configurado
+      const folder = "blog";
 
       try {
-        let respuesta = await fetch(urlMarkdown);
-        if(respuesta.ok) {
-          let textoMd = await respuesta.text();
-          
-          // Limpiar metadatos frontmatter de Decap CMS (lo que está entre los ---)
-          let contenidoLimpio = textoMd.replace(/^---[\s\S]*?---/, '');
-          
-          contenidoDiv.innerHTML = marked.parse(contenidoLimpio);
-        } else {
-          contenidoDiv.innerHTML = "<p style='color: #c53030;'>No se pudo cargar el contenido del artículo.</p>";
+        let response = await fetch(`https://api.github.com/repos/${repo}/contents/${folder}`);
+        if (!response.ok) throw new Error("No se pudo conectar con la API de GitHub");
+
+        let files = await response.json();
+        let markdownFiles = files.filter(file => file.name.endsWith('.md'));
+
+        if (markdownFiles.length === 0) {
+          contenedor.innerHTML = '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No hay publicaciones disponibles todavía.</p>';
+          return;
         }
-      } catch (e) {
-        contenidoDiv.innerHTML = "<p style='color: #c53030;'>Error al conectar con el archivo Markdown.</p>";
+
+        let html = "";
+        for (let file of markdownFiles) {
+          // Extraemos el slug quitando la extensión .md
+          let slugNombre = file.name.replace('.md', '');
+          
+          // Generamos un título limpio legible basado en el nombre del archivo
+          let tituloLimpio = slugNombre.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
+
+          html += `
+            <div class="post-card" onclick="window.location.href='articulo.html?slug=${slugNombre}'">
+              <div>
+                <span class="post-meta">Comunicado Oficial KFL</span>
+                <h3>${tituloLimpio}</h3>
+                <p>Haz clic para leer la noticia completa y conocer todos los detalles...</p>
+              </div>
+              <span class="leer-mas-link">Leer artículo →</span>
+            </div>
+          `;
+        }
+
+        contenedor.innerHTML = html;
+
+      } catch (error) {
+        console.error(error);
+        contenedor.innerHTML = '<p style="color: #c53030; text-align: center; grid-column: 1 / -1;">Error al cargar las publicaciones del blog.</p>';
       }
-
-      window.scrollTo({ top: 150, behavior: 'smooth' });
-    }
-
-    function mostrarLista() {
-      document.getElementById('detalle-post').style.display = 'none';
-      document.getElementById('lista-posts').style.display = 'grid';
-      window.scrollTo({ top: 150, behavior: 'smooth' });
     }
   </script>
 </body>

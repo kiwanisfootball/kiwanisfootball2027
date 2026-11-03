@@ -60,6 +60,7 @@ Los chicos de Kiwanis siguieron su siguiente serie ofensiva desde su propia yard
 Todo está listo para que el emparrillado vibre este **viernes 30 de octubre** con los duelos definitivos por el campeonato:
 
 **7:15 p.m.** | RAIDERS VS OWLS – **FINAL MICRO CONTACT**
+
 **8:30 p.m.** | OWLS VS EAGLES – **FINAL MINI CONTACT**
 
 ### Tabla General de Posiciones (Ronda Regular)

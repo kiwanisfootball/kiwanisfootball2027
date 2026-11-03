@@ -39,10 +39,11 @@
       font-weight: 600;
     }
 
+    /* GRILLA ADAPTABLE: Se acomodarán en columnas ordenadas al tener más noticias */
     #lista-posts {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
       margin-bottom: 50px;
     }
 
@@ -65,11 +66,22 @@
       box-shadow: 0 8px 20px rgba(25, 84, 126, 0.1);
     }
 
+    /* CONTENEDOR DE IMAGEN SIN CORTES (CONTAIN Y FONDO LIMPIO) */
+    .post-card-img-container {
+      width: 100%;
+      background-color: #0b0f19; /* Fondo elegante para rellenar espacios si la proporción varía */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 220px;
+      overflow: hidden;
+    }
+
     .post-card-img {
       width: 100%;
-      height: 180px;
-      object-fit: cover;
-      background-color: #f1f5f9;
+      height: auto;
+      max-height: 220px;
+      object-fit: contain; /* Garantiza que NUNCA se corte la imagen */
     }
 
     .post-card-body {
@@ -82,21 +94,22 @@
 
     .post-card h3 {
       font-family: 'Anton', sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       color: #19547E;
       text-transform: uppercase;
       margin-bottom: 10px;
+      line-height: 1.2;
     }
 
     .post-card p {
-      font-size: 14px;
+      font-size: 13.5px;
       color: #64748b;
       line-height: 1.5;
       margin-bottom: 15px;
     }
 
     .post-meta {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #94a3b8;
       font-weight: 700;
       text-transform: uppercase;
@@ -145,7 +158,6 @@
       cargarArticulosMarkdown();
     });
 
-    // Lista de slugs de tus artículos publicados (aquí pones el nombre del archivo .md sin la extensión)
     const slugsArticulos = [
       "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
     ];
@@ -166,7 +178,6 @@
           if (!respuesta.ok) continue;
           let textoMd = await respuesta.text();
 
-          // Extraer el frontmatter (bloque YAML superior entre ---)
           let matchFrontmatter = textoMd.match(/^---[\s\S]*?---/);
           let titulo = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
           let fecha = "26/10/2026";
@@ -177,23 +188,18 @@
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
             
-            // Extraer título si existe
             let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
             if (tMatch) titulo = tMatch[1];
 
-            // Extraer fecha si existe
             let dMatch = frontmatter.match(/date:\s*["']?([^"'\n]+)["']?/);
             if (dMatch) fecha = dMatch[1];
 
-            // Extraer extracto / resumen si existe
             let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
             if (eMatch) excerpt = eMatch[1];
 
-            // Extraer imagen de portada (coverImage)
             let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
             if (imgMatch) {
               coverImage = imgMatch[1];
-              // Asegurar ruta absoluta si viene relativa
               if (coverImage.startsWith('assets/')) {
                 coverImage = '/' + coverImage;
               }
@@ -202,7 +208,10 @@
 
           html += `
             <div class="post-card" onclick="window.location.href='articulo.html?slug=${slug}'">
-              ${coverImage ? `<img src="${coverImage}" alt="${titulo}" class="post-card-img">` : ''}
+              ${coverImage ? `
+                <div class="post-card-img-container">
+                  <img src="${coverImage}" alt="${titulo}" class="post-card-img">
+                </div>` : ''}
               <div class="post-card-body">
                 <div>
                   <span class="post-meta">${fecha} • ${categoria}</span>

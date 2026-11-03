@@ -36,7 +36,6 @@
       z-index: 9999;
     }
 
-    /* BARRA SUPERIOR DE SALIDA */
     .portal-top-bar {
       max-width: 1250px;
       margin: 15px auto 0 auto;
@@ -73,7 +72,7 @@
       box-sizing: border-box;
     }
 
-    /* TÍTULO Y SUBTÍTULO SOBRE FONDO BLANCO LIMPIO */
+    /* ENCABEZADO LIMPIO SOBRE FONDO BLANCO */
     .section-header-clean {
       text-align: center;
       margin-bottom: 30px;
@@ -114,7 +113,7 @@
       display: block;
     }
 
-    /* NOTA DE FORMATO DE FECHA */
+    /* NOTA INFORMATIVA */
     .format-note-box {
       background-color: #eff6ff;
       border-left: 4px solid var(--kfl-blue);
@@ -126,7 +125,7 @@
       margin-bottom: 15px;
     }
 
-    /* TARJETAS PRINCIPALES */
+    /* TARJETAS */
     .auth-card, .dashboard-card {
       background: var(--kfl-card-bg);
       border: 1px solid var(--kfl-border);
@@ -157,7 +156,6 @@
       margin-bottom: 25px;
     }
 
-    /* FORMULARIO DE ACCESO */
     .form-group {
       margin-bottom: 20px;
     }
@@ -188,7 +186,6 @@
       box-shadow: 0 0 0 3px rgba(25, 84, 126, 0.12);
     }
 
-    /* BOTONES */
     .btn-kfl {
       background-color: var(--kfl-blue);
       color: #ffffff;
@@ -234,7 +231,6 @@
       background-color: #e2e8f0;
     }
 
-    /* BARRA SUPERIOR DEL DASHBOARD */
     .dashboard-header-bar {
       display: flex;
       justify-content: space-between;
@@ -255,7 +251,7 @@
       color: var(--kfl-text-dark);
     }
 
-    /* TABLA SIMULADORA DE HOJA DE CÁLCULO (100% ANCHO) */
+    /* TABLA DE ROSTER (100% ANCHO) */
     .table-actions-bar {
       display: flex;
       justify-content: space-between;
@@ -317,7 +313,6 @@
       border-radius: 4px;
     }
 
-    /* COLUMNA CANTIDAD BLOQUEADA */
     .col-idx {
       width: 50px;
       text-align: center !important;
@@ -359,7 +354,7 @@
       text-transform: uppercase;
     }
 
-    /* SECCIÓN INFERIOR: JUGADORES REGISTRADOS EN LA WEB */
+    /* SECCIÓN INFERIOR DE REGISTROS */
     .registered-web-section {
       margin-top: 40px;
       border-top: 2px solid var(--kfl-border);
@@ -432,7 +427,6 @@
       color: #92400e;
     }
 
-    /* ESTADOS Y NOTIFICACIONES */
     .status-msg {
       padding: 12px 16px;
       border-radius: 8px;
@@ -473,28 +467,25 @@
 </head>
 <body>
 
-  <!-- HEADER MAESTRO GLOBAL -->
   <header class="header-nav" id="globalNav"></header>
 
-  <!-- ACCESO RÁPIDO PARA SALIDA -->
   <div class="portal-top-bar">
     <a href="index.html" class="btn-exit-link">← Volver al Sitio Principal</a>
   </div>
 
   <main class="portal-container">
     
-    <!-- TÍTULO Y SUBTÍTULO SOBRE FONDO BLANCO -->
     <div class="section-header-clean">
       <h1>Portal de Coaches KFL</h1>
       <p>Gestión de Rosters y Monitoreo de Inscripciones</p>
     </div>
 
-    <!-- BANNER DE FECHA LÍMITE EXPIRADA -->
+    <!-- BANNER DE FECHA LÍMITE (SE ACTUALIZA EN VIVO) -->
     <div id="deadlineWarning" class="deadline-banner">
       ⚠️ <strong>Período Cerrado:</strong> La fecha límite oficial para cambios de roster ha vencido (<span id="deadlineDisplay"></span>). El sistema se encuentra en modo solo lectura.
     </div>
 
-    <!-- SECCIÓN 1: LOGIN POR CONTRASEÑA -->
+    <!-- SECCIÓN 1: LOGIN -->
     <section class="auth-card" id="loginSection">
       <h2>Acceso Exclusivo para Entrenadores</h2>
       <div class="info-box">
@@ -521,7 +512,7 @@
       </form>
     </section>
 
-    <!-- SECCIÓN 2: PANEL DE CONTROL (DASHBOARD) -->
+    <!-- SECCIÓN 2: DASHBOARD -->
     <div id="dashboardSection" style="display: none;">
       
       <div class="dashboard-card">
@@ -541,12 +532,10 @@
 
         <div id="saveFeedback" class="status-msg"></div>
 
-        <!-- NOTA DE FORMATO DE FECHA -->
         <div class="format-note-box">
           ℹ️ <strong>FORMATO REQUERIDO:</strong> La <strong>Fecha de Nacimiento</strong> debe ingresarse estrictamente en formato <strong>DD/MM/AAAA</strong> (ejemplo: <code>28/05/2008</code>). La columna <strong>CANTIDAD</strong> y la <strong>FOTO</strong> son de administración oficial.
         </div>
 
-        <!-- ACCIONES Y TABLA DE ROSTER (100% ANCHO) -->
         <div class="table-actions-bar">
           <div>
             <span id="rosterCountStatus" style="font-size: 13.5px; color: var(--kfl-text-dark); font-weight: 800;">
@@ -584,7 +573,7 @@
           </button>
         </div>
 
-        <!-- SECCIÓN: JUGADORES REGISTRADOS EN LA WEB -->
+        <!-- JUGADORES REGISTRADOS EN LA WEB -->
         <div class="registered-web-section">
           <div class="registered-web-header">
             <div>
@@ -602,9 +591,7 @@
             Consultando registros en vivo...
           </div>
 
-          <div class="registros-grid" id="categoryRegistrationsList">
-            <!-- Inyectado dinámicamente -->
-          </div>
+          <div class="registros-grid" id="categoryRegistrationsList"></div>
         </div>
 
       </div>
@@ -613,49 +600,38 @@
 
   </main>
 
-  <!-- FOOTER MAESTRO GLOBAL -->
   <div id="globalFooter"></div>
 
-  <!-- CONTROLADOR JAVASCRIPT -->
   <script>
     const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec";
 
     let currentUser = null;
     let isLockedSession = false;
-    let limiteMaximoRoster = null; // 100% dinámico: lo dicta la pestaña CONFIG
+    let limiteMaximoRoster = null;
 
     document.addEventListener("DOMContentLoaded", function() {
-      // 1. Inyección de Nav y activación del menú móvil
+      // 1. Inyección de componentes maestros
       fetch('nav.html')
-        .then(response => {
-          if (!response.ok) throw new Error('No se pudo cargar nav.html');
-          return response.text();
-        })
+        .then(response => response.ok ? response.text() : '')
         .then(html => {
-          const navContainer = document.getElementById('globalNav');
-          navContainer.innerHTML = html;
-          activarMenuHamburguesa();
+          if (html) {
+            document.getElementById('globalNav').innerHTML = html;
+            activarMenuHamburguesa();
+          }
         })
-        .catch(err => console.warn('nav.html se resolverá en despliegue:', err));
+        .catch(err => console.warn('nav.html cargará en despliegue:', err));
 
-      // 2. Inyección de Footer maestro
       fetch('footer.html')
-        .then(response => {
-          if (!response.ok) throw new Error('No se pudo cargar footer.html');
-          return response.text();
-        })
+        .then(response => response.ok ? response.text() : '')
         .then(html => {
-          document.getElementById('globalFooter').innerHTML = html;
+          if (html) document.getElementById('globalFooter').innerHTML = html;
         })
-        .catch(err => console.warn('footer.html se resolverá en despliegue:', err));
+        .catch(err => console.warn('footer.html cargará en despliegue:', err));
 
-      // 3. Restaurar sesión si existe
+      // 2. Verificar si hay sesión previa activa
       verificarSesionExistente();
     });
 
-    /**
-     * MENÚ MÓVIL
-     */
     function activarMenuHamburguesa() {
       const hamburgerBtn = document.getElementById('hamburgerBtn') || document.querySelector('.hamburger-btn');
       const navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu');
@@ -688,7 +664,7 @@
     }
 
     /**
-     * INICIO DE SESIÓN
+     * LOGIN INICIAL
      */
     async function handleLoginSubmit(e) {
       e.preventDefault();
@@ -703,7 +679,7 @@
       if (!passwordInput) return;
 
       btn.disabled = true;
-      btnText.innerHTML = '<span class="spinner-inline"></span> Verificando...';
+      btnText.innerHTML = '<span class="spinner-inline"></span> Verificando con Google Sheets...';
 
       try {
         const response = await fetch(GAS_API_URL, {
@@ -719,17 +695,17 @@
         if (result.status === 'success') {
           currentUser = result.user;
           currentUser.password = passwordInput;
-          isLockedSession = Boolean(result.isLocked);
-          limiteMaximoRoster = result.limiteRoster !== undefined ? result.limiteRoster : null;
-
-          sessionStorage.setItem('kfl_coach_session', JSON.stringify({
-            user: currentUser,
-            isLocked: isLockedSession,
-            deadline: result.deadline,
-            limiteRoster: limiteMaximoRoster
+          
+          // Guardar credenciales de sesión activa
+          sessionStorage.setItem('kfl_coach_auth', JSON.stringify({
+            user: currentUser
           }));
 
-          inicializarDashboard(result.deadline);
+          // Actualizar estado con la respuesta en vivo
+          actualizarEstadoBloqueo(result.isLocked, result.deadline);
+          if (result.limiteRoster !== undefined) limiteMaximoRoster = result.limiteRoster;
+
+          mostrarDashboard();
         } else {
           feedback.textContent = result.message || 'Contraseña incorrecta.';
           feedback.className = 'status-msg error';
@@ -737,7 +713,7 @@
         }
       } catch (err) {
         console.error(err);
-        feedback.textContent = 'Error de conexión con el servidor. Verifica tu internet.';
+        feedback.textContent = 'Error al conectar con la base de datos de la liga.';
         feedback.className = 'status-msg error';
         feedback.style.display = 'block';
       } finally {
@@ -747,9 +723,38 @@
     }
 
     /**
-     * INICIALIZAR EL DASHBOARD
+     * GESTIÓN DINÁMICA DEL BLOQUEO (SIN CACHÉ ROTA)
      */
-    async function inicializarDashboard(deadlineString) {
+    function actualizarEstadoBloqueo(bloqueado, fechaTexto) {
+      isLockedSession = Boolean(bloqueado);
+      const warningBanner = document.getElementById('deadlineWarning');
+      const deadlineSpan = document.getElementById('deadlineDisplay');
+      const submitBtn = document.getElementById('btnSubmitRoster');
+      const addRowBtn = document.getElementById('btnAddRowBtn');
+
+      if (isLockedSession) {
+        deadlineSpan.innerText = fechaTexto || 'Fecha Vencida';
+        warningBanner.classList.add('active');
+        submitBtn.disabled = true;
+        addRowBtn.disabled = true;
+      } else {
+        warningBanner.classList.remove('active');
+        submitBtn.disabled = false;
+        addRowBtn.disabled = false;
+      }
+
+      // Aplicar o remover readonly en las celdas ya creadas
+      const inputs = document.querySelectorAll('#rosterTableBody input');
+      inputs.forEach(input => {
+        if (isLockedSession) {
+          input.setAttribute('readonly', 'true');
+        } else {
+          input.removeAttribute('readonly');
+        }
+      });
+    }
+
+    function mostrarDashboard() {
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('dashboardSection').style.display = 'block';
 
@@ -757,38 +762,38 @@
       document.getElementById('coachNameLabel').innerText = currentUser.coach || 'Entrenador';
       document.getElementById('categoryNameLabel').innerText = currentUser.categoria;
 
-      if (isLockedSession) {
-        const deadlineWarning = document.getElementById('deadlineWarning');
-        document.getElementById('deadlineDisplay').innerText = deadlineString || 'Fecha vencida';
-        deadlineWarning.classList.add('active');
-        document.getElementById('btnSubmitRoster').disabled = true;
-        document.getElementById('btnAddRowBtn').disabled = true;
-      }
-
-      await Promise.all([
-        cargarRosterActual(),
-        cargarRegistrosCategoria()
-      ]);
+      cargarRosterActual();
+      cargarRegistrosCategoria();
     }
 
     /**
-     * CARGAR ROSTER DESDE GOOGLE SHEETS
+     * CONSULTA EN VIVO DEL ROSTER (SIEMPRE LEE LA FECHA EN VIVO DE GOOGLE SHEETS)
      */
     async function cargarRosterActual() {
       const tbody = document.getElementById('rosterTableBody');
       tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color: var(--kfl-text-muted);">Consultando Roster en Google Sheets...</td></tr>';
 
       try {
-        const url = `${GAS_API_URL}?action=getTeamRoster&sheetName=${encodeURIComponent(currentUser.sheetName)}&password=${encodeURIComponent(currentUser.password)}`;
+        const url = `${GAS_API_URL}?action=getTeamRoster&sheetName=${encodeURIComponent(currentUser.sheetName)}&password=${encodeURIComponent(currentUser.password)}&_t=${new Date().getTime()}`;
         const res = await fetch(url);
         const data = await res.json();
 
         tbody.innerHTML = '';
 
-        if (data.status === 'success' && data.roster && data.roster.length > 0) {
-          data.roster.forEach((jugador, i) => {
-            agregarFila(jugador, i + 1);
-          });
+        if (data.status === 'success') {
+          // ACTUALIZAR ESTADO DE BLOQUEO EN VIVO DESDE LA HOJA
+          actualizarEstadoBloqueo(data.isLocked, data.deadline);
+          if (data.limiteRoster !== undefined) limiteMaximoRoster = data.limiteRoster;
+
+          if (data.roster && data.roster.length > 0) {
+            data.roster.forEach((jugador, i) => {
+              agregarFila(jugador, i + 1);
+            });
+          } else {
+            for (let i = 1; i <= 5; i++) {
+              agregarFila({}, i);
+            }
+          }
         } else {
           for (let i = 1; i <= 5; i++) {
             agregarFila({}, i);
@@ -805,9 +810,6 @@
       }
     }
 
-    /**
-     * CARGAR REGISTROS GENERALES (JUGADORES REGISTRADOS EN LA WEB)
-     */
     async function cargarRegistrosCategoria() {
       const listContainer = document.getElementById('categoryRegistrationsList');
       const loader = document.getElementById('loadingRegistros');
@@ -817,7 +819,7 @@
       listContainer.innerHTML = '';
 
       try {
-        const url = `${GAS_API_URL}?action=getCategoryRegistrations&categoria=${encodeURIComponent(currentUser.categoria)}`;
+        const url = `${GAS_API_URL}?action=getCategoryRegistrations&categoria=${encodeURIComponent(currentUser.categoria)}&_t=${new Date().getTime()}`;
         const res = await fetch(url);
         const data = await res.json();
 
@@ -849,9 +851,6 @@
       }
     }
 
-    /**
-     * FORMATEAR FECHA A ESTRICTO DD/MM/AAAA
-     */
     function normalizarFechaDDMMAAAA(valor) {
       if (!valor) return '';
       const str = String(valor).trim();
@@ -867,9 +866,6 @@
       return str;
     }
 
-    /**
-     * RENDERIZAR FILA SIN COLUMNA DE ACCIÓN
-     */
     function agregarFila(datos = {}, index = null) {
       const tbody = document.getElementById('rosterTableBody');
       const tr = document.createElement('tr');
@@ -929,9 +925,6 @@
       }
     }
 
-    /**
-     * ENVIAR ROSTER AL BACKEND
-     */
     async function enviarRosterAlBackend() {
       if (isLockedSession) {
         alert('El período de edición ha finalizado. No es posible enviar modificaciones.');
@@ -964,6 +957,10 @@
       if (limiteMaximoRoster !== null && jugadores.length > limiteMaximoRoster) {
         alert(`No puedes registrar más de ${limiteMaximoRoster} jugadores según el reglamento oficial.`);
         return;
+      }
+
+      if (jugadores.length === 0) {
+        if (!confirm('¿Deseas enviar el Roster completamente vacío?')) return;
       }
 
       const btn = document.getElementById('btnSubmitRoster');
@@ -1012,26 +1009,21 @@
       }
     }
 
-    /**
-     * CIERRE Y RESTAURACIÓN DE SESIÓN
-     */
     function verificarSesionExistente() {
-      const stored = sessionStorage.getItem('kfl_coach_session');
+      const stored = sessionStorage.getItem('kfl_coach_auth');
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
           currentUser = parsed.user;
-          isLockedSession = Boolean(parsed.isLocked);
-          limiteMaximoRoster = parsed.limiteRoster !== undefined ? parsed.limiteRoster : null;
-          inicializarDashboard(parsed.deadline);
+          mostrarDashboard();
         } catch (e) {
-          sessionStorage.removeItem('kfl_coach_session');
+          sessionStorage.removeItem('kfl_coach_auth');
         }
       }
     }
 
     function cerrarSesion() {
-      sessionStorage.removeItem('kfl_coach_session');
+      sessionStorage.removeItem('kfl_coach_auth');
       currentUser = null;
       document.getElementById('dashboardSection').style.display = 'none';
       document.getElementById('loginSection').style.display = 'block';

@@ -31,10 +31,45 @@
       font-family: 'Avenir', sans-serif !important;
     }
 
+    /* REFUERZO DE NAVEGACIÓN Y MENÚ MÓVIL */
+    #globalNav {
+      position: relative;
+      z-index: 9999;
+    }
+
+    /* BARRA DE NAVEGACIÓN RÁPIDA / SALIDA */
+    .portal-top-bar {
+      max-width: 1200px;
+      margin: 15px auto 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-exit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--kfl-blue);
+      text-decoration: none;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-exit-link:hover {
+      background: var(--kfl-blue);
+      color: #ffffff;
+    }
+
     .portal-container {
       max-width: 1200px;
       width: 100%;
-      margin: 40px auto;
+      margin: 20px auto 50px auto;
       padding: 0 20px;
       box-sizing: border-box;
     }
@@ -66,6 +101,24 @@
       margin: 0;
     }
 
+    /* BANNER DE FECHA LÍMITE EXPIRADA */
+    .deadline-banner {
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      border-left: 4px solid var(--kfl-danger);
+      padding: 14px 18px;
+      border-radius: 8px;
+      color: #991b1b;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      display: none;
+    }
+
+    .deadline-banner.active {
+      display: block;
+    }
+
     /* TARJETAS PRINCIPALES */
     .auth-card, .dashboard-card {
       background: var(--kfl-card-bg);
@@ -95,23 +148,6 @@
       color: #475569;
       line-height: 1.5;
       margin-bottom: 25px;
-    }
-
-    .deadline-banner {
-      background-color: #fef2f2;
-      border: 1px solid #fecaca;
-      border-left: 4px solid var(--kfl-danger);
-      padding: 12px 16px;
-      border-radius: 8px;
-      color: #991b1b;
-      font-size: 13.5px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      display: none;
-    }
-
-    .deadline-banner.active {
-      display: block;
     }
 
     /* FORMULARIO DE ACCESO */
@@ -207,7 +243,7 @@
       background: #fee2e2;
     }
 
-    /* ESTRUCTURA DASHBOARD */
+    /* BARRA SUPERIOR DEL DASHBOARD */
     .dashboard-header-bar {
       display: flex;
       justify-content: space-between;
@@ -303,12 +339,14 @@
       border-radius: 4px;
     }
 
+    /* COLUMNA CANTIDAD BLOQUEADA */
     .col-idx {
-      width: 35px;
-      text-align: center;
-      background-color: #f8fafc;
-      font-weight: 700;
-      color: var(--kfl-text-muted);
+      width: 45px;
+      text-align: center !important;
+      background-color: #f1f5f9;
+      font-weight: 800;
+      color: var(--kfl-blue);
+      user-select: none;
     }
 
     .col-small {
@@ -318,6 +356,7 @@
     .col-photo-badge {
       text-align: center;
       width: 90px;
+      user-select: none;
     }
 
     .badge-photo-yes {
@@ -408,7 +447,7 @@
       color: #92400e;
     }
 
-    /* ESTADOS Y NOTIFICACIONES FLOTANTES */
+    /* ESTADOS Y NOTIFICACIONES */
     .status-msg {
       padding: 12px 16px;
       border-radius: 8px;
@@ -449,8 +488,13 @@
 </head>
 <body>
 
-  <!-- HEADER MAESTRO -->
+  <!-- HEADER MAESTRO GLOBAL -->
   <header class="header-nav" id="globalNav"></header>
+
+  <!-- ACCESO RÁPIDO PARA NAVEGACIÓN Y SALIDA -->
+  <div class="portal-top-bar">
+    <a href="index.html" class="btn-exit-link">← Volver al Sitio Principal</a>
+  </div>
 
   <main class="portal-container">
     
@@ -462,14 +506,14 @@
 
     <!-- BANNER DE FECHA LÍMITE EXPIRADA -->
     <div id="deadlineWarning" class="deadline-banner">
-      ⚠️ <strong>Período Cerrado:</strong> La fecha límite para actualización de rosters ha vencido (<span id="deadlineDisplay"></span>). El sistema se encuentra en modo solo lectura.
+      ⚠️ <strong>Período Cerrado:</strong> La fecha límite oficial para cambios de roster ha vencido (<span id="deadlineDisplay"></span>). El sistema se encuentra en modo solo lectura.
     </div>
 
     <!-- SECCIÓN 1: LOGIN POR CONTRASEÑA -->
     <section class="auth-card" id="loginSection">
       <h2>Acceso Exclusivo para Entrenadores</h2>
       <div class="info-box">
-        Ingresa la contraseña asignada por la administración de la liga para gestionar el Roster oficial de tu equipo y ver el estado de los aspirantes inscritos.
+        Ingresa la contraseña asignada a tu equipo para acceder a la gestión de tu Roster y ver los aspirantes inscritos en la categoría <strong>Varsity Contact</strong>.
       </div>
 
       <div id="loginFeedback" class="status-msg"></div>
@@ -503,7 +547,8 @@
               Coach: <strong id="coachNameLabel">---</strong> | Categoría: <strong id="categoryNameLabel">---</strong>
             </div>
           </div>
-          <div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="index.html" class="btn-secondary" style="text-decoration: none;">Ir a Inicio</a>
             <button type="button" class="btn-secondary" onclick="cerrarSesion()">Cerrar Sesión</button>
           </div>
         </div>
@@ -517,11 +562,11 @@
             <div class="table-actions-bar">
               <div>
                 <p style="font-size: 13.5px; color: var(--kfl-text-muted); margin: 0;">
-                  Edita las celdas directamente. La foto y validación institucional son gestionadas exclusivamente por la liga.
+                  La columna <strong>CANTIDAD</strong> y la <strong>FOTO</strong> son administradas por la liga. Completa los datos de cada ranura.
                 </p>
               </div>
               <div>
-                <button type="button" class="btn-secondary" id="btnAddRowBtn" onclick="agregarFilaVacia()">+ Agregar Fila</button>
+                <button type="button" class="btn-secondary" id="btnAddRowBtn" onclick="agregarFilaVacia()">+ Agregar Ranura</button>
               </div>
             </div>
 
@@ -529,7 +574,7 @@
               <table class="roster-grid-simulator" id="rosterTable">
                 <thead>
                   <tr>
-                    <th class="col-idx">#</th>
+                    <th class="col-idx">CANTIDAD</th>
                     <th style="min-width: 140px;">Nombre</th>
                     <th style="min-width: 140px;">Apellido</th>
                     <th class="col-small">Jersey #</th>
@@ -541,7 +586,7 @@
                   </tr>
                 </thead>
                 <tbody id="rosterTableBody">
-                  <!-- Inyectado dinámicamente -->
+                  <!-- Se llena dinámicamente -->
                 </tbody>
               </table>
             </div>
@@ -561,7 +606,7 @@
             <div class="auth-card" style="padding: 25px; margin-bottom: 0;">
               <h2 style="font-size: 20px;">Aspirantes Registrados</h2>
               <p style="font-size: 12.5px; color: var(--kfl-text-muted); margin-bottom: 15px;">
-                Inscripciones recibidas en la web general para tu categoría.
+                Inscripciones recibidas en la web general para esta categoría.
               </p>
 
               <div class="reg-summary-card">
@@ -587,33 +632,86 @@
 
   </main>
 
-  <!-- FOOTER MAESTRO -->
+  <!-- FOOTER MAESTRO GLOBAL -->
   <div id="globalFooter"></div>
 
-  <!-- LÓGICA DE INTEGRACIÓN Y COMUNICACIÓN SERVERLESS -->
+  <!-- CONTROLADOR PRINCIPAL Y RESOLUCIÓN DEL MENÚ MÓVIL -->
   <script>
-    // URL productiva de tu Web App de Google Apps Script
     const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec";
 
-    // Estado en memoria de la sesión
     let currentUser = null;
     let isLockedSession = false;
+    let limiteMaximoRoster = 35; // Límite por defecto, actualizado dinámicamente por la pestaña CONFIG
 
     document.addEventListener("DOMContentLoaded", function() {
-      // 1. Inyección de componentes globales maestros
+      // 1. Inyección de Navbar con activación garantizada del Menú Hamburguesa
       fetch('nav.html')
-        .then(res => res.text())
-        .then(data => { document.getElementById('globalNav').innerHTML = data; })
-        .catch(() => console.warn('nav.html cargará en entorno local/despliegue'));
+        .then(response => {
+          if (!response.ok) throw new Error('No se pudo cargar nav.html');
+          return response.text();
+        })
+        .then(html => {
+          const navContainer = document.getElementById('globalNav');
+          navContainer.innerHTML = html;
+          activarMenuHamburguesa();
+        })
+        .catch(err => {
+          console.warn('nav.html se resolverá en producción:', err);
+        });
 
+      // 2. Inyección de Footer maestro
       fetch('footer.html')
-        .then(res => res.text())
-        .then(data => { document.getElementById('globalFooter').innerHTML = data; })
-        .catch(() => console.warn('footer.html cargará en entorno local/despliegue'));
+        .then(response => {
+          if (!response.ok) throw new Error('No se pudo cargar footer.html');
+          return response.text();
+        })
+        .then(html => {
+          document.getElementById('globalFooter').innerHTML = html;
+        })
+        .catch(err => {
+          console.warn('footer.html se resolverá en producción:', err);
+        });
 
-      // 2. Comprobar si hay sesión previa guardada en sessionStorage
+      // 3. Restaurar sesión si el coach recarga la página
       verificarSesionExistente();
     });
+
+    /**
+     * SOLUCIÓN AL MENÚ MÓVIL (DELEGACIÓN ROBUSTA)
+     */
+    function activarMenuHamburguesa() {
+      const hamburgerBtn = document.getElementById('hamburgerBtn') || document.querySelector('.hamburger-btn');
+      const navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu');
+
+      if (hamburgerBtn && navMenu) {
+        // Remover listeners previos duplicados
+        hamburgerBtn.replaceWith(hamburgerBtn.cloneNode(true));
+        const newHamburgerBtn = document.getElementById('hamburgerBtn') || document.querySelector('.hamburger-btn');
+
+        newHamburgerBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          navMenu.classList.toggle('open');
+          navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic fuera de él
+        document.addEventListener('click', function(e) {
+          if (!navMenu.contains(e.target) && !newHamburgerBtn.contains(e.target)) {
+            navMenu.classList.remove('open');
+            navMenu.classList.remove('active');
+          }
+        });
+
+        // Cerrar menú al tocar cualquier link de navegación
+        const links = navMenu.querySelectorAll('a');
+        links.forEach(link => {
+          link.addEventListener('click', function() {
+            navMenu.classList.remove('open');
+            navMenu.classList.remove('active');
+          });
+        });
+      }
+    }
 
     /**
      * INICIO DE SESIÓN
@@ -634,7 +732,6 @@
       btnText.innerHTML = '<span class="spinner-inline"></span> Verificando...';
 
       try {
-        // Petición POST simple para mitigar preflight CORS en Google Apps Script
         const response = await fetch(GAS_API_URL, {
           method: 'POST',
           body: JSON.stringify({
@@ -649,12 +746,13 @@
           currentUser = result.user;
           currentUser.password = passwordInput;
           isLockedSession = Boolean(result.isLocked);
+          if (result.limiteRoster) limiteMaximoRoster = parseInt(result.limiteRoster, 10);
 
-          // Guardar en sessionStorage para no perder la sesión al recargar
           sessionStorage.setItem('kfl_coach_session', JSON.stringify({
             user: currentUser,
             isLocked: isLockedSession,
-            deadline: result.deadline
+            deadline: result.deadline,
+            limiteRoster: limiteMaximoRoster
           }));
 
           inicializarDashboard(result.deadline);
@@ -665,7 +763,7 @@
         }
       } catch (err) {
         console.error(err);
-        feedback.textContent = 'Error de conexión con el servidor. Revisa tu conexión a internet.';
+        feedback.textContent = 'Error de conexión con el servidor de la liga. Verifica tu conexión.';
         feedback.className = 'status-msg error';
         feedback.style.display = 'block';
       } finally {
@@ -675,7 +773,7 @@
     }
 
     /**
-     * INICIALIZAR EL DASHBOARD CON LOS DATOS DEL COACH
+     * INICIALIZAR EL DASHBOARD CON LOS DATOS DEL EQUIPO
      */
     async function inicializarDashboard(deadlineString) {
       document.getElementById('loginSection').style.display = 'none';
@@ -685,7 +783,6 @@
       document.getElementById('coachNameLabel').innerText = currentUser.coach || 'Entrenador';
       document.getElementById('categoryNameLabel').innerText = currentUser.categoria;
 
-      // Si la fecha límite expiró, activar modo solo lectura
       if (isLockedSession) {
         const deadlineWarning = document.getElementById('deadlineWarning');
         document.getElementById('deadlineDisplay').innerText = deadlineString || 'Fecha vencida';
@@ -694,7 +791,6 @@
         document.getElementById('btnAddRowBtn').disabled = true;
       }
 
-      // Cargar en paralelo el Roster del equipo y los Registros de la categoría
       await Promise.all([
         cargarRosterActual(),
         cargarRegistrosCategoria()
@@ -702,11 +798,11 @@
     }
 
     /**
-     * CARGAR ROSTER ACTUAL DEL EQUIPO DESDE GOOGLE SHEETS
+     * CARGAR ROSTER OFICIAL DESDE GOOGLE SHEETS
      */
     async function cargarRosterActual() {
       const tbody = document.getElementById('rosterTableBody');
-      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 25px; color: var(--kfl-text-muted);">Cargando Roster oficial desde Google Sheets...</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 25px; color: var(--kfl-text-muted);">Consultando Roster en Google Sheets...</td></tr>';
 
       try {
         const url = `${GAS_API_URL}?action=getTeamRoster&sheetName=${encodeURIComponent(currentUser.sheetName)}&password=${encodeURIComponent(currentUser.password)}`;
@@ -720,7 +816,7 @@
             agregarFila(jugador, i + 1);
           });
         } else {
-          // Si no tiene registros previos, inicializar con 5 filas vacías
+          // Si la hoja está limpia, inicializar con 5 ranuras vacías
           for (let i = 1; i <= 5; i++) {
             agregarFila({}, i);
           }
@@ -728,7 +824,7 @@
         actualizarContadorRoster();
       } catch (e) {
         console.error(e);
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster. Agregando filas limpias para edición manual.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster. Agregando filas para captura manual.</td></tr>';
         for (let i = 1; i <= 5; i++) {
           agregarFila({}, i);
         }
@@ -761,9 +857,9 @@
             const isVal = String(r.estado).toLowerCase().includes('val');
             html += `
               <li class="registro-item">
-                <span>${r.nombre}</span>
+                <span>${escaparHtml(r.nombre)}</span>
                 <span class="badge-status ${isVal ? 'badge-validado' : 'badge-pendiente'}">
-                  ${r.estado}
+                  ${escaparHtml(r.estado)}
                 </span>
               </li>
             `;
@@ -776,12 +872,12 @@
       } catch (err) {
         console.error(err);
         loader.style.display = 'none';
-        listContainer.innerHTML = '<li style="text-align:center; padding: 15px; color: var(--kfl-danger); font-size: 13px;">Error al conectar con la lista de registros.</li>';
+        listContainer.innerHTML = '<li style="text-align:center; padding: 15px; color: var(--kfl-danger); font-size: 13px;">Error al consultar registros.</li>';
       }
     }
 
     /**
-     * RENDERIZAR FILA DE ROSTER (COLUMNAS KFL 1 A 10)
+     * RENDERIZAR FILA: CANTIDAD Y FOTO BLOQUEADAS
      */
     function agregarFila(datos = {}, index = null) {
       const tbody = document.getElementById('rosterTableBody');
@@ -815,6 +911,11 @@
 
     function agregarFilaVacia() {
       if (isLockedSession) return;
+      const tbody = document.getElementById('rosterTableBody');
+      if (tbody.children.length >= limiteMaximoRoster) {
+        alert(`Has alcanzado el límite estricto de ${limiteMaximoRoster} jugadores permitidos para la categoría Varsity Contact.`);
+        return;
+      }
       agregarFila({}, null);
       actualizarContadorRoster();
     }
@@ -837,21 +938,21 @@
 
     function actualizarContadorRoster() {
       const rows = document.querySelectorAll('#rosterTableBody tr');
-      let totalConNombre = 0;
+      let totalConDatos = 0;
       rows.forEach(r => {
         const nom = r.querySelector('.cell-nombre')?.value.trim();
         const ced = r.querySelector('.cell-cedula')?.value.trim();
-        if (nom || ced) totalConNombre++;
+        if (nom || ced) totalConDatos++;
       });
-      document.getElementById('rosterCountStatus').innerText = `${totalConNombre} jugadoras/jugadores registrados`;
+      document.getElementById('rosterCountStatus').innerText = `${totalConDatos} de ${limiteMaximoRoster} jugadoras/jugadores listados`;
     }
 
     /**
-     * ENVIAR ROSTER AL BACKEND EN GOOGLE SHEETS
+     * ENVIAR ROSTER A GOOGLE SHEETS
      */
     async function enviarRosterAlBackend() {
       if (isLockedSession) {
-        alert('El período de edición ha finalizado. No es posible enviar cambios.');
+        alert('El período de edición ha finalizado. No es posible enviar modificaciones.');
         return;
       }
 
@@ -866,7 +967,6 @@
         const fechaNacimiento = row.querySelector('.cell-nacimiento')?.value.trim();
         const posicion = row.querySelector('.cell-posicion')?.value.trim();
 
-        // Solo agregar si tiene nombre o cédula
         if (nombre || cedula) {
           jugadores.push({
             nombre,
@@ -879,10 +979,13 @@
         }
       });
 
+      if (jugadores.length > limiteMaximoRoster) {
+        alert(`No puedes enviar más de ${limiteMaximoRoster} jugadores.`);
+        return;
+      }
+
       if (jugadores.length === 0) {
-        if (!confirm('¿Estás seguro de que deseas enviar un Roster completamente vacío?')) {
-          return;
-        }
+        if (!confirm('¿Deseas enviar el Roster completamente vacío?')) return;
       }
 
       const btn = document.getElementById('btnSubmitRoster');
@@ -890,7 +993,7 @@
       const feedback = document.getElementById('saveFeedback');
 
       btn.disabled = true;
-      btnText.innerHTML = '<span class="spinner-inline"></span> Sincronizando y Notificando...';
+      btnText.innerHTML = '<span class="spinner-inline"></span> Sincronizando con Liga...';
       feedback.style.display = 'none';
 
       try {
@@ -899,7 +1002,7 @@
           password: currentUser.password,
           sheetName: currentUser.sheetName,
           players: jugadores,
-          logDetails: `Envío de Roster oficial con ${jugadores.length} jugadores por Coach ${currentUser.coach}`
+          logDetails: `Envío oficial de Roster (${jugadores.length} jugadores) por Coach ${currentUser.coach}`
         };
 
         const res = await fetch(GAS_API_URL, {
@@ -910,11 +1013,11 @@
         const result = await res.json();
 
         if (result.status === 'success') {
-          feedback.textContent = result.message || '¡Roster confirmado y enviado exitosamente a la liga!';
+          feedback.textContent = result.message || '¡Roster sincronizado exitosamente con la liga!';
           feedback.className = 'status-msg success';
           feedback.style.display = 'block';
           actualizarContadorRoster();
-          window.scrollTo({ top: 180, behavior: 'smooth' });
+          window.scrollTo({ top: 120, behavior: 'smooth' });
         } else {
           feedback.textContent = result.message || 'Error al procesar el roster.';
           feedback.className = 'status-msg error';
@@ -922,7 +1025,7 @@
         }
       } catch (err) {
         console.error(err);
-        feedback.textContent = 'Error de conexión al enviar el roster. Inténtalo de nuevo.';
+        feedback.textContent = 'Error de conexión al enviar el roster. Revisa tu conexión.';
         feedback.className = 'status-msg error';
         feedback.style.display = 'block';
       } finally {
@@ -932,7 +1035,7 @@
     }
 
     /**
-     * GESTIÓN DE SESIÓN
+     * CIERRE Y RESTAURACIÓN DE SESIÓN
      */
     function verificarSesionExistente() {
       const stored = sessionStorage.getItem('kfl_coach_session');
@@ -941,6 +1044,7 @@
           const parsed = JSON.parse(stored);
           currentUser = parsed.user;
           isLockedSession = Boolean(parsed.isLocked);
+          if (parsed.limiteRoster) limiteMaximoRoster = parseInt(parsed.limiteRoster, 10);
           inicializarDashboard(parsed.deadline);
         } catch (e) {
           sessionStorage.removeItem('kfl_coach_session');

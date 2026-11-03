@@ -14,12 +14,31 @@ collections:
     label: "Noticias KFL"
     folder: "blog"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{slug}}"
+    path: "{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha de Publicación", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ" }
+      - { label: "Fecha de Publicación", name: "date", widget: "datetime", format: "DD/MM/YYYY", time_format: "hh:mm A" }
       - { label: "Imagen de Portada", name: "coverImage", widget: "image" }
       - { label: "Autor", name: "author", widget: "hidden", default: "kiwanisfootball" }
       - { label: "Resumen", name: "excerpt", widget: "text", required: false }
-      - { label: "Categoría", name: "category", widget: "select", options: ["Liga", "Equipos", "Comunicados", "Eventos"] }
+      - label: "Categoría Principal"
+        name: "category"
+        widget: "select"
+        options:
+          - "contact football"
+          - "flag football"
+          - "anuncios"
+      - label: "Subcategoría"
+        name: "subcategory"
+        widget: "select"
+        options:
+          - "contact varsity"
+          - "contact juvenil"
+          - "contact mini"
+          - "contact micro"
+          - "flag varsity"
+          - "flag micro"
+          - "flag mini"
+          - "flag juvenil"
       - { label: "Cuerpo", name: "body", widget: "markdown" }

@@ -45,11 +45,22 @@
       background: #e2e8f0;
     }
 
-    .article-content h1, .article-content h2, .article-content h3 {
+    /* TÍTULOS MÁS DISCRETOS Y PROPORCIONADOS (SOLUCIÓN PUNTO 1) */
+    .article-content h1 {
       font-family: 'Anton', sans-serif;
+      font-size: 28px;
+      color: #19547E;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .article-content h2, .article-content h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 24px;
       color: #19547E;
       margin-top: 25px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       text-transform: uppercase;
     }
 
@@ -60,10 +71,19 @@
       margin-bottom: 15px;
     }
 
+    /* ASEGURAR QUE LAS IMÁGENES DE DECAP CMS SE VEAN BIEN (SOLUCIÓN PUNTO 2) */
     .article-content img {
       max-width: 100%;
-      border-radius: 10px;
-      margin: 20px 0;
+      height: auto;
+      border-radius: 12px;
+      margin: 25px 0;
+      display: block;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    /* ELIMINAR LÍNEAS DIVISORIAS MOLESTAS (SOLUCIÓN PUNTO 3) */
+    .article-content hr {
+      display: none !important;
     }
   </style>
 </head>
@@ -109,10 +129,20 @@
         let respuesta = await fetch(urlMarkdown);
         if (respuesta.ok) {
           let textoMd = await respuesta.text();
+          
+          // Limpiar el frontmatter (metadatos YAML de Decap CMS)
           let contenidoLimpio = textoMd.replace(/^---[\s\S]*?---/, '');
           
           loader.style.display = 'none';
-          container.innerHTML = marked.parse(contenidoLimpio);
+          
+          // Convertir Markdown a HTML
+          let htmlRenderizado = marked.parse(contenidoLimpio);
+
+          // CORRECCIÓN DE RUTAS DE IMÁGENES: 
+          // Si Decap guarda las imágenes como assets/... aseguramos que la ruta sea absoluta desde la raíz
+          htmlRenderizado = htmlRenderizado.replace(/src="assets\//g, 'src="/assets/');
+          
+          container.innerHTML = htmlRenderizado;
         } else {
           loader.style.display = 'none';
           container.innerHTML = "<p style='color: #c53030; text-align: center;'>No se pudo encontrar el archivo del artículo.</p>";

@@ -4,30 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administrador de Contenido - KFL</title>
-  
-  <!-- Favicon Global KFL -->
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png" />
-  
-  <!-- Deshabilitar la inicialización automática de Netlify -->
-  <script>window.CMS_MANUAL_INIT = true;</script>
-  
   <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
 </head>
 <body>
-  <!-- Carga del CDN oficial de Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
-  <!-- Inicialización manual forzada del CMS con el backend de GitHub -->
-  <script>
-    window.CMS.init({
-      config: {
-        backend: {
-          name: 'github',
-          repo: 'kiwanisfootball/kiwanisfootball2027',
-          branch: 'main'
-        }
-      }
-    });
-  </script>
 </body>
 </html>

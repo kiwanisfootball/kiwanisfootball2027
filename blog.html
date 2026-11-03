@@ -110,8 +110,9 @@
       <p>Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football</p>
     </div>
 
+    <!-- CONTENEDOR DE PUBLICACIONES -->
     <div id="lista-posts">
-      <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando publicaciones desde el repositorio...</p>
+      <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando publicaciones...</p>
     </div>
 
   </main>
@@ -121,52 +122,49 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+      // 1. Inyectar Nav y Footer maestros
       fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
       fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
 
-      cargarPostsDesdeGitHub();
+      // 2. Cargar las publicaciones registradas
+      cargarPublicaciones();
     });
 
-    async function cargarPostsDesdeGitHub() {
-      const contenedor = document.getElementById('lista-posts');
-      const repo = "kiwanisfootball/kiwanisfootball2027";
-      const folder = "blog";
-
-      try {
-        let response = await fetch(`https://api.github.com/repos/${repo}/contents/${folder}`);
-        if (!response.ok) throw new Error("No se pudo conectar con la API de GitHub");
-
-        let files = await response.json();
-        let markdownFiles = files.filter(file => file.name && file.name.endsWith('.md'));
-
-        if (markdownFiles.length === 0) {
-          contenedor.innerHTML = '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No hay publicaciones disponibles todavía.</p>';
-          return;
-        }
-
-        let html = "";
-        for (let file of markdownFiles) {
-          let slugNombre = file.name.replace('.md', '');
-          let tituloLimpio = slugNombre.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
-
-          html += `
-            <div class="post-card" onclick="window.location.href='articulo.html?slug=${slugNombre}'">
-              <div>
-                <span class="post-meta">Comunicado Oficial KFL</span>
-                <h3>${tituloLimpio}</h3>
-                <p>Haz clic para leer la noticia completa y conocer todos los detalles...</p>
-              </div>
-              <span class="leer-mas-link">Leer artículo →</span>
-            </div>
-          `;
-        }
-
-        contenedor.innerHTML = html;
-
-      } catch (error) {
-        console.error(error);
-        contenedor.innerHTML = '<p style="color: #c53030; text-align: center; grid-column: 1 / -1;">Error al cargar las publicaciones del blog.</p>';
+    // Lista de artículos creados en tu CMS. 
+    // Cada vez que publiques un artículo nuevo con Decap CMS, solo agregas su slug (nombre del archivo sin .md) en este array.
+    const articulosKFL = [
+      {
+        slug: "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026",
+        titulo: "AIP y Eagles sellan su pase a la gran final",
+        fecha: "26/10/2026",
+        categoria: "Contact Football",
+        extracto: "Emocionantes encuentros definieron a los finalistas de la categoría Mini Contact de la KFL."
       }
+    ];
+
+    function cargarPublicaciones() {
+      const contenedor = document.getElementById('lista-posts');
+
+      if (articulosKFL.length === 0) {
+        contenedor.innerHTML = '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No hay publicaciones disponibles todavía.</p>';
+        return;
+      }
+
+      let html = "";
+      articulosKFL.forEach(post => {
+        html += `
+          <div class="post-card" onclick="window.location.href='articulo.html?slug=${post.slug}'">
+            <div>
+              <span class="post-meta">${post.fecha} • ${post.categoria}</span>
+              <h3>${post.titulo}</h3>
+              <p>${post.extracto}</p>
+            </div>
+            <span class="leer-mas-link">Leer artículo →</span>
+          </div>
+        `;
+      });
+
+      contenedor.innerHTML = html;
     }
   </script>
 </body>

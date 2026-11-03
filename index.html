@@ -1,339 +1,299 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiwanis Football League Panama - Sitio Oficial</title>
-  
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-</head>
-<body>
-
-  <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
-  <header class="header-nav" id="globalNav"></header>
-
-  <main>
-    <!-- 2. TICKER DE MARCADORES CON LOGOS -->
-    <section class="ticker-section gsap-reveal">
-      <div class="ticker-container">
-        
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
-              <span>OWLS</span>
-            </div>
-            <span class="game-score">21</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/raiders.png" alt="Raiders" class="team-logo-small">
-              <span>RAIDERS</span>
-            </div>
-            <span class="game-score">14</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/eagles.png" alt="Eagles" class="team-logo-small">
-              <span>EAGLES</span>
-            </div>
-            <span class="game-score">7</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/kolts.png" alt="Kolts" class="team-logo-small">
-              <span>KOLTS</span>
-            </div>
-            <span class="game-score">12</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/dragons.png" alt="Dragons" class="team-logo-small">
-              <span>DRAGONS</span>
-            </div>
-            <span class="game-score">28</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/spartans.png" alt="Spartans" class="team-logo-small">
-              <span>SPARTANS</span>
-            </div>
-            <span class="game-score">0</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/lions.png" alt="Lions" class="team-logo-small">
-              <span>LIONS</span>
-            </div>
-            <span class="game-score">14</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
-              <span>OWLS</span>
-            </div>
-            <span class="game-score">14</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- 3. TITULO INSTITUCIONAL -->
-    <section class="welcome-header gsap-reveal">
-      <div class="welcome-subtitle">BIENVENIDOS A</div>
-      <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
-    </section>
-
-    <!-- 4. ACERCA DE LA LIGA -->
-    <div class="about-wrapper gsap-reveal">
-      <section class="about-section">
-        <div class="about-image">
-          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
-        </div>
-        <article class="about-card">
-          <h2>ACERCA DE LA LIGA</h2>
-          <p>La Liga de Football Americano Kiwanis se ha convertido en un programa escolar pionero.</p>
-          <p>Ofrecemos dos ligas, la de <strong>Contact Football Masculino</strong> y la de <strong>Flag Football Femenino</strong>, ambas con las categorías Micro (U10), Mini (U13), Juvenil (U16) y Varsity (U19).</p>
-          <p>Nos orgullece que actualmente contamos con un aproximado de <strong>1,600 jugadores</strong> entre ambas ligas.</p>
-        </article>
-      </section>
+<!-- SECCIÓN DE NOTICIAS EN INDEX.HTML -->
+<section class="home-news-section">
+  <div class="news-container">
+    
+    <!-- TÍTULO CAMBIADO A "NOTICIAS" -->
+    <div class="section-header-clean">
+      <h2>NOTICIAS</h2>
     </div>
 
-    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW (1200x250) -->
-    <section class="promo-banner-section gsap-reveal">
-      <div class="slider-container">
-        
-        <div class="slide active">
-          <a href="contacto.html">
-            <img src="assets/img/banner-promo-1.jpg" alt="Anuncia Tu Marca Aquí - Espacio Publicitario KFL">
-          </a>
-        </div>
-
-        <div class="slide">
-          <a href="registro-jugadores.html">
-            <img src="assets/img/banner-promo-2.jpg" alt="Inscripciones Abiertas Temporada 2026">
-          </a>
-        </div>
-
-        <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
-        <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
-
+    <div class="news-grid-layout">
+      
+      <!-- COLUMNA IZQUIERDA: ÚLTIMA NOTICIA EN GRANDE -->
+      <div id="mainFeaturedPost" class="featured-main-card" onclick="window.location.href='articulo.html?slug=2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026'">
+        <!-- Se llena dinámicamente -->
+        <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
       </div>
-    </section>
 
-    <!-- 6. MÓDULO DE NOTICIAS -->
-    <section class="news-section gsap-reveal">
-      <h2 class="section-headline">NOTICIAS DESTACADAS</h2>
-      <div class="news-grid">
-        
-        <article class="main-featured-card">
-          <img src="https://i.imgur.com/wrPDjDN.png" alt="Noticia Principal KFL">
-          <div class="main-featured-content">
-            <span class="badge-category">VARSITY CONTACT</span>
-            <h2 class="main-news-title">OWLS SE LLEVA EL CLÁSICO DE LA SEMANA EN UN FINAL DE INFARTO</h2>
-            <p class="main-news-desc">Con un pase de anotación en los últimos 30 segundos, el equipo asegura su pase a semifinales de la temporada.</p>
-          </div>
-        </article>
-
-        <aside class="sidebar-feed">
-          <h3>ÚLTIMAS NOTICIAS</h3>
-          
-          <article class="feed-item">
-            <img class="feed-thumb" src="https://i.imgur.com/wrPDjDN.png" alt="Noticia KFL">
-            <div>
-              <span class="feed-tag">FLAG FEMENINO</span>
-              <p class="feed-title">Calendario oficial de la jornada de este fin de semana.</p>
-            </div>
-          </article>
-
-          <article class="feed-item">
-            <img class="feed-thumb" src="https://i.imgur.com/wrPDjDN.png" alt="Noticia KFL">
-            <div>
-              <span class="feed-tag">JUVENIL</span>
-              <p class="feed-title">Los líderes defensivos tras completarse la Semana 3.</p>
-            </div>
-          </article>
-
-          <article class="feed-item">
-            <img class="feed-thumb" src="https://i.imgur.com/wrPDjDN.png" alt="Noticia KFL">
-            <div>
-              <span class="feed-tag">INFANTIL</span>
-              <p class="feed-title">Resultados de las categorías Micro y Mini.</p>
-            </div>
-          </article>
-        </aside>
-
-      </div>
-    </section>
-
-    <!-- 7. FORMULARIO DE NEWSLETTER -->
-    <div class="newsletter-wrapper gsap-reveal">
-      <section class="newsletter-box">
-        <div class="newsletter-header">
-          <h2 class="newsletter-main-title">NO TE LO PUEDES PERDER</h2>
+      <!-- COLUMNA DERECHA: ÚLTIMAS 4 NOTICIAS -->
+      <div class="latest-sidebar-card">
+        <h3>ÚLTIMAS NOTICIAS</h3>
+        <div id="sidebarNewsList">
+          <!-- Se llena dinámicamente -->
+          <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
         </div>
-        <p class="newsletter-subtitle">SUSCRÍBETE A NUESTRO NEWSLETTER Y ENTÉRATE DE TODAS NUESTRAS NOTICIAS</p>
-        
-        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
-          <input 
-            type="email" 
-            class="newsletter-input" 
-            placeholder="Registra tu correo electrónico" 
-            title="Por favor ingresa un correo electrónico válido" 
-            required
-          >
-          <button type="submit" class="newsletter-btn">Suscríbete</button>
-        </form>
-      </section>
+      </div>
+
     </div>
+  </div>
+</section>
 
-    <!-- 8. SECCIÓN DE PATROCINADORES -->
-    <section class="sponsors-section gsap-reveal">
-      <div class="sponsors-container">
-        
-        <div class="sponsors-tier">
-          <h3 class="tier-title">PATROCINADORES OFICIALES</h3>
-          <div class="sponsors-grid tier-gold">
-            
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor2.png" alt="Sponsor 2" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor3.png" alt="Sponsor 3" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor4.png" alt="Sponsor 4" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor5.png" alt="Sponsor 5" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor6.png" alt="Sponsor 6" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor7.png" alt="Sponsor 7" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor8.png" alt="Sponsor 8" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor9.png" alt="Sponsor 9" class="sponsor-logo">
-            </div>
+<!-- ESTILOS ESPECÍFICOS PARA ESTA SECCIÓN -->
+<style>
+  .home-news-section {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+    font-family: 'Avenir', sans-serif;
+    box-sizing: border-box;
+  }
 
-          </div>
-        </div>
+  .section-header-clean h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: 36px;
+    color: #19547E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+  }
 
-      </div>
-    </section>
-  </main>
+  .news-grid-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    align-items: start;
+  }
 
-  <!-- 9. FOOTER GLOBAL (Inyectado automáticamente) -->
-  <div id="globalFooter"></div>
+  @media (max-width: 950px) {
+    .news-grid-layout {
+      grid-template-columns: 1fr;
+    }
+  }
 
-  <!-- BOTÓN VOLVER ARRIBA -->
-  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
-    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-  </button>
+  /* CARD PRINCIPAL IZQUIERDA */
+  .featured-main-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+  }
 
-  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
-      fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
+  .featured-main-card:hover {
+    border-color: #19547E;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(25, 84, 126, 0.1);
+  }
+
+  .featured-img-container {
+    width: 100%;
+    max-height: 380px;
+    background-color: #0b0f19;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .featured-img {
+    width: 100%;
+    height: auto;
+    max-height: 380px;
+    object-fit: contain;
+  }
+
+  .featured-body {
+    padding: 30px;
+  }
+
+  .badge-category {
+    background-color: #19547E;
+    color: #ffffff;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+
+  .featured-body h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px;
+    color: #0b0f19;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .featured-body p {
+    font-size: 14.5px;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CARD LATERAL DERECHA (ÚLTIMAS NOTICIAS) */
+  .latest-sidebar-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  }
+
+  .latest-sidebar-card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 20px;
+    color: #c53030; /* Tono rojo institucional de sección o azul KFL */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .sidebar-news-item {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .sidebar-news-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .sidebar-news-item:hover h4 {
+    color: #19547E;
+  }
+
+  .sidebar-thumb {
+    width: 65px;
+    height: 65px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: #f1f5f9;
+  }
+
+  .sidebar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .sidebar-tag {
+    font-size: 10px;
+    font-weight: 800;
+    color: #c53030;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .sidebar-info h4 {
+    font-family: 'Avenir', sans-serif;
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1.3;
+    margin: 0;
+  }
+</style>
+
+<!-- SCRIPT DE CARGA AUTOMÁTICA DESDE LOS MARKDOWN -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Lista de slugs de tus artículos publicados (el primero será el más reciente en grande)
+    const slugsArticulosIndex = [
+      "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
+      // Aquí puedes agregar más slugs de tus archivos .md conforme los vayas creando en Decap
+    ];
+
+    cargarSeccionNoticiasIndex(slugsArticulosIndex);
+  });
+
+  async function cargarSeccionNoticiasIndex(slugs) {
+    const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
+    const sidebarContainer = document.getElementById('sidebarNewsList');
+
+    if (!slugs || slugs.length === 0) {
+      mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
+      sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
+      return;
+    }
+
+    let postsCargados = [];
+
+    // Leer los archivos .md correspondientes
+    for (let slug of slugs) {
+      try {
+        let respuesta = await fetch(`blog/${slug}.md`);
+        if (!respuesta.ok) continue;
+        let textoMd = await respuesta.text();
+
+        let matchFrontmatter = textoMd.match(/^---[\s\S]*?---/);
+        let titulo = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
+        let categoria = "KFL";
+        let excerpt = "Haz clic para leer el comunicado oficial...";
+        let coverImage = "https://i.imgur.com/wrPDjDN.png"; // Imagen por defecto KFL si no tiene
+
+        if (matchFrontmatter) {
+          let frontmatter = matchFrontmatter[0];
           
-          // Activar menú hamburguesa dinámicamente tras cargar
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+          let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
+          if (tMatch) titulo = tMatch[1];
+
+          let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
+          if (catMatch) categoria = catMatch[1];
+
+          let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
+          if (eMatch) excerpt = eMatch[1];
+
+          let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
+          if (imgMatch) {
+            coverImage = imgMatch[1];
+            if (coverImage.startsWith('assets/')) coverImage = '/' + coverImage;
           }
-        });
-
-      // Inyectar Footer desde footer.html
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
-        });
-
-      // Botón volver arriba
-      const backToTopBtn = document.getElementById('backToTopBtn');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
         }
-      });
-      backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-  </script>
 
-  <!-- SCRIPTS ESPECÍFICOS DE LA PÁGINA (GSAP + SLIDESHOW) -->
-  <script>
-    // 1. GSAP ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.gsap-reveal').forEach((element) => {
-      gsap.to(element, {
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 88%',
-          toggleActions: 'play none none reverse'
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out'
-      });
-    });
-
-    // 2. Slideshow Promocional
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        if (i === index) slide.classList.add('active');
-      });
+        postsCargados.push({ slug, titulo, categoria, excerpt, coverImage });
+      } catch (e) {
+        console.error("Error cargando post para el index:", slug);
+      }
     }
 
-    function moveSlide(step) {
-      currentSlide = (currentSlide + step + slides.length) % slides.length;
-      showSlide(currentSlide);
-    }
+    if (postsCargados.length === 0) return;
 
-    setInterval(() => {
-      moveSlide(1);
-    }, 5000);
-  </script>
-</body>
-</html>
+    // 1. RENDERIZAR LA NOTICIA PRINCIPAL (LA MÁS RECIENTE A LA IZQUIERDA)
+    let postPrincipal = postsCargados[0];
+    mainFeaturedContainer.onclick = () => window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
+    mainFeaturedContainer.innerHTML = `
+      <div class="featured-img-container">
+        <img src="${postPrincipal.coverImage}" alt="${postPrincipal.titulo}" class="featured-img">
+      </div>
+      <div class="featured-body">
+        <span class="badge-category">${postPrincipal.categoria}</span>
+        <h3>${postPrincipal.titulo}</h3>
+        <p>${postPrincipal.excerpt}</p>
+      </div>
+    `;
+
+    // 2. RENDERIZAR LAS ÚLTIMAS NOTICIAS EN LA DERECHA (MÁXIMO 4)
+    // Usamos el resto de posts o duplicamos/mostramos la lista disponible
+    let listaSidebarHtml = "";
+    let postsSecundarios = postsCargados.slice(0, 4); // Toma máximo 4
+
+    postsSecundarios.forEach(post => {
+      listaSidebarHtml += `
+        <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${post.slug}'">
+          <img src="${post.coverImage}" alt="${post.titulo}" class="sidebar-thumb">
+          <div class="sidebar-info">
+            <span class="sidebar-tag">${post.categoria}</span>
+            <h4>${post.titulo}</h4>
+          </div>
+        </div>
+      `;
+    });
+
+    sidebarContainer.innerHTML = listaSidebarHtml || "<p style='font-size:13px; color:#64748b;'>No hay más noticias recientes.</p>";
+  }
+</script>

@@ -65,11 +65,15 @@ Todo está listo para que el emparrillado vibre este **viernes 30 de octubre** c
 
 ### Tabla General de Posiciones (Ronda Regular)
 
-1. **OWLS** (4-0)
-2. **EAGLES** (4-1)
-3. **KOLTS** (3-2)
-4. **DRAGONS** (1-4)
-5. **RAIDERS** (0-5)
+**1. OWLS** (4-0)
+
+**2. EAGLES** (4-1)
+
+**3. KOLTS** (3-2)
+
+**4. DRAGONS** (1-4)
+
+**5. RAIDERS** (0-5)
 
 ## Información de Transmisión y Cobertura
 

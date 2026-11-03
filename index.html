@@ -3,62 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiwanis Football League (KFL)</title>
+  <title>Kiwanis Football League Panama - Sitio Oficial</title>
   
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- ESTILOS ADICIONALES PARA LA NUEVA SECCIÓN DE NOTICIAS DINÁMICAS -->
   <style>
-    /* Estilos base de la página de inicio */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Avenir', sans-serif;
-      background-color: #f8fafc;
-      color: #334155;
-    }
-
-    .home-hero {
-      background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)), 
-                  url('assets/img/hero-bg.jpg') center/cover no-repeat;
-      padding: 80px 20px;
-      text-align: center;
-      color: #ffffff;
-    }
-
-    .home-hero h1 {
-      font-family: 'Anton', sans-serif;
-      font-size: 48px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 15px;
-    }
-
-    .home-hero p {
-      font-size: 16px;
-      color: #cbd5e1;
-      max-width: 600px;
-      margin: 0 auto;
-      font-weight: 600;
-    }
-
-    /* SECCIÓN DE NOTICIAS */
-    .home-news-section {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 0 20px;
-      box-sizing: border-box;
-    }
-
-    .section-header-clean h2 {
-      font-family: 'Anton', sans-serif;
-      font-size: 36px;
-      color: #19547E;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 25px;
-    }
-
     .news-grid-layout {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -72,7 +27,6 @@
       }
     }
 
-    /* CARD PRINCIPAL IZQUIERDA */
     .featured-main-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -140,7 +94,6 @@
       margin: 0;
     }
 
-    /* CARD LATERAL DERECHA (ÚLTIMAS NOTICIAS) */
     .latest-sidebar-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -213,55 +166,267 @@
 </head>
 <body>
 
-  <!-- NAV MAESTRO -->
+  <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
   <header class="header-nav" id="globalNav"></header>
 
-  <!-- HERO DE INICIO -->
-  <section class="home-hero">
-    <h1>Kiwanis Football League</h1>
-    <p>La cuna del Football Americano y Flag Football en Panamá</p>
-  </section>
+  <main>
+    <!-- 2. TICKER DE MARCADORES CON LOGOS -->
+    <section class="ticker-section gsap-reveal">
+      <div class="ticker-container">
+        
+        <article class="game-card">
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
+              <span>OWLS</span>
+            </div>
+            <span class="game-score">21</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/raiders.png" alt="Raiders" class="team-logo-small">
+              <span>RAIDERS</span>
+            </div>
+            <span class="game-score">14</span>
+          </div>
+          <div class="game-status">FINAL - SEMANA 4</div>
+        </article>
 
-  <!-- SECCIÓN DE NOTICIAS -->
-  <section class="home-news-section">
-    <div class="section-header-clean">
-      <h2>NOTICIAS</h2>
-    </div>
+        <article class="game-card">
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/eagles.png" alt="Eagles" class="team-logo-small">
+              <span>EAGLES</span>
+            </div>
+            <span class="game-score">7</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/kolts.png" alt="Kolts" class="team-logo-small">
+              <span>KOLTS</span>
+            </div>
+            <span class="game-score">12</span>
+          </div>
+          <div class="game-status">FINAL - SEMANA 4</div>
+        </article>
 
-    <div class="news-grid-layout">
-      
-      <!-- COLUMNA IZQUIERDA: ÚLTIMA NOTICIA EN GRANDE -->
-      <div id="mainFeaturedPost" class="featured-main-card">
-        <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
+        <article class="game-card">
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/dragons.png" alt="Dragons" class="team-logo-small">
+              <span>DRAGONS</span>
+            </div>
+            <span class="game-score">28</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/spartans.png" alt="Spartans" class="team-logo-small">
+              <span>SPARTANS</span>
+            </div>
+            <span class="game-score">0</span>
+          </div>
+          <div class="game-status">FINAL - SEMANA 4</div>
+        </article>
+
+        <article class="game-card">
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/lions.png" alt="Lions" class="team-logo-small">
+              <span>LIONS</span>
+            </div>
+            <span class="game-score">14</span>
+          </div>
+          <div class="game-team">
+            <div class="team-info">
+              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
+              <span>OWLS</span>
+            </div>
+            <span class="game-score">14</span>
+          </div>
+          <div class="game-status">FINAL - SEMANA 4</div>
+        </article>
+
       </div>
+    </section>
 
-      <!-- COLUMNA DERECHA: ÚLTIMAS 4 NOTICIAS -->
-      <div class="latest-sidebar-card">
-        <h3>ÚLTIMAS NOTICIAS</h3>
-        <div id="sidebarNewsList">
-          <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
+    <!-- 3. TITULO INSTITUCIONAL -->
+    <section class="welcome-header gsap-reveal">
+      <div class="welcome-subtitle">BIENVENIDOS A</div>
+      <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
+    </section>
+
+    <!-- 4. ACERCA DE LA LIGA -->
+    <div class="about-wrapper gsap-reveal">
+      <section class="about-section">
+        <div class="about-image">
+          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
         </div>
-      </div>
-
+        <article class="about-card">
+          <h2>ACERCA DE LA LIGA</h2>
+          <p>La Liga de Football Americano Kiwanis se ha convertido en un programa escolar pionero.</p>
+          <p>Ofrecemos two ligas, la de <strong>Contact Football Masculino</strong> y la de <strong>Flag Football Femenino</strong>, ambas con las categorías Micro (U10), Mini (U13), Juvenil (U16) y Varsity (U19).</p>
+          <p>Nos orgullece que actualmente contamos con un aproximado de <strong>1,600 jugadores</strong> entre ambas ligas.</p>
+        </article>
+      </section>
     </div>
-  </section>
 
-  <!-- FOOTER MAESTRO -->
+    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW (1200x250) -->
+    <section class="promo-banner-section gsap-reveal">
+      <div class="slider-container">
+        
+        <div class="slide active">
+          <a href="contacto.html">
+            <img src="assets/img/banner-promo-1.jpg" alt="Anuncia Tu Marca Aquí - Espacio Publicitario KFL">
+          </a>
+        </div>
+
+        <div class="slide">
+          <a href="registro-jugadores.html">
+            <img src="assets/img/banner-promo-2.jpg" alt="Inscripciones Abiertas Temporada 2026">
+          </a>
+        </div>
+
+        <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
+        <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
+
+      </div>
+    </section>
+
+    <!-- 6. MÓDULO DE NOTICIAS CONECTADO A LOS MARKDOWN -->
+    <section class="news-section gsap-reveal">
+      <h2 class="section-headline">NOTICIAS</h2>
+      
+      <div class="news-grid-layout">
+        
+        <!-- COLUMNA IZQUIERDA: ÚLTIMA NOTICIA EN GRANDE -->
+        <div id="mainFeaturedPost" class="featured-main-card">
+          <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
+        </div>
+
+        <!-- COLUMNA DERECHA: ÚLTIMAS 4 NOTICIAS -->
+        <div class="latest-sidebar-card">
+          <h3>ÚLTIMAS NOTICIAS</h3>
+          <div id="sidebarNewsList">
+            <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. FORMULARIO DE NEWSLETTER -->
+    <div class="newsletter-wrapper gsap-reveal">
+      <section class="newsletter-box">
+        <div class="newsletter-header">
+          <h2 class="newsletter-main-title">NO TE LO PUEDES PERDER</h2>
+        </div>
+        <p class="newsletter-subtitle">SUSCRÍBETE A NUESTRO NEWSLETTER Y ENTÉRATE DE TODAS NUESTRAS NOTICIAS</p>
+        
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
+          <input 
+            type="email" 
+            class="newsletter-input" 
+            placeholder="Registra tu correo electrónico" 
+            title="Por favor ingresa un correo electrónico válido" 
+            required
+          >
+          <button type="submit" class="newsletter-btn">Suscríbete</button>
+        </form>
+      </section>
+    </div>
+
+    <!-- 8. SECCIÓN DE PATROCINADORES -->
+    <section class="sponsors-section gsap-reveal">
+      <div class="sponsors-container">
+        
+        <div class="sponsors-tier">
+          <h3 class="tier-title">PATROCINADORES OFICIALES</h3>
+          <div class="sponsors-grid tier-gold">
+            
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor2.png" alt="Sponsor 2" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor3.png" alt="Sponsor 3" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor4.png" alt="Sponsor 4" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor5.png" alt="Sponsor 5" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor6.png" alt="Sponsor 6" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor7.png" alt="Sponsor 7" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor8.png" alt="Sponsor 8" class="sponsor-logo">
+            </div>
+            <div class="sponsor-card">
+              <img src="assets/sponsors/sponsor9.png" alt="Sponsor 9" class="sponsor-logo">
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. FOOTER GLOBAL (Inyectado automáticamente) -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPTS DE INYECCIÓN Y CARGA DINÁMICA DE NOTICIAS -->
+  <!-- BOTÓN VOLVER ARRIBA -->
+  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
+    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  </button>
+
+  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // 1. Inyectar Nav y Footer maestros
-      fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
-      fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
+      // Inyectar Navbar desde nav.html
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalNav').innerHTML = data;
+          
+          const hamburgerBtn = document.getElementById('hamburgerBtn');
+          const navMenu = document.getElementById('navMenu');
+          if (hamburgerBtn && navMenu) {
+            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+          }
+        });
 
-      // 2. Slugs de tus artículos publicados en la carpeta blog/
+      // Inyectar Footer desde footer.html
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalFooter').innerHTML = data;
+        });
+
+      // Botón volver arriba
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Cargar Noticias dinámicamente desde los .md
       const slugsArticulosIndex = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
-        // Agrega aquí más slugs conforme vayas creando noticias desde Decap CMS
+        // Agrega aquí más slugs de tus archivos .md conforme los vayas creando en Decap
       ];
-
       cargarSeccionNoticiasIndex(slugsArticulosIndex);
     });
 
@@ -348,6 +513,46 @@
 
       sidebarContainer.innerHTML = listaSidebarHtml || "<p style='font-size:13px; color:#64748b;'>No hay más noticias recientes.</p>";
     }
+  </script>
+
+  <!-- SCRIPTS ESPECÍFICOS DE LA PÁGINA (GSAP + SLIDESHOW) -->
+  <script>
+    // 1. GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.gsap-reveal').forEach((element) => {
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 88%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+    });
+
+    // 2. Slideshow Promocional
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) slide.classList.add('active');
+      });
+    }
+
+    function moveSlide(step) {
+      currentSlide = (currentSlide + step + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    setInterval(() => {
+      moveSlide(1);
+    }, 5000);
   </script>
 </body>
 </html>

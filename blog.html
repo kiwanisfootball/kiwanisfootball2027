@@ -50,7 +50,7 @@
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
-      padding: 25px;
+      overflow: hidden;
       cursor: pointer;
       transition: all 0.25s ease;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -63,6 +63,22 @@
       border-color: #19547E;
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(25, 84, 126, 0.1);
+    }
+
+    /* CONTENEDOR DE LA IMAGEN EN EL CARD */
+    .post-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      background-color: #f1f5f9;
+    }
+
+    .post-card-body {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
     }
 
     .post-card h3 {
@@ -126,19 +142,19 @@
       fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
       fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
 
-      // 2. Cargar las publicaciones registradas
+      // 2. Cargar las publicaciones con sus respectivas imágenes
       cargarPublicaciones();
     });
 
-    // Lista de artículos creados en tu CMS. 
-    // Cada vez que publiques un artículo nuevo con Decap CMS, solo agregas su slug (nombre del archivo sin .md) en este array.
+    // Array de artículos. Aquí defines la imagen (puede ser URL externa o ruta interna).
     const articulosKFL = [
       {
         slug: "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026",
         titulo: "AIP y Eagles sellan su pase a la gran final",
         fecha: "26/10/2026",
         categoria: "Contact Football",
-        extracto: "Emocionantes encuentros definieron a los finalistas de la categoría Mini Contact de la KFL."
+        extracto: "Emocionantes encuentros definieron a los finalistas de la categoría Mini Contact de la KFL.",
+        imagen: "https://images.unsplash.com/photo-1566958769312-8277cc27389a?q=80&w=600&auto=format&fit=crop" // Ejemplo de imagen por URL o pon la tuya de Decap
       }
     ];
 
@@ -154,12 +170,15 @@
       articulosKFL.forEach(post => {
         html += `
           <div class="post-card" onclick="window.location.href='articulo.html?slug=${post.slug}'">
-            <div>
-              <span class="post-meta">${post.fecha} • ${post.categoria}</span>
-              <h3>${post.titulo}</h3>
-              <p>${post.extracto}</p>
+            ${post.imagen ? `<img src="${post.imagen}" alt="${post.titulo}" class="post-card-img">` : ''}
+            <div class="post-card-body">
+              <div>
+                <span class="post-meta">${post.fecha} • ${post.categoria}</span>
+                <h3>${post.titulo}</h3>
+                <p>${post.extracto}</p>
+              </div>
+              <span class="leer-mas-link">Leer artículo →</span>
             </div>
-            <span class="leer-mas-link">Leer artículo →</span>
           </div>
         `;
       });

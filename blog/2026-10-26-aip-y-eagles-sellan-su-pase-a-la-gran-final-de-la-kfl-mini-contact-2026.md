@@ -4,10 +4,9 @@ date: 2026-10-26T12:00:00-05:00
 coverImage: https://scontent.fpac1-3.fna.fbcdn.net/v/t39.30808-6/865991713_122146787907032693_8720268658411926723_n.jpg?stp=dst-jpg_tt6&cstp=mx1350x900&ctp=s1350x900&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=7BQQ1lJs-ycQ7kNvwFMzatC&_nc_oc=AdrUEU-gGZfyvsrAYCtu5f4ZsuufhiE_ZFb_mPnmabD4rj15jEwkPIkZxxGMd7FESIQ&_nc_zt=23&_nc_ht=scontent.fpac1-3.fna&_nc_gid=mi79dBzKHF0dYDWjDg0KNQ&_nc_ss=7b2a8&oh=00_AQT2WIaiiAdlUtvg6K1pJOngKu3drwarJYK-mDJGGEu5PA&oe=6AEFE9CA
 author: kiwanisfootball
 excerpt: Conoce los resultados de las semifinales de la KFL Mini Contact 2026.
-category: Liga
+category: contact football
+subcategory: contact mini
 ---
-
-
 La emoción del emparrillado escolar vivió su punto álgido el pasado **viernes 23 de octubre** con la séptima jornada de las llaves semifinales de la **“KFL Mini Contact 2026”**. Organizada por el **Club Kiwanis de Panamá**, la cita tuvo como escenario la moderna cancha del **Copa Airlines Field**, ubicada en el complejo deportivo **Sportcenter Costa del Este**, donde los equipos dejaron el alma en busca del ansiado boleto a la máxima instancia del torneo.
 
 ---

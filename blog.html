@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Oficial - Kiwanis Football League</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <!-- Librería gratuita Marked.js para convertir Markdown a HTML en el navegador -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    .blog-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: 'Avenir', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .blog-hero {
+      background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+                  url('assets/img/blog-banner.jpg') center/cover no-repeat;
+      border-radius: 16px;
+      padding: 40px 30px;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .blog-hero h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 36px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .blog-hero p {
+      font-size: 15px;
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    /* Contenedor donde se cargarán los artículos del blog */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .blog-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(25, 84, 126, 0.1);
+      border-color: #19547E;
+    }
+
+    .blog-card h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 20px;
+      color: #19547E;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .blog-card p {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .btn-leer-mas {
+      align-self: flex-start;
+      background-color: #19547E;
+      color: #ffffff;
+      padding: 8px 16px;
+      font-size: 12.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+
+    .btn-leer-mas:hover {
+      background-color: #144061;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV MAESTRO -->
+  <header class="header-nav" id="globalNav"></header>
+
+  <main class="blog-container">
+
+    <section class="blog-hero">
+      <h1>Noticias y Artículos KFL</h1>
+      <p>Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football</p>
+    </section>
+
+    <!-- Aquí se inyectarán dinámicamente las tarjetas de los posts -->
+    <div class="blog-grid" id="blogPostsContainer">
+      <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando artículos...</p>
+    </div>
+
+  </main>
+
+  <!-- FOOTER MAESTRO -->
+  <div id="globalFooter"></div>
+
+  <!-- SCRIPTS DE INYECCIÓN Y CARGA DE MARKDOWN -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inyectar Nav y Footer
+      fetch('nav.html').then(res => res.text()).then(data => {
+        document.getElementById('globalNav').innerHTML = data;
+      });
+      fetch('footer.html').then(res => res.text()).then(data => {
+        document.getElementById('globalFooter').innerHTML = data;
+      });
+
+      // Cargar los archivos Markdown generados por Decap CMS
+      // Nota: Decap guarda los posts en una carpeta, por ejemplo 'content/posts/' o 'posts/'
+      cargarArticulosDelBlog();
+    });
+
+    async function cargarArticulosDelBlog() {
+      const container = document.getElementById('blogPostsContainer');
+      
+      try {
+        // En un sitio estático puro, puedes listar los archivos o tener un archivo JSON índice (que Decap CMS también puede generar, o una lista estática).
+        // Ejemplo simulado de lista de posts generados por tu CMS:
+        const listaPosts = [
+          { url: 'content/posts/inicio-temporada-2026.md', titulo: 'Gran Inicio de Temporada 2026', extracto: 'Arrancan las emociones de la KFL con partidos llenos de intensidad y talento en todas las categorías...' },
+          { url: 'content/posts/reglas-actualizadas.md', titulo: 'Actualización del Reglamento Oficial', desc: 'Conoce las nuevas disposiciones aprobadas por la comisión para garantizar la seguridad y diversión...' }
+        ];
+
+        // Si prefieres hacerlo totalmente dinámico mediante un archivo índice o fetch directo:
+        let htmlContent = '';
+        
+        for (let post of listaPosts) {
+          htmlContent += `
+            <article class="blog-card">
+              <div>
+                <h3>${post.titulo}</h3>
+                <p>${post.extracto || post.desc}</p>
+              </div>
+              <a href="articulo.html?file=${post.url}" class="btn-leer-mas">Leer Artículo</a>
+            </article>
+          `;
+        }
+
+        container.innerHTML = htmlContent;
+
+      } catch (error) {
+        container.innerHTML = '<p style="color: #c53030; text-align: center;">Error al cargar los artículos del blog.</p>';
+        console.error("Error cargando Markdown:", error);
+      }
+    }
+  </script>
+</body>
+</html>

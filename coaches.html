@@ -73,7 +73,7 @@
       box-sizing: border-box;
     }
 
-    /* TÍTULO Y SUBTÍTULO SOBRE FONDO LIMPIO (SIN CAJA OSCURA) */
+    /* TÍTULO Y SUBTÍTULO SOBRE FONDO BLANCO LIMPIO */
     .section-header-clean {
       text-align: center;
       margin-bottom: 30px;
@@ -114,7 +114,7 @@
       display: block;
     }
 
-    /* NOTA ACLARATORIA DE FORMATO DE FECHA */
+    /* NOTA DE FORMATO DE FECHA */
     .format-note-box {
       background-color: #eff6ff;
       border-left: 4px solid var(--kfl-blue);
@@ -483,7 +483,7 @@
 
   <main class="portal-container">
     
-    <!-- TÍTULO Y SUBTÍTULO SOBRE FONDO LIMPIO -->
+    <!-- TÍTULO Y SUBTÍTULO SOBRE FONDO BLANCO -->
     <div class="section-header-clean">
       <h1>Portal de Coaches KFL</h1>
       <p>Gestión de Rosters y Monitoreo de Inscripciones</p>
@@ -498,7 +498,7 @@
     <section class="auth-card" id="loginSection">
       <h2>Acceso Exclusivo para Entrenadores</h2>
       <div class="info-box">
-        Ingresa la contraseña asignada a tu equipo para acceder a la gestión de tu Roster y ver los registros en la categoría <strong>Varsity Contact</strong>.
+        Ingresa la contraseña asignada a tu equipo para acceder a la gestión de tu Roster oficial y verificar las inscripciones de tu categoría.
       </div>
 
       <div id="loginFeedback" class="status-msg"></div>
@@ -541,16 +541,16 @@
 
         <div id="saveFeedback" class="status-msg"></div>
 
-        <!-- NOTA DE FORMATO DE FECHA OBLIGATORIA -->
+        <!-- NOTA DE FORMATO DE FECHA -->
         <div class="format-note-box">
-          ℹ️ <strong>FORMATO REQUERIDO:</strong> La <strong>Fecha de Nacimiento</strong> debe ingresarse estrictamente en formato <strong>DD/MM/AAAA</strong> (Día/Mes/Año, ejemplo: <code>28/05/2008</code>). La columna <strong>CANTIDAD</strong> y la <strong>FOTO</strong> son de administración oficial.
+          ℹ️ <strong>FORMATO REQUERIDO:</strong> La <strong>Fecha de Nacimiento</strong> debe ingresarse estrictamente en formato <strong>DD/MM/AAAA</strong> (ejemplo: <code>28/05/2008</code>). La columna <strong>CANTIDAD</strong> y la <strong>FOTO</strong> son de administración oficial.
         </div>
 
         <!-- ACCIONES Y TABLA DE ROSTER (100% ANCHO) -->
         <div class="table-actions-bar">
           <div>
             <span id="rosterCountStatus" style="font-size: 13.5px; color: var(--kfl-text-dark); font-weight: 800;">
-              0 de 35 jugadores listados
+              0 jugadores registrados
             </span>
           </div>
           <div>
@@ -590,7 +590,7 @@
             <div>
               <h3>Jugadores registrados en la web</h3>
               <p style="font-size: 13px; color: var(--kfl-text-muted); margin: 4px 0 0 0;">
-                Aspirantes con inscripción enviada desde la plataforma web para esta categoría.
+                Aspirantes con registro procesado en la web general para esta categoría.
               </p>
             </div>
             <div>
@@ -622,7 +622,7 @@
 
     let currentUser = null;
     let isLockedSession = false;
-    let limiteMaximoRoster = 35;
+    let limiteMaximoRoster = null; // 100% dinámico: lo dicta la pestaña CONFIG
 
     document.addEventListener("DOMContentLoaded", function() {
       // 1. Inyección de Nav y activación del menú móvil
@@ -720,7 +720,7 @@
           currentUser = result.user;
           currentUser.password = passwordInput;
           isLockedSession = Boolean(result.isLocked);
-          if (result.limiteRoster) limiteMaximoRoster = parseInt(result.limiteRoster, 10);
+          limiteMaximoRoster = result.limiteRoster !== undefined ? result.limiteRoster : null;
 
           sessionStorage.setItem('kfl_coach_session', JSON.stringify({
             user: currentUser,
@@ -857,7 +857,6 @@
       const str = String(valor).trim();
       if (/^\d{2}\/\d{2}\/\d{4}$/.test(str)) return str;
 
-      // Detectar formato largo tipo "Sat May 31 2008..." o ISO
       const d = new Date(str);
       if (!isNaN(d.getTime())) {
         const dia = String(d.getDate()).padStart(2, '0');
@@ -905,8 +904,8 @@
     function agregarFilaVacia() {
       if (isLockedSession) return;
       const tbody = document.getElementById('rosterTableBody');
-      if (tbody.children.length >= limiteMaximoRoster) {
-        alert(`Has alcanzado el límite estricto de ${limiteMaximoRoster} jugadores permitido por la liga.`);
+      if (limiteMaximoRoster !== null && tbody.children.length >= limiteMaximoRoster) {
+        alert(`Has alcanzado el límite oficial de ${limiteMaximoRoster} jugadores establecido en la configuración de la liga.`);
         return;
       }
       agregarFila({}, null);
@@ -921,7 +920,13 @@
         const ced = r.querySelector('.cell-cedula')?.value.trim();
         if (nom || ced) totalConDatos++;
       });
-      document.getElementById('rosterCountStatus').innerText = `${totalConDatos} de ${limiteMaximoRoster} jugadores registrados`;
+
+      const label = document.getElementById('rosterCountStatus');
+      if (limiteMaximoRoster !== null) {
+        label.innerText = `${totalConDatos} de ${limiteMaximoRoster} jugadores registrados`;
+      } else {
+        label.innerText = `${totalConDatos} jugadores registrados`;
+      }
     }
 
     /**
@@ -956,8 +961,8 @@
         }
       });
 
-      if (jugadores.length > limiteMaximoRoster) {
-        alert(`No puedes registrar más de ${limiteMaximoRoster} jugadores.`);
+      if (limiteMaximoRoster !== null && jugadores.length > limiteMaximoRoster) {
+        alert(`No puedes registrar más de ${limiteMaximoRoster} jugadores según el reglamento oficial.`);
         return;
       }
 
@@ -1017,7 +1022,7 @@
           const parsed = JSON.parse(stored);
           currentUser = parsed.user;
           isLockedSession = Boolean(parsed.isLocked);
-          if (parsed.limiteRoster) limiteMaximoRoster = parseInt(parsed.limiteRoster, 10);
+          limiteMaximoRoster = parsed.limiteRoster !== undefined ? parsed.limiteRoster : null;
           inicializarDashboard(parsed.deadline);
         } catch (e) {
           sessionStorage.removeItem('kfl_coach_session');

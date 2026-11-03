@@ -19,9 +19,9 @@ Desde el primer cuarto, el mariscal **Camilo Salazar** y los corredores **Nicol�
 
 A pesar de los intentos de reacción de los Dragons liderados por los mariscales Octavio Hess y Jaime Guerra —cuyos esfuerzos terminaron en intercepciones de la defensiva de la AIP mediante **Josué Lowe** y **Juan José Parada**—, la ofensiva de los Owls no perdonó.
 
-* **Felipe Ugueto** amplió el marcador con una corrida de poder desde la yarda 5, sumada a la efectiva patada de conversión de **Eduardo Orvieto** (14-0).
-* Antes del descanso, **Nicolás Vallarino** rompió tackleos para sumar el tercer touchdown, seguido de otra patada perfecta de Orvieto (22-0 al medio tiempo).
-* En la segunda mitad, sendas escapadas por velocidad de **Nicolás Vallarino** y **Eduardo Orvieto** (en jugada reversible) sentenciaron el definitivo **38 a 0**, sellando el pase de los Fighting Owls a la final.
+**Felipe Ugueto** amplió el marcador con una corrida de poder desde la yarda 5, sumada a la efectiva patada de conversión de **Eduardo Orvieto** (14-0).
+Antes del descanso, **Nicolás Vallarino** rompió tackleos para sumar el tercer touchdown, seguido de otra patada perfecta de Orvieto (22-0 al medio tiempo).
+En la segunda mitad, sendas escapadas por velocidad de **Nicolás Vallarino** y **Eduardo Orvieto** (en jugada reversible) sentenciaron el definitivo **38 a 0**, sellando el pase de los Fighting Owls a la final.
 
 ---
 
@@ -39,8 +39,8 @@ Los Kolts intentaron descontar mediante la presión defensiva, destacando una gr
 
 Todo está listo para que el emparrillado vibre este **viernes 30 de octubre** con los duelos definitivos por el campeonato:
 
-* **7:15 p.m.** | RAIDERS VS OWLS – **FINAL MICRO CONTACT**
-* **8:30 p.m.** | OWLS VS EAGLES – **FINAL MINI CONTACT**
+**7:15 p.m.** | RAIDERS VS OWLS – **FINAL MICRO CONTACT**
+**8:30 p.m.** | OWLS VS EAGLES – **FINAL MINI CONTACT**
 
 ### Tabla General de Posiciones (Ronda Regular)
 

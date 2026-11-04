@@ -86,7 +86,7 @@
       border-color: #777777;
     }
 
-    /* PÍLDORAS DE CATEGORÍA (MÁS GRANDES Y LEGIBLES) */
+    /* PÍLDORAS DE CATEGORÍA */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
@@ -135,7 +135,7 @@
       transform: translateY(-1px);
     }
 
-    /* SUB-PESTAÑAS CON INDICADOR VISUAL CLARO */
+    /* SUB-PESTAÑAS CON INDICADOR */
     .sub-tabs-bar {
       display: flex;
       justify-content: center;
@@ -183,7 +183,7 @@
       background: #A91C00;
     }
 
-    /* FILTROS Y BOTÓN DE IMPRESIÓN */
+    /* FILTROS Y CONTENEDOR GENERAL */
     .kfl-filter-bar {
       display: flex;
       gap: 12px;
@@ -231,11 +231,97 @@
 
     .kfl-render-container {
       width: 100%;
-      max-width: 920px;
+      max-width: 960px;
       margin: 0 auto;
       padding-bottom: 60px;
     }
 
+    /* ========================================================
+       DISEÑO DE LA SECCIÓN DE ROSTERS (CENTRADITO Y HOMOGÉNEO)
+       ======================================================== */
+    .rosters-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 20px;
+      width: 100%;
+      margin: 20px auto 40px auto;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    .team-card-roster {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 22px 14px 18px 14px;
+      width: 145px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .team-card-roster:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      border-color: #19547E;
+    }
+
+    body.flag-theme .team-card-roster:hover {
+      border-color: #A91C00;
+      box-shadow: 0 8px 20px rgba(169, 28, 0, 0.12);
+    }
+
+    .team-roster-logo-wrap {
+      width: 82px;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .team-card-roster img {
+      max-width: 78px;
+      max-height: 78px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+      transition: transform 0.25s ease;
+    }
+
+    .team-card-roster:hover img {
+      transform: scale(1.06);
+    }
+
+    .team-card-roster h4 {
+      font-family: 'Anton', sans-serif;
+      font-size: 16px;
+      color: #1e293b;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      transition: color 0.2s ease;
+    }
+
+    .team-card-roster:hover h4 {
+      color: #19547E;
+    }
+
+    body.flag-theme .team-card-roster:hover h4 {
+      color: #A91C00;
+    }
+
+    /* ESTILOS DE CALENDARIO */
     .kfl-week-section {
       margin-bottom: 28px;
     }
@@ -493,7 +579,7 @@
       background-color: #f8fafc;
     }
 
-    /* ESTILOS DE ESTADÍSTICAS (REPOSA DIRECTAMENTE SOBRE EL BG) */
+    /* ESTILOS DE STATS */
     .stats-buttons-grid {
       display: flex;
       justify-content: center;
@@ -562,7 +648,6 @@
       border-color: #19547E;
     }
 
-    /* BANNER DE NOTA DE ACTUALIZACIÓN EN NEGRO PURO */
     .kfl-last-update-banner {
       display: flex;
       align-items: center;
@@ -641,7 +726,7 @@
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- TARJETAS HERO -->
+    <!-- TARJETAS HERO DE SELECCIÓN DE LIGA -->
     <section class="leagues-hero-grid">
       <div class="league-hero-card contact-card" id="cardContact" onclick="selectLeague('contact')">
         <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino" class="hero-bg-img">
@@ -679,7 +764,7 @@
         <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
       </section>
 
-      <!-- SUB-PESTAÑAS CON INDICADOR VISUAL CLARO -->
+      <!-- SUB-PESTAÑAS -->
       <section class="league-display-wrapper">
         <div class="sub-tabs-bar">
           <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
@@ -702,7 +787,7 @@
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ROSTERS -->
+        <!-- ROSTERS (DISEÑO RENOVADO) -->
         <div class="tab-pane" id="pane-rosters">
           <div class="kfl-render-container">
             <div class="rosters-grid" id="rostersGrid"></div>
@@ -718,7 +803,6 @@
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container">
             
-            <!-- BANNER DE ÚLTIMA ACTUALIZACIÓN EN NEGRO PURO -->
             <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
               <svg class="kfl-update-svg" viewBox="0 0 24 24">
                 <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
@@ -726,7 +810,6 @@
               <span id="kflLastUpdateLabel">Sincronizando última actualización...</span>
             </div>
 
-            <!-- BOTONES DE TIPOS DE STATS (PÍLDORAS) -->
             <div class="stats-buttons-grid">
               <button onclick="filtrarTipoStat('RUSHING', this)" class="stat-type-btn active-stat" id="btn-stat-rushing">Rushing Stats</button>
               <button onclick="filtrarTipoStat('PASSING', this)" class="stat-type-btn" id="btn-stat-passing">Passing Stats</button>
@@ -734,13 +817,11 @@
               <button onclick="filtrarTipoStat('DEFENSIVE', this)" class="stat-type-btn" id="btn-stat-defensive">Defensive Stats</button>
             </div>
 
-            <!-- BUSCADOR INSTANTÁNEO -->
             <div class="search-box-stats">
               <span style="font-weight: 800; font-size: 13px; color: #334155; text-transform: uppercase;">Buscar Jugador/Equipo:</span>
               <input type="text" id="searchStatInput" class="search-stats-input" onkeyup="filtrarTablaStats()" placeholder="Escribe aquí...">
             </div>
 
-            <!-- TABLA DE STATS -->
             <div style="overflow-x: auto;">
               <table class="kfl-table" id="statsTable">
                 <thead>
@@ -762,7 +843,6 @@
               </table>
             </div>
 
-            <!-- BARRA DE PAGINACIÓN DE 10 EN 10 -->
             <div class="kfl-pagination-bar" id="statsPaginationBar"></div>
 
           </div>
@@ -783,13 +863,10 @@
   <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
       fetch('nav.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('globalNav').innerHTML = data;
-          
-          // Activar menú hamburguesa dinámicamente tras cargar
           const hamburgerBtn = document.getElementById('hamburgerBtn');
           const navMenu = document.getElementById('navMenu');
           if (hamburgerBtn && navMenu) {
@@ -797,14 +874,12 @@
           }
         });
 
-      // Inyectar Footer desde footer.html
       fetch('footer.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('globalFooter').innerHTML = data;
         });
 
-      // Botón volver arriba
       const backToTopBtn = document.getElementById('backToTopBtn');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
@@ -819,8 +894,66 @@
     });
   </script>
 
-  <!-- LÓGICA DE LIGAS Y ESTADÍSTICAS -->
+  <!-- CONTROLADOR PRINCIPAL Y CONFIGURACIÓN -->
   <script>
+    /* ==========================================================================
+       CONFIGURACIÓN GENERAL KFL (EDITAR AQUÍ EQUIPOS Y LOGOS)
+       ==========================================================================
+       GUÍA RÁPIDA PARA AGREGAR O QUITAR EQUIPOS:
+       
+       1. CÓMO AGREGAR UN EQUIPO NUEVO:
+          a) Guarda la imagen del logo en tu repositorio en la carpeta:
+             assets/logos/nombre_equipo.png
+             * Recomendación: Formato PNG con fondo transparente, proporción cuadrada
+               (ej: 512x512 px) y peso optimizado (< 100 KB).
+          b) Agrega su nombre y su ruta en el objeto EQUIPOS_LOGOS (en mayúsculas):
+             "TITANS": "assets/logos/titans.png"
+          c) Agrega una URL de respaldo (Imgur u otro host CDN) en FALLBACK_LOGOS:
+             "TITANS": "https://i.imgur.com/tu-imagen.png"
+          d) Agrégalo a las categorías deseadas en el objeto CATEGORIAS_EQUIPOS.
+       
+       2. CÓMO CAMBIAR EQUIPOS EN UNA CATEGORÍA:
+          Modifica el arreglo correspondiente en CATEGORIAS_EQUIPOS.
+          Ejemplo: para agregar a "TITANS" en Contact Varsity:
+          "varsity": ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES", "TITANS"]
+       ========================================================================== */
+
+    const EQUIPOS_LOGOS = {
+      "DRAGONS": "assets/logos/dragons.png",
+      "EAGLES": "assets/logos/eagles.png",
+      "KOLTS": "assets/logos/kolts.png",
+      "LIONS": "assets/logos/lions.png",
+      "OWLS": "assets/logos/owls.png",
+      "RAIDERS": "assets/logos/raiders.png",
+      "SPARTANS": "assets/logos/spartans.png"
+    };
+
+    const FALLBACK_LOGOS = {
+      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
+      "EAGLES": "https://i.imgur.com/lxfq565.png",
+      "KOLTS": "https://i.imgur.com/id2gPdH.png",
+      "LIONS": "https://i.imgur.com/XQaNhUb.png",
+      "OWLS": "https://i.imgur.com/KRjk1AV.png",
+      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
+      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png"
+    };
+
+    // DEFINICIÓN OFICIAL DE EQUIPOS POR LIGA Y CATEGORÍA
+    const CATEGORIAS_EQUIPOS = {
+      "contact": {
+        "varsity": ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"],
+        "juvenil": ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"],
+        "mini":    ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"],
+        "micro":   ["OWLS", "RAIDERS", "EAGLES"]
+      },
+      "flag": {
+        "varsity": ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "SPARTANS", "LIONS"],
+        "juvenil": ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "LIONS"],
+        "mini":    ["OWLS", "KOLTS", "RAIDERS", "SPARTANS", "EAGLES", "LIONS"],
+        "micro":   ["OWLS", "RAIDERS", "KOLTS", "LIONS"]
+      }
+    };
+
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
 
     const STATS_CSV_LINKS = {
@@ -849,45 +982,10 @@
       pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
     };
 
-    const EQUIPOS_LOGOS = {
-      "DRAGONS": "assets/logos/dragons.png",
-      "EAGLES": "assets/logos/eagles.png",
-      "KOLTS": "assets/logos/kolts.png",
-      "LIONS": "assets/logos/lions.png",
-      "OWLS": "assets/logos/owls.png",
-      "RAIDERS": "assets/logos/raiders.png",
-      "SPARTANS": "assets/logos/spartans.png"
-    };
-
-    const FALLBACK_LOGOS = {
-      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
-      "EAGLES": "https://i.imgur.com/lxfq565.png",
-      "KOLTS": "https://i.imgur.com/id2gPdH.png",
-      "LIONS": "https://i.imgur.com/XQaNhUb.png",
-      "OWLS": "https://i.imgur.com/KRjk1AV.png",
-      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
-      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png"
-    };
-
     function getTeamLogo(teamName) {
       const cleanTeam = (teamName || "").toUpperCase().trim();
       return EQUIPOS_LOGOS[cleanTeam] || FALLBACK_LOGOS[cleanTeam] || "https://i.imgur.com/wrPDjDN.png";
     }
-
-    let CATEGORIAS_EQUIPOS = {
-      "contact": {
-        "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "SPARTANS"],
-        "juvenil": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS"],
-        "mini": ["OWLS", "RAIDERS", "EAGLES", "KOLTS"],
-        "micro": ["OWLS", "RAIDERS", "EAGLES"]
-      },
-      "flag": {
-        "varsity": ["OWLS", "RAIDERS", "EAGLES", "KOLTS", "DRAGONS", "LIONS"],
-        "juvenil": ["OWLS", "RAIDERS", "EAGLES", "KOLTS"],
-        "mini": ["OWLS", "RAIDERS", "EAGLES"],
-        "micro": ["OWLS", "RAIDERS"]
-      }
-    };
 
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -1048,7 +1146,7 @@
     function renderCalendar(partidos) {
       const container = document.getElementById('calendarioNativeContent');
       if (!partidos || partidos.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding:30px;">No hay partidos registrados para esta vista.</p>';
+        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados para esta vista.</p>';
         return;
       }
 
@@ -1185,7 +1283,7 @@
     function renderPosiciones(tabla) {
       const container = document.getElementById('posicionesNativeContent');
       if (!tabla || tabla.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding:30px;">No hay tabla disponible aún.</p>';
+        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay tabla disponible aún.</p>';
         return;
       }
 
@@ -1260,6 +1358,7 @@
       renderPosiciones(tabla);
     }
 
+    /* RENDERIZADO VISUALMENTE ELEGANTE Y CENTRADO DE ROSTERS */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
@@ -1268,7 +1367,7 @@
       grid.innerHTML = '';
 
       if (equipos.length === 0) {
-        grid.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">No hay equipos registrados.</p>';
+        grid.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay equipos registrados en esta categoría.</p>';
         return;
       }
 
@@ -1277,7 +1376,9 @@
         const card = document.createElement('div');
         card.className = 'team-card-roster';
         card.innerHTML = `
-          <img src="${logoUrl}" alt="${equipo}" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+          <div class="team-roster-logo-wrap">
+            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+          </div>
           <h4>${equipo}</h4>
         `;
         grid.appendChild(card);

@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
+  <!-- CONFIGURACIÓN CENTRALIZADA KFL (EQUIPOS, LOGOS Y ENLACES) -->
+  <script src="js/config-ligas.js"></script>
+
   <style>
     /* PESTAÑAS Y VISTAS */
     .tab-pane {
@@ -17,7 +20,7 @@
       display: block !important;
     }
 
-    /* TARJETAS HERO SIN REBORDES NI RELIEVES ARTIFICIALES */
+    /* TARJETAS HERO SIN BORDES NI RELIEVES */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -26,7 +29,7 @@
     
     .league-hero-card {
       cursor: pointer;
-      border: none !important; /* Sin reborde */
+      border: none !important;
       border-radius: 16px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -39,12 +42,10 @@
     }
 
     .league-hero-card.selected-contact {
-      border: none !important;
       box-shadow: 0 8px 25px rgba(25, 84, 126, 0.35);
     }
 
     .league-hero-card.selected-flag {
-      border: none !important;
       box-shadow: 0 8px 25px rgba(169, 28, 0, 0.35);
     }
 
@@ -238,8 +239,7 @@
     }
 
     /* ========================================================
-       SECCIÓN DE ROSTERS: SIN CONTENEDORES, TEXTO AVENIR SUAVE
-       Y FILA COMPLETA EN ESCRITORIO
+       SECCIÓN DE ROSTERS: SIN CONTENEDORES Y FLUIDA
        ======================================================== */
     .rosters-grid {
       display: flex;
@@ -248,7 +248,7 @@
       align-items: flex-start;
       gap: 28px;
       width: 100%;
-      margin: 25px auto 40px auto;
+      margin: 25px auto 30px auto;
       padding: 0 10px;
       box-sizing: border-box;
     }
@@ -259,7 +259,7 @@
       box-shadow: none !important;
       border-radius: 0 !important;
       padding: 10px 6px;
-      width: 120px; /* Permite que los 7 equipos de Flag entren en una sola línea en desktop */
+      width: 120px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -299,12 +299,11 @@
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
     }
 
-    /* NOMBRE DEL EQUIPO EN AVENIR Y COLOR TENUE SUAVE */
     .team-card-roster h4 {
       font-family: 'Avenir', sans-serif !important;
       font-weight: 800;
       font-size: 13.5px;
-      color: #475569; /* Tono tenue, elegante y nada invasivo */
+      color: #475569;
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 0.8px;
@@ -319,403 +318,314 @@
       color: #A91C00;
     }
 
-    /* ESTILOS DE CALENDARIO */
-    .kfl-week-section {
-      margin-bottom: 28px;
-    }
-
-    .kfl-week-title {
-      font-size: 17px;
-      font-weight: 800;
-      color: #19547E;
-      border-bottom: 2px solid #19547E;
-      padding-bottom: 6px;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      text-align: left;
-    }
-
-    body.flag-theme .kfl-week-title {
-      color: #A91C00;
-      border-color: #A91C00;
-    }
-
-    .kfl-grid-matches {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      width: 100%;
-    }
-
-    @media (max-width: 720px) {
-      .kfl-grid-matches {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .kfl-match-card {
+    /* CONTENEDOR DESPLEGABLE DEL ROSTER DEL EQUIPO (COLUMNAS A - D) */
+    .roster-detail-container {
       background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 25px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      display: none;
     }
 
-    .kfl-match-header {
-      background: #19547E;
-      color: #ffffff;
-      padding: 8px 14px;
-      font-weight: 700;
-      font-size: 12px;
+    .roster-detail-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      text-transform: uppercase;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
-    body.flag-theme .kfl-match-header {
-      background: #A91C00;
-    }
-
-    .kfl-info-item {
+    .roster-detail-title-group {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 14px;
     }
 
-    .kfl-icon-svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-
-    .kfl-match-body {
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .kfl-team-box {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 36%;
-      text-align: center;
-      font-weight: 700;
-      font-size: 14px;
-      color: #0f172a;
-    }
-
-    .kfl-team-logo {
-      width: 48px;
-      height: 48px;
+    .roster-detail-title-group img {
+      width: 50px;
+      height: 50px;
       object-fit: contain;
-      margin-bottom: 6px;
     }
 
-    .kfl-score-box {
-      width: 28%;
-      text-align: center;
-    }
-
-    .kfl-score-num {
-      font-size: 24px;
-      font-weight: 900;
-      color: #0f172a;
-    }
-
-    .kfl-score-vs {
-      font-size: 18px;
-      font-weight: 800;
-      color: #94a3b8;
-    }
-
-    .kfl-score-status {
-      font-size: 11px;
-      font-weight: 800;
-      color: #16a34a;
-      letter-spacing: 0.5px;
-    }
-
-    .kfl-single-match-wrapper {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-    }
-
-    .kfl-jamboree-body-text {
-      font-size: 16px;
-      font-weight: 900;
+    .roster-detail-title-group h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 26px;
       color: #19547E;
-      text-align: center;
-      padding: 22px 10px;
+      margin: 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    body.flag-theme .kfl-jamboree-body-text {
+    body.flag-theme .roster-detail-title-group h3 {
       color: #A91C00;
     }
 
-    .kfl-bye-card-wrapper {
-      grid-column: 1 / -1;
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin-top: 6px;
-    }
-
-    .kfl-bye-card {
-      width: 100%;
-      max-width: 440px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
-    }
-
-    .kfl-bye-header {
-      background: #19547E;
-      color: #ffffff;
-      padding: 8px 14px;
+    .btn-close-roster {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
       font-weight: 800;
-      font-size: 12px;
+      color: #334155;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .btn-close-roster:hover {
+      background: #e2e8f0;
+    }
+
+    .roster-player-clickable-row {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .roster-player-clickable-row:hover {
+      background-color: #f0f7ff !important;
+    }
+
+    body.flag-theme .roster-player-clickable-row:hover {
+      background-color: #fff1f2 !important;
+    }
+
+    /* MODAL: PLAYER CARD CON STATS Y FOTO */
+    .player-card-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 15, 25, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .player-card-modal-backdrop.active {
+      display: flex;
+    }
+
+    .player-card {
+      background: #ffffff;
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      position: relative;
+      animation: modalFadeIn 0.25s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .player-card-header {
+      background: linear-gradient(135deg, #19547E, #0b0f19);
+      padding: 30px 25px 25px 25px;
+      color: #ffffff;
       text-align: center;
+      position: relative;
+    }
+
+    body.flag-theme .player-card-header {
+      background: linear-gradient(135deg, #A91C00, #0b0f19);
+    }
+
+    .btn-modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .btn-modal-close:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
+    .player-card-photo-container {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 15px auto;
+      border-radius: 50%;
+      background: #f8fafc;
+      border: 4px solid #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .player-card-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .player-card-name {
+      font-family: 'Anton', sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin: 0 0 4px 0;
+    }
+
+    .player-card-jersey-tag {
+      font-size: 13px;
+      font-weight: 800;
+      color: #cbd5e1;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
-    body.flag-theme .kfl-bye-header {
-      background: #A91C00;
+    .player-card-body {
+      padding: 25px;
     }
 
-    .kfl-bye-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .kfl-bye-logo {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-    }
-
-    .kfl-bye-team-name {
-      font-size: 15px;
-      font-weight: 800;
-      color: #1e293b;
+    .player-stats-section-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 17px;
+      color: #19547E;
       text-transform: uppercase;
-    }
-
-    /* TABLA DE POSICIONES */
-    .kfl-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-      margin-top: 10px;
-      margin-bottom: 40px;
-    }
-
-    .kfl-table th {
-      background: #19547E;
-      color: #ffffff;
-      padding: 10px 8px;
-      font-size: 12px;
-      text-transform: uppercase;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    body.flag-theme .kfl-table th {
-      background: #A91C00;
-    }
-
-    .kfl-table td {
-      padding: 10px 8px;
+      margin: 0 0 15px 0;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 6px;
       text-align: center;
-      border-bottom: 1px solid #f1f5f9;
-      font-size: 13px;
-      color: #334155;
+      letter-spacing: 0.5px;
     }
 
-    .kfl-table td.team-col-cell, .kfl-table th.team-col-cell {
-      width: 1% !important;
-      white-space: nowrap !important;
-      text-align: left !important;
+    body.flag-theme .player-stats-section-title {
+      color: #A91C00;
     }
 
-    .kfl-table-team-cell {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-align: left;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .kfl-table-team-logo {
-      width: 26px;
-      height: 26px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .kfl-table tr:nth-child(even) {
-      background-color: #f8fafc;
-    }
-
-    /* ESTILOS DE STATS */
-    .stats-buttons-grid {
-      display: flex;
-      justify-content: center;
+    .player-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .stat-type-btn {
-      padding: 10px 24px;
-      background: #19547E;
-      border: none;
-      color: #ffffff;
-      border-radius: 30px;
-      font-family: 'Avenir', sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-      opacity: 0.75;
-      box-shadow: none;
-    }
-
-    body.flag-theme .stat-type-btn {
-      background: #A91C00;
-    }
-
-    .stat-type-btn.active-stat {
-      opacity: 1;
-      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #19547E;
-      transform: translateY(-1px);
-    }
-
-    body.flag-theme .stat-type-btn.active-stat {
-      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #A91C00;
-    }
-
-    .stat-type-btn:hover {
-      opacity: 1;
-    }
-
-    .search-box-stats {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .search-stats-input {
-      padding: 9px 14px;
-      width: 100%;
-      max-width: 300px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 13px;
-      font-family: 'Avenir', sans-serif;
-      outline: none;
-      background: #f8fafc;
-    }
-
-    .search-stats-input:focus {
-      background: #ffffff;
-      border-color: #19547E;
-    }
-
-    .kfl-last-update-banner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: transparent;
-      color: #000000;
-      padding: 6px 15px;
-      border-radius: 0;
-      font-size: 16px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 22px;
-      box-shadow: none;
       text-align: center;
     }
 
-    .kfl-update-svg {
-      width: 22px;
-      height: 22px;
-      fill: #000000;
-      flex-shrink: 0;
+    .player-stat-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 10px;
     }
 
-    .kfl-pagination-bar {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      margin-top: 20px;
-      margin-bottom: 10px;
+    .player-stat-val {
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      color: #19547E;
+      line-height: 1.1;
     }
 
-    .kfl-page-btn {
-      padding: 6px 12px;
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 13px;
-      color: #334155;
-      cursor: pointer;
-      transition: all 0.2s;
+    body.flag-theme .player-stat-val {
+      color: #A91C00;
     }
 
-    .kfl-page-btn.active-page {
-      background: #19547E;
-      color: #ffffff;
-      border-color: #19547E;
+    .player-stat-lbl {
+      font-size: 11px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-top: 4px;
     }
 
-    body.flag-theme .kfl-page-btn.active-page {
-      background: #A91C00;
-      border-color: #A91C00;
+    /* ESTILOS DE CALENDARIO, TABLA DE POSICIONES Y STATS */
+    .kfl-week-section { margin-bottom: 28px; }
+    .kfl-week-title {
+      font-size: 17px; font-weight: 800; color: #19547E; border-bottom: 2px solid #19547E;
+      padding-bottom: 6px; margin-bottom: 16px; text-transform: uppercase; text-align: left;
     }
+    body.flag-theme .kfl-week-title { color: #A91C00; border-color: #A91C00; }
+    .kfl-grid-matches { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
+    @media (max-width: 720px) { .kfl-grid-matches { grid-template-columns: 1fr; } }
+    .kfl-match-card {
+      background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .kfl-match-header {
+      background: #19547E; color: #ffffff; padding: 8px 14px; font-weight: 700; font-size: 12px;
+      display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;
+    }
+    body.flag-theme .kfl-match-header { background: #A91C00; }
+    .kfl-info-item { display: flex; align-items: center; gap: 5px; }
+    .kfl-icon-svg { width: 14px; height: 14px; fill: currentColor; }
+    .kfl-match-body { padding: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .kfl-team-box { display: flex; flex-direction: column; align-items: center; width: 36%; text-align: center; font-weight: 700; font-size: 14px; color: #0f172a; }
+    .kfl-team-logo { width: 48px; height: 48px; object-fit: contain; margin-bottom: 6px; }
+    .kfl-score-box { width: 28%; text-align: center; }
+    .kfl-score-num { font-size: 24px; font-weight: 900; color: #0f172a; }
+    .kfl-score-vs { font-size: 18px; font-weight: 800; color: #94a3b8; }
+    .kfl-score-status { font-size: 11px; font-weight: 800; color: #16a34a; letter-spacing: 0.5px; }
+    .kfl-single-match-wrapper { display: flex; justify-content: center; width: 100%; }
+    .kfl-jamboree-body-text { font-size: 16px; font-weight: 900; color: #19547E; text-align: center; padding: 22px 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    body.flag-theme .kfl-jamboree-body-text { color: #A91C00; }
+    .kfl-bye-card-wrapper { grid-column: 1 / -1; display: flex; justify-content: center; width: 100%; margin-top: 6px; }
+    .kfl-bye-card { width: 100%; max-width: 440px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
+    .kfl-bye-header { background: #19547E; color: #ffffff; padding: 8px 14px; font-weight: 800; font-size: 12px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+    body.flag-theme .kfl-bye-header { background: #A91C00; }
+    .kfl-bye-body { padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .kfl-bye-logo { width: 48px; height: 48px; object-fit: contain; }
+    .kfl-bye-team-name { font-size: 15px; font-weight: 800; color: #1e293b; text-transform: uppercase; }
 
-    .kfl-page-btn:hover:not(:disabled) {
-      background: #e2e8f0;
+    /* TABLA */
+    .kfl-table {
+      width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 12px; overflow: hidden;
+      border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-top: 10px; margin-bottom: 40px;
     }
+    .kfl-table th { background: #19547E; color: #ffffff; padding: 10px 8px; font-size: 12px; text-transform: uppercase; cursor: pointer; user-select: none; text-align: center; }
+    body.flag-theme .kfl-table th { background: #A91C00; }
+    .kfl-table td { padding: 10px 8px; text-align: center; border-bottom: 1px solid #f1f5f9; font-size: 13px; color: #334155; }
+    .kfl-table td.team-col-cell, .kfl-table th.team-col-cell { width: 1% !important; white-space: nowrap !important; text-align: left !important; }
+    .kfl-table-team-cell { display: flex; align-items: center; gap: 8px; text-align: left; font-weight: 700; white-space: nowrap; }
+    .kfl-table-team-logo { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
+    .kfl-table tr:nth-child(even) { background-color: #f8fafc; }
 
-    .kfl-page-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    /* STATS */
+    .stats-buttons-grid { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+    .stat-type-btn {
+      padding: 10px 24px; background: #19547E; border: none; color: #ffffff; border-radius: 30px;
+      font-family: 'Avenir', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.5px;
+      cursor: pointer; transition: all 0.2s ease; text-transform: uppercase; opacity: 0.75; box-shadow: none;
     }
-
-    @page {
-      size: letter portrait;
-      margin: 0.2in;
-    }
+    body.flag-theme .stat-type-btn { background: #A91C00; }
+    .stat-type-btn.active-stat { opacity: 1; box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #19547E; transform: translateY(-1px); }
+    body.flag-theme .stat-type-btn.active-stat { box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #A91C00; }
+    .search-box-stats { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    .search-stats-input { padding: 9px 14px; width: 100%; max-width: 300px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; font-family: 'Avenir', sans-serif; outline: none; background: #f8fafc; }
+    .search-stats-input:focus { background: #ffffff; border-color: #19547E; }
+    .kfl-last-update-banner { display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; color: #000000; padding: 6px 15px; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 22px; text-align: center; }
+    .kfl-update-svg { width: 22px; height: 22px; fill: #000000; flex-shrink: 0; }
+    .kfl-pagination-bar { display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 20px; margin-bottom: 10px; }
+    .kfl-page-btn { padding: 6px 12px; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; font-size: 13px; color: #334155; cursor: pointer; transition: all 0.2s; }
+    .kfl-page-btn.active-page { background: #19547E; color: #ffffff; border-color: #19547E; }
+    body.flag-theme .kfl-page-btn.active-page { background: #A91C00; border-color: #A91C00; }
   </style>
 </head>
 <body class="contact-theme">
@@ -723,7 +633,6 @@
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- TARJETAS HERO SIN BORDES NI RELIEVES -->
     <section class="leagues-hero-grid">
       <div class="league-hero-card contact-card" id="cardContact" onclick="selectLeague('contact')">
         <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino" class="hero-bg-img">
@@ -750,10 +659,8 @@
       <button class="btn-reset-league" onclick="resetLeagueSelection()">🔄 Restablecer Selección</button>
     </div>
 
-    <!-- SECCIÓN DESPLEGABLE -->
     <div id="leagueContentSection" style="display: none;">
       
-      <!-- PÍLDORAS DE CATEGORÍA -->
       <section class="category-pills-wrapper">
         <button class="category-pill-btn active" onclick="selectCategory('varsity')">VARSITY</button>
         <button class="category-pill-btn" onclick="selectCategory('juvenil')">JUVENIL</button>
@@ -761,7 +668,6 @@
         <button class="category-pill-btn" onclick="selectCategory('micro')">MICRO</button>
       </section>
 
-      <!-- SUB-PESTAÑAS -->
       <section class="league-display-wrapper">
         <div class="sub-tabs-bar">
           <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
@@ -784,14 +690,43 @@
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ROSTERS (SIN CONTENEDOR, CENTRADO Y 100% HOMOGÉNEO) -->
+        <!-- ROSTERS (LOGOS + DESPLIEGUE DE COLUMNAS A-D) -->
         <div class="tab-pane" id="pane-rosters">
           <div class="kfl-render-container">
+            <!-- GRILLA HOMOGÉNEA DE LOGOS -->
             <div class="rosters-grid" id="rostersGrid"></div>
+
+            <!-- CONTENEDOR DESPLEGABLE DE ROSTER -->
+            <div class="roster-detail-container" id="rosterDetailBox">
+              <div class="roster-detail-header">
+                <div class="roster-detail-title-group">
+                  <img id="rosterDetailLogo" src="" alt="Equipo Logo">
+                  <div>
+                    <h3 id="rosterDetailTeamName">EQUIPO</h3>
+                    <span style="font-size: 13px; color: #64748b; font-weight: 700;">Haz clic sobre cualquier jugador para ver su tarjeta oficial y estadísticas</span>
+                  </div>
+                </div>
+                <button type="button" class="btn-close-roster" onclick="cerrarDetalleRoster()">✕ Cerrar Roster</button>
+              </div>
+
+              <div style="overflow-x: auto;">
+                <table class="kfl-table" style="margin-bottom: 0;">
+                  <thead>
+                    <tr>
+                      <th style="width: 50px;">#</th>
+                      <th style="min-width: 160px; text-align: left; padding-left: 15px;">NOMBRE</th>
+                      <th style="min-width: 160px; text-align: left;">APELLIDO</th>
+                      <th style="width: 100px;">JERSEY #</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rosterTablePublicBody"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- TABLA DE POSICIONES -->
+        <!-- POSICIONES -->
         <div class="tab-pane" id="pane-posiciones">
           <div id="posicionesNativeContent" class="kfl-render-container"></div>
         </div>
@@ -799,7 +734,6 @@
         <!-- STATS -->
         <div class="tab-pane" id="pane-stats">
           <div class="kfl-render-container">
-            
             <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
               <svg class="kfl-update-svg" viewBox="0 0 24 24">
                 <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/>
@@ -841,13 +775,32 @@
             </div>
 
             <div class="kfl-pagination-bar" id="statsPaginationBar"></div>
-
           </div>
         </div>
 
       </section>
     </div>
   </main>
+
+  <!-- MODAL DE LA TARJETA DEL JUGADOR (PLAYER CARD) -->
+  <div class="player-card-modal-backdrop" id="playerCardModal" onclick="cerrarPlayerCardModal(event)">
+    <div class="player-card" onclick="event.stopPropagation()">
+      <div class="player-card-header">
+        <button type="button" class="btn-modal-close" onclick="forzarCerrarModal()">✕</button>
+        <div class="player-card-photo-container">
+          <img src="" alt="Foto Jugador" class="player-card-photo" id="modalPlayerPhoto">
+        </div>
+        <h3 class="player-card-name" id="modalPlayerName">NOMBRE JUGADOR</h3>
+        <div class="player-card-jersey-tag" id="modalPlayerMeta">#00 • EQUIPO • CATEGORÍA</div>
+      </div>
+      <div class="player-card-body">
+        <div class="player-stats-section-title">Estadísticas de Temporada</div>
+        <div id="modalPlayerStatsContainer">
+          <!-- Inyectado dinámicamente -->
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="globalFooter"></div>
 
@@ -858,108 +811,36 @@
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+        .then(res => res.ok ? res.text() : '')
+        .then(html => {
+          if (html) {
+            document.getElementById('globalNav').innerHTML = html;
+            const btn = document.getElementById('hamburgerBtn');
+            const menu = document.getElementById('navMenu');
+            if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('open'));
           }
         });
 
       fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
+        .then(res => res.ok ? res.text() : '')
+        .then(html => {
+          if (html) document.getElementById('globalFooter').innerHTML = html;
         });
 
       const backToTopBtn = document.getElementById('backToTopBtn');
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
+        if (window.scrollY > 300) backToTopBtn.classList.add('visible');
+        else backToTopBtn.classList.remove('visible');
       });
-      backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
+      backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     });
   </script>
 
-  <!-- CONTROLADOR PRINCIPAL Y CONFIGURACIÓN CENTRALIZADA -->
+  <!-- CONTROLADOR PRINCIPAL Y LÓGICA DE CRUCE DE DATOS -->
   <script>
-    /* ==========================================================================
-       CONFIGURACIÓN GENERAL KFL (EDITAR AQUÍ EQUIPOS Y LOGOS)
-       ==========================================================================
-       GUÍA RÁPIDA:
-       
-       1. CÓMO AGREGAR UN EQUIPO NUEVO:
-          a) Guarda la imagen del logo en tu repositorio en la carpeta:
-             assets/logos/nombre_equipo.png (Fondo transparente, 512x512 px, PNG).
-          b) Agrega su nombre y ruta en EQUIPOS_LOGOS (en mayúsculas):
-             "TITANS": "assets/logos/titans.png"
-          c) Agrega la URL de respaldo en FALLBACK_LOGOS:
-             "TITANS": "https://i.imgur.com/tu-imagen.png"
-          d) Agrégalo a las categorías deseadas en CATEGORIAS_EQUIPOS.
-       
-       2. CÓMO CAMBIAR EQUIPOS EN UNA CATEGORÍA:
-          Edita el arreglo correspondiente en CATEGORIAS_EQUIPOS.
-       ========================================================================== */
-
-    const EQUIPOS_LOGOS = {
-      "DRAGONS": "assets/logos/dragons.png",
-      "EAGLES": "assets/logos/eagles.png",
-      "KOLTS": "assets/logos/kolts.png",
-      "LIONS": "assets/logos/lions.png",
-      "OWLS": "assets/logos/owls.png",
-      "RAIDERS": "assets/logos/raiders.png",
-      "SPARTANS": "assets/logos/spartans.png"
-    };
-
-    const FALLBACK_LOGOS = {
-      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
-      "EAGLES": "https://i.imgur.com/lxfq565.png",
-      "KOLTS": "https://i.imgur.com/id2gPdH.png",
-      "LIONS": "https://i.imgur.com/XQaNhUb.png",
-      "OWLS": "https://i.imgur.com/KRjk1AV.png",
-      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
-      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png"
-    };
-
-    // DEFINICIÓN OFICIAL DE EQUIPOS POR LIGA Y CATEGORÍA
-    const CATEGORIAS_EQUIPOS = {
-      "contact": {
-        "varsity": ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"],
-        "juvenil": ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"],
-        "mini":    ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"],
-        "micro":   ["OWLS", "RAIDERS", "EAGLES"]
-      },
-      "flag": {
-        "varsity": ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "SPARTANS", "LIONS"],
-        "juvenil": ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "LIONS"],
-        "mini":    ["OWLS", "KOLTS", "RAIDERS", "SPARTANS", "EAGLES", "LIONS"],
-        "micro":   ["OWLS", "RAIDERS", "KOLTS", "LIONS"]
-      }
-    };
-
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec";
-
-    const STATS_CSV_LINKS = {
-      "contact": {
-        "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
-        "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
-        "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
-        "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
-      },
-      "flag": {
-        "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
-        "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
-        "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
-        "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
-      }
-    };
+    let activeLeague = null;
+    let activeCategory = 'varsity';
+    let activeSubTab = 'calendario';
 
     let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
     let tipoStatActivo = 'RUSHING';
@@ -974,29 +855,21 @@
 
     function getTeamLogo(teamName) {
       const cleanTeam = (teamName || "").toUpperCase().trim();
-      return EQUIPOS_LOGOS[cleanTeam] || FALLBACK_LOGOS[cleanTeam] || "https://i.imgur.com/wrPDjDN.png";
+      return (KFL_CONFIG.EQUIPOS_LOGOS && KFL_CONFIG.EQUIPOS_LOGOS[cleanTeam]) ||
+             (KFL_CONFIG.FALLBACK_LOGOS && KFL_CONFIG.FALLBACK_LOGOS[cleanTeam]) ||
+             "https://i.imgur.com/wrPDjDN.png";
     }
-
-    let activeLeague = null;
-    let activeCategory = 'varsity';
-    let activeSubTab = 'calendario';
 
     function getMasterDB() {
       try {
-        const data = sessionStorage.getItem('kfl_master_db');
-        return data ? JSON.parse(data) : null;
+        const d = sessionStorage.getItem('kfl_master_db');
+        return d ? JSON.parse(d) : null;
       } catch (e) { return null; }
     }
 
     function setMasterDB(data) {
-      try {
-        sessionStorage.setItem('kfl_master_db', JSON.stringify(data));
-      } catch (e) {}
+      try { sessionStorage.setItem('kfl_master_db', JSON.stringify(data)); } catch (e) {}
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      fetchMasterDB();
-    });
 
     function fetchMasterDB(callback) {
       if (getMasterDB()) {
@@ -1004,18 +877,15 @@
         return;
       }
 
-      fetch(`${APPS_SCRIPT_URL}?modulo=all_data`)
+      fetch(`${KFL_CONFIG.API_CALENDARIO_URL}?modulo=all_data`)
         .then(res => res.json())
         .then(db => {
           setMasterDB(db);
           if (callback) callback();
         })
-        .catch(err => {
-          console.error("Error cargando base de datos KFL:", err);
-        });
+        .catch(err => console.error("Error BD KFL:", err));
     }
 
-    /* SELECCIÓN DE LIGA: RESTABLECE SIEMPRE A CATEGORÍA VARSITY Y CALENDARIO */
     function selectLeague(league) {
       activeLeague = league;
       activeCategory = 'varsity';
@@ -1040,12 +910,14 @@
       resetBtnWrapper.style.display = 'block';
       instructionBar.style.display = 'none';
 
-      // Sincronizar botones de categorías
       document.querySelectorAll('.category-pill-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.toLowerCase() === 'varsity');
       });
 
-      // Forzar sub-pestaña de calendario siempre
+      // Precargar las estadísticas para tenerlas listas para las Player Cards
+      precargarStatsCategoria();
+
+      // Regla: Siempre iniciar en calendario
       selectSubTab('calendario');
     }
 
@@ -1059,19 +931,14 @@
       document.body.className = 'contact-theme';
     }
 
-    /* SELECCIÓN DE CATEGORÍA: RESETEA SIEMPRE A CALENDARIO */
     function selectCategory(category) {
       activeCategory = category;
       document.querySelectorAll('.category-pill-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.toLowerCase() === category);
       });
       
-      tipoStatActivo = 'RUSHING';
-      document.querySelectorAll('.stat-type-btn').forEach(b => {
-        b.classList.toggle('active-stat', b.id === 'btn-stat-rushing');
-      });
-
-      // REGLA OBLIGATORIA: Al cambiar de categoría, mostrar siempre CALENDARIO
+      cerrarDetalleRoster();
+      precargarStatsCategoria();
       selectSubTab('calendario');
     }
 
@@ -1109,261 +976,12 @@
       }
     }
 
-    function loadCalendarioData() {
-      const db = getMasterDB();
-      const catData = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
-
-      populateCalendarFilters(catData);
-      renderCalendar(catData);
-    }
-
-    function populateCalendarFilters(partidos) {
-      const weekSelect = document.getElementById('filterWeek');
-      const teamSelect = document.getElementById('filterTeam');
-
-      const weeks = [...new Set(partidos.map(p => p.week).filter(Boolean))];
-      const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => t && t !== 'KFL' && t !== 'TODOS JUEGAN'))];
-
-      weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
-      teamSelect.innerHTML = '<option value="ALL">Todos los Equipos</option>' + teams.map(t => `<option value="${t}">${t}</option>`).join('');
-    }
-
-    function applyCalendarFilters() {
-      const db = getMasterDB();
-      const partidos = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
-      const selectedWeek = document.getElementById('filterWeek').value;
-      const selectedTeam = document.getElementById('filterTeam').value;
-
-      const filtered = partidos.filter(p => {
-        const matchWeek = selectedWeek === 'ALL' || p.week === selectedWeek;
-        const matchTeam = selectedTeam === 'ALL' || p.home === selectedTeam || p.away === selectedTeam;
-        return matchWeek && matchTeam;
-      });
-
-      renderCalendar(filtered);
-    }
-
-    function renderCalendar(partidos) {
-      const container = document.getElementById('calendarioNativeContent');
-      if (!partidos || partidos.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados para esta vista.</p>';
-        return;
-      }
-
-      const grouped = {};
-      partidos.forEach(p => {
-        const week = p.week || 'CALENDARIO';
-        if (!grouped[week]) grouped[week] = [];
-        grouped[week].push(p);
-      });
-
-      let html = '';
-      for (const weekName in grouped) {
-        html += `<div class="kfl-week-section">`;
-        html += `<div class="kfl-week-title">${weekName}</div>`;
-
-        const weekGames = grouped[weekName];
-        const byeGames = weekGames.filter(g => g.isBye);
-        const regularGames = weekGames.filter(g => !g.isBye);
-
-        if (regularGames.length === 1 && (regularGames[0].isJamboree || weekName.includes("FINAL") || weekName.includes("SEMI"))) {
-          const p = regularGames[0];
-          if (p.isJamboree) {
-            const titleJam = (p.home && p.home !== "KFL") ? `${p.home} - TODOS JUEGAN` : `${weekName} - TODOS JUEGAN`;
-
-            html += `
-              <div class="kfl-single-match-wrapper">
-                <div class="kfl-match-card" style="width:100%; max-width:580px;">
-                  <div class="kfl-match-header">
-                    <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
-                    <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
-                  </div>
-                  <div class="kfl-jamboree-body-text">
-                    ${titleJam}
-                  </div>
-                </div>
-              </div>
-            `;
-          } else {
-            const homeLogo = getTeamLogo(p.home);
-            const awayLogo = getTeamLogo(p.away);
-
-            html += `
-              <div class="kfl-single-match-wrapper">
-                <div class="kfl-match-card" style="width:100%; max-width:580px;">
-                  <div class="kfl-match-header">
-                    <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
-                    <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
-                  </div>
-                  <div class="kfl-match-body">
-                    <div class="kfl-team-box">
-                      <img src="${homeLogo}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.home] || 'https://i.imgur.com/wrPDjDN.png'}'">
-                      <span>${p.home}</span>
-                    </div>
-                    <div class="kfl-score-box">
-                      ${p.hasScore 
-                        ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
-                        : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
-                    </div>
-                    <div class="kfl-team-box">
-                      <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png'}'">
-                      <span>${p.away}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `;
-          }
-        } else {
-          html += `<div class="kfl-grid-matches">`;
-          regularGames.forEach(p => {
-            const homeLogo = getTeamLogo(p.home);
-            const awayLogo = getTeamLogo(p.away);
-
-            html += `
-              <div class="kfl-match-card">
-                <div class="kfl-match-header">
-                  <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
-                  <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
-                </div>
-                <div class="kfl-match-body">
-                  <div class="kfl-team-box">
-                    <img src="${homeLogo}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.home] || 'https://i.imgur.com/wrPDjDN.png'}'">
-                    <span>${p.home}</span>
-                  </div>
-                  <div class="kfl-score-box">
-                    ${p.hasScore 
-                      ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
-                      : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
-                  </div>
-                  <div class="kfl-team-box">
-                    <img src="${awayLogo}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='${FALLBACK_LOGOS[p.away] || 'https://i.imgur.com/wrPDjDN.png'}'">
-                    <span>${p.away}</span>
-                  </div>
-                </div>
-              </div>
-            `;
-          });
-
-          if (byeGames.length > 0) {
-            byeGames.forEach(bg => {
-              const byeLogo = getTeamLogo(bg.home);
-              html += `
-                <div class="kfl-bye-card-wrapper">
-                  <div class="kfl-bye-card">
-                    <div class="kfl-bye-header">BYE WEEK</div>
-                    <div class="kfl-bye-body">
-                      <img src="${byeLogo}" alt="${bg.home}" class="kfl-bye-logo" onerror="this.src='${FALLBACK_LOGOS[bg.home] || 'https://i.imgur.com/wrPDjDN.png'}'">
-                      <span class="kfl-bye-team-name">${bg.home}</span>
-                    </div>
-                  </div>
-                </div>
-              `;
-            });
-          }
-
-          html += `</div>`;
-        }
-
-        html += `</div>`;
-      }
-
-      container.innerHTML = html;
-    }
-
-    function loadPosicionesData() {
-      const db = getMasterDB();
-      const catTabla = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].tabla : [];
-
-      renderPosiciones(catTabla);
-    }
-
-    let sortState = { col: 'pts', asc: false };
-
-    function renderPosiciones(tabla) {
-      const container = document.getElementById('posicionesNativeContent');
-      if (!tabla || tabla.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay tabla disponible aún.</p>';
-        return;
-      }
-
-      let html = `
-        <table class="kfl-table" id="standingsTable">
-          <thead>
-            <tr>
-              <th onclick="sortPosiciones('rank')"># ↕</th>
-              <th onclick="sortPosiciones('equipo')" class="team-col-cell" style="text-align:left;">EQUIPO ↕</th>
-              <th onclick="sortPosiciones('jj')">JJ ↕</th>
-              <th onclick="sortPosiciones('jg')">JG ↕</th>
-              <th onclick="sortPosiciones('jp')">JP ↕</th>
-              <th onclick="sortPosiciones('je')">JE ↕</th>
-              <th onclick="sortPosiciones('pf')">PF ↕</th>
-              <th onclick="sortPosiciones('pc')">PC ↕</th>
-              <th onclick="sortPosiciones('dif')">DIF ↕</th>
-              <th onclick="sortPosiciones('pts')">PTS ↕</th>
-            </tr>
-          </thead>
-          <tbody>
-      `;
-
-      tabla.forEach((row, idx) => {
-        const logoUrl = getTeamLogo(row.equipo);
-        html += `
-          <tr>
-            <td><strong>${idx + 1}</strong></td>
-            <td class="team-col-cell">
-              <div class="kfl-table-team-cell">
-                <img src="${logoUrl}" alt="${row.equipo}" class="kfl-table-team-logo" onerror="this.src='${FALLBACK_LOGOS[row.equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
-                <span>${row.equipo}</span>
-              </div>
-            </td>
-            <td>${row.jj}</td>
-            <td>${row.jg}</td>
-            <td>${row.jp}</td>
-            <td>${row.je}</td>
-            <td>${row.pf}</td>
-            <td>${row.pc}</td>
-            <td style="font-weight:bold; color:${row.dif >= 0 ? '#16a34a' : '#dc2626'}">${row.dif > 0 ? '+' + row.dif : row.dif}</td>
-            <td><strong>${row.pts}</strong></td>
-          </tr>
-        `;
-      });
-
-      html += '</tbody></table>';
-      container.innerHTML = html;
-    }
-
-    function sortPosiciones(column) {
-      const db = getMasterDB();
-      let tabla = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].tabla : [];
-      if (!tabla || tabla.length === 0) return;
-
-      if (sortState.col === column) {
-        sortState.asc = !sortState.asc;
-      } else {
-        sortState.col = column;
-        sortState.asc = false;
-      }
-
-      tabla.sort((a, b) => {
-        let valA = a[column];
-        let valB = b[column];
-
-        if (typeof valA === 'string') {
-          return sortState.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
-        }
-        return sortState.asc ? valA - valB : valB - valA;
-      });
-
-      renderPosiciones(tabla);
-    }
-
-    /* RENDERIZADO VISUALMENTE LIMPIO DE ROSTERS (SIN CONTENEDOR Y EN UNA LÍNEA EN DESKTOP) */
+    /* RENDER DE ROSTERS: GRILLA HOMOGÉNEA DE LOGOS */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
 
-      const equipos = (CATEGORIAS_EQUIPOS[activeLeague] && CATEGORIAS_EQUIPOS[activeLeague][activeCategory]) || [];
+      const equipos = (KFL_CONFIG.CATEGORIAS_EQUIPOS[activeLeague] && KFL_CONFIG.CATEGORIAS_EQUIPOS[activeLeague][activeCategory]) || [];
       grid.innerHTML = '';
 
       if (equipos.length === 0) {
@@ -1375,9 +993,10 @@
         const logoUrl = getTeamLogo(equipo);
         const card = document.createElement('div');
         card.className = 'team-card-roster';
+        card.onclick = () => abrirRosterEquipo(equipo);
         card.innerHTML = `
           <div class="team-roster-logo-wrap">
-            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='${FALLBACK_LOGOS[equipo] || 'https://i.imgur.com/wrPDjDN.png'}'">
+            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
           </div>
           <h4>${equipo}</h4>
         `;
@@ -1385,34 +1004,287 @@
       });
     }
 
-    function loadStatsData() {
-      const linksLiga = STATS_CSV_LINKS[activeLeague];
-      const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
+    /* CARGAR Y MOSTRAR ROSTER DEL EQUIPO (COLUMNAS A A D) */
+    async function abrirRosterEquipo(nombreEquipo) {
+      const detailBox = document.getElementById('rosterDetailBox');
+      const tableBody = document.getElementById('rosterTablePublicBody');
+      const teamTitle = document.getElementById('rosterDetailTeamName');
+      const teamLogo = document.getElementById('rosterDetailLogo');
 
-      if (!csvUrl) {
-        document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
-        document.getElementById('statsPaginationBar').innerHTML = '';
-        document.getElementById('kflLastUpdateLabel').textContent = 'ÚLTIMA ACTUALIZACIÓN: NO DISPONIBLE';
-        return;
+      teamTitle.innerText = `${nombreEquipo} - ROSTER`;
+      teamLogo.src = getTeamLogo(nombreEquipo);
+      detailBox.style.display = 'block';
+
+      tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">Consultando roster oficial en el CMS...</td></tr>';
+      detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      try {
+        const url = `${KFL_CONFIG.API_ROSTERS_URL}?action=getPublicRoster&sheetName=${encodeURIComponent(nombreEquipo)}&_t=${new Date().getTime()}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        tableBody.innerHTML = '';
+
+        if (data.status === 'success' && data.roster && data.roster.length > 0) {
+          data.roster.forEach(player => {
+            const tr = document.createElement('tr');
+            tr.className = 'roster-player-clickable-row';
+            tr.onclick = () => abrirPlayerCard(player, nombreEquipo);
+
+            tr.innerHTML = `
+              <td><strong>${player.cantidad}</strong></td>
+              <td style="text-align: left; padding-left: 15px; font-weight:700;">${player.nombre}</td>
+              <td style="text-align: left;">${player.apellido}</td>
+              <td><span style="font-weight:800; color:#19547E;">#${player.jersey || '0'}</span></td>
+            `;
+            tableBody.appendChild(tr);
+          });
+        } else {
+          tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadoras/jugadores registrados oficialmente para este equipo aún.</td></tr>';
+        }
+      } catch (err) {
+        console.error(err);
+        tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#c53030;">Error al conectar con la hoja del equipo.</td></tr>';
       }
+    }
 
-      document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Cargando estadísticas de WEB_FINAL...</td></tr>`;
+    function cerrarDetalleRoster() {
+      document.getElementById('rosterDetailBox').style.display = 'none';
+    }
+
+    /* PRECARGA DE STATS EN MEMORIA PARA CRUCE INSTANTÁNEO */
+    function precargarStatsCategoria() {
+      const linksLiga = KFL_CONFIG.STATS_CSV_LINKS[activeLeague];
+      const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
+      if (!csvUrl) return;
 
       fetch(csvUrl)
         .then(res => res.text())
         .then(texto => {
-          const resultadoParseado = parsearWebFinalCSV(texto);
-          seccionesStatsGlobal = resultadoParseado.secciones;
-          
-          let rawUpdate = resultadoParseado.ultimaActualizacion || "NO REGISTRADA";
-          let formattedUpdate = formatearHora12h(rawUpdate);
-          document.getElementById('kflLastUpdateLabel').textContent = formattedUpdate;
+          const res = parsearWebFinalCSV(texto);
+          seccionesStatsGlobal = res.secciones;
+        })
+        .catch(() => {});
+    }
 
+    /* ABRIR PLAYER CARD MODAL */
+    function abrirPlayerCard(player, equipo) {
+      const modal = document.getElementById('playerCardModal');
+      const photoEl = document.getElementById('modalPlayerPhoto');
+      const nameEl = document.getElementById('modalPlayerName');
+      const metaEl = document.getElementById('modalPlayerMeta');
+      const statsContainer = document.getElementById('modalPlayerStatsContainer');
+
+      nameEl.innerText = `${player.nombre} ${player.apellido}`;
+      metaEl.innerText = `#${player.jersey || '00'} • ${equipo} • ${activeCategory.toUpperCase()}`;
+
+      // Foto de columna G o Fallback al Logo del Equipo
+      const defaultPhoto = getTeamLogo(equipo);
+      photoEl.src = player.fotoUrl && player.fotoUrl.startsWith('http') ? player.fotoUrl : defaultPhoto;
+      photoEl.onerror = () => { photoEl.src = defaultPhoto; };
+
+      // Búsqueda cruzada de estadísticas en memoria
+      const nombreCompleto = `${player.nombre} ${player.apellido}`.toLowerCase().trim();
+      const statsEncontradas = buscarStatsJugador(nombreCompleto);
+
+      if (statsEncontradas.length > 0) {
+        let statsHtml = '';
+        statsEncontradas.forEach(sec => {
+          statsHtml += `<div style="font-size:12px; font-weight:800; color:#64748b; text-transform:uppercase; margin-bottom:8px; margin-top:10px;">${sec.tipo}</div>`;
+          statsHtml += `<div class="player-stats-grid">`;
+          for (const key in sec.datos) {
+            statsHtml += `
+              <div class="player-stat-box">
+                <div class="player-stat-val">${sec.datos[key]}</div>
+                <div class="player-stat-lbl">${key}</div>
+              </div>
+            `;
+          }
+          statsHtml += `</div>`;
+        });
+        statsContainer.innerHTML = statsHtml;
+      } else {
+        statsContainer.innerHTML = `
+          <div style="text-align: center; padding: 20px; color: #64748b; font-size: 13.5px;">
+            Sin estadísticas registradas en los partidos disputados hasta el momento.
+          </div>
+        `;
+      }
+
+      modal.classList.add('active');
+    }
+
+    function buscarStatsJugador(nombreBuscado) {
+      const resultado = [];
+      const categorias = ['RUSHING', 'PASSING', 'RECEIVING', 'DEFENSIVE'];
+
+      categorias.forEach(cat => {
+        const filas = seccionesStatsGlobal[cat] || [];
+        const match = filas.find(r => {
+          const j = (r.JUGADOR || r.PLAYER || r.NOMBRE || '').toLowerCase().trim();
+          return j && (j === nombreBuscado || nombreBuscado.includes(j) || j.includes(nombreBuscado));
+        });
+
+        if (match) {
+          let datosExtraidos = {};
+          if (cat === 'RUSHING') {
+            datosExtraidos = { 'YDS': match.YARDS || '0', 'CAR': match.CARRIES || '0', 'TD': match.TD || '0', 'AVG': match.AVG || '0.0' };
+          } else if (cat === 'PASSING') {
+            datosExtraidos = { 'YDS': match.YARDS || '0', 'COMP': match.COMP || '0', 'TD': match.TD || '0', 'INT': match.INT || '0' };
+          } else if (cat === 'RECEIVING') {
+            datosExtraidos = { 'YDS': match.YARDS || '0', 'REC': match.REC || '0', 'TD': match.TD || '0', 'AVG': match.AVG || '0.0' };
+          } else if (cat === 'DEFENSIVE') {
+            datosExtraidos = { 'TOTAL': match.TOTAL || '0', 'SACK': match.SACK || '0', 'INT': match.INT || '0' };
+          }
+          resultado.push({ tipo: cat, datos: datosExtraidos });
+        }
+      });
+
+      return resultado;
+    }
+
+    function cerrarPlayerCardModal(e) {
+      if (e.target.id === 'playerCardModal') {
+        document.getElementById('playerCardModal').classList.remove('active');
+      }
+    }
+
+    function forzarCerrarModal() {
+      document.getElementById('playerCardModal').classList.remove('active');
+    }
+
+    /* MÓDULO DE CALENDARIO */
+    function loadCalendarioData() {
+      const db = getMasterDB();
+      const catData = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
+      populateCalendarFilters(catData);
+      renderCalendar(catData);
+    }
+
+    function populateCalendarFilters(partidos) {
+      const weekSelect = document.getElementById('filterWeek');
+      const teamSelect = document.getElementById('filterTeam');
+      const weeks = [...new Set(partidos.map(p => p.week).filter(Boolean))];
+      const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => t && t !== 'KFL' && t !== 'TODOS JUEGAN'))];
+      weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
+      teamSelect.innerHTML = '<option value="ALL">Todos los Equipos</option>' + teams.map(t => `<option value="${t}">${t}</option>`).join('');
+    }
+
+    function applyCalendarFilters() {
+      const db = getMasterDB();
+      const partidos = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
+      const selectedWeek = document.getElementById('filterWeek').value;
+      const selectedTeam = document.getElementById('filterTeam').value;
+      const filtered = partidos.filter(p => {
+        const matchWeek = selectedWeek === 'ALL' || p.week === selectedWeek;
+        const matchTeam = selectedTeam === 'ALL' || p.home === selectedTeam || p.away === selectedTeam;
+        return matchWeek && matchTeam;
+      });
+      renderCalendar(filtered);
+    }
+
+    function renderCalendar(partidos) {
+      const container = document.getElementById('calendarioNativeContent');
+      if (!partidos || partidos.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados para esta vista.</p>';
+        return;
+      }
+      const grouped = {};
+      partidos.forEach(p => {
+        const week = p.week || 'CALENDARIO';
+        if (!grouped[week]) grouped[week] = [];
+        grouped[week].push(p);
+      });
+      let html = '';
+      for (const weekName in grouped) {
+        html += `<div class="kfl-week-section"><div class="kfl-week-title">${weekName}</div><div class="kfl-grid-matches">`;
+        grouped[weekName].forEach(p => {
+          html += `
+            <div class="kfl-match-card">
+              <div class="kfl-match-header">
+                <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
+                <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
+              </div>
+              <div class="kfl-match-body">
+                <div class="kfl-team-box">
+                  <img src="${getTeamLogo(p.home)}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                  <span>${p.home}</span>
+                </div>
+                <div class="kfl-score-box">
+                  ${p.hasScore 
+                    ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
+                    : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
+                </div>
+                <div class="kfl-team-box">
+                  <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                  <span>${p.away}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        html += `</div></div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    /* MÓDULO DE TABLA DE POSICIONES */
+    function loadPosicionesData() {
+      const db = getMasterDB();
+      const catTabla = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].tabla : [];
+      renderPosiciones(catTabla);
+    }
+
+    function renderPosiciones(tabla) {
+      const container = document.getElementById('posicionesNativeContent');
+      if (!tabla || tabla.length === 0) {
+        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay tabla disponible aún.</p>';
+        return;
+      }
+      let html = `
+        <table class="kfl-table" id="standingsTable">
+          <thead>
+            <tr>
+              <th>#</th><th class="team-col-cell" style="text-align:left;">EQUIPO</th><th>JJ</th><th>JG</th><th>JP</th><th>JE</th><th>PF</th><th>PC</th><th>DIF</th><th>PTS</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      tabla.forEach((row, idx) => {
+        html += `
+          <tr>
+            <td><strong>${idx + 1}</strong></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(row.equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${row.equipo}</span></div></td>
+            <td>${row.jj}</td><td>${row.jg}</td><td>${row.jp}</td><td>${row.je}</td><td>${row.pf}</td><td>${row.pc}</td>
+            <td style="font-weight:bold; color:${row.dif >= 0 ? '#16a34a' : '#dc2626'}">${row.dif > 0 ? '+' + row.dif : row.dif}</td>
+            <td><strong>${row.pts}</strong></td>
+          </tr>
+        `;
+      });
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    /* MÓDULO DE STATS */
+    function loadStatsData() {
+      const linksLiga = KFL_CONFIG.STATS_CSV_LINKS[activeLeague];
+      const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
+
+      if (!csvUrl) {
+        document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #64748b;">Estadísticas disponibles próximamente para esta liga.</td></tr>`;
+        return;
+      }
+
+      fetch(csvUrl)
+        .then(res => res.text())
+        .then(texto => {
+          const resultado = parsearWebFinalCSV(texto);
+          seccionesStatsGlobal = resultado.secciones;
+          document.getElementById('kflLastUpdateLabel').textContent = formatearHora12h(resultado.ultimaActualizacion || "NO REGISTRADA");
           paginaActualStats = 1;
           renderizarSeccionActivaStats();
         })
-        .catch(err => {
-          console.error("Error cargando CSV de Stats:", err);
+        .catch(() => {
           document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #dc2626;">Error al cargar las estadísticas.</td></tr>`;
         });
     }
@@ -1425,8 +1297,7 @@
           let horas = parseInt(match[2], 10);
           let minutos = match[3];
           let ampm = horas >= 12 ? 'PM' : 'AM';
-          horas = horas % 12;
-          horas = horas ? horas : 12;
+          horas = horas % 12 || 12;
           return `ÚLTIMA ACTUALIZACIÓN: ${fecha} ${horas}:${minutos} ${ampm}`;
         }
       } catch(e) {}
@@ -1446,9 +1317,7 @@
         let cols = linea.split(',').map(c => c.trim().replace(/"/g, ''));
         let lineaUnida = cols.join(' ').toUpperCase();
 
-        if (i === 0 || lineaUnida.includes('ACTUALIZACIÓN') || lineaUnida.includes('ACTUALIZACION')) {
-          ultimaActualizacion = lineaUnida;
-        }
+        if (i === 0 || lineaUnida.includes('ACTUALIZACIÓN') || lineaUnida.includes('ACTUALIZACION')) ultimaActualizacion = lineaUnida;
 
         if (cols[0] === 'START' || lineaUnida.includes('START')) {
           let nombreSec = (cols[1] || lineaUnida).toUpperCase();
@@ -1466,24 +1335,14 @@
           continue;
         }
 
-        if (!seccionActual) {
-          if (lineaUnida.includes('RUSHING')) seccionActual = 'RUSHING';
-          else if (lineaUnida.includes('PASSING')) seccionActual = 'PASSING';
-          else if (lineaUnida.includes('RECEIVING')) seccionActual = 'RECEIVING';
-          else if (lineaUnida.includes('DEFENSIVE') || lineaUnida.includes('TACKLE')) seccionActual = 'DEFENSIVE';
-        }
-
         if (seccionActual) {
           if (headersActuales.length === 0 && (lineaUnida.includes('JUGADOR') || lineaUnida.includes('PLAYER') || lineaUnida.includes('RANK'))) {
             headersActuales = cols.map(h => h.toUpperCase());
             continue;
           }
-
           if (headersActuales.length > 0) {
             let obj = {};
-            headersActuales.forEach((h, idx) => {
-              obj[h] = cols[idx] || '';
-            });
+            headersActuales.forEach((h, idx) => { obj[h] = cols[idx] || ''; });
             if (obj['JUGADOR'] && obj['JUGADOR'] !== 'JUGADOR' && obj['JUGADOR'] !== 'PLAYER') {
               secciones[seccionActual].push(obj);
             }
@@ -1495,58 +1354,16 @@
 
     function renderizarSeccionActivaStats() {
       const datosSeccion = seccionesStatsGlobal[tipoStatActivo] || [];
-      const tbody = document.getElementById('statsTableBody');
       const theadRow = document.getElementById('statsTableHeaderRow');
 
       if (tipoStatActivo === 'RUSHING') {
-        theadRow.innerHTML = `
-          <th style="text-align: center;">Rank</th>
-          <th style="text-align: left;">Jugador</th>
-          <th class="team-col-cell">Equipo</th>
-          <th style="text-align: center;">Carries</th>
-          <th style="text-align: center;">Yards</th>
-          <th style="text-align: center;">Avg</th>
-          <th style="text-align: center;">TD</th>
-          <th style="text-align: center;">Lng</th>
-          <th style="text-align: center;">Fum</th>
-        `;
+        theadRow.innerHTML = `<th style="text-align: center;">Rank</th><th style="text-align: left;">Jugador</th><th class="team-col-cell">Equipo</th><th style="text-align: center;">Carries</th><th style="text-align: center;">Yards</th><th style="text-align: center;">Avg</th><th style="text-align: center;">TD</th><th style="text-align: center;">Lng</th><th style="text-align: center;">Fum</th>`;
       } else if (tipoStatActivo === 'PASSING') {
-        theadRow.innerHTML = `
-          <th style="text-align: center;">Rank</th>
-          <th style="text-align: left;">Jugador</th>
-          <th class="team-col-cell">Equipo</th>
-          <th style="text-align: center;">Comp</th>
-          <th style="text-align: center;">Att</th>
-          <th style="text-align: center;">Comp %</th>
-          <th style="text-align: center;">Yards</th>
-          <th style="text-align: center;">TD</th>
-          <th style="text-align: center;">Int</th>
-          <th style="text-align: center;">Sack</th>
-        `;
+        theadRow.innerHTML = `<th style="text-align: center;">Rank</th><th style="text-align: left;">Jugador</th><th class="team-col-cell">Equipo</th><th style="text-align: center;">Comp</th><th style="text-align: center;">Att</th><th style="text-align: center;">Comp %</th><th style="text-align: center;">Yards</th><th style="text-align: center;">TD</th><th style="text-align: center;">Int</th><th style="text-align: center;">Sack</th>`;
       } else if (tipoStatActivo === 'RECEIVING') {
-        theadRow.innerHTML = `
-          <th style="text-align: center;">Rank</th>
-          <th style="text-align: left;">Jugador</th>
-          <th class="team-col-cell">Equipo</th>
-          <th style="text-align: center;">Rec</th>
-          <th style="text-align: center;">Yards</th>
-          <th style="text-align: center;">Avg</th>
-          <th style="text-align: center;">TD</th>
-          <th style="text-align: center;">Lng</th>
-          <th style="text-align: center;">Fum</th>
-        `;
+        theadRow.innerHTML = `<th style="text-align: center;">Rank</th><th style="text-align: left;">Jugador</th><th class="team-col-cell">Equipo</th><th style="text-align: center;">Rec</th><th style="text-align: center;">Yards</th><th style="text-align: center;">Avg</th><th style="text-align: center;">TD</th><th style="text-align: center;">Lng</th><th style="text-align: center;">Fum</th>`;
       } else if (tipoStatActivo === 'DEFENSIVE') {
-        theadRow.innerHTML = `
-          <th style="text-align: center;">Rank</th>
-          <th style="text-align: left;">Jugador</th>
-          <th class="team-col-cell">Equipo</th>
-          <th style="text-align: center;">Total</th>
-          <th style="text-align: center;">Sack</th>
-          <th style="text-align: center;">TD</th>
-          <th style="text-align: center;">Int</th>
-          <th style="text-align: center;">FF</th>
-          <th style="text-align: center;">FR</th>
-        `;
+        theadRow.innerHTML = `<th style="text-align: center;">Rank</th><th style="text-align: left;">Jugador</th><th class="team-col-cell">Equipo</th><th style="text-align: center;">Total</th><th style="text-align: center;">Sack</th><th style="text-align: center;">TD</th><th style="text-align: center;">Int</th><th style="text-align: center;">FF</th><th style="text-align: center;">FR</th>`;
       }
 
       renderizarTablaStatsPaginada(datosSeccion);
@@ -1571,85 +1388,58 @@
       const fin = inicio + filasPorPagina;
       const datosPagina = datos.slice(inicio, fin);
 
-      datosPagina.forEach((row, indexRelativo) => {
-        const indiceReal = inicio + indexRelativo;
-        const jugador = row.JUGADOR || row.PLAYER || row.NOMBRE || row.NAME || "-";
-        const equipo = (row.EQUIPO || row.TEAM || row.CLUB || "").toUpperCase();
-        const logoUrl = getTeamLogo(equipo);
-
+      datosPagina.forEach((row, idxRel) => {
+        const indiceReal = inicio + idxRel;
+        const jugador = row.JUGADOR || row.PLAYER || row.NOMBRE || "-";
+        const equipo = (row.EQUIPO || row.TEAM || "").toUpperCase();
         let tr = document.createElement('tr');
-        
-        if (tipoStatActivo === 'RUSHING' || tipoStatActivo === 'RECEIVING') {
-          const c1 = row.CARRIES || row.REC || row.CARRY || "0";
-          const c2 = row.YARDS || row.YARDAS || row.YDS || "0";
-          const c3 = row.AVG || row.PROMEDIO || "0.0";
-          const c4 = row.TD || row.TDS || "0";
-          const c5 = row.LNG || row.LONG || "0";
-          const c6 = row.FUM || row.FUMBLES || "0";
 
+        if (tipoStatActivo === 'RUSHING' || tipoStatActivo === 'RECEIVING') {
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell">
-              <div class="kfl-table-team-cell">
-                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                <span>${equipo}</span>
-              </div>
-            </td>
-            <td style="text-align: center;">${c1}</td>
-            <td style="text-align: center; font-weight: 700; color: #19547E;">${c2}</td>
-            <td style="text-align: center;">${c3}</td>
-            <td style="text-align: center; font-weight: 700;">${c4}</td>
-            <td style="text-align: center;">${c5}</td>
-            <td style="text-align: center;">${c6}</td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td style="text-align: center;">${row.CARRIES || row.REC || "0"}</td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || "0"}</td>
+            <td style="text-align: center;">${row.AVG || "0.0"}</td>
+            <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
+            <td style="text-align: center;">${row.LNG || "0"}</td>
+            <td style="text-align: center;">${row.FUM || "0"}</td>
           `;
         } else if (tipoStatActivo === 'PASSING') {
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell">
-              <div class="kfl-table-team-cell">
-                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                <span>${equipo}</span>
-              </div>
-            </td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
             <td style="text-align: center;">${row.COMP || "0"}</td>
             <td style="text-align: center;">${row.ATT || "0"}</td>
-            <td style="text-align: center;">${row["COMP %"] || row.COMP_PERC || "0.0%"}</td>
-            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || row.YDS || "0"}</td>
+            <td style="text-align: center;">${row["COMP %"] || "0.0%"}</td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || "0"}</td>
             <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
             <td style="text-align: center;">${row.INT || "0"}</td>
-            <td style="text-align: center;">${row.SACK || row.SACKS || "0"}</td>
+            <td style="text-align: center;">${row.SACK || "0"}</td>
           `;
         } else if (tipoStatActivo === 'DEFENSIVE') {
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell">
-              <div class="kfl-table-team-cell">
-                <img src="${logoUrl}" alt="${equipo}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                <span>${equipo}</span>
-              </div>
-            </td>
-            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.TOTAL || row.TACKLES || "0"}</td>
-            <td style="text-align: center;">${row.SACK || row.SACKS || "0"}</td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.TOTAL || "0"}</td>
+            <td style="text-align: center;">${row.SACK || "0"}</td>
             <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
             <td style="text-align: center;">${row.INT || "0"}</td>
             <td style="text-align: center;">${row.FF || "0"}</td>
             <td style="text-align: center;">${row.FR || "0"}</td>
           `;
         }
-
         tbody.appendChild(tr);
       });
 
       if (totalPaginas > 1) {
         let pagHtml = `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats - 1})" ${paginaActualStats === 1 ? 'disabled' : ''}>&laquo; Ant</button>`;
-        
         for (let p = 1; p <= totalPaginas; p++) {
           pagHtml += `<button class="kfl-page-btn ${p === paginaActualStats ? 'active-page' : ''}" onclick="cambiarPaginaStats(${p})">${p}</button>`;
         }
-
         pagHtml += `<button class="kfl-page-btn" onclick="cambiarPaginaStats(${paginaActualStats + 1})" ${paginaActualStats === totalPaginas ? 'disabled' : ''}>Sig &raquo;</button>`;
         paginationBar.innerHTML = pagHtml;
       }
@@ -1665,8 +1455,7 @@
       const filtro = document.getElementById('searchStatInput').value.toLowerCase();
       const datosOriginales = seccionesStatsGlobal[tipoStatActivo] || [];
       const filtrados = datosOriginales.filter(item => {
-        const textValues = Object.values(item).join(' ').toLowerCase();
-        return textValues.includes(filtro);
+        return Object.values(item).join(' ').toLowerCase().includes(filtro);
       });
       paginaActualStats = 1;
       renderizarTablaStatsPaginada(filtrados);

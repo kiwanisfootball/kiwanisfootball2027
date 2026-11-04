@@ -11,17 +11,6 @@
   <!-- LECTURA DEL ARCHIVO DE CONFIGURACIÓN -->
   <script src="js/config-ligas.js"></script>
 
-  <!-- RESPALDO INTEGRADO EN CASO DE FALLA DEL ARCHIVO JS EXTERNO -->
-  <script>
-    window.KFL_CONFIG = window.KFL_CONFIG || {};
-    if (!window.KFL_CONFIG.API_CALENDARIO_URL) {
-      window.KFL_CONFIG.API_CALENDARIO_URL = {
-        "contact": "https://script.google.com/macros/s/AKfycbxU6knUi6orz37wYKqv6hbf3k75l64gwRTxU2yB3LD8DBvRyw02ATEfJFm6rSXFC2WZ/exec",
-        "flag": "https://script.google.com/macros/s/AKfycbwiZ73jSuTV6XOXZeSSdQpozBonJfhe7Qg8bi0sjgG78tyEIOSq9ir9ya5sxs4TfBOS/exec"
-      };
-    }
-  </script>
-
   <style>
     .tab-pane {
       display: none !important;

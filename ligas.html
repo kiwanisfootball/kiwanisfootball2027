@@ -19,7 +19,7 @@
       display: block !important;
     }
 
-    /* TARJETAS HERO SIN BORDES */
+    /* TARJETAS HERO */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -235,7 +235,7 @@
       padding-bottom: 60px;
     }
 
-    /* ROSTERS: LOGOS CENTRADOS Y HOMOGÉNEOS */
+    /* ROSTERS: LOGOS CENTRADOS */
     .rosters-grid {
       display: flex;
       flex-wrap: wrap;
@@ -698,7 +698,7 @@
     .kfl-last-update-banner { display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; color: #000000; padding: 6px 15px; font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 22px; text-align: center; }
     .kfl-update-svg { width: 22px; height: 22px; fill: #000000; flex-shrink: 0; }
 
-    /* BARRA DE PAGINACIÓN COMPACTA Y FLUIDA */
+    /* PAGINADOR COMPACTO */
     .kfl-pagination-bar {
       display: flex;
       justify-content: center;
@@ -1123,9 +1123,6 @@
       });
     }
 
-    /**
-     * CARGA DE ROSTER Y STAFF (SIEMPRE EN VIVO)
-     */
     async function abrirRosterEquipo(nombreEquipo) {
       const detailBox = document.getElementById('rosterDetailBox');
       const playerBody = document.getElementById('rosterTablePublicBody');
@@ -1232,9 +1229,6 @@
         .catch(() => {});
     }
 
-    /**
-     * PLAYER CARD MODAL (SIN EMOJIS, CON NOMBRES DE SECCIÓN FORMALES)
-     */
     function abrirPlayerCard(player, equipo) {
       const modal = document.getElementById('playerCardModal');
       const photoEl = document.getElementById('modalPlayerPhoto');
@@ -1287,9 +1281,6 @@
         .trim();
     }
 
-    /**
-     * MOTOR DE BÚSQUEDA BOTH WAYS BLINDADO CONTRA DISCREPANCIAS Y HOMÓNIMOS
-     */
     function buscarStatsBothWays(nombre, apellido, jersey, equipo) {
       const resultado = [];
       const categorias = [
@@ -1307,29 +1298,21 @@
       categorias.forEach(cat => {
         const filas = seccionesStatsGlobal[cat.key] || [];
         const match = filas.find(r => {
-          // 1. Coincidencia estricta de franquicia
           const rowEquipoNorm = normalizarToken(r.EQUIPO || r.TEAM || r.CLUB || '');
           if (rowEquipoNorm && equipoNorm) {
             const coincideEquipo = rowEquipoNorm === equipoNorm || rowEquipoNorm.includes(equipoNorm) || equipoNorm.includes(rowEquipoNorm);
             if (!coincideEquipo) return false;
           }
 
-          // 2. Extraer nombre de la fila
           const rawRowName = String(r.JUGADOR || r.PLAYER || r.NOMBRE || r.NAME || '');
           const rowTokens = rawRowName.split(/[\s,.-]+/).map(normalizarToken).filter(Boolean);
           if (rowTokens.length === 0) return false;
 
-          // 3. El apellido debe coincidir exactamente
           const coincideApellido = tokensApellido.some(ape => rowTokens.includes(ape));
-          
-          // 4. Coincidencia por dorsal exacto al inicio o nombre completo
           const coincideDorsal = jerseyStr && rowTokens.includes(jerseyStr);
           const coincideNombre = tokensNombre.some(nom => rowTokens.includes(nom));
 
-          // Si coincide el apellido y (el nombre o el dorsal), es el jugador
           if (coincideApellido && (coincideNombre || coincideDorsal)) return true;
-
-          // Red de seguridad si el apellido tiene una letra errónea en la mesa (ej: Latorraga vs Latorraca):
           if (coincideDorsal && coincideNombre) return true;
 
           return false;
@@ -1477,7 +1460,7 @@
       container.innerHTML = html;
     }
 
-    /* STATS CON COLUMNA TACKLES REAL Y PAGINADOR COMPACTO */
+    /* STATS */
     function loadStatsData() {
       const linksLiga = KFL_CONFIG.STATS_CSV_LINKS[activeLeague];
       const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
@@ -1517,6 +1500,9 @@
       return textoFecha.toUpperCase();
     }
 
+    /**
+     * PARSER DE CSV CORREGIDO: VALIDACIÓN ESTRICTA DE DIRECTIVAS START/END
+     */
     function parsearWebFinalCSV(texto) {
       const lineas = texto.split('\n');
       let secciones = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
@@ -1528,12 +1514,15 @@
         let linea = lineas[i].trim();
         if (!linea) continue;
         let cols = linea.split(',').map(c => c.trim().replace(/"/g, ''));
-        let lineaUnida = cols.join(' ').toUpperCase();
+        let col0 = (cols[0] || '').toUpperCase();
 
-        if (i === 0 || lineaUnida.includes('ACTUALIZACIÓN') || lineaUnida.includes('ACTUALIZACION')) ultimaActualizacion = lineaUnida;
+        if (i === 0 || col0.includes('ACTUALIZACIÓN') || col0.includes('ACTUALIZACION')) {
+          ultimaActualizacion = cols.join(' ').toUpperCase();
+        }
 
-        if (cols[0] === 'START' || lineaUnida.includes('START')) {
-          let nombreSec = (cols[1] || lineaUnida).toUpperCase();
+        // 1. Detección estricta de inicio de sección
+        if (col0 === 'START' || col0 === 'START_SECTION' || col0.startsWith('START')) {
+          let nombreSec = (cols[1] || cols[0]).toUpperCase();
           if (nombreSec.includes('RUSH')) seccionActual = 'RUSHING';
           else if (nombreSec.includes('PASS')) seccionActual = 'PASSING';
           else if (nombreSec.includes('RECEIV')) seccionActual = 'RECEIVING';
@@ -1542,22 +1531,28 @@
           continue;
         }
 
-        if (cols[0] === 'END' || lineaUnida.includes('END')) {
+        // 2. Detección estricta de fin de sección (Solo evalúa la celda 1, evitando cortar nombres con "END")
+        if (col0 === 'END' || col0 === 'END_SECTION' || col0 === 'FIN') {
           seccionActual = null;
           headersActuales = [];
           continue;
         }
 
+        // 3. Extracción de cabeceras de columnas y filas
         if (seccionActual) {
-          if (headersActuales.length === 0 && (lineaUnida.includes('JUGADOR') || lineaUnida.includes('PLAYER') || lineaUnida.includes('RANK') || lineaUnida.includes('DEFENSA'))) {
-            headersActuales = cols.map(h => h.toUpperCase());
-            continue;
+          if (headersActuales.length === 0) {
+            let lineaUnida = cols.join(' ').toUpperCase();
+            if (lineaUnida.includes('JUGADOR') || lineaUnida.includes('PLAYER') || lineaUnida.includes('RANK') || lineaUnida.includes('DEFENSA')) {
+              headersActuales = cols.map(h => h.toUpperCase());
+              continue;
+            }
           }
+
           if (headersActuales.length > 0) {
             let obj = {};
             headersActuales.forEach((h, idx) => { obj[h] = cols[idx] || ''; });
             let colJug = obj['JUGADOR'] || obj['PLAYER'] || obj['NOMBRE'] || obj['NAME'];
-            if (colJug && colJug !== 'JUGADOR' && colJug !== 'PLAYER') {
+            if (colJug && colJug !== 'JUGADOR' && colJug !== 'PLAYER' && colJug !== 'NAME') {
               secciones[seccionActual].push(obj);
             }
           }
@@ -1576,7 +1571,6 @@
       } else if (tipoStatActivo === 'RECEIVING') {
         theadRow.innerHTML = `<th style="text-align: center;">Rank</th><th style="text-align: left;">Jugador</th><th class="team-col-cell">Equipo</th><th style="text-align: center;">Rec</th><th style="text-align: center;">Yards</th><th style="text-align: center;">Avg</th><th style="text-align: center;">TD</th><th style="text-align: center;">Lng</th><th style="text-align: center;">Fum</th>`;
       } else if (tipoStatActivo === 'DEFENSIVE') {
-        // Encabezado corregido a Tackles
         theadRow.innerHTML = `<th style="text-align: center;">Rank</th><th style="text-align: left;">Jugador</th><th class="team-col-cell">Equipo</th><th style="text-align: center;">Tackles</th><th style="text-align: center;">Sack</th><th style="text-align: center;">TD</th><th style="text-align: center;">Int</th><th style="text-align: center;">FF</th><th style="text-align: center;">FR</th>`;
       }
 
@@ -1634,7 +1628,6 @@
             <td style="text-align: center;">${row.SACK || "0"}</td>
           `;
         } else if (tipoStatActivo === 'DEFENSIVE') {
-          // Lectura de Tackles reales del CSV
           const tacklesVal = row.TACKLES || row.TOTAL || row.TKLS || "0";
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
@@ -1651,7 +1644,6 @@
         tbody.appendChild(tr);
       });
 
-      // Paginador limpio y compacto
       if (totalPaginas > 1) {
         paginationBar.innerHTML = `
           <button class="kfl-nav-btn" onclick="cambiarPaginaStats(${paginaActualStats - 1})" ${paginaActualStats === 1 ? 'disabled' : ''}>← Anterior</button>

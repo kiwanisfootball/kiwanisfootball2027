@@ -74,8 +74,8 @@
 
     .section-header-clean {
       text-align: center;
-      margin-bottom: 30px;
-      padding: 15px 0;
+      margin-bottom: 25px;
+      padding: 10px 0;
     }
 
     .section-header-clean h1 {
@@ -111,15 +111,40 @@
       display: block;
     }
 
-    .format-note-box {
-      background-color: #eff6ff;
-      border-left: 4px solid var(--kfl-blue);
-      padding: 10px 14px;
-      border-radius: 0 6px 6px 0;
-      color: #1e40af;
-      font-size: 12.5px;
-      font-weight: 600;
-      margin-bottom: 15px;
+    /* PANEL LEGAL Y DE ASEGURADORA */
+    .legal-instructions-card {
+      background-color: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-left: 5px solid var(--kfl-blue);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .legal-instructions-card h3 {
+      font-family: 'Anton', sans-serif;
+      font-size: 18px;
+      color: var(--kfl-blue);
+      text-transform: uppercase;
+      margin: 0 0 12px 0;
+      letter-spacing: 0.5px;
+    }
+
+    .legal-instructions-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: #334155;
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+
+    .legal-instructions-card li {
+      margin-bottom: 8px;
+    }
+
+    .legal-instructions-card li:last-child {
+      margin-bottom: 0;
     }
 
     .auth-card, .dashboard-card {
@@ -141,15 +166,13 @@
       letter-spacing: 0.5px;
     }
 
-    .info-box {
-      background: #f8fafc;
-      border-left: 4px solid var(--kfl-blue);
-      padding: 15px;
-      border-radius: 0 8px 8px 0;
-      font-size: 13.5px;
-      color: #475569;
-      line-height: 1.5;
-      margin-bottom: 25px;
+    .section-subheading {
+      font-family: 'Anton', sans-serif;
+      font-size: 20px;
+      color: var(--kfl-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 35px 0 12px 0;
     }
 
     .form-group {
@@ -174,6 +197,7 @@
       outline: none;
       box-sizing: border-box;
       font-family: 'Avenir', sans-serif;
+      text-align: center;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
@@ -186,8 +210,8 @@
       background-color: var(--kfl-blue);
       color: #ffffff;
       border: none;
-      padding: 12px 24px;
-      font-size: 13.5px;
+      padding: 14px 28px;
+      font-size: 14px;
       font-weight: 800;
       text-transform: uppercase;
       border-radius: 8px;
@@ -271,15 +295,7 @@
       border: 1px solid #fecaca;
     }
 
-    .table-actions-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
+    /* ESTILOS DE TABLAS (TEXTO 100% CENTRADO) */
     .table-container {
       width: 100%;
       overflow-x: auto;
@@ -300,7 +316,8 @@
     .roster-grid-simulator td {
       border: 1px solid var(--kfl-border-table);
       padding: 8px 12px;
-      text-align: left;
+      text-align: center !important; /* Centrado absoluto */
+      vertical-align: middle;
     }
 
     .roster-grid-simulator th {
@@ -313,6 +330,7 @@
       position: sticky;
       top: 0;
       z-index: 2;
+      text-align: center !important;
     }
 
     .roster-grid-simulator td input {
@@ -325,6 +343,7 @@
       color: #1e293b;
       padding: 4px 2px;
       box-sizing: border-box;
+      text-align: center !important; /* Centrado absoluto */
     }
 
     .roster-grid-simulator td input:focus {
@@ -332,7 +351,6 @@
       border-radius: 4px;
     }
 
-    /* ESTILO CUANDO ESTÁ BLOQUEADO */
     .roster-grid-simulator td input[readonly] {
       background-color: #f8fafc;
       color: #64748b;
@@ -341,7 +359,6 @@
 
     .col-idx {
       width: 50px;
-      text-align: center !important;
       background-color: #f1f5f9;
       font-weight: 800;
       color: var(--kfl-blue);
@@ -349,11 +366,10 @@
     }
 
     .col-small {
-      width: 80px;
+      width: 90px;
     }
 
     .col-photo-badge {
-      text-align: center;
       width: 110px;
       user-select: none;
     }
@@ -380,6 +396,7 @@
       text-transform: uppercase;
     }
 
+    /* SECCIÓN INFERIOR: REGISTROS EN LA WEB */
     .registered-web-section {
       margin-top: 40px;
       border-top: 2px solid var(--kfl-border);
@@ -459,6 +476,7 @@
       margin-bottom: 15px;
       display: none;
       font-weight: 600;
+      text-align: center;
     }
 
     .status-msg.success {
@@ -505,7 +523,7 @@
       <p>Gestión de Rosters y Monitoreo de Inscripciones</p>
     </div>
 
-    <!-- BANNER DE FECHA LÍMITE (REACTIVO EN VIVO) -->
+    <!-- BANNER DE FECHA LÍMITE -->
     <div id="deadlineWarning" class="deadline-banner">
       ⚠️ <strong>Período Cerrado:</strong> La fecha límite oficial para cambios de roster venció el <span id="deadlineDisplay"></span>. El sistema se encuentra en modo solo lectura.
     </div>
@@ -547,7 +565,7 @@
             <h2 style="display:inline-block; margin-bottom:0;" id="teamCategoryLabel">Cargando...</h2>
             <span id="liveStatusBadge" class="badge-lock-status"></span>
             <div class="coach-profile-tag">
-              Coach: <strong id="coachNameLabel">---</strong> | Categoría: <strong id="categoryNameLabel">---</strong>
+              Coach Responsable: <strong id="coachNameLabel">---</strong> | Categoría: <strong id="categoryNameLabel">---</strong>
             </div>
           </div>
           <div style="display: flex; gap: 10px; align-items: center;">
@@ -558,19 +576,24 @@
 
         <div id="saveFeedback" class="status-msg"></div>
 
-        <div class="format-note-box">
-          ℹ️ <strong>FORMATO REQUERIDO:</strong> La <strong>Fecha de Nacimiento</strong> debe ingresarse estrictamente en formato <strong>DD/MM/AAAA</strong> (ejemplo: <code>28/05/2008</code>). La columna <strong>CANTIDAD</strong> y la <strong>FOTO</strong> son de administración oficial.
+        <!-- PANEL DE INSTRUCCIONES FORMALES Y POLÍTICAS DE ASEGURADORA -->
+        <div class="legal-instructions-card">
+          <h3>Directrices Obligatorias para el Registro Oficial</h3>
+          <ul>
+            <li><strong>Exactitud de Nombres y Apellidos:</strong> Los datos deben coincidir estrictamente con el documento de identidad legal. Este listado constituye el censo oficial remitido a la compañía aseguradora para la póliza médica deportiva contra accidentes. Cualquier discrepancia o error ortográfico puede anular la cobertura.</li>
+            <li><strong>Cédula o Pasaporte:</strong> Debe registrarse con sus guiones correspondientes tal como figura en el documento físico (ejemplo: <code>8-1066-1306</code>, <code>PE-12-345</code> o número exacto de pasaporte).</li>
+            <li><strong>Fecha de Nacimiento:</strong> Es de carácter estrictamente obligatorio ingresarla en formato <strong>DD/MM/AAAA</strong> (Día/Mes/Año, ejemplo: <code>31/05/2008</code>).</li>
+            <li><strong>Ordenamiento Automatizado por Dorsal:</strong> Puedes ingresar las filas en cualquier orden; al guardar, el sistema reordenará automáticamente todo el roster de forma ascendente por el <strong># de Jersey</strong> y asignará la numeración de <strong>CANTIDAD</strong> correlativa.</li>
+            <li><strong>Control Institucional:</strong> La columna <strong>CANTIDAD</strong> y la validación de la <strong>FOTO</strong> son de administración oficial de la liga.</li>
+          </ul>
         </div>
 
-        <div class="table-actions-bar">
-          <div>
-            <span id="rosterCountStatus" style="font-size: 13.5px; color: var(--kfl-text-dark); font-weight: 800;">
-              0 jugadores registrados
-            </span>
-          </div>
-          <div>
-            <button type="button" class="btn-secondary" id="btnAddRowBtn" onclick="agregarFilaVacia()">+ Agregar Ranura</button>
-          </div>
+        <!-- 1. TABLA DE ROSTER DE JUGADORES (COLUMNAS A - G) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-family: 'Anton', sans-serif; font-size: 20px; color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
+            Roster Oficial de Jugadores
+          </h3>
+          <button type="button" class="btn-secondary" id="btnAddRowBtn" onclick="agregarFilaJugadorVacia()">+ Agregar Jugador</button>
         </div>
 
         <div class="table-container">
@@ -578,28 +601,52 @@
             <thead>
               <tr>
                 <th class="col-idx">CANTIDAD</th>
-                <th style="min-width: 140px;">NOMBRE</th>
-                <th style="min-width: 140px;">APELLIDO</th>
+                <th style="min-width: 150px;">NOMBRE</th>
+                <th style="min-width: 150px;">APELLIDO</th>
                 <th class="col-small"># DE JERSEY</th>
-                <th style="min-width: 120px;">CÉDULA</th>
-                <th style="min-width: 130px;">FECHA DE NACIMIENTO</th>
-                <th style="min-width: 110px;">POSICIÓN</th>
+                <th style="min-width: 130px;">CÉDULA</th>
+                <th style="min-width: 140px;">FECHA DE NACIMIENTO</th>
                 <th class="col-photo-badge">FOTO (LIGA)</th>
               </tr>
             </thead>
-            <tbody id="rosterTableBody">
-              <!-- Se inyecta dinámicamente -->
-            </tbody>
+            <tbody id="rosterTableBody"></tbody>
           </table>
         </div>
 
-        <div id="submitContainer" style="margin-top: 15px; margin-bottom: 30px;">
+        <!-- 2. TABLA DE CUERPO TÉCNICO / STAFF (COLUMNAS I Y J) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 35px; margin-bottom: 12px;">
+          <div>
+            <h3 style="font-family: 'Anton', sans-serif; font-size: 20px; color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
+              Cuerpo Técnico / Staff de Coaches
+            </h3>
+            <p style="font-size: 13px; color: var(--kfl-text-muted); margin: 4px 0 0 0;">
+              Registra a los entrenadores, coordinadores y personal acreditado de tu equipo.
+            </p>
+          </div>
+          <button type="button" class="btn-secondary" id="btnAddStaffBtn" onclick="agregarFilaStaffVacia()">+ Agregar Miembro del Staff</button>
+        </div>
+
+        <div class="table-container">
+          <table class="roster-grid-simulator" id="staffTable">
+            <thead>
+              <tr>
+                <th style="width: 50px;">#</th>
+                <th style="min-width: 260px;">COACH (NOMBRE Y APELLIDO)</th>
+                <th style="min-width: 220px;">POSICIÓN / CARGO EN EL STAFF</th>
+              </tr>
+            </thead>
+            <tbody id="staffTableBody"></tbody>
+          </table>
+        </div>
+
+        <!-- BOTÓN DE CONFIRMACIÓN Y ENVÍO -->
+        <div style="margin-top: 25px; margin-bottom: 35px; text-align: center;">
           <button type="button" class="btn-kfl" id="btnSubmitRoster" onclick="enviarRosterAlBackend()">
-            <span id="btnSubmitRosterText">Confirmar y Enviar Roster a la Liga</span>
+            <span id="btnSubmitRosterText">Confirmar y Enviar Roster y Staff a la Liga</span>
           </button>
         </div>
 
-        <!-- JUGADORES REGISTRADOS EN LA WEB -->
+        <!-- SECCIÓN: JUGADORES REGISTRADOS EN LA WEB -->
         <div class="registered-web-section">
           <div class="registered-web-header">
             <div>
@@ -750,15 +797,13 @@
       cargarRegistrosCategoria();
     }
 
-    /**
-     * APLICA EL BLOQUEO INMEDIATO Y VISIBLE
-     */
     function aplicarEstadoBloqueo(bloqueado, fechaTexto) {
       isLockedSession = Boolean(bloqueado);
       const warningBanner = document.getElementById('deadlineWarning');
       const deadlineSpan = document.getElementById('deadlineDisplay');
       const submitBtn = document.getElementById('btnSubmitRoster');
       const addRowBtn = document.getElementById('btnAddRowBtn');
+      const addStaffBtn = document.getElementById('btnAddStaffBtn');
       const liveBadge = document.getElementById('liveStatusBadge');
 
       if (isLockedSession) {
@@ -767,6 +812,7 @@
         submitBtn.disabled = true;
         submitBtn.style.opacity = '0.5';
         addRowBtn.style.display = 'none';
+        addStaffBtn.style.display = 'none';
 
         liveBadge.className = 'badge-lock-status badge-lock-closed';
         liveBadge.innerText = '🔴 Edición Cerrada';
@@ -775,13 +821,13 @@
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
         addRowBtn.style.display = 'inline-block';
+        addStaffBtn.style.display = 'inline-block';
 
         liveBadge.className = 'badge-lock-status badge-lock-open';
         liveBadge.innerText = '🟢 Edición Abierta';
       }
 
-      // Desactivar y oscurecer celdas si está bloqueado
-      const inputs = document.querySelectorAll('#rosterTableBody input');
+      const inputs = document.querySelectorAll('#rosterTableBody input, #staffTableBody input');
       inputs.forEach(input => {
         if (isLockedSession) {
           input.setAttribute('readonly', 'true');
@@ -792,41 +838,55 @@
     }
 
     async function cargarRosterActual() {
-      const tbody = document.getElementById('rosterTableBody');
-      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color: var(--kfl-text-muted);">Consultando Roster en Google Sheets...</td></tr>';
+      const tbodyJugadores = document.getElementById('rosterTableBody');
+      const tbodyStaff = document.getElementById('staffTableBody');
+
+      tbodyJugadores.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--kfl-text-muted);">Consultando Roster en Google Sheets...</td></tr>';
+      tbodyStaff.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: var(--kfl-text-muted);">Consultando Staff de Coaches...</td></tr>';
 
       try {
         const url = `${GAS_API_URL}?action=getTeamRoster&sheetName=${encodeURIComponent(currentUser.sheetName)}&password=${encodeURIComponent(currentUser.password)}&_t=${new Date().getTime()}`;
         const res = await fetch(url);
         const data = await res.json();
 
-        tbody.innerHTML = '';
+        tbodyJugadores.innerHTML = '';
+        tbodyStaff.innerHTML = '';
 
         if (data.status === 'success') {
           if (data.limiteRoster !== undefined) limiteMaximoRoster = data.limiteRoster;
 
+          // 1. Cargar Jugadores
           if (data.roster && data.roster.length > 0) {
             data.roster.forEach((jugador, i) => {
-              agregarFila(jugador, i + 1);
+              agregarFilaJugador(jugador, i + 1);
             });
           } else {
             for (let i = 1; i <= 5; i++) {
-              agregarFila({}, i);
+              agregarFilaJugador({}, i);
             }
           }
 
-          // APLICAR BLOQUEO DESPUÉS DE CREAR LAS CELDAS
+          // 2. Cargar Staff
+          if (data.staff && data.staff.length > 0) {
+            data.staff.forEach((miembro, i) => {
+              agregarFilaStaff(miembro, i + 1);
+            });
+          } else {
+            for (let i = 1; i <= 3; i++) {
+              agregarFilaStaff({}, i);
+            }
+          }
+
           aplicarEstadoBloqueo(data.isLocked, data.deadline);
         } else {
-          for (let i = 1; i <= 5; i++) {
-            agregarFila({}, i);
-          }
+          for (let i = 1; i <= 5; i++) agregarFilaJugador({}, i);
+          for (let i = 1; i <= 3; i++) agregarFilaStaff({}, i);
           aplicarEstadoBloqueo(false, '');
         }
-        actualizarContadorRoster();
       } catch (e) {
         console.error(e);
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster.</td></tr>';
+        tbodyJugadores.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster.</td></tr>';
+        tbodyStaff.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: var(--kfl-danger);">No se pudo cargar el Staff.</td></tr>';
       }
     }
 
@@ -874,7 +934,10 @@
     function normalizarFechaDDMMAAAA(valor) {
       if (!valor) return '';
       const str = String(valor).trim();
-      if (/^\d{2}\/\d{2}\/\d{4}$/.test(str)) return str;
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(str)) {
+        const p = str.split('/');
+        return `${p[0].padStart(2, '0')}/${p[1].padStart(2, '0')}/${p[2]}`;
+      }
 
       const d = new Date(str);
       if (!isNaN(d.getTime())) {
@@ -886,7 +949,8 @@
       return str;
     }
 
-    function agregarFila(datos = {}, index = null) {
+    /* RENDERIZADO DE JUGADORES (A - G) */
+    function agregarFilaJugador(datos = {}, index = null) {
       const tbody = document.getElementById('rosterTableBody');
       const tr = document.createElement('tr');
       const rowNum = index || (tbody.children.length + 1);
@@ -897,10 +961,9 @@
         <td class="col-idx">${rowNum}</td>
         <td><input type="text" class="cell-nombre" value="${escaparHtml(datos.nombre || '')}" placeholder="Nombre"></td>
         <td><input type="text" class="cell-apellido" value="${escaparHtml(datos.apellido || '')}" placeholder="Apellido"></td>
-        <td><input type="text" class="cell-jersey" value="${escaparHtml(datos.jersey || '')}" placeholder="#" style="text-align:center;"></td>
+        <td><input type="text" class="cell-jersey" value="${escaparHtml(datos.jersey || '')}" placeholder="#"></td>
         <td><input type="text" class="cell-cedula" value="${escaparHtml(datos.cedula || '')}" placeholder="8-000-000"></td>
         <td><input type="text" class="cell-nacimiento" value="${escaparHtml(fechaLimpia)}" placeholder="DD/MM/AAAA" onblur="validarFormatoFecha(this)"></td>
-        <td><input type="text" class="cell-posicion" value="${escaparHtml(datos.posicion || '')}" placeholder="QB, WR, etc."></td>
         <td class="col-photo-badge">
           ${datos.tieneFoto 
             ? '<span class="badge-photo-yes">Asignada</span>' 
@@ -911,55 +974,58 @@
       tbody.appendChild(tr);
     }
 
+    /* RENDERIZADO DE STAFF (I Y J) */
+    function agregarFilaStaff(datos = {}, index = null) {
+      const tbody = document.getElementById('staffTableBody');
+      const tr = document.createElement('tr');
+      const rowNum = index || (tbody.children.length + 1);
+
+      tr.innerHTML = `
+        <td class="col-idx">${rowNum}</td>
+        <td><input type="text" class="cell-staff-nombre" value="${escaparHtml(datos.nombre || '')}" placeholder="Nombre del Coach"></td>
+        <td><input type="text" class="cell-staff-posicion" value="${escaparHtml(datos.posicion || '')}" placeholder="Cargo (ej: Head Coach, WR Coach)"></td>
+      `;
+
+      tbody.appendChild(tr);
+    }
+
     function validarFormatoFecha(input) {
       if (!input.value.trim()) return;
       input.value = normalizarFechaDDMMAAAA(input.value.trim());
     }
 
-    function agregarFilaVacia() {
+    function agregarFilaJugadorVacia() {
       if (isLockedSession) return;
       const tbody = document.getElementById('rosterTableBody');
       if (limiteMaximoRoster !== null && tbody.children.length >= limiteMaximoRoster) {
-        alert(`Has alcanzado el límite oficial de ${limiteMaximoRoster} jugadores establecido en la configuración de la liga.`);
+        alert(`Has alcanzado el límite oficial de ${limiteMaximoRoster} jugadores permitido por la liga.`);
         return;
       }
-      agregarFila({}, null);
-      actualizarContadorRoster();
+      agregarFilaJugador({}, null);
     }
 
-    function actualizarContadorRoster() {
-      const rows = document.querySelectorAll('#rosterTableBody tr');
-      let totalConDatos = 0;
-      rows.forEach(r => {
-        const nom = r.querySelector('.cell-nombre')?.value.trim();
-        const ced = r.querySelector('.cell-cedula')?.value.trim();
-        if (nom || ced) totalConDatos++;
-      });
-
-      const label = document.getElementById('rosterCountStatus');
-      if (limiteMaximoRoster !== null) {
-        label.innerText = `${totalConDatos} de ${limiteMaximoRoster} jugadores registrados`;
-      } else {
-        label.innerText = `${totalConDatos} jugadores registrados`;
-      }
+    function agregarFilaStaffVacia() {
+      if (isLockedSession) return;
+      agregarFilaStaff({}, null);
     }
 
+    /* CONSOLIDACIÓN Y ENVÍO AL BACKEND */
     async function enviarRosterAlBackend() {
       if (isLockedSession) {
         alert('El período de edición ha finalizado. No es posible enviar modificaciones.');
         return;
       }
 
-      const rows = document.querySelectorAll('#rosterTableBody tr');
+      // 1. Extraer Jugadores
+      const playerRows = document.querySelectorAll('#rosterTableBody tr');
       const jugadores = [];
 
-      rows.forEach(row => {
+      playerRows.forEach(row => {
         const nombre = row.querySelector('.cell-nombre')?.value.trim();
         const apellido = row.querySelector('.cell-apellido')?.value.trim();
         const jersey = row.querySelector('.cell-jersey')?.value.trim();
         const cedula = row.querySelector('.cell-cedula')?.value.trim();
         const fechaNacimiento = normalizarFechaDDMMAAAA(row.querySelector('.cell-nacimiento')?.value.trim());
-        const posicion = row.querySelector('.cell-posicion')?.value.trim();
 
         if (nombre || cedula) {
           jugadores.push({
@@ -967,7 +1033,22 @@
             apellido,
             jersey,
             cedula,
-            fechaNacimiento,
+            fechaNacimiento
+          });
+        }
+      });
+
+      // 2. Extraer Staff
+      const staffRows = document.querySelectorAll('#staffTableBody tr');
+      const staff = [];
+
+      staffRows.forEach(row => {
+        const nombre = row.querySelector('.cell-staff-nombre')?.value.trim();
+        const posicion = row.querySelector('.cell-staff-posicion')?.value.trim();
+
+        if (nombre || posicion) {
+          staff.push({
+            nombre,
             posicion
           });
         }
@@ -978,12 +1059,16 @@
         return;
       }
 
+      if (jugadores.length === 0 && staff.length === 0) {
+        if (!confirm('¿Deseas guardar los listados vacíos?')) return;
+      }
+
       const btn = document.getElementById('btnSubmitRoster');
       const btnText = document.getElementById('btnSubmitRosterText');
       const feedback = document.getElementById('saveFeedback');
 
       btn.disabled = true;
-      btnText.innerHTML = '<span class="spinner-inline"></span> Sincronizando con Liga...';
+      btnText.innerHTML = '<span class="spinner-inline"></span> Sincronizando Roster y Staff...';
       feedback.style.display = 'none';
 
       try {
@@ -992,7 +1077,8 @@
           password: currentUser.password,
           sheetName: currentUser.sheetName,
           players: jugadores,
-          logDetails: `Envío oficial de Roster (${jugadores.length} jugadores) por Coach ${currentUser.coach}`
+          staff: staff,
+          logDetails: `Actualización oficial: ${jugadores.length} jugadores y ${staff.length} miembros del staff por ${currentUser.coach}`
         };
 
         const res = await fetch(GAS_API_URL, {
@@ -1003,24 +1089,26 @@
         const result = await res.json();
 
         if (result.status === 'success') {
-          feedback.textContent = result.message || '¡Roster sincronizado exitosamente con la liga!';
+          feedback.textContent = result.message || '¡Datos sincronizados exitosamente con la liga!';
           feedback.className = 'status-msg success';
           feedback.style.display = 'block';
-          actualizarContadorRoster();
+
+          // Recargar para ver los jugadores ordenados por Jersey automáticamente
+          cargarRosterActual();
           window.scrollTo({ top: 120, behavior: 'smooth' });
         } else {
-          feedback.textContent = result.message || 'Error al procesar el roster.';
+          feedback.textContent = result.message || 'Error al procesar los datos.';
           feedback.className = 'status-msg error';
           feedback.style.display = 'block';
         }
       } catch (err) {
         console.error(err);
-        feedback.textContent = 'Error de conexión al enviar el roster. Revisa tu conexión.';
+        feedback.textContent = 'Error de conexión al enviar el roster. Revisa tu internet.';
         feedback.className = 'status-msg error';
         feedback.style.display = 'block';
       } finally {
         btn.disabled = false;
-        btnText.textContent = 'Confirmar y Enviar Roster a la Liga';
+        btnText.textContent = 'Confirmar y Enviar Roster y Staff a la Liga';
       }
     }
 

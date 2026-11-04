@@ -72,7 +72,6 @@
       box-sizing: border-box;
     }
 
-    /* ENCABEZADO LIMPIO SOBRE FONDO BLANCO */
     .section-header-clean {
       text-align: center;
       margin-bottom: 30px;
@@ -95,7 +94,6 @@
       margin: 0;
     }
 
-    /* BANNER DE FECHA LÍMITE */
     .deadline-banner {
       background-color: #fef2f2;
       border: 1px solid #fecaca;
@@ -113,7 +111,6 @@
       display: block;
     }
 
-    /* NOTA INFORMATIVA */
     .format-note-box {
       background-color: #eff6ff;
       border-left: 4px solid var(--kfl-blue);
@@ -125,7 +122,6 @@
       margin-bottom: 15px;
     }
 
-    /* TARJETAS */
     .auth-card, .dashboard-card {
       background: var(--kfl-card-bg);
       border: 1px solid var(--kfl-border);
@@ -245,13 +241,36 @@
     .coach-profile-tag {
       font-size: 14px;
       color: var(--kfl-text-muted);
+      margin-top: 5px;
     }
 
     .coach-profile-tag strong {
       color: var(--kfl-text-dark);
     }
 
-    /* TABLA DE ROSTER (100% ANCHO) */
+    .badge-lock-status {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      margin-left: 10px;
+      vertical-align: middle;
+    }
+
+    .badge-lock-open {
+      background-color: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .badge-lock-closed {
+      background-color: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
     .table-actions-bar {
       display: flex;
       justify-content: space-between;
@@ -313,6 +332,13 @@
       border-radius: 4px;
     }
 
+    /* ESTILO CUANDO ESTÁ BLOQUEADO */
+    .roster-grid-simulator td input[readonly] {
+      background-color: #f8fafc;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+
     .col-idx {
       width: 50px;
       text-align: center !important;
@@ -354,7 +380,6 @@
       text-transform: uppercase;
     }
 
-    /* SECCIÓN INFERIOR DE REGISTROS */
     .registered-web-section {
       margin-top: 40px;
       border-top: 2px solid var(--kfl-border);
@@ -480,9 +505,9 @@
       <p>Gestión de Rosters y Monitoreo de Inscripciones</p>
     </div>
 
-    <!-- BANNER DE FECHA LÍMITE (SE ACTUALIZA EN VIVO) -->
+    <!-- BANNER DE FECHA LÍMITE (REACTIVO EN VIVO) -->
     <div id="deadlineWarning" class="deadline-banner">
-      ⚠️ <strong>Período Cerrado:</strong> La fecha límite oficial para cambios de roster ha vencido (<span id="deadlineDisplay"></span>). El sistema se encuentra en modo solo lectura.
+      ⚠️ <strong>Período Cerrado:</strong> La fecha límite oficial para cambios de roster venció el <span id="deadlineDisplay"></span>. El sistema se encuentra en modo solo lectura.
     </div>
 
     <!-- SECCIÓN 1: LOGIN -->
@@ -519,7 +544,8 @@
         
         <div class="dashboard-header-bar">
           <div>
-            <h2 id="teamCategoryLabel">Cargando Equipo...</h2>
+            <h2 style="display:inline-block; margin-bottom:0;" id="teamCategoryLabel">Cargando...</h2>
+            <span id="liveStatusBadge" class="badge-lock-status"></span>
             <div class="coach-profile-tag">
               Coach: <strong id="coachNameLabel">---</strong> | Categoría: <strong id="categoryNameLabel">---</strong>
             </div>
@@ -567,7 +593,7 @@
           </table>
         </div>
 
-        <div style="margin-top: 15px; margin-bottom: 30px;">
+        <div id="submitContainer" style="margin-top: 15px; margin-bottom: 30px;">
           <button type="button" class="btn-kfl" id="btnSubmitRoster" onclick="enviarRosterAlBackend()">
             <span id="btnSubmitRosterText">Confirmar y Enviar Roster a la Liga</span>
           </button>
@@ -610,7 +636,6 @@
     let limiteMaximoRoster = null;
 
     document.addEventListener("DOMContentLoaded", function() {
-      // 1. Inyección de componentes maestros
       fetch('nav.html')
         .then(response => response.ok ? response.text() : '')
         .then(html => {
@@ -628,7 +653,6 @@
         })
         .catch(err => console.warn('footer.html cargará en despliegue:', err));
 
-      // 2. Verificar si hay sesión previa activa
       verificarSesionExistente();
     });
 
@@ -663,9 +687,6 @@
       }
     }
 
-    /**
-     * LOGIN INICIAL
-     */
     async function handleLoginSubmit(e) {
       e.preventDefault();
       const passwordInput = document.getElementById('coachPassword').value.trim();
@@ -696,14 +717,9 @@
           currentUser = result.user;
           currentUser.password = passwordInput;
           
-          // Guardar credenciales de sesión activa
           sessionStorage.setItem('kfl_coach_auth', JSON.stringify({
             user: currentUser
           }));
-
-          // Actualizar estado con la respuesta en vivo
-          actualizarEstadoBloqueo(result.isLocked, result.deadline);
-          if (result.limiteRoster !== undefined) limiteMaximoRoster = result.limiteRoster;
 
           mostrarDashboard();
         } else {
@@ -722,38 +738,6 @@
       }
     }
 
-    /**
-     * GESTIÓN DINÁMICA DEL BLOQUEO (SIN CACHÉ ROTA)
-     */
-    function actualizarEstadoBloqueo(bloqueado, fechaTexto) {
-      isLockedSession = Boolean(bloqueado);
-      const warningBanner = document.getElementById('deadlineWarning');
-      const deadlineSpan = document.getElementById('deadlineDisplay');
-      const submitBtn = document.getElementById('btnSubmitRoster');
-      const addRowBtn = document.getElementById('btnAddRowBtn');
-
-      if (isLockedSession) {
-        deadlineSpan.innerText = fechaTexto || 'Fecha Vencida';
-        warningBanner.classList.add('active');
-        submitBtn.disabled = true;
-        addRowBtn.disabled = true;
-      } else {
-        warningBanner.classList.remove('active');
-        submitBtn.disabled = false;
-        addRowBtn.disabled = false;
-      }
-
-      // Aplicar o remover readonly en las celdas ya creadas
-      const inputs = document.querySelectorAll('#rosterTableBody input');
-      inputs.forEach(input => {
-        if (isLockedSession) {
-          input.setAttribute('readonly', 'true');
-        } else {
-          input.removeAttribute('readonly');
-        }
-      });
-    }
-
     function mostrarDashboard() {
       document.getElementById('loginSection').style.display = 'none';
       document.getElementById('dashboardSection').style.display = 'block';
@@ -767,8 +751,46 @@
     }
 
     /**
-     * CONSULTA EN VIVO DEL ROSTER (SIEMPRE LEE LA FECHA EN VIVO DE GOOGLE SHEETS)
+     * APLICA EL BLOQUEO INMEDIATO Y VISIBLE
      */
+    function aplicarEstadoBloqueo(bloqueado, fechaTexto) {
+      isLockedSession = Boolean(bloqueado);
+      const warningBanner = document.getElementById('deadlineWarning');
+      const deadlineSpan = document.getElementById('deadlineDisplay');
+      const submitBtn = document.getElementById('btnSubmitRoster');
+      const addRowBtn = document.getElementById('btnAddRowBtn');
+      const liveBadge = document.getElementById('liveStatusBadge');
+
+      if (isLockedSession) {
+        deadlineSpan.innerText = fechaTexto || 'Fecha Vencida';
+        warningBanner.classList.add('active');
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.5';
+        addRowBtn.style.display = 'none';
+
+        liveBadge.className = 'badge-lock-status badge-lock-closed';
+        liveBadge.innerText = '🔴 Edición Cerrada';
+      } else {
+        warningBanner.classList.remove('active');
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+        addRowBtn.style.display = 'inline-block';
+
+        liveBadge.className = 'badge-lock-status badge-lock-open';
+        liveBadge.innerText = '🟢 Edición Abierta';
+      }
+
+      // Desactivar y oscurecer celdas si está bloqueado
+      const inputs = document.querySelectorAll('#rosterTableBody input');
+      inputs.forEach(input => {
+        if (isLockedSession) {
+          input.setAttribute('readonly', 'true');
+        } else {
+          input.removeAttribute('readonly');
+        }
+      });
+    }
+
     async function cargarRosterActual() {
       const tbody = document.getElementById('rosterTableBody');
       tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color: var(--kfl-text-muted);">Consultando Roster en Google Sheets...</td></tr>';
@@ -781,8 +803,6 @@
         tbody.innerHTML = '';
 
         if (data.status === 'success') {
-          // ACTUALIZAR ESTADO DE BLOQUEO EN VIVO DESDE LA HOJA
-          actualizarEstadoBloqueo(data.isLocked, data.deadline);
           if (data.limiteRoster !== undefined) limiteMaximoRoster = data.limiteRoster;
 
           if (data.roster && data.roster.length > 0) {
@@ -794,19 +814,19 @@
               agregarFila({}, i);
             }
           }
+
+          // APLICAR BLOQUEO DESPUÉS DE CREAR LAS CELDAS
+          aplicarEstadoBloqueo(data.isLocked, data.deadline);
         } else {
           for (let i = 1; i <= 5; i++) {
             agregarFila({}, i);
           }
+          aplicarEstadoBloqueo(false, '');
         }
         actualizarContadorRoster();
       } catch (e) {
         console.error(e);
-        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster. Agregando filas para captura manual.</td></tr>';
-        for (let i = 1; i <= 5; i++) {
-          agregarFila({}, i);
-        }
-        actualizarContadorRoster();
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster.</td></tr>';
       }
     }
 
@@ -871,17 +891,16 @@
       const tr = document.createElement('tr');
       const rowNum = index || (tbody.children.length + 1);
 
-      const readonlyAttr = isLockedSession ? 'readonly' : '';
       const fechaLimpia = normalizarFechaDDMMAAAA(datos.fechaNacimiento || '');
 
       tr.innerHTML = `
         <td class="col-idx">${rowNum}</td>
-        <td><input type="text" class="cell-nombre" value="${escaparHtml(datos.nombre || '')}" placeholder="Nombre" ${readonlyAttr}></td>
-        <td><input type="text" class="cell-apellido" value="${escaparHtml(datos.apellido || '')}" placeholder="Apellido" ${readonlyAttr}></td>
-        <td><input type="text" class="cell-jersey" value="${escaparHtml(datos.jersey || '')}" placeholder="#" style="text-align:center;" ${readonlyAttr}></td>
-        <td><input type="text" class="cell-cedula" value="${escaparHtml(datos.cedula || '')}" placeholder="8-000-000" ${readonlyAttr}></td>
-        <td><input type="text" class="cell-nacimiento" value="${escaparHtml(fechaLimpia)}" placeholder="DD/MM/AAAA" ${readonlyAttr} onblur="validarFormatoFecha(this)"></td>
-        <td><input type="text" class="cell-posicion" value="${escaparHtml(datos.posicion || '')}" placeholder="QB, WR, etc." ${readonlyAttr}></td>
+        <td><input type="text" class="cell-nombre" value="${escaparHtml(datos.nombre || '')}" placeholder="Nombre"></td>
+        <td><input type="text" class="cell-apellido" value="${escaparHtml(datos.apellido || '')}" placeholder="Apellido"></td>
+        <td><input type="text" class="cell-jersey" value="${escaparHtml(datos.jersey || '')}" placeholder="#" style="text-align:center;"></td>
+        <td><input type="text" class="cell-cedula" value="${escaparHtml(datos.cedula || '')}" placeholder="8-000-000"></td>
+        <td><input type="text" class="cell-nacimiento" value="${escaparHtml(fechaLimpia)}" placeholder="DD/MM/AAAA" onblur="validarFormatoFecha(this)"></td>
+        <td><input type="text" class="cell-posicion" value="${escaparHtml(datos.posicion || '')}" placeholder="QB, WR, etc."></td>
         <td class="col-photo-badge">
           ${datos.tieneFoto 
             ? '<span class="badge-photo-yes">Asignada</span>' 
@@ -957,10 +976,6 @@
       if (limiteMaximoRoster !== null && jugadores.length > limiteMaximoRoster) {
         alert(`No puedes registrar más de ${limiteMaximoRoster} jugadores según el reglamento oficial.`);
         return;
-      }
-
-      if (jugadores.length === 0) {
-        if (!confirm('¿Deseas enviar el Roster completamente vacío?')) return;
       }
 
       const btn = document.getElementById('btnSubmitRoster');

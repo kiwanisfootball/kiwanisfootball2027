@@ -10,7 +10,7 @@ const KFL_CONFIG = {
   API_ROSTERS_URL: {
     "contact": {
       "varsity": "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec",
-      "juvenil": "", // Pega aquí la URL de Backend Juvenil Rosters Contact
+      "juvenil": "https://script.google.com/macros/s/AKfycbwn2o725RO9N1-ra7N768DSo6eZU5Bj1ibMQUswNeZn9tnbZtV3yXSgAjlY89M4PbLrSA/exec",
       "mini": "",    // Pega aquí la URL de Backend Mini Rosters Contact
       "micro": ""    // Pega aquí la URL de Backend Micro Rosters Contact
     },

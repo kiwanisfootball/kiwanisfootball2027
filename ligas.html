@@ -19,7 +19,6 @@
       display: block !important;
     }
 
-    /* TARJETAS HERO SIN BORDES */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -88,7 +87,6 @@
       border-color: #777777;
     }
 
-    /* PÍLDORAS DE CATEGORÍA */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
@@ -137,7 +135,6 @@
       transform: translateY(-1px);
     }
 
-    /* SUB-PESTAÑAS */
     .sub-tabs-bar {
       display: flex;
       justify-content: center;
@@ -315,14 +312,14 @@
       color: #A91C00;
     }
 
-    /* CONTENEDOR DE ROSTER: ANCHO COMPACTO HOMOGÉNEO */
+    /* CONTENEDOR DE ROSTER COMPACTO */
     .roster-detail-container {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
       padding: 28px 32px;
       margin: 25px auto 40px auto;
-      max-width: 760px; /* Ancho armónico */
+      max-width: 760px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.04);
       display: none;
       box-sizing: border-box;
@@ -433,7 +430,7 @@
 
     .cell-player-apellido {
       color: #0f172a;
-      font-weight: 800; /* Apellido en negrita destacada */
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
@@ -450,7 +447,6 @@
       color: #A91C00;
     }
 
-    /* COACHING STAFF */
     .staff-section-title {
       font-family: 'Anton', sans-serif;
       font-size: 18px;
@@ -466,7 +462,7 @@
       color: #A91C00;
     }
 
-    /* MODAL: PLAYER CARD (DISEÑO SÓLIDO PLANO, CERO GRADIENTES) */
+    /* MODAL: PLAYER CARD (DISEÑO SÓLIDO PLANO) */
     .player-card-modal-backdrop {
       position: fixed;
       top: 0;
@@ -490,9 +486,10 @@
     .player-card {
       background: #ffffff;
       border-radius: 16px;
-      max-width: 460px;
+      max-width: 480px;
       width: 100%;
-      overflow: hidden;
+      max-height: 90vh;
+      overflow-y: auto;
       box-shadow: 0 15px 35px rgba(0,0,0,0.3);
       position: relative;
       animation: modalFadeIn 0.25s ease-out;
@@ -504,9 +501,8 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* CABECERA PLANA Y NÍTIDA */
     .player-card-header {
-      background-color: #19547E; /* Azul sólido sin degradados */
+      background-color: #19547E;
       padding: 26px 20px 20px 20px;
       color: #ffffff;
       text-align: center;
@@ -514,7 +510,7 @@
     }
 
     body.flag-theme .player-card-header {
-      background-color: #A91C00; /* Rojo sólido sin degradados */
+      background-color: #A91C00;
     }
 
     .btn-modal-close {
@@ -540,7 +536,6 @@
       background: rgba(255,255,255,0.4);
     }
 
-    /* FOTO ATLÉTICA ANCLADA ABAJO */
     .player-card-photo-container {
       width: 135px;
       height: 135px;
@@ -585,26 +580,32 @@
       background: #ffffff;
     }
 
-    .player-stats-section-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 16px;
+    .player-bothways-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 800;
       color: #19547E;
+      background-color: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 4px 10px;
+      border-radius: 6px;
       text-transform: uppercase;
-      margin: 0 0 12px 0;
-      border-bottom: 2px solid #f1f5f9;
-      padding-bottom: 5px;
-      text-align: center;
-      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      margin-top: 10px;
     }
 
-    body.flag-theme .player-stats-section-title {
+    body.flag-theme .player-bothways-badge {
       color: #A91C00;
+      background-color: #fff1f2;
+      border-color: #fecaca;
     }
 
     .player-stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+      gap: 8px;
       text-align: center;
       margin-bottom: 12px;
     }
@@ -613,12 +614,12 @@
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      padding: 8px 6px;
+      padding: 8px 4px;
     }
 
     .player-stat-val {
       font-family: 'Anton', sans-serif;
-      font-size: 20px;
+      font-size: 19px;
       color: #19547E;
       line-height: 1.1;
     }
@@ -628,14 +629,14 @@
     }
 
     .player-stat-lbl {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 800;
       color: #334155;
       text-transform: uppercase;
       margin-top: 3px;
     }
 
-    /* ESTILOS DE CALENDARIO, TABLA DE POSICIONES Y STATS */
+    /* ESTILOS DE CALENDARIO, TABLA Y STATS */
     .kfl-week-section { margin-bottom: 28px; }
     .kfl-week-title {
       font-size: 17px; font-weight: 800; color: #19547E; border-bottom: 2px solid #19547E;
@@ -890,7 +891,6 @@
         <div class="player-card-jersey-tag" id="modalPlayerMeta">#00 • EQUIPO • CATEGORÍA</div>
       </div>
       <div class="player-card-body">
-        <div class="player-stats-section-title">Estadísticas de Temporada</div>
         <div id="modalPlayerStatsContainer"></div>
       </div>
     </div>
@@ -930,7 +930,7 @@
     });
   </script>
 
-  <!-- CONTROLADOR PRINCIPAL Y CACHÉ -->
+  <!-- CONTROLADOR PRINCIPAL Y RESOLUCIÓN DINÁMICA -->
   <script>
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -1094,7 +1094,9 @@
       });
     }
 
-    /* CARGAR Y MOSTRAR ROSTER CON CACHÉ LOCAL INSTANTÁNEA */
+    /**
+     * CARGAR ROSTER Y STAFF DE FORMA DINÁMICA POR CATEGORÍA
+     */
     async function abrirRosterEquipo(nombreEquipo) {
       const detailBox = document.getElementById('rosterDetailBox');
       const playerBody = document.getElementById('rosterTablePublicBody');
@@ -1106,30 +1108,30 @@
       teamLogo.src = getTeamLogo(nombreEquipo);
       detailBox.style.display = 'block';
 
-      // Mensaje sobrio y limpio
       playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 22px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
       staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
       detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-      // Verificación en Caché de sesión para carga inmediata
-      const cacheKey = `kfl_cache_roster_${activeLeague}_${activeCategory}_${nombreEquipo}`;
-      const cached = sessionStorage.getItem(cacheKey);
+      // Resolución dinámica de la URL de backend según la Liga y Categoría actual
+      let apiUrl = "";
+      if (typeof KFL_CONFIG.API_ROSTERS_URL === 'object') {
+        apiUrl = (KFL_CONFIG.API_ROSTERS_URL[activeLeague] && KFL_CONFIG.API_ROSTERS_URL[activeLeague][activeCategory]) || "";
+      } else {
+        apiUrl = KFL_CONFIG.API_ROSTERS_URL;
+      }
 
-      if (cached) {
-        try {
-          const cachedData = JSON.parse(cached);
-          renderizarTablasRosterYStaff(cachedData, nombreEquipo);
-          return;
-        } catch(e) {}
+      if (!apiUrl) {
+        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b; font-weight:600;">Rosters de esta categoría próximamente disponibles.</td></tr>';
+        staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b;">Sin cuerpo técnico registrado.</td></tr>';
+        return;
       }
 
       try {
-        const url = `${KFL_CONFIG.API_ROSTERS_URL}?action=getPublicRoster&sheetName=${encodeURIComponent(nombreEquipo)}&_t=${new Date().getTime()}`;
+        const url = `${apiUrl}?action=getPublicRoster&sheetName=${encodeURIComponent(nombreEquipo)}&_t=${new Date().getTime()}`;
         const res = await fetch(url);
         const data = await res.json();
 
         if (data.status === 'success') {
-          sessionStorage.setItem(cacheKey, JSON.stringify(data));
           renderizarTablasRosterYStaff(data, nombreEquipo);
         } else {
           playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores registrados oficialmente aún.</td></tr>';
@@ -1149,7 +1151,7 @@
       playerBody.innerHTML = '';
       staffBody.innerHTML = '';
 
-      // 1. Roster de Jugadores (Apellido en Negrita, Nombre Tenue)
+      // 1. Jugadores
       if (data.roster && data.roster.length > 0) {
         data.roster.forEach(player => {
           const tr = document.createElement('tr');
@@ -1168,7 +1170,7 @@
         playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores listados aún.</td></tr>';
       }
 
-      // 2. Coaching Staff (Siempre visible)
+      // 2. Coaching Staff
       if (data.staff && data.staff.length > 0) {
         data.staff.forEach(miembro => {
           const tr = document.createElement('tr');
@@ -1202,7 +1204,9 @@
         .catch(() => {});
     }
 
-    /* PLAYER CARD MODAL (SIN DEGRADADOS) */
+    /**
+     * PLAYER CARD MODAL (SOPORTE BOTH WAYS: OFENSIVA Y DEFENSA SIMULTÁNEA)
+     */
     function abrirPlayerCard(player, equipo) {
       const modal = document.getElementById('playerCardModal');
       const photoEl = document.getElementById('modalPlayerPhoto');
@@ -1217,13 +1221,16 @@
       photoEl.src = player.fotoUrl && player.fotoUrl.startsWith('http') ? player.fotoUrl : defaultPhoto;
       photoEl.onerror = () => { photoEl.src = defaultPhoto; };
 
-      // Búsqueda estricta que no confunde hermanos
-      const statsEncontradas = buscarStatsJugadorEstricto(player.nombre, player.apellido, equipo);
+      // Búsqueda Both Ways estricta por franquicia y nombre
+      const statsEncontradas = buscarStatsBothWays(player.nombre, player.apellido, equipo);
 
       if (statsEncontradas.length > 0) {
         let statsHtml = '';
         statsEncontradas.forEach(sec => {
-          statsHtml += `<div style="font-size:12px; font-weight:800; color:#1e293b; text-transform:uppercase; margin-bottom:8px; margin-top:8px;">${sec.tipo}</div>`;
+          const esDefensa = sec.tipo === 'DEFENSIVE';
+          const iconoTag = esDefensa ? '🛡️ DEFENSA' : '🏈 OFENSIVA (' + sec.tipo + ')';
+
+          statsHtml += `<div class="player-bothways-badge">${iconoTag}</div>`;
           statsHtml += `<div class="player-stats-grid">`;
           for (const key in sec.datos) {
             statsHtml += `
@@ -1238,8 +1245,8 @@
         statsContainer.innerHTML = statsHtml;
       } else {
         statsContainer.innerHTML = `
-          <div style="text-align: center; padding: 20px; color: #64748b; font-size: 13.5px; font-weight:600;">
-            Sin estadísticas acumuladas en los partidos disputados hasta el momento.
+          <div style="text-align: center; padding: 25px; color: #64748b; font-size: 13.5px; font-weight:600;">
+            Sin estadísticas acumuladas registradas esta temporada.
           </div>
         `;
       }
@@ -1247,7 +1254,6 @@
       modal.classList.add('active');
     }
 
-    /* NORMALIZADOR DE CARACTERES */
     function normalizarToken(str) {
       return String(str || '')
         .toLowerCase()
@@ -1258,13 +1264,12 @@
     }
 
     /**
-     * MOTOR DE BÚSQUEDA EXACTO PARA HERMANOS / HOMÓNIMOS
+     * MOTOR DE BÚSQUEDA BOTH WAYS BLINDADO
      */
-    function buscarStatsJugadorEstricto(nombre, apellido, equipo) {
+    function buscarStatsBothWays(nombre, apellido, equipo) {
       const resultado = [];
       const categorias = ['RUSHING', 'PASSING', 'RECEIVING', 'DEFENSIVE'];
 
-      // Descomponer en palabras individuales
       const tokensNombre = String(nombre || '').split(/\s+/).map(normalizarToken).filter(Boolean);
       const tokensApellido = String(apellido || '').split(/\s+/).map(normalizarToken).filter(Boolean);
       const equipoNorm = normalizarToken(equipo);
@@ -1272,26 +1277,26 @@
       categorias.forEach(cat => {
         const filas = seccionesStatsGlobal[cat] || [];
         const match = filas.find(r => {
-          // 1. EL EQUIPO DEBE COINCIDIR ESTRICTAMENTE
+          // 1. FILTRO ESTRICTO DE EQUIPO
           const rowEquipoNorm = normalizarToken(r.EQUIPO || r.TEAM || r.CLUB || '');
-          if (rowEquipoNorm && rowEquipoNorm !== equipoNorm && !rowEquipoNorm.includes(equipoNorm) && !equipoNorm.includes(rowEquipoNorm)) {
-            return false;
+          if (rowEquipoNorm && equipoNorm) {
+            const coincideFranquicia = rowEquipoNorm === equipoNorm || rowEquipoNorm.includes(equipoNorm) || equipoNorm.includes(rowEquipoNorm);
+            if (!coincideFranquicia) return false;
           }
 
-          // 2. TOKENIZAR NOMBRE DE LA FILA DE STATS
-          const rawRowName = String(r.JUGADOR || r.PLAYER || r.NOMBRE || '');
+          // 2. EXTRAER NOMBRE DE LA FILA DE STATS
+          const rawRowName = String(r.JUGADOR || r.PLAYER || r.NOMBRE || r.NAME || '');
           const rowTokens = rawRowName.split(/[\s,.-]+/).map(normalizarToken).filter(Boolean);
           if (rowTokens.length === 0) return false;
 
-          // 3. El apellido debe estar presente como palabra exacta
+          // 3. El apellido debe estar como palabra completa exacta
           const coincideApellido = tokensApellido.some(ape => rowTokens.includes(ape));
           if (!coincideApellido) return false;
 
-          // 4. El nombre debe coincidir: o el nombre de pila completo o su inicial como token individual
+          // 4. El nombre debe coincidir como palabra completa o como token inicial delimitado
           const coincideNombre = tokensNombre.some(nom => {
-            if (rowTokens.includes(nom)) return true; // Nombre completo (ej. "Lorenzo")
-            const inicial = nom.charAt(0);
-            return rowTokens.includes(inicial); // Token individual inicial (ej. "L")
+            if (rowTokens.includes(nom)) return true;
+            return rowTokens.includes(nom.charAt(0));
           });
 
           return coincideNombre;
@@ -1299,7 +1304,7 @@
 
         if (match) {
           let datosExtraidos = {};
-          const ignorarCampos = ['JUGADOR', 'PLAYER', 'NOMBRE', 'EQUIPO', 'TEAM', 'CLUB', 'RANK', '#'];
+          const ignorarCampos = ['JUGADOR', 'PLAYER', 'NOMBRE', 'NAME', 'EQUIPO', 'TEAM', 'CLUB', 'RANK', '#'];
 
           for (const k in match) {
             const kNorm = k.toUpperCase().trim();
@@ -1327,7 +1332,7 @@
       document.getElementById('playerCardModal').classList.remove('active');
     }
 
-    /* MÓDULO DE CALENDARIO */
+    /* CALENDARIO */
     function loadCalendarioData() {
       const db = getMasterDB();
       const catData = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
@@ -1510,14 +1515,15 @@
         }
 
         if (seccionActual) {
-          if (headersActuales.length === 0 && (lineaUnida.includes('JUGADOR') || lineaUnida.includes('PLAYER') || lineaUnida.includes('RANK'))) {
+          if (headersActuales.length === 0 && (lineaUnida.includes('JUGADOR') || lineaUnida.includes('PLAYER') || lineaUnida.includes('RANK') || lineaUnida.includes('DEFENSA'))) {
             headersActuales = cols.map(h => h.toUpperCase());
             continue;
           }
           if (headersActuales.length > 0) {
             let obj = {};
             headersActuales.forEach((h, idx) => { obj[h] = cols[idx] || ''; });
-            if (obj['JUGADOR'] && obj['JUGADOR'] !== 'JUGADOR' && obj['JUGADOR'] !== 'PLAYER') {
+            let colJug = obj['JUGADOR'] || obj['PLAYER'] || obj['NOMBRE'] || obj['NAME'];
+            if (colJug && colJug !== 'JUGADOR' && colJug !== 'PLAYER') {
               secciones[seccionActual].push(obj);
             }
           }
@@ -1564,8 +1570,8 @@
 
       datosPagina.forEach((row, idxRel) => {
         const indiceReal = inicio + idxRel;
-        const jugador = row.JUGADOR || row.PLAYER || row.NOMBRE || "-";
-        const equipo = (row.EQUIPO || row.TEAM || "").toUpperCase();
+        const jugador = row.JUGADOR || row.PLAYER || row.NOMBRE || row.NAME || "-";
+        const equipo = (row.EQUIPO || row.TEAM || row.CLUB || "").toUpperCase();
         let tr = document.createElement('tr');
 
         if (tipoStatActivo === 'RUSHING' || tipoStatActivo === 'RECEIVING') {

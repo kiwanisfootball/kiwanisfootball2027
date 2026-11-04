@@ -5,11 +5,27 @@
  */
 
 const KFL_CONFIG = {
-  // 1. ENDPOINTS DE BACKEND (GOOGLE APPS SCRIPT)
-  API_ROSTERS_URL: "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec",
+  // 1. ENDPOINTS DE ROSTERS POR LIGA Y CATEGORÍA
+  // Conforme crees las hojas de Juvenil, Mini, Micro y Flag, solo pega su URL aquí:
+  API_ROSTERS_URL: {
+    "contact": {
+      "varsity": "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec",
+      "juvenil": "", // Pega aquí la URL de Backend Juvenil Rosters Contact
+      "mini": "",    // Pega aquí la URL de Backend Mini Rosters Contact
+      "micro": ""    // Pega aquí la URL de Backend Micro Rosters Contact
+    },
+    "flag": {
+      "varsity": "", // Pega aquí la URL de Backend Varsity Rosters Flag
+      "juvenil": "", // Pega aquí la URL de Backend Juvenil Rosters Flag
+      "mini": "",    // Pega aquí la URL de Backend Mini Rosters Flag
+      "micro": ""    // Pega aquí la URL de Backend Micro Rosters Flag
+    }
+  },
+
+  // 2. ENDPOINT DEL CALENDARIO Y TABLA GENERAL
   API_CALENDARIO_URL: "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec",
 
-  // 2. ENLACES PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA
+  // 3. ENLACES PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA
   STATS_CSV_LINKS: {
     "contact": {
       "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
@@ -25,7 +41,7 @@ const KFL_CONFIG = {
     }
   },
 
-  // 3. RUTAS LOCALES DE LOGOS EN EL REPOSITORIO
+  // 4. RUTAS DE LOGOS
   EQUIPOS_LOGOS: {
     "DRAGONS": "assets/logos/dragons.png",
     "EAGLES": "assets/logos/eagles.png",
@@ -36,7 +52,6 @@ const KFL_CONFIG = {
     "SPARTANS": "assets/logos/spartans.png"
   },
 
-  // 4. LOGOS DE RESPALDO (CDN / FALLBACK)
   FALLBACK_LOGOS: {
     "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
     "EAGLES": "https://i.imgur.com/lxfq565.png",

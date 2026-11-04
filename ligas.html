@@ -12,7 +12,6 @@
   <script src="js/config-ligas.js"></script>
 
   <style>
-    /* PESTAÑAS Y VISTAS */
     .tab-pane {
       display: none !important;
     }
@@ -20,7 +19,7 @@
       display: block !important;
     }
 
-    /* TARJETAS HERO */
+    /* TARJETAS HERO SIN BORDES */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -238,9 +237,7 @@
       padding-bottom: 60px;
     }
 
-    /* ========================================================
-       SECCIÓN DE ROSTERS: GRILLA DE LOGOS
-       ======================================================== */
+    /* ROSTERS: LOGOS CENTRADOS Y HOMOGÉNEOS */
     .rosters-grid {
       display: flex;
       flex-wrap: wrap;
@@ -318,14 +315,14 @@
       color: #A91C00;
     }
 
-    /* CONTENEDOR DE ROSTER: ANCHO COMPACTO Y HOMOGÉNEO */
+    /* CONTENEDOR DE ROSTER: ANCHO COMPACTO HOMOGÉNEO */
     .roster-detail-container {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
       padding: 28px 32px;
       margin: 25px auto 40px auto;
-      max-width: 760px; /* Ancho homogéneo y elegante */
+      max-width: 760px; /* Ancho armónico */
       box-shadow: 0 4px 20px rgba(0,0,0,0.04);
       display: none;
       box-sizing: border-box;
@@ -389,7 +386,7 @@
     .roster-compact-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       font-size: 13.5px;
     }
 
@@ -412,7 +409,7 @@
     .roster-compact-table td {
       padding: 9px 12px;
       border-bottom: 1px solid #f1f5f9;
-      white-space: nowrap; /* Evita que los nombres se corten */
+      white-space: nowrap;
       color: #334155;
     }
 
@@ -430,13 +427,13 @@
     }
 
     .cell-player-nombre {
-      color: #475569; /* Nombre en tono regular */
+      color: #475569;
       font-weight: 500;
     }
 
     .cell-player-apellido {
-      color: #0f172a; /* Apellido en negrita destacada */
-      font-weight: 800;
+      color: #0f172a;
+      font-weight: 800; /* Apellido en negrita destacada */
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
@@ -453,14 +450,14 @@
       color: #A91C00;
     }
 
-    /* TABLA DE COACHING STAFF */
+    /* COACHING STAFF */
     .staff-section-title {
       font-family: 'Anton', sans-serif;
       font-size: 18px;
       color: #19547E;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin: 30px 0 10px 0;
+      margin: 25px 0 10px 0;
       padding-bottom: 6px;
       border-bottom: 1px solid #e2e8f0;
     }
@@ -469,7 +466,7 @@
       color: #A91C00;
     }
 
-    /* MODAL: PLAYER CARD */
+    /* MODAL: PLAYER CARD (DISEÑO SÓLIDO PLANO, CERO GRADIENTES) */
     .player-card-modal-backdrop {
       position: fixed;
       top: 0;
@@ -492,41 +489,43 @@
 
     .player-card {
       background: #ffffff;
-      border-radius: 20px;
-      max-width: 480px;
+      border-radius: 16px;
+      max-width: 460px;
       width: 100%;
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.3);
       position: relative;
       animation: modalFadeIn 0.25s ease-out;
+      border: 1px solid #e2e8f0;
     }
 
     @keyframes modalFadeIn {
-      from { opacity: 0; transform: scale(0.95); }
+      from { opacity: 0; transform: scale(0.96); }
       to { opacity: 1; transform: scale(1); }
     }
 
+    /* CABECERA PLANA Y NÍTIDA */
     .player-card-header {
-      background: linear-gradient(135deg, #19547E 0%, #0b0f19 100%);
-      padding: 30px 20px 22px 20px;
+      background-color: #19547E; /* Azul sólido sin degradados */
+      padding: 26px 20px 20px 20px;
       color: #ffffff;
       text-align: center;
       position: relative;
     }
 
     body.flag-theme .player-card-header {
-      background: linear-gradient(135deg, #A91C00 0%, #0b0f19 100%);
+      background-color: #A91C00; /* Rojo sólido sin degradados */
     }
 
     .btn-modal-close {
       position: absolute;
-      top: 14px;
-      right: 14px;
+      top: 12px;
+      right: 12px;
       background: rgba(255,255,255,0.2);
       border: none;
       color: #ffffff;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       cursor: pointer;
       font-size: 14px;
@@ -541,63 +540,59 @@
       background: rgba(255,255,255,0.4);
     }
 
-    /* CONTENEDOR DE FOTO ATLÉTICO PERFECTAMENTE CENTRADO */
+    /* FOTO ATLÉTICA ANCLADA ABAJO */
     .player-card-photo-container {
-      width: 140px;
-      height: 140px;
+      width: 135px;
+      height: 135px;
       margin: 0 auto 12px auto;
       border-radius: 50%;
-      background: radial-gradient(circle, #ffffff 50%, #f1f5f9 100%);
+      background-color: #ffffff;
       border: 4px solid #ffffff;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
       overflow: hidden;
       display: flex;
-      align-items: flex-end; /* Anclado al fondo para siluetas de busto */
+      align-items: flex-end;
       justify-content: center;
     }
 
     .player-card-photo {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Nunca corta la cabeza ni deforma */
+      object-fit: contain;
       object-position: center bottom;
     }
 
     .player-card-name {
       font-family: 'Anton', sans-serif;
-      font-size: 26px;
+      font-size: 25px;
       color: #ffffff;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       margin: 0 0 4px 0;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     .player-card-jersey-tag {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 800;
-      color: #93c5fd; /* Alto contraste legible */
+      color: #ffffff;
+      opacity: 0.92;
       text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    body.flag-theme .player-card-jersey-tag {
-      color: #fca5a5;
+      letter-spacing: 0.8px;
     }
 
     .player-card-body {
-      padding: 24px 20px;
+      padding: 22px 20px;
       background: #ffffff;
     }
 
     .player-stats-section-title {
       font-family: 'Anton', sans-serif;
-      font-size: 17px;
+      font-size: 16px;
       color: #19547E;
       text-transform: uppercase;
-      margin: 0 0 14px 0;
+      margin: 0 0 12px 0;
       border-bottom: 2px solid #f1f5f9;
-      padding-bottom: 6px;
+      padding-bottom: 5px;
       text-align: center;
       letter-spacing: 0.5px;
     }
@@ -608,7 +603,7 @@
 
     .player-stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
       gap: 10px;
       text-align: center;
       margin-bottom: 12px;
@@ -635,7 +630,7 @@
     .player-stat-lbl {
       font-size: 11px;
       font-weight: 800;
-      color: #334155; /* Contraste nítido */
+      color: #334155;
       text-transform: uppercase;
       margin-top: 3px;
     }
@@ -774,7 +769,7 @@
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ROSTERS (ANCHO COMPACTO HOMOGÉNEO Y STAFF INTEGRADO) -->
+        <!-- ROSTERS -->
         <div class="tab-pane" id="pane-rosters">
           <div class="kfl-render-container">
             <div class="rosters-grid" id="rostersGrid"></div>
@@ -806,8 +801,8 @@
                 </table>
               </div>
 
-              <!-- TABLA DE CUERPO TÉCNICO (I Y J) -->
-              <div id="staffSectionWrapper" style="display: none;">
+              <!-- TABLA DE COACHING STAFF (I Y J) -->
+              <div id="staffSectionWrapper">
                 <div class="staff-section-title">Coaching Staff</div>
                 <div style="overflow-x: auto;">
                   <table class="roster-compact-table" style="margin-bottom: 5px;">
@@ -883,7 +878,7 @@
     </div>
   </main>
 
-  <!-- MODAL: PLAYER CARD -->
+  <!-- MODAL: PLAYER CARD (DISEÑO SÓLIDO PLANO) -->
   <div class="player-card-modal-backdrop" id="playerCardModal" onclick="cerrarPlayerCardModal(event)">
     <div class="player-card" onclick="event.stopPropagation()">
       <div class="player-card-header">
@@ -935,7 +930,7 @@
     });
   </script>
 
-  <!-- CONTROLADOR PRINCIPAL Y CACHÉ ULTRA RÁPIDA -->
+  <!-- CONTROLADOR PRINCIPAL Y CACHÉ -->
   <script>
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -1104,7 +1099,6 @@
       const detailBox = document.getElementById('rosterDetailBox');
       const playerBody = document.getElementById('rosterTablePublicBody');
       const staffBody = document.getElementById('staffTablePublicBody');
-      const staffSection = document.getElementById('staffSectionWrapper');
       const teamTitle = document.getElementById('rosterDetailTeamName');
       const teamLogo = document.getElementById('rosterDetailLogo');
 
@@ -1113,8 +1107,8 @@
       detailBox.style.display = 'block';
 
       // Mensaje sobrio y limpio
-      playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
-      staffSection.style.display = 'none';
+      playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 22px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
+      staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
       detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       // Verificación en Caché de sesión para carga inmediata
@@ -1139,22 +1133,23 @@
           renderizarTablasRosterYStaff(data, nombreEquipo);
         } else {
           playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores registrados oficialmente aún.</td></tr>';
+          staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b;">Sin cuerpo técnico registrado.</td></tr>';
         }
       } catch (err) {
         console.error(err);
         playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#c53030;">Error al conectar con la base de datos del equipo.</td></tr>';
+        staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#c53030;">Error al cargar staff.</td></tr>';
       }
     }
 
     function renderizarTablasRosterYStaff(data, nombreEquipo) {
       const playerBody = document.getElementById('rosterTablePublicBody');
       const staffBody = document.getElementById('staffTablePublicBody');
-      const staffSection = document.getElementById('staffSectionWrapper');
 
       playerBody.innerHTML = '';
       staffBody.innerHTML = '';
 
-      // 1. Roster de Jugadores (Apellido en Negrita y Nombre Tenue)
+      // 1. Roster de Jugadores (Apellido en Negrita, Nombre Tenue)
       if (data.roster && data.roster.length > 0) {
         data.roster.forEach(player => {
           const tr = document.createElement('tr');
@@ -1173,7 +1168,7 @@
         playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores listados aún.</td></tr>';
       }
 
-      // 2. Coaching Staff (Cols I y J)
+      // 2. Coaching Staff (Siempre visible)
       if (data.staff && data.staff.length > 0) {
         data.staff.forEach(miembro => {
           const tr = document.createElement('tr');
@@ -1184,9 +1179,8 @@
           `;
           staffBody.appendChild(tr);
         });
-        staffSection.style.display = 'block';
       } else {
-        staffSection.style.display = 'none';
+        staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b; font-weight:600;">Sin miembros de coaching staff registrados actualmente.</td></tr>';
       }
     }
 
@@ -1208,7 +1202,7 @@
         .catch(() => {});
     }
 
-    /* PLAYER CARD MODAL */
+    /* PLAYER CARD MODAL (SIN DEGRADADOS) */
     function abrirPlayerCard(player, equipo) {
       const modal = document.getElementById('playerCardModal');
       const photoEl = document.getElementById('modalPlayerPhoto');
@@ -1219,13 +1213,12 @@
       nameEl.innerText = `${player.nombre} ${player.apellido}`;
       metaEl.innerText = `#${player.jersey || '00'} • ${equipo} • ${activeCategory.toUpperCase()}`;
 
-      // Manejo de Foto: anclado limpio sin cortes
       const defaultPhoto = getTeamLogo(equipo);
       photoEl.src = player.fotoUrl && player.fotoUrl.startsWith('http') ? player.fotoUrl : defaultPhoto;
       photoEl.onerror = () => { photoEl.src = defaultPhoto; };
 
-      // Búsqueda inteligente tolerante a formatos de nombres
-      const statsEncontradas = buscarStatsJugador(player.nombre, player.apellido);
+      // Búsqueda estricta que no confunde hermanos
+      const statsEncontradas = buscarStatsJugadorEstricto(player.nombre, player.apellido, equipo);
 
       if (statsEncontradas.length > 0) {
         let statsHtml = '';
@@ -1254,42 +1247,59 @@
       modal.classList.add('active');
     }
 
-    /* MOTOR DE BÚSQUEDA ROBUSTO POR TOKENS */
-    function normalizarString(str) {
+    /* NORMALIZADOR DE CARACTERES */
+    function normalizarToken(str) {
       return String(str || '')
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/[^a-z0-9]/g, "")
         .trim();
     }
 
-    function buscarStatsJugador(nombre, apellido) {
+    /**
+     * MOTOR DE BÚSQUEDA EXACTO PARA HERMANOS / HOMÓNIMOS
+     */
+    function buscarStatsJugadorEstricto(nombre, apellido, equipo) {
       const resultado = [];
       const categorias = ['RUSHING', 'PASSING', 'RECEIVING', 'DEFENSIVE'];
 
-      const nomNorm = normalizarString(nombre);
-      const apeNorm = normalizarString(apellido);
+      // Descomponer en palabras individuales
+      const tokensNombre = String(nombre || '').split(/\s+/).map(normalizarToken).filter(Boolean);
+      const tokensApellido = String(apellido || '').split(/\s+/).map(normalizarToken).filter(Boolean);
+      const equipoNorm = normalizarToken(equipo);
 
       categorias.forEach(cat => {
         const filas = seccionesStatsGlobal[cat] || [];
         const match = filas.find(r => {
-          const rawRowName = normalizarString(r.JUGADOR || r.PLAYER || r.NOMBRE || '');
-          if (!rawRowName) return false;
+          // 1. EL EQUIPO DEBE COINCIDIR ESTRICTAMENTE
+          const rowEquipoNorm = normalizarToken(r.EQUIPO || r.TEAM || r.CLUB || '');
+          if (rowEquipoNorm && rowEquipoNorm !== equipoNorm && !rowEquipoNorm.includes(equipoNorm) && !equipoNorm.includes(rowEquipoNorm)) {
+            return false;
+          }
 
-          // Si contiene tanto el nombre como el apellido sin importar orden (ej. "Romagosa, Lorenzo")
-          const contieneAmbos = rawRowName.includes(nomNorm) && rawRowName.includes(apeNorm);
-          // O si coincide con el apellido y la inicial del nombre
-          const inicialNombre = nomNorm.charAt(0);
-          const coincideApellidoEInicial = rawRowName.includes(apeNorm) && rawRowName.includes(inicialNombre);
+          // 2. TOKENIZAR NOMBRE DE LA FILA DE STATS
+          const rawRowName = String(r.JUGADOR || r.PLAYER || r.NOMBRE || '');
+          const rowTokens = rawRowName.split(/[\s,.-]+/).map(normalizarToken).filter(Boolean);
+          if (rowTokens.length === 0) return false;
 
-          return contieneAmbos || coincideApellidoEInicial;
+          // 3. El apellido debe estar presente como palabra exacta
+          const coincideApellido = tokensApellido.some(ape => rowTokens.includes(ape));
+          if (!coincideApellido) return false;
+
+          // 4. El nombre debe coincidir: o el nombre de pila completo o su inicial como token individual
+          const coincideNombre = tokensNombre.some(nom => {
+            if (rowTokens.includes(nom)) return true; // Nombre completo (ej. "Lorenzo")
+            const inicial = nom.charAt(0);
+            return rowTokens.includes(inicial); // Token individual inicial (ej. "L")
+          });
+
+          return coincideNombre;
         });
 
         if (match) {
-          // Extraer TODAS las columnas numéricas que no sean metadatos
           let datosExtraidos = {};
-          const ignorarCampos = ['JUGADOR', 'PLAYER', 'NOMBRE', 'EQUIPO', 'TEAM', 'RANK', '#'];
+          const ignorarCampos = ['JUGADOR', 'PLAYER', 'NOMBRE', 'EQUIPO', 'TEAM', 'CLUB', 'RANK', '#'];
 
           for (const k in match) {
             const kNorm = k.toUpperCase().trim();
@@ -1317,7 +1327,7 @@
       document.getElementById('playerCardModal').classList.remove('active');
     }
 
-    /* CALENDARIO */
+    /* MÓDULO DE CALENDARIO */
     function loadCalendarioData() {
       const db = getMasterDB();
       const catData = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];

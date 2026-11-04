@@ -8,8 +8,19 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
-  <!-- LECTURA DEL ARCHIVO EXTERNO QUE YA CONFIGURASTE -->
+  <!-- LECTURA DE TU ARCHIVO JS/CONFIG-LIGAS.JS -->
   <script src="js/config-ligas.js"></script>
+
+  <!-- RED DE SEGURIDAD: GARANTIZA QUE LAS URLS SIEMPRE ESTÉN PRESENTES -->
+  <script>
+    window.KFL_CONFIG = window.KFL_CONFIG || {};
+    if (!window.KFL_CONFIG.API_CALENDARIO_URL) {
+      window.KFL_CONFIG.API_CALENDARIO_URL = {
+        "contact": "https://script.google.com/macros/s/AKfycbxU6knUi6orz37wYKqv6hbf3k75l64gwRTxU2yB3LD8DBvRyw02ATEfJFm6rSXFC2WZ/exec",
+        "flag": "https://script.google.com/macros/s/AKfycbwiZ73jSuTV6XOXZeSSdQpozBonJfhe7Qg8bi0sjgG78tyEIOSq9ir9ya5sxs4TfBOS/exec"
+      };
+    }
+  </script>
 
   <style>
     .tab-pane {
@@ -48,7 +59,7 @@
       box-shadow: 0 8px 25px rgba(169, 28, 0, 0.35);
     }
 
-    /* BARRA DE INSTRUCCIONES A 1000PX */
+    /* BARRA DE INSTRUCCIONES AJUSTADA A 1000PX */
     .league-instruction-bar {
       display: flex;
       align-items: center;
@@ -250,7 +261,7 @@
       transform: translateY(-1px);
     }
 
-    /* CONTENEDORES RESPONSIVE PARA MÓVIL Y TABLET */
+    /* CONTENEDORES Y TABLAS RESPONSIVE PARA MÓVIL Y TABLET */
     .kfl-render-container {
       width: 100%;
       max-width: 1120px;
@@ -1040,7 +1051,7 @@
     });
   </script>
 
-  <!-- CONTROLADOR PRINCIPAL ROBUSTO -->
+  <!-- CONTROLADOR PRINCIPAL DESACOPLADO -->
   <script>
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -1081,7 +1092,7 @@
     }
 
     /**
-     * LECTURA DE CALENDARIO Y POSICIONES CON COMPATIBILIDAD DUAL
+     * CONSULTA AL GESTOR CORRESPONDIENTE (SIN BLOQUEAR OTRAS PESTAÑAS)
      */
     function fetchMasterDB(callback) {
       if (!activeLeague) return;
@@ -1107,19 +1118,22 @@
       }
 
       fetch(`${urlEndpoint}?modulo=all_data&_t=${Date.now()}`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        })
         .then(db => {
           setMasterDB(db);
           if (callback) callback();
         })
         .catch(err => {
-          console.error("Error al cargar datos de " + activeLeague + ":", err);
+          console.warn("Aviso: el gestor de " + activeLeague + " no entregó JSON:", err);
           if (callback) callback();
         });
     }
 
     /**
-     * SELECCIÓN DE LIGA: VISUALIZACIÓN INMEDIATA
+     * SELECCIÓN DE LIGA: DESPLIEGUE INMEDIATO
      */
     function selectLeague(league) {
       activeLeague = league;
@@ -1141,7 +1155,6 @@
         document.body.className = 'flag-theme';
       }
 
-      // Despliegue visual inmediato
       contentSection.style.display = 'block';
       resetBtnWrapper.style.display = 'block';
       instructionBar.style.display = 'none';
@@ -1150,11 +1163,16 @@
         btn.classList.toggle('active', btn.textContent.toLowerCase() === 'varsity');
       });
 
+      // Mostrar subpestaña de calendario de inmediato
       selectSubTab('calendario');
+
+      // Precargar stats en segundo plano
       precargarStatsCategoria();
 
+      // Cargar la base de datos de esa liga en segundo plano
       fetchMasterDB(() => {
-        updateActiveView();
+        if (activeSubTab === 'calendario') loadCalendarioData();
+        if (activeSubTab === 'posiciones') loadPosicionesData();
       });
     }
 
@@ -1190,29 +1208,28 @@
       const targetPane = document.getElementById('pane-' + subTab);
       if (targetPane) targetPane.classList.add('active');
 
-      if (activeLeague) updateActiveView();
+      // Ejecutar actualización de la pestaña activa de forma directa
+      updateActiveView();
     }
 
+    /**
+     * MOTOR DESACOPLADO: CADA PESTAÑA CORRE INDEPENDIENTE (CERO BLOQUEOS)
+     */
     function updateActiveView() {
       if (!activeLeague) return;
 
-      const db = getMasterDB();
-      if (!db) {
-        fetchMasterDB(() => updateActiveView());
-        return;
-      }
-
-      if (activeSubTab === 'calendario') {
+      if (activeSubTab === 'rosters') {
+        renderRostersGrid(); // Ejecuta de inmediato sin requerir DB
+      } else if (activeSubTab === 'stats') {
+        loadStatsData();    // Lee el CSV de inmediato sin requerir DB
+      } else if (activeSubTab === 'calendario') {
         loadCalendarioData();
       } else if (activeSubTab === 'posiciones') {
         loadPosicionesData();
-      } else if (activeSubTab === 'rosters') {
-        renderRostersGrid();
-      } else if (activeSubTab === 'stats') {
-        loadStatsData();
       }
     }
 
+    /* RENDER DE ROSTERS */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
@@ -1466,16 +1483,26 @@
       document.getElementById('playerCardModal').classList.remove('active');
     }
 
+    /**
+     * CALENDARIO
+     */
     function loadCalendarioData() {
+      const container = document.getElementById('calendarioNativeContent');
       const db = getMasterDB();
-      let catData = [];
 
-      if (db) {
-        if (db[activeCategory] && db[activeCategory].partidos) {
-          catData = db[activeCategory].partidos;
-        } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].partidos) {
-          catData = db[activeLeague][activeCategory].partidos;
-        }
+      if (!db) {
+        if (container) container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">Cargando calendario oficial...</p>';
+        fetchMasterDB(() => {
+          loadCalendarioData();
+        });
+        return;
+      }
+
+      let catData = [];
+      if (db[activeCategory] && db[activeCategory].partidos) {
+        catData = db[activeCategory].partidos;
+      } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].partidos) {
+        catData = db[activeLeague][activeCategory].partidos;
       }
 
       populateCalendarFilters(catData);
@@ -1558,16 +1585,26 @@
       container.innerHTML = html;
     }
 
+    /**
+     * POSICIONES
+     */
     function loadPosicionesData() {
+      const container = document.getElementById('posicionesNativeContent');
       const db = getMasterDB();
-      let catTabla = [];
 
-      if (db) {
-        if (db[activeCategory] && db[activeCategory].tabla) {
-          catTabla = db[activeCategory].tabla;
-        } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].tabla) {
-          catTabla = db[activeLeague][activeCategory].tabla;
-        }
+      if (!db) {
+        if (container) container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">Cargando tabla de posiciones...</p>';
+        fetchMasterDB(() => {
+          loadPosicionesData();
+        });
+        return;
+      }
+
+      let catTabla = [];
+      if (db[activeCategory] && db[activeCategory].tabla) {
+        catTabla = db[activeCategory].tabla;
+      } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].tabla) {
+        catTabla = db[activeLeague][activeCategory].tabla;
       }
 
       renderPosiciones(catTabla);
@@ -1604,7 +1641,7 @@
       container.innerHTML = html;
     }
 
-    /* STATS */
+    /* STATS (DESACOPLADO: NUNCA BLOQUEADO POR OTRAS CONSULTAS) */
     function loadStatsData() {
       const cfg = window.KFL_CONFIG || {};
       const linksLiga = cfg.STATS_CSV_LINKS && cfg.STATS_CSV_LINKS[activeLeague];

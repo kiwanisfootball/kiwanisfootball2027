@@ -6,12 +6,12 @@
   <title>Ligas - Kiwanis Football League Panama</title>
   
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <link rel="icon" type="image/png" href="assets/logos/kfl.png">
 
-  <!-- LECTURA DE TU ARCHIVO JS/CONFIG-LIGAS.JS -->
+  <!-- LECTURA DEL ARCHIVO DE CONFIGURACIÓN -->
   <script src="js/config-ligas.js"></script>
 
-  <!-- RED DE SEGURIDAD: GARANTIZA QUE LAS URLS SIEMPRE ESTÉN PRESENTES -->
+  <!-- RESPALDO INTEGRADO EN CASO DE FALLA DEL ARCHIVO JS EXTERNO -->
   <script>
     window.KFL_CONFIG = window.KFL_CONFIG || {};
     if (!window.KFL_CONFIG.API_CALENDARIO_URL) {
@@ -30,7 +30,7 @@
       display: block !important;
     }
 
-    /* TARJETAS HERO SIN BORDES */
+    /* TARJETAS HERO SIN BORDES ARTIFICIALES */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -261,7 +261,7 @@
       transform: translateY(-1px);
     }
 
-    /* CONTENEDORES Y TABLAS RESPONSIVE PARA MÓVIL Y TABLET */
+    /* CONTENEDORES RESPONSIVE PARA MÓVIL Y TABLET */
     .kfl-render-container {
       width: 100%;
       max-width: 1120px;
@@ -338,7 +338,7 @@
       background-color: #f8fafc;
     }
 
-    /* ROSTERS: LOGOS CENTRADOS */
+    /* ROSTERS: LOGOS CENTRADOS Y HOMOGÉNEOS */
     .rosters-grid {
       display: flex;
       flex-wrap: wrap;
@@ -733,43 +733,204 @@
       margin-top: 3px;
     }
 
-    /* ESTILOS DE CALENDARIO */
-    .kfl-week-section { margin-bottom: 28px; }
+    /* ========================================================
+       CALENDARIO: CENTRADO GEOMÉTRICO (1, 2 O 3 JUEGOS)
+       ======================================================== */
+    .kfl-week-section {
+      margin-bottom: 32px;
+    }
+
     .kfl-week-title {
-      font-size: 17px; font-weight: 800; color: #19547E; border-bottom: 2px solid #19547E;
-      padding-bottom: 6px; margin-bottom: 16px; text-transform: uppercase; text-align: left;
+      font-size: 18px;
+      font-weight: 800;
+      color: #19547E;
+      border-bottom: 2px solid #19547E;
+      padding-bottom: 6px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      text-align: left;
     }
-    body.flag-theme .kfl-week-title { color: #A91C00; border-color: #A91C00; }
-    .kfl-grid-matches { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
-    @media (max-width: 720px) { .kfl-grid-matches { grid-template-columns: 1fr; } }
+
+    body.flag-theme .kfl-week-title {
+      color: #A91C00;
+      border-color: #A91C00;
+    }
+
+    /* CENTRADO PERFECTO: 1 JUEGO = AL MEDIO; 2 JUEGOS = PARALELOS; 3 JUEGOS = 2 ARRIBA Y 1 CENTRADO */
+    .kfl-grid-matches {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+    }
+
     .kfl-match-card {
-      background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;
+      flex: 1 1 340px;
+      max-width: 530px;
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
     }
+
     .kfl-match-header {
-      background: #19547E; color: #ffffff; padding: 8px 14px; font-weight: 700; font-size: 12px;
-      display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;
+      background: #19547E;
+      color: #ffffff;
+      padding: 8px 14px;
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-transform: uppercase;
     }
-    body.flag-theme .kfl-match-header { background: #A91C00; }
-    .kfl-info-item { display: flex; align-items: center; gap: 5px; }
-    .kfl-icon-svg { width: 14px; height: 14px; fill: currentColor; }
-    .kfl-match-body { padding: 16px; display: flex; align-items: center; justify-content: space-between; }
-    .kfl-team-box { display: flex; flex-direction: column; align-items: center; width: 36%; text-align: center; font-weight: 700; font-size: 14px; color: #0f172a; }
-    .kfl-team-logo { width: 48px; height: 48px; object-fit: contain; margin-bottom: 6px; }
-    .kfl-score-box { width: 28%; text-align: center; }
-    .kfl-score-num { font-size: 24px; font-weight: 900; color: #0f172a; }
-    .kfl-score-vs { font-size: 18px; font-weight: 800; color: #94a3b8; }
-    .kfl-score-status { font-size: 11px; font-weight: 800; color: #16a34a; letter-spacing: 0.5px; }
-    .kfl-single-match-wrapper { display: flex; justify-content: center; width: 100%; }
-    .kfl-jamboree-body-text { font-size: 16px; font-weight: 900; color: #19547E; text-align: center; padding: 22px 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-    body.flag-theme .kfl-jamboree-body-text { color: #A91C00; }
-    .kfl-bye-card-wrapper { grid-column: 1 / -1; display: flex; justify-content: center; width: 100%; margin-top: 6px; }
-    .kfl-bye-card { width: 100%; max-width: 440px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.04); }
-    .kfl-bye-header { background: #19547E; color: #ffffff; padding: 8px 14px; font-weight: 800; font-size: 12px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
-    body.flag-theme .kfl-bye-header { background: #A91C00; }
-    .kfl-bye-body { padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-    .kfl-bye-logo { width: 48px; height: 48px; object-fit: contain; }
-    .kfl-bye-team-name { font-size: 15px; font-weight: 800; color: #1e293b; text-transform: uppercase; }
+
+    body.flag-theme .kfl-match-header {
+      background: #A91C00;
+    }
+
+    .kfl-info-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .kfl-icon-svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .kfl-match-body {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .kfl-team-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 36%;
+      text-align: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #0f172a;
+    }
+
+    .kfl-team-logo {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      margin-bottom: 6px;
+    }
+
+    .kfl-score-box {
+      width: 28%;
+      text-align: center;
+    }
+
+    .kfl-score-num {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .kfl-score-vs {
+      font-size: 18px;
+      font-weight: 800;
+      color: #94a3b8;
+    }
+
+    .kfl-score-status {
+      font-size: 11px;
+      font-weight: 800;
+      color: #16a34a;
+      letter-spacing: 0.5px;
+    }
+
+    /* CARD DE JAMBOREE RESTAURADO Y MEJORADO CON LOGOS */
+    .kfl-jamboree-card {
+      width: 100%;
+      max-width: 580px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      margin: 0 auto;
+    }
+
+    .kfl-jamboree-body {
+      padding: 22px 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .kfl-jamboree-logos-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .kfl-jamboree-team-logo {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .kfl-jamboree-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      color: #19547E;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    body.flag-theme .kfl-jamboree-title {
+      color: #A91C00;
+    }
+
+    .kfl-jamboree-time {
+      font-family: 'Avenir', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #475569;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* EQUIPO LIBRE (BYE) EN TEXTO AVENIR GRIS (SIN CARDS EXTRA) */
+    .kfl-bye-text-row {
+      width: 100%;
+      text-align: center;
+      font-family: 'Avenir', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #64748b;
+      margin-top: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .kfl-bye-text-row strong {
+      color: #1e293b;
+    }
 
     /* STATS BUTTONS */
     .stats-buttons-grid { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
@@ -1051,7 +1212,7 @@
     });
   </script>
 
-  <!-- CONTROLADOR PRINCIPAL DESACOPLADO -->
+  <!-- CONTROLADOR PRINCIPAL CON PERSISTENCIA INSTANTÁNEA EN LOCALSTORAGE -->
   <script>
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -1068,40 +1229,43 @@
       pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
     };
 
+    /**
+     * RESOLUCIÓN LOCAL DE LOGOS (100% EN EL REPOSITORIO, SIN IMGUR)
+     */
     function getTeamLogo(teamName) {
-      const cleanTeam = (teamName || "").toUpperCase().trim();
+      if (!teamName) return "assets/logos/kfl.png";
+      const clean = teamName.toUpperCase().trim().replace(/[^A-Z0-9]/g, '');
       const cfg = window.KFL_CONFIG || {};
-      return (cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) ||
-             (cfg.FALLBACK_LOGOS && cfg.FALLBACK_LOGOS[cleanTeam]) ||
-             "https://i.imgur.com/wrPDjDN.png";
+
+      if (cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[clean]) {
+        return cfg.EQUIPOS_LOGOS[clean];
+      }
+      return `assets/logos/${clean.toLowerCase()}.png`;
     }
 
+    /**
+     * PERSISTENCIA PERMANENTE EN LOCALSTORAGE (CARGA EN 0 SEGUNDOS)
+     */
     function getMasterDB() {
       try {
         if (!activeLeague) return null;
-        const d = sessionStorage.getItem('kfl_master_db_' + activeLeague);
+        const d = localStorage.getItem('kfl_db_' + activeLeague);
         return d ? JSON.parse(d) : null;
       } catch (e) { return null; }
     }
 
     function setMasterDB(data) {
       try {
-        if (!activeLeague) return;
-        sessionStorage.setItem('kfl_master_db_' + activeLeague, JSON.stringify(data));
+        if (!activeLeague || !data) return;
+        localStorage.setItem('kfl_db_' + activeLeague, JSON.stringify(data));
       } catch (e) {}
     }
 
     /**
-     * CONSULTA AL GESTOR CORRESPONDIENTE (SIN BLOQUEAR OTRAS PESTAÑAS)
+     * CONSULTA ASÍNCRONA EN SEGUNDO PLANO (STALE-WHILE-REVALIDATE)
      */
     function fetchMasterDB(callback) {
       if (!activeLeague) return;
-
-      const cached = getMasterDB();
-      if (cached) {
-        if (callback) callback();
-        return;
-      }
 
       const cfg = window.KFL_CONFIG || {};
       let urlEndpoint = "";
@@ -1117,6 +1281,7 @@
         return;
       }
 
+      // Consulta en segundo plano sin bloquear la interfaz
       fetch(`${urlEndpoint}?modulo=all_data&_t=${Date.now()}`)
         .then(res => {
           if (!res.ok) throw new Error("HTTP " + res.status);
@@ -1127,13 +1292,13 @@
           if (callback) callback();
         })
         .catch(err => {
-          console.warn("Aviso: el gestor de " + activeLeague + " no entregó JSON:", err);
+          console.warn("Aviso: el gestor no respondió con JSON:", err);
           if (callback) callback();
         });
     }
 
     /**
-     * SELECCIÓN DE LIGA: DESPLIEGUE INMEDIATO
+     * SELECCIÓN DE LIGA
      */
     function selectLeague(league) {
       activeLeague = league;
@@ -1163,13 +1328,13 @@
         btn.classList.toggle('active', btn.textContent.toLowerCase() === 'varsity');
       });
 
-      // Mostrar subpestaña de calendario de inmediato
+      // 1. Mostrar de inmediato la pestaña activa desde la caché local (0 segundos)
       selectSubTab('calendario');
 
-      // Precargar stats en segundo plano
+      // 2. Precargar estadísticas en memoria
       precargarStatsCategoria();
 
-      // Cargar la base de datos de esa liga en segundo plano
+      // 3. Sincronizar actualización en segundo plano
       fetchMasterDB(() => {
         if (activeSubTab === 'calendario') loadCalendarioData();
         if (activeSubTab === 'posiciones') loadPosicionesData();
@@ -1208,20 +1373,20 @@
       const targetPane = document.getElementById('pane-' + subTab);
       if (targetPane) targetPane.classList.add('active');
 
-      // Ejecutar actualización de la pestaña activa de forma directa
+      // Ejecutar la vista de forma 100% independiente
       updateActiveView();
     }
 
     /**
-     * MOTOR DESACOPLADO: CADA PESTAÑA CORRE INDEPENDIENTE (CERO BLOQUEOS)
+     * MOTOR TOTALMENTE DESACOPLADO (CERO ESPERAS Y CERO BLOQUEOS)
      */
     function updateActiveView() {
       if (!activeLeague) return;
 
       if (activeSubTab === 'rosters') {
-        renderRostersGrid(); // Ejecuta de inmediato sin requerir DB
+        renderRostersGrid(); // Dibuja inmediatamente
       } else if (activeSubTab === 'stats') {
-        loadStatsData();    // Lee el CSV de inmediato sin requerir DB
+        loadStatsData();    // Lee el CSV de inmediato
       } else if (activeSubTab === 'calendario') {
         loadCalendarioData();
       } else if (activeSubTab === 'posiciones') {
@@ -1250,7 +1415,7 @@
         card.onclick = () => abrirRosterEquipo(equipo);
         card.innerHTML = `
           <div class="team-roster-logo-wrap">
-            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+            <img src="${logoUrl}" alt="${equipo}" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}">
           </div>
           <h4>${equipo}</h4>
         `;
@@ -1267,10 +1432,23 @@
 
       teamTitle.innerText = `${nombreEquipo} - ROSTER`;
       teamLogo.src = getTeamLogo(nombreEquipo);
+      teamLogo.onerror = function() { this.src = `assets/img/logos/${nombreEquipo.toLowerCase()}.png`; };
       detailBox.style.display = 'block';
 
-      playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 22px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
-      staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
+      // 1. Verificar si ya tenemos el roster guardado en localStorage para apertura instantánea
+      const cacheKey = `kfl_roster_local_${activeLeague}_${activeCategory}_${nombreEquipo}`;
+      const localCached = localStorage.getItem(cacheKey);
+
+      if (localCached) {
+        try {
+          const parsedCache = JSON.parse(localCached);
+          renderizarTablasRosterYStaff(parsedCache, nombreEquipo);
+        } catch(e) {}
+      } else {
+        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 22px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
+        staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
+      }
+
       detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       const cfg = window.KFL_CONFIG || {};
@@ -1282,8 +1460,10 @@
       }
 
       if (!apiUrl) {
-        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b; font-weight:600;">Rosters de esta categoría próximamente disponibles.</td></tr>';
-        staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b;">Sin cuerpo técnico registrado.</td></tr>';
+        if (!localCached) {
+          playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b; font-weight:600;">Rosters de esta categoría próximamente disponibles.</td></tr>';
+          staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b;">Sin cuerpo técnico registrado.</td></tr>';
+        }
         return;
       }
 
@@ -1293,15 +1473,16 @@
         const data = await res.json();
 
         if (data.status === 'success') {
+          localStorage.setItem(cacheKey, JSON.stringify(data));
           renderizarTablasRosterYStaff(data, nombreEquipo);
-        } else {
+        } else if (!localCached) {
           playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores registrados oficialmente aún.</td></tr>';
           staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b;">Sin cuerpo técnico registrado.</td></tr>';
         }
       } catch (err) {
-        console.error(err);
-        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#c53030;">Error al conectar con la base de datos del equipo.</td></tr>';
-        staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#c53030;">Error al cargar staff.</td></tr>';
+        if (!localCached) {
+          playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#c53030;">Error al conectar con la base de datos del equipo.</td></tr>';
+        }
       }
     }
 
@@ -1355,9 +1536,20 @@
       const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
       if (!csvUrl) return;
 
+      // Verificar caché de stats en localStorage
+      const cacheKey = `kfl_stats_csv_${activeLeague}_${activeCategory}`;
+      const cachedCSV = localStorage.getItem(cacheKey);
+      if (cachedCSV) {
+        try {
+          const res = parsearWebFinalCSV(cachedCSV);
+          seccionesStatsGlobal = res.secciones;
+        } catch(e) {}
+      }
+
       fetch(csvUrl)
         .then(res => res.text())
         .then(texto => {
+          localStorage.setItem(cacheKey, texto);
           const res = parsearWebFinalCSV(texto);
           seccionesStatsGlobal = res.secciones;
         })
@@ -1484,36 +1676,37 @@
     }
 
     /**
-     * CALENDARIO
+     * CALENDARIO: LECTURA ULTRA RÁPIDA
      */
     function loadCalendarioData() {
       const container = document.getElementById('calendarioNativeContent');
       const db = getMasterDB();
+      let catData = [];
 
-      if (!db) {
+      if (db) {
+        if (db[activeCategory] && db[activeCategory].partidos) {
+          catData = db[activeCategory].partidos;
+        } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].partidos) {
+          catData = db[activeLeague][activeCategory].partidos;
+        }
+      }
+
+      if (catData.length > 0) {
+        populateCalendarFilters(catData);
+        renderCalendar(catData);
+      } else {
         if (container) container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">Cargando calendario oficial...</p>';
         fetchMasterDB(() => {
           loadCalendarioData();
         });
-        return;
       }
-
-      let catData = [];
-      if (db[activeCategory] && db[activeCategory].partidos) {
-        catData = db[activeCategory].partidos;
-      } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].partidos) {
-        catData = db[activeLeague][activeCategory].partidos;
-      }
-
-      populateCalendarFilters(catData);
-      renderCalendar(catData);
     }
 
     function populateCalendarFilters(partidos) {
       const weekSelect = document.getElementById('filterWeek');
       const teamSelect = document.getElementById('filterTeam');
       const weeks = [...new Set(partidos.map(p => p.week).filter(Boolean))];
-      const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => t && t !== 'KFL' && t !== 'TODOS JUEGAN'))];
+      const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => t && t !== 'KFL' && t !== 'TODOS JUEGAN' && !t.includes('LIBRE') && !t.includes('BYE')))];
       weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
       teamSelect.innerHTML = '<option value="ALL">Todos los Equipos</option>' + teams.map(t => `<option value="${t}">${t}</option>`).join('');
     }
@@ -1540,6 +1733,9 @@
       renderCalendar(filtered);
     }
 
+    /**
+     * RENDER DE CALENDARIO CON JAMBOREE COMPLETO Y BYE COMO TEXTO AVENIR
+     */
     function renderCalendar(partidos) {
       const container = document.getElementById('calendarioNativeContent');
       if (!partidos || partidos.length === 0) {
@@ -1552,35 +1748,94 @@
         if (!grouped[week]) grouped[week] = [];
         grouped[week].push(p);
       });
+
+      const cfg = window.KFL_CONFIG || {};
+      const equiposCategoria = (cfg.CATEGORIAS_EQUIPOS && cfg.CATEGORIAS_EQUIPOS[activeLeague] && cfg.CATEGORIAS_EQUIPOS[activeLeague][activeCategory]) || [];
+
       let html = '';
       for (const weekName in grouped) {
-        html += `<div class="kfl-week-section"><div class="kfl-week-title">${weekName}</div><div class="kfl-grid-matches">`;
-        grouped[weekName].forEach(p => {
+        html += `<div class="kfl-week-section"><div class="kfl-week-title">${weekName}</div>`;
+        
+        const weekGames = grouped[weekName];
+        const regularGames = [];
+        let byeTeamName = "";
+
+        // Separar partidos regulares, Jamboree y equipos libres (BYE)
+        weekGames.forEach(g => {
+          const homeUp = (g.home || "").toUpperCase();
+          const awayUp = (g.away || "").toUpperCase();
+
+          if (g.isBye || homeUp.includes("LIBRE") || homeUp.includes("BYE")) {
+            byeTeamName = homeUp.replace("LIBRE", "").replace("BYE", "").trim();
+          } else if (awayUp.includes("LIBRE") || awayUp.includes("BYE")) {
+            byeTeamName = awayUp.replace("LIBRE", "").replace("BYE", "").trim();
+          } else {
+            regularGames.push(g);
+          }
+        });
+
+        // Caso 1: Es un Jamboree oficial
+        const primerJuego = regularGames[0];
+        if (primerJuego && (primerJuego.isJamboree || weekName.toUpperCase().includes("JAMBOREE") || primerJuego.away === "TODOS JUEGAN")) {
+          let logosJamboreeHtml = '';
+          equiposCategoria.forEach(eq => {
+            logosJamboreeHtml += `<img src="${getTeamLogo(eq)}" alt="${eq}" class="kfl-jamboree-team-logo" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}">`;
+          });
+
           html += `
-            <div class="kfl-match-card">
+            <div class="kfl-jamboree-card">
               <div class="kfl-match-header">
-                <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
-                <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
+                <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${primerJuego.date || 'POR CONFIRMAR'}</span></div>
+                <div class="kfl-info-item">${SVG_ICONS.pin} <span>${primerJuego.field || 'TBD'}</span></div>
               </div>
-              <div class="kfl-match-body">
-                <div class="kfl-team-box">
-                  <img src="${getTeamLogo(p.home)}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                  <span>${p.home}</span>
+              <div class="kfl-jamboree-body">
+                <div class="kfl-jamboree-logos-row">
+                  ${logosJamboreeHtml}
                 </div>
-                <div class="kfl-score-box">
-                  ${p.hasScore 
-                    ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
-                    : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
-                </div>
-                <div class="kfl-team-box">
-                  <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
-                  <span>${p.away}</span>
+                <h3 class="kfl-jamboree-title">TODOS JUEGAN</h3>
+                <div class="kfl-jamboree-time">
+                  ${SVG_ICONS.clock} <span>${primerJuego.time || 'POR CONFIRMAR'}</span>
                 </div>
               </div>
             </div>
           `;
-        });
-        html += `</div></div>`;
+        } else {
+          // Caso 2: Partidos regulares (centrado automático para 1, 2 o más partidos)
+          html += `<div class="kfl-grid-matches">`;
+          regularGames.forEach(p => {
+            html += `
+              <div class="kfl-match-card">
+                <div class="kfl-match-header">
+                  <div class="kfl-info-item">${SVG_ICONS.calendar} <span>${p.date || 'POR CONFIRMAR'}</span></div>
+                  <div class="kfl-info-item">${SVG_ICONS.pin} <span>${p.field || 'TBD'}</span></div>
+                </div>
+                <div class="kfl-match-body">
+                  <div class="kfl-team-box">
+                    <img src="${getTeamLogo(p.home)}" alt="${p.home}" class="kfl-team-logo" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}">
+                    <span>${p.home}</span>
+                  </div>
+                  <div class="kfl-score-box">
+                    ${p.hasScore 
+                      ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
+                      : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
+                  </div>
+                  <div class="kfl-team-box">
+                    <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}">
+                    <span>${p.away}</span>
+                  </div>
+                </div>
+              </div>
+            `;
+          });
+          html += `</div>`;
+        }
+
+        // Caso 3: Equipo Bye en texto plano Avenir Gris sin cards extras
+        if (byeTeamName) {
+          html += `<div class="kfl-bye-text-row">EQUIPO LIBRE (BYE): <strong>${byeTeamName}</strong></div>`;
+        }
+
+        html += `</div>`;
       }
       container.innerHTML = html;
     }
@@ -1591,23 +1846,24 @@
     function loadPosicionesData() {
       const container = document.getElementById('posicionesNativeContent');
       const db = getMasterDB();
+      let catTabla = [];
 
-      if (!db) {
+      if (db) {
+        if (db[activeCategory] && db[activeCategory].tabla) {
+          catTabla = db[activeCategory].tabla;
+        } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].tabla) {
+          catTabla = db[activeLeague][activeCategory].tabla;
+        }
+      }
+
+      if (catTabla.length > 0) {
+        renderPosiciones(catTabla);
+      } else {
         if (container) container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">Cargando tabla de posiciones...</p>';
         fetchMasterDB(() => {
           loadPosicionesData();
         });
-        return;
       }
-
-      let catTabla = [];
-      if (db[activeCategory] && db[activeCategory].tabla) {
-        catTabla = db[activeCategory].tabla;
-      } else if (db[activeLeague] && db[activeLeague][activeCategory] && db[activeLeague][activeCategory].tabla) {
-        catTabla = db[activeLeague][activeCategory].tabla;
-      }
-
-      renderPosiciones(catTabla);
     }
 
     function renderPosiciones(tabla) {
@@ -1630,7 +1886,7 @@
         html += `
           <tr>
             <td><strong>${idx + 1}</strong></td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(row.equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${row.equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(row.equipo)}" class="kfl-table-team-logo" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}"><span>${row.equipo}</span></div></td>
             <td>${row.jj || row.PJ || 0}</td><td>${row.jg || row.G || 0}</td><td>${row.jp || row.P || 0}</td><td>${row.je || row.E || 0}</td><td>${row.pf || row.PF || 0}</td><td>${row.pc || row.PC || 0}</td>
             <td style="font-weight:bold; color:${(row.dif || 0) >= 0 ? '#16a34a' : '#dc2626'}">${(row.dif || 0) > 0 ? '+' + row.dif : (row.dif || 0)}</td>
             <td><strong>${row.pts || row.PTS || 0}</strong></td>
@@ -1641,7 +1897,7 @@
       container.innerHTML = html;
     }
 
-    /* STATS (DESACOPLADO: NUNCA BLOQUEADO POR OTRAS CONSULTAS) */
+    /* STATS */
     function loadStatsData() {
       const cfg = window.KFL_CONFIG || {};
       const linksLiga = cfg.STATS_CSV_LINKS && cfg.STATS_CSV_LINKS[activeLeague];
@@ -1653,17 +1909,23 @@
         return;
       }
 
+      // Si ya tenemos secciones parseadas, renderizar de inmediato en 0 segundos
+      if (seccionesStatsGlobal[tipoStatActivo] && seccionesStatsGlobal[tipoStatActivo].length > 0) {
+        renderizarSeccionActivaStats();
+      }
+
       fetch(csvUrl)
         .then(res => res.text())
         .then(texto => {
           const resultado = parsearWebFinalCSV(texto);
           seccionesStatsGlobal = resultado.secciones;
           document.getElementById('kflLastUpdateLabel').textContent = formatearHora12h(resultado.ultimaActualizacion || "NO REGISTRADA");
-          paginaActualStats = 1;
           renderizarSeccionActivaStats();
         })
         .catch(() => {
-          document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #dc2626;">Error al cargar las estadísticas.</td></tr>`;
+          if (!seccionesStatsGlobal[tipoStatActivo] || seccionesStatsGlobal[tipoStatActivo].length === 0) {
+            document.getElementById('statsTableBody').innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 25px; color: #dc2626;">Error al cargar las estadísticas.</td></tr>`;
+          }
         });
     }
 
@@ -1782,7 +2044,7 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}"><span>${equipo}</span></div></td>
             <td style="text-align: center;">${row.CARRIES || row.REC || "0"}</td>
             <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || "0"}</td>
             <td style="text-align: center;">${row.AVG || "0.0"}</td>
@@ -1794,7 +2056,7 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}"><span>${equipo}</span></div></td>
             <td style="text-align: center;">${row.COMP || "0"}</td>
             <td style="text-align: center;">${row.ATT || "0"}</td>
             <td style="text-align: center;">${row["COMP %"] || "0.0%"}</td>
@@ -1808,7 +2070,7 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='assets/img/logos/' + this.alt.toLowerCase() + '.png';}"><span>${equipo}</span></div></td>
             <td style="text-align: center; font-weight: 700; color: #19547E;">${tacklesVal}</td>
             <td style="text-align: center;">${row.SACK || "0"}</td>
             <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>

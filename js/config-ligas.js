@@ -34,10 +34,10 @@ const KFL_CONFIG = {
       "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
     },
     "flag": {
-      "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
-      "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
-      "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
-      "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
+      "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtLR7KV_c_QOFIVal54Rwm3UC1xRlDWGUVz4IOKjAIKpZBNv3eCQ8SZrEbZcQTjk_F8Sj9fA0oQrju/pub?gid=835067495&single=true&output=csv",
+      "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGOYtkC2GUu_Doijz1JzOOotTL-RJWwN-YNjhqepCOnE1EjYq9kOvSNm8cPJau9hqLCMCIUfQlSHDj/pub?gid=835067495&single=true&output=csv",
+      "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTA6XDCFs8Mt2kFL9MEZyzaKxUun9-r-HN60qH75nB5_tdwWyniQ6UzWx6kpk7_DvncTvZp6AcjFBoV/pub?gid=835067495&single=true&output=csv",
+      "micro": ""
     }
   },
 

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
-  <!-- CONFIGURACIÓN CENTRALIZADA KFL (EQUIPOS, LOGOS Y ENLACES) -->
+  <!-- CONFIGURACIÓN CENTRALIZADA KFL -->
   <script src="js/config-ligas.js"></script>
 
   <style>
@@ -20,7 +20,7 @@
       display: block !important;
     }
 
-    /* TARJETAS HERO SIN BORDES NI RELIEVES */
+    /* TARJETAS HERO */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
@@ -239,7 +239,7 @@
     }
 
     /* ========================================================
-       SECCIÓN DE ROSTERS: SIN CONTENEDORES Y FLUIDA
+       SECCIÓN DE ROSTERS: GRILLA DE LOGOS
        ======================================================== */
     .rosters-grid {
       display: flex;
@@ -318,15 +318,17 @@
       color: #A91C00;
     }
 
-    /* CONTENEDOR DESPLEGABLE DEL ROSTER DEL EQUIPO (COLUMNAS A - D) */
+    /* CONTENEDOR DE ROSTER: ANCHO COMPACTO Y HOMOGÉNEO */
     .roster-detail-container {
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
-      padding: 30px;
-      margin-top: 25px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      padding: 28px 32px;
+      margin: 25px auto 40px auto;
+      max-width: 760px; /* Ancho homogéneo y elegante */
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
       display: none;
+      box-sizing: border-box;
     }
 
     .roster-detail-header {
@@ -347,14 +349,14 @@
     }
 
     .roster-detail-title-group img {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       object-fit: contain;
     }
 
     .roster-detail-title-group h3 {
       font-family: 'Anton', sans-serif;
-      font-size: 26px;
+      font-size: 24px;
       color: #19547E;
       margin: 0;
       text-transform: uppercase;
@@ -368,11 +370,11 @@
     .btn-close-roster {
       background: #f1f5f9;
       border: 1px solid #cbd5e1;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-size: 13px;
+      padding: 7px 16px;
+      border-radius: 6px;
+      font-size: 12px;
       font-weight: 800;
-      color: #334155;
+      color: #475569;
       cursor: pointer;
       text-transform: uppercase;
       transition: background 0.2s;
@@ -380,11 +382,43 @@
 
     .btn-close-roster:hover {
       background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* TABLA DE ROSTER (COLUMNAS A-D) */
+    .roster-compact-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 25px;
+      font-size: 13.5px;
+    }
+
+    .roster-compact-table th {
+      background-color: #f8fafc;
+      color: #19547E;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 11.5px;
+      letter-spacing: 0.5px;
+      padding: 10px 12px;
+      border-bottom: 2px solid #cbd5e1;
+      text-align: left;
+    }
+
+    body.flag-theme .roster-compact-table th {
+      color: #A91C00;
+    }
+
+    .roster-compact-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      white-space: nowrap; /* Evita que los nombres se corten */
+      color: #334155;
     }
 
     .roster-player-clickable-row {
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color 0.15s ease;
     }
 
     .roster-player-clickable-row:hover {
@@ -395,14 +429,54 @@
       background-color: #fff1f2 !important;
     }
 
-    /* MODAL: PLAYER CARD CON STATS Y FOTO */
+    .cell-player-nombre {
+      color: #475569; /* Nombre en tono regular */
+      font-weight: 500;
+    }
+
+    .cell-player-apellido {
+      color: #0f172a; /* Apellido en negrita destacada */
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .cell-jersey-badge {
+      display: inline-block;
+      font-family: 'Anton', sans-serif;
+      font-size: 16px;
+      color: #19547E;
+      letter-spacing: 0.5px;
+    }
+
+    body.flag-theme .cell-jersey-badge {
+      color: #A91C00;
+    }
+
+    /* TABLA DE COACHING STAFF */
+    .staff-section-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 18px;
+      color: #19547E;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 30px 0 10px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    body.flag-theme .staff-section-title {
+      color: #A91C00;
+    }
+
+    /* MODAL: PLAYER CARD */
     .player-card-modal-backdrop {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(11, 15, 25, 0.75);
+      background: rgba(11, 15, 25, 0.78);
       backdrop-filter: blur(4px);
       z-index: 10000;
       display: none;
@@ -419,10 +493,10 @@
     .player-card {
       background: #ffffff;
       border-radius: 20px;
-      max-width: 520px;
+      max-width: 480px;
       width: 100%;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
       position: relative;
       animation: modalFadeIn 0.25s ease-out;
     }
@@ -433,29 +507,29 @@
     }
 
     .player-card-header {
-      background: linear-gradient(135deg, #19547E, #0b0f19);
-      padding: 30px 25px 25px 25px;
+      background: linear-gradient(135deg, #19547E 0%, #0b0f19 100%);
+      padding: 30px 20px 22px 20px;
       color: #ffffff;
       text-align: center;
       position: relative;
     }
 
     body.flag-theme .player-card-header {
-      background: linear-gradient(135deg, #A91C00, #0b0f19);
+      background: linear-gradient(135deg, #A91C00 0%, #0b0f19 100%);
     }
 
     .btn-modal-close {
       position: absolute;
-      top: 15px;
-      right: 15px;
+      top: 14px;
+      right: 14px;
       background: rgba(255,255,255,0.2);
       border: none;
       color: #ffffff;
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -467,44 +541,53 @@
       background: rgba(255,255,255,0.4);
     }
 
+    /* CONTENEDOR DE FOTO ATLÉTICO PERFECTAMENTE CENTRADO */
     .player-card-photo-container {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 15px auto;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 12px auto;
       border-radius: 50%;
-      background: #f8fafc;
+      background: radial-gradient(circle, #ffffff 50%, #f1f5f9 100%);
       border: 4px solid #ffffff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
       overflow: hidden;
       display: flex;
-      align-items: center;
+      align-items: flex-end; /* Anclado al fondo para siluetas de busto */
       justify-content: center;
     }
 
     .player-card-photo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain; /* Nunca corta la cabeza ni deforma */
+      object-position: center bottom;
     }
 
     .player-card-name {
       font-family: 'Anton', sans-serif;
       font-size: 26px;
+      color: #ffffff;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       margin: 0 0 4px 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
 
     .player-card-jersey-tag {
       font-size: 13px;
       font-weight: 800;
-      color: #cbd5e1;
+      color: #93c5fd; /* Alto contraste legible */
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
+    body.flag-theme .player-card-jersey-tag {
+      color: #fca5a5;
+    }
+
     .player-card-body {
-      padding: 25px;
+      padding: 24px 20px;
+      background: #ffffff;
     }
 
     .player-stats-section-title {
@@ -512,7 +595,7 @@
       font-size: 17px;
       color: #19547E;
       text-transform: uppercase;
-      margin: 0 0 15px 0;
+      margin: 0 0 14px 0;
       border-bottom: 2px solid #f1f5f9;
       padding-bottom: 6px;
       text-align: center;
@@ -525,21 +608,22 @@
 
     .player-stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+      gap: 10px;
       text-align: center;
+      margin-bottom: 12px;
     }
 
     .player-stat-box {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 10px;
+      border-radius: 8px;
+      padding: 8px 6px;
     }
 
     .player-stat-val {
       font-family: 'Anton', sans-serif;
-      font-size: 22px;
+      font-size: 20px;
       color: #19547E;
       line-height: 1.1;
     }
@@ -551,9 +635,9 @@
     .player-stat-lbl {
       font-size: 11px;
       font-weight: 800;
-      color: #64748b;
+      color: #334155; /* Contraste nítido */
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     /* ESTILOS DE CALENDARIO, TABLA DE POSICIONES Y STATS */
@@ -690,38 +774,55 @@
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ROSTERS (LOGOS + DESPLIEGUE DE COLUMNAS A-D) -->
+        <!-- ROSTERS (ANCHO COMPACTO HOMOGÉNEO Y STAFF INTEGRADO) -->
         <div class="tab-pane" id="pane-rosters">
           <div class="kfl-render-container">
-            <!-- GRILLA HOMOGÉNEA DE LOGOS -->
             <div class="rosters-grid" id="rostersGrid"></div>
 
-            <!-- CONTENEDOR DESPLEGABLE DE ROSTER -->
             <div class="roster-detail-container" id="rosterDetailBox">
               <div class="roster-detail-header">
                 <div class="roster-detail-title-group">
                   <img id="rosterDetailLogo" src="" alt="Equipo Logo">
                   <div>
                     <h3 id="rosterDetailTeamName">EQUIPO</h3>
-                    <span style="font-size: 13px; color: #64748b; font-weight: 700;">Haz clic sobre cualquier jugador para ver su tarjeta oficial y estadísticas</span>
+                    <span style="font-size: 13px; color: #64748b; font-weight: 600;">Haz clic sobre cualquier jugador para ver su tarjeta de estadísticas</span>
                   </div>
                 </div>
                 <button type="button" class="btn-close-roster" onclick="cerrarDetalleRoster()">✕ Cerrar Roster</button>
               </div>
 
+              <!-- TABLA DE JUGADORES (A - D) -->
               <div style="overflow-x: auto;">
-                <table class="kfl-table" style="margin-bottom: 0;">
+                <table class="roster-compact-table">
                   <thead>
                     <tr>
-                      <th style="width: 50px;">#</th>
-                      <th style="min-width: 160px; text-align: left; padding-left: 15px;">NOMBRE</th>
-                      <th style="min-width: 160px; text-align: left;">APELLIDO</th>
-                      <th style="width: 100px;">JERSEY #</th>
+                      <th style="width: 50px; text-align: center;">#</th>
+                      <th style="min-width: 160px;">NOMBRE</th>
+                      <th style="min-width: 160px;">APELLIDO</th>
+                      <th style="width: 90px; text-align: center;">DORSAL</th>
                     </tr>
                   </thead>
                   <tbody id="rosterTablePublicBody"></tbody>
                 </table>
               </div>
+
+              <!-- TABLA DE CUERPO TÉCNICO (I Y J) -->
+              <div id="staffSectionWrapper" style="display: none;">
+                <div class="staff-section-title">Coaching Staff</div>
+                <div style="overflow-x: auto;">
+                  <table class="roster-compact-table" style="margin-bottom: 5px;">
+                    <thead>
+                      <tr>
+                        <th style="width: 50px; text-align: center;">#</th>
+                        <th style="min-width: 200px;">COACH</th>
+                        <th style="min-width: 200px;">POSICIÓN / CARGO</th>
+                      </tr>
+                    </thead>
+                    <tbody id="staffTablePublicBody"></tbody>
+                  </table>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -782,7 +883,7 @@
     </div>
   </main>
 
-  <!-- MODAL DE LA TARJETA DEL JUGADOR (PLAYER CARD) -->
+  <!-- MODAL: PLAYER CARD -->
   <div class="player-card-modal-backdrop" id="playerCardModal" onclick="cerrarPlayerCardModal(event)">
     <div class="player-card" onclick="event.stopPropagation()">
       <div class="player-card-header">
@@ -795,9 +896,7 @@
       </div>
       <div class="player-card-body">
         <div class="player-stats-section-title">Estadísticas de Temporada</div>
-        <div id="modalPlayerStatsContainer">
-          <!-- Inyectado dinámicamente -->
-        </div>
+        <div id="modalPlayerStatsContainer"></div>
       </div>
     </div>
   </div>
@@ -836,7 +935,7 @@
     });
   </script>
 
-  <!-- CONTROLADOR PRINCIPAL Y LÓGICA DE CRUCE DE DATOS -->
+  <!-- CONTROLADOR PRINCIPAL Y CACHÉ ULTRA RÁPIDA -->
   <script>
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -914,10 +1013,7 @@
         btn.classList.toggle('active', btn.textContent.toLowerCase() === 'varsity');
       });
 
-      // Precargar las estadísticas para tenerlas listas para las Player Cards
       precargarStatsCategoria();
-
-      // Regla: Siempre iniciar en calendario
       selectSubTab('calendario');
     }
 
@@ -976,7 +1072,6 @@
       }
     }
 
-    /* RENDER DE ROSTERS: GRILLA HOMOGÉNEA DE LOGOS */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
@@ -1004,10 +1099,12 @@
       });
     }
 
-    /* CARGAR Y MOSTRAR ROSTER DEL EQUIPO (COLUMNAS A A D) */
+    /* CARGAR Y MOSTRAR ROSTER CON CACHÉ LOCAL INSTANTÁNEA */
     async function abrirRosterEquipo(nombreEquipo) {
       const detailBox = document.getElementById('rosterDetailBox');
-      const tableBody = document.getElementById('rosterTablePublicBody');
+      const playerBody = document.getElementById('rosterTablePublicBody');
+      const staffBody = document.getElementById('staffTablePublicBody');
+      const staffSection = document.getElementById('staffSectionWrapper');
       const teamTitle = document.getElementById('rosterDetailTeamName');
       const teamLogo = document.getElementById('rosterDetailLogo');
 
@@ -1015,36 +1112,81 @@
       teamLogo.src = getTeamLogo(nombreEquipo);
       detailBox.style.display = 'block';
 
-      tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">Consultando roster oficial en el CMS...</td></tr>';
+      // Mensaje sobrio y limpio
+      playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
+      staffSection.style.display = 'none';
       detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Verificación en Caché de sesión para carga inmediata
+      const cacheKey = `kfl_cache_roster_${activeLeague}_${activeCategory}_${nombreEquipo}`;
+      const cached = sessionStorage.getItem(cacheKey);
+
+      if (cached) {
+        try {
+          const cachedData = JSON.parse(cached);
+          renderizarTablasRosterYStaff(cachedData, nombreEquipo);
+          return;
+        } catch(e) {}
+      }
 
       try {
         const url = `${KFL_CONFIG.API_ROSTERS_URL}?action=getPublicRoster&sheetName=${encodeURIComponent(nombreEquipo)}&_t=${new Date().getTime()}`;
         const res = await fetch(url);
         const data = await res.json();
 
-        tableBody.innerHTML = '';
-
-        if (data.status === 'success' && data.roster && data.roster.length > 0) {
-          data.roster.forEach(player => {
-            const tr = document.createElement('tr');
-            tr.className = 'roster-player-clickable-row';
-            tr.onclick = () => abrirPlayerCard(player, nombreEquipo);
-
-            tr.innerHTML = `
-              <td><strong>${player.cantidad}</strong></td>
-              <td style="text-align: left; padding-left: 15px; font-weight:700;">${player.nombre}</td>
-              <td style="text-align: left;">${player.apellido}</td>
-              <td><span style="font-weight:800; color:#19547E;">#${player.jersey || '0'}</span></td>
-            `;
-            tableBody.appendChild(tr);
-          });
+        if (data.status === 'success') {
+          sessionStorage.setItem(cacheKey, JSON.stringify(data));
+          renderizarTablasRosterYStaff(data, nombreEquipo);
         } else {
-          tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadoras/jugadores registrados oficialmente para este equipo aún.</td></tr>';
+          playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores registrados oficialmente aún.</td></tr>';
         }
       } catch (err) {
         console.error(err);
-        tableBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#c53030;">Error al conectar con la hoja del equipo.</td></tr>';
+        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#c53030;">Error al conectar con la base de datos del equipo.</td></tr>';
+      }
+    }
+
+    function renderizarTablasRosterYStaff(data, nombreEquipo) {
+      const playerBody = document.getElementById('rosterTablePublicBody');
+      const staffBody = document.getElementById('staffTablePublicBody');
+      const staffSection = document.getElementById('staffSectionWrapper');
+
+      playerBody.innerHTML = '';
+      staffBody.innerHTML = '';
+
+      // 1. Roster de Jugadores (Apellido en Negrita y Nombre Tenue)
+      if (data.roster && data.roster.length > 0) {
+        data.roster.forEach(player => {
+          const tr = document.createElement('tr');
+          tr.className = 'roster-player-clickable-row';
+          tr.onclick = () => abrirPlayerCard(player, nombreEquipo);
+
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight:800; color:#64748b;">${player.cantidad}</td>
+            <td class="cell-player-nombre">${player.nombre}</td>
+            <td class="cell-player-apellido">${player.apellido}</td>
+            <td style="text-align: center;"><span class="cell-jersey-badge">#${player.jersey || '0'}</span></td>
+          `;
+          playerBody.appendChild(tr);
+        });
+      } else {
+        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores listados aún.</td></tr>';
+      }
+
+      // 2. Coaching Staff (Cols I y J)
+      if (data.staff && data.staff.length > 0) {
+        data.staff.forEach(miembro => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="text-align: center; font-weight:800; color:#64748b;">${miembro.cantidad}</td>
+            <td style="font-weight:700; color:#0f172a;">${miembro.nombre}</td>
+            <td style="color:#475569; font-weight:600;">${miembro.posicion}</td>
+          `;
+          staffBody.appendChild(tr);
+        });
+        staffSection.style.display = 'block';
+      } else {
+        staffSection.style.display = 'none';
       }
     }
 
@@ -1052,7 +1194,6 @@
       document.getElementById('rosterDetailBox').style.display = 'none';
     }
 
-    /* PRECARGA DE STATS EN MEMORIA PARA CRUCE INSTANTÁNEO */
     function precargarStatsCategoria() {
       const linksLiga = KFL_CONFIG.STATS_CSV_LINKS[activeLeague];
       const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
@@ -1067,7 +1208,7 @@
         .catch(() => {});
     }
 
-    /* ABRIR PLAYER CARD MODAL */
+    /* PLAYER CARD MODAL */
     function abrirPlayerCard(player, equipo) {
       const modal = document.getElementById('playerCardModal');
       const photoEl = document.getElementById('modalPlayerPhoto');
@@ -1078,19 +1219,18 @@
       nameEl.innerText = `${player.nombre} ${player.apellido}`;
       metaEl.innerText = `#${player.jersey || '00'} • ${equipo} • ${activeCategory.toUpperCase()}`;
 
-      // Foto de columna G o Fallback al Logo del Equipo
+      // Manejo de Foto: anclado limpio sin cortes
       const defaultPhoto = getTeamLogo(equipo);
       photoEl.src = player.fotoUrl && player.fotoUrl.startsWith('http') ? player.fotoUrl : defaultPhoto;
       photoEl.onerror = () => { photoEl.src = defaultPhoto; };
 
-      // Búsqueda cruzada de estadísticas en memoria
-      const nombreCompleto = `${player.nombre} ${player.apellido}`.toLowerCase().trim();
-      const statsEncontradas = buscarStatsJugador(nombreCompleto);
+      // Búsqueda inteligente tolerante a formatos de nombres
+      const statsEncontradas = buscarStatsJugador(player.nombre, player.apellido);
 
       if (statsEncontradas.length > 0) {
         let statsHtml = '';
         statsEncontradas.forEach(sec => {
-          statsHtml += `<div style="font-size:12px; font-weight:800; color:#64748b; text-transform:uppercase; margin-bottom:8px; margin-top:10px;">${sec.tipo}</div>`;
+          statsHtml += `<div style="font-size:12px; font-weight:800; color:#1e293b; text-transform:uppercase; margin-bottom:8px; margin-top:8px;">${sec.tipo}</div>`;
           statsHtml += `<div class="player-stats-grid">`;
           for (const key in sec.datos) {
             statsHtml += `
@@ -1105,8 +1245,8 @@
         statsContainer.innerHTML = statsHtml;
       } else {
         statsContainer.innerHTML = `
-          <div style="text-align: center; padding: 20px; color: #64748b; font-size: 13.5px;">
-            Sin estadísticas registradas en los partidos disputados hasta el momento.
+          <div style="text-align: center; padding: 20px; color: #64748b; font-size: 13.5px; font-weight:600;">
+            Sin estadísticas acumuladas en los partidos disputados hasta el momento.
           </div>
         `;
       }
@@ -1114,29 +1254,53 @@
       modal.classList.add('active');
     }
 
-    function buscarStatsJugador(nombreBuscado) {
+    /* MOTOR DE BÚSQUEDA ROBUSTO POR TOKENS */
+    function normalizarString(str) {
+      return String(str || '')
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .trim();
+    }
+
+    function buscarStatsJugador(nombre, apellido) {
       const resultado = [];
       const categorias = ['RUSHING', 'PASSING', 'RECEIVING', 'DEFENSIVE'];
+
+      const nomNorm = normalizarString(nombre);
+      const apeNorm = normalizarString(apellido);
 
       categorias.forEach(cat => {
         const filas = seccionesStatsGlobal[cat] || [];
         const match = filas.find(r => {
-          const j = (r.JUGADOR || r.PLAYER || r.NOMBRE || '').toLowerCase().trim();
-          return j && (j === nombreBuscado || nombreBuscado.includes(j) || j.includes(nombreBuscado));
+          const rawRowName = normalizarString(r.JUGADOR || r.PLAYER || r.NOMBRE || '');
+          if (!rawRowName) return false;
+
+          // Si contiene tanto el nombre como el apellido sin importar orden (ej. "Romagosa, Lorenzo")
+          const contieneAmbos = rawRowName.includes(nomNorm) && rawRowName.includes(apeNorm);
+          // O si coincide con el apellido y la inicial del nombre
+          const inicialNombre = nomNorm.charAt(0);
+          const coincideApellidoEInicial = rawRowName.includes(apeNorm) && rawRowName.includes(inicialNombre);
+
+          return contieneAmbos || coincideApellidoEInicial;
         });
 
         if (match) {
+          // Extraer TODAS las columnas numéricas que no sean metadatos
           let datosExtraidos = {};
-          if (cat === 'RUSHING') {
-            datosExtraidos = { 'YDS': match.YARDS || '0', 'CAR': match.CARRIES || '0', 'TD': match.TD || '0', 'AVG': match.AVG || '0.0' };
-          } else if (cat === 'PASSING') {
-            datosExtraidos = { 'YDS': match.YARDS || '0', 'COMP': match.COMP || '0', 'TD': match.TD || '0', 'INT': match.INT || '0' };
-          } else if (cat === 'RECEIVING') {
-            datosExtraidos = { 'YDS': match.YARDS || '0', 'REC': match.REC || '0', 'TD': match.TD || '0', 'AVG': match.AVG || '0.0' };
-          } else if (cat === 'DEFENSIVE') {
-            datosExtraidos = { 'TOTAL': match.TOTAL || '0', 'SACK': match.SACK || '0', 'INT': match.INT || '0' };
+          const ignorarCampos = ['JUGADOR', 'PLAYER', 'NOMBRE', 'EQUIPO', 'TEAM', 'RANK', '#'];
+
+          for (const k in match) {
+            const kNorm = k.toUpperCase().trim();
+            if (!ignorarCampos.includes(kNorm) && match[k] !== '' && match[k] !== undefined) {
+              datosExtraidos[kNorm] = match[k];
+            }
           }
-          resultado.push({ tipo: cat, datos: datosExtraidos });
+
+          if (Object.keys(datosExtraidos).length > 0) {
+            resultado.push({ tipo: cat, datos: datosExtraidos });
+          }
         }
       });
 
@@ -1153,7 +1317,7 @@
       document.getElementById('playerCardModal').classList.remove('active');
     }
 
-    /* MÓDULO DE CALENDARIO */
+    /* CALENDARIO */
     function loadCalendarioData() {
       const db = getMasterDB();
       const catData = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].partidos : [];
@@ -1228,7 +1392,7 @@
       container.innerHTML = html;
     }
 
-    /* MÓDULO DE TABLA DE POSICIONES */
+    /* POSICIONES */
     function loadPosicionesData() {
       const db = getMasterDB();
       const catTabla = (db && db[activeLeague] && db[activeLeague][activeCategory]) ? db[activeLeague][activeCategory].tabla : [];
@@ -1265,7 +1429,7 @@
       container.innerHTML = html;
     }
 
-    /* MÓDULO DE STATS */
+    /* STATS */
     function loadStatsData() {
       const linksLiga = KFL_CONFIG.STATS_CSV_LINKS[activeLeague];
       const csvUrl = linksLiga ? linksLiga[activeCategory] : null;

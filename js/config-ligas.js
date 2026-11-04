@@ -22,10 +22,13 @@ const KFL_CONFIG = {
     }
   },
 
-  // 2. ENDPOINT DEL CALENDARIO Y TABLA GENERAL
-  API_CALENDARIO_URL: "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec",
+  // 2. URLS DE LOS GESTORES DE CALENDARIO Y TABLAS DE POSICIONES
+  API_CALENDARIO_URL: {
+    "contact": "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec",
+    "flag": ""
+  },
 
-  // 3. ENLACES PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA
+  // 3. URLS PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA
   STATS_CSV_LINKS: {
     "contact": {
       "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",

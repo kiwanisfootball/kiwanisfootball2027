@@ -17,33 +17,35 @@
       display: block !important;
     }
 
+    /* TARJETAS HERO SIN REBORDES NI RELIEVES ARTIFICIALES */
     .league-hero-card img.hero-bg-img {
       filter: none !important;
       opacity: 1 !important;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease;
     }
     
     .league-hero-card {
       cursor: pointer;
-      border: 3px solid transparent;
+      border: none !important; /* Sin reborde */
       border-radius: 16px;
       overflow: hidden;
-      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
 
     .league-hero-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16);
     }
 
     .league-hero-card.selected-contact {
-      border-color: #19547E !important;
-      box-shadow: 0 0 20px rgba(25, 84, 126, 0.4);
+      border: none !important;
+      box-shadow: 0 8px 25px rgba(25, 84, 126, 0.35);
     }
 
     .league-hero-card.selected-flag {
-      border-color: #A91C00 !important;
-      box-shadow: 0 0 20px rgba(169, 28, 0, 0.4);
+      border: none !important;
+      box-shadow: 0 8px 25px rgba(169, 28, 0, 0.35);
     }
 
     .league-instruction-bar {
@@ -135,7 +137,7 @@
       transform: translateY(-1px);
     }
 
-    /* SUB-PESTAÑAS CON INDICADOR */
+    /* SUB-PESTAÑAS */
     .sub-tabs-bar {
       display: flex;
       justify-content: center;
@@ -183,7 +185,6 @@
       background: #A91C00;
     }
 
-    /* FILTROS Y CONTENEDOR GENERAL */
     .kfl-filter-bar {
       display: flex;
       gap: 12px;
@@ -231,53 +232,47 @@
 
     .kfl-render-container {
       width: 100%;
-      max-width: 960px;
+      max-width: 1120px;
       margin: 0 auto;
       padding-bottom: 60px;
     }
 
     /* ========================================================
-       DISEÑO DE LA SECCIÓN DE ROSTERS (CENTRADITO Y HOMOGÉNEO)
+       SECCIÓN DE ROSTERS: SIN CONTENEDORES, TEXTO AVENIR SUAVE
+       Y FILA COMPLETA EN ESCRITORIO
        ======================================================== */
     .rosters-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: stretch;
-      gap: 20px;
+      align-items: flex-start;
+      gap: 28px;
       width: 100%;
-      margin: 20px auto 40px auto;
+      margin: 25px auto 40px auto;
       padding: 0 10px;
       box-sizing: border-box;
     }
 
     .team-card-roster {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 22px 14px 18px 14px;
-      width: 145px;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 10px 6px;
+      width: 120px; /* Permite que los 7 equipos de Flag entren en una sola línea en desktop */
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       text-align: center;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
       user-select: none;
       cursor: pointer;
+      transition: transform 0.25s ease;
     }
 
     .team-card-roster:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      border-color: #19547E;
-    }
-
-    body.flag-theme .team-card-roster:hover {
-      border-color: #A91C00;
-      box-shadow: 0 8px 20px rgba(169, 28, 0, 0.12);
     }
 
     .team-roster-logo-wrap {
@@ -286,7 +281,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .team-card-roster img {
@@ -295,21 +290,24 @@
       width: auto;
       height: auto;
       object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
-      transition: transform 0.25s ease;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.06));
+      transition: transform 0.25s ease, filter 0.25s ease;
     }
 
     .team-card-roster:hover img {
-      transform: scale(1.06);
+      transform: scale(1.08);
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
     }
 
+    /* NOMBRE DEL EQUIPO EN AVENIR Y COLOR TENUE SUAVE */
     .team-card-roster h4 {
-      font-family: 'Anton', sans-serif;
-      font-size: 16px;
-      color: #1e293b;
+      font-family: 'Avenir', sans-serif !important;
+      font-weight: 800;
+      font-size: 13.5px;
+      color: #475569; /* Tono tenue, elegante y nada invasivo */
       margin: 0;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.8px;
       transition: color 0.2s ease;
     }
 
@@ -722,11 +720,10 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER GLOBAL INYECTADO -->
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- TARJETAS HERO DE SELECCIÓN DE LIGA -->
+    <!-- TARJETAS HERO SIN BORDES NI RELIEVES -->
     <section class="leagues-hero-grid">
       <div class="league-hero-card contact-card" id="cardContact" onclick="selectLeague('contact')">
         <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino" class="hero-bg-img">
@@ -787,7 +784,7 @@
           <div id="calendarioNativeContent" class="kfl-render-container"></div>
         </div>
 
-        <!-- ROSTERS (DISEÑO RENOVADO) -->
+        <!-- ROSTERS (SIN CONTENEDOR, CENTRADO Y 100% HOMOGÉNEO) -->
         <div class="tab-pane" id="pane-rosters">
           <div class="kfl-render-container">
             <div class="rosters-grid" id="rostersGrid"></div>
@@ -852,15 +849,12 @@
     </div>
   </main>
 
-  <!-- FOOTER GLOBAL INYECTADO -->
   <div id="globalFooter"></div>
 
-  <!-- BOTÓN VOLVER ARRIBA -->
   <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       fetch('nav.html')
@@ -894,28 +888,24 @@
     });
   </script>
 
-  <!-- CONTROLADOR PRINCIPAL Y CONFIGURACIÓN -->
+  <!-- CONTROLADOR PRINCIPAL Y CONFIGURACIÓN CENTRALIZADA -->
   <script>
     /* ==========================================================================
        CONFIGURACIÓN GENERAL KFL (EDITAR AQUÍ EQUIPOS Y LOGOS)
        ==========================================================================
-       GUÍA RÁPIDA PARA AGREGAR O QUITAR EQUIPOS:
+       GUÍA RÁPIDA:
        
        1. CÓMO AGREGAR UN EQUIPO NUEVO:
           a) Guarda la imagen del logo en tu repositorio en la carpeta:
-             assets/logos/nombre_equipo.png
-             * Recomendación: Formato PNG con fondo transparente, proporción cuadrada
-               (ej: 512x512 px) y peso optimizado (< 100 KB).
-          b) Agrega su nombre y su ruta en el objeto EQUIPOS_LOGOS (en mayúsculas):
+             assets/logos/nombre_equipo.png (Fondo transparente, 512x512 px, PNG).
+          b) Agrega su nombre y ruta en EQUIPOS_LOGOS (en mayúsculas):
              "TITANS": "assets/logos/titans.png"
-          c) Agrega una URL de respaldo (Imgur u otro host CDN) en FALLBACK_LOGOS:
+          c) Agrega la URL de respaldo en FALLBACK_LOGOS:
              "TITANS": "https://i.imgur.com/tu-imagen.png"
-          d) Agrégalo a las categorías deseadas en el objeto CATEGORIAS_EQUIPOS.
+          d) Agrégalo a las categorías deseadas en CATEGORIAS_EQUIPOS.
        
        2. CÓMO CAMBIAR EQUIPOS EN UNA CATEGORÍA:
-          Modifica el arreglo correspondiente en CATEGORIAS_EQUIPOS.
-          Ejemplo: para agregar a "TITANS" en Contact Varsity:
-          "varsity": ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES", "TITANS"]
+          Edita el arreglo correspondiente en CATEGORIAS_EQUIPOS.
        ========================================================================== */
 
     const EQUIPOS_LOGOS = {
@@ -1025,8 +1015,10 @@
         });
     }
 
+    /* SELECCIÓN DE LIGA: RESTABLECE SIEMPRE A CATEGORÍA VARSITY Y CALENDARIO */
     function selectLeague(league) {
       activeLeague = league;
+      activeCategory = 'varsity';
 
       const cardContact = document.getElementById('cardContact');
       const cardFlag = document.getElementById('cardFlag');
@@ -1048,7 +1040,13 @@
       resetBtnWrapper.style.display = 'block';
       instructionBar.style.display = 'none';
 
-      updateActiveView();
+      // Sincronizar botones de categorías
+      document.querySelectorAll('.category-pill-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === 'varsity');
+      });
+
+      // Forzar sub-pestaña de calendario siempre
+      selectSubTab('calendario');
     }
 
     function resetLeagueSelection() {
@@ -1061,6 +1059,7 @@
       document.body.className = 'contact-theme';
     }
 
+    /* SELECCIÓN DE CATEGORÍA: RESETEA SIEMPRE A CALENDARIO */
     function selectCategory(category) {
       activeCategory = category;
       document.querySelectorAll('.category-pill-btn').forEach(btn => {
@@ -1072,7 +1071,8 @@
         b.classList.toggle('active-stat', b.id === 'btn-stat-rushing');
       });
 
-      if (activeLeague) updateActiveView();
+      // REGLA OBLIGATORIA: Al cambiar de categoría, mostrar siempre CALENDARIO
+      selectSubTab('calendario');
     }
 
     function selectSubTab(subTab) {
@@ -1358,7 +1358,7 @@
       renderPosiciones(tabla);
     }
 
-    /* RENDERIZADO VISUALMENTE ELEGANTE Y CENTRADO DE ROSTERS */
+    /* RENDERIZADO VISUALMENTE LIMPIO DE ROSTERS (SIN CONTENEDOR Y EN UNA LÍNEA EN DESKTOP) */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;

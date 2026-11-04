@@ -24,8 +24,8 @@ const KFL_CONFIG = {
 
   // 2. URLS DE LOS GESTORES DE CALENDARIO Y TABLAS DE POSICIONES
   API_CALENDARIO_URL: {
-    "contact": "https://script.google.com/macros/s/AKfycbwnvxeb53v4jncrIc1Iezdrd-wc4vQoTLUMIR6sDMOEuhp1Q8U9FfQ-RsYQgBdvp3KHxQ/exec",
-    "flag": ""
+    "contact": "https://script.google.com/macros/s/AKfycbxU6knUi6orz37wYKqv6hbf3k75l64gwRTxU2yB3LD8DBvRyw02ATEfJFm6rSXFC2WZ/exec",
+    "flag": "https://script.google.com/macros/s/AKfycbwiZ73jSuTV6XOXZeSSdQpozBonJfhe7Qg8bi0sjgG78tyEIOSq9ir9ya5sxs4TfBOS/exec"
   },
 
   // 3. URLS PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA

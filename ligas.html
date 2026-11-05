@@ -10,6 +10,7 @@
 
   <!-- CONFIGURACIÓN CENTRALIZADA KFL -->
   <script src="js/config-ligas.js"></script>
+  <script src="js/components.js"></script>
 
   <style>
     .tab-pane {
@@ -727,23 +728,6 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      fetch('nav.html')
-        .then(res => res.ok ? res.text() : '')
-        .then(html => {
-          if (html) {
-            document.getElementById('globalNav').innerHTML = html;
-            const btn = document.getElementById('hamburgerBtn');
-            const menu = document.getElementById('navMenu');
-            if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('open'));
-          }
-        });
-
-      fetch('footer.html')
-        .then(res => res.ok ? res.text() : '')
-        .then(html => {
-          if (html) document.getElementById('globalFooter').innerHTML = html;
-        });
-
       const backToTopBtn = document.getElementById('backToTopBtn');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 300) backToTopBtn.classList.add('visible');

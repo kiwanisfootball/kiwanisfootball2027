@@ -2,10 +2,10 @@
    KIWANIS FOOTBALL LEAGUE PANAMA 2026 - HOJA DE ESTILOS MAESTRA UNIFICADA
    ========================================================================== */
 
-/* 1. VARIABLES GLOBALES DE DISEÑO */
+/* 2. VARIABLES GLOBALES DE DISEÑO */
 :root {
-  --azul-kfl: #0033A1;
-  --rojo-kfl: #EA002A;
+  --azul-kfl: #005EAA;
+  --rojo-kfl: #EB3D40;
   --celeste-hover: #E0F2FE;
   --blanco-fondo: #f8fafc;
   --tarjeta-bg: #ffffff;
@@ -82,7 +82,7 @@ p {
   line-height: 1.7;
 }
 
-/* 5. NAVEGACIÓN SUPERIOR INMUTABLE (FONDO BLANCO) */
+/* 5. NAVEGACIÓN SUPERIOR INMUTABLE */
 .header-nav {
   background-color: #ffffff;
   position: sticky;
@@ -181,19 +181,7 @@ p {
   }
 }
 
-/* 6. ANIMACIONES GSAP */
-.gsap-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.gsap-reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 7. INDEX/HOME - TICKER DE MARCADORES */
+/* 7. TICKER DE MARCADORES */
 .ticker-section {
   max-width: var(--ancho-maximo);
   margin: 25px auto 15px auto;
@@ -256,7 +244,7 @@ p {
   letter-spacing: 0.5px;
 }
 
-/* 8. INDEX/HOME - TÍTULO INSTITUCIONAL DE BIENVENIDA */
+/* 8. TÍTULO INSTITUCIONAL DE BIENVENIDA */
 .welcome-header {
   max-width: var(--ancho-maximo);
   margin: 40px auto 30px auto;
@@ -295,7 +283,7 @@ p {
   text-transform: uppercase;
 }
 
-/* 9. INDEX/HOME - ACERCA DE LA LIGA */
+/* 9. ACERCA DE LA LIGA */
 .about-wrapper {
   max-width: var(--ancho-maximo);
   margin: 0 auto 40px auto;
@@ -363,7 +351,7 @@ p {
   font-weight: 800;
 }
 
-/* 10. INDEX/HOME - BANNER PROMOCIONAL / SLIDESHOW */
+/* 10. BANNER PROMOCIONAL / SLIDESHOW */
 .promo-banner-section {
   max-width: var(--ancho-maximo);
   margin: 0 auto 50px auto;
@@ -424,7 +412,7 @@ p {
 .slider-btn.prev { left: 15px; }
 .slider-btn.next { right: 15px; }
 
-/* 11. INDEX/HOME - NOTICIAS DESTACADAS */
+/* 11. NOTICIAS DESTACADAS Y SECCIÓN DINÁMICA */
 .news-section {
   max-width: var(--ancho-maximo);
   margin: 0 auto 50px auto;
@@ -438,185 +426,168 @@ p {
   margin-bottom: 20px;
 }
 
-.news-grid {
+.news-grid-layout {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 25px;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  align-items: stretch;
 }
 
-@media (min-width: 850px) {
-  .news-grid {
-    grid-template-columns: 1.8fr 1fr;
+@media (max-width: 950px) {
+  .news-grid-layout {
+    grid-template-columns: 1fr;
   }
 }
 
-.main-featured-card {
+.featured-main-card {
   background: #ffffff;
-  border-radius: 12px;
   border: 1px solid var(--gris-borde);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.main-featured-card img {
+.featured-main-card:hover {
+  border-color: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 94, 170, 0.1);
+}
+
+.featured-img-container {
   width: 100%;
-  height: 280px;
-  object-fit: cover;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background-color: #f1f5f9;
 }
 
-.main-featured-content {
-  padding: 25px;
+.featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-body {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 
 .badge-category {
-  display: inline-block;
   background-color: var(--azul-kfl);
   color: #ffffff;
+  padding: 5px 12px;
   font-size: 11px;
   font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 4px;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 6px;
+  display: inline-block;
   margin-bottom: 12px;
 }
 
-.main-news-title {
-  font-family: var(--fuente-titulos);
+.featured-body h3 {
+  font-family: 'Anton', sans-serif;
   font-size: 26px;
-  color: var(--texto-oscuro);
-  line-height: 1.15;
-  margin-bottom: 10px;
+  color: #0b0f19;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  line-height: 1.2;
 }
 
-.main-news-desc {
-  font-size: 14px;
+.featured-body p {
+  font-size: 14.5px;
   color: var(--texto-suave);
+  line-height: 1.6;
+  margin: 0;
 }
 
-.sidebar-feed {
+.latest-sidebar-card {
   background: #ffffff;
-  border-radius: 12px;
   border: 1px solid var(--gris-borde);
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-.sidebar-feed h3 {
-  font-family: var(--fuente-titulos);
-  font-size: 20px;
-  color: var(--rojo-kfl);
-  margin-bottom: 15px;
-  border-bottom: 2px solid var(--gris-borde);
-  padding-bottom: 8px;
-}
-
-.feed-item {
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
   display: flex;
-  gap: 12px;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--gris-borde);
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.latest-sidebar-card h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 20px;
+  color: var(--azul-kfl);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+#sidebarNewsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.sidebar-news-item {
+  display: flex;
+  gap: 15px;
   align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
 }
 
-.feed-item:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
+.sidebar-news-item:last-child {
   border-bottom: none;
+  padding-bottom: 0;
 }
 
-.feed-thumb {
+.sidebar-news-item:hover h4 {
+  color: var(--azul-kfl);
+}
+
+.sidebar-thumb {
   width: 65px;
   height: 65px;
-  border-radius: 6px;
+  border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
+  background-color: #f1f5f9;
 }
 
-.feed-tag {
+.sidebar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-tag {
   font-size: 10px;
   font-weight: 800;
-  color: var(--rojo-kfl);
+  color: var(--azul-kfl);
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.feed-title {
+.sidebar-info h4 {
+  font-family: var(--fuente-cuerpo);
   font-size: 13px;
-  font-weight: 700;
-  color: var(--texto-oscuro);
+  font-weight: 800;
+  color: #1e293b;
   line-height: 1.3;
-  margin-top: 2px;
+  margin: 0;
 }
 
-/* 12. INDEX/HOME - NEWSLETTER */
-.newsletter-wrapper {
-  max-width: var(--ancho-maximo);
-  margin: 0 auto 50px auto;
-  padding: 0 15px;
-}
-
-.newsletter-box {
-  background-color: var(--azul-kfl);
-  color: #ffffff;
-  border-radius: 14px;
-  padding: 40px 25px;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0, 51, 161, 0.2);
-}
-
-.newsletter-main-title {
-  font-family: var(--fuente-titulos);
-  font-size: clamp(28px, 4vw, 40px);
-  color: #ffffff;
-  margin-bottom: 6px;
-  letter-spacing: 1px;
-}
-
-.newsletter-subtitle {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--celeste-hover);
-  letter-spacing: 1px;
-  margin-bottom: 25px;
-}
-
-.newsletter-form {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  max-width: 520px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-}
-
-.newsletter-input {
-  flex: 1;
-  min-width: 240px;
-  padding: 14px 18px;
-  border-radius: 8px;
-  border: none;
-  font-size: 14px;
-  outline: none;
-}
-
-.newsletter-btn {
-  background-color: var(--rojo-kfl);
-  color: #ffffff;
-  border: none;
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-family: var(--fuente-titulos);
-  font-size: 18px;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: background-color 0.2s ease;
-}
-
-.newsletter-btn:hover {
-  background-color: #b80021;
-}
-
-/* 13. INDEX/HOME - PATROCINADORES OFICIALES */
+/* 13. PATROCINADORES OFICIALES */
 .sponsors-section {
   max-width: var(--ancho-maximo);
   margin: 0 auto 60px auto;
@@ -819,11 +790,11 @@ p {
 }
 
 .league-hero-card.contact-card .hero-overlay {
-  background-color: rgba(0, 51, 161, 0.72);
+  background-color: rgba(0, 94, 170, 0.72);
 }
 
 .league-hero-card.flag-card .hero-overlay {
-  background-color: rgba(234, 0, 42, 0.72);
+  background-color: rgba(235, 61, 64, 0.72);
 }
 
 .hero-overlay h2 {

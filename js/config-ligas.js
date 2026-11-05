@@ -10,7 +10,7 @@ const KFL_CONFIG = {
     "contact": {
       "varsity": "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec",
       "juvenil": "https://script.google.com/macros/s/AKfycbwn2o725RO9N1-ra7N768DSo6eZU5Bj1ibMQUswNeZn9tnbZtV3yXSgAjlY89M4PbLrSA/exec",
-      "mini": "",    // Pega aquí la URL de Backend Mini Rosters Contact
+      "mini": "https://script.google.com/macros/s/AKfycbxSFzHDfBwPhFAxtHD3FGWlkHmVrMF7js0uahnn-T3f84jYkakgp8kAp59YVHggPJKLKw/exec",
       "micro": ""    // Pega aquí la URL de Backend Micro Rosters Contact
     },
     "flag": {

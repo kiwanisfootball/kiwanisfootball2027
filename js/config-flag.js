@@ -18,10 +18,10 @@ const KFL_FLAG_CONFIG = {
 
   // 3. ENLACES PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA
   STATS_CSV_LINKS: {
-    "varsity": "",
-    "juvenil": "",
-    "mini": "",
-    "micro": ""
+   "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRtLR7KV_c_QOFIVal54Rwm3UC1xRlDWGUVz4IOKjAIKpZBNv3eCQ8SZrEbZcQTjk_F8Sj9fA0oQrju/pub?gid=835067495&single=true&output=csv",
+      "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQGOYtkC2GUu_Doijz1JzOOotTL-RJWwN-YNjhqepCOnE1EjYq9kOvSNm8cPJau9hqLCMCIUfQlSHDj/pub?gid=835067495&single=true&output=csv",
+      "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTA6XDCFs8Mt2kFL9MEZyzaKxUun9-r-HN60qH75nB5_tdwWyniQ6UzWx6kpk7_DvncTvZp6AcjFBoV/pub?gid=835067495&single=true&output=csv",
+      "micro": ""
   },
 
   // 4. EQUIPOS ACTIVOS POR CATEGORÍA FLAG

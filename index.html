@@ -8,12 +8,24 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-  <!-- ESTILOS ADICIONALES PARA LA NUEVA SECCIÓN DE NOTICIAS DINÁMICAS -->
+  <!-- ESTILOS ADICIONALES PARA LA NUEVA SECCIÓN DE NOTICIAS DINÁMICAS Y ANIMACIONES LIGERAS CSS -->
  <style>
+    /* ANIMACIÓN CSS NATIVA (LIGERA Y FLUIDA) */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-element {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
     .news-grid-layout {
       display: grid;
       grid-template-columns: 2fr 1fr;
@@ -186,7 +198,7 @@
 
   <main>
     <!-- 2. TICKER DE MARCADORES CON LOGOS -->
-    <section class="ticker-section gsap-reveal">
+    <section class="ticker-section fade-in-element">
       <div class="ticker-container">
         
         <article class="game-card">
@@ -265,13 +277,13 @@
     </section>
 
     <!-- 3. TITULO INSTITUCIONAL -->
-    <section class="welcome-header gsap-reveal">
+    <section class="welcome-header fade-in-element">
       <div class="welcome-subtitle">BIENVENIDOS A</div>
       <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
     </section>
 
     <!-- 4. ACERCA DE LA LIGA -->
-    <div class="about-wrapper gsap-reveal">
+    <div class="about-wrapper fade-in-element">
       <section class="about-section">
         <div class="about-image">
           <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
@@ -286,7 +298,7 @@
     </div>
 
     <!-- 5. BANNER PROMOCIONAL / SLIDESHOW (1200x250) -->
-    <section class="promo-banner-section gsap-reveal">
+    <section class="promo-banner-section fade-in-element">
       <div class="slider-container">
         
         <div class="slide active">
@@ -308,7 +320,7 @@
     </section>
 
     <!-- 6. MÓDULO DE NOTICIAS CONECTADO A LOS MARKDOWN -->
-    <section class="news-section gsap-reveal">
+    <section class="news-section fade-in-element">
       <h2 class="section-headline">NOTICIAS</h2>
       
       <div class="news-grid-layout">
@@ -330,7 +342,7 @@
     </section>
 
     <!-- 7. SECCIÓN DE PATROCINADORES -->
-    <section class="sponsors-section gsap-reveal">
+    <section class="sponsors-section fade-in-element">
       <div class="sponsors-container">
         
         <div class="sponsors-tier">
@@ -514,26 +526,9 @@
     }
   </script>
   
-  <!-- SCRIPTS ESPECÍFICOS DE LA PÁGINA (GSAP + SLIDESHOW) -->
+  <!-- SCRIPT DEL SLIDESHOW (SIN GSAP) -->
   <script>
-    // 1. GSAP ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.gsap-reveal').forEach((element) => {
-      gsap.to(element, {
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 88%',
-          toggleActions: 'play none none reverse'
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out'
-      });
-    });
-
-    // 2. Slideshow Promocional
+    // Slideshow Promocional
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
 

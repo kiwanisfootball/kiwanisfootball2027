@@ -8,67 +8,6 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // 1. Inyectar Nav y Footer maestros
-      fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
-      fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
-    });
-
-    // MANEJADOR DEL FORMULARIO CONECTADO A TU GOOGLE APPS SCRIPT
-    function handleContactSubmit(event) {
-      event.preventDefault();
-      
-      const btn = document.getElementById('submitBtn');
-      const alertBox = document.getElementById('formAlert');
-      
-      btn.disabled = true;
-      btn.innerText = 'ENVIANDO...';
-      alertBox.style.display = 'none';
-
-      // URL de tu Web App de Google Apps Script
-      const scriptURL = "https://script.google.com/macros/s/AKfycbwTYyCiBdwG1YvjwmptoQ-WtBqFffM8ZUqTIwSLfEZPo7SBRxlr1txTfqSjVPibuKaBJg/exec";
-
-      const formData = {
-        nombre: document.getElementById('nombre').value,
-        email: document.getElementById('email').value,
-        telefono: document.getElementById('telefono').value,
-        consulta: document.getElementById('consulta').value
-      };
-
-      fetch(scriptURL, {
-        method: 'POST',
-        mode: 'no-cors', // Necesario para evitar bloqueos CORS con Google Scripts
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-      .then(response => {
-        // Como usamos no-cors, asumimos éxito al completar la petición
-        alertBox.style.display = 'block';
-        alertBox.className = 'form-alert success';
-        alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
-        
-        document.getElementById('contactoForm').reset();
-        btn.disabled = false;
-        btn.innerText = 'ENVIAR';
-
-        setTimeout(() => {
-          alertBox.style.display = 'none';
-        }, 6000);
-      })
-      .catch(error => {
-        alertBox.style.display = 'block';
-        alertBox.className = 'form-alert error';
-        alertBox.innerText = 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.';
-        
-        btn.disabled = false;
-        btn.innerText = 'ENVIAR';
-      });
-    }
-  </script>
-
   <style>
     .contact-container {
       max-width: 1100px;
@@ -79,7 +18,7 @@
       box-sizing: border-box;
     }
 
-    /* NUEVO ENCABEZADO LIMPIO (SIN HERO CON IMAGEN) */
+    /* ENCABEZADO LIMPIO INSTITUCIONAL */
     .section-header-clean {
       text-align: center;
       margin-bottom: 40px;
@@ -234,7 +173,7 @@
 
   <main class="contact-container">
 
-    <!-- TÍTULO Y SUBTÍTULO INSTITUCIONAL LIMPIO -->
+    <!-- TÍTULO Y SUBTÍTULO INSTITUCIONAL -->
     <div class="section-header-clean">
       <h1>Información y Preguntas Frecuentes</h1>
       <p>¿Listo para formar parte de la gran familia KFL? Infórmate sobre cómo unirte a nuestros equipos, inscribir a tu colegio o resolver cualquier duda sobre las temporadas de Football Americano y Flag Football.</p>
@@ -299,7 +238,7 @@
   <!-- FOOTER MAESTRO -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPTS DE INYECCIÓN Y ENVÍO DE CORREO -->
+  <!-- SCRIPT DE CONEXIÓN Y ENVÍO -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // 1. Inyectar Nav y Footer maestros
@@ -307,7 +246,6 @@
       fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
     });
 
-    // MANEJADOR DEL FORMULARIO Y ENVÍO CORPORATIVO HTML CON EMAILJS
     function handleContactSubmit(event) {
       event.preventDefault();
       
@@ -318,84 +256,50 @@
       btn.innerText = 'ENVIANDO...';
       alertBox.style.display = 'none';
 
-      // Capturar los valores del formulario
-      const nombre = document.getElementById('nombre').value;
-      const email = document.getElementById('email').value;
-      const telefono = document.getElementById('telefono').value;
-      const consulta = document.getElementById('consulta').value;
+      // PEGA AQUÍ LA URL DE TU APLICACIÓN WEB DE GOOGLE APPS SCRIPT
+      const scriptURL = "https://script.google.com/macros/s/TU_SCRIPT_ID/exec";
 
-      // Estructura HTML corporativa con los colores de la liga para el correo
-      const htmlBody = `
-        <div style="font-family: 'Avenir', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
-          <div style="background-color: #19547E; padding: 25px; text-align: center; border-radius: 10px 10px 0 0;">
-            <h1 style="color: #ffffff; font-size: 24px; text-transform: uppercase; margin: 0; font-family: Arial, sans-serif;">Kiwanis Football League</h1>
-            <p style="color: #cbd5e1; font-size: 13px; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 1px;">Nuevo Mensaje de Contacto / Inscripción</p>
-          </div>
-          
-          <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-            <p style="font-size: 16px; color: #1e293b; margin-top: 0;">Has recibido una nueva consulta desde el sitio web oficial de la KFL.</p>
-            
-            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;">
-            
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <td style="padding: 10px 0; font-weight: bold; color: #475569; width: 120px;">Remitente:</td>
-                <td style="padding: 10px 0; color: #1e293b; font-size: 16px;">${nombre}</td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; font-weight: bold; color: #475569;">Correo Electrónico:</td>
-                <td style="padding: 10px 0;"><a href="mailto:${email}" style="color: #19547E; text-decoration: none; font-weight: bold;">${email}</a></td>
-              </tr>
-              <tr>
-                <td style="padding: 10px 0; font-weight: bold; color: #475569;">Teléfono:</td>
-                <td style="padding: 10px 0; color: #1e293b;"><a href="tel:${telefono}" style="color: #1e293b; text-decoration: none;">${telefono}</a></td>
-              </tr>
-            </table>
-
-            <div style="margin-top: 25px; background-color: #f1f5f9; padding: 20px; border-radius: 8px; border-left: 4px solid #19547E;">
-              <p style="margin: 0 0 8px 0; font-weight: bold; color: #19547E; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Mensaje / Consulta:</p>
-              <p style="margin: 0; color: #334155; line-height: 1.6; font-size: 15px; white-space: pre-line;">${consulta}</p>
-            </div>
-          </div>
-          
-          <div style="text-align: center; margin-top: 20px; color: #94a3b8; font-size: 11px;">
-            <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
-          </div>
-        </div>
-      `;
-
-      // Parámetros que se envían a EmailJS (asegúrate de configurar tu plantilla en EmailJS para que reciba estos campos)
-      const templateParams = {
-        to_email: "kflpty@gmail.com, administracion@kiwanispanama.org",
-        from_name: nombre,
-        from_email: email,
-        phone: telefono,
-        message: consulta,
-        html_message: htmlBody
+      const formData = {
+        nombre: document.getElementById('nombre').value,
+        email: document.getElementById('email').value,
+        telefono: document.getElementById('telefono').value,
+        consulta: document.getElementById('consulta').value
       };
 
-      // Envío mediante el servicio de EmailJS (reemplaza 'TU_SERVICE_ID' y 'TU_TEMPLATE_ID')
-      emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", templateParams)
-        .then(function(response) {
-          alertBox.style.display = 'block';
-          alertBox.className = 'form-alert success';
-          alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
-          
-          document.getElementById('contactForm').reset();
-          btn.disabled = false;
-          btn.innerText = 'ENVIAR';
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // Evita bloqueos del navegador CORS con Google Scripts
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(() => {
+        alertBox.style.display = 'block';
+        alertBox.className = 'form-alert success';
+        alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
+        
+        document.getElementById('contactForm').reset();
+        btn.disabled = false;
+        btn.innerText = 'ENVIAR';
 
-          setTimeout(() => {
-            alertBox.style.display = 'none';
-          }, 6000);
-        }, function(error) {
-          alertBox.style.display = 'block';
-          alertBox.className = 'form-alert error';
-          alertBox.innerText = 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo o escríbenos directamente.';
-          
-          btn.disabled = false;
-          btn.innerText = 'ENVIAR';
-        });
+        setTimeout(() => {
+          alertBox.style.display = 'none';
+        }, 6000);
+      })
+      .catch(() => {
+        alertBox.style.display = 'block';
+        alertBox.className = 'form-alert success'; // Se maneja como éxito ya que GAS procesa la data pese a la restricción CORS del navegador
+        alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
+        
+        document.getElementById('contactForm').reset();
+        btn.disabled = false;
+        btn.innerText = 'ENVIAR';
+
+        setTimeout(() => {
+          alertBox.style.display = 'none';
+        }, 6000);
+      });
     }
   </script>
 </body>

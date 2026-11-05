@@ -751,7 +751,7 @@
     });
   </script>
 
-  <!-- MOTOR DE DATOS KFL JAMSTACK -->
+  <!-- MOTOR JAMSTACK KFL CENTRALIZADO -->
   <script>
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -768,7 +768,6 @@
       pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
     };
 
-    /* ACCESO UNIVERSAL Y SEGURO A KFL_CONFIG */
     function getKFLConfig() {
       if (typeof KFL_CONFIG !== 'undefined') return KFL_CONFIG;
       if (typeof window !== 'undefined' && window.KFL_CONFIG) return window.KFL_CONFIG;
@@ -783,7 +782,7 @@
              "https://i.imgur.com/wrPDjDN.png";
     }
 
-    /* OBTENCIÓN ROBUSTA DE LA URL DE APPS SCRIPT DE CADA LIGA */
+    /* OBTENCIÓN ROBUSTA DE LA URL DE APPS SCRIPT POR LIGA */
     function getCalendarApiUrl(league) {
       const cfg = getKFLConfig();
       if (!cfg || !cfg.API_CALENDARIO_URL) return "";
@@ -798,18 +797,81 @@
       return "";
     }
 
-    /* CACHÉ AISLADA */
-    function getLocalCache(key) {
+    /* GESTIÓN DE BASE DE DATOS PARTICIONADA EN SESSIONSTORAGE */
+    function getMasterDB(league) {
+      const l = (league || activeLeague || 'contact').toLowerCase();
       try {
-        const d = sessionStorage.getItem(`kfl_v3_${key}`);
+        const d = sessionStorage.getItem(`kfl_master_db_${l}`);
         return d ? JSON.parse(d) : null;
       } catch (e) { return null; }
     }
 
-    function setLocalCache(key, data) {
+    function setMasterDB(league, data) {
+      const l = (league || activeLeague || 'contact').toLowerCase();
       try {
-        sessionStorage.setItem(`kfl_v3_${key}`, JSON.stringify(data));
+        sessionStorage.setItem(`kfl_master_db_${l}`, JSON.stringify(data));
       } catch (e) {}
+    }
+
+    /* CONSULTA AL ENDPOINT SERVERLESS JSON OFICIAL: ?modulo=all_data */
+    function fetchMasterDB(league, callback) {
+      const l = (league || activeLeague || 'contact').toLowerCase();
+      if (getMasterDB(l)) {
+        if (callback) callback();
+        return;
+      }
+
+      const apiUrl = getCalendarApiUrl(l);
+      if (!apiUrl) {
+        console.error(`URL de API no encontrada para la liga: ${l}`);
+        if (callback) callback();
+        return;
+      }
+
+      fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then(db => {
+          setMasterDB(l, db);
+          if (callback) callback();
+        })
+        .catch(err => {
+          console.error(`Error BD KFL [${l}]:`, err);
+          if (callback) callback();
+        });
+    }
+
+    /* EXTRACTOR UNIVERSAL Y RESILIENTE DE CATEGORÍA */
+    function getCategoryData(league, category) {
+      const l = (league || activeLeague || 'contact').toLowerCase();
+      const cat = (category || activeCategory || 'varsity').toLowerCase();
+      
+      let db = getMasterDB(l);
+      if (!db) return { partidos: [], tabla: [] };
+
+      if (db.data && typeof db.data === 'object') db = db.data;
+      if (db.result && typeof db.result === 'object') db = db.result;
+
+      // Si viene anidado en db.contact o db.flag
+      let scope = db;
+      const foundLeagueKey = Object.keys(db).find(k => k.toLowerCase() === l);
+      if (foundLeagueKey && typeof db[foundLeagueKey] === 'object') {
+        scope = db[foundLeagueKey];
+      }
+
+      // Buscar categoría case-insensitive (varsity, VARSITY, Varsity)
+      const foundCatKey = Object.keys(scope).find(k => k.toLowerCase() === cat);
+      if (foundCatKey && scope[foundCatKey]) {
+        const target = scope[foundCatKey];
+        return {
+          partidos: target.partidos || target.matches || target.calendario || (Array.isArray(target) ? target : []),
+          tabla: target.tabla || target.standings || target.posiciones || []
+        };
+      }
+
+      return { partidos: [], tabla: [] };
     }
 
     function selectLeague(league) {
@@ -841,7 +903,11 @@
       });
 
       precargarStatsCategoria();
-      selectSubTab('calendario');
+
+      // Sincronizar master DB de la liga seleccionada
+      fetchMasterDB(league, () => {
+        selectSubTab('calendario');
+      });
     }
 
     function resetLeagueSelection() {
@@ -881,6 +947,12 @@
 
     function updateActiveView() {
       if (!activeLeague) return;
+
+      const db = getMasterDB(activeLeague);
+      if (!db) {
+        fetchMasterDB(activeLeague, () => updateActiveView());
+        return;
+      }
 
       if (activeSubTab === 'calendario') {
         loadCalendarioData();
@@ -932,57 +1004,11 @@
     /* ==========================================================================
        CALENDARIO
        ========================================================================== */
-    async function loadCalendarioData() {
-      const container = document.getElementById('calendarioNativeContent');
-      const cacheKey = `cal_${activeLeague}_${activeCategory}`;
-      const cached = getLocalCache(cacheKey);
-
-      if (cached && Array.isArray(cached) && cached.length > 0) {
-        populateCalendarFilters(cached);
-        renderCalendar(cached);
-        return;
-      }
-
-      container.innerHTML = '<p style="text-align:center; padding:35px; color:#64748b; font-weight:600;">Cargando calendario oficial...</p>';
-
-      const apiUrl = getCalendarApiUrl(activeLeague);
-      if (!apiUrl) {
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">URL de calendario no configurada.</p>';
-        return;
-      }
-
-      try {
-        // Petición combinada: intenta traer datos de la categoría activa
-        const queryUrl = `${apiUrl}?modulo=calendario&categoria=${activeCategory}&_t=${Date.now()}`;
-        const res = await fetch(queryUrl);
-        const data = await res.json();
-
-        let partidos = [];
-
-        if (Array.isArray(data)) {
-          partidos = data;
-        } else if (data.partidos && Array.isArray(data.partidos)) {
-          partidos = data.partidos;
-        } else if (data[activeCategory] && data[activeCategory].partidos) {
-          partidos = data[activeCategory].partidos;
-          // Guardar categorías restantes si vinieron en la misma respuesta
-          Object.keys(data).forEach(cat => {
-            if (data[cat].partidos) setLocalCache(`cal_${activeLeague}_${cat.toLowerCase()}`, data[cat].partidos);
-            if (data[cat].tabla) setLocalCache(`tabla_${activeLeague}_${cat.toLowerCase()}`, data[cat].tabla);
-          });
-        }
-
-        if (partidos.length > 0) {
-          setLocalCache(cacheKey, partidos);
-          populateCalendarFilters(partidos);
-          renderCalendar(partidos);
-        } else {
-          container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados en ${activeCategory.toUpperCase()}.</p>`;
-        }
-      } catch (err) {
-        console.error("Error al cargar calendario:", err);
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#dc2626;">Error al sincronizar el calendario.</p>';
-      }
+    function loadCalendarioData() {
+      const catData = getCategoryData(activeLeague, activeCategory);
+      const partidos = catData.partidos || [];
+      populateCalendarFilters(partidos);
+      renderCalendar(partidos);
     }
 
     function populateCalendarFilters(partidos) {
@@ -1001,8 +1027,8 @@
     }
 
     function applyCalendarFilters() {
-      const cacheKey = `cal_${activeLeague}_${activeCategory}`;
-      const partidos = getLocalCache(cacheKey) || [];
+      const catData = getCategoryData(activeLeague, activeCategory);
+      const partidos = catData.partidos || [];
       const selectedWeek = document.getElementById('filterWeek').value;
       const selectedTeam = document.getElementById('filterTeam').value;
       
@@ -1017,7 +1043,7 @@
     function renderCalendar(partidos) {
       const container = document.getElementById('calendarioNativeContent');
       if (!partidos || partidos.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados para esta selección.</p>';
+        container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados en ${activeCategory.toUpperCase()}.</p>`;
         return;
       }
 
@@ -1071,7 +1097,7 @@
               </div>
             `;
           } else {
-            // TARJETA COMPETITIVA NORMAL
+            // TARJETA DE PARTIDO COMPETITIVO
             html += `
               <div class="kfl-match-card">
                 <div class="kfl-match-header">
@@ -1100,7 +1126,7 @@
 
         html += `</div>`;
 
-        // EQUIPO LIBRE
+        // EQUIPO LIBRE AL PIE DE LA SEMANA
         if (equiposLibresSemana.length > 0) {
           equiposLibresSemana.forEach(teamLibre => {
             html += `
@@ -1127,60 +1153,17 @@
     }
 
     /* ==========================================================================
-       TABLA DE POSICIONES (?modulo=tabla_[categoria])
+       TABLA DE POSICIONES
        ========================================================================== */
-    async function loadPosicionesData() {
-      const container = document.getElementById('posicionesNativeContent');
-      const cacheKey = `tabla_${activeLeague}_${activeCategory}`;
-      const cached = getLocalCache(cacheKey);
-
-      if (cached && Array.isArray(cached) && cached.length > 0) {
-        renderPosiciones(cached);
-        return;
-      }
-
-      container.innerHTML = '<p style="text-align:center; padding:35px; color:#64748b; font-weight:600;">Cargando tabla de posiciones...</p>';
-
-      const apiUrl = getCalendarApiUrl(activeLeague);
-      if (!apiUrl) {
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">URL de tabla no configurada.</p>';
-        return;
-      }
-
-      try {
-        const queryUrl = `${apiUrl}?modulo=tabla_${activeCategory}&_t=${Date.now()}`;
-        const res = await fetch(queryUrl);
-        const textResponse = await res.text();
-
-        // Si devuelve tabla HTML directa
-        if (textResponse.trim().startsWith('<table') || textResponse.trim().startsWith('<div')) {
-          container.innerHTML = textResponse;
-          return;
-        }
-
-        // Si devuelve JSON
-        const json = JSON.parse(textResponse);
-        let tabla = [];
-        if (Array.isArray(json)) tabla = json;
-        else if (json.tabla && Array.isArray(json.tabla)) tabla = json.tabla;
-        else if (json.data && Array.isArray(json.data)) tabla = json.data;
-
-        if (tabla.length > 0) {
-          setLocalCache(cacheKey, tabla);
-          renderPosiciones(tabla);
-        } else {
-          container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay tabla de posiciones oficial para ${activeCategory.toUpperCase()} aún.</p>`;
-        }
-      } catch (err) {
-        console.error("Error al cargar tabla:", err);
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#dc2626;">Error al sincronizar la tabla de posiciones.</p>';
-      }
+    function loadPosicionesData() {
+      const catData = getCategoryData(activeLeague, activeCategory);
+      renderPosiciones(catData.tabla || []);
     }
 
     function renderPosiciones(tabla) {
       const container = document.getElementById('posicionesNativeContent');
       if (!tabla || tabla.length === 0) {
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">No hay tabla disponible aún.</p>';
+        container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay tabla de posiciones oficial para ${activeCategory.toUpperCase()} aún.</p>`;
         return;
       }
 
@@ -1243,7 +1226,7 @@
     }
 
     /* ==========================================================================
-       ROSTERS Y PLAYER CARDS (INTACTO)
+       ROSTERS Y STATS (TOTALMENTE INTACTOS)
        ========================================================================== */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');

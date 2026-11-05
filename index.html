@@ -4,50 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO & METADATOS -->
+  <!-- SEO, GEO & AEO METADATOS OPTIMIZADOS -->
   <title>Kiwanis Football League Panamá - Sitio Oficial</title>
-  <meta name="description" content="La Kiwanis Football League es la liga de fútbol americano con más tradición de Panamá, organizada por Club Kiwanis de Panamá. Calendarios, resultados y noticias de cada temporada.">
-  <meta name="keywords" content="Kiwanis Football League, KFL Panamá, futbol americano Panamá, flag football Panamá, KFL contact, deportes escolares Panamá">
+  <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programas escolares de contact football y flag football, calendarios, marcadores y estadísticas oficiales.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panamá, futbol americano escolar, flag football Panamá, KFL contact, deportes Panamá, AIP, Eagles">
   <meta name="author" content="Kiwanis Football League">
+  <meta name="geo.region" content="PA-8">
+  <meta name="geo.placename" content="Panamá">
   
   <!-- Open Graph / Redes Sociales -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Kiwanis Football League Panamá - Sitio Oficial">
   <meta property="og:description" content="La liga de football americano y flag football escolar más importante de Panamá.">
-  <meta property="og:image" content="assets/img/kfl-og-image.jpg">
+  <meta property="og:image" content="assets/img/KFL-logo.svg">
   <meta property="og:url" content="https://www.kiwanisfootball.com/">
 
-  <!-- Performance: Preconnect para Fuentes y Recursos -->
+  <!-- SCHEMA.ORG (JSON-LD) PARA DATOS ESTRUCTURADOS -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Kiwanis Football League",
+    "alternateName": "KFL Panamá",
+    "url": "https://www.kiwanisfootball.com/",
+    "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
+    "sameAs": [
+      "https://www.instagram.com/kiwanisfootball"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Panamá",
+      "addressCountry": "PA"
+    },
+    "sport": "American Football"
+  }
+  </script>
+
+  <!-- Performance: Preconnect para Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
 
   <!-- Estilos y Favicon -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
-  <!-- GSAP Scripts -->
+  <!-- GSAP Ligero (Solo ScrollTrigger esencial) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 
-  <!-- ESTILOS LIMPIOS Y UNIVERSALES (SIN INLINE STYLES) -->
+  <!-- ESTILOS ORIGINALES CON IDENTIDAD KFL (#0033A1 Y #EA002A) -->
   <style>
     :root {
       --kfl-blue: #0033A1;
       --kfl-red: #EA002A;
-      --kfl-bg: #EFEFEF;
-      --kfl-border: #AFAFAF;
-      --kfl-text: #555555;
-      --kfl-white: #FFFFFF;
-      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
-      --font-display: 'Anton', system-ui, -apple-system, sans-serif;
     }
 
     body {
-      background-color: var(--kfl-bg);
-      color: var(--kfl-text);
-      font-family: var(--font-stack);
+      background-color: #ffffff;
+      color: #1e293b;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
       margin: 0;
       padding: 0;
     }
@@ -66,12 +82,12 @@
     }
 
     .featured-main-card {
-      background: var(--kfl-white);
-      border: 1px solid var(--kfl-border);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      transition: box-shadow 0.25s ease;
+      transition: all 0.25s ease;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
@@ -79,14 +95,14 @@
     }
 
     .featured-main-card:hover {
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
 
     .featured-img-container {
       width: 100%;
       aspect-ratio: 3 / 2;
       overflow: hidden;
-      background-color: var(--kfl-bg);
+      background-color: #f1f5f9;
     }
 
     .featured-img {
@@ -106,7 +122,7 @@
 
     .badge-category {
       background-color: var(--kfl-blue);
-      color: var(--kfl-white);
+      color: #ffffff;
       padding: 5px 12px;
       font-size: 11px;
       font-weight: 800;
@@ -117,9 +133,9 @@
     }
 
     .featured-body h3 {
-      font-family: var(--font-display);
+      font-family: 'Anton', system-ui, sans-serif;
       font-size: 26px;
-      color: var(--kfl-text);
+      color: #0b0f19;
       text-transform: uppercase;
       margin-bottom: 12px;
       line-height: 1.2;
@@ -127,14 +143,14 @@
 
     .featured-body p {
       font-size: 14.5px;
-      color: var(--kfl-text);
+      color: #64748b;
       line-height: 1.6;
       margin: 0;
     }
 
     .latest-sidebar-card {
-      background: var(--kfl-white);
-      border: 1px solid var(--kfl-border);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
       border-radius: 16px;
       padding: 25px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -145,7 +161,7 @@
     }
 
     .latest-sidebar-card h3 {
-      font-family: var(--font-display);
+      font-family: 'Anton', system-ui, sans-serif;
       font-size: 20px;
       color: var(--kfl-blue);
       text-transform: uppercase;
@@ -165,7 +181,7 @@
       gap: 15px;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid var(--kfl-bg);
+      border-bottom: 1px solid #f1f5f9;
       cursor: pointer;
       text-decoration: none;
       transition: background 0.2s;
@@ -186,7 +202,7 @@
       border-radius: 8px;
       object-fit: cover;
       flex-shrink: 0;
-      background-color: var(--kfl-bg);
+      background-color: #f1f5f9;
     }
 
     .sidebar-info {
@@ -204,29 +220,21 @@
     }
 
     .sidebar-info h4 {
-      font-family: var(--font-stack);
       font-size: 13px;
       font-weight: 800;
-      color: var(--kfl-text);
+      color: #1e293b;
       line-height: 1.3;
       margin: 0;
-    }
-
-    .loading-state {
-      padding: 40px;
-      text-align: center;
-      color: var(--kfl-text);
-      font-family: var(--font-stack);
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. HEADER GLOBAL -->
+  <!-- 1. HEADER GLOBAL (Inyectado por JS) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- 2. TICKER DE MARCADORES -->
+    <!-- 2. TICKER DE MARCADORES CON LOGOS -->
     <section class="ticker-section gsap-reveal">
       <div class="ticker-container">
         
@@ -305,10 +313,10 @@
       </div>
     </section>
 
-    <!-- 3. TITULO INSTITUCIONAL -->
+    <!-- 3. TITULO INSTITUCIONAL (Con el bloque rojo original recuperado) -->
     <section class="welcome-header gsap-reveal">
-      <div class="welcome-subtitle">BIENVENIDOS A</div>
-      <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
+      <div class="welcome-subtitle" style="color: var(--kfl-red); font-weight: 800; letter-spacing: 1px; margin-bottom: 8px;">BIENVENIDOS A</div>
+      <h1 class="welcome-title" style="font-family: 'Anton', sans-serif; color: var(--kfl-blue);">KIWANIS FOOTBALL LEAGUE</h1>
     </section>
 
     <!-- 4. ACERCA DE LA LIGA -->
@@ -326,7 +334,7 @@
       </section>
     </div>
 
-    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW -->
+    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW AUTOMÁTICO (Sin botones invasivos) -->
     <section class="promo-banner-section gsap-reveal">
       <div class="slider-container">
         
@@ -353,21 +361,21 @@
         
         <!-- COLUMNA IZQUIERDA: NOTICIA PRINCIPAL -->
         <div id="mainFeaturedPost" class="featured-main-card">
-          <div class="loading-state">Cargando noticia destacada...</div>
+          <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
         </div>
 
         <!-- COLUMNA DERECHA: ÚLTIMAS NOTICIAS -->
         <div class="latest-sidebar-card">
           <h3>ÚLTIMAS NOTICIAS</h3>
           <div id="sidebarNewsList">
-            <div class="loading-state">Cargando listado...</div>
+            <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 7. SECCIÓN DE PATROCINADORES -->
+    <!-- 7. SECCIÓN DE PATROCINADORES (Estructura original recuperada) -->
     <section class="sponsors-section gsap-reveal">
       <div class="sponsors-container">
         
@@ -375,33 +383,15 @@
           <h3 class="tier-title">PATROCINADORES OFICIALES</h3>
           <div class="sponsors-grid tier-gold">
             
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor2.png" alt="Sponsor 2" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor3.png" alt="Sponsor 3" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor4.png" alt="Sponsor 4" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor5.png" alt="Sponsor 5" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor6.png" alt="Sponsor 6" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor7.png" alt="Sponsor 7" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor8.png" alt="Sponsor 8" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor9.png" alt="Sponsor 9" class="sponsor-logo">
-            </div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor1.png" alt="Sponsor 1" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor2.png" alt="Sponsor 2" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor3.png" alt="Sponsor 3" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor4.png" alt="Sponsor 4" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor5.png" alt="Sponsor 5" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor6.png" alt="Sponsor 6" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor7.png" alt="Sponsor 7" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor8.png" alt="Sponsor 8" class="sponsor-logo"></div>
+            <div class="sponsor-card"><img src="assets/sponsors/sponsor9.png" alt="Sponsor 9" class="sponsor-logo"></div>
 
           </div>
         </div>
@@ -410,7 +400,7 @@
     </section>
   </main>
 
-  <!-- 8. FOOTER GLOBAL -->
+  <!-- 8. FOOTER GLOBAL (Inyectado por JS) -->
   <div id="globalFooter"></div>
 
   <!-- BOTÓN VOLVER ARRIBA -->
@@ -418,7 +408,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO Y DE GESTIÓN DE EVENTOS SIN INLINE JS -->
+  <!-- SCRIPT MAESTRO Y DE GESTIÓN (NAV + FOOTER + NOTICIAS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Inyectar Navbar desde nav.html
@@ -426,7 +416,6 @@
         .then(response => response.text())
         .then(data => {
           document.getElementById('globalNav').innerHTML = data;
-          
           const hamburgerBtn = document.getElementById('hamburgerBtn');
           const navMenu = document.getElementById('navMenu');
           if (hamburgerBtn && navMenu) {
@@ -441,7 +430,7 @@
           document.getElementById('globalFooter').innerHTML = data;
         });
 
-      // Botón volver arriba con listener limpio
+      // Botón volver arriba
       const backToTopBtn = document.getElementById('backToTopBtn');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
@@ -466,8 +455,8 @@
       const sidebarContainer = document.getElementById('sidebarNewsList');
 
       if (!slugs || slugs.length === 0) {
-        mainFeaturedContainer.innerHTML = "<div class='loading-state'>No hay noticias destacadas.</div>";
-        sidebarContainer.innerHTML = "<div class='loading-state'>Sin noticias recientes.</div>";
+        mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
+        sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
         return;
       }
 
@@ -487,16 +476,12 @@
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
-            
             let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
             if (tMatch) titulo = tMatch[1];
-
             let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
             if (catMatch) categoria = catMatch[1];
-
             let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
             if (eMatch) excerpt = eMatch[1];
-
             let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
             if (imgMatch) {
               coverImage = imgMatch[1];
@@ -512,7 +497,6 @@
 
       if (postsCargados.length === 0) return;
 
-      // 1. RENDERIZAR NOTICIA PRINCIPAL Y EVENT LISTENER (SIN ONCLICK EN LÍNEA)
       let postPrincipal = postsCargados[0];
       mainFeaturedContainer.addEventListener('click', () => {
         window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
@@ -528,12 +512,11 @@
         </div>
       `;
 
-      // 2. RENDERIZAR ÚLTIMAS NOTICIAS
       let postsSecundarios = postsCargados.slice(1, 5); 
       let listaSidebarHtml = "";
 
       if (postsSecundarios.length === 0) {
-        sidebarContainer.innerHTML = "<div class='loading-state'>No hay más noticias recientes.</div>";
+        sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
         return;
       }
 
@@ -551,7 +534,6 @@
 
       sidebarContainer.innerHTML = listaSidebarHtml;
 
-      // Delegación de eventos para las noticias secundarias (Cero onclick en línea)
       sidebarContainer.querySelectorAll('.sidebar-news-item').forEach(item => {
         item.addEventListener('click', function() {
           const targetSlug = this.getAttribute('data-slug');
@@ -561,25 +543,9 @@
     }
   </script>
   
-  <!-- GSAP Y SLIDESHOW AUTOMÁTICO -->
+  <!-- SLIDESHOW AUTOMÁTICO -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      gsap.registerPlugin(ScrollTrigger);
-
-      gsap.utils.toArray('.gsap-reveal').forEach((element) => {
-        gsap.to(element, {
-          scrollTrigger: {
-            trigger: element,
-            start: 'top 88%',
-            toggleActions: 'play none none reverse'
-          },
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power2.out'
-        });
-      });
-
       let currentSlide = 0;
       const slides = document.querySelectorAll('.promo-banner-section .slide');
 

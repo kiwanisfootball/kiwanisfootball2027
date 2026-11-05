@@ -1,79 +1,17 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMÁ - HOJA DE ESTILOS MAESTRA
-   Arquitectura Jamstack Ultra-Rápida | Mobile-First | Sin bordes rígidos
+   HEADER Y NAVBAR GLOBAL (Sincronizado con js/components.js)
    ========================================================================== */
-
-/* 1. VARIABLES GLOBALES DE DISEÑO */
-:root {
-  --kfl-blue: #0033A1;
-  --kfl-blue-hover: #002575;
-  --kfl-red: #EA002A;
-  --kfl-dark: #0b0f19;
-  --kfl-surface: #ffffff;
-  --kfl-bg: #f8fafc;
-  --kfl-text-primary: #1e293b;
-  --kfl-text-secondary: #64748b;
-  --kfl-border-subtle: #f1f5f9;
-  --kfl-shadow-sm: 0 2px 8px rgba(11, 15, 25, 0.04);
-  --kfl-shadow-card: 0 4px 16px rgba(11, 15, 25, 0.05);
-  --kfl-shadow-hover: 0 10px 24px rgba(0, 51, 161, 0.12);
-  --font-title: 'Anton', sans-serif;
-  --font-body: 'Mulish', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --max-width: 1240px;
-}
-
-/* 2. RESETEO Y NORMALIZACIÓN */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-  overflow-x: clip;
-}
-
-body {
-  font-family: var(--font-body);
-  background-color: var(--kfl-bg);
-  color: var(--kfl-text-primary);
-  line-height: 1.6;
-  overflow-x: clip;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-}
-
-/* 3. HEADER & NAVEGACIÓN GLOBAL */
-.header-nav {
+.site-header {
   position: sticky;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(11, 15, 25, 0.05);
   z-index: 1000;
-  box-shadow: var(--kfl-shadow-sm);
 }
 
-.nav-container {
-  max-width: var(--max-width);
+.main-nav {
+  max-width: 1240px;
   margin: 0 auto;
   padding: 12px 20px;
   display: flex;
@@ -81,466 +19,178 @@ button {
   justify-content: space-between;
 }
 
-.nav-brand {
+.logo-container {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
-.nav-logo {
-  width: 44px;
-  height: 44px;
+.kfl-nav-logo {
+  height: 48px;
+  width: auto;
+  display: block;
   object-fit: contain;
 }
 
-.nav-brand-text {
-  font-family: var(--font-title);
-  font-size: 20px;
-  color: var(--kfl-blue);
-  letter-spacing: 0.5px;
-}
-
-.nav-menu {
+/* Lista horizontal de enlaces */
+.nav-links {
+  list-style: none; /* Elimina las viñetas */
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-link {
-  font-size: 14.5px;
+.nav-links li {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-family: 'Mulish', sans-serif;
+  font-size: 13.5px;
   font-weight: 700;
-  color: var(--kfl-dark);
+  color: #1e293b;
+  text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 8px 0;
+  padding: 6px 0;
   position: relative;
   transition: color 0.2s ease;
 }
 
-.nav-link:hover,
-.nav-link.active {
-  color: var(--kfl-blue);
+.nav-links a:hover {
+  color: #0033A1;
 }
 
-.nav-link.active::after {
+/* Indicador de página activa en rojo KFL */
+.nav-links a.active {
+  color: #0033A1;
+}
+
+.nav-links a.active::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   width: 100%;
-  height: 2.5px;
-  background-color: var(--kfl-red);
+  height: 2px;
+  background-color: #EA002A;
   border-radius: 2px;
 }
 
-/* Menú Móvil Hamburger */
-.hamburger-btn {
+/* Botón Hamburguesa Móvil */
+.menu-toggle {
   display: none;
   background: none;
   border: none;
   cursor: pointer;
-  width: 32px;
-  height: 24px;
+  width: 30px;
+  height: 22px;
   position: relative;
   flex-direction: column;
   justify-content: space-between;
   padding: 0;
 }
 
-.hamburger-btn span {
+.menu-toggle span {
   width: 100%;
   height: 3px;
-  background-color: var(--kfl-blue);
+  background-color: #0033A1;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
-@media (max-width: 860px) {
-  .hamburger-btn {
+/* Estado activo del botón hamburguesa (X) */
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+/* Adaptación Responsive para Móvil y Tablets */
+@media (max-width: 1024px) {
+  .menu-toggle {
     display: flex;
   }
 
-  .nav-menu {
+  .nav-links {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     background: #ffffff;
     flex-direction: column;
-    padding: 24px;
-    gap: 18px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
-    display: none;
+    align-items: flex-start;
+    padding: 20px 24px;
+    gap: 16px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    display: none; /* Oculto por defecto en móvil */
   }
 
-  .nav-menu.open {
-    display: flex;
+  .nav-links.nav-active {
+    display: flex; /* Se abre al tocar el botón */
   }
-}
 
-/* 4. CONTENEDOR GENERAL */
-main {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* 5. TICKER DE RESULTADOS */
-.ticker-section {
-  margin: 20px 0;
-  overflow: hidden;
-}
-
-.ticker-container {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.ticker-container::-webkit-scrollbar {
-  display: none;
-}
-
-.game-card {
-  background: var(--kfl-surface);
-  border-radius: 12px;
-  padding: 14px 18px;
-  min-width: 220px;
-  flex-shrink: 0;
-  box-shadow: var(--kfl-shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.game-team {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.team-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 13.5px;
-}
-
-.team-logo-small {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.game-score {
-  font-family: var(--font-title);
-  font-size: 18px;
-  color: var(--kfl-dark);
-}
-
-.game-status {
-  font-size: 10.5px;
-  font-weight: 800;
-  color: var(--kfl-blue);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-align: right;
-  margin-top: 4px;
-}
-
-/* 6. TITULO DE BIENVENIDA INSTITUCIONAL */
-.welcome-header {
-  text-align: center;
-  margin: 36px 0 24px 0;
-}
-
-.welcome-subtitle {
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: var(--kfl-red);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.welcome-title {
-  font-family: var(--font-title);
-  font-size: clamp(32px, 5vw, 48px);
-  color: var(--kfl-blue);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 1.1;
-}
-
-/* 7. ACERCA DE LA LIGA */
-.about-wrapper {
-  margin: 30px 0 40px 0;
-}
-
-.about-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: center;
-}
-
-@media (max-width: 860px) {
-  .about-section {
-    grid-template-columns: 1fr;
+  .nav-links a {
+    font-size: 15px;
+    width: 100%;
+    display: block;
+    padding: 8px 0;
   }
 }
 
-.about-image {
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: var(--kfl-shadow-card);
-  aspect-ratio: 4 / 3;
-}
-
-.about-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.about-card {
-  background: var(--kfl-surface);
-  padding: clamp(24px, 4vw, 36px);
-  border-radius: 16px;
-  box-shadow: var(--kfl-shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.about-card h2 {
-  font-family: var(--font-title);
-  font-size: clamp(24px, 3vw, 32px);
-  color: var(--kfl-blue);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.about-card p {
-  font-size: 15px;
-  color: var(--kfl-text-secondary);
-  line-height: 1.65;
-}
-
-.about-card strong {
-  color: var(--kfl-dark);
-}
-
-/* 8. BANNER PROMOCIONAL / SLIDESHOW (1200x250) */
-.promo-banner-section {
-  margin: 40px 0;
-}
-
-.slider-container {
-  width: 100%;
-  aspect-ratio: 1200 / 250;
-  min-height: 140px;
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: var(--kfl-shadow-card);
-  background-color: #e2e8f0;
-}
-
-@media (max-width: 768px) {
-  .slider-container {
-    aspect-ratio: 16 / 9;
-  }
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease;
-}
-
-.slide.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 1;
-}
-
-.slide a,
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* 9. SECCIÓN DE PATROCINADORES OFICIALES */
-.sponsors-section {
-  margin: 50px 0 70px 0;
-}
-
-.tier-title {
-  font-family: var(--font-title);
-  font-size: 22px;
-  color: var(--kfl-blue);
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 24px;
-}
-
-.sponsors-grid.tier-gold {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 16px;
-  align-items: center;
-}
-
-.sponsor-card {
-  background: var(--kfl-surface);
-  border-radius: 12px;
-  padding: 16px;
-  aspect-ratio: 3 / 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--kfl-shadow-card);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.sponsor-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--kfl-shadow-hover);
-}
-
-.sponsor-logo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-}
-
-/* 10. FOOTER GLOBAL */
+/* ==========================================================================
+   FOOTER GLOBAL (Sincronizado con js/components.js)
+   ========================================================================== */
 .site-footer {
   background-color: #071329;
   color: #ffffff;
-  padding: 50px 20px 30px 20px;
+  padding: 28px 20px;
   margin-top: 60px;
+  font-family: 'Mulish', sans-serif;
 }
 
-.footer-container {
-  max-width: var(--max-width);
+.footer-content {
+  max-width: 1240px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1.5fr;
-  gap: 40px;
-}
-
-@media (max-width: 860px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-}
-
-.footer-logo {
-  width: 56px;
-  height: 56px;
-  margin-bottom: 14px;
-}
-
-.footer-about {
-  font-size: 13.5px;
-  color: #94a3b8;
-  line-height: 1.6;
-  max-width: 360px;
-}
-
-.footer-title {
-  font-family: var(--font-title);
-  font-size: 16px;
-  color: #ffffff;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-
-.footer-links {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-links a {
-  font-size: 13.5px;
-  color: #94a3b8;
-  transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-  color: #ffffff;
-}
-
-.footer-org {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 4px;
-}
-
-.footer-geo,
-.footer-copyright {
-  font-size: 12.5px;
-  color: #64748b;
-  line-height: 1.5;
-}
-
-.footer-copyright {
-  margin-top: 14px;
-}
-
-/* 11. BOTÓN VOLVER ARRIBA */
-.back-to-top-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 44px;
-  height: 44px;
-  background-color: var(--kfl-blue);
-  color: #ffffff;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 14px rgba(0, 51, 161, 0.35);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
-  z-index: 999;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
-.back-to-top-btn.visible {
-  opacity: 1;
-  visibility: visible;
+.footer-content p {
+  margin: 0;
+  font-size: 13.5px;
+  color: #94a3b8;
 }
 
-.back-to-top-btn:hover {
-  background-color: var(--kfl-blue-hover);
-  transform: translateY(-2px);
+.social-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.back-to-top-btn svg {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
+.social-links a:hover {
+  background: #EA002A; /* Rojo YouTube / KFL al hover */
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
 }

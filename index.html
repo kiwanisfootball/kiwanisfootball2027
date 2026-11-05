@@ -2,24 +2,60 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <title>Kiwanis Football League Panama - Sitio Oficial</title>
   
+  <!-- SEO & Meta Tags Avanzados -->
+  <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programación de partidos, resultados, estadísticas y noticias de Contact y Flag Football.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panama, Futbol Americano Panama, Flag Football Panama, Contact Football">
+  <meta name="author" content="Kiwanis Football League">
+  
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
+  <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/KFL-logo.svg">
+
+  <!-- Hojas de Estilo y Favicon Local (Sin depender de Imgur) -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
-  <!-- PRECONEXIÓN Y FUENTES GOOGLE OPTIMIZADAS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Preconexión y Fuentes Google Optimizadas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- ESTILOS ADICIONALES PARA LA NUEVA SECCIÓN DE NOTICIAS DINÁMICAS Y ANIMACIONES LIGERAS CSS -->
- <style>
+  <!-- Schema.org Data (JSON-LD para Google y AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Kiwanis Football League Panama",
+    "alternateName": "KFL",
+    "url": "https://kiwanisfootball.com",
+    "logo": "assets/img/KFL-logo.svg",
+    "sameAs": [
+      "https://youtube.com/@kiwanisfootball"
+    ],
+    "sport": "American Football"
+  }
+  </script>
+
+  <!-- ESTILOS OPTIMIZADOS PARA DISEÑO FLUIDO Y POP-UP PWA -->
+  <style>
+    /* Control global contra desbordamientos horizontales */
+    img, video, canvas, svg {
+      max-width: 100%;
+      height: auto;
+    }
+
     .news-grid-layout {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 30px;
       align-items: stretch;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     @media (max-width: 950px) {
@@ -39,6 +75,7 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      width: 100%;
     }
 
     .featured-main-card:hover {
@@ -67,10 +104,11 @@
       flex-direction: column;
       flex-grow: 1;
       justify-content: space-between;
+      box-sizing: border-box;
     }
 
     .badge-category {
-      background-color: #005EAA; /* Azul Oficial KFL */
+      background-color: #005EAA;
       color: #ffffff;
       padding: 5px 12px;
       font-size: 11px;
@@ -83,11 +121,12 @@
 
     .featured-body h3 {
       font-family: 'Anton', sans-serif;
-      font-size: 26px;
+      font-size: clamp(20px, 4vw, 26px);
       color: #0b0f19;
       text-transform: uppercase;
       margin-bottom: 12px;
       line-height: 1.2;
+      word-break: break-word;
     }
 
     .featured-body p {
@@ -107,12 +146,13 @@
       flex-direction: column;
       height: 100%;
       box-sizing: border-box;
+      width: 100%;
     }
 
     .latest-sidebar-card h3 {
       font-family: 'Anton', sans-serif;
       font-size: 20px;
-      color: #005EAA; /* Azul Oficial KFL */
+      color: #005EAA;
       text-transform: uppercase;
       margin-bottom: 20px;
       letter-spacing: 0.5px;
@@ -142,7 +182,7 @@
     }
 
     .sidebar-news-item:hover h4 {
-      color: #005EAA; /* Azul Oficial KFL */
+      color: #005EAA;
     }
 
     .sidebar-thumb {
@@ -158,23 +198,105 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      min-width: 0; /* Evita desbordamiento de texto flex */
     }
 
     .sidebar-tag {
       font-size: 10px;
       font-weight: 800;
-      color: #005EAA; /* Azul Oficial KFL */
+      color: #005EAA;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .sidebar-info h4 {
-      font-family: 'Avenir', sans-serif;
+      font-family: var(--fuente-cuerpo);
       font-size: 13px;
       font-weight: 800;
       color: #1e293b;
       line-height: 1.3;
       margin: 0;
+      word-break: break-word;
+    }
+
+    /* ESTILOS PARA EL POP-UP / BANNER DE INSTALACIÓN PWA */
+    .pwa-install-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(150px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 14px 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 9999;
+      width: 90%;
+      max-width: 450px;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .pwa-install-banner.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .pwa-icon {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+    }
+
+    .pwa-text {
+      flex-grow: 1;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .pwa-text strong {
+      display: block;
+      font-size: 14px;
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 0.5px;
+      color: #005EAA;
+    }
+
+    .pwa-btns {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pwa-btn-install {
+      background-color: #EB3D40;
+      color: #ffffff;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .pwa-btn-install:hover {
+      background-color: #c52a2d;
+    }
+
+    .pwa-btn-close {
+      background: transparent;
+      color: #94a3b8;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .pwa-btn-close:hover {
+      color: #ffffff;
     }
   </style>
 </head>
@@ -185,7 +307,7 @@
 
   <main>
     <!-- 2. TICKER DE MARCADORES CON LOGOS -->
-    <section class="ticker-section fade-in-element">
+    <section class="ticker-section">
       <div class="ticker-container">
         
         <article class="game-card">
@@ -264,13 +386,13 @@
     </section>
 
     <!-- 3. TITULO INSTITUCIONAL -->
-    <section class="welcome-header fade-in-element">
+    <section class="welcome-header">
       <div class="welcome-subtitle">BIENVENIDOS A</div>
       <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
     </section>
 
     <!-- 4. ACERCA DE LA LIGA -->
-    <div class="about-wrapper fade-in-element">
+    <div class="about-wrapper">
       <section class="about-section">
         <div class="about-image">
           <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
@@ -278,14 +400,14 @@
         <article class="about-card">
           <h2>ACERCA DE LA LIGA</h2>
           <p>La Liga de Football Americano Kiwanis se ha convertido en un programa escolar pionero.</p>
-          <p>Ofrecemos two ligas, la de <strong>Contact Football Masculino</strong> y la de <strong>Flag Football Femenino</strong>, ambas con las categorías Micro (U10), Mini (U13), Juvenil (U16) y Varsity (U19).</p>
+          <p>Ofrecemos dos ligas, la de <strong>Contact Football Masculino</strong> y la de <strong>Flag Football Femenino</strong>, ambas con las categorías Micro (U10), Mini (U13), Juvenil (U16) y Varsity (U19).</p>
           <p>Nos orgullece que actualmente contamos con un aproximado de <strong>1,600 jugadores</strong> entre ambas ligas.</p>
         </article>
       </section>
     </div>
 
     <!-- 5. BANNER PROMOCIONAL / SLIDESHOW (1200x250) -->
-    <section class="promo-banner-section fade-in-element">
+    <section class="promo-banner-section">
       <div class="slider-container">
         
         <div class="slide active">
@@ -307,7 +429,7 @@
     </section>
 
     <!-- 6. MÓDULO DE NOTICIAS CONECTADO A LOS MARKDOWN -->
-    <section class="news-section fade-in-element">
+    <section class="news-section">
       <h2 class="section-headline">NOTICIAS</h2>
       
       <div class="news-grid-layout">
@@ -329,7 +451,7 @@
     </section>
 
     <!-- 7. SECCIÓN DE PATROCINADORES -->
-    <section class="sponsors-section fade-in-element">
+    <section class="sponsors-section">
       <div class="sponsors-container">
         
         <div class="sponsors-tier">
@@ -374,12 +496,25 @@
   <!-- 8. FOOTER GLOBAL (Inyectado automáticamente) -->
   <div id="globalFooter"></div>
 
+  <!-- POP-UP / BANNER DE INSTALACIÓN PWA (AGREGAR A APP) -->
+  <div id="pwaInstallBanner" class="pwa-install-banner">
+    <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="pwa-icon">
+    <div class="pwa-text">
+      <strong>Kiwanis App</strong>
+      Instala la web en tu pantalla de inicio para un acceso más rápido.
+    </div>
+    <div class="pwa-btns">
+      <button id="pwaInstallBtn" class="pwa-btn-install">Instalar</button>
+      <button id="pwaCloseBtn" class="pwa-btn-close" aria-label="Cerrar">&times;</button>
+    </div>
+  </div>
+
   <!-- BOTÓN VOLVER ARRIBA -->
   <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
+  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER + NOTICIAS + PWA) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Inyectar Navbar desde nav.html
@@ -418,9 +553,42 @@
       // Lista de slugs de tus artículos publicados
       const slugsArticulosIndex = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
-        // Agrega más slugs aquí en orden (el primero será el destacado principal)
       ];
       cargarSeccionNoticiasIndex(slugsArticulosIndex);
+
+      // Lógica de PWA App Install Prompt
+      let deferredPrompt;
+      const pwaBanner = document.getElementById('pwaInstallBanner');
+      const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+      const pwaCloseBtn = document.getElementById('pwaCloseBtn');
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // Mostrar banner si el usuario no lo ha cerrado antes en esta sesión
+        if (!sessionStorage.getItem('pwaClosed')) {
+          setTimeout(() => {
+            pwaBanner.classList.add('show');
+          }, 2000);
+        }
+      });
+
+      pwaInstallBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          if (outcome === 'accepted') {
+            console.log('Usuario aceptó instalar la PWA');
+          }
+          deferredPrompt = null;
+        }
+        pwaBanner.classList.remove('show');
+      });
+
+      pwaCloseBtn.addEventListener('click', () => {
+        pwaBanner.classList.remove('show');
+        sessionStorage.setItem('pwaClosed', 'true');
+      });
     });
 
     async function cargarSeccionNoticiasIndex(slugs) {
@@ -445,7 +613,7 @@
           let titulo = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
           let categoria = "KFL";
           let excerpt = "Haz clic para leer el comunicado oficial...";
-          let coverImage = "https://i.imgur.com/wrPDjDN.png";
+          let coverImage = "assets/img/KFL-logo.svg";
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
@@ -488,7 +656,7 @@
         </div>
       `;
 
-      // 2. RENDERIZAR ÚLTIMAS NOTICIAS (DERECHA) EXCLUYENDO LA PRINCIPAL Y TOMANDO MÁXIMO 4
+      // 2. RENDERIZAR ÚLTIMAS NOTICIAS (DERECHA)
       let postsSecundarios = postsCargados.slice(1, 5); 
       let listaSidebarHtml = "";
 
@@ -513,9 +681,8 @@
     }
   </script>
   
-  <!-- SCRIPT DEL SLIDESHOW (SIN GSAP) -->
+  <!-- SCRIPT DEL SLIDESHOW -->
   <script>
-    // Slideshow Promocional
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
 

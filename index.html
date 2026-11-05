@@ -36,13 +36,12 @@
     "url": "https://kiwanisfootball.com",
     "logo": "assets/img/KFL-logo.svg",
     "sameAs": [
-      "https://youtube.com/@kiwanisfootball"
+      "https://www.youtube.com/@KFLTotalAccess"
     ],
     "sport": "American Football"
   }
   </script>
 
-  <!-- ESTILOS OPTIMIZADOS PARA DISEÑO FLUIDO Y POP-UP PWA (SOLO MOBILE) -->
   <style>
     /* Control global contra desbordamientos horizontales */
     img, video, canvas, svg {
@@ -220,93 +219,116 @@
       word-break: break-word;
     }
 
-    /* ESTILOS PARA EL POP-UP / BANNER DE INSTALACIÓN PWA (SOLO MOBILE) */
-    .pwa-install-banner {
+    /* ===== BANNER PWA (TODOS LOS DISPOSITIVOS) ===== */
+    .pwa-banner {
       display: none;
       position: fixed;
-      bottom: 20px;
       left: 50%;
-      transform: translateX(-50%) translateY(150px);
+      bottom: 20px;
+      transform: translateX(-50%) translateY(160px);
+      width: 92%;
+      max-width: 420px;
       background: #0f172a;
-      color: #cbd5e1;
-      padding: 14px 20px;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-      align-items: center;
-      gap: 15px;
-      z-index: 9999;
-      width: 90%;
-      max-width: 450px;
-      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+      padding: 18px 20px;
+      box-sizing: border-box;
+      z-index: 9999;
+      transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-family: 'Montserrat', sans-serif;
     }
 
-    @media (max-width: 768px) {
-      .pwa-install-banner.show {
-        display: flex;
-        transform: translateX(-50%) translateY(0);
-      }
+    .pwa-banner.show {
+      transform: translateX(-50%) translateY(0);
     }
 
-    .pwa-icon {
-      width: 40px;
-      height: 40px;
+    .pwa-banner-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .pwa-banner-logo {
+      width: 48px;
+      height: 48px;
       flex-shrink: 0;
+      border-radius: 10px;
+      background: #ffffff;
+      padding: 5px;
+      box-sizing: border-box;
     }
 
-    .pwa-text {
-      flex-grow: 1;
-      font-size: 12.5px;
-      line-height: 1.4;
+    .pwa-banner-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.45;
+      margin: 0;
+      color: #cbd5e1;
     }
 
-    .pwa-text strong {
-      display: inline;
-      font-size: 14px;
-      font-family: 'Anton', sans-serif;
-      letter-spacing: 0.5px;
+    .pwa-banner-text strong {
       color: #ffffff;
     }
 
-    .pwa-btns {
+    .pwa-share-icon {
+      display: inline-block;
+      background: #005EAA;
+      color: #ffffff;
+      border-radius: 6px;
+      padding: 0 6px;
+      font-weight: 800;
+    }
+
+    .pwa-banner-actions {
       display: flex;
-      gap: 8px;
+      gap: 10px;
+    }
+
+    .pwa-banner-actions button {
+      flex: 1;
     }
 
     .pwa-btn-install {
-      background-color: #EB3D40;
+      background: #EB3D40;
       color: #ffffff;
       border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 12px;
-      cursor: pointer;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
       text-transform: uppercase;
-      transition: background 0.2s;
+      cursor: pointer;
     }
 
     .pwa-btn-install:hover {
-      background-color: #c52a2d;
+      background: #c52a2d;
     }
 
-    .pwa-btn-close {
+    .pwa-btn-secondary {
       background: transparent;
       color: #94a3b8;
-      border: none;
-      font-size: 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
       cursor: pointer;
-      padding: 4px;
+      transition: color 0.2s;
     }
 
-    .pwa-btn-close:hover {
+    .pwa-btn-secondary:hover {
       color: #ffffff;
     }
   </style>
 </head>
 <body>
 
-  <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
+  <!-- 1. HEADER GLOBAL (Inyectado por components.js) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main>
@@ -497,18 +519,20 @@
     </section>
   </main>
 
-  <!-- 8. FOOTER GLOBAL (Inyectado automáticamente) -->
+  <!-- 8. FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
 
-  <!-- POP-UP / BANNER DE INSTALACIÓN PWA -->
-  <div id="pwaInstallBanner" class="pwa-install-banner">
-    <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="pwa-icon">
-    <div class="pwa-text">
-      Sigue los pasos para instalar el <strong>KFL App</strong> y tener acceso rápido a toda la información.
+  <!-- BANNER DE INSTALACIÓN PWA (TODOS LOS DISPOSITIVOS) -->
+  <div id="pwaBanner" class="pwa-banner" role="region" aria-label="Instalar KFL App">
+    <div class="pwa-banner-head">
+      <img src="assets/img/KFL-logo.svg" alt="KFL" class="pwa-banner-logo">
+      <p id="pwaText" class="pwa-banner-text">
+        Instala la <strong>KFL App</strong> y ten partidos, resultados y noticias en tu pantalla de inicio.
+      </p>
     </div>
-    <div class="pwa-btns">
+    <div class="pwa-banner-actions">
       <button id="pwaInstallBtn" class="pwa-btn-install">Instalar</button>
-      <button id="pwaCloseBtn" class="pwa-btn-close" aria-label="Cerrar">&times;</button>
+      <button id="pwaLaterBtn" class="pwa-btn-secondary">Ahora no</button>
     </div>
   </div>
 
@@ -517,29 +541,9 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO (NAV + FOOTER + BACK TO TOP + NOTICIAS) -->
+  <!-- SCRIPT MAESTRO (BACK TO TOP + NOTICIAS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
-      fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
-
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-          }
-        });
-
-      // Inyectar Footer desde footer.html
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
-        });
-
       // Botón volver arriba
       const backToTopBtn = document.getElementById('backToTopBtn');
       window.addEventListener('scroll', () => {
@@ -672,58 +676,96 @@
     }, 5000);
   </script>
 
-  <!-- SCRIPT PWA Y SERVICE WORKER (FUERA DE DOMContentLoaded) -->
+  <!-- SCRIPT PWA Y SERVICE WORKER -->
   <script>
-    let deferredPrompt = null;
-    const pwaBanner = document.getElementById('pwaInstallBanner');
-    const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-    const pwaCloseBtn = document.getElementById('pwaCloseBtn');
+    (function () {
+      const banner = document.getElementById('pwaBanner');
+      const text = document.getElementById('pwaText');
+      const installBtn = document.getElementById('pwaInstallBtn');
+      const laterBtn = document.getElementById('pwaLaterBtn');
 
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                           navigator.standalone === true;
 
-    function mostrarBanner() {
-      if (!isMobile || isStandalone || sessionStorage.getItem('pwaClosed')) return;
-      setTimeout(() => pwaBanner.classList.add('show'), 2000);
-    }
+      let deferredPrompt = null;
+      let instruccionesMostradas = false;
 
-    // Chrome/Android: evento nativo de instalación
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      mostrarBanner();
-    });
-
-    // iOS no dispara beforeinstallprompt, así que mostramos el banner directamente
-    if (isIOS) mostrarBanner();
-
-    pwaInstallBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        pwaBanner.classList.remove('show');
-      } else {
-        alert('En iPhone: toca el botón Compartir y luego "Agregar a pantalla de inicio".');
+      function yaDescartado() {
+        const fecha = localStorage.getItem('pwaDismissed');
+        return fecha && (Date.now() - Number(fecha)) < 7 * 24 * 60 * 60 * 1000;
       }
-    });
 
-    pwaCloseBtn.addEventListener('click', () => {
-      pwaBanner.classList.remove('show');
-      sessionStorage.setItem('pwaClosed', 'true');
-    });
+      function mostrarBanner() {
+        if (isStandalone || yaDescartado()) return;
+        banner.style.display = 'block';
+        setTimeout(() => banner.classList.add('show'), 2000);
+      }
 
-    window.addEventListener('appinstalled', () => {
-      pwaBanner.classList.remove('show');
-    });
+      function ocultarBanner() {
+        banner.classList.remove('show');
+      }
 
-    // Registro del Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(() => console.log('Service Worker registrado correctamente.'))
-        .catch((err) => console.log('Fallo al registrar Service Worker:', err));
-    }
+      function recordarDescarte() {
+        localStorage.setItem('pwaDismissed', String(Date.now()));
+      }
+
+      // Android, Chrome y Edge en escritorio: el navegador ofrece instalación nativa
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        mostrarBanner();
+      });
+
+      // iPhone: no existe beforeinstallprompt, así que mostramos el banner con instrucciones
+      if (isIOS) {
+        installBtn.textContent = 'Cómo instalar';
+        mostrarBanner();
+      }
+
+      installBtn.addEventListener('click', async () => {
+        // Instalación nativa (Android / escritorio)
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          ocultarBanner();
+          if (outcome !== 'accepted') recordarDescarte();
+          return;
+        }
+
+        // iPhone: primer toque muestra los pasos, segundo toque cierra
+        if (isIOS && !instruccionesMostradas) {
+          instruccionesMostradas = true;
+          text.innerHTML = 'Toca <span class="pwa-share-icon">⬆︎</span> en Safari o Chrome y luego <strong>"Agregar a pantalla de inicio"</strong>.';
+          installBtn.textContent = 'Entendido';
+          return;
+        }
+
+        ocultarBanner();
+        recordarDescarte();
+      });
+
+      laterBtn.addEventListener('click', () => {
+        ocultarBanner();
+        recordarDescarte();
+      });
+
+      window.addEventListener('appinstalled', () => {
+        ocultarBanner();
+        deferredPrompt = null;
+      });
+
+      // Registro del Service Worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+          .catch((err) => console.log('Fallo al registrar Service Worker:', err));
+      }
+    })();
   </script>
+
+  <!-- MENÚ Y PIE DE PÁGINA GLOBALES -->
+  <script src="components.js"></script>
 </body>
 </html>

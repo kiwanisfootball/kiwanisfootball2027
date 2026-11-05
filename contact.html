@@ -22,52 +22,84 @@
       display: block !important;
     }
 
-    /* BANNER PRINCIPAL CONTACT */
+    /* HERO BANNER - DIMENSIÓN EXACTA 1100x735 SIN DISTORSIÓN */
     .contact-hero-banner {
       width: 100%;
-      max-width: 1120px;
+      max-width: 1100px;
       margin: 20px auto 30px auto;
       border-radius: 16px;
       overflow: hidden;
       position: relative;
-      background: #19547E;
-      box-shadow: 0 8px 25px rgba(25, 84, 126, 0.25);
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      aspect-ratio: 1100 / 735;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      background-color: #0b0f19;
     }
 
-    .contact-hero-banner img {
-      position: absolute;
+    .contact-hero-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.35;
+      display: block;
+    }
+
+    /* CAPA DE ALTO CONTRASTE */
+    .contact-hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(15, 23, 42, 0.25) 0%,
+        rgba(15, 23, 42, 0.55) 50%,
+        rgba(11, 15, 25, 0.85) 100%
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .contact-hero-content {
-      position: relative;
-      z-index: 2;
       text-align: center;
       color: #ffffff;
+      padding: 24px 36px;
+      background: rgba(11, 15, 25, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      max-width: 90%;
     }
 
     .contact-hero-content h1 {
       font-family: 'Anton', sans-serif;
-      font-size: 38px;
-      margin: 0;
-      letter-spacing: 1.5px;
+      font-size: clamp(28px, 4.5vw, 52px);
+      margin: 0 0 8px 0;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+      line-height: 1.1;
     }
 
-    .contact-hero-content span {
+    .contact-hero-badge {
+      display: inline-block;
+      background: #19547E;
+      color: #ffffff;
       font-family: 'Avenir', sans-serif;
-      font-size: 14px;
+      font-size: clamp(12px, 1.8vw, 15px);
       font-weight: 800;
       letter-spacing: 2px;
-      color: #e2e8f0;
       text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
     /* PILLS DE CATEGORÍAS */
@@ -209,7 +241,6 @@
       width: 100%; 
     }
 
-    /* Auto-centrado si hay 1 tarjeta o impar */
     .kfl-grid-matches.kfl-grid-single {
       display: flex;
       justify-content: center;
@@ -488,12 +519,14 @@
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- HERO TITLE CONTACT FOOTBALL -->
+    <!-- HERO PRINCIPAL CONTACT FOOTBALL -->
     <section class="contact-hero-banner">
-      <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino">
-      <div class="contact-hero-content">
-        <h1>CONTACT FOOTBALL</h1>
-        <span>TEMPORADA OFICIAL MASCULINA</span>
+      <img src="assets/img/contact-page.jpg" alt="Contact Football - Kiwanis Football League" class="contact-hero-img">
+      <div class="contact-hero-overlay">
+        <div class="contact-hero-content">
+          <h1>CONTACT FOOTBALL</h1>
+          <span class="contact-hero-badge">TEMPORADA 2026</span>
+        </div>
       </div>
     </section>
 
@@ -675,7 +708,7 @@
       });
       backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-      // Inicializar carga de Contact
+      // Inicializar Contact Football
       initContactFootball();
     });
   </script>
@@ -1332,6 +1365,7 @@
       document.getElementById('playerCardModal').classList.remove('active');
     }
 
+    /* STATS CSV ENGINE */
     function loadStatsData() {
       const cfg = getCfg();
       const csvUrl = cfg && cfg.STATS_CSV_LINKS && cfg.STATS_CSV_LINKS[activeCategory];

@@ -220,18 +220,18 @@
       word-break: break-word;
     }
 
-    /* ESTILOS PARA EL POP-UP / BANNER DE INSTALACIÓN PWA (OCULTO POR DEFECTO EN DESKTOP) */
+    /* ESTILOS PARA EL POP-UP / BANNER DE INSTALACIÓN PWA (SOLO MOBILE) */
     .pwa-install-banner {
-      display: none; /* Oculto en escritorio por defecto */
+      display: none;
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%) translateY(150px);
       background: #0f172a;
-      color: #ffffff;
+      color: #cbd5e1;
       padding: 14px 20px;
       border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
       align-items: center;
       gap: 15px;
       z-index: 9999;
@@ -241,7 +241,6 @@
       border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Se muestra exclusivamente en pantallas móviles (menores o iguales a 768px) cuando tiene la clase show */
     @media (max-width: 768px) {
       .pwa-install-banner.show {
         display: flex;
@@ -257,16 +256,16 @@
 
     .pwa-text {
       flex-grow: 1;
-      font-size: 13px;
+      font-size: 12.5px;
       line-height: 1.4;
     }
 
     .pwa-text strong {
-      display: block;
+      display: inline;
       font-size: 14px;
       font-family: 'Anton', sans-serif;
       letter-spacing: 0.5px;
-      color: #005EAA;
+      color: #ffffff; /* KFL App en blanco puro */
     }
 
     .pwa-btns {
@@ -501,12 +500,11 @@
   <!-- 8. FOOTER GLOBAL (Inyectado automáticamente) -->
   <div id="globalFooter"></div>
 
-  <!-- POP-UP / BANNER DE INSTALACIÓN PWA (SOLO MOBILE Y CAMBIADO A KFL APP) -->
+  <!-- POP-UP / BANNER DE INSTALACIÓN PWA CON EL TEXTO PERSONALIZADO -->
   <div id="pwaInstallBanner" class="pwa-install-banner">
     <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="pwa-icon">
     <div class="pwa-text">
-      <strong>KFL App</strong>
-      Instala la web en tu pantalla de inicio para un acceso más rápido.
+      Sigue los pasos para instalar el <strong>KFL App</strong> y tener acceso rápido a toda la información.
     </div>
     <div class="pwa-btns">
       <button id="pwaInstallBtn" class="pwa-btn-install">Instalar</button>
@@ -568,7 +566,7 @@
           .catch((err) => console.log('Fallo al registrar Service Worker:', err));
       }
 
-      // Lógica de PWA App Install Prompt (Restringido estrictamente a Mobile vía CSS y matchMedia)
+      // Lógica de PWA App Install Prompt (Restringido estrictamente a Mobile)
       let deferredPrompt;
       const pwaBanner = document.getElementById('pwaInstallBanner');
       const pwaInstallBtn = document.getElementById('pwaInstallBtn');
@@ -578,7 +576,6 @@
         e.preventDefault();
         deferredPrompt = e;
         
-        // Validar si es un dispositivo móvil por ancho de pantalla (<= 768px)
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
         if (isMobile && !sessionStorage.getItem('pwaClosed')) {
@@ -684,7 +681,6 @@
         listaSidebarHtml += `
           <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${post.slug}'">
             <img src="${post.coverImage}" alt="${post.titulo}" class="sidebar-thumb">
-            .sidebar-info
             <div class="sidebar-info">
               <span class="sidebar-tag">${post.categoria}</span>
               <h4>${post.titulo}</h4>

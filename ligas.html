@@ -250,7 +250,6 @@
       width: 100%; 
     }
 
-    /* Auto-centrado de tarjeta única (Finales o Jamboree único) */
     .kfl-grid-matches.kfl-grid-single {
       display: flex;
       justify-content: center;
@@ -262,7 +261,6 @@
       width: 100%;
     }
 
-    /* Auto-centrado cuando hay un número impar de tarjetas */
     .kfl-grid-matches.kfl-grid-odd > .kfl-match-card:last-child {
       grid-column: 1 / -1;
       max-width: 560px;
@@ -294,7 +292,7 @@
     .kfl-score-vs { font-size: 18px; font-weight: 800; color: #94a3b8; }
     .kfl-score-status { font-size: 11px; font-weight: 800; color: #16a34a; letter-spacing: 0.5px; }
 
-    /* CARD DE JAMBOREE */
+    /* CARD DE JAMBOREE INDIVIDUAL Y CENTRADO */
     .kfl-jamboree-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -349,7 +347,7 @@
       color: #0f172a;
     }
 
-    /* CARD DE EQUIPO LIBRE (COLUMNA B - FONT AVENIR) */
+    /* EQUIPO LIBRE / DESCANSO (COLUMNA B - TIPOGRAFÍA AVENIR) */
     .kfl-bye-week-wrapper {
       width: 100%;
       display: flex;
@@ -753,7 +751,7 @@
     });
   </script>
 
-  <!-- MOTOR DE DATOS JAMSTACK KFL -->
+  <!-- MOTOR DE DATOS KFL JAMSTACK -->
   <script>
     let activeLeague = null;
     let activeCategory = 'varsity';
@@ -770,73 +768,47 @@
       pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
     };
 
+    /* ACCESO UNIVERSAL Y SEGURO A KFL_CONFIG */
+    function getKFLConfig() {
+      if (typeof KFL_CONFIG !== 'undefined') return KFL_CONFIG;
+      if (typeof window !== 'undefined' && window.KFL_CONFIG) return window.KFL_CONFIG;
+      return null;
+    }
+
     function getTeamLogo(teamName) {
+      const cfg = getKFLConfig();
       const cleanTeam = (teamName || "").toUpperCase().trim();
-      return (KFL_CONFIG.EQUIPOS_LOGOS && KFL_CONFIG.EQUIPOS_LOGOS[cleanTeam]) ||
-             (KFL_CONFIG.FALLBACK_LOGOS && KFL_CONFIG.FALLBACK_LOGOS[cleanTeam]) ||
+      return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) ||
+             (cfg && cfg.FALLBACK_LOGOS && cfg.FALLBACK_LOGOS[cleanTeam]) ||
              "https://i.imgur.com/wrPDjDN.png";
     }
 
-    /**
-     * DETECTOR POLIMÓRFICO DE URL DE APPS SCRIPT
-     * Resuelve llaves en mayúsculas/minúsculas y variables independientes
-     */
-    function getCalendarApiUrl(league, category) {
-      if (!window.KFL_CONFIG) return "";
+    /* OBTENCIÓN ROBUSTA DE LA URL DE APPS SCRIPT DE CADA LIGA */
+    function getCalendarApiUrl(league) {
+      const cfg = getKFLConfig();
+      if (!cfg || !cfg.API_CALENDARIO_URL) return "";
       const l = (league || activeLeague || 'contact').toLowerCase();
-      const cat = (category || activeCategory || 'varsity').toLowerCase();
 
-      // 1. Detección en KFL_CONFIG.API_CALENDARIO_URL (Objeto o String)
-      const cand = KFL_CONFIG.API_CALENDARIO_URL;
-      if (cand) {
-        if (typeof cand === 'string') return cand;
-        if (typeof cand === 'object') {
-          const matchKey = Object.keys(cand).find(k => k.toLowerCase() === l);
-          if (matchKey) {
-            const val = cand[matchKey];
-            if (typeof val === 'string') return val;
-            if (typeof val === 'object') {
-              const catKey = Object.keys(val).find(k => k.toLowerCase() === cat);
-              return catKey ? val[catKey] : (val.varsity || Object.values(val)[0]);
-            }
-          }
-        }
+      if (typeof cfg.API_CALENDARIO_URL === 'string') {
+        return cfg.API_CALENDARIO_URL;
       }
-
-      // 2. Detección por propiedades específicas de Flag
-      if (l === 'flag') {
-        const flagCand = KFL_CONFIG.API_CALENDARIO_FLAG_URL || 
-                         KFL_CONFIG.API_CALENDARIO_URL_FLAG || 
-                         KFL_CONFIG.API_FLAG_CALENDARIO_URL || 
-                         KFL_CONFIG.API_CALENDARIO_FLAG ||
-                         KFL_CONFIG.API_FLAG_URL;
-        if (flagCand) return typeof flagCand === 'object' ? (flagCand[cat] || flagCand.varsity || Object.values(flagCand)[0]) : flagCand;
+      if (typeof cfg.API_CALENDARIO_URL === 'object') {
+        return cfg.API_CALENDARIO_URL[l] || cfg.API_CALENDARIO_URL[l.toUpperCase()] || "";
       }
-
-      // 3. Detección por propiedades específicas de Contact
-      if (l === 'contact') {
-        const contactCand = KFL_CONFIG.API_CALENDARIO_CONTACT_URL || 
-                            KFL_CONFIG.API_CALENDARIO_URL_CONTACT || 
-                            KFL_CONFIG.API_CONTACT_CALENDARIO_URL || 
-                            KFL_CONFIG.API_CALENDARIO_CONTACT ||
-                            KFL_CONFIG.API_CONTACT_URL;
-        if (contactCand) return typeof contactCand === 'object' ? (contactCand[cat] || contactCand.varsity || Object.values(contactCand)[0]) : contactCand;
-      }
-
       return "";
     }
 
-    /* CACHÉ AISLADA POR LIGA Y CATEGORÍA */
+    /* CACHÉ AISLADA */
     function getLocalCache(key) {
       try {
-        const d = sessionStorage.getItem(`kfl_cache_${key}`);
+        const d = sessionStorage.getItem(`kfl_v3_${key}`);
         return d ? JSON.parse(d) : null;
       } catch (e) { return null; }
     }
 
     function setLocalCache(key, data) {
       try {
-        sessionStorage.setItem(`kfl_cache_${key}`, JSON.stringify(data));
+        sessionStorage.setItem(`kfl_v3_${key}`, JSON.stringify(data));
       } catch (e) {}
     }
 
@@ -921,9 +893,7 @@
       }
     }
 
-    /* ==========================================================================
-       DETECCIÓN DE EQUIPO LIBRE (COLUMNA B - HORA)
-       ========================================================================== */
+    /* DETECTOR DE EQUIPO LIBRE (COLUMNA B - HORA) */
     function extraerEquipoLibre(partido) {
       if (!partido) return null;
       const hora = String(partido.time || partido.hora || '').trim().toLowerCase();
@@ -946,7 +916,7 @@
       return null;
     }
 
-    /* DETECCIÓN EXACTA DE JAMBOREE */
+    /* DETECTOR DE JAMBOREE */
     function esJamboreeMatch(p) {
       if (!p) return false;
       const h = (p.home || '').toUpperCase().trim();
@@ -960,7 +930,7 @@
     }
 
     /* ==========================================================================
-       CARGA DE CALENDARIO ESPECÍFICO POR CATEGORÍA
+       CALENDARIO
        ========================================================================== */
     async function loadCalendarioData() {
       const container = document.getElementById('calendarioNativeContent');
@@ -973,34 +943,29 @@
         return;
       }
 
-      container.innerHTML = '<p style="text-align:center; padding:35px; color:#64748b; font-weight:600;">Sincronizando calendario oficial...</p>';
+      container.innerHTML = '<p style="text-align:center; padding:35px; color:#64748b; font-weight:600;">Cargando calendario oficial...</p>';
 
-      const apiUrl = getCalendarApiUrl(activeLeague, activeCategory);
+      const apiUrl = getCalendarApiUrl(activeLeague);
       if (!apiUrl) {
         container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">URL de calendario no configurada.</p>';
         return;
       }
 
       try {
-        // Petición parametrizada por categoría exacta
-        const queryUrl = `${apiUrl}?modulo=calendario&categoria=${activeCategory}&category=${activeCategory}&_t=${Date.now()}`;
+        // Petición combinada: intenta traer datos de la categoría activa
+        const queryUrl = `${apiUrl}?modulo=calendario&categoria=${activeCategory}&_t=${Date.now()}`;
         const res = await fetch(queryUrl);
         const data = await res.json();
 
         let partidos = [];
 
-        // 1. Si vino como lista directa de partidos
         if (Array.isArray(data)) {
           partidos = data;
-        } 
-        // 2. Si vino anidado como { partidos: [...] }
-        else if (data.partidos && Array.isArray(data.partidos)) {
+        } else if (data.partidos && Array.isArray(data.partidos)) {
           partidos = data.partidos;
-        } 
-        // 3. Si vino como un mega-objeto { varsity: {...}, juvenil: {...} }
-        else if (data[activeCategory] && data[activeCategory].partidos) {
+        } else if (data[activeCategory] && data[activeCategory].partidos) {
           partidos = data[activeCategory].partidos;
-          // Guardar en caché el resto de categorías recibidas
+          // Guardar categorías restantes si vinieron en la misma respuesta
           Object.keys(data).forEach(cat => {
             if (data[cat].partidos) setLocalCache(`cal_${activeLeague}_${cat.toLowerCase()}`, data[cat].partidos);
             if (data[cat].tabla) setLocalCache(`tabla_${activeLeague}_${cat.toLowerCase()}`, data[cat].tabla);
@@ -1012,11 +977,11 @@
           populateCalendarFilters(partidos);
           renderCalendar(partidos);
         } else {
-          container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados aún en la categoría ${activeCategory.toUpperCase()}.</p>`;
+          container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados en ${activeCategory.toUpperCase()}.</p>`;
         }
       } catch (err) {
         console.error("Error al cargar calendario:", err);
-        container.innerHTML = '<p style="text-align:center; padding:30px; color:#dc2626;">Error al conectar con el servidor del calendario.</p>';
+        container.innerHTML = '<p style="text-align:center; padding:30px; color:#dc2626;">Error al sincronizar el calendario.</p>';
       }
     }
 
@@ -1090,7 +1055,7 @@
         html += `<div class="kfl-grid-matches ${gridModifier}">`;
 
         partidosJugables.forEach(p => {
-          // EVALUACIÓN DE JAMBOREE: Solo Header, Título Jamboree, "Todos Juegan" y Hora (Sin VS)
+          // TARJETA DE JAMBOREE INDIVIDUAL
           if (esJamboreeMatch(p)) {
             html += `
               <div class="kfl-jamboree-card">
@@ -1106,7 +1071,7 @@
               </div>
             `;
           } else {
-            // TARJETA DE PARTIDO COMPETITIVO
+            // TARJETA COMPETITIVA NORMAL
             html += `
               <div class="kfl-match-card">
                 <div class="kfl-match-header">
@@ -1135,7 +1100,7 @@
 
         html += `</div>`;
 
-        // EQUIPO LIBRE AL PIE DE LA SEMANA (FONT AVENIR)
+        // EQUIPO LIBRE
         if (equiposLibresSemana.length > 0) {
           equiposLibresSemana.forEach(teamLibre => {
             html += `
@@ -1162,7 +1127,7 @@
     }
 
     /* ==========================================================================
-       TABLAS DE POSICIONES (CONSULTA ESPECÍFICA POR CATEGORÍA)
+       TABLA DE POSICIONES (?modulo=tabla_[categoria])
        ========================================================================== */
     async function loadPosicionesData() {
       const container = document.getElementById('posicionesNativeContent');
@@ -1176,25 +1141,24 @@
 
       container.innerHTML = '<p style="text-align:center; padding:35px; color:#64748b; font-weight:600;">Cargando tabla de posiciones...</p>';
 
-      const apiUrl = getCalendarApiUrl(activeLeague, activeCategory);
+      const apiUrl = getCalendarApiUrl(activeLeague);
       if (!apiUrl) {
         container.innerHTML = '<p style="text-align:center; padding:30px; color:#64748b;">URL de tabla no configurada.</p>';
         return;
       }
 
       try {
-        // LLAMADA EXACTA AL MÓDULO INDICADO POR EL APPS SCRIPT: ?modulo=tabla_[categoria]
-        const queryUrl = `${apiUrl}?modulo=tabla_${activeCategory}&categoria=${activeCategory}&_t=${Date.now()}`;
+        const queryUrl = `${apiUrl}?modulo=tabla_${activeCategory}&_t=${Date.now()}`;
         const res = await fetch(queryUrl);
         const textResponse = await res.text();
 
-        // 1. Si el backend devuelve HTML puro
+        // Si devuelve tabla HTML directa
         if (textResponse.trim().startsWith('<table') || textResponse.trim().startsWith('<div')) {
           container.innerHTML = textResponse;
           return;
         }
 
-        // 2. Si el backend devuelve JSON
+        // Si devuelve JSON
         const json = JSON.parse(textResponse);
         let tabla = [];
         if (Array.isArray(json)) tabla = json;
@@ -1279,13 +1243,14 @@
     }
 
     /* ==========================================================================
-       ROSTERS & STATS
+       ROSTERS Y PLAYER CARDS (INTACTO)
        ========================================================================== */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
 
-      const equipos = (KFL_CONFIG.CATEGORIAS_EQUIPOS[activeLeague] && KFL_CONFIG.CATEGORIAS_EQUIPOS[activeLeague][activeCategory]) || [];
+      const cfg = getKFLConfig();
+      const equipos = (cfg && cfg.CATEGORIAS_EQUIPOS && cfg.CATEGORIAS_EQUIPOS[activeLeague] && cfg.CATEGORIAS_EQUIPOS[activeLeague][activeCategory]) || [];
       grid.innerHTML = '';
 
       if (equipos.length === 0) {
@@ -1323,15 +1288,16 @@
       staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b; font-weight:600;">Cargando...</td></tr>';
       detailBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
+      const cfg = getKFLConfig();
       let apiUrl = "";
-      if (typeof KFL_CONFIG.API_ROSTERS_URL === 'object') {
-        apiUrl = (KFL_CONFIG.API_ROSTERS_URL[activeLeague] && KFL_CONFIG.API_ROSTERS_URL[activeLeague][activeCategory]) || "";
-      } else {
-        apiUrl = KFL_CONFIG.API_ROSTERS_URL;
+      if (cfg && typeof cfg.API_ROSTERS_URL === 'object') {
+        apiUrl = (cfg.API_ROSTERS_URL[activeLeague] && cfg.API_ROSTERS_URL[activeLeague][activeCategory]) || "";
+      } else if (cfg) {
+        apiUrl = cfg.API_ROSTERS_URL;
       }
 
       if (!apiUrl) {
-        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">Rosters de esta categoría próximamente disponibles.</td></tr>';
+        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b; font-weight:600;">Rosters de esta categoría próximamente disponibles.</td></tr>';
         staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b;">Sin cuerpo técnico registrado.</td></tr>';
         return;
       }
@@ -1399,7 +1365,8 @@
     }
 
     function precargarStatsCategoria() {
-      const linksLiga = KFL_CONFIG.STATS_CSV_LINKS && KFL_CONFIG.STATS_CSV_LINKS[activeLeague];
+      const cfg = getKFLConfig();
+      const linksLiga = cfg && cfg.STATS_CSV_LINKS && cfg.STATS_CSV_LINKS[activeLeague];
       const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
       if (!csvUrl) return;
 
@@ -1531,8 +1498,10 @@
       document.getElementById('playerCardModal').classList.remove('active');
     }
 
+    /* STATS CSV */
     function loadStatsData() {
-      const linksLiga = KFL_CONFIG.STATS_CSV_LINKS && KFL_CONFIG.STATS_CSV_LINKS[activeLeague];
+      const cfg = getKFLConfig();
+      const linksLiga = cfg && cfg.STATS_CSV_LINKS && cfg.STATS_CSV_LINKS[activeLeague];
       const csvUrl = linksLiga ? linksLiga[activeCategory] : null;
 
       if (!csvUrl) {

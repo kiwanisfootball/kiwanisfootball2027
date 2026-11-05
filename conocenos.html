@@ -3,29 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conócenos - Kiwanis Football League Panama</title>
   
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <!-- SEO & AEO Meta Tags -->
+  <title>Conócenos - Kiwanis Football League Panamá | Historia y Tradición</title>
+  <meta name="description" content="Conoce la historia, cronología, directiva y el impacto de la Kiwanis Football League (KFL) en Panamá desde 1967. El programa líder de football americano y flag football escolar.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panamá, football americano Panamá, flag football, historia KFL, Raúl Méndez de Obarrio, Panama Sharks">
+  <link rel="canonical" href="https://www.kiwanisfootball.com/conocenos.html">
 
-  <!-- GSAP ScrollTrigger para animaciones -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Conócenos - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Descubre nuestra trayectoria, más de 50 fomentando el deporte escolar, valores y disciplina en Panamá.">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/conocenos-historia-kfl.jpg">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/conocenos.html">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- Schema.org Structured Data (JSON-LD) para GEO, SEO y AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Kiwanis Football League Panamá",
+    "alternateName": "KFL",
+    "url": "https://www.kiwanisfootball.com",
+    "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
+    "foundingDate": "1967",
+    "founder": {
+      "@type": "Person",
+      "name": "Arq. Gustavo Rosania"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Panamá",
+      "addressCountry": "PA"
+    },
+    "sameAs": [
+      "https://www.instagram.com/kiwanisfootball"
+    ],
+    "memberOf": {
+      "@type": "Organization",
+      "name": "Club Kiwanis de Panamá"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: Anton & Montserrat/Avenir System Fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
+
+  <style>
+    /* ==========================================================================
+       OPTIMIZACIONES DE CONTENCIÓN Y RESPONSIVIDAD ESTRICTA (RESTAURACIÓN DE MARCOS)
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      max-width: 100%;
+    }
+
+    body {
+      overflow-x: hidden;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Corrección de desbordamientos en grids y contenedores responsivos */
+    .executive-league-section, 
+    .conocenos-hero, 
+    .counters-section, 
+    .history-banner-container, 
+    .timeline-section-wrapper {
+      width: 100%;
+      max-width: min(1200px, 100% - 30px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .executive-league-banner,
+    .history-banner-grid {
+      display: grid;
+      width: 100%;
+      grid-template-columns: 330px minmax(0, 1fr);
+    }
+
+    @media (max-width: 900px) {
+      .executive-league-banner,
+      .history-banner-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .executive-card-side,
+    .league-red-box,
+    .history-banner-blue,
+    .history-banner-image {
+      min-width: 0;
+      word-break: break-word;
+    }
+
+    .league-red-content {
+      overflow-wrap: break-word;
+    }
+
+    .timeline-viewport-container {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .timeline-scroll-track {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
 </head>
 <body>
 
   <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
-  <header class="header-nav" id="globalNav"></header>
+  <header class="header-nav" id="globalNav" role="banner"></header>
 
-  <main>
+  <main id="main-content" role="main">
     <!-- 1. ENCABEZADO H1 CON RESEÑA DE PÁGINA -->
-    <section class="conocenos-hero gsap-reveal">
+    <section class="conocenos-hero">
       <h1>CONÓCENOS</h1>
       <p>Conoce la historia de la Kiwanis Football League desde sus inicios hasta la actualidad.</p>
     </section>
 
     <!-- 2. CONTADORES / MÉTRICAS -->
-    <section class="counters-section gsap-reveal">
+    <section class="counters-section" aria-label="Métricas de la Liga">
       <div class="counters-grid">
         <div class="counter-card">
           <div class="counter-number"><span class="counter-val" data-target="58">0</span>+</div>
@@ -45,13 +161,13 @@
     </section>
 
     <!-- 3. BLOQUE UNIFICADO: CARD EJECUTIVO RAÚL MÉNDEZ + TEXT BOX ROJO KFL -->
-    <section class="executive-league-section gsap-reveal">
+    <section class="executive-league-section">
       <div class="executive-league-banner">
         
         <!-- Card Ejecutivo (Izquierda) -->
         <article class="executive-card-side">
           <div class="executive-photo-wrap">
-            <img src="assets/img/conocenos-raul-mendez.jpg" alt="Raúl Méndez de Obarrio - Presidente KFL">
+            <img src="assets/img/conocenos-raul-mendez.jpg" alt="Raúl Méndez de Obarrio - Presidente KFL" loading="lazy">
           </div>
           <div class="executive-info-group">
             <h2 class="executive-name">RAÚL MÉNDEZ DE OBARRIO</h2>
@@ -62,7 +178,7 @@
           </div>
         </article>
 
-        <!-- Text Box Rojo KFL (Derecha, Texto Texto Íntegro Solicitado) -->
+        <!-- Text Box Rojo KFL (Derecha) -->
         <article class="league-red-box">
           <header>
             <h2>NUESTRA LIGA</h2>
@@ -96,8 +212,8 @@
       </div>
     </section>
 
-    <!-- 4. BANNER NUESTRA HISTORIA (SIN SVG) -->
-    <section class="history-banner-container gsap-reveal">
+    <!-- 4. BANNER NUESTRA HISTORIA -->
+    <section class="history-banner-container">
       <div class="history-banner-grid">
         
         <!-- Bloque Azul Institucional -->
@@ -110,28 +226,28 @@
 
         <!-- Imagen de Historia -->
         <div class="history-banner-image">
-          <img src="assets/img/conocenos-historia-kfl.jpg" alt="Historia de la Kiwanis Football League Panamá">
+          <img src="assets/img/conocenos-historia-kfl.jpg" alt="Historia de la Kiwanis Football League Panamá" loading="lazy">
         </div>
 
       </div>
     </section>
 
     <!-- 5. CRONOLOGÍA DE LA LIGA -->
-    <section class="timeline-section-wrapper gsap-reveal">
+    <section class="timeline-section-wrapper" aria-label="Cronología histórica">
       <h2 class="timeline-title-main">CRONOLOGÍA DE LA LIGA</h2>
 
       <div class="timeline-viewport-container">
         
         <!-- Capas de Difuminación Lateral -->
-        <div class="tl-fade-overlay tl-fade-left" id="tlFadeLeft"></div>
-        <div class="tl-fade-overlay tl-fade-right" id="tlFadeRight"></div>
+        <div class="tl-fade-overlay tl-fade-left" id="tlFadeLeft" aria-hidden="true"></div>
+        <div class="tl-fade-overlay tl-fade-right" id="tlFadeRight" aria-hidden="true"></div>
 
         <!-- Botones Flotantes de Navegación -->
         <button class="tl-float-btn prev-btn" id="tlPrevBtn" aria-label="Anterior">
-          <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
         </button>
         <button class="tl-float-btn next-btn" id="tlNextBtn" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
         </button>
 
         <!-- Track con Scroll Oculto -->
@@ -142,8 +258,8 @@
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">1967</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <div class="timeline-badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>
               </div>
               <p class="timeline-h-desc">Se funda <strong>El Club Kiwanis de Panamá</strong>, una sociedad civil sin fines de lucro fundada en Panamá por iniciativa del <strong>Arq. Gustavo Rosania</strong>.</p>
@@ -153,19 +269,19 @@
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">1972</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                <div class="timeline-badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
                 </div>
               </div>
-              <p class="timeline-h-desc">Con la administración del <strong>Ing. Mario Rognoni (QEPD)</strong>, el Club Kiwanis de Panama organizó dos equipos juveniles de futbol americano, para que participaran en el <strong>Canal Zone League</strong> donde jugaban diferentes equipos de las bases militares de los Estados Unidos acantonadas en Panamá.</p>
+              <p class="timeline-h-desc">Con la administración del <strong>Ing. Mario Rognoni (QEPD)</strong>, el Club Kiwanis de Panama organizó dos equipos juveniles de futbol americano, para que participaran en el <strong>Canal Zone League</strong>.</p>
             </article>
 
             <!-- 1977 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">1977</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <div class="timeline-badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                 </div>
               </div>
               <p class="timeline-h-desc">Los <strong>Kiwanis Kolts</strong> se consagran bi-campeones del football americano y comienza el sueño de Panamá.</p>
@@ -175,40 +291,40 @@
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">1999</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
+                <div class="timeline-badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg>
                 </div>
               </div>
-              <p class="timeline-h-desc">Con la firma de los <strong>Tratados Torrijos-Carter</strong>, se van los Americanos de Panamá. La Liga se debilita y se reducen los equipos. Cierra la liga de la Zona del Canal y se abre la Liga organizada por <strong>Panajuru</strong> que dura pocos años.</p>
+              <p class="timeline-h-desc">Con la firma de los <strong>Tratados Torrijos-Carter</strong>, se van los Americanos de Panamá y se debilita temporalmente la liga local.</p>
             </article>
 
             <!-- 2000 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2000</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99z"/></svg>
+                <div class="timeline-badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99z"/></svg>
                 </div>
               </div>
-              <p class="timeline-h-desc">Bajo la Presidencia de <strong>Raúl Méndez de Obarrio</strong>, el Club Kiwanis retoma el deporte y la liga se juega con solo cuatro equipos de Panamá en la categoría mayor. Todos bajo el primer nombre “Kiwanis”: <strong>Kiwanis Kolts</strong>, <strong>Kiwanis Knights</strong>, <strong>Kiwanis Kobra</strong> y <strong>Kiwanis Kings</strong>.</p>
+              <p class="timeline-h-desc">Bajo la Presidencia de <strong>Raúl Méndez de Obarrio</strong>, el Club Kiwanis retoma el deporte con cuatro equipos fundacionales.</p>
             </article>
 
             <!-- 2001 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2001</div>
-                <div class="timeline-badge-icon">
-                  <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+                <div class="timeline-badge-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
                 </div>
               </div>
-              <p class="timeline-h-desc">Se hace una reingeniería de la Liga. Migra hacia una <strong>liga intercolegial</strong>.</p>
+              <p class="timeline-h-desc">Se hace una reingeniería total de la Liga, migrando exitosamente hacia un formato de <strong>liga intercolegial</strong>.</p>
             </article>
 
             <!-- 2002 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2002</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
               <p class="timeline-h-desc">Entran los <strong>Raiders</strong> del Colegio Brader y los <strong>Tigers</strong> del Instituto Don Bosco.</p>
             </article>
@@ -217,108 +333,108 @@
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2004</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Entran los <strong>Spartans</strong> de La Salle.</p>
+              <p class="timeline-h-desc">Se suman a la competencia oficial los <strong>Spartans</strong> del Colegio La Salle.</p>
             </article>
 
             <!-- 2005 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2005</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Entran los <strong>Titans</strong> de la comunidad hebrea liderizada por el <strong>Instituto Alberto Einstein</strong>.</p>
+              <p class="timeline-h-desc">Entran los <strong>Titans</strong> del Instituto Alberto Einstein.</p>
             </article>
 
             <!-- 2007 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2007</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Entran los <strong>Dragons</strong> de la escuela de <strong>Balboa Academy</strong>.</p>
+              <p class="timeline-h-desc">Se incorporan los <strong>Dragons</strong> de Balboa Academy.</p>
             </article>
 
             <!-- 2008 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2008</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Entran los <strong>Redskins</strong> del San Vicente de Paul. Se inaugura la <strong>Categoría Mini</strong> con 7 equipos: Kiwanis Kolts, AIP Fighting Owls, San Vicente Redskins, La Salle Spartans, Alberto Einstein Titans, Balboa Dragons y Brader Raiders.</p>
+              <p class="timeline-h-desc">Inauguración oficial de la <strong>Categoría Mini</strong> con 7 equipos consolidados.</p>
             </article>
 
             <!-- 2009 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2009</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Se inaugura la <strong>Categoría Micro</strong> con 10 equipos. El Chino Panameño, la AIP saca 2 equipos, Kolts, Raiders, Spartans, Titans, Balboa, Oxford, Red Lions y Redskins.</p>
+              <p class="timeline-h-desc">Se inaugura la <strong>Categoría Micro</strong> con 10 equipos participantes.</p>
             </article>
 
             <!-- 2012 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2012</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Se inaugura la <strong>Categoría Varsity</strong>, con jugadores de 16 a 18 años de edad y peso ilimitado.</p>
+              <p class="timeline-h-desc">Se inaugura la <strong>Categoría Varsity</strong>, con jugadores de 16 a 18 años y peso ilimitado.</p>
             </article>
 
             <!-- 2015 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2015</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Se inaugura <strong>Flag Football Femenino</strong> en la <strong>Categoría Juvenil</strong> con la participación de 7 equipos.</p>
+              <p class="timeline-h-desc">Lanzamiento histórico del <strong>Flag Football Femenino</strong> en categoría Juvenil.</p>
             </article>
 
             <!-- 2016 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2016</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Se inaugura en Flag Femenino la <strong>Categoría Varsity</strong> con 7 equipos.</p>
+              <p class="timeline-h-desc">Se inaugura la categoría <strong>Varsity</strong> en Flag Football Femenino.</p>
             </article>
 
             <!-- 2017 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2017</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Se inaugura en Flag Femenino la <strong>Categoría Mini</strong>.</p>
+              <p class="timeline-h-desc">Apertura de la <strong>Categoría Mini</strong> en la modalidad de Flag Femenino.</p>
             </article>
 
             <!-- 2019 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2019</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">Los <strong>Panama Sharks U18</strong>, participaron del <strong>International Bowl</strong>, organizado por <strong>USA Football</strong> y hacen historia, ganándole al combinado de estados unidos por <strong>30-25</strong>.</p>
+              <p class="timeline-h-desc">Los <strong>Panama Sharks U18</strong> vencen al combinado de Estados Unidos (30-25) en el International Bowl.</p>
             </article>
 
             <!-- 2021 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2021</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">La liga sigue creciendo. Se lanzan las <strong>Sharks de flag football femenino</strong> por primer vez en un partido Internacional con sede en Panamá contra Querétaro México.</p>
+              <p class="timeline-h-desc">Debut internacional histórico de las <strong>Sharks de flag football femenino</strong> en sede Panamá.</p>
             </article>
 
             <!-- 2025 -->
             <article class="timeline-h-card">
               <div class="timeline-card-header">
                 <div class="timeline-h-year">2025</div>
-                <div class="timeline-badge-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
+                <div class="timeline-badge-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2L2 7l10 5 10-5-10-5z"/></svg></div>
               </div>
-              <p class="timeline-h-desc">La Liga de flag football femenino migra del formato 8vs8 a formato <strong>5v5 con reglamentación IFAF</strong> (International Federation of American Football) y debutan los <strong>Eagles del Colegio de Panamá</strong> en la categoría <strong>Varsity Contact</strong>.</p>
+              <p class="timeline-h-desc">Migración a formato <strong>5v5 IFAF</strong> y debut oficial de los <strong>Eagles</strong> en Varsity Contact.</p>
             </article>
 
           </div>
@@ -359,26 +475,7 @@
   <!-- SCRIPTS DE INTERACCIÓN Y CONTROLES -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Animaciones GSAP
-      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.utils.toArray('.gsap-reveal').forEach((element) => {
-          gsap.to(element, {
-            scrollTrigger: {
-              trigger: element,
-              start: 'top 88%',
-              toggleActions: 'play none none reverse'
-            },
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power2.out'
-          });
-        });
-      }
-
-      // 2. Contadores Numéricos
+      // 1. Contadores Numéricos Optimizados
       const counters = document.querySelectorAll('.counter-val');
       let animated = false;
 
@@ -417,7 +514,7 @@
         observer.observe(countersSection);
       }
 
-      // 3. Control de Navegación del Timeline
+      // 2. Control de Navegación del Timeline
       const track = document.getElementById('timelineTrack');
       const prevBtn = document.getElementById('tlPrevBtn');
       const nextBtn = document.getElementById('tlNextBtn');

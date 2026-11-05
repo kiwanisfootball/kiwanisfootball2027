@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <title>Kiwanis Football League Panama - Sitio Oficial</title>
-  
+
   <!-- SEO & Meta Tags Avanzados -->
   <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programación de partidos, resultados, estadísticas y noticias de Contact y Flag Football.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panama, Futbol Americano Panama, Flag Football Panama, Contact Football">
   <meta name="author" content="Kiwanis Football League">
-  
+
   <!-- Open Graph / Redes Sociales -->
   <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
   <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
@@ -211,7 +211,7 @@
     }
 
     .sidebar-info h4 {
-      font-family: var(--fuente-cuerpo);
+      font-family: 'Montserrat', sans-serif;
       font-size: 13px;
       font-weight: 800;
       color: #1e293b;
@@ -265,7 +265,7 @@
       font-size: 14px;
       font-family: 'Anton', sans-serif;
       letter-spacing: 0.5px;
-      color: #ffffff; /* KFL App en blanco puro */
+      color: #ffffff;
     }
 
     .pwa-btns {
@@ -313,7 +313,7 @@
     <!-- 2. TICKER DE MARCADORES CON LOGOS -->
     <section class="ticker-section">
       <div class="ticker-container">
-        
+
         <article class="game-card">
           <div class="game-team">
             <div class="team-info">
@@ -413,7 +413,7 @@
     <!-- 5. BANNER PROMOCIONAL / SLIDESHOW (1200x250) -->
     <section class="promo-banner-section">
       <div class="slider-container">
-        
+
         <div class="slide active">
           <a href="contacto.html">
             <img src="assets/img/banner-promo-1.jpg" alt="Anuncia Tu Marca Aquí - Espacio Publicitario KFL">
@@ -435,9 +435,9 @@
     <!-- 6. MÓDULO DE NOTICIAS CONECTADO A LOS MARKDOWN -->
     <section class="news-section">
       <h2 class="section-headline">NOTICIAS</h2>
-      
+
       <div class="news-grid-layout">
-        
+
         <!-- COLUMNA IZQUIERDA: ÚLTIMA NOTICIA EN GRANDE -->
         <div id="mainFeaturedPost" class="featured-main-card">
           <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
@@ -457,11 +457,11 @@
     <!-- 7. SECCIÓN DE PATROCINADORES -->
     <section class="sponsors-section">
       <div class="sponsors-container">
-        
+
         <div class="sponsors-tier">
           <h3 class="tier-title">PATROCINADORES OFICIALES</h3>
           <div class="sponsors-grid tier-gold">
-            
+
             <div class="sponsor-card">
               <img src="assets/sponsors/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
             </div>
@@ -500,7 +500,7 @@
   <!-- 8. FOOTER GLOBAL (Inyectado automáticamente) -->
   <div id="globalFooter"></div>
 
-  <!-- POP-UP / BANNER DE INSTALACIÓN PWA CON EL TEXTO PERSONALIZADO -->
+  <!-- POP-UP / BANNER DE INSTALACIÓN PWA -->
   <div id="pwaInstallBanner" class="pwa-install-banner">
     <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="pwa-icon">
     <div class="pwa-text">
@@ -517,7 +517,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER + NOTICIAS + PWA + SERVICE WORKER) -->
+  <!-- SCRIPT MAESTRO (NAV + FOOTER + BACK TO TOP + NOTICIAS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Inyectar Navbar desde nav.html
@@ -525,7 +525,7 @@
         .then(response => response.text())
         .then(data => {
           document.getElementById('globalNav').innerHTML = data;
-          
+
           const hamburgerBtn = document.getElementById('hamburgerBtn');
           const navMenu = document.getElementById('navMenu');
           if (hamburgerBtn && navMenu) {
@@ -558,49 +558,6 @@
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
       cargarSeccionNoticiasIndex(slugsArticulosIndex);
-
-      // Registro de Service Worker para PWA
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-          .then(() => console.log('Service Worker registrado correctamente.'))
-          .catch((err) => console.log('Fallo al registrar Service Worker:', err));
-      }
-
-      // Lógica de PWA App Install Prompt (Restringido estrictamente a Mobile)
-      let deferredPrompt;
-      const pwaBanner = document.getElementById('pwaInstallBanner');
-      const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-      const pwaCloseBtn = document.getElementById('pwaCloseBtn');
-
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        
-        const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-        if (isMobile && !sessionStorage.getItem('pwaClosed')) {
-          setTimeout(() => {
-            pwaBanner.classList.add('show');
-          }, 2000);
-        }
-      });
-
-      pwaInstallBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-            console.log('Usuario aceptó instalar la PWA');
-          }
-          deferredPrompt = null;
-        }
-        pwaBanner.classList.remove('show');
-      });
-
-      pwaCloseBtn.addEventListener('click', () => {
-        pwaBanner.classList.remove('show');
-        sessionStorage.setItem('pwaClosed', 'true');
-      });
     });
 
     async function cargarSeccionNoticiasIndex(slugs) {
@@ -629,7 +586,7 @@
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
-            
+
             let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
             if (tMatch) titulo = tMatch[1];
 
@@ -669,7 +626,7 @@
       `;
 
       // 2. RENDERIZAR ÚLTIMAS NOTICIAS (DERECHA)
-      let postsSecundarios = postsCargados.slice(1, 5); 
+      let postsSecundarios = postsCargados.slice(1, 5);
       let listaSidebarHtml = "";
 
       if (postsSecundarios.length === 0) {
@@ -692,7 +649,7 @@
       sidebarContainer.innerHTML = listaSidebarHtml;
     }
   </script>
-  
+
   <!-- SCRIPT DEL SLIDESHOW -->
   <script>
     let currentSlide = 0;
@@ -713,6 +670,60 @@
     setInterval(() => {
       moveSlide(1);
     }, 5000);
+  </script>
+
+  <!-- SCRIPT PWA Y SERVICE WORKER (FUERA DE DOMContentLoaded) -->
+  <script>
+    let deferredPrompt = null;
+    const pwaBanner = document.getElementById('pwaInstallBanner');
+    const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+    const pwaCloseBtn = document.getElementById('pwaCloseBtn');
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+
+    function mostrarBanner() {
+      if (!isMobile || isStandalone || sessionStorage.getItem('pwaClosed')) return;
+      setTimeout(() => pwaBanner.classList.add('show'), 2000);
+    }
+
+    // Chrome/Android: evento nativo de instalación
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      mostrarBanner();
+    });
+
+    // iOS no dispara beforeinstallprompt, así que mostramos el banner directamente
+    if (isIOS) mostrarBanner();
+
+    pwaInstallBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        pwaBanner.classList.remove('show');
+      } else {
+        alert('En iPhone: toca el botón Compartir y luego "Agregar a pantalla de inicio".');
+      }
+    });
+
+    pwaCloseBtn.addEventListener('click', () => {
+      pwaBanner.classList.remove('show');
+      sessionStorage.setItem('pwaClosed', 'true');
+    });
+
+    window.addEventListener('appinstalled', () => {
+      pwaBanner.classList.remove('show');
+    });
+
+    // Registro del Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('Service Worker registrado correctamente.'))
+        .catch((err) => console.log('Fallo al registrar Service Worker:', err));
+    }
   </script>
 </body>
 </html>

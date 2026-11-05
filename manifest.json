@@ -1,0 +1,15 @@
+{
+  "name": "Kiwanis Football League Panama",
+  "short_name": "KFL",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#005EAA",
+  "icons": [
+    {
+      "src": "assets/img/KFL-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

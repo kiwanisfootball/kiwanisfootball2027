@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const navHTML = `
-        <header class="site-header">
+        <header class="site-header" style="font-family: var(--fuente-cuerpo);">
             <nav class="main-nav">
                 <div class="logo-container">
                     <a href="index.html" aria-label="KFL Inicio">
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
     `;
 
     const footerHTML = `
-        <footer class="site-footer">
+        <footer class="site-footer" style="font-family: var(--fuente-cuerpo);">
             <div class="footer-content">
                 <p>&copy; 2027 Kiwanis Football League. Todos los derechos reservados.</p>
                 <div class="social-links">

@@ -3,22 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kiwanis Football League Panama - Sitio Oficial</title>
   
+  <!-- SEO & METADATOS -->
+  <title>Kiwanis Football League Panamá - Sitio Oficial</title>
+  <meta name="description" content="La Kiwanis Football League es la liga de fútbol americano con más tradición de Panamá, organizada por Club Kiwanis de Panamá. Calendarios, resultados y noticias de cada temporada.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panamá, futbol americano Panamá, flag football Panamá, KFL contact, deportes escolares Panamá">
+  <meta name="author" content="Kiwanis Football League">
+  
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kiwanis Football League Panamá - Sitio Oficial">
+  <meta property="og:description" content="La liga de football americano y flag football escolar más importante de Panamá.">
+  <meta property="og:image" content="assets/img/kfl-og-image.jpg">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/">
+
+  <!-- Performance: Preconnect para Fuentes y Recursos -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.css">
+
+  <!-- Estilos y Favicon -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- GSAP Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 
-  <!-- ESTILOS ADICIONALES PARA LA NUEVA SECCIÓN DE NOTICIAS DINÁMICAS -->
- <style>
+  <!-- ESTILOS LIMPIOS Y UNIVERSALES (SIN INLINE STYLES) -->
+  <style>
+    :root {
+      --kfl-blue: #0033A1;
+      --kfl-red: #EA002A;
+      --kfl-bg: #EFEFEF;
+      --kfl-border: #AFAFAF;
+      --kfl-text: #555555;
+      --kfl-white: #FFFFFF;
+      --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+      --font-display: 'Anton', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--kfl-bg);
+      color: var(--kfl-text);
+      font-family: var(--font-stack);
+      margin: 0;
+      padding: 0;
+    }
+
     .news-grid-layout {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 30px;
-      align-items: stretch; /* Asegura que ambas columnas tengan la misma altura visual */
+      align-items: stretch;
     }
 
     @media (max-width: 950px) {
@@ -28,12 +66,12 @@
     }
 
     .featured-main-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
+      background: var(--kfl-white);
+      border: 1px solid var(--kfl-border);
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition: box-shadow 0.25s ease;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
       display: flex;
       flex-direction: column;
@@ -41,23 +79,20 @@
     }
 
     .featured-main-card:hover {
-      border-color: #19547E;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(25, 84, 126, 0.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
     }
 
-    /* CONTENEDOR DE IMAGEN CON RATIO 3:2 SIN BORDES NEGROS (COVER) */
     .featured-img-container {
       width: 100%;
-      aspect-ratio: 3 / 2; /* Mantiene estrictamente el ratio 3:2 */
+      aspect-ratio: 3 / 2;
       overflow: hidden;
-      background-color: #f1f5f9;
+      background-color: var(--kfl-bg);
     }
 
     .featured-img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Llena el espacio sin barras negras */
+      object-fit: cover;
       display: block;
     }
 
@@ -70,8 +105,8 @@
     }
 
     .badge-category {
-      background-color: #19547E;
-      color: #ffffff;
+      background-color: var(--kfl-blue);
+      color: var(--kfl-white);
       padding: 5px 12px;
       font-size: 11px;
       font-weight: 800;
@@ -82,9 +117,9 @@
     }
 
     .featured-body h3 {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-display);
       font-size: 26px;
-      color: #0b0f19;
+      color: var(--kfl-text);
       text-transform: uppercase;
       margin-bottom: 12px;
       line-height: 1.2;
@@ -92,15 +127,14 @@
 
     .featured-body p {
       font-size: 14.5px;
-      color: #64748b;
+      color: var(--kfl-text);
       line-height: 1.6;
       margin: 0;
     }
 
-    /* CARD LATERAL DERECHA (IGUALA LA ALTURA Y MANTIENE ORDEN) */
     .latest-sidebar-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
+      background: var(--kfl-white);
+      border: 1px solid var(--kfl-border);
       border-radius: 16px;
       padding: 25px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
@@ -111,9 +145,9 @@
     }
 
     .latest-sidebar-card h3 {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--font-display);
       font-size: 20px;
-      color: #19547E;
+      color: var(--kfl-blue);
       text-transform: uppercase;
       margin-bottom: 20px;
       letter-spacing: 0.5px;
@@ -122,7 +156,7 @@
     #sidebarNewsList {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Distribuye los 4 items ocupando el mismo alto que la izquierda */
+      justify-content: space-between;
       flex-grow: 1;
     }
 
@@ -131,7 +165,7 @@
       gap: 15px;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid var(--kfl-bg);
       cursor: pointer;
       text-decoration: none;
       transition: background 0.2s;
@@ -143,7 +177,7 @@
     }
 
     .sidebar-news-item:hover h4 {
-      color: #19547E;
+      color: var(--kfl-blue);
     }
 
     .sidebar-thumb {
@@ -152,7 +186,7 @@
       border-radius: 8px;
       object-fit: cover;
       flex-shrink: 0;
-      background-color: #f1f5f9;
+      background-color: var(--kfl-bg);
     }
 
     .sidebar-info {
@@ -164,27 +198,35 @@
     .sidebar-tag {
       font-size: 10px;
       font-weight: 800;
-      color: #19547E;
+      color: var(--kfl-blue);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     .sidebar-info h4 {
-      font-family: 'Avenir', sans-serif;
+      font-family: var(--font-stack);
       font-size: 13px;
       font-weight: 800;
-      color: #1e293b;
+      color: var(--kfl-text);
       line-height: 1.3;
       margin: 0;
     }
-  </style></head>
+
+    .loading-state {
+      padding: 40px;
+      text-align: center;
+      color: var(--kfl-text);
+      font-family: var(--font-stack);
+    }
+  </style>
+</head>
 <body>
 
-  <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
+  <!-- 1. HEADER GLOBAL -->
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- 2. TICKER DE MARCADORES CON LOGOS -->
+    <!-- 2. TICKER DE MARCADORES -->
     <section class="ticker-section gsap-reveal">
       <div class="ticker-container">
         
@@ -273,18 +315,18 @@
     <div class="about-wrapper gsap-reveal">
       <section class="about-section">
         <div class="about-image">
-          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
+          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panamá">
         </div>
         <article class="about-card">
           <h2>ACERCA DE LA LIGA</h2>
           <p>La Liga de Football Americano Kiwanis se ha convertido en un programa escolar pionero.</p>
-          <p>Ofrecemos two ligas, la de <strong>Contact Football Masculino</strong> y la de <strong>Flag Football Femenino</strong>, ambas con las categorías Micro (U10), Mini (U13), Juvenil (U16) y Varsity (U19).</p>
+          <p>Ofrecemos dos ligas, la de <strong>Contact Football Masculino</strong> y la de <strong>Flag Football Femenino</strong>, ambas con las categorías Micro (U10), Mini (U13), Juvenil (U16) y Varsity (U19).</p>
           <p>Nos orgullece que actualmente contamos con un aproximado de <strong>1,600 jugadores</strong> entre ambas ligas.</p>
         </article>
       </section>
     </div>
 
-    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW (1200x250) -->
+    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW -->
     <section class="promo-banner-section gsap-reveal">
       <div class="slider-container">
         
@@ -300,56 +342,32 @@
           </a>
         </div>
 
-        <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
-        <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
-
       </div>
     </section>
 
-    <!-- 6. MÓDULO DE NOTICIAS CONECTADO A LOS MARKDOWN -->
+    <!-- 6. MÓDULO DE NOTICIAS -->
     <section class="news-section gsap-reveal">
       <h2 class="section-headline">NOTICIAS</h2>
       
       <div class="news-grid-layout">
         
-        <!-- COLUMNA IZQUIERDA: ÚLTIMA NOTICIA EN GRANDE -->
+        <!-- COLUMNA IZQUIERDA: NOTICIA PRINCIPAL -->
         <div id="mainFeaturedPost" class="featured-main-card">
-          <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
+          <div class="loading-state">Cargando noticia destacada...</div>
         </div>
 
-        <!-- COLUMNA DERECHA: ÚLTIMAS 4 NOTICIAS -->
+        <!-- COLUMNA DERECHA: ÚLTIMAS NOTICIAS -->
         <div class="latest-sidebar-card">
           <h3>ÚLTIMAS NOTICIAS</h3>
           <div id="sidebarNewsList">
-            <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
+            <div class="loading-state">Cargando listado...</div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 7. FORMULARIO DE NEWSLETTER -->
-    <div class="newsletter-wrapper gsap-reveal">
-      <section class="newsletter-box">
-        <div class="newsletter-header">
-          <h2 class="newsletter-main-title">NO TE LO PUEDES PERDER</h2>
-        </div>
-        <p class="newsletter-subtitle">SUSCRÍBETE A NUESTRO NEWSLETTER Y ENTÉRATE DE TODAS NUESTRAS NOTICIAS</p>
-        
-        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('¡Gracias por suscribirte!');">
-          <input 
-            type="email" 
-            class="newsletter-input" 
-            placeholder="Registra tu correo electrónico" 
-            title="Por favor ingresa un correo electrónico válido" 
-            required
-          >
-          <button type="submit" class="newsletter-btn">Suscríbete</button>
-        </form>
-      </section>
-    </div>
-
-    <!-- 8. SECCIÓN DE PATROCINADORES -->
+    <!-- 7. SECCIÓN DE PATROCINADORES -->
     <section class="sponsors-section gsap-reveal">
       <div class="sponsors-container">
         
@@ -392,7 +410,7 @@
     </section>
   </main>
 
-  <!-- 9. FOOTER GLOBAL (Inyectado automáticamente) -->
+  <!-- 8. FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
   <!-- BOTÓN VOLVER ARRIBA -->
@@ -400,7 +418,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
+  <!-- SCRIPT MAESTRO Y DE GESTIÓN DE EVENTOS SIN INLINE JS -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Inyectar Navbar desde nav.html
@@ -423,7 +441,7 @@
           document.getElementById('globalFooter').innerHTML = data;
         });
 
-      // Botón volver arriba
+      // Botón volver arriba con listener limpio
       const backToTopBtn = document.getElementById('backToTopBtn');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
@@ -436,10 +454,9 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // Lista de slugs de tus artículos publicados
+      // Lista de artículos
       const slugsArticulosIndex = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
-        // Agrega más slugs aquí en orden (el primero será el destacado principal)
       ];
       cargarSeccionNoticiasIndex(slugsArticulosIndex);
     });
@@ -449,8 +466,8 @@
       const sidebarContainer = document.getElementById('sidebarNewsList');
 
       if (!slugs || slugs.length === 0) {
-        mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
-        sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
+        mainFeaturedContainer.innerHTML = "<div class='loading-state'>No hay noticias destacadas.</div>";
+        sidebarContainer.innerHTML = "<div class='loading-state'>Sin noticias recientes.</div>";
         return;
       }
 
@@ -466,7 +483,7 @@
           let titulo = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
           let categoria = "KFL";
           let excerpt = "Haz clic para leer el comunicado oficial...";
-          let coverImage = "https://i.imgur.com/wrPDjDN.png";
+          let coverImage = "assets/img/KFL-logo.svg";
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
@@ -495,9 +512,11 @@
 
       if (postsCargados.length === 0) return;
 
-      // 1. RENDERIZAR NOTICIA PRINCIPAL (IZQUIERDA) - LA MÁS RECIENTE
+      // 1. RENDERIZAR NOTICIA PRINCIPAL Y EVENT LISTENER (SIN ONCLICK EN LÍNEA)
       let postPrincipal = postsCargados[0];
-      mainFeaturedContainer.onclick = () => window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
+      mainFeaturedContainer.addEventListener('click', () => {
+        window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
+      });
       mainFeaturedContainer.innerHTML = `
         <div class="featured-img-container">
           <img src="${postPrincipal.coverImage}" alt="${postPrincipal.titulo}" class="featured-img">
@@ -509,18 +528,18 @@
         </div>
       `;
 
-      // 2. RENDERIZAR ÚLTIMAS NOTICIAS (DERECHA) EXCLUYENDO LA PRINCIPAL Y TOMANDO MÁXIMO 4
+      // 2. RENDERIZAR ÚLTIMAS NOTICIAS
       let postsSecundarios = postsCargados.slice(1, 5); 
       let listaSidebarHtml = "";
 
       if (postsSecundarios.length === 0) {
-        sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
+        sidebarContainer.innerHTML = "<div class='loading-state'>No hay más noticias recientes.</div>";
         return;
       }
 
       postsSecundarios.forEach(post => {
         listaSidebarHtml += `
-          <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${post.slug}'">
+          <div class="sidebar-news-item" data-slug="${post.slug}">
             <img src="${post.coverImage}" alt="${post.titulo}" class="sidebar-thumb">
             <div class="sidebar-info">
               <span class="sidebar-tag">${post.categoria}</span>
@@ -531,47 +550,58 @@
       });
 
       sidebarContainer.innerHTML = listaSidebarHtml;
+
+      // Delegación de eventos para las noticias secundarias (Cero onclick en línea)
+      sidebarContainer.querySelectorAll('.sidebar-news-item').forEach(item => {
+        item.addEventListener('click', function() {
+          const targetSlug = this.getAttribute('data-slug');
+          window.location.href = `articulo.html?slug=${targetSlug}`;
+        });
+      });
     }
   </script>
   
-  <!-- SCRIPTS ESPECÍFICOS DE LA PÁGINA (GSAP + SLIDESHOW) -->
+  <!-- GSAP Y SLIDESHOW AUTOMÁTICO -->
   <script>
-    // 1. GSAP ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
+    document.addEventListener("DOMContentLoaded", function() {
+      gsap.registerPlugin(ScrollTrigger);
 
-    gsap.utils.toArray('.gsap-reveal').forEach((element) => {
-      gsap.to(element, {
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 88%',
-          toggleActions: 'play none none reverse'
-        },
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out'
+      gsap.utils.toArray('.gsap-reveal').forEach((element) => {
+        gsap.to(element, {
+          scrollTrigger: {
+            trigger: element,
+            start: 'top 88%',
+            toggleActions: 'play none none reverse'
+          },
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out'
+        });
       });
+
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.promo-banner-section .slide');
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active');
+          if (i === index) slide.classList.add('active');
+        });
+      }
+
+      function moveSlide(step) {
+        if (slides.length === 0) return;
+        currentSlide = (currentSlide + step + slides.length) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      if (slides.length > 1) {
+        setInterval(() => {
+          moveSlide(1);
+        }, 5000);
+      }
     });
-
-    // 2. Slideshow Promocional
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        if (i === index) slide.classList.add('active');
-      });
-    }
-
-    function moveSlide(step) {
-      currentSlide = (currentSlide + step + slides.length) % slides.length;
-      showSlide(currentSlide);
-    }
-
-    setInterval(() => {
-      moveSlide(1);
-    }, 5000);
   </script>
 </body>
 </html>

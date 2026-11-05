@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información y Contacto - Kiwanis Football League Panama</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+
+  <!-- SDK de EmailJS para envío directo de correos corporativos -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      // Inicializa EmailJS con tu Public Key (reemplaza 'TU_PUBLIC_KEY' con la tuya de EmailJS)
+      emailjs.init({
+        publicKey: "TU_PUBLIC_KEY",
+      });
+    })();
+  </script>
+
+  <style>
+    .contact-container {
+      max-width: 1100px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: 'Avenir', sans-serif;
+      box-sizing: border-box;
+    }
+
+    /* NUEVO ENCABEZADO LIMPIO (SIN HERO CON IMAGEN) */
+    .section-header-clean {
+      text-align: center;
+      margin-bottom: 40px;
+      padding: 20px 0;
+    }
+
+    .section-header-clean h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: 42px;
+      color: #19547E;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .section-header-clean p {
+      font-size: 15px;
+      color: #475569;
+      font-weight: 600;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* SECCIÓN DEL FORMULARIO */
+    .contact-form-wrapper {
+      max-width: 750px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      box-sizing: border-box;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Avenir', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: #334155;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .input-icon-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      width: 20px;
+      height: 20px;
+      fill: #94a3b8;
+      pointer-events: none;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 14px 14px 14px 48px;
+      font-family: 'Avenir', sans-serif;
+      font-size: 15px;
+      color: #1e293b;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.25s ease;
+      box-sizing: border-box;
+    }
+
+    .form-textarea {
+      padding-top: 14px;
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      background: #ffffff;
+      border-color: #19547E;
+      box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
+    }
+
+    /* BOTÓN DE ENVIAR */
+    .form-submit-btn {
+      width: 100%;
+      background: #19547E;
+      color: #ffffff;
+      border: none;
+      padding: 16px;
+      font-family: 'Anton', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
+      margin-top: 10px;
+    }
+
+    .form-submit-btn:hover {
+      background: #144265;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(25, 84, 126, 0.35);
+    }
+
+    .form-alert {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Avenir', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .form-alert.success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .form-alert.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    @media (max-width: 768px) {
+      .contact-container { padding: 15px 10px; }
+      .section-header-clean h1 { font-size: 32px; }
+      .contact-form-wrapper { padding: 25px 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV MAESTRO -->
+  <header class="header-nav" id="globalNav"></header>
+
+  <main class="contact-container">
+
+    <!-- TÍTULO Y SUBTÍTULO INSTITUCIONAL LIMPIO -->
+    <div class="section-header-clean">
+      <h1>Información y Preguntas Frecuentes</h1>
+      <p>¿Listo para formar parte de la gran familia KFL? Infórmate sobre cómo unirte a nuestros equipos, inscribir a tu colegio o resolver cualquier duda sobre las temporadas de Football Americano y Flag Football.</p>
+    </div>
+
+    <!-- FORMULARIO DE CONTACTO -->
+    <div class="contact-form-wrapper">
+      <form id="contactForm" onsubmit="handleContactSubmit(event)">
+        
+        <!-- NOMBRE -->
+        <div class="form-group">
+          <label class="form-label" for="nombre">Nombre</label>
+          <div class="input-icon-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+            <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre completo" required>
+          </div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <div class="input-icon-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <input type="email" id="email" name="email" class="form-input" placeholder="tucorreo@ejemplo.com" required>
+          </div>
+        </div>
+
+        <!-- TELÉFONO -->
+        <div class="form-group">
+          <label class="form-label" for="telefono">Teléfono</label>
+          <div class="input-icon-wrapper">
+            <svg class="input-icon" viewBox="0 0 24 24">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </svg>
+            <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="+507 0000-0000" required>
+          </div>
+        </div>
+
+        <!-- CONSULTA -->
+        <div class="form-group">
+          <label class="form-label" for="consulta">Consulta</label>
+          <div class="input-icon-wrapper" style="align-items: flex-start;">
+            <svg class="input-icon" style="top: 15px;" viewBox="0 0 24 24">
+              <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+            </svg>
+            <textarea id="consulta" name="consulta" class="form-textarea" placeholder="Escribe aquí tu consulta sobre cómo unirte a un equipo, inscripciones, categorías, etc..." required></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="form-submit-btn" id="submitBtn">Enviar</button>
+
+        <div id="formAlert" class="form-alert"></div>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- FOOTER MAESTRO -->
+  <div id="globalFooter"></div>
+
+  <!-- SCRIPTS DE INYECCIÓN Y ENVÍO DE CORREO -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // 1. Inyectar Nav y Footer maestros
+      fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
+      fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
+    });
+
+    // MANEJADOR DEL FORMULARIO Y ENVÍO CORPORATIVO HTML CON EMAILJS
+    function handleContactSubmit(event) {
+      event.preventDefault();
+      
+      const btn = document.getElementById('submitBtn');
+      const alertBox = document.getElementById('formAlert');
+      
+      btn.disabled = true;
+      btn.innerText = 'ENVIANDO...';
+      alertBox.style.display = 'none';
+
+      // Capturar los valores del formulario
+      const nombre = document.getElementById('nombre').value;
+      const email = document.getElementById('email').value;
+      const telefono = document.getElementById('telefono').value;
+      const consulta = document.getElementById('consulta').value;
+
+      // Estructura HTML corporativa con los colores de la liga para el correo
+      const htmlBody = `
+        <div style="font-family: 'Avenir', Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
+          <div style="background-color: #19547E; padding: 25px; text-align: center; border-radius: 10px 10px 0 0;">
+            <h1 style="color: #ffffff; font-size: 24px; text-transform: uppercase; margin: 0; font-family: Arial, sans-serif;">Kiwanis Football League</h1>
+            <p style="color: #cbd5e1; font-size: 13px; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 1px;">Nuevo Mensaje de Contacto / Inscripción</p>
+          </div>
+          
+          <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+            <p style="font-size: 16px; color: #1e293b; margin-top: 0;">Has recibido una nueva consulta desde el sitio web oficial de la KFL.</p>
+            
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+            
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 10px 0; font-weight: bold; color: #475569; width: 120px;">Remitente:</td>
+                <td style="padding: 10px 0; color: #1e293b; font-size: 16px;">${nombre}</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: bold; color: #475569;">Correo Electrónico:</td>
+                <td style="padding: 10px 0;"><a href="mailto:${email}" style="color: #19547E; text-decoration: none; font-weight: bold;">${email}</a></td>
+              </tr>
+              <tr>
+                <td style="padding: 10px 0; font-weight: bold; color: #475569;">Teléfono:</td>
+                <td style="padding: 10px 0; color: #1e293b;"><a href="tel:${telefono}" style="color: #1e293b; text-decoration: none;">${telefono}</a></td>
+              </tr>
+            </table>
+
+            <div style="margin-top: 25px; background-color: #f1f5f9; padding: 20px; border-radius: 8px; border-left: 4px solid #19547E;">
+              <p style="margin: 0 0 8px 0; font-weight: bold; color: #19547E; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px;">Mensaje / Consulta:</p>
+              <p style="margin: 0; color: #334155; line-height: 1.6; font-size: 15px; white-space: pre-line;">${consulta}</p>
+            </div>
+          </div>
+          
+          <div style="text-align: center; margin-top: 20px; color: #94a3b8; font-size: 11px;">
+            <p>&copy; 2026 Kiwanis Football League Panama. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      `;
+
+      // Parámetros que se envían a EmailJS (asegúrate de configurar tu plantilla en EmailJS para que reciba estos campos)
+      const templateParams = {
+        to_email: "kflpty@gmail.com, administracion@kiwanispanama.org",
+        from_name: nombre,
+        from_email: email,
+        phone: telefono,
+        message: consulta,
+        html_message: htmlBody
+      };
+
+      // Envío mediante el servicio de EmailJS (reemplaza 'TU_SERVICE_ID' y 'TU_TEMPLATE_ID')
+      emailjs.send("TU_SERVICE_ID", "TU_TEMPLATE_ID", templateParams)
+        .then(function(response) {
+          alertBox.style.display = 'block';
+          alertBox.className = 'form-alert success';
+          alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
+          
+          document.getElementById('contactForm').reset();
+          btn.disabled = false;
+          btn.innerText = 'ENVIAR';
+
+          setTimeout(() => {
+            alertBox.style.display = 'none';
+          }, 6000);
+        }, function(error) {
+          alertBox.style.display = 'block';
+          alertBox.className = 'form-alert error';
+          alertBox.innerText = 'Hubo un error al enviar el mensaje. Por favor, intenta de nuevo o escríbenos directamente.';
+          
+          btn.disabled = false;
+          btn.innerText = 'ENVIAR';
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,103 +1,234 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE - CSS GLOBAL UNIFICADO Y OPTIMIZADO
+   KIWANIS FOOTBALL LEAGUE PANAMÁ - HOJA DE ESTILOS MAESTRA
+   Arquitectura Jamstack Ultra-Rápida | Mobile-First | Sin bordes rígidos
    ========================================================================== */
 
+/* 1. VARIABLES GLOBALES DE DISEÑO */
 :root {
-  /* Paleta de Colores Universales */
   --kfl-blue: #0033A1;
+  --kfl-blue-hover: #002575;
   --kfl-red: #EA002A;
-  --kfl-bg: #EFEFEF;
-  --kfl-border: #AFAFAF;
-  --kfl-text: #555555;
-  --kfl-white: #FFFFFF;
-
-  /* Tipografías Universales del Sistema (Sin Arial) */
-  --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
-  --font-display: 'Anton', system-ui, -apple-system, sans-serif;
+  --kfl-dark: #0b0f19;
+  --kfl-surface: #ffffff;
+  --kfl-bg: #f8fafc;
+  --kfl-text-primary: #1e293b;
+  --kfl-text-secondary: #64748b;
+  --kfl-border-subtle: #f1f5f9;
+  --kfl-shadow-sm: 0 2px 8px rgba(11, 15, 25, 0.04);
+  --kfl-shadow-card: 0 4px 16px rgba(11, 15, 25, 0.05);
+  --kfl-shadow-hover: 0 10px 24px rgba(0, 51, 161, 0.12);
+  --font-title: 'Anton', sans-serif;
+  --font-body: 'Mulish', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --max-width: 1240px;
 }
 
-/* Base Global */
-* {
+/* 2. RESETEO Y NORMALIZACIÓN */
+*, *::before, *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
+  font-family: var(--font-body);
   background-color: var(--kfl-bg);
-  color: var(--kfl-text);
-  font-family: var(--font-stack);
-  margin: 0;
-  padding: 0;
+  color: var(--kfl-text-primary);
+  line-height: 1.6;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Tipografía de Encabezados y Display */
-h1, h2, h3, h4, h5, h6, .welcome-title, .section-headline, .tier-title {
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  color: var(--kfl-text);
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* Enlaces y Navegación Global */
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* 3. HEADER & NAVEGACIÓN GLOBAL */
+.header-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-shadow: var(--kfl-shadow-sm);
+}
+
+.nav-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.nav-brand-text {
+  font-family: var(--font-title);
+  font-size: 20px;
+  color: var(--kfl-blue);
+  letter-spacing: 0.5px;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--kfl-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 0;
+  position: relative;
   transition: color 0.2s ease;
 }
 
-a:hover {
+.nav-link:hover,
+.nav-link.active {
   color: var(--kfl-blue);
 }
 
-/* ==========================================================================
-   COMPONENTES GLOBALES Y ESTRUCTURAS
-   ========================================================================== */
-
-/* 1. Header y Footer */
-.header-nav {
-  background-color: var(--kfl-white);
-  border-bottom: 1px solid var(--kfl-border);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: var(--kfl-red);
+  border-radius: 2px;
 }
 
-/* 2. Ticker de Marcadores */
+/* Menú Móvil Hamburger */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 24px;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.hamburger-btn span {
+  width: 100%;
+  height: 3px;
+  background-color: var(--kfl-blue);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 860px) {
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 24px;
+    gap: 18px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+    display: none;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+}
+
+/* 4. CONTENEDOR GENERAL */
+main {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 5. TICKER DE RESULTADOS */
 .ticker-section {
-  background-color: var(--kfl-white);
-  border-bottom: 1px solid var(--kfl-border);
-  padding: 15px 0;
+  margin: 20px 0;
+  overflow: hidden;
 }
 
 .ticker-container {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   overflow-x: auto;
-  padding: 0 20px;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ticker-container::-webkit-scrollbar {
+  display: none;
 }
 
 .game-card {
-  background: var(--kfl-bg);
-  border: 1px solid var(--kfl-border);
+  background: var(--kfl-surface);
   border-radius: 12px;
-  padding: 12px 16px;
+  padding: 14px 18px;
   min-width: 220px;
   flex-shrink: 0;
+  box-shadow: var(--kfl-shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .game-team {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
 }
 
 .team-info {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-weight: 800;
-  font-size: 13px;
-  color: var(--kfl-text);
+  font-size: 13.5px;
 }
 
 .team-logo-small {
@@ -107,206 +238,294 @@ a:hover {
 }
 
 .game-score {
-  font-family: var(--font-display);
-  font-size: 16px;
-  color: var(--kfl-blue);
+  font-family: var(--font-title);
+  font-size: 18px;
+  color: var(--kfl-dark);
 }
 
 .game-status {
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 800;
-  color: var(--kfl-red);
+  color: var(--kfl-blue);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-top: 8px;
-  border-top: 1px solid var(--kfl-border);
-  padding-top: 4px;
+  text-align: right;
+  margin-top: 4px;
 }
 
-/* 3. Welcome Header */
+/* 6. TITULO DE BIENVENIDA INSTITUCIONAL */
 .welcome-header {
   text-align: center;
-  padding: 40px 20px 20px;
+  margin: 36px 0 24px 0;
 }
 
 .welcome-subtitle {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
+  letter-spacing: 2px;
   color: var(--kfl-red);
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
 .welcome-title {
-  font-size: clamp(28px, 5vw, 48px);
+  font-family: var(--font-title);
+  font-size: clamp(32px, 5vw, 48px);
   color: var(--kfl-blue);
-  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
 }
 
-/* 4. Acerca de la Liga */
+/* 7. ACERCA DE LA LIGA */
 .about-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 30px 0 40px 0;
 }
 
 .about-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 32px;
   align-items: center;
-  background: var(--kfl-white);
-  border: 1px solid var(--kfl-border);
+}
+
+@media (max-width: 860px) {
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-image {
   border-radius: 16px;
   overflow: hidden;
-  padding: 40px;
+  box-shadow: var(--kfl-shadow-card);
+  aspect-ratio: 4 / 3;
 }
 
 .about-image img {
   width: 100%;
-  height: auto;
-  border-radius: 12px;
+  height: 100%;
   object-fit: cover;
 }
 
+.about-card {
+  background: var(--kfl-surface);
+  padding: clamp(24px, 4vw, 36px);
+  border-radius: 16px;
+  box-shadow: var(--kfl-shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .about-card h2 {
+  font-family: var(--font-title);
+  font-size: clamp(24px, 3vw, 32px);
   color: var(--kfl-blue);
-  font-size: 28px;
-  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .about-card p {
   font-size: 15px;
-  line-height: 1.6;
-  margin-bottom: 15px;
+  color: var(--kfl-text-secondary);
+  line-height: 1.65;
 }
 
-@media (max-width: 900px) {
-  .about-section {
-    grid-template-columns: 1fr;
-    padding: 20px;
-  }
+.about-card strong {
+  color: var(--kfl-dark);
 }
 
-/* 5. Banner Promocional / Slideshow */
+/* 8. BANNER PROMOCIONAL / SLIDESHOW (1200x250) */
 .promo-banner-section {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
+  margin: 40px 0;
 }
 
 .slider-container {
+  width: 100%;
+  aspect-ratio: 1200 / 250;
+  min-height: 140px;
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid var(--kfl-border);
-  background: var(--kfl-white);
+  box-shadow: var(--kfl-shadow-card);
+  background-color: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .slider-container {
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .slide {
-  display: none;
+  position: absolute;
+  inset: 0;
   width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease;
 }
 
 .slide.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
 }
 
+.slide a,
 .slide img {
   width: 100%;
-  height: auto;
-  display: block;
-  aspect-ratio: 1200 / 250;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-/* 6. Sección de Noticias */
-.news-section {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.section-headline {
-  font-size: 32px;
-  color: var(--kfl-blue);
-  margin-bottom: 25px;
-  border-bottom: 3px solid var(--kfl-red);
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-/* 7. Patrocinadores */
+/* 9. SECCIÓN DE PATROCINADORES OFICIALES */
 .sponsors-section {
-  max-width: 1200px;
-  margin: 60px auto;
-  padding: 0 20px;
+  margin: 50px 0 70px 0;
 }
 
 .tier-title {
-  font-size: 20px;
+  font-family: var(--font-title);
+  font-size: 22px;
   color: var(--kfl-blue);
   text-align: center;
-  margin-bottom: 30px;
+  text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 24px;
 }
 
-.sponsors-grid {
+.sponsors-grid.tier-gold {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 16px;
   align-items: center;
 }
 
 .sponsor-card {
-  background: var(--kfl-white);
-  border: 1px solid var(--kfl-border);
+  background: var(--kfl-surface);
   border-radius: 12px;
-  padding: 20px;
+  padding: 16px;
+  aspect-ratio: 3 / 2;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 90px;
-  transition: border-color 0.2s ease;
+  justify-content: center;
+  box-shadow: var(--kfl-shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .sponsor-card:hover {
-  border-color: var(--kfl-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--kfl-shadow-hover);
 }
 
 .sponsor-logo {
   max-width: 100%;
-  max-height: 50px;
+  max-height: 100%;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.7;
-  transition: all 0.2s ease;
 }
 
-.sponsor-card:hover .sponsor-logo {
-  filter: grayscale(0%);
-  opacity: 1;
+/* 10. FOOTER GLOBAL */
+.site-footer {
+  background-color: #071329;
+  color: #ffffff;
+  padding: 50px 20px 30px 20px;
+  margin-top: 60px;
 }
 
-/* Botón Volver Arriba */
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 40px;
+}
+
+@media (max-width: 860px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+.footer-logo {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 14px;
+}
+
+.footer-about {
+  font-size: 13.5px;
+  color: #94a3b8;
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+.footer-title {
+  font-family: var(--font-title);
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 13.5px;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-org {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.footer-geo,
+.footer-copyright {
+  font-size: 12.5px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.footer-copyright {
+  margin-top: 14px;
+}
+
+/* 11. BOTÓN VOLVER ARRIBA */
 .back-to-top-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
   background-color: var(--kfl-blue);
-  color: var(--kfl-white);
+  color: #ffffff;
   border: none;
-  width: 45px;
-  height: 45px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 51, 161, 0.35);
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
   z-index: 999;
 }
 
@@ -316,12 +535,12 @@ a:hover {
 }
 
 .back-to-top-btn:hover {
-  background-color: var(--kfl-red);
-  transform: translateY(-3px);
+  background-color: var(--kfl-blue-hover);
+  transform: translateY(-2px);
 }
 
 .back-to-top-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   fill: currentColor;
 }

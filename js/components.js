@@ -3,22 +3,25 @@ document.addEventListener("DOMContentLoaded", function() {
         <header class="site-header">
             <nav class="main-nav">
                 <div class="logo-container">
-                    <a href="index.html"><img src="assets/logos/kfl-logo.png" alt="KFL Logo"></a>
+                    <a href="index.html" aria-label="KFL Inicio">
+                        <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="kfl-nav-logo">
+                    </a>
                 </div>
                 <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
                     <span></span><span></span><span></span>
                 </button>
                 <ul class="nav-links">
                     <li><a href="index.html">Inicio</a></li>
+                    <li><a href="conocenos.html">Conocenos</a></li>
                     <li><a href="ligas.html">Ligas</a></li>
+                    <li><a href="reglamento.html">Reglamento</a></li>
                     <li><a href="campeones.html">Campeones</a></li>
                     <li><a href="mvp.html">MVP</a></li>
-                    <li><a href="coaches.html">Coaches</a></li>
-                    <li><a href="reglamento.html">Reglamento</a></li>
                     <li><a href="registro.html">Registro</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contacto.html">Contacto</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="coaches.html">Portal de Coaches</a></li>
+                    <li><a href="total-access.html">KFL Total Access</a></li>
+                    <li><a href="fotos.html">Fotos</a></li>
+                    <li><a href="informacion.html">Información</a></li>
                 </ul>
             </nav>
         </header>
@@ -35,14 +38,19 @@ document.addEventListener("DOMContentLoaded", function() {
         </footer>
     `;
 
-    // Inyectar componentes si existen los contenedores o al inicio/final del body
-    const headerPlaceholder = document.getElementById('nav-placeholder') || document.body.insertBefore(document.createElement('div'), document.body.firstChild);
+    // Soporte para ambos nombres de contenedor (nav-placeholder o globalNav)
+    const headerPlaceholder = document.getElementById('nav-placeholder') || 
+                              document.getElementById('globalNav') || 
+                              document.body.insertBefore(document.createElement('div'), document.body.firstChild);
     headerPlaceholder.innerHTML = navHTML;
 
-    const footerPlaceholder = document.getElementById('footer-placeholder') || document.body.appendChild(document.createElement('div'));
+    // Soporte para ambos nombres de contenedor (footer-placeholder o globalFooter)
+    const footerPlaceholder = document.getElementById('footer-placeholder') || 
+                              document.getElementById('globalFooter') || 
+                              document.body.appendChild(document.createElement('div'));
     footerPlaceholder.innerHTML = footerHTML;
 
-    // Lógica para resaltar la página activa de forma automática
+    // Resaltar la página activa automáticamente
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll('.nav-links a').forEach(link => {
         if (link.getAttribute('href') === currentPage) {
@@ -55,8 +63,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const navLinks = document.querySelector('.nav-links');
     if (toggleBtn && navLinks) {
         toggleBtn.addEventListener('click', () => {
-            const expanded = toggleBtn.getAttribute('aria-expanded') === 'true' || false;
+            const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
             toggleBtn.setAttribute('aria-expanded', !expanded);
+            toggleBtn.classList.toggle('active');
             navLinks.classList.toggle('nav-active');
         });
     }

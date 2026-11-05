@@ -15,8 +15,8 @@
 </head>
 <body>
 
-  <!-- HEADER NAVEGACIÓN DINÁMICO -->
-  <div id="global-header"></div>
+  <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
+  <header class="header-nav" id="globalNav"></header>
 
   <main>
     <!-- 1. ENCABEZADO H1 CON RESEÑA DE PÁGINA -->
@@ -329,10 +329,33 @@
     </section>
   </main>
 
-  <!-- FOOTER DINÁMICO -->
-  <div id="global-footer"></div>
+  <!-- 2. FOOTER GLOBAL (Inyectado automáticamente) -->
+  <div id="globalFooter"></div>
 
-  <script src="js/components.js"></script>
+  <!-- SCRIPTS DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Inyectar Navbar desde nav.html
+      fetch('nav.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalNav').innerHTML = data;
+          
+          const hamburgerBtn = document.getElementById('hamburgerBtn');
+          const navMenu = document.getElementById('navMenu');
+          if (hamburgerBtn && navMenu) {
+            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
+          }
+        });
+
+      // Inyectar Footer desde footer.html
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('globalFooter').innerHTML = data;
+        });
+    });
+  </script>
 
   <!-- SCRIPTS DE INTERACCIÓN Y CONTROLES -->
   <script>

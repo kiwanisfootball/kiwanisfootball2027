@@ -16,9 +16,10 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/img/KFL-logo.svg">
 
-  <!-- Hojas de Estilo y Favicon Local (Sin depender de Imgur) -->
+  <!-- Hojas de Estilo y Favicon Local -->
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="manifest" href="manifest.json">
 
   <!-- Preconexión y Fuentes Google Optimizadas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -198,7 +199,7 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
-      min-width: 0; /* Evita desbordamiento de texto flex */
+      min-width: 0;
     }
 
     .sidebar-tag {
@@ -496,7 +497,7 @@
   <!-- 8. FOOTER GLOBAL (Inyectado automáticamente) -->
   <div id="globalFooter"></div>
 
-  <!-- POP-UP / BANNER DE INSTALACIÓN PWA (AGREGAR A APP) -->
+  <!-- POP-UP / BANNER DE INSTALACIÓN PWA -->
   <div id="pwaInstallBanner" class="pwa-install-banner">
     <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="pwa-icon">
     <div class="pwa-text">
@@ -514,7 +515,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER + NOTICIAS + PWA) -->
+  <!-- SCRIPT MAESTRO DE INYECCIÓN GLOBAL (NAV + FOOTER + NOTICIAS + PWA + SERVICE WORKER) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Inyectar Navbar desde nav.html
@@ -556,6 +557,13 @@
       ];
       cargarSeccionNoticiasIndex(slugsArticulosIndex);
 
+      // Registro de Service Worker para PWA
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+          .then(() => console.log('Service Worker registrado correctamente.'))
+          .catch((err) => console.log('Fallo al registrar Service Worker:', err));
+      }
+
       // Lógica de PWA App Install Prompt
       let deferredPrompt;
       const pwaBanner = document.getElementById('pwaInstallBanner');
@@ -565,7 +573,6 @@
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-        // Mostrar banner si el usuario no lo ha cerrado antes en esta sesión
         if (!sessionStorage.getItem('pwaClosed')) {
           setTimeout(() => {
             pwaBanner.classList.add('show');
@@ -642,7 +649,7 @@
 
       if (postsCargados.length === 0) return;
 
-      // 1. RENDERIZAR NOTICIA PRINCIPAL (IZQUIERDA) - LA MÁS RECIENTE
+      // 1. RENDERIZAR NOTICIA PRINCIPAL (IZQUIERDA)
       let postPrincipal = postsCargados[0];
       mainFeaturedContainer.onclick = () => window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
       mainFeaturedContainer.innerHTML = `

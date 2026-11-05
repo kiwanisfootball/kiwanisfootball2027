@@ -1,6 +1,6 @@
 {
   "name": "KFL App",
-  "short_name": "KFL",
+  "short_name": "KFL App",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#f8fafc",

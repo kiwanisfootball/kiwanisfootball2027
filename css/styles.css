@@ -2,13 +2,10 @@
    KIWANIS FOOTBALL LEAGUE PANAMA 2026 - HOJA DE ESTILOS MAESTRA UNIFICADA
    ========================================================================== */
 
-/* 1. IMPORTACIÓN DE FUENTES OFICIALES (ANTON + MONTSERRAT/AVENIR) */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap');
-
-/* 2. VARIABLES GLOBALES DE DISEÑO */
+/* 1. VARIABLES GLOBALES DE DISEÑO */
 :root {
-  --azul-kfl: #19547E;
-  --rojo-kfl: #A91C00;
+  --azul-kfl: #0033A1;
+  --rojo-kfl: #EA002A;
   --celeste-hover: #E0F2FE;
   --blanco-fondo: #f8fafc;
   --tarjeta-bg: #ffffff;
@@ -18,9 +15,9 @@
   --texto-suave: #475569;
   --ancho-maximo: 1200px;
   
-  /* FUENTES EXCLUSIVAS (PROHIBIDO ARIAL E IMPACT) */
-  --fuente-titulos: 'Anton', sans-serif;
-  --fuente-cuerpo: 'Avenir', 'Montserrat', sans-serif;
+  /* FUENTES NATIVAS OPTIMIZADAS PARA TODOS LOS SO */
+  --fuente-titulos: 'Anton', Impact, sans-serif;
+  --fuente-cuerpo: 'Avenir', 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* 3. RESET Y BASES */
@@ -259,7 +256,7 @@ p {
   letter-spacing: 0.5px;
 }
 
-/* 8. INDEX/HOME - TÍTULO INSTITUCIONAL DE BIENVENIDA (CON LÍNEAS ROJAS Y AZUL KFL) */
+/* 8. INDEX/HOME - TÍTULO INSTITUCIONAL DE BIENVENIDA */
 .welcome-header {
   max-width: var(--ancho-maximo);
   margin: 40px auto 30px auto;
@@ -298,7 +295,7 @@ p {
   text-transform: uppercase;
 }
 
-/* 9. INDEX/HOME - ACERCA DE LA LIGA (IMAGEN + CAJA ROJA KFL) */
+/* 9. INDEX/HOME - ACERCA DE LA LIGA */
 .about-wrapper {
   max-width: var(--ancho-maximo);
   margin: 0 auto 40px auto;
@@ -564,7 +561,7 @@ p {
   border-radius: 14px;
   padding: 40px 25px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(25, 84, 126, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 51, 161, 0.2);
 }
 
 .newsletter-main-title {
@@ -616,10 +613,10 @@ p {
 }
 
 .newsletter-btn:hover {
-  background-color: #8b1700;
+  background-color: #b80021;
 }
 
-/* 13. INDEX/HOME - PATROCINADORES OFICIALES (GRILLA DINÁMICA 5 ARRIBA / 4 ABAJO) */
+/* 13. INDEX/HOME - PATROCINADORES OFICIALES */
 .sponsors-section {
   max-width: var(--ancho-maximo);
   margin: 0 auto 60px auto;
@@ -781,7 +778,7 @@ p {
   box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
 
-/* 15. SECCIÓN LIGAS (BANNERS CON OVERLAY Y PÍLDORAS HOMOGÉNEAS) */
+/* 15. SECCIÓN LIGAS */
 .leagues-hero-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -822,11 +819,11 @@ p {
 }
 
 .league-hero-card.contact-card .hero-overlay {
-  background-color: rgba(25, 84, 126, 0.72);
+  background-color: rgba(0, 51, 161, 0.72);
 }
 
 .league-hero-card.flag-card .hero-overlay {
-  background-color: rgba(169, 28, 0, 0.72);
+  background-color: rgba(234, 0, 42, 0.72);
 }
 
 .hero-overlay h2 {
@@ -1010,11 +1007,11 @@ body.flag-theme .sub-tab-btn.active { color: var(--rojo-kfl); }
   height: 22px;
   fill: currentColor;
 }
-/* Estilo para que el enlace de backlinking sea totalmente invisible al usuario */
+
 .backlink-discreto {
   color: inherit;
   text-decoration: none;
-  cursor: text; /* Mantiene el cursor normal de texto */
+  cursor: text;
 }
 
 .backlink-discreto:hover, 

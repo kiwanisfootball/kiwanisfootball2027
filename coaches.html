@@ -254,7 +254,6 @@
       background-color: #e2e8f0;
     }
 
-    /* CABECERA DEL DASHBOARD: COACH Y CATEGORÍA DESTACADOS EN AVENIR */
     .dashboard-header-bar {
       display: flex;
       justify-content: space-between;
@@ -306,7 +305,6 @@
       border: 1px solid #fecaca;
     }
 
-    /* ESTILO DE TABLAS (100% CENTRADO) */
     .table-container {
       width: 100%;
       overflow-x: auto;
@@ -406,7 +404,6 @@
       text-transform: uppercase;
     }
 
-    /* SECCIÓN INFERIOR DE REGISTROS WEB */
     .registered-web-section {
       margin-top: 40px;
       border-top: 2px solid var(--kfl-border);
@@ -522,7 +519,6 @@
 
   <header class="header-nav" id="globalNav"></header>
 
-  <!-- ÚNICO BOTÓN GLOBAL DE RETORNO -->
   <div class="portal-top-bar">
     <a href="index.html" class="btn-exit-link">← Volver al Sitio Principal</a>
   </div>
@@ -534,7 +530,6 @@
       <p>Gestión de Rosters y Monitoreo de Inscripciones</p>
     </div>
 
-    <!-- BANNER DE FECHA LÍMITE (REACTIVO EN VIVO) -->
     <div id="deadlineWarning" class="deadline-banner">
       ⚠️ <strong>Período Cerrado:</strong> La fecha límite oficial para cambios de roster venció el <span id="deadlineDisplay"></span>. El sistema se encuentra en modo solo lectura.
     </div>
@@ -571,7 +566,6 @@
       
       <div class="dashboard-card">
         
-        <!-- CABECERA LIMPIA: COACH Y CATEGORÍA EN AVENIR CON BADGE DE ESTADO CENTRADO -->
         <div class="dashboard-header-bar">
           <div class="coach-profile-headline">
             Coach Responsable: <strong id="coachNameLabel">---</strong> | Categoría: <strong id="categoryNameLabel">---</strong>
@@ -584,19 +578,16 @@
 
         <div id="saveFeedback" class="status-msg"></div>
 
-        <!-- PANEL DE INSTRUCCIONES FORMALES Y POLÍTICAS DE ASEGURADORA -->
         <div class="legal-instructions-card">
           <h3>Directrices Obligatorias para el Registro Oficial</h3>
           <ul>
-            <li><strong>Exactitud de Nombres y Apellidos:</strong> Los datos deben coincidir estrictamente con el documento de identidad legal. Este listado constituye el censo oficial remitido a la compañía aseguradora para la póliza médica deportiva contra accidentes. Cualquier discrepancia o error ortográfico puede anular la cobertura.</li>
-            <li><strong>Cédula o Pasaporte:</strong> Debe registrarse con sus guiones correspondientes tal como figura en el documento físico (ejemplo: <code>8-1066-1306</code>, <code>PE-12-345</code> o número exacto de pasaporte).</li>
-            <li><strong>Fecha de Nacimiento:</strong> Es de carácter estrictamente obligatorio ingresarla en formato <strong>DD/MM/AAAA</strong> (Día/Mes/Año, ejemplo: <code>31/05/2008</code>).</li>
-            <li><strong>Ordenamiento Automatizado por Dorsal:</strong> Puedes ingresar las filas en cualquier orden; al guardar, el sistema reordenará automáticamente todo el roster de forma ascendente por el <strong># de Jersey</strong> y asignará la numeración de <strong>CANTIDAD</strong> correlativa.</li>
-            <li><strong>Control Institucional:</strong> La columna <strong>CANTIDAD</strong> y la validación de la <strong>FOTO</strong> son de administración oficial de la liga.</li>
+            <li><strong>Exactitud de Nombres y Apellidos:</strong> Los datos deben coincidir estrictamente con el documento de identidad legal. Este listado constituye el censo oficial remitido a la compañía aseguradora para la póliza médica deportiva contra accidentes.</li>
+            <li><strong>Cédula o Pasaporte:</strong> Debe registrarse con sus guiones correspondientes tal como figura en el documento físico (ejemplo: <code>8-1066-1306</code>).</li>
+            <li><strong>Fecha de Nacimiento:</strong> Ingresarla estrictamente en formato <strong>DD/MM/AAAA</strong> (ejemplo: <code>31/05/2008</code>).</li>
+            <li><strong>Ordenamiento Automatizado por Dorsal:</strong> Al guardar, el sistema reordenará automáticamente todo el roster de forma ascendente por el <strong># de Jersey</strong> y asignará la numeración de <strong>CANTIDAD</strong> correlativa.</li>
           </ul>
         </div>
 
-        <!-- 1. TABLA DE ROSTER DE JUGADORES (COLUMNAS A - G) -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
           <h3 style="font-family: 'Anton', sans-serif; font-size: 20px; color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
             Roster Oficial de Jugadores
@@ -621,9 +612,8 @@
           </table>
         </div>
 
-        <!-- 2. TABLA DE COACHING STAFF (COLUMNAS I Y J) -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 35px; margin-bottom: 15px;">
-          <h3 style="font-family: 'Anton', sans-serif; font-size: 20px; color: var(--kfl-blue); margin: 0; text-transform: uppercase; letter-spacing: 0.5px;">
+          <h3 style="font-family: 'Anton', sans-serif; font-size: 20px; color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
             Coaching Staff
           </h3>
           <button type="button" class="btn-secondary" id="btnAddStaffBtn" onclick="agregarFilaStaffVacia()">+ Agregar Miembro del Staff</button>
@@ -642,14 +632,12 @@
           </table>
         </div>
 
-        <!-- BOTÓN DE CONFIRMACIÓN Y ENVÍO -->
         <div style="margin-top: 25px; margin-bottom: 35px; text-align: center;">
           <button type="button" class="btn-kfl" id="btnSubmitRoster" onclick="enviarRosterAlBackend()">
             <span id="btnSubmitRosterText">Confirmar y Enviar Roster y Staff a la Liga</span>
           </button>
         </div>
 
-        <!-- SECCIÓN: JUGADORES REGISTRADOS EN LA WEB -->
         <div class="registered-web-section">
           <div class="registered-web-header">
             <div>
@@ -678,9 +666,10 @@
 
   <div id="globalFooter"></div>
 
-  <script>
-    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec";
+  <!-- INCLUIMOS EL CONFIG DE URLS -->
+  <script src="js/config-coaches.js"></script>
 
+  <script>
     let currentUser = null;
     let isLockedSession = false;
     let limiteMaximoRoster = null;
@@ -694,14 +683,14 @@
             activarMenuHamburguesa();
           }
         })
-        .catch(err => console.warn('nav.html cargará en despliegue:', err));
+        .catch(err => console.warn('nav cargado', err));
 
       fetch('footer.html')
         .then(response => response.ok ? response.text() : '')
         .then(html => {
           if (html) document.getElementById('globalFooter').innerHTML = html;
         })
-        .catch(err => console.warn('footer.html cargará en despliegue:', err));
+        .catch(err => console.warn('footer cargado', err));
 
       verificarSesionExistente();
     });
@@ -726,15 +715,16 @@
             navMenu.classList.remove('active');
           }
         });
-
-        const links = navMenu.querySelectorAll('a');
-        links.forEach(link => {
-          link.addEventListener('click', function() {
-            navMenu.classList.remove('open');
-            navMenu.classList.remove('active');
-          });
-        });
       }
+    }
+
+    // Función inteligente para obtener la URL correcta según la categoría del coach
+    function obtenerApiUrl(categoria) {
+      if (typeof KFL_COACHES_CONFIG !== 'undefined' && KFL_COACHES_CONFIG[categoria]) {
+        return KFL_COACHES_CONFIG[categoria];
+      }
+      // Fallback a Varsity por defecto si no encuentra la categoría mapeada
+      return KFL_COACHES_CONFIG["VARSITY CONTACT"] || "";
     }
 
     async function handleLoginSubmit(e) {
@@ -750,30 +740,41 @@
       if (!passwordInput) return;
 
       btn.disabled = true;
-      btnText.innerHTML = '<span class="spinner-inline"></span> Verificando con Google Sheets...';
+      btnText.innerHTML = '<span class="spinner-inline"></span> Verificando credenciales...';
+
+      // Hacemos un barrido rápido consultando en las URLs configuradas en config-coaches.js
+      let loginExitoso = null;
+      let urlUsada = "";
+
+      const urlsAConsultar = Object.values(KFL_COACHES_CONFIG);
 
       try {
-        const response = await fetch(GAS_API_URL, {
-          method: 'POST',
-          body: JSON.stringify({
-            action: 'login',
-            password: passwordInput
-          })
-        });
+        for (const urlApi of urlsAConsultar) {
+          try {
+            const response = await fetch(urlApi, {
+              method: 'POST',
+              body: JSON.stringify({ action: 'login', password: passwordInput })
+            });
+            const result = await response.json();
+            if (result.status === 'success') {
+              loginExitoso = result.user;
+              urlUsada = urlApi;
+              break;
+            }
+          } catch (err) {
+            // Continúa buscando en las demás URLs si una no responde
+          }
+        }
 
-        const result = await response.json();
-
-        if (result.status === 'success') {
-          currentUser = result.user;
+        if (loginExitoso) {
+          currentUser = loginExitoso;
           currentUser.password = passwordInput;
+          currentUser.apiUrl = urlUsada;
           
-          sessionStorage.setItem('kfl_coach_auth', JSON.stringify({
-            user: currentUser
-          }));
-
+          sessionStorage.setItem('kfl_coach_auth', JSON.stringify({ user: currentUser }));
           mostrarDashboard();
         } else {
-          feedback.textContent = result.message || 'Contraseña incorrecta.';
+          feedback.textContent = 'Contraseña incorrecta o no asignada.';
           feedback.className = 'status-msg error';
           feedback.style.display = 'block';
         }
@@ -847,7 +848,9 @@
       tbodyStaff.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: var(--kfl-text-muted);">Consultando Coaching Staff...</td></tr>';
 
       try {
-        const url = `${GAS_API_URL}?action=getTeamRoster&sheetName=${encodeURIComponent(currentUser.sheetName)}&password=${encodeURIComponent(currentUser.password)}&_t=${new Date().getTime()}`;
+        const apiEndpoint = currentUser.apiUrl || obtenerApiUrl(currentUser.categoria);
+        const url = `${apiEndpoint}?action=getTeamRoster&sheetName=${encodeURIComponent(currentUser.sheetName)}&password=${encodeURIComponent(currentUser.password)}&_t=${new Date().getTime()}`;
+        
         const res = await fetch(url);
         const data = await res.json();
 
@@ -857,26 +860,16 @@
         if (data.status === 'success') {
           if (data.limiteRoster !== undefined) limiteMaximoRoster = data.limiteRoster;
 
-          // 1. Cargar Jugadores
           if (data.roster && data.roster.length > 0) {
-            data.roster.forEach((jugador, i) => {
-              agregarFilaJugador(jugador, i + 1);
-            });
+            data.roster.forEach((jugador, i) => agregarFilaJugador(jugador, i + 1));
           } else {
-            for (let i = 1; i <= 5; i++) {
-              agregarFilaJugador({}, i);
-            }
+            for (let i = 1; i <= 5; i++) agregarFilaJugador({}, i);
           }
 
-          // 2. Cargar Coaching Staff
           if (data.staff && data.staff.length > 0) {
-            data.staff.forEach((miembro, i) => {
-              agregarFilaStaff(miembro, i + 1);
-            });
+            data.staff.forEach((miembro, i) => agregarFilaStaff(miembro, i + 1));
           } else {
-            for (let i = 1; i <= 3; i++) {
-              agregarFilaStaff({}, i);
-            }
+            for (let i = 1; i <= 3; i++) agregarFilaStaff({}, i);
           }
 
           aplicarEstadoBloqueo(data.isLocked, data.deadline);
@@ -888,7 +881,7 @@
       } catch (e) {
         console.error(e);
         tbodyJugadores.innerHTML = '<tr><td colspan="7" style="text-align:center; padding: 25px; color: var(--kfl-danger);">No se pudo cargar el Roster.</td></tr>';
-        tbodyStaff.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: var(--kfl-danger);">No se pudo cargar el Coaching Staff.</td></tr>';
+        tbodyStaff.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 20px; color: var(--kfl-danger);">No se pudo cargar el Staff.</td></tr>';
       }
     }
 
@@ -901,7 +894,9 @@
       listContainer.innerHTML = '';
 
       try {
-        const url = `${GAS_API_URL}?action=getCategoryRegistrations&categoria=${encodeURIComponent(currentUser.categoria)}&_t=${new Date().getTime()}`;
+        const apiEndpoint = currentUser.apiUrl || obtenerApiUrl(currentUser.categoria);
+        const url = `${apiEndpoint}?action=getCategoryRegistrations&categoria=${encodeURIComponent(currentUser.categoria)}&_t=${new Date().getTime()}`;
+        
         const res = await fetch(url);
         const data = await res.json();
 
@@ -940,13 +935,9 @@
         const p = str.split('/');
         return `${p[0].padStart(2, '0')}/${p[1].padStart(2, '0')}/${p[2]}`;
       }
-
       const d = new Date(str);
       if (!isNaN(d.getTime())) {
-        const dia = String(d.getDate()).padStart(2, '0');
-        const mes = String(d.getMonth() + 1).padStart(2, '0');
-        const anio = d.getFullYear();
-        return `${dia}/${mes}/${anio}`;
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
       }
       return str;
     }
@@ -955,7 +946,6 @@
       const tbody = document.getElementById('rosterTableBody');
       const tr = document.createElement('tr');
       const rowNum = index || (tbody.children.length + 1);
-
       const fechaLimpia = normalizarFechaDDMMAAAA(datos.fechaNacimiento || '');
 
       tr.innerHTML = `
@@ -966,12 +956,9 @@
         <td><input type="text" class="cell-cedula" value="${escaparHtml(datos.cedula || '')}" placeholder="8-000-000"></td>
         <td><input type="text" class="cell-nacimiento" value="${escaparHtml(fechaLimpia)}" placeholder="DD/MM/AAAA" onblur="validarFormatoFecha(this)"></td>
         <td class="col-photo-badge">
-          ${datos.tieneFoto 
-            ? '<span class="badge-photo-yes">Asignada</span>' 
-            : '<span class="badge-photo-no">Pendiente</span>'}
+          ${datos.tieneFoto ? '<span class="badge-photo-yes">Asignada</span>' : '<span class="badge-photo-no">Pendiente</span>'}
         </td>
       `;
-
       tbody.appendChild(tr);
     }
 
@@ -983,9 +970,8 @@
       tr.innerHTML = `
         <td class="col-idx">${rowNum}</td>
         <td><input type="text" class="cell-staff-nombre" value="${escaparHtml(datos.nombre || '')}" placeholder="Nombre del Coach"></td>
-        <td><input type="text" class="cell-staff-posicion" value="${escaparHtml(datos.posicion || '')}" placeholder="Cargo (ej: Head Coach, Coordinador)"></td>
+        <td><input type="text" class="cell-staff-posicion" value="${escaparHtml(datos.posicion || '')}" placeholder="Cargo (ej: Head Coach)"></td>
       `;
-
       tbody.appendChild(tr);
     }
 
@@ -998,7 +984,7 @@
       if (isLockedSession) return;
       const tbody = document.getElementById('rosterTableBody');
       if (limiteMaximoRoster !== null && tbody.children.length >= limiteMaximoRoster) {
-        alert(`Has alcanzado el límite oficial de ${limiteMaximoRoster} jugadores permitido por la liga.`);
+        alert(`Has alcanzado el límite oficial de ${limiteMaximoRoster} jugadores permitido.`);
         return;
       }
       agregarFilaJugador({}, null);
@@ -1011,13 +997,12 @@
 
     async function enviarRosterAlBackend() {
       if (isLockedSession) {
-        alert('El período de edición ha finalizado. No es posible enviar modificaciones.');
+        alert('El período de edición ha finalizado.');
         return;
       }
 
       const playerRows = document.querySelectorAll('#rosterTableBody tr');
       const jugadores = [];
-
       playerRows.forEach(row => {
         const nombre = row.querySelector('.cell-nombre')?.value.trim();
         const apellido = row.querySelector('.cell-apellido')?.value.trim();
@@ -1026,38 +1011,21 @@
         const fechaNacimiento = normalizarFechaDDMMAAAA(row.querySelector('.cell-nacimiento')?.value.trim());
 
         if (nombre || cedula) {
-          jugadores.push({
-            nombre,
-            apellido,
-            jersey,
-            cedula,
-            fechaNacimiento
-          });
+          jugadores.push({ nombre, apellido, jersey, cedula, fechaNacimiento });
         }
       });
 
       const staffRows = document.querySelectorAll('#staffTableBody tr');
       const staff = [];
-
       staffRows.forEach(row => {
         const nombre = row.querySelector('.cell-staff-nombre')?.value.trim();
         const posicion = row.querySelector('.cell-staff-posicion')?.value.trim();
-
-        if (nombre || posicion) {
-          staff.push({
-            nombre,
-            posicion
-          });
-        }
+        if (nombre || posicion) staff.push({ nombre, posicion });
       });
 
       if (limiteMaximoRoster !== null && jugadores.length > limiteMaximoRoster) {
-        alert(`No puedes registrar más de ${limiteMaximoRoster} jugadores según el reglamento oficial.`);
+        alert(`No puedes registrar más de ${limiteMaximoRoster} jugadores.`);
         return;
-      }
-
-      if (jugadores.length === 0 && staff.length === 0) {
-        if (!confirm('¿Deseas guardar los listados vacíos?')) return;
       }
 
       const btn = document.getElementById('btnSubmitRoster');
@@ -1078,7 +1046,8 @@
           logDetails: `Actualización oficial: ${jugadores.length} jugadores y ${staff.length} miembros del staff por ${currentUser.coach}`
         };
 
-        const res = await fetch(GAS_API_URL, {
+        const apiEndpoint = currentUser.apiUrl || obtenerApiUrl(currentUser.categoria);
+        const res = await fetch(apiEndpoint, {
           method: 'POST',
           body: JSON.stringify(payload)
         });
@@ -1086,10 +1055,9 @@
         const result = await res.json();
 
         if (result.status === 'success') {
-          feedback.textContent = result.message || '¡Datos sincronizados exitosamente con la liga!';
+          feedback.textContent = result.message || '¡Datos sincronizados exitosamente!';
           feedback.className = 'status-msg success';
           feedback.style.display = 'block';
-
           cargarRosterActual();
           window.scrollTo({ top: 120, behavior: 'smooth' });
         } else {
@@ -1099,7 +1067,7 @@
         }
       } catch (err) {
         console.error(err);
-        feedback.textContent = 'Error de conexión al enviar el roster. Revisa tu conexión.';
+        feedback.textContent = 'Error de conexión al enviar el roster.';
         feedback.className = 'status-msg error';
         feedback.style.display = 'block';
       } finally {

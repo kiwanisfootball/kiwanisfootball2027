@@ -15,27 +15,11 @@
 
   <!-- ESTILOS ADICIONALES PARA LA NUEVA SECCIÓN DE NOTICIAS DINÁMICAS Y ANIMACIONES LIGERAS CSS -->
  <style>
-    /* ANIMACIÓN CSS NATIVA (LIGERA Y FLUIDA) */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in-element {
-      animation: fadeIn 0.4s ease-out forwards;
-    }
-
     .news-grid-layout {
       display: grid;
       grid-template-columns: 2fr 1fr;
       gap: 30px;
-      align-items: stretch; /* Asegura que ambas columnas tengan la misma altura visual */
+      align-items: stretch;
     }
 
     @media (max-width: 950px) {
@@ -60,13 +44,12 @@
     .featured-main-card:hover {
       border-color: #e2e8f0;
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(25, 84, 126, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 94, 170, 0.1);
     }
 
-    /* CONTENEDOR DE IMAGEN CON RATIO 3:2 SIN BORDES NEGROS (COVER) */
     .featured-img-container {
       width: 100%;
-      aspect-ratio: 3 / 2; /* Mantiene estrictamente el ratio 3:2 */
+      aspect-ratio: 3 / 2;
       overflow: hidden;
       background-color: #f1f5f9;
     }
@@ -74,7 +57,7 @@
     .featured-img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Llena el espacio sin barras negras */
+      object-fit: cover;
       display: block;
     }
 
@@ -87,7 +70,7 @@
     }
 
     .badge-category {
-      background-color: #19547E;
+      background-color: #005EAA; /* Azul Oficial KFL */
       color: #ffffff;
       padding: 5px 12px;
       font-size: 11px;
@@ -114,7 +97,6 @@
       margin: 0;
     }
 
-    /* CARD LATERAL DERECHA (IGUALA LA ALTURA Y MANTIENE ORDEN) */
     .latest-sidebar-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -130,7 +112,7 @@
     .latest-sidebar-card h3 {
       font-family: 'Anton', sans-serif;
       font-size: 20px;
-      color: #19547E;
+      color: #005EAA; /* Azul Oficial KFL */
       text-transform: uppercase;
       margin-bottom: 20px;
       letter-spacing: 0.5px;
@@ -139,7 +121,7 @@
     #sidebarNewsList {
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Distribuye los 4 items ocupando el mismo alto que la izquierda */
+      justify-content: space-between;
       flex-grow: 1;
     }
 
@@ -160,7 +142,7 @@
     }
 
     .sidebar-news-item:hover h4 {
-      color: #19547E;
+      color: #005EAA; /* Azul Oficial KFL */
     }
 
     .sidebar-thumb {
@@ -181,7 +163,7 @@
     .sidebar-tag {
       font-size: 10px;
       font-weight: 800;
-      color: #19547E;
+      color: #005EAA; /* Azul Oficial KFL */
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }

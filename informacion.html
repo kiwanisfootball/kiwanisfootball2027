@@ -18,7 +18,6 @@
       box-sizing: border-box;
     }
 
-    /* ENCABEZADO LIMPIO INSTITUCIONAL */
     .section-header-clean {
       text-align: center;
       margin-bottom: 40px;
@@ -43,7 +42,6 @@
       line-height: 1.6;
     }
 
-    /* SECCIÓN DEL FORMULARIO */
     .contact-form-wrapper {
       max-width: 750px;
       margin: 0 auto;
@@ -112,7 +110,6 @@
       box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
     }
 
-    /* BOTÓN DE ENVIAR */
     .form-submit-btn {
       width: 100%;
       background: #19547E;
@@ -173,17 +170,14 @@
 
   <main class="contact-container">
 
-    <!-- TÍTULO Y SUBTÍTULO INSTITUCIONAL -->
     <div class="section-header-clean">
       <h1>Información y Preguntas Frecuentes</h1>
       <p>¿Listo para formar parte de la gran familia KFL? Infórmate sobre cómo unirte a nuestros equipos, inscribir a tu colegio o resolver cualquier duda sobre las temporadas de Football Americano y Flag Football.</p>
     </div>
 
-    <!-- FORMULARIO DE CONTACTO -->
     <div class="contact-form-wrapper">
       <form id="contactForm" onsubmit="handleContactSubmit(event)">
         
-        <!-- NOMBRE -->
         <div class="form-group">
           <label class="form-label" for="nombre">Nombre</label>
           <div class="input-icon-wrapper">
@@ -194,7 +188,6 @@
           </div>
         </div>
 
-        <!-- EMAIL -->
         <div class="form-group">
           <label class="form-label" for="email">Email</label>
           <div class="input-icon-wrapper">
@@ -205,7 +198,6 @@
           </div>
         </div>
 
-        <!-- TELÉFONO -->
         <div class="form-group">
           <label class="form-label" for="telefono">Teléfono</label>
           <div class="input-icon-wrapper">
@@ -216,7 +208,6 @@
           </div>
         </div>
 
-        <!-- CONSULTA -->
         <div class="form-group">
           <label class="form-label" for="consulta">Consulta</label>
           <div class="input-icon-wrapper" style="align-items: flex-start;">
@@ -235,13 +226,10 @@
 
   </main>
 
-  <!-- FOOTER MAESTRO -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPT DE CONEXIÓN Y ENVÍO -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // 1. Inyectar Nav y Footer maestros
       fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
       fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
     });
@@ -256,8 +244,8 @@
       btn.innerText = 'ENVIANDO...';
       alertBox.style.display = 'none';
 
-      // PEGA AQUÍ LA URL DE TU APLICACIÓN WEB DE GOOGLE APPS SCRIPT
-      const scriptURL = "https://script.google.com/macros/s/TU_SCRIPT_ID/exec";
+      // PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
+      const scriptURL = "https://script.google.com/macros/s/AKfycbwTYyCiBdwG1YvjwmptoQ-WtBqFffM8ZUqTIwSLfEZPo7SBRxlr1txTfqSjVPibuKaBJg/exec";
 
       const formData = {
         nombre: document.getElementById('nombre').value,
@@ -268,38 +256,32 @@
 
       fetch(scriptURL, {
         method: 'POST',
-        mode: 'no-cors', // Evita bloqueos del navegador CORS con Google Scripts
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
       })
       .then(() => {
-        alertBox.style.display = 'block';
-        alertBox.className = 'form-alert success';
-        alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
-        
-        document.getElementById('contactForm').reset();
-        btn.disabled = false;
-        btn.innerText = 'ENVIAR';
-
-        setTimeout(() => {
-          alertBox.style.display = 'none';
-        }, 6000);
+        mostrarExito(btn, alertBox);
       })
       .catch(() => {
-        alertBox.style.display = 'block';
-        alertBox.className = 'form-alert success'; // Se maneja como éxito ya que GAS procesa la data pese a la restricción CORS del navegador
-        alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
-        
-        document.getElementById('contactForm').reset();
-        btn.disabled = false;
-        btn.innerText = 'ENVIAR';
-
-        setTimeout(() => {
-          alertBox.style.display = 'none';
-        }, 6000);
+        mostrarExito(btn, alertBox);
       });
+    }
+
+    function mostrarExito(btn, alertBox) {
+      alertBox.style.display = 'block';
+      alertBox.className = 'form-alert success';
+      alertBox.innerText = '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.';
+      
+      document.getElementById('contactForm').reset();
+      btn.disabled = false;
+      btn.innerText = 'ENVIAR';
+
+      setTimeout(() => {
+        alertBox.style.display = 'none';
+      }, 6000);
     }
   </script>
 </body>

@@ -6,7 +6,6 @@
 
 const KFL_CONFIG = {
   // 1. ENDPOINTS DE ROSTERS POR LIGA Y CATEGORÍA
-  // Conforme crees las hojas de Juvenil, Mini, Micro y Flag, solo pega su URL aquí:
   API_ROSTERS_URL: {
     "contact": {
       "varsity": "https://script.google.com/macros/s/AKfycbwe9LFwS_FkmGZeUhOVZy3z2hv4RsBfG1SpT81u_oGJ8bESqja7AmkFd64xZT-ZiZp8Zg/exec",
@@ -30,7 +29,7 @@ const KFL_CONFIG = {
 
   // 3. URLS PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA
   STATS_CSV_LINKS: {
-    "contact": {
+"contact": {
       "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
       "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
       "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
@@ -55,16 +54,6 @@ const KFL_CONFIG = {
     "SPARTANS": "assets/logos/spartans.png"
   },
 
-  FALLBACK_LOGOS: {
-    "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
-    "EAGLES": "https://i.imgur.com/lxfq565.png",
-    "KOLTS": "https://i.imgur.com/id2gPdH.png",
-    "LIONS": "https://i.imgur.com/XQaNhUb.png",
-    "OWLS": "https://i.imgur.com/KRjk1AV.png",
-    "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
-    "SPARTANS": "https://i.imgur.com/JGvY0Zk.png"
-  },
-
   // 5. EQUIPOS POR LIGA Y CATEGORÍA
   CATEGORIAS_EQUIPOS: {
     "contact": {
@@ -81,3 +70,8 @@ const KFL_CONFIG = {
     }
   }
 };
+
+// Exposición global segura para el navegador
+if (typeof window !== 'undefined') {
+  window.KFL_CONFIG = KFL_CONFIG;
+}

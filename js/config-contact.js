@@ -18,10 +18,10 @@ const KFL_CONTACT_CONFIG = {
 
   // 3. ENLACES PÚBLICOS DE CSV DE ESTADÍSTICAS POR CATEGORÍA
   STATS_CSV_LINKS: {
-    "varsity": "",
-    "juvenil": "",
-    "mini": "",
-    "micro": ""
+ "varsity": "https://docs.google.com/spreadsheets/d/e/2PACX-1vTYknL7eWkp_BnEC3ob9a05Ejt6p2Rfjrk9QWtOd56FL7o398g4JM2BquSi0R8qyzmfIZcqxz6D8I34/pub?gid=835067495&single=true&output=csv",
+      "juvenil": "https://docs.google.com/spreadsheets/d/e/2PACX-1vQhQ3iKki3vAUGiJG7kSYUC51dfG9WMPO7HVwrXXNrdsqDcDqTfB2nlVV9wdLz5G_nNYTqKeXHfyuGE/pub?gid=835067495&single=true&output=csv",
+      "mini": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSQwk7Fn-hQZwWjgckn4Dj20_VRCi72fw0Ygk1TWotaYGBlwfi0aJO6kR_2qhcN1ZeETsSrLev1k-ZR/pub?gid=835067495&single=true&output=csv",
+      "micro": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRx22LT7t2dCE64E_1w1kJnV7PlYK7Y9YMmWqVG99UpX-sKkBMqosLo6smVh4QBtlPiGFI8Gxwh1Uex/pub?gid=835067495&single=true&output=csv"
   },
 
   // 4. EQUIPOS ACTIVOS POR CATEGORÍA

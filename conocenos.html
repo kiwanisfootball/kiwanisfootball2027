@@ -13,7 +13,7 @@
   <!-- Open Graph / Social Media Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Conócenos - Kiwanis Football League Panamá">
-  <meta property="og:description" content="Descubre nuestra trayectoria, más de 50 años fomentando el deporte, valores y disciplina en Panamá.">
+  <meta property="og:description" content="Descubre nuestra trayectoria, más de 50 años fomentando el deporte escolar, valores y disciplina en Panamá.">
   <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/conocenos-historia-kfl.jpg">
   <meta property="og:url" content="https://www.kiwanisfootball.com/conocenos.html">
   <meta property="og:locale" content="es_PA">
@@ -47,7 +47,7 @@
   }
   </script>
 
-  <!-- Google Fonts: Anton & Montserrat/Avenir System Fallbacks -->
+  <!-- Google Fonts: Anton & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -57,7 +57,7 @@
 
   <style>
     /* ==========================================================================
-       OPTIMIZACIONES DE CONTENCIÓN Y RESPONSIVIDAD ESTRICTA (RESTAURACIÓN DE MARCOS)
+       BLINDAJE RESPONSIVO SIN ALTERAR DESKTOP
        ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -76,7 +76,6 @@
       overflow: hidden;
     }
 
-    /* Corrección de desbordamientos en grids y contenedores responsivos */
     .executive-league-section, 
     .conocenos-hero, 
     .counters-section, 
@@ -114,6 +113,25 @@
       overflow-wrap: break-word;
     }
 
+    /* ==========================================================================
+       CORRECCIÓN ESPECÍFICA PARA TABLET (CONTADORES / MÉTRICAS)
+       ========================================================================== */
+    @media (min-width: 650px) and (max-width: 1024px) {
+      .counters-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 12px;
+      }
+      .counter-card {
+        padding: 16px 10px;
+      }
+      .counter-number {
+        font-size: 32px;
+      }
+    }
+
+    /* ==========================================================================
+       CORRECCIÓN ESPECÍFICA PARA MOBILE (CRONOLOGÍA Y BOTONES)
+       ========================================================================== */
     .timeline-viewport-container {
       position: relative;
       width: 100%;
@@ -125,6 +143,21 @@
       width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+    }
+
+    @media (max-width: 768px) {
+      /* Ocultar los botones flotantes en móviles para permitir scroll táctil limpio sin estorbar texto */
+      .tl-float-btn, .tl-fade-overlay {
+        display: none !important;
+      }
+      /* Reducir ancho de tarjetas de cronología para que no se corten en pantallas chicas */
+      .timeline-h-card {
+        width: 260px;
+        padding: 16px;
+      }
+      .timeline-scroll-track {
+        padding: 10px 15px;
+      }
     }
   </style>
 </head>

@@ -4,33 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- SEO, GEO & AEO METADATOS OPTIMIZADOS -->
-  <title>Kiwanis Football League Panamá - Sitio Oficial</title>
-  <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programas escolares de contact football y flag football, calendarios, marcadores y estadísticas oficiales.">
-  <meta name="keywords" content="Kiwanis Football League, KFL Panamá, futbol americano escolar, flag football Panamá, KFL contact, deportes Panamá, AIP, Eagles">
-  <meta name="author" content="Kiwanis Football League">
-  <meta name="geo.region" content="PA-8">
-  <meta name="geo.placename" content="Panamá">
-  
+  <!-- ================= SECCIÓN SEO, GEO, AEO Y SCHEMA.ORG ================= -->
+  <title>Kiwanis Football League Panama - Sitio Oficial</title>
+  <meta name="description" content="La Kiwanis Football League es la liga de fútbol americano con mayor tradición de Panamá, organizada por el Club Kiwanis de Panamá. Calendarios, resultados, noticias y mucho más.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panama, futbol americano Panama, flag football Panama, Club Kiwanis, deportes escolares Panama">
+  <link rel="canonical" href="https://www.kiwanisfootballleague.com/">
+
   <!-- Open Graph / Redes Sociales -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Kiwanis Football League Panamá - Sitio Oficial">
-  <meta property="og:description" content="La liga de football americano y flag football escolar más importante de Panamá.">
-  <meta property="og:image" content="assets/img/KFL-logo.svg">
-  <meta property="og:url" content="https://www.kiwanisfootball.com/">
+  <meta property="og:url" content="https://www.kiwanisfootballleague.com/">
+  <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
+  <meta property="og:description" content="La Kiwanis Football League es la liga de fútbol americano con mayor tradición de Panamá, organizada por el Club Kiwanis de Panamá. Calendarios, resultados, noticias y mucho más.">
+  <meta property="og:image" content="https://www.kiwanisfootballleague.com/assets/img/KFL-logo.svg">
 
-  <!-- SCHEMA.ORG (JSON-LD) PARA DATOS ESTRUCTURADOS -->
+  <!-- GEO Tags -->
+  <meta name="geo.region" content="PA-8">
+  <meta name="geo.placename" content="Panama City">
+  <meta name="geo.position" content="8.9824;-79.5199">
+  <meta name="ICBM" content="8.9824, -79.5199">
+
+  <!-- Schema.org JSON-LD (AEO & Entidad Local) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SportsOrganization",
-    "name": "Kiwanis Football League",
-    "alternateName": "KFL Panamá",
-    "url": "https://www.kiwanisfootball.com/",
-    "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
-    "sameAs": [
-      "https://www.instagram.com/kiwanisfootball"
-    ],
+    "name": "Kiwanis Football League Panama",
+    "alternateName": "KFL",
+    "url": "https://www.kiwanisfootballleague.com/",
+    "logo": "https://www.kiwanisfootballleague.com/assets/img/KFL-logo.svg",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Club Kiwanis de Panamá"
+    },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Panamá",
@@ -39,33 +44,37 @@
     "sport": "American Football"
   }
   </script>
+  <!-- ================= FIN METADATA ================= -->
 
-  <!-- Performance: Preconnect para Fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
-
-  <!-- Estilos y Favicon -->
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Favicon Oficial -->
   <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
-  <!-- GSAP Ligero (Solo ScrollTrigger esencial) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+  <!-- Estilos Globales y Tipografía Optimizada -->
+  <link rel="stylesheet" href="css/styles.css">
 
-  <!-- ESTILOS ORIGINALES CON IDENTIDAD KFL (#0033A1 Y #EA002A) -->
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
+    /* Estilos base de tipografía y colores institucionales KFL (#0033A1 y #EA002A) */
     :root {
       --kfl-blue: #0033A1;
       --kfl-red: #EA002A;
+      --kfl-dark: #0b0f19;
+      --kfl-gray: #64748b;
+      --kfl-light: #f8fafc;
     }
 
     body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: var(--kfl-dark);
       background-color: #ffffff;
-      color: #1e293b;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
 
     .news-grid-layout {
@@ -83,26 +92,26 @@
 
     .featured-main-card {
       background: #ffffff;
-      border: 1px solid #e2e8f0;
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       height: 100%;
     }
 
     .featured-main-card:hover {
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 51, 161, 0.08);
     }
 
     .featured-img-container {
       width: 100%;
       aspect-ratio: 3 / 2;
       overflow: hidden;
-      background-color: #f1f5f9;
+      background-color: var(--kfl-light);
     }
 
     .featured-img {
@@ -133,9 +142,9 @@
     }
 
     .featured-body h3 {
-      font-family: 'Anton', system-ui, sans-serif;
+      font-family: 'Anton', sans-serif;
       font-size: 26px;
-      color: #0b0f19;
+      color: var(--kfl-dark);
       text-transform: uppercase;
       margin-bottom: 12px;
       line-height: 1.2;
@@ -143,17 +152,16 @@
 
     .featured-body p {
       font-size: 14.5px;
-      color: #64748b;
+      color: var(--kfl-gray);
       line-height: 1.6;
       margin: 0;
     }
 
     .latest-sidebar-card {
       background: #ffffff;
-      border: 1px solid #e2e8f0;
       border-radius: 16px;
       padding: 25px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       height: 100%;
@@ -161,7 +169,7 @@
     }
 
     .latest-sidebar-card h3 {
-      font-family: 'Anton', system-ui, sans-serif;
+      font-family: 'Anton', sans-serif;
       font-size: 20px;
       color: var(--kfl-blue);
       text-transform: uppercase;
@@ -181,7 +189,7 @@
       gap: 15px;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid var(--kfl-light);
       cursor: pointer;
       text-decoration: none;
       transition: background 0.2s;
@@ -202,7 +210,7 @@
       border-radius: 8px;
       object-fit: cover;
       flex-shrink: 0;
-      background-color: #f1f5f9;
+      background-color: var(--kfl-light);
     }
 
     .sidebar-info {
@@ -230,7 +238,7 @@
 </head>
 <body>
 
-  <!-- 1. HEADER GLOBAL (Inyectado por JS) -->
+  <!-- 1. HEADER GLOBAL (Inyectado vía JS) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main>
@@ -313,17 +321,17 @@
       </div>
     </section>
 
-    <!-- 3. TITULO INSTITUCIONAL (Con el bloque rojo original recuperado) -->
+    <!-- 3. TITULO INSTITUCIONAL -->
     <section class="welcome-header gsap-reveal">
-      <div class="welcome-subtitle" style="color: var(--kfl-red); font-weight: 800; letter-spacing: 1px; margin-bottom: 8px;">BIENVENIDOS A</div>
-      <h1 class="welcome-title" style="font-family: 'Anton', sans-serif; color: var(--kfl-blue);">KIWANIS FOOTBALL LEAGUE</h1>
+      <div class="welcome-subtitle">BIENVENIDOS A</div>
+      <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
     </section>
 
     <!-- 4. ACERCA DE LA LIGA -->
     <div class="about-wrapper gsap-reveal">
       <section class="about-section">
         <div class="about-image">
-          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panamá">
+          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
         </div>
         <article class="about-card">
           <h2>ACERCA DE LA LIGA</h2>
@@ -334,7 +342,7 @@
       </section>
     </div>
 
-    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW AUTOMÁTICO (Sin botones invasivos) -->
+    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW -->
     <section class="promo-banner-section gsap-reveal">
       <div class="slider-container">
         
@@ -350,6 +358,9 @@
           </a>
         </div>
 
+        <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
+        <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
+
       </div>
     </section>
 
@@ -361,21 +372,21 @@
         
         <!-- COLUMNA IZQUIERDA: NOTICIA PRINCIPAL -->
         <div id="mainFeaturedPost" class="featured-main-card">
-          <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
+          <div style="padding: 40px; text-align: center; color: var(--kfl-gray);">Cargando noticia destacada...</div>
         </div>
 
         <!-- COLUMNA DERECHA: ÚLTIMAS NOTICIAS -->
         <div class="latest-sidebar-card">
           <h3>ÚLTIMAS NOTICIAS</h3>
           <div id="sidebarNewsList">
-            <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
+            <div style="padding: 20px; text-align: center; color: var(--kfl-gray);">Cargando listado...</div>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 7. SECCIÓN DE PATROCINADORES (Estructura original recuperada) -->
+    <!-- 7. SECCIÓN DE PATROCINADORES -->
     <section class="sponsors-section gsap-reveal">
       <div class="sponsors-container">
         
@@ -400,7 +411,7 @@
     </section>
   </main>
 
-  <!-- 8. FOOTER GLOBAL (Inyectado por JS) -->
+  <!-- 8. FOOTER GLOBAL (Inyectado vía JS) -->
   <div id="globalFooter"></div>
 
   <!-- BOTÓN VOLVER ARRIBA -->
@@ -408,14 +419,15 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO Y DE GESTIÓN (NAV + FOOTER + NOTICIAS) -->
+  <!-- SCRIPT MAESTRO (NAV, FOOTER Y CARGA DINÁMICA DE NOTICIAS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
+      // Inyectar Navbar
       fetch('nav.html')
         .then(response => response.text())
         .then(data => {
           document.getElementById('globalNav').innerHTML = data;
+          
           const hamburgerBtn = document.getElementById('hamburgerBtn');
           const navMenu = document.getElementById('navMenu');
           if (hamburgerBtn && navMenu) {
@@ -423,7 +435,7 @@
           }
         });
 
-      // Inyectar Footer desde footer.html
+      // Inyectar Footer
       fetch('footer.html')
         .then(response => response.text())
         .then(data => {
@@ -443,7 +455,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // Lista de artículos
       const slugsArticulosIndex = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
@@ -476,12 +487,16 @@
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
+            
             let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
             if (tMatch) titulo = tMatch[1];
+
             let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
             if (catMatch) categoria = catMatch[1];
+
             let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
             if (eMatch) excerpt = eMatch[1];
+
             let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
             if (imgMatch) {
               coverImage = imgMatch[1];
@@ -498,9 +513,7 @@
       if (postsCargados.length === 0) return;
 
       let postPrincipal = postsCargados[0];
-      mainFeaturedContainer.addEventListener('click', () => {
-        window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
-      });
+      mainFeaturedContainer.onclick = () => window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
       mainFeaturedContainer.innerHTML = `
         <div class="featured-img-container">
           <img src="${postPrincipal.coverImage}" alt="${postPrincipal.titulo}" class="featured-img">
@@ -516,13 +529,13 @@
       let listaSidebarHtml = "";
 
       if (postsSecundarios.length === 0) {
-        sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
+        sidebarContainer.innerHTML = "<p style='font-size:13px; color:var(--kfl-gray); text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
         return;
       }
 
       postsSecundarios.forEach(post => {
         listaSidebarHtml += `
-          <div class="sidebar-news-item" data-slug="${post.slug}">
+          <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${post.slug}'">
             <img src="${post.coverImage}" alt="${post.titulo}" class="sidebar-thumb">
             <div class="sidebar-info">
               <span class="sidebar-tag">${post.categoria}</span>
@@ -533,41 +546,45 @@
       });
 
       sidebarContainer.innerHTML = listaSidebarHtml;
-
-      sidebarContainer.querySelectorAll('.sidebar-news-item').forEach(item => {
-        item.addEventListener('click', function() {
-          const targetSlug = this.getAttribute('data-slug');
-          window.location.href = `articulo.html?slug=${targetSlug}`;
-        });
-      });
     }
   </script>
   
-  <!-- SLIDESHOW AUTOMÁTICO -->
+  <!-- ANIMACIONES Y SLIDESHOW -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      let currentSlide = 0;
-      const slides = document.querySelectorAll('.promo-banner-section .slide');
+    gsap.registerPlugin(ScrollTrigger);
 
-      function showSlide(index) {
-        slides.forEach((slide, i) => {
-          slide.classList.remove('active');
-          if (i === index) slide.classList.add('active');
-        });
-      }
-
-      function moveSlide(step) {
-        if (slides.length === 0) return;
-        currentSlide = (currentSlide + step + slides.length) % slides.length;
-        showSlide(currentSlide);
-      }
-
-      if (slides.length > 1) {
-        setInterval(() => {
-          moveSlide(1);
-        }, 5000);
-      }
+    gsap.utils.toArray('.gsap-reveal').forEach((element) => {
+      gsap.to(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 88%',
+          toggleActions: 'play none none reverse'
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
     });
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (i === index) slide.classList.add('active');
+      });
+    }
+
+    function moveSlide(step) {
+      currentSlide = (currentSlide + step + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    setInterval(() => {
+      moveSlide(1);
+    }, 5000);
   </script>
 </body>
 </html>

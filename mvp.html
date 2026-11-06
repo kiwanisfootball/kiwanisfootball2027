@@ -397,7 +397,7 @@
       flex-shrink: 0;
     }
 
-    /* RESPONSIVE */
+    /* RESPONSIVE (mismas reglas de botones que campeones.html) */
     @media (max-width: 768px) {
       .mvp-container { padding: 15px 10px; }
       .mvp-hero-banner { padding: 30px 15px; }
@@ -405,6 +405,14 @@
       .mvp-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
       .mvp-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
       .mvp-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
+    }
+
+    /* Tabla: se desliza dentro de su contenedor en vez de cortarse */
+    .mvp-single-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    @media (max-width: 768px) {
+      .mvp-table { min-width: 460px; }
+      .mvp-table th, .mvp-table td { white-space: normal; }
     }
   </style>
   <!-- Vercel Speed Insights -->
@@ -543,7 +551,7 @@
     /* Nombre de equipo (con variantes) -> logo local en assets/logos/ */
     const TEAM_LOGOS_MAP = {
       "E.C.P MIGHTY EAGLES": "assets/logos/eagles.png",
-      "ECP EAGLES": "assets/logos/eagles.png",
+      "E.C.P EAGLES": "assets/logos/eagles.png",
       "MIGHTY EAGLES": "assets/logos/eagles.png",
       "METS EAGLES": "assets/logos/eagles.png",
       "EAGLES": "assets/logos/eagles.png",
@@ -572,7 +580,7 @@
 
     function getTeamLogoInfo(fullTeamName) {
       const clean = (fullTeamName || "").toUpperCase().trim();
-      // Coincidencia con la clave más larga primero (ej. "ECP MIGHTY EAGLES" antes que "EAGLES")
+      // Coincidencia con la clave más larga primero (ej. "E.C.P MIGHTY EAGLES" antes que "EAGLES")
       const key = Object.keys(TEAM_LOGOS_MAP)
         .sort((a, b) => b.length - a.length)
         .find(k => clean.includes(k));

@@ -77,6 +77,12 @@
       padding-bottom: env(safe-area-inset-bottom);
     }
 
+    /* Corrección estricta para eliminar espacio extra y altura indeseada sobre el footer */
+    main {
+      flex: none !important;
+      padding-bottom: 0 !important;
+    }
+
     .tab-pane {
       display: none !important;
     }
@@ -222,21 +228,16 @@
       box-shadow: 0 4px 14px rgba(235, 61, 64, 0.35);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 768px) { 
       .leagues-hero-grid { display: none !important; }
       .mobile-league-selector-wrapper { display: grid !important; }
-      padding: 15px 10px;
-        padding-top: 15px;
-        padding-right: 10px;
-        padding-bottom: 15px;
-        padding-left: 10px;
     }
 
-    /* INSTRUCTION BAR (ADAPTADO EXACTAMENTE A LA REGLA SOLICITADA) */
+    /* INSTRUCTION BAR */
     .league-instruction-bar {
       text-align: center;
-      padding: 35px 20px;
-      font-size: 16px;
+      padding: 25px 20px;
+      font-size: 15px;
       color: #64748b;
       font-family: var(--fuente-cuerpo);
       font-weight: 700;
@@ -245,11 +246,13 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      background: transparent;
+      border: none;
     }
 
-    }
-    body.flag-theme .league-instruction-bar strong {
-      color: var(--rojo-kfl);
+    .league-instruction-bar strong {
+      color: inherit;
+      font-weight: 800;
     }
 
     .reset-selection-wrapper {
@@ -281,7 +284,7 @@
       transform: translateY(-2px);
     }
 
-    /* CATEGORY PILLS (Padding superior incrementado para evitar corte de shadow activo) */
+    /* CATEGORY PILLS */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
@@ -792,7 +795,7 @@
     .kfl-table tr:nth-child(even) { background-color: #f8fafc; }
     .kfl-table tr:hover { background-color: #f1f5f9; }
 
-    /* STATS BUTTONS GRID (FORZADO 2x2 SIMÉTRICO EN MOBILE Y TABLET) */
+    /* STATS BUTTONS GRID */
     .stats-buttons-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 240px));
@@ -1105,9 +1108,9 @@
       </button>
     </div>
 
-    <!-- INSTRUCTION BAR ADAPTADA EXACTAMENTE A LA REGLA SOLICITADA -->
+    <!-- INSTRUCTION BAR (Con flechita SVG hacia arriba y color unificado) -->
     <div class="league-instruction-bar" id="instructionBar">
-      <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
+      <span>Selecciona arriba <svg class="kfl-icon-svg" style="display:inline-block; vertical-align:middle; width:16px; height:16px;" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg> <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
     </div>
 
     <div class="reset-selection-wrapper" id="resetBtnWrapper">

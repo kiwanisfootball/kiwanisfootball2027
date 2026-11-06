@@ -6,7 +6,7 @@
   
   <!-- SEO & AEO Meta Tags -->
   <title>Conócenos - Kiwanis Football League Panamá | Historia y Tradición</title>
-  <meta name="description" content="Conoce la historia, cronología, directiva y el impacto de la Kiwanis Football League (KFL) en Panamá desde 1967. El programa líder de football americano y flag football escolar.">
+  <meta name="description" content="Conoce la historia, cronología y el impacto de la Kiwanis Football League en Panamá desde 1967. El programa líder de football americano y flag football escolar.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panamá, football americano Panamá, flag football, historia KFL, Raúl Méndez de Obarrio, Panama Sharks">
   <link rel="canonical" href="https://www.kiwanisfootball.com/conocenos.html">
 
@@ -163,7 +163,7 @@
 </head>
 <body>
 
-  <!-- 1. HEADER GLOBAL (Inyectado automáticamente) -->
+  <!-- 1. HEADER GLOBAL (Inyectado por components.js) -->
   <header class="header-nav" id="globalNav" role="banner"></header>
 
   <main id="main-content" role="main">
@@ -477,33 +477,8 @@
     </section>
   </main>
 
-  <!-- 2. FOOTER GLOBAL (Inyectado automáticamente) -->
+  <!-- 2. FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
-
-  <!-- SCRIPTS DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
-      fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
-          
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-          }
-        });
-
-      // Inyectar Footer desde footer.html
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
-        });
-    });
-  </script>
 
   <!-- SCRIPTS DE INTERACCIÓN Y CONTROLES -->
   <script>
@@ -596,5 +571,8 @@
       }
     });
   </script>
+
+  <!-- MENÚ, PIE Y BOTÓN VOLVER ARRIBA GLOBALES -->
+  <script src="js/components.js"></script>
 </body>
 </html>

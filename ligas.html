@@ -222,21 +222,16 @@
       box-shadow: 0 4px 14px rgba(235, 61, 64, 0.35);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 768px) { 
       .leagues-hero-grid { display: none !important; }
       .mobile-league-selector-wrapper { display: grid !important; }
-      padding: 15px 10px;
-        padding-top: 15px;
-        padding-right: 10px;
-        padding-bottom: 15px;
-        padding-left: 10px;
     }
 
-    /* INSTRUCTION BAR (ADAPTADO EXACTAMENTE A LA REGLA SOLICITADA) */
+    /* INSTRUCTION BAR (LIMPIO, SIN BORDES NI FONDOS DE COLOR) */
     .league-instruction-bar {
       text-align: center;
-      padding: 35px 20px;
-      font-size: 16px;
+      padding: 25px 20px;
+      font-size: 15px;
       color: #64748b;
       font-family: var(--fuente-cuerpo);
       font-weight: 700;
@@ -245,11 +240,13 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+      background: transparent;
+      border: none;
     }
 
-    }
-    body.flag-theme .league-instruction-bar strong {
-      color: var(--rojo-kfl);
+    .league-instruction-bar strong {
+      color: #0f172a;
+      font-weight: 800;
     }
 
     .reset-selection-wrapper {
@@ -281,7 +278,7 @@
       transform: translateY(-2px);
     }
 
-    /* CATEGORY PILLS (Padding superior incrementado para evitar corte de shadow activo) */
+    /* CATEGORY PILLS */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
@@ -792,7 +789,7 @@
     .kfl-table tr:nth-child(even) { background-color: #f8fafc; }
     .kfl-table tr:hover { background-color: #f1f5f9; }
 
-    /* STATS BUTTONS GRID (FORZADO 2x2 SIMÉTRICO EN MOBILE Y TABLET) */
+    /* STATS BUTTONS GRID */
     .stats-buttons-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 240px));
@@ -1105,7 +1102,7 @@
       </button>
     </div>
 
-    <!-- INSTRUCTION BAR ADAPTADA EXACTAMENTE A LA REGLA SOLICITADA -->
+    <!-- INSTRUCTION BAR -->
     <div class="league-instruction-bar" id="instructionBar">
       <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
     </div>

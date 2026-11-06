@@ -77,6 +77,12 @@
       padding-bottom: env(safe-area-inset-bottom);
     }
 
+    /* Corrección estricta para eliminar espacio extra y altura indeseada sobre el footer */
+    main {
+      flex: none !important;
+      padding-bottom: 0 !important;
+    }
+
     .tab-pane {
       display: none !important;
     }
@@ -227,7 +233,7 @@
       .mobile-league-selector-wrapper { display: grid !important; }
     }
 
-    /* INSTRUCTION BAR (LIMPIO, SIN BORDES NI FONDOS DE COLOR) */
+    /* INSTRUCTION BAR */
     .league-instruction-bar {
       text-align: center;
       padding: 25px 20px;
@@ -245,7 +251,7 @@
     }
 
     .league-instruction-bar strong {
-      color: #0f172a;
+      color: inherit;
       font-weight: 800;
     }
 
@@ -1102,9 +1108,9 @@
       </button>
     </div>
 
-    <!-- INSTRUCTION BAR -->
+    <!-- INSTRUCTION BAR (Con flechita SVG hacia arriba y color unificado) -->
     <div class="league-instruction-bar" id="instructionBar">
-      <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
+      <span>Selecciona arriba <svg class="kfl-icon-svg" style="display:inline-block; vertical-align:middle; width:16px; height:16px;" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg> <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
     </div>
 
     <div class="reset-selection-wrapper" id="resetBtnWrapper">

@@ -9,7 +9,6 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
-    /* ESTILOS ESPECÍFICOS DEL FORMULARIO DE REGISTRO */
     .inscripcion-container {
       max-width: 1100px;
       width: 100%;
@@ -18,7 +17,7 @@
       box-sizing: border-box;
     }
 
-    /* 1. GATE DE CONTRASEÑA */
+    /* GATE DE CONTRASEÑA */
     #passwordGate {
       max-width: 500px;
       margin: 60px auto;
@@ -45,7 +44,7 @@
       line-height: 1.6;
     }
 
-    /* 2. SELECTOR DE MODALIDAD */
+    /* SELECTOR DE MODALIDAD */
     #modalitySelector {
       display: none;
       max-width: 900px;
@@ -104,41 +103,43 @@
     .btn-flag-theme { background: var(--rojo-kfl); }
     .btn-flag-theme:hover { background: #c92f32; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(235, 61, 64, 0.3); }
 
-    /* 3. VISTA DEL FORMULARIO */
+    /* VISTA DEL FORMULARIO */
     #inscripcionContent {
       display: none;
     }
 
-    .inscripcion-hero {
-      position: relative;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
-                  url('assets/img/inscripcion-banner.jpg') center/cover no-repeat;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      margin-bottom: 25px;
-      padding: 40px 25px;
-      color: #ffffff;
+    /* TÍTULO LIMPIO Y SIN CONTENEDORES CON VARIABLES CSS */
+    .inscripcion-header {
       text-align: center;
-      box-sizing: border-box;
+      margin: 10px 0 30px 0;
     }
 
     .inscripcion-hero-title {
       font-family: var(--fuente-titulos);
-      font-size: 38px;
-      font-weight: 400;
-      color: #ffffff;
+      font-size: clamp(34px, 5vw, 52px);
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 10px;
-      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      line-height: 1.1;
+      color: var(--azul-kfl); /* Color por defecto contact */
+      transition: color 0.3s ease;
+    }
+
+    /* Cambio dinámico según el tema activo en el body */
+    body.contact-theme .inscripcion-hero-title {
+      color: var(--azul-kfl);
+    }
+
+    body.flag-theme .inscripcion-hero-title {
+      color: var(--rojo-kfl);
     }
 
     .inscripcion-hero-subtitle {
-      font-size: 16px;
-      color: #cbd5e1;
-      font-weight: 600;
+      font-size: 15px;
+      color: var(--texto-suave);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .privacy-notice {
@@ -151,6 +152,10 @@
       color: #334155;
       line-height: 1.6;
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    body.flag-theme .privacy-notice {
+      border-left-color: var(--rojo-kfl);
     }
 
     .form-card {
@@ -170,6 +175,10 @@
       margin-bottom: 20px;
       padding-bottom: 8px;
       border-bottom: 2px solid var(--gris-borde);
+    }
+
+    body.flag-theme .form-section-title {
+      color: var(--rojo-kfl);
     }
 
     .form-grid {
@@ -244,6 +253,12 @@
       box-shadow: 0 0 0 4px rgba(0, 94, 170, 0.12);
     }
 
+    body.flag-theme .form-input:focus, 
+    body.flag-theme .form-select:focus {
+      border-color: var(--rojo-kfl);
+      box-shadow: 0 0 0 4px rgba(235, 61, 64, 0.12);
+    }
+
     .file-upload-box {
       border: 2px dashed #cbd5e1;
       padding: 20px;
@@ -257,6 +272,10 @@
     .file-upload-box:hover {
       border-color: var(--azul-kfl);
       background: #f1f5f9;
+    }
+
+    body.flag-theme .file-upload-box:hover {
+      border-color: var(--rojo-kfl);
     }
 
     .file-upload-box input {
@@ -373,6 +392,15 @@
       transform: translateY(-2px);
     }
 
+    body.flag-theme .submit-btn {
+      background: var(--rojo-kfl);
+      box-shadow: 0 4px 15px rgba(235, 61, 64, 0.25);
+    }
+
+    body.flag-theme .submit-btn:hover {
+      background: #c92f32;
+    }
+
     .alert-msg {
       display: none;
       margin-top: 15px;
@@ -395,6 +423,10 @@
       cursor: pointer;
     }
     .back-link:hover { text-decoration: underline; }
+
+    body.flag-theme .back-link {
+      color: var(--rojo-kfl);
+    }
 
     @media (max-width: 900px) {
       .modality-buttons-grid { grid-template-columns: 1fr; }
@@ -446,8 +478,9 @@
 
       <a class="back-link" onclick="goBackToSelector()">← Volver a selección de modalidad</a>
 
-      <section class="inscripcion-hero">
-        <h1 class="inscripcion-hero-title" id="formHeroTitle">Registro de Atleta</h1>
+      <!-- ENCABEZADO SIN CONTENEDOR CONTROLANDO COLORES DESDE VARIABLES CSS -->
+      <section class="inscripcion-header">
+        <h1 class="inscripcion-hero-title" id="formHeroTitle">REGISTRO CONTACT FOOTBALL</h1>
         <p class="inscripcion-hero-subtitle">Temporada <span id="currentYearDisplay"></span> | Kiwanis Football League Panama</p>
       </section>
 
@@ -633,9 +666,8 @@
   <!-- FOOTER GLOBAL INYECTADO -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPT UNIFICADO DE COMPONENTES GLOBALES (NAV, FOOTER Y BOTÓN BACK TO TOP) -->
+  <!-- SCRIPT DE INYECCIÓN GLOBAL -->
   <script src="js/components.js"></script>
-  <script src="js/config-coaches.js"></script>
 
   <!-- SCRIPT DE LÓGICA DE INSCRIPCIÓN -->
   <script>
@@ -768,6 +800,15 @@
       modalidadActual = modality;
       document.getElementById('modalitySelector').style.display = 'none';
       document.getElementById('inscripcionContent').style.display = 'block';
+
+      // Cambiar clase temática en el body para alternar los colores mediante CSS vars
+      if (modality === 'flag') {
+        document.body.classList.remove('contact-theme');
+        document.body.classList.add('flag-theme');
+      } else {
+        document.body.classList.remove('flag-theme');
+        document.body.classList.add('contact-theme');
+      }
 
       const config = KFL_CONFIG.modalidades[modality];
       document.getElementById('formHeroTitle').innerText = config.titulo;

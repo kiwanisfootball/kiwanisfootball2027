@@ -77,167 +77,134 @@
       padding-bottom: env(safe-area-inset-bottom);
     }
 
-    /* Corrección estricta para eliminar espacio extra y altura indeseada sobre el footer */
+    /* Limpieza total de main para evitar espacios extra sobre el footer */
     main {
-      flex: none !important;
-      padding-bottom: 0 !important;
+      flex: none;
+      padding-bottom: 0;
     }
 
     .tab-pane {
-      display: none !important;
+      display: none;
     }
     .tab-pane.active {
-      display: block !important;
+      display: block;
     }
 
-    /* DESKTOP HERO CARDS */
-    .leagues-hero-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-      gap: 24px;
+    /* HERO BANNER ÚNICO KFL LIGAS */
+    .ligas-hero-banner {
+      position: relative;
       width: 100%;
       max-width: 1200px;
       margin: 24px auto 16px auto;
-      padding: 0 20px;
-    }
-
-    .league-hero-card {
-      position: relative;
-      cursor: pointer;
-      border: none !important;
-      border-radius: 18px;
+      border-radius: 16px;
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      min-height: 240px;
+      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.82)),
+                  url('assets/img/ligas-banner.jpg') center/cover no-repeat;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      padding: 35px 20px 30px 20px;
+      color: #ffffff;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .league-hero-card img.hero-bg-img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: none !important;
-      opacity: 1 !important;
-      transition: transform 0.4s ease;
-    }
-
-    .league-hero-card:hover img.hero-bg-img {
-      transform: scale(1.04);
-    }
-
-    .hero-overlay {
-      position: relative;
-      z-index: 2;
-      background: linear-gradient(to top, rgba(11, 15, 25, 0.88) 0%, rgba(11, 15, 25, 0.4) 60%, transparent 100%);
-      padding: 22px;
-      width: 100%;
-      color: #ffffff;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      gap: 8px;
     }
 
-    .hero-overlay h2 {
+    .ligas-hero-content {
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .ligas-hero-title {
       font-family: var(--fuente-titulos);
-      font-size: 30px;
-      margin: 0 0 4px 0;
-      letter-spacing: 1px;
+      font-size: 38px;
+      font-weight: 400;
+      color: #ffffff;
       text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
       line-height: 1.1;
     }
 
-    .hero-overlay span {
-      font-size: 13px;
+    .ligas-hero-description {
+      font-family: var(--fuente-cuerpo);
+      font-size: 15px;
+      line-height: 1.6;
+      color: #f8fafc;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+      margin: 0 auto;
+    }
+
+    .ligas-hero-description strong {
+      color: #ffffff;
       font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      opacity: 0.9;
     }
 
-    .league-hero-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .league-hero-card.selected-contact {
-      box-shadow: 0 0 0 4px var(--azul-kfl), 0 12px 30px rgba(0, 94, 170, 0.4);
-    }
-
-    .league-hero-card.selected-flag {
-      box-shadow: 0 0 0 4px var(--rojo-kfl), 0 12px 30px rgba(235, 61, 64, 0.4);
-    }
-
-    /* MOBILE LEAGUE SELECTOR PILLS */
-    .mobile-league-selector-wrapper {
-      display: none;
+    /* SELECTOR DE LIGAS (CONTACT / FLAG) */
+    .league-selector-grid {
+      display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       width: 100%;
-      max-width: 600px;
-      margin: 16px auto 8px auto;
-      padding: 8px 16px 4px 16px;
+      max-width: 650px;
+      margin: 20px auto 12px auto;
+      padding: 0 16px;
     }
 
-    .mobile-league-btn {
+    .league-select-btn {
       background: #ffffff;
       border: 2px solid #cbd5e1;
       color: #334155;
-      padding: 14px 10px;
+      padding: 14px 12px;
       font-family: var(--fuente-titulos);
-      font-size: 15px;
-      border-radius: 30px;
+      font-size: 16px;
+      border-radius: 14px;
       cursor: pointer;
       text-transform: uppercase;
       text-align: center;
       transition: all 0.2s ease;
       letter-spacing: 0.5px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      min-height: 52px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       line-height: 1.1;
-      width: 100%;
     }
 
-    .mobile-league-btn span {
+    .league-select-btn span {
       font-family: var(--fuente-cuerpo);
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 800;
-      margin-top: 3px;
+      margin-top: 4px;
       opacity: 0.85;
       letter-spacing: 0.8px;
     }
 
-    .mobile-league-btn.mobile-contact-btn.selected {
+    .league-select-btn.contact-btn.selected {
       background: var(--azul-kfl);
       border-color: var(--azul-kfl);
       color: #ffffff;
       box-shadow: 0 4px 14px rgba(0, 94, 170, 0.35);
     }
 
-    .mobile-league-btn.mobile-flag-btn.selected {
+    .league-select-btn.flag-btn.selected {
       background: var(--rojo-kfl);
       border-color: var(--rojo-kfl);
       color: #ffffff;
       box-shadow: 0 4px 14px rgba(235, 61, 64, 0.35);
     }
 
-    @media (max-width: 768px) { 
-      .leagues-hero-grid { display: none !important; }
-      .mobile-league-selector-wrapper { display: grid !important; }
-    }
-
     /* INSTRUCTION BAR */
     .league-instruction-bar {
       text-align: center;
-      padding: 25px 20px;
-      font-size: 15px;
+      padding: 20px 16px;
+      font-size: 14.5px;
       color: #64748b;
       font-family: var(--fuente-cuerpo);
       font-weight: 700;
@@ -248,6 +215,8 @@
       gap: 8px;
       background: transparent;
       border: none;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     .league-instruction-bar strong {
@@ -286,100 +255,99 @@
 
     /* CATEGORY PILLS */
     .category-pills-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      padding: 16px 16px 6px 16px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 550px;
+      margin: 0 auto 24px auto;
+      padding: 0 16px;
     }
-    .category-pills-wrapper::-webkit-scrollbar { display: none; }
 
     .category-pill-btn {
-      padding: 10px 22px;
+      padding: 12px 16px;
       background: #ffffff;
-      border: none;
-      color: #ffffff;
+      border: 2px solid #cbd5e1;
+      color: #334155;
       font-family: var(--fuente-titulos);
       font-weight: 400;
       font-size: 16px;
-      border-radius: 30px;
+      border-radius: 14px;
       cursor: pointer;
       text-transform: uppercase;
       transition: all 0.2s ease;
       letter-spacing: 0.8px;
-      opacity: 0.75;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-      min-height: 42px;
-      white-space: nowrap;
-      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      min-height: 48px;
+      width: 100%;
+      text-align: center;
     }
 
-    body.contact-theme .category-pill-btn { background: var(--azul-kfl); }
-    body.flag-theme .category-pill-btn { background: var(--rojo-kfl); }
-
-    .category-pill-btn.active {
-      opacity: 1;
-      box-shadow: 0 0 0 2.5px #ffffff, 0 0 0 5.5px var(--azul-kfl), 0 4px 10px rgba(0,0,0,0.12);
-      transform: translateY(-1.5px);
+    body.contact-theme .category-pill-btn.active {
+      background: var(--azul-kfl);
+      border-color: var(--azul-kfl);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
     }
 
     body.flag-theme .category-pill-btn.active {
-      box-shadow: 0 0 0 2.5px #ffffff, 0 0 0 5.5px var(--rojo-kfl), 0 4px 10px rgba(0,0,0,0.12);
+      background: var(--rojo-kfl);
+      border-color: var(--rojo-kfl);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
     }
 
-    .category-pill-btn:hover { opacity: 1; transform: translateY(-1.5px); }
+    .category-pill-btn:hover {
+      border-color: #94a3b8;
+      transform: translateY(-1.5px);
+    }
 
     /* SUB TABS BAR */
     .sub-tabs-bar {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      flex-wrap: nowrap;
-      overflow-x: auto;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      max-width: 900px;
+      margin: 0 auto 24px auto;
       border-bottom: 2px solid #e2e8f0;
       padding: 0 16px 12px 16px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
     }
-    .sub-tabs-bar::-webkit-scrollbar { display: none; }
+
+    @media (max-width: 768px) {
+      .sub-tabs-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
     .sub-tab-btn {
-      padding: 8px 16px;
-      background: transparent;
-      border: none;
+      padding: 10px 12px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
       color: #64748b;
       font-weight: 800;
-      font-size: 13px;
+      font-size: 12px;
       cursor: pointer;
       text-transform: uppercase;
       transition: all 0.2s ease;
-      position: relative;
+      text-align: center;
       letter-spacing: 0.4px;
       min-height: 40px;
-      white-space: nowrap;
-      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
 
-    .sub-tab-btn.active { color: var(--azul-kfl); }
-    body.flag-theme .sub-tab-btn.active { color: var(--rojo-kfl); }
-
-    .sub-tab-btn.active::after {
-      content: '';
-      position: absolute;
-      bottom: -12px;
-      left: 0;
-      width: 100%;
-      height: 3px;
+    .sub-tab-btn.active {
       background: var(--azul-kfl);
-      border-radius: 3px 3px 0 0;
+      border-color: var(--azul-kfl);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(0, 94, 170, 0.25);
     }
 
-    body.flag-theme .sub-tab-btn.active::after { background: var(--rojo-kfl); }
+    body.flag-theme .sub-tab-btn.active {
+      background: var(--rojo-kfl);
+      border-color: var(--rojo-kfl);
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(235, 61, 64, 0.25);
+    }
 
     .kfl-filter-bar {
       display: flex;
@@ -568,7 +536,7 @@
     /* EQUIPO LIBRE / DESCANSO */
     .kfl-bye-week-wrapper { width: 100%; display: flex; justify-content: center; margin-top: 16px; }
     .kfl-bye-card-avenir {
-      font-family: var(--fuente-cuerpo) !important;
+      font-family: var(--fuente-cuerpo);
       background: #ffffff;
       border: 2px solid #0f172a;
       border-radius: 12px;
@@ -614,8 +582,8 @@
       box-sizing: border-box;
     }
     .team-card-roster {
-      background: transparent !important;
-      border: none !important;
+      background: transparent;
+      border: none;
       padding: 10px 6px;
       width: 120px;
       display: flex;
@@ -638,7 +606,7 @@
     }
     .team-card-roster img { max-width: 100%; max-height: 100%; object-fit: contain; }
     .team-card-roster h4 {
-      font-family: var(--fuente-cuerpo) !important;
+      font-family: var(--fuente-cuerpo);
       font-weight: 800;
       font-size: 13.5px;
       color: #475569;
@@ -705,8 +673,8 @@
     body.flag-theme .roster-compact-table th { color: var(--rojo-kfl); }
     .roster-compact-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; }
     .roster-player-clickable-row { cursor: pointer; transition: background-color 0.15s; }
-    .roster-player-clickable-row:hover { background-color: #f0f7ff !important; }
-    body.flag-theme .roster-player-clickable-row:hover { background-color: #fff1f2 !important; }
+    .roster-player-clickable-row:hover { background-color: #f0f7ff; }
+    body.flag-theme .roster-player-clickable-row:hover { background-color: #fff1f2; }
     .cell-jersey-badge { font-family: var(--fuente-titulos); font-size: 16px; color: var(--azul-kfl); }
     body.flag-theme .cell-jersey-badge { color: var(--rojo-kfl); }
     .staff-section-title {
@@ -771,9 +739,9 @@
     }
 
     .kfl-table td.team-col-cell, .kfl-table th.team-col-cell {
-      width: 1% !important;
-      white-space: nowrap !important;
-      text-align: left !important;
+      width: 1%;
+      white-space: nowrap;
+      text-align: left;
     }
 
     .kfl-table-team-cell {
@@ -1077,40 +1045,34 @@
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- DESKTOP HERO CARDS -->
-    <section class="leagues-hero-grid">
-      <div class="league-hero-card contact-card" id="cardContact" onclick="selectLeague('contact')">
-        <img src="assets/img/ligas-contact-football.jpg" alt="Contact Football Masculino" class="hero-bg-img" loading="eager" width="600" height="280">
-        <div class="hero-overlay">
-          <h2>CONTACT FOOTBALL</h2>
-          <span>MASCULINO</span>
-        </div>
-      </div>
-
-      <div class="league-hero-card flag-card" id="cardFlag" onclick="selectLeague('flag')">
-        <img src="assets/img/ligas-flag-football.jpg" alt="Flag Football Femenino" class="hero-bg-img" loading="eager" width="600" height="280">
-        <div class="hero-overlay">
-          <h2>FLAG FOOTBALL</h2>
-          <span>FEMENINO</span>
-        </div>
+    <!-- HERO BANNER ÚNICO KFL LIGAS -->
+    <section class="ligas-hero-banner">
+      <div class="ligas-hero-content">
+        <h1 class="ligas-hero-title">LIGAS KFL</h1>
+        <p class="ligas-hero-description">
+          Consulta el calendario oficial, tablas de posición, rosters actualizados y estadísticas detalladas de la <strong>Kiwanis Football League</strong> en Panamá.
+        </p>
       </div>
     </section>
 
-    <!-- MOBILE LEAGUE SELECTOR PILLS -->
-    <div class="mobile-league-selector-wrapper" id="mobileLeagueSelector">
-      <button class="mobile-league-btn mobile-contact-btn" id="mobileBtnContact" onclick="selectLeague('contact')">
+    <!-- SELECTOR DE LIGAS (CONTACT / FLAG) -->
+    <div class="league-selector-grid" id="leagueSelectorGrid">
+      <button class="league-select-btn contact-btn" id="btnLeagueContact" onclick="selectLeague('contact')">
         CONTACT FOOTBALL
         <span>MASCULINO</span>
       </button>
-      <button class="mobile-league-btn mobile-flag-btn" id="mobileBtnFlag" onclick="selectLeague('flag')">
+      <button class="league-select-btn flag-btn" id="btnLeagueFlag" onclick="selectLeague('flag')">
         FLAG FOOTBALL
         <span>FEMENINO</span>
       </button>
     </div>
 
-    <!-- INSTRUCTION BAR (Con flechita SVG hacia arriba y color unificado) -->
+    <!-- INSTRUCTION BAR (Con flecha al inicio) -->
     <div class="league-instruction-bar" id="instructionBar">
-      <span>Selecciona arriba <svg class="kfl-icon-svg" style="display:inline-block; vertical-align:middle; width:16px; height:16px;" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg> <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
+      <span>
+        <svg class="kfl-icon-svg" style="display:inline-block; vertical-align:middle; width:16px; height:16px; margin-right:4px;" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+        Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para comenzar.
+      </span>
     </div>
 
     <div class="reset-selection-wrapper" id="resetBtnWrapper">
@@ -1130,7 +1092,7 @@
         <div class="sub-tabs-bar">
           <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
           <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
-          <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Tabla de Posiciones</button>
+          <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Posiciones</button>
           <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Stats</button>
         </div>
 
@@ -1408,25 +1370,19 @@
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
-      const cardContact = document.getElementById('cardContact');
-      const cardFlag = document.getElementById('cardFlag');
-      const mobileBtnContact = document.getElementById('mobileBtnContact');
-      const mobileBtnFlag = document.getElementById('mobileBtnFlag');
+      const btnContact = document.getElementById('btnLeagueContact');
+      const btnFlag = document.getElementById('btnLeagueFlag');
       const contentSection = document.getElementById('leagueContentSection');
       const resetBtnWrapper = document.getElementById('resetBtnWrapper');
       const instructionBar = document.getElementById('instructionBar');
 
       if (league === 'contact') {
-        if (cardContact) cardContact.classList.add('selected-contact');
-        if (cardFlag) cardFlag.classList.remove('selected-flag');
-        if (mobileBtnContact) mobileBtnContact.classList.add('selected');
-        if (mobileBtnFlag) mobileBtnFlag.classList.remove('selected');
+        if (btnContact) btnContact.classList.add('selected');
+        if (btnFlag) btnFlag.classList.remove('selected');
         document.body.className = 'contact-theme';
       } else {
-        if (cardFlag) cardFlag.classList.add('selected-flag');
-        if (cardContact) cardContact.classList.remove('selected-contact');
-        if (mobileBtnFlag) mobileBtnFlag.classList.add('selected');
-        if (mobileBtnContact) mobileBtnContact.classList.remove('selected');
+        if (btnFlag) btnFlag.classList.add('selected');
+        if (btnContact) btnContact.classList.remove('selected');
         document.body.className = 'flag-theme';
       }
 
@@ -1450,15 +1406,11 @@
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
-      const cardContact = document.getElementById('cardContact');
-      const cardFlag = document.getElementById('cardFlag');
-      const mobileBtnContact = document.getElementById('mobileBtnContact');
-      const mobileBtnFlag = document.getElementById('mobileBtnFlag');
+      const btnContact = document.getElementById('btnLeagueContact');
+      const btnFlag = document.getElementById('btnLeagueFlag');
 
-      if (cardContact) cardContact.classList.remove('selected-contact');
-      if (cardFlag) cardFlag.classList.remove('selected-flag');
-      if (mobileBtnContact) mobileBtnContact.classList.remove('selected');
-      if (mobileBtnFlag) mobileBtnFlag.classList.remove('selected');
+      if (btnContact) btnContact.classList.remove('selected');
+      if (btnFlag) btnFlag.classList.remove('selected');
 
       document.getElementById('leagueContentSection').style.display = 'none';
       document.getElementById('resetBtnWrapper').style.display = 'none';

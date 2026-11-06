@@ -40,13 +40,6 @@
           "name": "Kiwanis Football League Panamá",
           "alternateName": "KFL"
         }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.kiwanisfootball.com/index.html" },
-          { "@type": "ListItem", "position": 2, "name": "MVP", "item": "https://www.kiwanisfootball.com/mvp.html" }
-        ]
       }
     ]
   }
@@ -414,6 +407,11 @@
       .mvp-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
     }
   </style>
+  <!-- Vercel Speed Insights -->
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body class="contact-theme">
 
@@ -542,8 +540,13 @@
       }
     };
 
-    /* Nombres de equipo -> logos locales */
+    /* Nombre de equipo (con variantes) -> logo local en assets/logos/ */
     const TEAM_LOGOS_MAP = {
+      "E.C.P MIGHTY EAGLES": "assets/logos/eagles.png",
+      "ECP EAGLES": "assets/logos/eagles.png",
+      "MIGHTY EAGLES": "assets/logos/eagles.png",
+      "METS EAGLES": "assets/logos/eagles.png",
+      "EAGLES": "assets/logos/eagles.png",
       "A.I.P FIGHTING OWLS": "assets/logos/owls.png",
       "OWLS": "assets/logos/owls.png",
       "BRADER RAIDERS": "assets/logos/raiders.png",
@@ -554,44 +557,27 @@
       "SPARTANS": "assets/logos/spartans.png",
       "BALBOA DRAGONS": "assets/logos/dragons.png",
       "DRAGONS": "assets/logos/dragons.png",
-      "METS EAGLES": "assets/logos/eagles.png",
-      "EAGLES": "assets/logos/eagles.png",
       "ESCLAVAS": "assets/logos/esclavas.png",
       "PANTERS": "assets/logos/panters.png",
       "PANTHER": "assets/logos/panters.png",
       "ATENEA": "assets/logos/panters.png",
-      "BLACK TIGERS": "assets/logos/black-tigers.png"
-    };
-
-    const FALLBACK_LOGOS = {
-      "OWLS": "https://i.imgur.com/KRjk1AV.png",
-      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
-      "KOLTS": "https://i.imgur.com/id2gPdH.png",
-      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png",
-      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
-      "EAGLES": "https://i.imgur.com/lxfq565.png"
+      "BLACK TIGERS": "assets/logos/black-tigers.png",
+      "LIONS": "assets/logos/lions.png",
+      "TITANS": "assets/logos/titans.png",
+      "KOBRAS": "assets/logos/kobras.png",
+      "SAINTS": "assets/logos/saints.png"
     };
 
     const LOGO_KFL_DEFAULT = "assets/logos/KFL-Logo.png";
 
     function getTeamLogoInfo(fullTeamName) {
       const clean = (fullTeamName || "").toUpperCase().trim();
-      let logoUrl = LOGO_KFL_DEFAULT;
-      let keyMatched = "";
-
-      for (const [key, path] of Object.entries(TEAM_LOGOS_MAP)) {
-        if (clean.includes(key)) {
-          logoUrl = path;
-          if (key.includes("OWLS")) keyMatched = "OWLS";
-          else if (key.includes("RAIDERS")) keyMatched = "RAIDERS";
-          else if (key.includes("KOLTS")) keyMatched = "KOLTS";
-          else if (key.includes("SPARTANS")) keyMatched = "SPARTANS";
-          else if (key.includes("DRAGONS")) keyMatched = "DRAGONS";
-          else if (key.includes("EAGLES")) keyMatched = "EAGLES";
-          break;
-        }
-      }
-      return { logoUrl, fallbackUrl: FALLBACK_LOGOS[keyMatched] || LOGO_KFL_DEFAULT };
+      // Coincidencia con la clave más larga primero (ej. "ECP MIGHTY EAGLES" antes que "EAGLES")
+      const key = Object.keys(TEAM_LOGOS_MAP)
+        .sort((a, b) => b.length - a.length)
+        .find(k => clean.includes(k));
+      const logoUrl = key ? TEAM_LOGOS_MAP[key] : LOGO_KFL_DEFAULT;
+      return { logoUrl, fallbackUrl: LOGO_KFL_DEFAULT };
     }
 
     let currentModality = null;

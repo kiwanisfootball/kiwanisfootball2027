@@ -3,26 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de Jugadores - Kiwanis Football League Panama</title>
+  <title>Registro de Atletas | Kiwanis Football League Panamá</title>
   
+  <!-- FAVICON ACTUALIZADO -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- SEO / GEO / AEO METADATOS -->
+  <meta name="description" content="Formulario oficial de inscripción y registro para atletas de la Kiwanis Football League (KFL) en Panamá. Modalidades Contact Football y Flag Football Femenino.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panamá, Registro de Atletas, Contact Football, Flag Football Femenino, Liga Kiwanis, Inscripciones Football Panamá">
+  <meta name="author" content="Kiwanis Football League Panamá">
+  
+  <!-- GEOLOCALIZACIÓN (GEO) -->
+  <meta name="geo.region" content="PA-8">
+  <meta name="geo.placename" content="Panamá">
+  <meta name="geo.position" content="8.983333;-79.516667">
+  <meta name="ICBM" content="8.983333, -79.516667">
+
+  <!-- OPEN GRAPH (REDES SOCIALES & AEO) -->
+  <meta property="og:title" content="Registro Oficial de Jugadores - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Inscríbete en las ligas de Contact Football y Flag Football Femenino de la KFL Panamá. Proceso seguro y oficial.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/registro.html">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/favicon.png">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- SCHEMA.ORG / STRUCTURED DATA (JSON-LD PARA SEO Y AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SportsOrganization",
+        "name": "Kiwanis Football League",
+        "alternateName": "KFL Panamá",
+        "url": "https://www.kiwanisfootball.com",
+        "logo": "https://www.kiwanisfootball.com/assets/img/favicon.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ciudad de Panamá",
+          "addressCountry": "PA"
+        }
+      },
+      {
+        "@type": "RegisterAction",
+        "name": "Inscripción de Jugadores KFL",
+        "target": "https://www.kiwanisfootball.com/registro.html",
+        "description": "Formulario oficial para el registro de jugadores en categorías Contact y Flag Football Femenino."
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
+    /* ESTILOS ESTRUCTURALES Y DEL FORMULARIO */
     .inscripcion-container {
       max-width: 1100px;
       width: 100%;
       margin: 0 auto;
       padding: 20px;
-      font-family: 'Avenir', sans-serif;
       box-sizing: border-box;
     }
 
+    /* GATE DE CONTRASEÑA */
     #passwordGate {
       max-width: 500px;
       margin: 60px auto;
       background: #ffffff;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--gris-borde);
       border-radius: 16px;
       padding: 40px;
       text-align: center;
@@ -30,20 +79,21 @@
     }
 
     .gate-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 28px;
-      color: #19547E;
+      color: var(--azul-kfl);
       margin-bottom: 12px;
       text-transform: uppercase;
     }
 
     .gate-desc {
       font-size: 14.5px;
-      color: #64748b;
+      color: var(--texto-suave);
       margin-bottom: 25px;
       line-height: 1.6;
     }
 
+    /* SELECTOR DE MODALIDAD */
     #modalitySelector {
       display: none;
       max-width: 900px;
@@ -52,16 +102,16 @@
     }
 
     .selector-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 32px;
-      color: #19547E;
+      color: var(--azul-kfl);
       text-transform: uppercase;
       margin-bottom: 10px;
     }
 
     .selector-desc {
       font-size: 15px;
-      color: #64748b;
+      color: var(--texto-suave);
       margin-bottom: 30px;
     }
 
@@ -81,14 +131,13 @@
       border-radius: 14px;
       border: none;
       color: #ffffff;
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 22px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
 
     .modality-choice-btn svg {
@@ -97,51 +146,47 @@
       fill: #ffffff;
     }
 
-    .btn-contact-theme { background: #19547E; }
-    .btn-contact-theme:hover { background: #144265; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(25, 84, 126, 0.3); }
+    .btn-contact-theme { background: var(--azul-kfl); }
+    .btn-contact-theme:hover { background: #004a87; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 94, 170, 0.3); }
 
-    .btn-flag-theme { background: #C53030; }
-    .btn-flag-theme:hover { background: #9b2c2c; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(197, 48, 48, 0.3); }
+    .btn-flag-theme { background: var(--rojo-kfl); }
+    .btn-flag-theme:hover { background: #c92f32; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(235, 61, 64, 0.3); }
 
+    /* VISTA DEL FORMULARIO */
     #inscripcionContent {
       display: none;
     }
 
-    .inscripcion-hero {
-      position: relative;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
-                  url('assets/img/inscripcion-banner.jpg') center/cover no-repeat;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      margin-bottom: 25px;
-      padding: 40px 25px;
-      color: #ffffff;
+    .inscripcion-header {
       text-align: center;
-      box-sizing: border-box;
+      margin: 10px 0 30px 0;
     }
 
     .inscripcion-hero-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 38px;
-      font-weight: 400;
-      color: #ffffff;
+      font-family: var(--fuente-titulos);
+      font-size: clamp(34px, 5vw, 52px);
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 10px;
-      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      line-height: 1.1;
+      color: var(--azul-kfl);
+      transition: color 0.3s ease;
     }
 
+    body.contact-theme .inscripcion-hero-title { color: var(--azul-kfl); }
+    body.flag-theme .inscripcion-hero-title { color: var(--rojo-kfl); }
+
     .inscripcion-hero-subtitle {
-      font-size: 16px;
-      color: #cbd5e1;
-      font-weight: 600;
+      font-size: 15px;
+      color: var(--texto-suave);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .privacy-notice {
       background: #f8fafc;
-      border-left: 4px solid #19547E;
+      border-left: 4px solid var(--azul-kfl);
       padding: 18px 22px;
       border-radius: 0 12px 12px 0;
       margin-bottom: 30px;
@@ -151,9 +196,11 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
 
+    body.flag-theme .privacy-notice { border-left-color: var(--rojo-kfl); }
+
     .form-card {
       background: #ffffff;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--gris-borde);
       border-radius: 16px;
       padding: 35px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
@@ -161,14 +208,28 @@
     }
 
     .form-section-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 22px;
-      color: #19547E;
+      color: var(--azul-kfl);
       text-transform: uppercase;
       margin-bottom: 20px;
       padding-bottom: 8px;
-      border-bottom: 2px solid #e2e8f0;
+      border-bottom: 2px solid var(--gris-borde);
     }
+
+    body.flag-theme .form-section-title { color: var(--rojo-kfl); }
+
+    .form-subsection-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--azul-kfl);
+      text-transform: uppercase;
+      margin: 20px 0 15px 0;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed var(--gris-borde);
+    }
+
+    body.flag-theme .form-subsection-title { color: var(--rojo-kfl); }
 
     .form-grid {
       display: grid;
@@ -190,7 +251,7 @@
       display: block;
       font-size: 13.5px;
       font-weight: 800;
-      color: #334155;
+      color: var(--texto-oscuro);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 8px;
@@ -199,7 +260,7 @@
     .form-note {
       display: block;
       font-size: 12px;
-      color: #64748b;
+      color: var(--texto-suave);
       margin-top: 4px;
       font-weight: 600;
     }
@@ -207,7 +268,7 @@
     .form-input, .form-select {
       width: 100%;
       padding: 12px 16px;
-      font-family: 'Avenir', sans-serif;
+      font-family: var(--fuente-cuerpo);
       font-size: 14.5px;
       color: #1e293b;
       background: #f8fafc;
@@ -216,7 +277,6 @@
       outline: none;
       transition: all 0.25s ease;
       box-sizing: border-box;
-      text-transform: uppercase;
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -227,19 +287,32 @@
       padding-right: 40px;
     }
 
+    /* CAPITALIZACIÓN SELECTIVA ÚNICAMENTE EN NOMBRES COMPLETOS */
+    .form-input-capitalize {
+      text-transform: capitalize;
+    }
+
+    .form-select:disabled, .form-input:disabled {
+      background-color: #e2e8f0;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
     input.form-input {
       background-image: none;
       padding-right: 16px;
     }
 
-    .form-input[type="email"] {
-      text-transform: none;
-    }
-
     .form-input:focus, .form-select:focus {
       background-color: #ffffff;
-      border-color: #19547E;
-      box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
+      border-color: var(--azul-kfl);
+      box-shadow: 0 0 0 4px rgba(0, 94, 170, 0.12);
+    }
+
+    body.flag-theme .form-input:focus, 
+    body.flag-theme .form-select:focus {
+      border-color: var(--rojo-kfl);
+      box-shadow: 0 0 0 4px rgba(235, 61, 64, 0.12);
     }
 
     .file-upload-box {
@@ -253,13 +326,13 @@
     }
 
     .file-upload-box:hover {
-      border-color: #19547E;
+      border-color: var(--azul-kfl);
       background: #f1f5f9;
     }
 
-    .file-upload-box input {
-      display: none;
-    }
+    body.flag-theme .file-upload-box:hover { border-color: var(--rojo-kfl); }
+
+    .file-upload-box input { display: none; }
 
     .file-upload-label {
       font-size: 13.5px;
@@ -278,7 +351,7 @@
     }
 
     .payment-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 20px;
       text-transform: uppercase;
       margin-bottom: 12px;
@@ -294,9 +367,7 @@
       line-height: 1.6;
     }
 
-    .payment-list li {
-      margin-bottom: 6px;
-    }
+    .payment-list li { margin-bottom: 6px; }
 
     .insurance-note {
       background: #eff6ff;
@@ -331,7 +402,7 @@
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--gris-borde);
       padding-top: 12px;
     }
 
@@ -352,24 +423,31 @@
 
     .submit-btn {
       width: 100%;
-      background: #19547E;
+      background: var(--azul-kfl);
       color: #ffffff;
       border: none;
       padding: 16px;
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 22px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(25, 84, 126, 0.25);
+      box-shadow: 0 4px 15px rgba(0, 94, 170, 0.25);
     }
 
     .submit-btn:hover {
-      background: #144265;
+      background: #004a87;
       transform: translateY(-2px);
     }
+
+    body.flag-theme .submit-btn {
+      background: var(--rojo-kfl);
+      box-shadow: 0 4px 15px rgba(235, 61, 64, 0.25);
+    }
+
+    body.flag-theme .submit-btn:hover { background: #c92f32; }
 
     .alert-msg {
       display: none;
@@ -388,11 +466,12 @@
       margin-bottom: 20px;
       font-size: 14px;
       font-weight: 800;
-      color: #19547E;
+      color: var(--azul-kfl);
       text-decoration: none;
       cursor: pointer;
     }
     .back-link:hover { text-decoration: underline; }
+    body.flag-theme .back-link { color: var(--rojo-kfl); }
 
     @media (max-width: 900px) {
       .modality-buttons-grid { grid-template-columns: 1fr; }
@@ -413,7 +492,7 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER GLOBAL INYECTADO -->
+  <!-- HEADER GLOBAL -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="inscripcion-container">
@@ -422,8 +501,8 @@
     <div id="passwordGate">
       <h2 class="gate-title">Acceso Restringido</h2>
       <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
-      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none; background-image: none;">
-      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px; background: #19547E;">Ingresar</button>
+      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center;">
+      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px;">Ingresar</button>
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
 
@@ -445,13 +524,13 @@
       </div>
     </div>
 
-    <!-- 3. CONTENIDO DEL FORMULARIO -->
+    <!-- 3. FORMULARIO DE REGISTRO -->
     <div id="inscripcionContent">
 
       <a class="back-link" onclick="goBackToSelector()">← Volver a selección de modalidad</a>
 
-      <section class="inscripcion-hero">
-        <h1 class="inscripcion-hero-title" id="formHeroTitle">Registro de Atleta</h1>
+      <section class="inscripcion-header">
+        <h1 class="inscripcion-hero-title" id="formHeroTitle">REGISTRO CONTACT FOOTBALL</h1>
         <p class="inscripcion-hero-subtitle">Temporada <span id="currentYearDisplay"></span> | Kiwanis Football League Panama</p>
       </section>
 
@@ -472,34 +551,75 @@
 
       <form id="athleteForm" novalidate onsubmit="handleFormSubmit(event)">
         
-        <!-- INFORMACIÓN DEL ATLETA -->
+        <!-- CAMPOS OCULTOS PARA ENVÍO A GOOGLE SHEETS DE LA EDAD AL 1 DE ENERO -->
+        <input type="hidden" id="edadAnios" name="edadAnios">
+        <input type="hidden" id="edadMeses" name="edadMeses">
+        <input type="hidden" id="edadDias" name="edadDias">
+        <input type="hidden" id="edadTextoFormateado" name="edadTextoFormateado">
+
+        <!-- INFORMACIÓN DEL ATLETA ORGANIZADA POR SUBSECCIONES -->
         <div class="form-card">
           <h3 class="form-section-title" id="secTitleAtleta">1. Información del Jugador</h3>
+
+          <!-- A. INFORMACIÓN PERSONAL -->
+          <h4 class="form-subsection-title">Información Personal</h4>
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Nombre Completo</label>
-              <input type="text" id="nombre" class="form-input" placeholder="EJ. CARLOS PÉREZ" required>
+              <input type="text" id="nombre" class="form-input form-input-capitalize" placeholder="Ej. Carlos Pérez" required>
             </div>
+
+            <div class="form-group">
+              <label class="form-label">Fecha de Nacimiento</label>
+              <input type="text" id="fechaNacimiento" class="form-input" placeholder="DD/MM/AAAA" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" oninput="formatAndCalculateAge(this)" required>
+              <span class="form-note">Introducir Día, Mes y Año en ese orden específico (DD/MM/AAAA).</span>
+            </div>
+
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
-              <input type="text" id="cedula" class="form-input" placeholder="EJ. 8-123-4567" required>
+              <input type="text" id="cedula" class="form-input" placeholder="Ej. 8-123-4567" required>
             </div>
+          </div>
+
+          <!-- B. INFORMACIÓN RESIDENCIAL -->
+          <h4 class="form-subsection-title">Información Residencial</h4>
+          <div class="form-grid">
             <div class="form-group">
-              <label class="form-label">Email de Contacto</label>
-              <input type="email" id="emailJugador" class="form-input" placeholder="correo@ejemplo.com" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Corregimiento / Área</label>
-              <select id="corregimiento" class="form-select" required>
-                <option value="">Selecciona tu área / corregimiento</option>
+              <label class="form-label">Provincia</label>
+              <select id="provinciaSelect" class="form-select" onchange="onProvinciaChange()" required>
+                <option value="">Selecciona Provincia</option>
               </select>
             </div>
-            
-            <!-- COLEGIO / UNIVERSIDAD -->
+
+            <div class="form-group">
+              <label class="form-label">Distrito</label>
+              <select id="distritoSelect" class="form-select" onchange="onDistritoChange()" disabled required>
+                <option value="">Primero selecciona una Provincia</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Corregimiento</label>
+              <select id="corregimientoSelect" class="form-select" onchange="onCorregimientoChange()" disabled required>
+                <option value="">Primero selecciona un Distrito</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Barriada / Lugar de Residencia</label>
+              <input type="text" id="barriadaInput" class="form-input" list="barriadasList" placeholder="Escribe o selecciona tu barriada" disabled required style="padding-right: 16px;">
+              <datalist id="barriadasList"></datalist>
+            </div>
+          </div>
+
+          <!-- C. INFORMACIÓN ACADÉMICA -->
+          <h4 class="form-subsection-title">Información Académica</h4>
+          <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Colegio o Universidad</label>
-              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="ESCRIBE O SELECCIONA TU CENTRO EDUCATIVO" required style="background-image: none; padding-right: 16px;">
+              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="Escribe o selecciona tu centro educativo" required style="padding-right: 16px;">
               <datalist id="colegiosList"></datalist>
+              <span class="form-note">Si el atleta cursa estudios en casa, elige "Home School". Si no cursa estudios actualmente, elige "No Aplica".</span>
             </div>
 
             <div class="form-group">
@@ -518,14 +638,18 @@
                 <option value="11.° GRADO">11.° Grado</option>
                 <option value="12.° GRADO">12.° Grado</option>
                 <option value="UNIVERSIDAD">Universidad</option>
+                <option value="HOME SCHOOL">Home School</option>
+                <option value="NO APLICA">No Aplica</option>
               </select>
             </div>
+
             <div class="form-group">
               <label class="form-label">Categoría</label>
               <select id="categoria" class="form-select" onchange="updateTeams()" required>
                 <option value="">Selecciona una categoría</option>
               </select>
             </div>
+
             <div class="form-group">
               <label class="form-label">Equipo</label>
               <select id="equipo" class="form-select" required>
@@ -533,41 +657,42 @@
               </select>
             </div>
           </div>
+
         </div>
 
         <!-- INFORMACIÓN DE LOS ACUDIENTES -->
         <div class="form-card">
           <h3 class="form-section-title">2. Información de los Acudientes</h3>
           
-          <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
+          <h4 style="color: var(--azul-kfl); font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
           <div class="form-grid-3" style="margin-bottom: 25px;">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
-              <input type="text" id="padreNombre" class="form-input" placeholder="EJ. JUAN PÉREZ">
+              <input type="text" id="padreNombre" class="form-input form-input-capitalize" placeholder="Ej. Juan Pérez">
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono de Contacto</label>
-              <input type="tel" id="padreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
+              <input type="tel" id="padreTelefono" class="form-input" placeholder="Ej. +507 6000-0000">
             </div>
             <div class="form-group">
               <label class="form-label">Email</label>
-              <input type="email" id="padreEmail" class="form-input" placeholder="padre@ejemplo.com" style="text-transform: none;">
+              <input type="email" id="padreEmail" class="form-input" placeholder="padre@ejemplo.com">
             </div>
           </div>
 
-          <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
+          <h4 style="color: var(--azul-kfl); font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
           <div class="form-grid-3">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
-              <input type="text" id="madreNombre" class="form-input" placeholder="EJ. MARÍA RODRÍGUEZ">
+              <input type="text" id="madreNombre" class="form-input form-input-capitalize" placeholder="Ej. María Rodríguez">
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono de Contacto</label>
-              <input type="tel" id="madreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
+              <input type="tel" id="madreTelefono" class="form-input" placeholder="Ej. +507 6000-0000">
             </div>
             <div class="form-group">
               <label class="form-label">Email</label>
-              <input type="email" id="madreEmail" class="form-input" placeholder="madre@ejemplo.com" style="text-transform: none;">
+              <input type="email" id="madreEmail" class="form-input" placeholder="madre@ejemplo.com">
             </div>
           </div>
         </div>
@@ -634,91 +759,855 @@
 
   </main>
 
-  <!-- FOOTER GLOBAL INYECTADO -->
+  <!-- FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
-  <!-- BOTÓN VOLVER ARRIBA -->
-  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
-    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-  </button>
+  <!-- COMPONENTES Y LÓGICA GENERAL -->
+  <script src="js/components.js"></script>
 
-  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
-      fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
-          
-          // Activar menú hamburguesa dinámicamente tras cargar
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-          }
-        });
-
-      // Inyectar Footer desde footer.html
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
-        });
-
-      // Botón volver arriba
-      const backToTopBtn = document.getElementById('backToTopBtn');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
-      });
-      backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-  </script>
-
-  <!-- SCRIPT DE LA LÓGICA DE INSCRIPCIÓN -->
   <script>
     const KFL_CONFIG = {
-      distritosCorregimientos: {
-        "Distrito de Panamá": [
-          "Ancón", "Betania", "Bella Vista", "Calidonia", "Chilibre", "Curundú", 
-          "El Chorrillo", "Ernesto Córdoba Campos", "Juan Díaz", "Las Cumbres", 
-          "Las Mañanitas", "Pacora", "Parque Lefevre", "Pedregal", "Pueblo Nuevo", 
-          "Río Abajo", "San Francisco", "Santa Ana", "Tocumen"
-        ],
-        "Distrito de San Miguelito": [
-          "Belisario Frías", "Belisario Porras", "Mateo Iturralde", "Rufina Alfaro", 
-          "Arnulfo Arias", "José Domingo Espinar", "Amelia Denis de Icaza", "Victoriano Lorenzo"
-        ],
-        "Distrito de Arraiján": [
-          "Arraiján (Cabecera)", "Burunga", "Juan Demóstenes Arosemena", 
-          "Nuevo Emperador", "Puerto Caimito", "Veracruz"
-        ],
-        "Distrito de La Chorrera": [
-          "La Chorrera (Cabecera)", "Barrio Balboa", "Barrio Colón", "Amador", 
-          "El Arado", "Herrera", "Hurtado", "La Represa", "Los Díaz", 
-          "Obaldía", "Playa Leona", "Tigre de los Amarillos"
-        ]
+      geografiaPanama: {
+        "Panamá": {
+          "Distrito de Panamá": {
+            "San Felipe": ["Casco Antiguo", "San Felipe Centro"],
+            "El Chorrillo": ["La Gloria (Chorrillo)", "El Chorrillo Centro"],
+            "Santa Ana": ["Plaza Amador", "Santa Ana Centro"],
+            "Calidonia": ["La Exposición", "Perejil", "Calidonia Centro"],
+            "Curundú": ["Curundú Centro"],
+            "Betania": ["Condado del Rey", "El Dorado", "Villa de las Fuentes", "Dos Mares", "La Gloria", "Pontemar", "Linda Vista", "Altos de Panamá", "Club X", "Bethania Centro"],
+            "Bella Vista": ["El Cangrejo", "Obarrio", "La Cresta", "Campo Alegre", "Bella Vista Centro"],
+            "Pueblo Nuevo": ["Hato Pintado", "12 de Octubre", "Pueblo Nuevo Centro"],
+            "San Francisco": ["Paitilla", "Punta Pacífica", "San Francisco Centro", "Coco del Mar", "Calle 50"],
+            "Parque Lefevre": ["Chanis", "Santa Elena", "La Fontana", "Panamá Viejo", "Parque Lefevre Centro"],
+            "Río Abajo": ["Villa Lucre (Río Abajo)", "Río Abajo Centro"],
+            "Juan Díaz": ["Costa del Este", "Santa María Country Club", "Versalles", "Ciudad Radial", "Don Bosco (Juan Díaz)", "Concepción", "Juan Díaz Centro"],
+            "Pedregal": ["Rana de Oro", "Pedregal Centro", "Villalobos"],
+            "Ancón": ["Clayton", "Albrook", "Cárdenas", "Diablo", "Balboa", "Paraíso (Ancón)", "Pedro Miguel", "Los Ríos", "Dos Mares (Ancón)"],
+            "Chilibre": ["Chilibre Centro", "Agua Buena"],
+            "Las Cumbres": ["Villa Zaita", "Las Cumbres Centro", "Alps of Lake"],
+            "Pacora": ["Pacora Centro", "Cabra"],
+            "San Martín": ["San Martín Centro"],
+            "Tocumen": ["La Siesta", "Nuevo Reparto", "Tocumen Centro", "Sector Sur"],
+            "Las Mañanitas": ["Las Mañanitas Centro"],
+            "24 de Diciembre": ["24 de Diciembre Centro", "Felipillo"],
+            "Alcalde Díaz": ["Alcalde Díaz Centro"],
+            "Ernesto Córdoba Campos": ["Paso Blanco", "Ernesto Córdoba Centro"],
+            "Caimitillo": ["Caimitillo Centro"],
+            "Las Garzas": ["Las Garzas Centro"],
+            "Don Bosco": ["Versalles II", "Don Bosco Centro"]
+          },
+          "Distrito de Balboa": {
+            "San Miguel": ["San Miguel Centro"],
+            "La Ensenada": ["La Ensenada Centro"],
+            "La Esmeralda": ["La Esmeralda Centro"],
+            "La Guinea": ["La Guinea Centro"],
+            "Pedro González": ["Pedro González Island"],
+            "Saboga": ["Saboga Island"]
+          },
+          "Distrito de Chepo": {
+            "Chepo": ["Chepo Centro"],
+            "Cañita": ["Cañita Centro"],
+            "Chepillo": ["Isla Chepillo"],
+            "El Llano": ["El Llano Centro"],
+            "Las Margaritas": ["Las Margaritas Centro"],
+            "Santa Cruz de Chinina": ["Chinina"],
+            "Madungandí": ["Madungandí Centro"],
+            "Tortí": ["Tortí Centro"]
+          },
+          "Distrito de Chimán": {
+            "Chimán": ["Chimán Centro"],
+            "Brujas": ["Brujas Centro"],
+            "Gonzalo Vásquez": ["Gonzalo Vásquez Centro"],
+            "Pasiga": ["Pasiga Centro"],
+            "Unión Santeña": ["Unión Santeña Centro"]
+          },
+          "Distrito de San Miguelito": {
+            "Amelia Denis de Icaza": ["Pan de Azúcar", "Los Andes No. 1"],
+            "Belisario Porras": ["Samaria", "Belisario Porras Centro"],
+            "José Domingo Espinar": ["Villa Lucre", "El Crisol", "San Antonio Centro"],
+            "Mateo Iturralde": ["Paraíso", "El Bosque"],
+            "Victoriano Lorenzo": ["Victoriano Lorenzo Centro"],
+            "Arnulfo Arias": ["Arnulfo Arias Centro"],
+            "Belisario Frías": ["Torrijos Carter"],
+            "Omar Torrijos": ["Santa Librada"],
+            "Rufina Alfaro": ["Brisas del Golf", "Villa Lucre (Sector Rufina)", "Cerro Viento", "San Antonio"]
+          },
+          "Distrito de Taboga": {
+            "Taboga": ["Taboga Centro"],
+            "Otoque Oriente": ["Otoque Oriente"],
+            "Otoque Occidente": ["Otoque Occidente"]
+          }
+        },
+        "Bocas del Toro": {
+          "Distrito de Bocas del Toro": {
+            "Bocas del Toro": ["Isla Colón", "Bocas Town"],
+            "Bastimentos": ["Isla Bastimentos", "Old Bank"],
+            "Caucero": ["Caucero Centro"],
+            "Isla Cristóbal": ["San Cristóbal"],
+            "San Cristóbal": ["San Cristóbal Centro"],
+            "Tierra Oscura": ["Tierra Oscura Centro"]
+          },
+          "Distrito de Changuinola": {
+            "Changuinola": ["Changuinola Centro"],
+            "Barriada 4 de Abril": ["4 de Abril"],
+            "Finca 4": ["Finca 4"],
+            "Finca 6": ["Finca 6"],
+            "Finca 60": ["Finca 60"],
+            "Guabito": ["Guabito Centro"],
+            "El Teribe": ["El Teribe"],
+            "Barranco Adentro": ["Barranco Adentro"],
+            "El Empalme": ["El Empalme"],
+            "Las Tablas": ["Las Tablas (Bocas)"],
+            "Las Delicias": ["Las Delicias"],
+            "Cochigró": ["Cochigró"]
+          },
+          "Distrito de Chiriquí Grande": {
+            "Chiriquí Grande": ["Chiriquí Grande Centro"],
+            "Miramar": ["Miramar"],
+            "Punta Peña": ["Punta Peña"],
+            "Punta Robalo": ["Punta Robalo"],
+            "Rambala": ["Rambala"],
+            "Bajo Cedro": ["Bajo Cedro"]
+          },
+          "Distrito de Almirante": {
+            "Almirante": ["Almirante Centro"],
+            "Barriada Guaymí": ["Barriada Guaymí"],
+            "Barrio Francés": ["Barrio Francés"],
+            "Nance de Rincón": ["Nance de Rincón"],
+            "Puerto Cortés": ["Puerto Cortés"],
+            "Cauchero": ["Cauchero"],
+            "Ceiba": ["Ceiba"],
+            "Miraflores": ["Miraflores (Almirante)"],
+            "Valle de Agua Arriba": ["Valle de Agua"],
+            "Valle de Rincón": ["Valle de Rincón"]
+          }
+        },
+        "Coclé": {
+          "Distrito de Aguadulce": {
+            "Aguadulce": ["Aguadulce Centro"],
+            "El Cristo": ["El Cristo"],
+            "El Roble": ["El Roble"],
+            "Pocrí": ["Pocrí (Aguadulce)"],
+            "Barrios Unidos": ["Barrios Unidos"],
+            "El Harbour": ["El Harbour"]
+          },
+          "Distrito de Antón": {
+            "Antón": ["Antón Centro"],
+            "Cabuya": ["Cabuya"],
+            "El Chirú": ["El Chirú"],
+            "El Retiro": ["El Retiro"],
+            "El Valle": ["El Valle de Antón"],
+            "Juan Díaz": ["Juan Díaz (Antón)"],
+            "Río Hato": ["Río Hato Centro", "Playa Blanca"],
+            "San Juan de Dios": ["San Juan de Dios"],
+            "Santa Clara": ["Santa Clara"]
+          },
+          "Distrito de La Pintada": {
+            "La Pintada": ["La Pintada Centro"],
+            "El Harino": ["El Harino"],
+            "El Potrero": ["El Potrero"],
+            "Llano Grande": ["Llano Grande"],
+            "Piedras Gordas": ["Piedras Gordas"],
+            "Las Minas": ["Las Minas (La Pintada)"],
+            "Llano Norte": ["Llano Norte"]
+          },
+          "Distrito de Natá": {
+            "Natá": ["Natá de los Caballeros"],
+            "Capellanía": ["Capellanía"],
+            "El Caño": ["El Caño"],
+            "Guzmán": ["Guzmán"],
+            "Las Huacas": ["Las Huacas"],
+            "Toza": ["Toza"]
+          },
+          "Distrito de Olá": {
+            "Olá": ["Olá Centro"],
+            "El Copé": ["El Copé"],
+            "El Palmar": ["El Palmar"],
+            "El Picacho": ["El Picacho"],
+            "La Pava": ["La Pava"]
+          },
+          "Distrito de Penonomé": {
+            "Penonomé": ["Penonomé Centro"],
+            "Cañaveral": ["Cañaveral"],
+            "Coclé": ["Coclé Centro"],
+            "Chiguirí Arriba": ["Chiguirí Arriba"],
+            "El Coco": ["El Coco (Penonomé)"],
+            "Pajonal": ["Pajonal"],
+            "Río Indio": ["Río Indio"],
+            "Río Grande": ["Río Grande"],
+            "Toabré": ["Toabré"],
+            "Tulú": ["Tulú"]
+          }
+        },
+        "Colón": {
+          "Distrito de Colón": {
+            "Barrio Norte": ["Colón Centro Norte"],
+            "Barrio Sur": ["Colón Centro Sur"],
+            "Buana Vista": ["Buena Vista"],
+            "Cativa": ["Cativa Centro"],
+            "Ciricito": ["Ciricito"],
+            "Cristóbal": ["Margarita", "Espinar", "Davis"],
+            "Cristóbal Este": ["Residencial Los Lagos", "Puerto Escondido"],
+            "Escobal": ["Escobal"],
+            "Limón": ["Limón"],
+            "Nueva Providencia": ["Nueva Providencia"],
+            "Puerto Pilón": ["Puerto Pilón"],
+            "Sabanitas": ["Sabanitas Centro"],
+            "Salamanca": ["Salamanca"],
+            "San Juan": ["San Juan (Colón)"],
+            "Santa Rosa": ["Santa Rosa"]
+          },
+          "Distrito de Chagres": {
+            "Nuevo Chagres": ["Nuevo Chagres Centro"],
+            "Achiote": ["Achiote"],
+            "El Guabo": ["El Guabo"],
+            "La Encantada": ["La Encantada"],
+            "Palma Real": ["Palma Real"],
+            "Salud": ["Salud"]
+          },
+          "Distrito de Donoso": {
+            "Río Indio": ["Río Indio (Donoso)"],
+            "Guásimo": ["Guásimo"],
+            "Govea": ["Govea"],
+            "Miguel de la Borda": ["Miguel de la Borda"],
+            "Coclé del Norte": ["Coclé del Norte"]
+          },
+          "Distrito de Portobelo": {
+            "Portobelo": ["Portobelo Centro"],
+            "Cacique": ["Cacique"],
+            "Garrote": ["Garrote"],
+            "Isla Grande": ["Isla Grande"],
+            "María Chiquita": ["María Chiquita"]
+          },
+          "Distrito de Santa Isabel": {
+            "Palenque": ["Palenque"],
+            "Cuango": ["Cuango"],
+            "Miramar": ["Miramar (Santa Isabel)"],
+            "Nombre de Dios": ["Nombre de Dios"],
+            "Palmira": ["Palmira"],
+            "Playa Chiquita": ["Playa Chiquita"],
+            "Santa Isabel": ["Santa Isabel Centro"]
+          },
+          "Distrito de Omar Torrijos Herrera": {
+            "San José del General": ["San José del General"],
+            "San Juan de Turbe": ["San Juan de Turbe"],
+            "Nueva Esperanza": ["Nueva Esperanza"]
+          }
+        },
+        "Chiriquí": {
+          "Distrito de Alanje": {
+            "Alanje": ["Alanje Centro"],
+            "Divalá": ["Divalá"],
+            "El Agua": ["El Agua"],
+            "Palo Grande": ["Palo Grande"],
+            "Querévalo": ["Querévalo"],
+            "Santo Tomás": ["Santo Tomás"],
+            "Gurumal": ["Gurumal"],
+            "Canta Gallo": ["Canta Gallo"]
+          },
+          "Distrito de Barú": {
+            "Puerto Armuelles": ["Puerto Armuelles Centro"],
+            "Limón": ["Limón (Barú)"],
+            "Progreso": ["Progreso"],
+            "Baco": ["Baco"],
+            "Rodolfo Aguilar Delgado": ["Rodolfo Aguilar"]
+          },
+          "Distrito de Boquerón": {
+            "Boquerón": ["Boquerón Centro"],
+            "Bágala": ["Bágala"],
+            "Cordillera": ["Cordillera"],
+            "Guabal": ["Guabal"],
+            "Guayabal": ["Guayabal"],
+            "Paraíso": ["Paraíso (Boquerón)"],
+            "Pedregal": ["Pedregal (Boquerón)"],
+            "Tijeras": ["Tijeras"]
+          },
+          "Distrito de Boquete": {
+            "Bajo Boquete": ["Bajo Boquete Centro"],
+            "Caldera": ["Caldera"],
+            "Alto Boquete": ["Alto Boquete"],
+            "Jaramillo": ["Jaramillo"],
+            "Los Naranjos": ["Los Naranjos"],
+            "Palmira": ["Palmira (Boquete)"]
+          },
+          "Distrito de Bugaba": {
+            "La Concepción": ["La Concepción Centro"],
+            "Aserrío de Gariché": ["Aserrío"],
+            "Bugaba": ["Bugaba Centro"],
+            "El Bongo": ["El Bongo"],
+            "Gómez": ["Gómez"],
+            "La Estrella": ["La Estrella"],
+            "Limón": ["Limón (Bugaba)"],
+            "San Isidro": ["San Isidro"],
+            "Santo Domingo": ["Santo Domingo"],
+            "Solano": ["Solano"]
+          },
+          "Distrito de David": {
+            "David": ["David Centro", "San Mateo"],
+            "David Este": ["Terronal"],
+            "David Sur": ["David Sur"],
+            "Bijagual": ["Bijagual"],
+            "Cochea": ["Cochea"],
+            "Chiriquí": ["Chiriquí Centro"],
+            "Guaca": ["Guaca"],
+            "Las Lomas": ["Las Lomas"],
+            "Pedregal": ["Pedregal (David)"],
+            "San Carlos": ["San Carlos (David)"],
+            "San Pablo Nuevo": ["San Pablo Nuevo"],
+            "San Pablo Viejo": ["San Pablo Viejo"]
+          },
+          "Distrito de Dolega": {
+            "Dolega": ["Dolega Centro"],
+            "Dos Ríos": ["Dos Ríos"],
+            "Los Anastacios": ["Los Anastacios"],
+            "Potrerillos": ["Potrerillos"],
+            "Potrerillos Abajo": ["Potrerillos Abajo"],
+            "Rovira": ["Rovira"],
+            "Tinajas": ["Tinajas"]
+          },
+          "Distrito de Gualaca": {
+            "Gualaca": ["Gualaca Centro"],
+            "Hornito": ["Hornito"],
+            "Los Angeles": ["Los Ángeles"],
+            "Paja de Sombrero": ["Paja de Sombrero"],
+            "Rincón": ["Rincón"]
+          },
+          "Distrito de Remedios": {
+            "Remedios": ["Remedios Centro"],
+            "El Naranjo": ["El Naranjo"],
+            "Las Lomas": ["Las Lomas (Remedios)"],
+            "Santa Lucía": ["Santa Lucía"],
+            "El Porvenir": ["El Porvenir"]
+          },
+          "Distrito de Renacimiento": {
+            "Río Sereno": ["Río Sereno Centro"],
+            "Breñón": ["Breñón"],
+            "Cañas Gordas": ["Cañas Gordas"],
+            "Dominical": ["Dominical"],
+            "Plaza de Caisán": ["Plaza de Caisán"],
+            "Santa Cruz": ["Santa Cruz"],
+            "Monte Lirio": ["Monte Lirio"],
+            "Santa Clara": ["Santa Clara (Renacimiento)"]
+          },
+          "Distrito de San Félix": {
+            "Las Lajas": ["Las Lajas Centro"],
+            "Juay": ["Juay"],
+            "San Antonio": ["San Antonio"],
+            "San Félix": ["San Félix Centro"],
+            "Santa Cruz": ["Santa Cruz (San Félix)"]
+          },
+          "Distrito de San Lorenzo": {
+            "Horconcitos": ["Horconcitos Centro"],
+            "Boca de Monte": ["Boca de Monte"],
+            "Boca del Monte": ["Boca del Monte"],
+            "San Juan": ["San Juan (San Lorenzo)"],
+            "San Lorenzo": ["San Lorenzo Centro"]
+          },
+          "Distrito de Tierras Altas": {
+            "Volcán": ["Volcán Centro"],
+            "Cerro Punta": ["Cerro Punta Centro"],
+            "Cuesta de Piedra": ["Cuesta de Piedra"],
+            "Nueva California": ["Nueva California"],
+            "Paso Ancho": ["Paso Ancho"]
+          }
+        },
+        "Darién": {
+          "Distrito de Chepigana": {
+            "La Palma": ["La Palma Centro"],
+            "Camogantí": ["Camogantí"],
+            "Chepigana": ["Chepigana Centro"],
+            "Garachiné": ["Garachiné"],
+            "Jaqué": ["Jaqué"],
+            "Puerto Piña": ["Puerto Piña"],
+            "Sambú": ["Sambú"],
+            "Setegantí": ["Setegantí"],
+            "Taimatí": ["Taimatí"],
+            "Tucutí": ["Tucutí"]
+          },
+          "Distrito de Pinogana": {
+            "El Real de Santa María": ["El Real"],
+            "Boca de Cupe": ["Boca de Cupe"],
+            "Paya": ["Paya"],
+            "Pinogana": ["Pinogana Centro"],
+            "Yape": ["Yape"],
+            "Metetí": ["Metetí Centro"],
+            "Kannir Siria": ["Kannir Siria"]
+          },
+          "Distrito de Santa Fe": {
+            "Santa Fe": ["Santa Fe Centro"],
+            "Agua Fría": ["Agua Fría"],
+            "Cucunatí": ["Cucunatí"],
+            "Río Congo": ["Río Congo"],
+            "Río Congo Arriba": ["Río Congo Arriba"],
+            "Zapallal": ["Zapallal"]
+          }
+        },
+        "Herrera": {
+          "Distrito de Chitré": {
+            "Chitré": ["Chitré Centro"],
+            "La Arena": ["La Arena"],
+            "Monagrillo": ["Monagrillo"],
+            "Llano Bonito": ["Llano Bonito"],
+            "San Juan Bautista": ["San Juan Bautista"]
+          },
+          "Distrito de Las Minas": {
+            "Las Minas": ["Las Minas Centro"],
+            "Chepo": ["Chepo (Las Minas)"],
+            "Chumical": ["Chumical"],
+            "El Toro": ["El Toro"],
+            "Leones": ["Leones"],
+            "Quebrada del Rosario": ["Quebrada del Rosario"],
+            "Quebrada El Rosario": ["Quebrada El Rosario"]
+          },
+          "Distrito de Los Pozos": {
+            "Los Pozos": ["Los Pozos Centro"],
+            "El Capurí": ["El Capurí"],
+            "El Calabacito": ["El Calabacito"],
+            "El Cedro": ["El Cedro"],
+            "La Arena": ["La Arena (Los Pozos)"],
+            "La Pitaloza": ["La Pitaloza"],
+            "Los Cerritos": ["Los Cerritos"],
+            "Los Las Minas": ["Los Las Minas"]
+          },
+          "Distrito de Ocú": {
+            "Ocú": ["Ocú Centro"],
+            "Cerro Largo": ["Cerro Largo"],
+            "El Calabacito": ["El Calabacito (Ocú)"],
+            "Entradero del Castillo": ["Entradero"],
+            "Llano Grande": ["Llano Grande (Ocú)"],
+            "Peñas Chatas": ["Peñas Chatas"],
+            "El Tijera": ["El Tijera"],
+            "Menchaca": ["Menchaca"]
+          },
+          "Distrito de Parita": {
+            "Parita": ["Parita Centro"],
+            "Cabuya": ["Cabuya (Parita)"],
+            "Los Castillos": ["Los Castillos"],
+            "Llano de la Cruz": ["Llano de la Cruz"],
+            "París": ["París"],
+            "Portobelillo": ["Portobelillo"],
+            "Potuga": ["Potuga"]
+          },
+          "Distrito de Pesé": {
+            "Pesé": ["Pesé Centro"],
+            "Las Cabras": ["Las Cabras"],
+            "El Pájaro": ["El Pájaro"],
+            "El Pedregoso": ["El Pedregoso"],
+            "El Ciruelo": ["El Ciruelo"],
+            "Huacas de Quintero": ["Huacas"],
+            "Rincón Hondo": ["Rincón Hondo"],
+            "Sabanagrande": ["Sabanagrande"]
+          },
+          "Distrito de Santa María": {
+            "Santa María": ["Santa María Centro"],
+            "Chupampa": ["Chupampa"],
+            "El Rincón": ["El Rincón"],
+            "Limón": ["Limón (Santa María)"],
+            "Los Canelos": ["Los Canelos"]
+          }
+        },
+        "Los Santos": {
+          "Distrito de Guararé": {
+            "Guararé": ["Guararé Centro"],
+            "El Espinal": ["El Espinal"],
+            "El Macano": ["El Macano"],
+            "Guararé Arriba": ["Guararé Arriba"],
+            "La Enea": ["La Enea"],
+            "La Pasera": ["La Pasera"],
+            "Las Trancas": ["Las Trancas"],
+            "Llano Abajo": ["Llano Abajo"],
+            "Perales": ["Perales"]
+          },
+          "Distrito de Las Tablas": {
+            "Las Tablas": ["Las Tablas Centro"],
+            "Agua Buena": ["Agua Buena"],
+            "Alto de la Peña": ["Alto de la Peña"],
+            "Santo Domingo": ["Santo Domingo"],
+            "El Carate": ["El Carate"],
+            "El Cocal": ["El Cocal"],
+            "El Manantial": ["El Manantial"],
+            "El Muñoz": ["El Muñoz"],
+            "El Pedregoso": ["El Pedregoso (Las Tablas)"],
+            "La Laja": ["La Laja"],
+            "La Palma": ["La Palma (Las Tablas)"],
+            "La Tola": ["La Tola"],
+            "Las Tablas Abajo": ["Las Tablas Abajo"],
+            "Bayano": ["Bayano"],
+            "San José": ["San José (Las Tablas)"],
+            "San Miguel": ["San Miguel"],
+            "Slas": ["Slas"],
+            "Valle Rico": ["Valle Rico"],
+            "Vallerriquito": ["Vallerriquito"]
+          },
+          "Distrito de Los Santos": {
+            "La Villa de Los Santos": ["La Villa Centro"],
+            "Colorada": ["Colorada"],
+            "La Espigadilla": ["La Espigadilla"],
+            "Las Cruces": ["Las Cruces"],
+            "Las Guabas": ["Las Guabas"],
+            "Los Angeles": ["Los Ángeles"],
+            "Los Santos": ["Los Santos Centro"],
+            "Macaracas": ["Macaracas (Distrito)"],
+            "Tres Quebradas": ["Tres Quebradas"],
+            "Villa Lourdes": ["Villa Lourdes"],
+            "Agua Buena": ["Agua Buena (Los Santos)"]
+          },
+          "Distrito de Macaracas": {
+            "Macaracas": ["Macaracas Centro"],
+            "Bahía Honda": ["Bahía Honda"],
+            "Bajos de Güera": ["Bajos de Güera"],
+            "Corozal": ["Corozal"],
+            "Chupa": ["Chupa"],
+            "El Cedro": ["El Cedro (Macaracas)"],
+            "Espino Amarillo": ["Espino Amarillo"],
+            "La Mesa": ["La Mesa"],
+            "Llano de Piedras": ["Llano de Piedras"],
+            "Las Palmas": ["Las Palmas"]
+          },
+          "Distrito de Pedasí": {
+            "Pedasí": ["Pedasí Centro"],
+            "Los Asientos": ["Los Asientos"],
+            "Los Destiladeros": ["Playa Destiladeros"],
+            "Oria Arriba": ["Oria Arriba"],
+            "Purio": ["Purio"],
+            "Pocrí": ["Pocrí (Pedasí)"]
+          },
+          "Distrito de Pocrí": {
+            "Pocrí": ["Pocrí Centro"],
+            "El Cañafístulo": ["El Cañafístulo"],
+            "Lajamina": ["Lajamina"],
+            "Paraíso": ["Paraíso"],
+            "Paritilla": ["Paritilla"]
+          },
+          "Distrito de Tonosí": {
+            "Tonosí": ["Tonosí Centro"],
+            "Altos de Güera": ["Altos de Güera"],
+            "Cañas": ["Playa Venao", "Cañas"],
+            "El Cortezo": ["El Cortezo"],
+            "El Bebedero": ["El Bebedero"],
+            "El Cacao": ["El Cacao"],
+            "La Tronosa": ["La Tronosa"],
+            "Cambutal": ["Cambutal Beach", "Cambutal Centro"],
+            "Isla de Cañas": ["Isla de Cañas"]
+          }
+        },
+        "Panamá Oeste": {
+          "Distrito de Arraiján": {
+            "Arraiján": ["Arraiján Cabecera", "Ciudad del Futuro"],
+            "Burunga": ["Burunga Centro"],
+            "Cerro Silvestre": ["Cerro Silvestre"],
+            "Juan Demóstenes Arosemena": ["Hacienda Pacífico", "Vista Alegre (JDA)"],
+            "Nuevo Emperador": ["Nuevo Emperador"],
+            "Santa Clara": ["Santa Clara (Arraiján)"],
+            "Veracruz": ["Veracruz Beach", "Howard"],
+            "Vista Alegre": ["Vista Alegre Centro"]
+          },
+          "Distrito de Capira": {
+            "Capira": ["Capira Centro"],
+            "Caimito": ["Caimito"],
+            "Campana": ["Altos de Campana"],
+            "Cermeño": ["Cermeño"],
+            "Cirí de Los Sotos": ["Cirí de Los Sotos"],
+            "Cirí Grande": ["Cirí Grande"],
+            "El Cacao": ["El Cacao (Capira)"],
+            "La Trinidad": ["La Trinidad"],
+            "Las Ollas Arriba": ["Las Ollas"],
+            "Lídice": ["Lídice"],
+            "Villa Carmen": ["Villa Carmen"],
+            "Villa Rosario": ["Villa Rosario"]
+          },
+          "Distrito de Chame": {
+            "Chame": ["Chame Centro"],
+            "Bejuco": ["Bejuco"],
+            "Buenos Aires": ["Buenos Aires"],
+            "Cabuya": ["Cabuya (Chame)"],
+            "Chicá": ["Chicá"],
+            "El Libano": ["El Líbano"],
+            "Las Lajas": ["Coronado", "Las Lajas (Chame)"],
+            "Nueva Gorgona": ["Gorgona Beach"],
+            "Punta Chame": ["Punta Chame"],
+            "Sorá": ["Altos del María", "Sorá"]
+          },
+          "Distrito de La Chorrera": {
+            "La Chorrera": ["La Chorrera Centro"],
+            "Barrio Balboa": ["Costa Verde", "Balboa"],
+            "Barrio Colón": ["Market Plaza", "Colón"],
+            "Amador": ["Amador"],
+            "Arosemena": ["Arosemena"],
+            "El Coco": ["El Coco (La Chorrera)"],
+            "Feuillet": ["Feuillet"],
+            "Guadalupe": ["Guadalupe"],
+            "Herrera": ["Herrera"],
+            "Hurtado": ["Hurtado"],
+            "Iturralde": ["Iturralde"],
+            "La Represa": ["La Represa"],
+            "Los Díaz": ["Los Díaz"],
+            "Mendoza": ["Mendoza"],
+            "Obaldía": ["Obaldía"],
+            "Playa Leona": ["Playa Leona"],
+            "Puerto Caimito": ["Puerto Caimito"],
+            "Santa Rita": ["Santa Rita"]
+          },
+          "Distrito de San Carlos": {
+            "San Carlos": ["San Carlos Centro"],
+            "El Espino": ["El Espino"],
+            "El Higo": ["El Higo"],
+            "Guayabito": ["Guayabito"],
+            "La Ermita": ["La Ermita"],
+            "La Laguna": ["La Laguna"],
+            "Las Uvas": ["Las Uvas"],
+            "Los Naranjos": ["Los Naranjos (San Carlos)"],
+            "San José": ["San José (San Carlos)"]
+          }
+        },
+        "Veraguas": {
+          "Distrito de Atalaya": {
+            "Atalaya": ["Atalaya Centro"],
+            "El Barrito": ["El Barrito"],
+            "La Carrillo": ["La Carrillo"],
+            "La Montañuela": ["La Montañuela"],
+            "San Antonio": ["San Antonio (Atalaya)"]
+          },
+          "Distrito de Calobre": {
+            "Calobre": ["Calobre Centro"],
+            "Barnizal": ["Barnizal"],
+            "Chitra": ["Chitra"],
+            "El Cocla": ["El Cocla"],
+            "El Potrero": ["El Potrero"],
+            "La Laguna": ["La Yeguada", "La Laguna"],
+            "La Tetilla": ["La Tetilla"],
+            "La Yeguada": ["Reserva La Yeguada"],
+            "Las Guías": ["Las Guías"],
+            "Monjarás": ["Monjarás"],
+            "San José": ["San José (Calobre)"]
+          },
+          "Distrito de Cañazas": {
+            "Cañazas": ["Cañazas Centro"],
+            "Cerro de Plata": ["Cerro de Plata"],
+            "El Alto": ["El Alto"],
+            "San José": ["San José (Cañazas)"],
+            "San Marcelo": ["San Marcelo"],
+            "El Picador": ["El Picador"],
+            "San Martín": ["San Martín"]
+          },
+          "Distrito de La Mesa": {
+            "La Mesa": ["La Mesa Centro"],
+            "Bisvalles": ["Bisvalles"],
+            "Boró": ["Boró"],
+            "Llano Grande": ["Llano Grande"],
+            "San Bartolo": ["San Bartolo"],
+            "Los Milagros": ["Los Milagros"]
+          },
+          "Distrito de Las Palmas": {
+            "Las Palmas": ["Las Palmas Centro"],
+            "Cerro de Casa": ["Cerro de Casa"],
+            "Corozal": ["Corozal"],
+            "El María": ["El María"],
+            "El Prado": ["El Prado"],
+            "El Rincón": ["El Rincón"],
+            "Lolá": ["Lolá"],
+            "Pixvae": ["Pixvae Beach"],
+            "Puerto Vidal": ["Puerto Vidal"],
+            "San Martín de Porres": ["San Martín"],
+            "Viguí": ["Viguí"],
+            "Zapotillo": ["Zapotillo"]
+          },
+          "Distrito de Montijo": {
+            "Montijo": ["Montijo Centro"],
+            "Gobernadora": ["Isla Gobernadora"],
+            "Isla Leones": ["Isla Leones"],
+            "Las Palmas": ["Las Palmas"],
+            "Costa Hermosa": ["Costa Hermosa"],
+            "Unión del Sur": ["Unión del Sur"],
+            "Cébaco": ["Isla Cébaco"],
+            "Tebario": ["Tebario"]
+          },
+          "Distrito de Río de Jesús": {
+            "Río de Jesús": ["Río de Jesús Centro"],
+            "Las Huacas": ["Las Huacas"],
+            "Los Canelos": ["Los Canelos"],
+            "Utira": ["Utira"],
+            "Catorce de Noviembre": ["14 de Noviembre"]
+          },
+          "Distrito de San Francisco": {
+            "San Francisco": ["San Francisco Centro"],
+            "Corral Falso": ["Corral Falso"],
+            "Los Los Santos": ["Los Santos"],
+            "San José": ["San José"],
+            "San Juan": ["San Juan"],
+            "Remance": ["Remance"]
+          },
+          "Distrito de Santa Fe": {
+            "Santa Fe": ["Santa Fe Centro"],
+            "Calovébora": ["Calovébora Beach"],
+            "El Pantano": ["El Pantano"],
+            "Gatuncito": ["Gatuncito"],
+            "Río Luis": ["Río Luis"],
+            "San José": ["San José"],
+            "Rubén Cantú": ["Rubén Cantú"]
+          },
+          "Distrito de Santiago": {
+            "Santiago": ["Santiago Centro"],
+            "La Colorada": ["La Colorada"],
+            "La Peña": ["La Peña"],
+            "La Raya de Santa María": ["La Raya"],
+            "Ponuga": ["Ponuga"],
+            "San Pedro del Espino": ["San Pedro"],
+            "Canto del Llano": ["Canto del Llano"],
+            "Carlos Salas Bawer": ["Carlos Salas"],
+            "Edwin Fábrega": ["Edwin Fábrega"],
+            "San Martín de Porres": ["San Martín de Porres"],
+            "Urracá": ["Urracá"]
+          },
+          "Distrito de Soná": {
+            "Soná": ["Soná Centro"],
+            "Bahía Honda": ["Bahía Honda"],
+            "Calidonia": ["Calidonia (Soná)"],
+            "Cativé": ["Cativé"],
+            "El Marañón": ["El Marañón"],
+            "Gurumal": ["Gurumal"],
+            "La Soledad": ["La Soledad"],
+            "Quebrada de Oro": ["Quebrada de Oro"],
+            "Río Grande": ["Río Grande"],
+            "Rodeo Viejo": ["Rodeo Viejo"]
+          },
+          "Distrito de Mariato": {
+            "Llano de Catival (Mariato)": ["Mariato Centro"],
+            "Arenas": ["Playa Arenas"],
+            "El Cacao": ["El Cacao"],
+            "Quebro": ["Quebro"],
+            "Tebario": ["Tebario (Mariato)"]
+          }
+        },
+        "Comarca Guna Yala": {
+          "Narganá": ["Narganá", "Corazón de Jesús", "Cartí", "El Porvenir"],
+          "Ailigandí": ["Ailigandí Centro", "Achutupu"],
+          "Puerto Obaldía": ["Puerto Obaldía Centro", "La Miel"],
+          "Tubualá": ["Tubualá Centro"]
+        },
+        "Comarca Emberá-Wounaan": {
+          "Distrito Cémaco": {
+            "Cirilo Guainora": ["Cirilo Guainora"],
+            "Lajas Blancas": ["Lajas Blancas"],
+            "Manuel Javier": ["Manuel Javier"]
+          },
+          "Distrito Sambú": {
+            "Río Sabalo": ["Río Sábalo"],
+            "Jingurudó": ["Jingurudó"]
+          }
+        },
+        "Comarca Ngäbe-Buglé": {
+          "Distrito Besikó": {
+            "Soloy": ["Soloy Centro"],
+            "Boca de Balsa": ["Boca de Balsa"],
+            "Cerro Banco": ["Cerro Banco"],
+            "Cerro Kasique": ["Cerro Kasique"],
+            "Emplanada de Chorcha": ["Chorcha"],
+            "Nole Duima": ["Nole Duima"],
+            "Umuni": ["Umuni"]
+          },
+          "Distrito Kankintú": {
+            "Kankintú": ["Kankintú Centro"],
+            "Bisira": ["Bisira"],
+            "Calante": ["Calante"],
+            "Guoroni": ["Guoroni"],
+            "Mününí": ["Mününí"],
+            "Piedra Roja": ["Piedra Roja"],
+            "Tobobe": ["Tobobe"]
+          },
+          "Distrito Kusapín": {
+            "Kusapín": ["Kusapín Centro"],
+            "Bahía Azul": ["Bahía Azul"],
+            "Calovébora o Tobobe": ["Calovébora"],
+            "Río Chiriquí": ["Río Chiriquí"]
+          },
+          "Distrito Mironó": {
+            "Hato Pilón": ["Hato Pilón"],
+            "Cascabel": ["Cascabel"],
+            "Hato Corotú": ["Hato Corotú"],
+            "Hato Culantro": ["Hato Culantro"],
+            "Hato Jobo": ["Hato Jobo"],
+            "Hato Julí": ["Hato Julí"],
+            "Quebrada de Loro": ["Quebrada de Loro"],
+            "Salto Duima": ["Salto Duima"]
+          },
+          "Distrito Nole Düima": {
+            "Cerro Iglesias": ["Cerro Iglesias"],
+            "Hato Chamí": ["Hato Chamí"],
+            "Jädabli": ["Jädabli"],
+            "Lajero": ["Lajero"],
+            "Quebrada de Loro": ["Quebrada de Loro"]
+          },
+          "Distrito Nurüm": {
+            "Buenos Aires": ["Buenos Aires"],
+            "Agua de Salud": ["Agua de Salud"],
+            "Alto de Jesús": ["Alto de Jesús"],
+            "Cerro Pelado": ["Cerro Pelado"],
+            "El Inga": ["El Inga"],
+            "Guayabito": ["Guayabito"],
+            "Hato Rincón": ["Hato Rincón"],
+            "Las Minas": ["Las Minas"]
+          },
+          "Distrito Ñürüm": {
+            "El Bale": ["El Bale"],
+            "Agua de Salud": ["Agua de Salud"],
+            "Alto de Jesús": ["Alto de Jesús"],
+            "Cerro Pelado": ["Cerro Pelado"],
+            "El Inga": ["El Inga"],
+            "Guayabito": ["Guayabito"],
+            "Hato Rincón": ["Hato Rincón"]
+          },
+          "Distrito Müna": {
+            "Chichica": ["Chichica"],
+            "Alto Caballero": ["Alto Caballero"],
+            "Bakama": ["Bakama"],
+            "Cerro Caña": ["Cerro Caña"],
+            "Cerro Cerro": ["Cerro Cerro"],
+            "Peña Blanca": ["Peña Blanca"],
+            "Rincón": ["Rincón"]
+          },
+          "Distrito Jirondai": {
+            "Samboa": ["Samboa"],
+            "Burí": ["Burí"],
+            "Tuwai": ["Tuwai"],
+            "Mancrek": ["Mancrek"]
+          },
+          "Distrito Santa Catalina o Calovébora": {
+            "Santa Catalina de Calovébora": ["Santa Catalina"],
+            "Alto de Jesús": ["Alto de Jesús"]
+          }
+        },
+        "Comarca Naso Tjër Di": {
+          "Sieyic": { "Sieyic": ["Sieyic Centro"] },
+          "Sieyikin": { "Sieyikin": ["Sieyikin Centro"] },
+          "Teribe": { "Teribe": ["Teribe Centro"] },
+          "San San Drui": { "San San Drui": ["San San Drui Centro"] },
+          "Bonyic": { "Bonyic": ["Bonyic Centro"] }
+        },
+        "Comarca Guna de Madungandí": {
+          "Chepo": { "Madungandí": ["Akua Yala", "Madungandí Centro"] }
+        },
+        "Comarca Guna de Wargandí": {
+          "Pinogana": { "Wargandí": ["Wala", "Mortí", "Nurra"] }
+        }
       },
 
       colegios: [
-        "ACADEMIA INTERAMERICANA DE PANAMÁ (AIP)",
-        "COLEGIO BRADER",
-        "BALBOA ACADEMY",
-        "KIWANIS KOLTS",
+        "⭐ ACADEMIA INTERAMERICANA DE PANAMÁ (AIP)",
+        "⭐ COLEGIO BRADER",
+        "⭐ BALBOA ACADEMY",
+        "⭐ EL COLEGIO DE PANAMÁ (ECP)",
+        "⭐ COLEGIO REAL DE PANAMÁ",
+        "⭐ COLEGIO DE LA SALLE",
+        "HOME SCHOOL",
+        "NO APLICA (NO CURSA ESTUDIOS)",
         "INTERNATIONAL SCHOOL OF PANAMA (ISP)",
         "THE METROPOLITAN SCHOOL OF PANAMA (MET)",
         "KING'S COLLEGE PANAMA",
         "LICEO FRANCÉS INTERNACIONAL DE PANAMÁ",
         "CROSSROADS CHRISTIAN ACADEMY",
         "BOSTON SCHOOL INTERNATIONAL",
-        "EL COLEGIO DE PANAMÁ (ECP)",
-        "COLEGIO REAL DE PANAMÁ",
         "PANAMERICAN SCHOOL",
         "THE OXFORD SCHOOL",
         "OXFORD INTERNATIONAL SCHOOL",
@@ -726,7 +1615,6 @@
         "THOMAS JEFFERSON SCHOOL",
         "COLEGIO JAVIER",
         "COLEGIO SAN AGUSTÍN",
-        "COLEGIO DE LA SALLE",
         "COLEGIO EPISCOPAL DE PANAMÁ (CEP)",
         "COLEGIO EPISCOPAL SAN CRISTOBAL",
         "COLEGIO DE LAS ESCLAVAS",
@@ -813,6 +1701,14 @@
       document.getElementById('modalitySelector').style.display = 'none';
       document.getElementById('inscripcionContent').style.display = 'block';
 
+      if (modality === 'flag') {
+        document.body.classList.remove('contact-theme');
+        document.body.classList.add('flag-theme');
+      } else {
+        document.body.classList.remove('flag-theme');
+        document.body.classList.add('contact-theme');
+      }
+
       const config = KFL_CONFIG.modalidades[modality];
       document.getElementById('formHeroTitle').innerText = config.titulo;
       document.getElementById('costoInscripcionTxt').innerText = config.costo;
@@ -843,25 +1739,151 @@
     }
 
     function initDropdowns() {
-      const corregimientoSelect = document.getElementById('corregimiento');
-      for (const [distrito, lista] of Object.entries(KFL_CONFIG.distritosCorregimientos)) {
-        const group = document.createElement('optgroup');
-        group.label = distrito;
-        lista.forEach(corr => {
-          const opt = document.createElement('option');
-          opt.value = corr;
-          opt.textContent = corr;
-          group.appendChild(opt);
-        });
-        corregimientoSelect.appendChild(group);
-      }
+      const provinciaSelect = document.getElementById('provinciaSelect');
+      provinciaSelect.innerHTML = '<option value="">Selecciona Provincia</option>';
+      Object.keys(KFL_CONFIG.geografiaPanama).forEach(prov => {
+        const opt = document.createElement('option');
+        opt.value = prov;
+        opt.textContent = prov;
+        provinciaSelect.appendChild(opt);
+      });
 
-      const datalist = document.getElementById('colegiosList');
+      const datalistColegios = document.getElementById('colegiosList');
+      datalistColegios.innerHTML = '';
       KFL_CONFIG.colegios.forEach(col => {
         const opt = document.createElement('option');
         opt.value = col;
-        datalist.appendChild(opt);
+        datalistColegios.appendChild(opt);
       });
+    }
+
+    function onProvinciaChange() {
+      const prov = document.getElementById('provinciaSelect').value;
+      const distritoSelect = document.getElementById('distritoSelect');
+      const corregimientoSelect = document.getElementById('corregimientoSelect');
+      const barriadaInput = document.getElementById('barriadaInput');
+
+      distritoSelect.innerHTML = '<option value="">Selecciona Distrito</option>';
+      corregimientoSelect.innerHTML = '<option value="">Primero selecciona una Provincia</option>';
+      document.getElementById('barriadasList').innerHTML = '';
+      barriadaInput.value = '';
+      
+      corregimientoSelect.disabled = true;
+      barriadaInput.disabled = true;
+
+      if (prov && KFL_CONFIG.geografiaPanama[prov]) {
+        distritoSelect.disabled = false;
+        Object.keys(KFL_CONFIG.geografiaPanama[prov]).forEach(dist => {
+          const opt = document.createElement('option');
+          opt.value = dist;
+          opt.textContent = dist;
+          distritoSelect.appendChild(opt);
+        });
+      } else {
+        distritoSelect.disabled = true;
+      }
+    }
+
+    function onDistritoChange() {
+      const prov = document.getElementById('provinciaSelect').value;
+      const dist = document.getElementById('distritoSelect').value;
+      const corregimientoSelect = document.getElementById('corregimientoSelect');
+      const barriadaInput = document.getElementById('barriadaInput');
+
+      corregimientoSelect.innerHTML = '<option value="">Selecciona Corregimiento</option>';
+      document.getElementById('barriadasList').innerHTML = '';
+      barriadaInput.value = '';
+      barriadaInput.disabled = true;
+
+      if (prov && dist && KFL_CONFIG.geografiaPanama[prov][dist]) {
+        corregimientoSelect.disabled = false;
+        Object.keys(KFL_CONFIG.geografiaPanama[prov][dist]).forEach(corr => {
+          const opt = document.createElement('option');
+          opt.value = corr;
+          opt.textContent = corr;
+          corregimientoSelect.appendChild(opt);
+        });
+      } else {
+        corregimientoSelect.disabled = true;
+      }
+    }
+
+    function onCorregimientoChange() {
+      const prov = document.getElementById('provinciaSelect').value;
+      const dist = document.getElementById('distritoSelect').value;
+      const corr = document.getElementById('corregimientoSelect').value;
+      const barriadaInput = document.getElementById('barriadaInput');
+      const barriadasList = document.getElementById('barriadasList');
+
+      barriadasList.innerHTML = '';
+      barriadaInput.value = '';
+
+      if (prov && dist && corr && KFL_CONFIG.geografiaPanama[prov][dist][corr]) {
+        barriadaInput.disabled = false;
+        KFL_CONFIG.geografiaPanama[prov][dist][corr].forEach(barriada => {
+          const opt = document.createElement('option');
+          opt.value = barriada;
+          barriadasList.appendChild(opt);
+        });
+      } else if (corr) {
+        barriadaInput.disabled = false;
+      } else {
+        barriadaInput.disabled = true;
+      }
+    }
+
+    function formatAndCalculateAge(input) {
+      let val = input.value.replace(/\D/g, '');
+      if (val.length > 2 && val.length <= 4) {
+        val = val.slice(0, 2) + '/' + val.slice(2);
+      } else if (val.length > 4) {
+        val = val.slice(0, 2) + '/' + val.slice(2, 4) + '/' + val.slice(4, 8);
+      }
+      input.value = val;
+
+      if (val.length === 10) {
+        const parts = val.split('/');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const year = parseInt(parts[2], 10);
+
+        const birthDate = new Date(year, month, day);
+        const currentSeasonYear = new Date().getFullYear();
+        const cutoffDate = new Date(currentSeasonYear, 0, 1);
+
+        if (birthDate.getFullYear() === year && birthDate.getMonth() === month && birthDate.getDate() === day && birthDate <= cutoffDate) {
+          let years = cutoffDate.getFullYear() - birthDate.getFullYear();
+          let months = cutoffDate.getMonth() - birthDate.getMonth();
+          let days = cutoffDate.getDate() - birthDate.getDate();
+
+          if (days < 0) {
+            months--;
+            const prevMonth = new Date(cutoffDate.getFullYear(), cutoffDate.getMonth(), 0);
+            days += prevMonth.getDate();
+          }
+
+          if (months < 0) {
+            years--;
+            months += 12;
+          }
+
+          document.getElementById('edadAnios').value = years;
+          document.getElementById('edadMeses').value = months;
+          document.getElementById('edadDias').value = days;
+          document.getElementById('edadTextoFormateado').value = `${years} años, ${months} meses y ${days} días`;
+        } else {
+          clearAgeFields();
+        }
+      } else {
+        clearAgeFields();
+      }
+    }
+
+    function clearAgeFields() {
+      document.getElementById('edadAnios').value = '';
+      document.getElementById('edadMeses').value = '';
+      document.getElementById('edadDias').value = '';
+      document.getElementById('edadTextoFormateado').value = '';
     }
 
     function updateTeams() {

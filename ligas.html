@@ -3,13 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ligas - Kiwanis Football League Panama</title>
+  <title>Ligas - Contact y Flag Football | Kiwanis Football League Panamá</title>
+
+  <!-- SEO & AEO Meta Tags -->
+  <meta name="description" content="Calendario, tabla de posiciones, rosters y estadísticas de la Kiwanis Football League en Panamá. Contact Football Masculino y Flag Football Femenino en categorías Micro, Mini, Juvenil y Varsity.">
+  <meta name="keywords" content="Ligas KFL, Contact Football Panamá, Flag Football Panamá, calendario KFL, tabla de posiciones KFL, rosters KFL, estadísticas KFL, Kiwanis Football League">
+  <link rel="canonical" href="https://www.kiwanisfootball.com/ligas.html">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ligas - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Calendario, tabla de posiciones, rosters y estadísticas de KFL Contact y Flag Football en Panamá.">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/KFL-logo.svg">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/ligas.html">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- Schema.org Structured Data (JSON-LD) para GEO, SEO y AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Kiwanis Football League Panamá",
+    "alternateName": "KFL",
+    "url": "https://www.kiwanisfootball.com",
+    "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
+    "sport": "American Football",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Panamá",
+      "addressCountry": "PA"
+    },
+    "sameAs": [
+      "https://www.instagram.com/kiwanisfootball",
+      "https://www.youtube.com/@KFLTotalAccess"
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Anton & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
-
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <!-- CONFIGURACIÓN CENTRALIZADA KFL -->
   <script src="js/config-ligas.js"></script>
+  <script src="js/components.js"></script>
 
   <style>
     .tab-pane {
@@ -41,11 +81,11 @@
     }
 
     .league-hero-card.selected-contact {
-      box-shadow: 0 8px 25px rgba(25, 84, 126, 0.35);
+      box-shadow: 0 8px 25px rgba(0, 94, 170, 0.35);
     }
 
     .league-hero-card.selected-flag {
-      box-shadow: 0 8px 25px rgba(169, 28, 0, 0.35);
+      box-shadow: 0 8px 25px rgba(235, 61, 64, 0.35);
     }
 
     .league-instruction-bar {
@@ -53,12 +93,12 @@
       margin: 20px auto 10px auto;
       padding: 14px 20px;
       background-color: #f0f7ff;
-      border: 1px dashed #19547E;
+      border: 1px dashed var(--azul-kfl);
       border-radius: 12px;
       width: 100%;
       max-width: 1100px;
       box-sizing: border-box;
-      color: #19547E;
+      color: var(--azul-kfl);
       font-weight: 700;
       font-size: 15px;
       display: block;
@@ -103,7 +143,7 @@
       background: #ffffff;
       border: none;
       color: #ffffff;
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-weight: 400;
       font-size: 17px;
       border-radius: 30px;
@@ -116,21 +156,21 @@
     }
 
     body.contact-theme .category-pill-btn {
-      background: #19547E;
+      background: var(--azul-kfl);
     }
 
     body.flag-theme .category-pill-btn {
-      background: #A91C00;
+      background: var(--rojo-kfl);
     }
 
     .category-pill-btn.active {
       opacity: 1;
-      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #19547E;
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--azul-kfl);
       transform: translateY(-1px);
     }
 
     body.flag-theme .category-pill-btn.active {
-      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #A91C00;
+      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--rojo-kfl);
     }
 
     .category-pill-btn:hover {
@@ -163,11 +203,11 @@
     }
 
     .sub-tab-btn.active {
-      color: #19547E;
+      color: var(--azul-kfl);
     }
 
     body.flag-theme .sub-tab-btn.active {
-      color: #A91C00;
+      color: var(--rojo-kfl);
     }
 
     .sub-tab-btn.active::after {
@@ -177,12 +217,12 @@
       left: 0;
       width: 100%;
       height: 3px;
-      background: #19547E;
+      background: var(--azul-kfl);
       border-radius: 3px 3px 0 0;
     }
 
     body.flag-theme .sub-tab-btn.active::after {
-      background: #A91C00;
+      background: var(--rojo-kfl);
     }
 
     .kfl-filter-bar {
@@ -207,7 +247,7 @@
     }
 
     .btn-export-pdf {
-      background: #19547E;
+      background: var(--azul-kfl);
       color: #ffffff;
       border: none;
       padding: 9px 18px;
@@ -222,7 +262,7 @@
     }
 
     body.flag-theme .btn-export-pdf {
-      background: #A91C00;
+      background: var(--rojo-kfl);
     }
 
     .btn-export-pdf:hover {
@@ -240,10 +280,10 @@
     /* GRID Y CENTRADO DE PARTIDOS */
     .kfl-week-section { margin-bottom: 34px; }
     .kfl-week-title {
-      font-size: 17px; font-weight: 800; color: #19547E; border-bottom: 2px solid #19547E;
+      font-size: 17px; font-weight: 800; color: var(--azul-kfl); border-bottom: 2px solid var(--azul-kfl);
       padding-bottom: 6px; margin-bottom: 16px; text-transform: uppercase; text-align: left;
     }
-    body.flag-theme .kfl-week-title { color: #A91C00; border-color: #A91C00; }
+    body.flag-theme .kfl-week-title { color: var(--rojo-kfl); border-color: var(--rojo-kfl); }
     
     .kfl-grid-matches { 
       display: grid; 
@@ -280,10 +320,10 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.04); display: flex; flex-direction: column; justify-content: space-between;
     }
     .kfl-match-header {
-      background: #19547E; color: #ffffff; padding: 8px 14px; font-weight: 700; font-size: 12px;
+      background: var(--azul-kfl); color: #ffffff; padding: 8px 14px; font-weight: 700; font-size: 12px;
       display: flex; justify-content: space-between; align-items: center; text-transform: uppercase;
     }
-    body.flag-theme .kfl-match-header { background: #A91C00; }
+    body.flag-theme .kfl-match-header { background: var(--rojo-kfl); }
     .kfl-info-item { display: flex; align-items: center; gap: 5px; }
     .kfl-icon-svg { width: 14px; height: 14px; fill: currentColor; }
     .kfl-match-body { padding: 16px; display: flex; align-items: center; justify-content: space-between; }
@@ -319,19 +359,19 @@
       background: #ffffff;
     }
     .kfl-jamboree-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 28px;
-      color: #19547E;
+      color: var(--azul-kfl);
       letter-spacing: 1px;
       text-transform: uppercase;
       margin: 0;
       line-height: 1.1;
     }
     body.flag-theme .kfl-jamboree-title {
-      color: #A91C00;
+      color: var(--rojo-kfl);
     }
     .kfl-jamboree-sub {
-      font-family: 'Avenir', sans-serif;
+      font-family: var(--fuente-cuerpo);
       font-size: 14px;
       font-weight: 800;
       color: #475569;
@@ -343,7 +383,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-family: 'Avenir', sans-serif;
+      font-family: var(--fuente-cuerpo);
       font-size: 13.5px;
       font-weight: 700;
       color: #0f172a;
@@ -357,7 +397,7 @@
       margin-top: 16px;
     }
     .kfl-bye-card-avenir {
-      font-family: 'Avenir', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+      font-family: var(--fuente-cuerpo) !important;
       background: #ffffff;
       border: 2px solid #0f172a;
       border-radius: 12px;
@@ -367,8 +407,8 @@
       padding: 9px 20px;
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
     }
-    body.contact-theme .kfl-bye-card-avenir { border-color: #19547E; }
-    body.flag-theme .kfl-bye-card-avenir { border-color: #A91C00; }
+    body.contact-theme .kfl-bye-card-avenir { border-color: var(--azul-kfl); }
+    body.flag-theme .kfl-bye-card-avenir { border-color: var(--rojo-kfl); }
 
     .kfl-bye-pill-badge {
       background: #0f172a;
@@ -381,8 +421,8 @@
       text-transform: uppercase;
       white-space: nowrap;
     }
-    body.contact-theme .kfl-bye-pill-badge { background: #19547E; }
-    body.flag-theme .kfl-bye-pill-badge { background: #A91C00; }
+    body.contact-theme .kfl-bye-pill-badge { background: var(--azul-kfl); }
+    body.flag-theme .kfl-bye-pill-badge { background: var(--rojo-kfl); }
 
     .kfl-bye-team-cluster {
       display: flex;
@@ -448,7 +488,7 @@
       max-width: 78px; max-height: 78px; object-fit: contain;
     }
     .team-card-roster h4 {
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo) !important;
       font-weight: 800; font-size: 13.5px; color: #475569; margin: 0; text-transform: uppercase;
     }
 
@@ -463,33 +503,33 @@
     .roster-detail-title-group { display: flex; align-items: center; gap: 14px; }
     .roster-detail-title-group img { width: 48px; height: 48px; object-fit: contain; }
     .roster-detail-title-group h3 {
-      font-family: 'Anton', sans-serif; font-size: 24px; color: #19547E; margin: 0; text-transform: uppercase;
+      font-family: var(--fuente-titulos); font-size: 24px; color: var(--azul-kfl); margin: 0; text-transform: uppercase;
     }
-    body.flag-theme .roster-detail-title-group h3 { color: #A91C00; }
+    body.flag-theme .roster-detail-title-group h3 { color: var(--rojo-kfl); }
     .btn-close-roster {
       background: #f1f5f9; border: 1px solid #cbd5e1; padding: 7px 16px; border-radius: 6px;
       font-size: 12px; font-weight: 800; color: #475569; cursor: pointer; text-transform: uppercase;
     }
     .roster-compact-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13.5px; }
     .roster-compact-table th {
-      background-color: #f8fafc; color: #19547E; font-weight: 800; text-transform: uppercase;
+      background-color: #f8fafc; color: var(--azul-kfl); font-weight: 800; text-transform: uppercase;
       font-size: 11.5px; padding: 10px 12px; border-bottom: 2px solid #cbd5e1; text-align: left;
     }
-    body.flag-theme .roster-compact-table th { color: #A91C00; }
+    body.flag-theme .roster-compact-table th { color: var(--rojo-kfl); }
     .roster-compact-table td { padding: 9px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; }
     .roster-player-clickable-row { cursor: pointer; }
     .roster-player-clickable-row:hover { background-color: #f0f7ff !important; }
     body.flag-theme .roster-player-clickable-row:hover { background-color: #fff1f2 !important; }
-    .cell-jersey-badge { font-family: 'Anton', sans-serif; font-size: 16px; color: #19547E; }
-    body.flag-theme .cell-jersey-badge { color: #A91C00; }
+    .cell-jersey-badge { font-family: var(--fuente-titulos); font-size: 16px; color: var(--azul-kfl); }
+    body.flag-theme .cell-jersey-badge { color: var(--rojo-kfl); }
 
     /* TABLA DE POSICIONES */
     .kfl-table {
       width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 12px; overflow: hidden;
       border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-top: 10px; margin-bottom: 40px;
     }
-    .kfl-table th { background: #19547E; color: #ffffff; padding: 10px 8px; font-size: 12px; text-transform: uppercase; text-align: center; }
-    body.flag-theme .kfl-table th { background: #A91C00; }
+    .kfl-table th { background: var(--azul-kfl); color: #ffffff; padding: 10px 8px; font-size: 12px; text-transform: uppercase; text-align: center; }
+    body.flag-theme .kfl-table th { background: var(--rojo-kfl); }
     .kfl-table td { padding: 10px 8px; text-align: center; border-bottom: 1px solid #f1f5f9; font-size: 13px; color: #334155; }
     .kfl-table td.team-col-cell, .kfl-table th.team-col-cell { width: 1% !important; white-space: nowrap !important; text-align: left !important; }
     .kfl-table-team-cell { display: flex; align-items: center; gap: 8px; text-align: left; font-weight: 700; white-space: nowrap; }
@@ -499,23 +539,23 @@
     /* STATS BUTTONS */
     .stats-buttons-grid { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
     .stat-type-btn {
-      padding: 10px 24px; background: #19547E; border: none; color: #ffffff; border-radius: 30px;
-      font-family: 'Avenir', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 0.5px;
+      padding: 10px 24px; background: var(--azul-kfl); border: none; color: #ffffff; border-radius: 30px;
+      font-family: var(--fuente-cuerpo); font-weight: 800; font-size: 13px; letter-spacing: 0.5px;
       cursor: pointer; text-transform: uppercase; opacity: 0.75;
     }
-    body.flag-theme .stat-type-btn { background: #A91C00; }
-    .stat-type-btn.active-stat { opacity: 1; box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #19547E; }
-    body.flag-theme .stat-type-btn.active-stat { box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px #A91C00; }
+    body.flag-theme .stat-type-btn { background: var(--rojo-kfl); }
+    .stat-type-btn.active-stat { opacity: 1; box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--azul-kfl); }
+    body.flag-theme .stat-type-btn.active-stat { box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--rojo-kfl); }
     .search-box-stats { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
     .search-stats-input { padding: 9px 14px; width: 100%; max-width: 300px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 13px; background: #f8fafc; outline: none; }
     .kfl-last-update-banner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 6px 15px; font-size: 16px; font-weight: 900; text-transform: uppercase; margin-bottom: 22px; text-align: center; }
     .kfl-update-svg { width: 22px; height: 22px; fill: #000000; flex-shrink: 0; }
 
     .kfl-pagination-bar { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 25px; margin-bottom: 15px; }
-    .kfl-nav-btn { padding: 8px 18px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 800; font-size: 13px; color: #19547E; cursor: pointer; text-transform: uppercase; }
-    body.flag-theme .kfl-nav-btn { color: #A91C00; }
+    .kfl-nav-btn { padding: 8px 18px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; font-weight: 800; font-size: 13px; color: var(--azul-kfl); cursor: pointer; text-transform: uppercase; }
+    body.flag-theme .kfl-nav-btn { color: var(--rojo-kfl); }
     .kfl-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .kfl-page-indicator { font-family: 'Avenir', sans-serif; font-size: 13.5px; font-weight: 800; color: #475569; }
+    .kfl-page-indicator { font-family: var(--fuente-cuerpo); font-size: 13.5px; font-weight: 800; color: #475569; }
 
     /* MODAL */
     .player-card-modal-backdrop {
@@ -524,20 +564,20 @@
     }
     .player-card-modal-backdrop.active { display: flex; }
     .player-card { background: #ffffff; border-radius: 16px; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; border: 1px solid #e2e8f0; }
-    .player-card-header { background-color: #19547E; padding: 26px 20px 20px 20px; color: #ffffff; text-align: center; position: relative; }
-    body.flag-theme .player-card-header { background-color: #A91C00; }
+    .player-card-header { background-color: var(--azul-kfl); padding: 26px 20px 20px 20px; color: #ffffff; text-align: center; position: relative; }
+    body.flag-theme .player-card-header { background-color: var(--rojo-kfl); }
     .btn-modal-close { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.2); border: none; color: #ffffff; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
     .player-card-photo-container { width: 135px; height: 135px; margin: 0 auto 12px auto; border-radius: 50%; background-color: #ffffff; border: 4px solid #ffffff; overflow: hidden; }
     .player-card-photo { width: 100%; height: 100%; object-fit: contain; }
-    .player-card-name { font-family: 'Anton', sans-serif; font-size: 25px; color: #ffffff; text-transform: uppercase; margin: 0 0 4px 0; }
+    .player-card-name { font-family: var(--fuente-titulos); font-size: 25px; color: #ffffff; text-transform: uppercase; margin: 0 0 4px 0; }
     .player-card-jersey-tag { font-size: 12.5px; font-weight: 800; color: #ffffff; opacity: 0.92; text-transform: uppercase; }
     .player-card-body { padding: 22px 20px; background: #ffffff; }
-    .player-stat-category-title { font-family: 'Anton', sans-serif; font-size: 14px; color: #19547E; text-transform: uppercase; margin: 15px 0 8px 0; border-bottom: 1px solid #e2e8f0; }
-    body.flag-theme .player-stat-category-title { color: #A91C00; }
+    .player-stat-category-title { font-family: var(--fuente-titulos); font-size: 14px; color: var(--azul-kfl); text-transform: uppercase; margin: 15px 0 8px 0; border-bottom: 1px solid #e2e8f0; }
+    body.flag-theme .player-stat-category-title { color: var(--rojo-kfl); }
     .player-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); gap: 8px; text-align: center; }
     .player-stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 4px; }
-    .player-stat-val { font-family: 'Anton', sans-serif; font-size: 18px; color: #19547E; }
-    body.flag-theme .player-stat-val { color: #A91C00; }
+    .player-stat-val { font-family: var(--fuente-titulos); font-size: 18px; color: var(--azul-kfl); }
+    body.flag-theme .player-stat-val { color: var(--rojo-kfl); }
     .player-stat-lbl { font-size: 10px; font-weight: 800; color: #475569; text-transform: uppercase; }
   </style>
 
@@ -571,7 +611,7 @@
     </section>
 
     <div class="league-instruction-bar" id="instructionBar">
-      <svg class="instruction-arrow" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;fill:currentColor;vertical-align:middle;margin-right:6px;"><path d="M12 16l-6-6 1.41-1.41L12 13.17l4.59-4.58L18 10z"/></svg>haz clic en <strong>Contact Football</strong> o <strong>Flag Football</strong> para desplegar sus categorías, calendarios, rosters y estadísticas.
+      <svg class="instruction-arrow" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;fill:currentColor;vertical-align:middle;margin-right:6px;"><path d="M12 16l-6-6 1.41-1.41L12 13.17l4.59-4.58L18 10z"/></svg>Haz clic en <strong>Contact Football</strong> o <strong>Flag Football</strong> para desplegar sus categorías, calendarios, rosters y estadísticas.
     </div>
 
     <div class="reset-selection-wrapper" id="resetBtnWrapper">
@@ -733,23 +773,6 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      fetch('nav.html')
-        .then(res => res.ok ? res.text() : '')
-        .then(html => {
-          if (html) {
-            document.getElementById('globalNav').innerHTML = html;
-            const btn = document.getElementById('hamburgerBtn');
-            const menu = document.getElementById('navMenu');
-            if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('open'));
-          }
-        });
-
-      fetch('footer.html')
-        .then(res => res.ok ? res.text() : '')
-        .then(html => {
-          if (html) document.getElementById('globalFooter').innerHTML = html;
-        });
-
       const backToTopBtn = document.getElementById('backToTopBtn');
       window.addEventListener('scroll', () => {
         if (window.scrollY > 300) backToTopBtn.classList.add('visible');
@@ -787,7 +810,7 @@
       const cleanTeam = (teamName || "").toUpperCase().trim();
       return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) ||
              (cfg && cfg.FALLBACK_LOGOS && cfg.FALLBACK_LOGOS[cleanTeam]) ||
-             "https://i.imgur.com/wrPDjDN.png";
+             "assets/img/KFL-logo.svg";
     }
 
     /* OBTENCIÓN ROBUSTA DE LA URL DE APPS SCRIPT POR LIGA */
@@ -1114,7 +1137,7 @@
                 </div>
                 <div class="kfl-match-body">
                   <div class="kfl-team-box">
-                    <img src="${getTeamLogo(p.home)}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                    <img src="${getTeamLogo(p.home)}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='assets/img/KFL-logo.svg'">
                     <span>${p.home}</span>
                   </div>
                   <div class="kfl-score-box">
@@ -1123,7 +1146,7 @@
                       : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
                   </div>
                   <div class="kfl-team-box">
-                    <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                    <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='assets/img/KFL-logo.svg'">
                     <span>${p.away}</span>
                   </div>
                 </div>
@@ -1142,7 +1165,7 @@
                 <div class="kfl-bye-card-avenir">
                   <span class="kfl-bye-pill-badge">LIBRE / DESCANSO</span>
                   <div class="kfl-bye-team-cluster">
-                    <img src="${getTeamLogo(teamLibre)}" class="kfl-bye-logo-img" alt="${teamLibre}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                    <img src="${getTeamLogo(teamLibre)}" class="kfl-bye-logo-img" alt="${teamLibre}" onerror="this.src='assets/img/KFL-logo.svg'">
                     <div class="kfl-bye-text-info">
                       <span class="kfl-bye-subtext">EQUIPO LIBRE ESTA SEMANA</span>
                       <span class="kfl-bye-name-highlight">${teamLibre}</span>
@@ -1213,7 +1236,7 @@
             <td><strong>${idx + 1}</strong></td>
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
-                <img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                <img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'">
                 <span>${equipo}</span>
               </div>
             </td>
@@ -1256,7 +1279,7 @@
         card.onclick = () => abrirRosterEquipo(equipo);
         card.innerHTML = `
           <div class="team-roster-logo-wrap">
-            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'">
           </div>
           <h4>${equipo}</h4>
         `;
@@ -1630,9 +1653,9 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'"><span>${equipo}</span></div></td>
             <td style="text-align: center;">${row.CARRIES || row.REC || "0"}</td>
-            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || "0"}</td>
+            <td style="text-align: center; font-weight: 700; color: var(--azul-kfl);">${row.YARDS || "0"}</td>
             <td style="text-align: center;">${row.AVG || "0.0"}</td>
             <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
             <td style="text-align: center;">${row.LNG || "0"}</td>
@@ -1642,11 +1665,11 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'"><span>${equipo}</span></div></td>
             <td style="text-align: center;">${row.COMP || "0"}</td>
             <td style="text-align: center;">${row.ATT || "0"}</td>
             <td style="text-align: center;">${row["COMP %"] || "0.0%"}</td>
-            <td style="text-align: center; font-weight: 700; color: #19547E;">${row.YARDS || "0"}</td>
+            <td style="text-align: center; font-weight: 700; color: var(--azul-kfl);">${row.YARDS || "0"}</td>
             <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
             <td style="text-align: center;">${row.INT || "0"}</td>
             <td style="text-align: center;">${row.SACK || "0"}</td>
@@ -1656,8 +1679,8 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
-            <td style="text-align: center; font-weight: 700; color: #19547E;">${tacklesVal}</td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'"><span>${equipo}</span></div></td>
+            <td style="text-align: center; font-weight: 700; color: var(--azul-kfl);">${tacklesVal}</td>
             <td style="text-align: center;">${row.SACK || "0"}</td>
             <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>
             <td style="text-align: center;">${row.INT || "0"}</td>

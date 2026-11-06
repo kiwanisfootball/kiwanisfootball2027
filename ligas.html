@@ -1209,8 +1209,6 @@ body.flag-theme-active .sub-tab-btn.active {
       document.getElementById('filterBar').style.display = 'flex';
       document.getElementById('leagueContentSection').style.display = 'block';
 
-      document.getElementById('filter-micro').style.display = league === 'flag' ? 'none' : 'block';
-
       precargarStatsCategoria();
       fetchMasterDB(league, () => {
         selectSubTab('calendario');

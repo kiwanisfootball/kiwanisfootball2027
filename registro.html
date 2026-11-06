@@ -108,7 +108,6 @@
       display: none;
     }
 
-    /* TÍTULO LIMPIO Y SIN CONTENEDORES CON VARIABLES CSS */
     .inscripcion-header {
       text-align: center;
       margin: 10px 0 30px 0;
@@ -121,18 +120,12 @@
       letter-spacing: 1px;
       margin-bottom: 6px;
       line-height: 1.1;
-      color: var(--azul-kfl); /* Color por defecto contact */
+      color: var(--azul-kfl);
       transition: color 0.3s ease;
     }
 
-    /* Cambio dinámico según el tema activo en el body */
-    body.contact-theme .inscripcion-hero-title {
-      color: var(--azul-kfl);
-    }
-
-    body.flag-theme .inscripcion-hero-title {
-      color: var(--rojo-kfl);
-    }
+    body.contact-theme .inscripcion-hero-title { color: var(--azul-kfl); }
+    body.flag-theme .inscripcion-hero-title { color: var(--rojo-kfl); }
 
     .inscripcion-hero-subtitle {
       font-size: 15px;
@@ -154,9 +147,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
     }
 
-    body.flag-theme .privacy-notice {
-      border-left-color: var(--rojo-kfl);
-    }
+    body.flag-theme .privacy-notice { border-left-color: var(--rojo-kfl); }
 
     .form-card {
       background: #ffffff;
@@ -177,9 +168,7 @@
       border-bottom: 2px solid var(--gris-borde);
     }
 
-    body.flag-theme .form-section-title {
-      color: var(--rojo-kfl);
-    }
+    body.flag-theme .form-section-title { color: var(--rojo-kfl); }
 
     .form-grid {
       display: grid;
@@ -238,6 +227,12 @@
       padding-right: 40px;
     }
 
+    .form-select:disabled, .form-input:disabled {
+      background-color: #e2e8f0;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
     input.form-input {
       background-image: none;
       padding-right: 16px;
@@ -274,13 +269,9 @@
       background: #f1f5f9;
     }
 
-    body.flag-theme .file-upload-box:hover {
-      border-color: var(--rojo-kfl);
-    }
+    body.flag-theme .file-upload-box:hover { border-color: var(--rojo-kfl); }
 
-    .file-upload-box input {
-      display: none;
-    }
+    .file-upload-box input { display: none; }
 
     .file-upload-label {
       font-size: 13.5px;
@@ -315,9 +306,7 @@
       line-height: 1.6;
     }
 
-    .payment-list li {
-      margin-bottom: 6px;
-    }
+    .payment-list li { margin-bottom: 6px; }
 
     .insurance-note {
       background: #eff6ff;
@@ -397,9 +386,7 @@
       box-shadow: 0 4px 15px rgba(235, 61, 64, 0.25);
     }
 
-    body.flag-theme .submit-btn:hover {
-      background: #c92f32;
-    }
+    body.flag-theme .submit-btn:hover { background: #c92f32; }
 
     .alert-msg {
       display: none;
@@ -423,10 +410,7 @@
       cursor: pointer;
     }
     .back-link:hover { text-decoration: underline; }
-
-    body.flag-theme .back-link {
-      color: var(--rojo-kfl);
-    }
+    body.flag-theme .back-link { color: var(--rojo-kfl); }
 
     @media (max-width: 900px) {
       .modality-buttons-grid { grid-template-columns: 1fr; }
@@ -478,7 +462,6 @@
 
       <a class="back-link" onclick="goBackToSelector()">← Volver a selección de modalidad</a>
 
-      <!-- ENCABEZADO SIN CONTENEDOR CONTROLANDO COLORES DESDE VARIABLES CSS -->
       <section class="inscripcion-header">
         <h1 class="inscripcion-hero-title" id="formHeroTitle">REGISTRO CONTACT FOOTBALL</h1>
         <p class="inscripcion-hero-subtitle">Temporada <span id="currentYearDisplay"></span> | Kiwanis Football League Panama</p>
@@ -501,6 +484,12 @@
 
       <form id="athleteForm" novalidate onsubmit="handleFormSubmit(event)">
         
+        <!-- CAMPOS OCULTOS PARA ENVÍO A GOOGLE SHEETS DE LA EDAD AL 1 DE ENERO -->
+        <input type="hidden" id="edadAnios" name="edadAnios">
+        <input type="hidden" id="edadMeses" name="edadMeses">
+        <input type="hidden" id="edadDias" name="edadDias">
+        <input type="hidden" id="edadTextoFormateado" name="edadTextoFormateado">
+
         <!-- INFORMACIÓN DEL ATLETA -->
         <div class="form-card">
           <h3 class="form-section-title" id="secTitleAtleta">1. Información del Jugador</h3>
@@ -509,6 +498,14 @@
               <label class="form-label">Nombre Completo</label>
               <input type="text" id="nombre" class="form-input" placeholder="EJ. CARLOS PÉREZ" required>
             </div>
+
+            <!-- FECHA DE NACIMIENTO Y CÁLCULO DE EDAD AL 1 DE ENERO DE LA TEMPORADA -->
+            <div class="form-group">
+              <label class="form-label">Fecha de Nacimiento</label>
+              <input type="text" id="fechaNacimiento" class="form-input" placeholder="DD/MM/AAAA" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" oninput="formatAndCalculateAge(this)" required>
+              <span class="form-note" id="edadCalculadaNote">Formato: DD/MM/AAAA. Edad calculada automáticamente al 1 de enero.</span>
+            </div>
+
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
               <input type="text" id="cedula" class="form-input" placeholder="EJ. 8-123-4567" required>
@@ -517,14 +514,36 @@
               <label class="form-label">Email de Contacto</label>
               <input type="email" id="emailJugador" class="form-input" placeholder="correo@ejemplo.com" required>
             </div>
+
+            <!-- UBICACIÓN GEOGRÁFICA DEPENDIENTE (PROVINCIA -> DISTRITO -> CORREGIMIENTO -> BARRIADA) -->
             <div class="form-group">
-              <label class="form-label">Corregimiento / Área</label>
-              <select id="corregimiento" class="form-select" required>
-                <option value="">Selecciona tu área / corregimiento</option>
+              <label class="form-label">Provincia</label>
+              <select id="provinciaSelect" class="form-select" onchange="onProvinciaChange()" required>
+                <option value="">Selecciona Provincia</option>
               </select>
             </div>
-            
-            <!-- COLEGIO / UNIVERSIDAD -->
+
+            <div class="form-group">
+              <label class="form-label">Distrito</label>
+              <select id="distritoSelect" class="form-select" onchange="onDistritoChange()" disabled required>
+                <option value="">Primero selecciona una Provincia</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Corregimiento</label>
+              <select id="corregimientoSelect" class="form-select" onchange="onCorregimientoChange()" disabled required>
+                <option value="">Primero selecciona un Distrito</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Barriada / Lugar de Residencia</label>
+              <input type="text" id="barriadaInput" class="form-input" list="barriadasList" placeholder="ESCRIBE O SELECCIONA TU BARRIADA" disabled required style="padding-right: 16px;">
+              <datalist id="barriadasList"></datalist>
+            </div>
+
+            <!-- COLEGIO / UNIVERSIDAD PREDICTIVO -->
             <div class="form-group">
               <label class="form-label">Colegio o Universidad</label>
               <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="ESCRIBE O SELECCIONA TU CENTRO EDUCATIVO" required style="padding-right: 16px;">
@@ -672,41 +691,69 @@
   <!-- SCRIPT DE LÓGICA DE INSCRIPCIÓN -->
   <script>
     const KFL_CONFIG = {
-      distritosCorregimientos: {
-        "Distrito de Panamá": [
-          "Ancón", "Betania", "Bella Vista", "Calidonia", "Chilibre", "Curundú", 
-          "El Chorrillo", "Ernesto Córdoba Campos", "Juan Díaz", "Las Cumbres", 
-          "Las Mañanitas", "Pacora", "Parque Lefevre", "Pedregal", "Pueblo Nuevo", 
-          "Río Abajo", "San Francisco", "Santa Ana", "Tocumen"
-        ],
-        "Distrito de San Miguelito": [
-          "Belisario Frías", "Belisario Porras", "Mateo Iturralde", "Rufina Alfaro", 
-          "Arnulfo Arias", "José Domingo Espinar", "Amelia Denis de Icaza", "Victoriano Lorenzo"
-        ],
-        "Distrito de Arraiján": [
-          "Arraiján (Cabecera)", "Burunga", "Juan Demóstenes Arosemena", 
-          "Nuevo Emperador", "Puerto Caimito", "Veracruz"
-        ],
-        "Distrito de La Chorrera": [
-          "La Chorrera (Cabecera)", "Barrio Balboa", "Barrio Colón", "Amador", 
-          "El Arado", "Herrera", "Hurtado", "La Represa", "Los Díaz", 
-          "Obaldía", "Playa Leona", "Tigre de los Amarillos"
-        ]
+      // ESTRUCTURA GEOGRÁFICA ENCADENADA: PROVINCIA -> DISTRITO -> CORREGIMIENTO -> BARRIADAS
+      geografiaPanama: {
+        "Panamá": {
+          "Distrito de Panamá": {
+            "Bella Vista": ["El Cangrejo", "Obarrio", "La Cresta", "Campo Alegre", "Bella Vista Centro"],
+            "Bethania": ["Condado del Rey", "El Dorado", "Villa de las Fuentes", "Dos Mares", "La Gloria", "Pontemar", "Club X", "Bethania Centro"],
+            "Juan Díaz": ["Costa del Este", "Santa María Country Club", "Versalles", "Ciudad Radial", "Don Bosco", "Concepción", "Juan Díaz Centro"],
+            "San Francisco": ["Paitilla", "Punta Pacífica", "San Francisco Centro", "Coco del Mar", "Calle 50"],
+            "Parque Lefevre": ["Chanis", "Santa Elena", "Parque Lefevre Centro"],
+            "Ancón": ["Clayton", "Albrook", "Cárdenas", "Diablo", "Balboa", "Dos Mares (Ancón)"],
+            "Las Cumbres": ["Villa Zaita", "Las Cumbres Centro", "Alps of Lake"],
+            "Chilibre": ["Chilibre Centro", "Agua Buena"],
+            "Tocumen": ["La Siesta", "Tocumen Centro", "Sector Sur"],
+            "Pedregal": ["Rana de Oro", "Pedregal Centro", "Villalobos"]
+          },
+          "Distrito de San Miguelito": {
+            "Rufina Alfaro": ["Brisas del Golf", "Villa Lucre (Sector Rufina)", "Cerro Viento", "San Antonio"],
+            "José Domingo Espinar": ["Villa Lucre", "El Crisol", "San Antonio Centro"],
+            "Mateo Iturralde": ["Paraíso", "El Bosque"],
+            "Amelia Denis de Icaza": ["Pan de Azúcar", "Los Andes No. 1"]
+          }
+        },
+        "Panamá Oeste": {
+          "Distrito de Arraiján": {
+            "Arraiján (Cabecera)": ["Nuevo Arraiján", "Burunga", "Cerro Silvestre"],
+            "Juan Demóstenes Arosemena": ["Hacienda Pacífico", "Vista Alegre Centro"],
+            "Veracruz": ["Veracruz Beach", "Howard"]
+          },
+          "Distrito de La Chorrera": {
+            "Barrio Balboa": ["Costa Verde", "La Chorrera Centro"],
+            "Barrio Colón": ["Market Plaza", "Colón Centro"]
+          }
+        },
+        "Colón": {
+          "Distrito de Colón": {
+            "Barrio Norte": ["Zona Libre", "Colón Centro"],
+            "Cristóbal": ["Margarita", "Espinar", "Davis"]
+          }
+        },
+        "Chiriquí": {
+          "Distrito de David": {
+            "David (Cabecera)": ["Terronal", "David Centro", "San Mateo"]
+          }
+        }
       },
 
       colegios: [
-        "ACADEMIA INTERAMERICANA DE PANAMÁ (AIP)",
-        "COLEGIO BRADER",
-        "BALBOA ACADEMY",
-        "KIWANIS KOLTS",
+        // DESTACADOS KFL
+        "⭐ ACADEMIA INTERAMERICANA DE PANAMÁ (AIP)",
+        "⭐ COLEGIO BRADER",
+        "⭐ BALBOA ACADEMY",
+        "⭐ EL COLEGIO DE PANAMÁ (ECP)",
+        "⭐ COLEGIO REAL DE PANAMÁ",
+        "⭐ COLEGIO DE LA SALLE",
+        "⭐ KIWANIS KOLTS",
+        
+        // OTROS COLEGIOS Y UNIVERSIDADES
         "INTERNATIONAL SCHOOL OF PANAMA (ISP)",
         "THE METROPOLITAN SCHOOL OF PANAMA (MET)",
         "KING'S COLLEGE PANAMA",
         "LICEO FRANCÉS INTERNACIONAL DE PANAMÁ",
         "CROSSROADS CHRISTIAN ACADEMY",
         "BOSTON SCHOOL INTERNATIONAL",
-        "EL COLEGIO DE PANAMÁ (ECP)",
-        "COLEGIO REAL DE PANAMÁ",
         "PANAMERICAN SCHOOL",
         "THE OXFORD SCHOOL",
         "OXFORD INTERNATIONAL SCHOOL",
@@ -714,7 +761,6 @@
         "THOMAS JEFFERSON SCHOOL",
         "COLEGIO JAVIER",
         "COLEGIO SAN AGUSTÍN",
-        "COLEGIO DE LA SALLE",
         "COLEGIO EPISCOPAL DE PANAMÁ (CEP)",
         "COLEGIO EPISCOPAL SAN CRISTOBAL",
         "COLEGIO DE LAS ESCLAVAS",
@@ -801,7 +847,6 @@
       document.getElementById('modalitySelector').style.display = 'none';
       document.getElementById('inscripcionContent').style.display = 'block';
 
-      // Cambiar clase temática en el body para alternar los colores mediante CSS vars
       if (modality === 'flag') {
         document.body.classList.remove('contact-theme');
         document.body.classList.add('flag-theme');
@@ -839,26 +884,177 @@
       document.getElementById('modalitySelector').style.display = 'block';
     }
 
+    /* INICIALIZACIÓN DE DROPDOWNS Y COLEGIOS */
     function initDropdowns() {
-      const corregimientoSelect = document.getElementById('corregimiento');
-      for (const [distrito, lista] of Object.entries(KFL_CONFIG.distritosCorregimientos)) {
-        const group = document.createElement('optgroup');
-        group.label = distrito;
-        lista.forEach(corr => {
-          const opt = document.createElement('option');
-          opt.value = corr;
-          opt.textContent = corr;
-          group.appendChild(opt);
-        });
-        corregimientoSelect.appendChild(group);
-      }
+      const provinciaSelect = document.getElementById('provinciaSelect');
+      provinciaSelect.innerHTML = '<option value="">Selecciona Provincia</option>';
+      Object.keys(KFL_CONFIG.geografiaPanama).forEach(prov => {
+        const opt = document.createElement('option');
+        opt.value = prov;
+        opt.textContent = prov;
+        provinciaSelect.appendChild(opt);
+      });
 
-      const datalist = document.getElementById('colegiosList');
+      const datalistColegios = document.getElementById('colegiosList');
+      datalistColegios.innerHTML = '';
       KFL_CONFIG.colegios.forEach(col => {
         const opt = document.createElement('option');
         opt.value = col;
-        datalist.appendChild(opt);
+        datalistColegios.appendChild(opt);
       });
+    }
+
+    /* LÓGICA DE SELECCIÓN GEOGRÁFICA ENCADENADA */
+    function onProvinciaChange() {
+      const prov = document.getElementById('provinciaSelect').value;
+      const distritoSelect = document.getElementById('distritoSelect');
+      const corregimientoSelect = document.getElementById('corregimientoSelect');
+      const barriadaInput = document.getElementById('barriadaInput');
+
+      distritoSelect.innerHTML = '<option value="">Selecciona Distrito</option>';
+      corregimientoSelect.innerHTML = '<option value="">Primero selecciona un Distrito</option>';
+      document.getElementById('barriadasList').innerHTML = '';
+      barriadaInput.value = '';
+      
+      corregimientoSelect.disabled = true;
+      barriadaInput.disabled = true;
+
+      if (prov && KFL_CONFIG.geografiaPanama[prov]) {
+        distritoSelect.disabled = false;
+        Object.keys(KFL_CONFIG.geografiaPanama[prov]).forEach(dist => {
+          const opt = document.createElement('option');
+          opt.value = dist;
+          opt.textContent = dist;
+          distritoSelect.appendChild(opt);
+        });
+      } else {
+        distritoSelect.disabled = true;
+      }
+    }
+
+    function onDistritoChange() {
+      const prov = document.getElementById('provinciaSelect').value;
+      const dist = document.getElementById('distritoSelect').value;
+      const corregimientoSelect = document.getElementById('corregimientoSelect');
+      const barriadaInput = document.getElementById('barriadaInput');
+
+      corregimientoSelect.innerHTML = '<option value="">Selecciona Corregimiento</option>';
+      document.getElementById('barriadasList').innerHTML = '';
+      barriadaInput.value = '';
+      barriadaInput.disabled = true;
+
+      if (prov && dist && KFL_CONFIG.geografiaPanama[prov][dist]) {
+        corregimientoSelect.disabled = false;
+        Object.keys(KFL_CONFIG.geografiaPanama[prov][dist]).forEach(corr => {
+          const opt = document.createElement('option');
+          opt.value = corr;
+          opt.textContent = corr;
+          corregimientoSelect.appendChild(opt);
+        });
+      } else {
+        corregimientoSelect.disabled = true;
+      }
+    }
+
+    function onCorregimientoChange() {
+      const prov = document.getElementById('provinciaSelect').value;
+      const dist = document.getElementById('distritoSelect').value;
+      const corr = document.getElementById('corregimientoSelect').value;
+      const barriadaInput = document.getElementById('barriadaInput');
+      const barriadasList = document.getElementById('barriadasList');
+
+      barriadasList.innerHTML = '';
+      barriadaInput.value = '';
+
+      if (prov && dist && corr && KFL_CONFIG.geografiaPanama[prov][dist][corr]) {
+        barriadaInput.disabled = false;
+        KFL_CONFIG.geografiaPanama[prov][dist][corr].forEach(barriada => {
+          const opt = document.createElement('option');
+          opt.value = barriada;
+          barriadasList.appendChild(opt);
+        });
+      } else if (corr) {
+        barriadaInput.disabled = false;
+      } else {
+        barriadaInput.disabled = true;
+      }
+    }
+
+    /* MÁSCARA Y CÁLCULO DE EDAD ASÍNCRONO AL 1 DE ENERO DE LA TEMPORADA CORRIENTE */
+    function formatAndCalculateAge(input) {
+      let val = input.value.replace(/\D/g, '');
+      if (val.length > 2 && val.length <= 4) {
+        val = val.slice(0, 2) + '/' + val.slice(2);
+      } else if (val.length > 4) {
+        val = val.slice(0, 2) + '/' + val.slice(2, 4) + '/' + val.slice(4, 8);
+      }
+      input.value = val;
+
+      const note = document.getElementById('edadCalculadaNote');
+
+      if (val.length === 10) {
+        const parts = val.split('/');
+        const day = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10) - 1;
+        const year = parseInt(parts[2], 10);
+
+        const birthDate = new Date(year, month, day);
+
+        if (birthDate.getFullYear() !== year || birthDate.getMonth() !== month || birthDate.getDate() !== day) {
+          note.innerText = "⚠️ Fecha de nacimiento no válida.";
+          note.style.color = "#e11d48";
+          clearAgeFields();
+          return;
+        }
+
+        // Fecha de corte: 1 de Enero del año actual
+        const currentSeasonYear = new Date().getFullYear();
+        const cutoffDate = new Date(currentSeasonYear, 0, 1);
+
+        if (birthDate > cutoffDate) {
+          note.innerText = "⚠️ La fecha de nacimiento no puede ser posterior al 1 de enero de esta temporada.";
+          note.style.color = "#e11d48";
+          clearAgeFields();
+          return;
+        }
+
+        // Cálculo exacto de Años, Meses y Días
+        let years = cutoffDate.getFullYear() - birthDate.getFullYear();
+        let months = cutoffDate.getMonth() - birthDate.getMonth();
+        let days = cutoffDate.getDate() - birthDate.getDate();
+
+        if (days < 0) {
+          months--;
+          const prevMonth = new Date(cutoffDate.getFullYear(), cutoffDate.getMonth(), 0);
+          days += prevMonth.getDate();
+        }
+
+        if (months < 0) {
+          years--;
+          months += 12;
+        }
+
+        // Guardar valores en campos ocultos para Google Sheets
+        document.getElementById('edadAnios').value = years;
+        document.getElementById('edadMeses').value = months;
+        document.getElementById('edadDias').value = days;
+        const textoEdad = `${years} años, ${months} meses y ${days} días`;
+        document.getElementById('edadTextoFormateado').value = textoEdad;
+
+        note.innerText = `✅ Edad al 1 de enero de ${currentSeasonYear}: ${textoEdad}`;
+        note.style.color = "#16a34a";
+      } else {
+        note.innerText = "Formato: DD/MM/AAAA. Edad calculada automáticamente al 1 de enero.";
+        note.style.color = "#64748b";
+        clearAgeFields();
+      }
+    }
+
+    function clearAgeFields() {
+      document.getElementById('edadAnios').value = '';
+      document.getElementById('edadMeses').value = '';
+      document.getElementById('edadDias').value = '';
+      document.getElementById('edadTextoFormateado').value = '';
     }
 
     function updateTeams() {

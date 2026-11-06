@@ -3,29 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Campeones - Kiwanis Football League Panama</title>
-  
+
+  <!-- SEO & AEO Meta Tags -->
+  <title>Campeones KFL - Historial de Campeones | Kiwanis Football League Panamá</title>
+  <meta name="description" content="Historial de campeones y subcampeones de la Kiwanis Football League Panamá por categoría y temporada, en Contact Football y Flag Football.">
+  <meta name="keywords" content="Campeones KFL, subcampeones KFL, historial campeones Kiwanis Football League, campeones Contact Football Panamá, campeones Flag Football Panamá">
+  <link rel="canonical" href="https://www.kiwanisfootball.com/campeones.html">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Campeones KFL - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Vitrina histórica de campeones y subcampeones de la KFL en Panamá.">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/logos/KFL-Logo.png">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/campeones.html">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- Schema.org Structured Data (JSON-LD) para GEO, SEO y AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.kiwanisfootball.com/campeones.html",
+    "url": "https://www.kiwanisfootball.com/campeones.html",
+    "name": "Campeones KFL - Kiwanis Football League Panamá",
+    "inLanguage": "es",
+    "description": "Historial de campeones y subcampeones de la Kiwanis Football League Panamá por categoría y temporada.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Kiwanis Football League Panamá",
+      "url": "https://www.kiwanisfootball.com"
+    },
+    "about": {
+      "@type": "SportsOrganization",
+      "name": "Kiwanis Football League Panamá",
+      "alternateName": "KFL",
+      "sport": "American Football"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: Anton & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos global y favicon local -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
   <style>
-    /* CONTENEDOR PRINCIPAL - 1100px EXACTO */
+    /* ==========================================================================
+       CAMPEONES - ESTILOS DE LA PÁGINA (usan las variables globales de styles.css)
+       ========================================================================== */
     .champs-container {
       max-width: 1100px;
       width: 100%;
       margin: 0 auto;
       padding: 20px;
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo);
       box-sizing: border-box;
     }
 
-    /* HERO BANNER CON FOTO DE ANILLOS (RINGS.JPG) */
+    /* HERO */
     .champs-hero-banner {
       position: relative;
       width: 100%;
       border-radius: 16px;
       overflow: hidden;
-      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.82)), 
+      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.82)),
                   url('assets/img/rings.jpg') center/cover no-repeat;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
       margin-bottom: 25px;
@@ -48,7 +93,7 @@
     }
 
     .champs-hero-title {
-      font-family: 'Anton', sans-serif !important;
+      font-family: var(--fuente-titulos);
       font-size: 40px;
       font-weight: 400;
       color: #ffffff;
@@ -62,7 +107,7 @@
     }
 
     .champs-hero-description {
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo);
       font-size: 16px;
       line-height: 1.65;
       color: #f8fafc;
@@ -75,7 +120,7 @@
       font-weight: 800;
     }
 
-    /* ANIMACIÓN DEL TROFEO DE CAMPEONES (TROPHY.SVG) */
+    /* TROFEO (animación) */
     .champs-trophy-wrapper {
       width: 80px;
       height: 80px;
@@ -104,43 +149,29 @@
       height: auto;
       max-height: 80px;
       filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.65));
-      animation: buildTrophy 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, 
+      animation: buildTrophy 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
                  floatTrophy 3.8s ease-in-out 1.4s infinite alternate;
       transform-origin: center bottom;
     }
 
     @keyframes buildTrophy {
-      0% {
-        opacity: 0;
-        transform: translateY(25px) scale(0.3) rotateX(45deg);
-        filter: drop-shadow(0 0 0px rgba(234, 179, 8, 0));
-      }
-      60% {
-        opacity: 1;
-        transform: translateY(-5px) scale(1.08) rotateX(0deg);
-        filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.9));
-      }
-      80% {
-        transform: translateY(2px) scale(0.96);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.65));
-      }
+      0%   { opacity: 0; transform: translateY(25px) scale(0.3) rotateX(45deg); filter: drop-shadow(0 0 0px rgba(234, 179, 8, 0)); }
+      60%  { opacity: 1; transform: translateY(-5px) scale(1.08) rotateX(0deg); filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.9)); }
+      80%  { transform: translateY(2px) scale(0.96); }
+      100% { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.65)); }
     }
 
     @keyframes floatTrophy {
-      0% { transform: translateY(0) rotate(0deg); }
+      0%   { transform: translateY(0) rotate(0deg); }
       100% { transform: translateY(-6px) rotate(2deg); filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.85)); }
     }
 
     @keyframes pulseAura {
-      0% { transform: scale(0.85); opacity: 0.5; }
+      0%   { transform: scale(0.85); opacity: 0.5; }
       100% { transform: scale(1.18); opacity: 0.95; }
     }
 
-    /* SELECTORES PRINCIPALES DE MODALIDAD (ESTILO PÍLDORA) */
+    /* BOTONES DE MODALIDAD (píldora) */
     .champs-modality-bar {
       display: flex;
       gap: 20px;
@@ -157,7 +188,7 @@
       color: #334155;
       border: 2px solid #cbd5e1;
       padding: 16px 24px;
-      font-family: 'Anton', sans-serif !important;
+      font-family: var(--fuente-titulos);
       font-size: 22px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -175,20 +206,20 @@
     }
 
     .champs-modality-btn.active.contact-theme-btn {
-      background: #19547E;
+      background: var(--azul-kfl);
       color: #ffffff;
-      border-color: #19547E;
-      box-shadow: 0 6px 20px rgba(25, 84, 126, 0.35);
+      border-color: var(--azul-kfl);
+      box-shadow: 0 6px 20px rgba(0, 94, 170, 0.35);
     }
 
     .champs-modality-btn.active.flag-theme-btn {
-      background: #C53030;
+      background: var(--rojo-kfl);
       color: #ffffff;
-      border-color: #C53030;
-      box-shadow: 0 6px 20px rgba(197, 48, 48, 0.35);
+      border-color: var(--rojo-kfl);
+      box-shadow: 0 6px 20px rgba(235, 61, 64, 0.35);
     }
 
-    /* BARRA DE FILTROS DE CATEGORÍA */
+    /* FILTROS DE CATEGORÍA (píldora) */
     .champs-filter-bar {
       display: none;
       gap: 12px;
@@ -208,7 +239,7 @@
       color: #334155;
       border: 2px solid #cbd5e1;
       padding: 10px 16px;
-      font-family: 'Anton', sans-serif !important;
+      font-family: var(--fuente-titulos);
       font-size: 18px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
@@ -226,25 +257,25 @@
     }
 
     .champs-filter-btn.active.contact-active {
-      background: #19547E;
+      background: var(--azul-kfl);
       color: #ffffff;
-      border-color: #19547E;
-      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.3);
+      border-color: var(--azul-kfl);
+      box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
     }
 
     .champs-filter-btn.active.flag-active {
-      background: #C53030;
+      background: var(--rojo-kfl);
       color: #ffffff;
-      border-color: #C53030;
-      box-shadow: 0 4px 12px rgba(197, 48, 48, 0.3);
+      border-color: var(--rojo-kfl);
+      box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-6px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ARQUITECTURA DE TABLA CON ANCHOS EXACTOS E IGUALITARIOS */
+    /* TABLAS POR CATEGORÍA */
     .champs-category-section {
       display: none;
       margin-bottom: 35px;
@@ -258,7 +289,7 @@
       width: 100%;
     }
 
-    .kfl-table {
+    .champs-table {
       width: 100%;
       border-collapse: collapse;
       background: #ffffff;
@@ -266,62 +297,55 @@
       overflow: hidden;
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin-top: 10px;
-      margin-bottom: 20px;
-      font-family: 'Avenir', sans-serif !important;
+      margin: 10px 0 20px 0;
+      font-family: var(--fuente-cuerpo);
       table-layout: fixed;
     }
 
-    .kfl-table th:nth-child(1),
-    .kfl-table td:nth-child(1) { width: 22%; }
+    .champs-table th:nth-child(1),
+    .champs-table td:nth-child(1) { width: 22%; }
 
-    .kfl-table th:nth-child(2),
-    .kfl-table td:nth-child(2) { width: 39%; }
+    .champs-table th:nth-child(2),
+    .champs-table td:nth-child(2) { width: 39%; }
 
-    .kfl-table th:nth-child(3),
-    .kfl-table td:nth-child(3) { width: 39%; }
+    .champs-table th:nth-child(3),
+    .champs-table td:nth-child(3) { width: 39%; }
 
-    .kfl-table th {
-      background: #19547E;
+    .champs-table th {
+      background: var(--azul-kfl);
       color: #ffffff;
       padding: 14px 16px;
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo);
       font-size: 13px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       text-align: left;
-      cursor: default;
     }
 
-    body.flag-theme-active .kfl-table th {
-      background: #C53030 !important;
+    body.flag-theme-active .champs-table th {
+      background: var(--rojo-kfl);
     }
 
-    .kfl-table td {
+    .champs-table td {
       padding: 14px 16px;
       text-align: left;
       border-bottom: 1px solid #f1f5f9;
       font-size: 14px;
       font-weight: 600;
       color: #334155;
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       vertical-align: middle;
     }
 
-    /* CEBRADO UNIFORME POR BLOQUE DE AÑO */
-    .kfl-table tr.block-even td {
-      background-color: #ffffff !important;
-    }
+    /* Cebrado por bloque de temporada (incluye rowspan) */
+    .champs-table tr.block-even td { background-color: #ffffff; }
+    .champs-table tr.block-odd td  { background-color: #f8fafc; }
 
-    .kfl-table tr.block-odd td {
-      background-color: #f8fafc !important;
-    }
-
-    .kfl-table-team-cell {
+    .champs-team-cell {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -330,10 +354,10 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo);
     }
 
-    .kfl-table-team-logo {
+    .champs-team-logo {
       width: 26px;
       height: 26px;
       object-fit: contain;
@@ -341,9 +365,9 @@
     }
 
     .champs-team-name {
-      color: #19547E;
+      color: var(--azul-kfl);
       font-weight: 800;
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo);
     }
 
     body.flag-theme-active .champs-team-name {
@@ -357,7 +381,7 @@
       padding: 35px 20px;
       font-size: 16px;
       color: #64748b;
-      font-family: 'Avenir', sans-serif !important;
+      font-family: var(--fuente-cuerpo);
       font-weight: 700;
       letter-spacing: 0.3px;
       display: flex;
@@ -374,6 +398,7 @@
       flex-shrink: 0;
     }
 
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       .champs-container { padding: 15px 10px; }
       .champs-hero-banner { padding: 30px 15px; }
@@ -392,15 +417,15 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER GLOBAL INYECTADO -->
+  <!-- 1. HEADER GLOBAL (Inyectado por components.js) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="champs-container">
 
-    <!-- HERO BANNER CON TROPHY.SVG Y FOTO RINGS.JPG -->
+    <!-- HERO -->
     <section class="champs-hero-banner">
       <div class="champs-trophy-wrapper">
-        <img src="assets/img/trophy.svg" alt="KFL Champions Trophy" class="champs-trophy-img" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+        <img src="assets/img/trophy.svg" alt="Trofeo de campeones de la Kiwanis Football League" class="champs-trophy-img" onerror="this.src='assets/logos/KFL-Logo.png'">
       </div>
 
       <div class="champs-hero-content">
@@ -411,13 +436,13 @@
       </div>
     </section>
 
-    <!-- 1. BOTONES PRINCIPALES DE MODALIDAD -->
+    <!-- 2. MODALIDAD -->
     <div class="champs-modality-bar">
       <button class="champs-modality-btn" id="btnContact" onclick="selectModality('contact', this)">Contact Football</button>
       <button class="champs-modality-btn" id="btnFlag" onclick="selectModality('flag', this)">Flag Football</button>
     </div>
 
-    <!-- 2. FILTROS DE CATEGORÍA -->
+    <!-- 3. CATEGORÍA -->
     <div class="champs-filter-bar" id="filterBar">
       <button class="champs-filter-btn" id="filter-varsity" onclick="filterCategory('varsity', this)">VARSITY</button>
       <button class="champs-filter-btn" id="filter-juvenil" onclick="filterCategory('juvenil', this)">JUVENIL</button>
@@ -425,31 +450,24 @@
       <button class="champs-filter-btn" id="filter-micro" onclick="filterCategory('micro', this)">MICRO</button>
     </div>
 
-    <!-- MENSAJE INICIAL -->
     <div id="selectPrompt" class="champs-select-prompt">
-      <svg class="prompt-icon-svg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+      <svg class="prompt-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
       <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver el historial de campeones.</span>
     </div>
 
-    <!-- CONTENEDOR DE TABLAS POR CATEGORÍA -->
     <div id="champsTablesContainer" style="display: none;">
-      
-      <!-- MENSAJE INICIAL DE CATEGORÍA -->
+
       <div id="categoryPrompt" class="champs-category-prompt">
-        <svg class="prompt-icon-svg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+        <svg class="prompt-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
         <span>Selecciona una categoría arriba para visualizar los campeones correspondientes.</span>
       </div>
 
       <!-- VARSITY -->
-      <section class="champs-category-section" data-category="varsity" style="display: none;">
+      <section class="champs-category-section" data-category="varsity">
         <div class="champs-single-table-container">
-          <table class="kfl-table">
+          <table class="champs-table">
             <thead>
-              <tr>
-                <th>Season</th>
-                <th>Campeón</th>
-                <th>Sub-Campeón</th>
-              </tr>
+              <tr><th>Season</th><th>Campeón</th><th>Sub-Campeón</th></tr>
             </thead>
             <tbody id="table-varsity">
               <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
@@ -459,15 +477,11 @@
       </section>
 
       <!-- JUVENIL -->
-      <section class="champs-category-section" data-category="juvenil" style="display: none;">
+      <section class="champs-category-section" data-category="juvenil">
         <div class="champs-single-table-container">
-          <table class="kfl-table">
+          <table class="champs-table">
             <thead>
-              <tr>
-                <th>Season</th>
-                <th>Campeón</th>
-                <th>Sub-Campeón</th>
-              </tr>
+              <tr><th>Season</th><th>Campeón</th><th>Sub-Campeón</th></tr>
             </thead>
             <tbody id="table-juvenil">
               <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
@@ -477,15 +491,11 @@
       </section>
 
       <!-- MINI -->
-      <section class="champs-category-section" data-category="mini" style="display: none;">
+      <section class="champs-category-section" data-category="mini">
         <div class="champs-single-table-container">
-          <table class="kfl-table">
+          <table class="champs-table">
             <thead>
-              <tr>
-                <th>Season</th>
-                <th>Campeón</th>
-                <th>Sub-Campeón</th>
-              </tr>
+              <tr><th>Season</th><th>Campeón</th><th>Sub-Campeón</th></tr>
             </thead>
             <tbody id="table-mini">
               <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
@@ -495,15 +505,11 @@
       </section>
 
       <!-- MICRO -->
-      <section class="champs-category-section" data-category="micro" style="display: none;">
+      <section class="champs-category-section" data-category="micro">
         <div class="champs-single-table-container">
-          <table class="kfl-table">
+          <table class="champs-table">
             <thead>
-              <tr>
-                <th>Season</th>
-                <th>Campeón</th>
-                <th>Sub-Campeón</th>
-              </tr>
+              <tr><th>Season</th><th>Campeón</th><th>Sub-Campeón</th></tr>
             </thead>
             <tbody id="table-micro">
               <tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>
@@ -516,35 +522,10 @@
 
   </main>
 
-  <!-- FOOTER GLOBAL INYECTADO -->
+  <!-- 4. FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
-      fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
-          
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-          }
-        });
-
-      // Inyectar Footer desde footer.html
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
-        });
-    });
-  </script>
-
-  <!-- LÓGICA DE CAMPEONES & MAPEO DE LOGOS -->
+  <!-- LÓGICA DE CAMPEONES -->
   <script>
     const SHEETS_CONFIG = {
       contact: {
@@ -561,8 +542,15 @@
       }
     };
 
-    /* MAPEO DE NOMBRES LARGOS A LOGOS (INCLUYENDO ESCLAVAS, SAINTS, LIONS, KOBRAS, ETC.) */
+    /* Nombre de equipo (con variantes) -> logo local en assets/logos/ */
     const TEAM_LOGOS_MAP = {
+      "E.C.P MIGHTY EAGLES": "assets/logos/eagles.png",
+      "E.C.P EAGLES": "assets/logos/eagles.png",
+      "ECP MIGHTY EAGLES": "assets/logos/eagles.png",
+      "ECP EAGLES": "assets/logos/eagles.png",
+      "MIGHTY EAGLES": "assets/logos/eagles.png",
+      "METS EAGLES": "assets/logos/eagles.png",
+      "EAGLES": "assets/logos/eagles.png",
       "A.I.P FIGHTING OWLS": "assets/logos/owls.png",
       "OWLS": "assets/logos/owls.png",
       "BRADER RAIDERS": "assets/logos/raiders.png",
@@ -573,8 +561,6 @@
       "SPARTANS": "assets/logos/spartans.png",
       "BALBOA DRAGONS": "assets/logos/dragons.png",
       "DRAGONS": "assets/logos/dragons.png",
-      "METS EAGLES": "assets/logos/eagles.png",
-      "EAGLES": "assets/logos/eagles.png",
       "ESCLAVAS": "assets/logos/esclavas.png",
       "SLAVES": "assets/logos/esclavas.png",
       "SAINTS": "assets/logos/saints.png",
@@ -586,47 +572,22 @@
       "KOBRAS": "assets/logos/kobras.png"
     };
 
-    const FALLBACK_LOGOS = {
-      "OWLS": "https://i.imgur.com/KRjk1AV.png",
-      "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
-      "KOLTS": "https://i.imgur.com/id2gPdH.png",
-      "SPARTANS": "https://i.imgur.com/JGvY0Zk.png",
-      "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
-      "EAGLES": "https://i.imgur.com/lxfq565.png"
-    };
+    const LOGO_KFL_DEFAULT = "assets/logos/KFL-Logo.png";
 
     function getTeamLogoInfo(fullTeamName) {
       const clean = (fullTeamName || "").toUpperCase().trim();
-      let logoUrl = "https://i.imgur.com/wrPDjDN.png";
-      let keyMatched = "";
-
-      for (const [key, path] of Object.entries(TEAM_LOGOS_MAP)) {
-        if (clean.includes(key)) {
-          logoUrl = path;
-          if (key.includes("OWLS")) keyMatched = "OWLS";
-          else if (key.includes("RAIDERS")) keyMatched = "RAIDERS";
-          else if (key.includes("KOLTS")) keyMatched = "KOLTS";
-          else if (key.includes("SPARTANS")) keyMatched = "SPARTANS";
-          else if (key.includes("DRAGONS")) keyMatched = "DRAGONS";
-          else if (key.includes("EAGLES")) keyMatched = "EAGLES";
-          else if (key.includes("ESCLAVAS") || key.includes("SLAVES")) keyMatched = "ESCLAVAS";
-          else if (key.includes("SAINTS")) keyMatched = "SAINTS";
-          else if (key.includes("LIONS")) keyMatched = "LIONS";
-          else if (key.includes("PANTERS") || key.includes("PANTHER") || key.includes("ATENEA")) keyMatched = "PANTERS";
-          else if (key.includes("BLACK TIGERS")) keyMatched = "BLACK TIGERS";
-          else if (key.includes("KOBRAS")) keyMatched = "KOBRAS";
-          break;
-        }
-      }
-      return { logoUrl, fallbackUrl: FALLBACK_LOGOS[keyMatched] || "https://i.imgur.com/wrPDjDN.png" };
+      // Coincidencia con la clave más larga primero (ej. "E.C.P MIGHTY EAGLES" antes que "EAGLES")
+      const key = Object.keys(TEAM_LOGOS_MAP)
+        .sort((a, b) => b.length - a.length)
+        .find(k => clean.includes(k));
+      const logoUrl = key ? TEAM_LOGOS_MAP[key] : LOGO_KFL_DEFAULT;
+      return { logoUrl, fallbackUrl: LOGO_KFL_DEFAULT };
     }
 
     let currentModality = null;
-    let currentCategory = null;
 
     function selectModality(modality, btnElement) {
       currentModality = modality;
-      currentCategory = null;
 
       document.querySelectorAll('.champs-modality-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
@@ -642,8 +603,7 @@
 
       document.querySelectorAll('.champs-filter-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-active', 'flag-active');
-        if (modality === 'contact') btn.classList.add('contact-active');
-        else btn.classList.add('flag-active');
+        btn.classList.add(modality === 'contact' ? 'contact-active' : 'flag-active');
       });
 
       document.getElementById('selectPrompt').style.display = 'none';
@@ -655,51 +615,36 @@
         sec.style.display = 'none';
       });
 
-      // Micro Flag habilitado correctamente
-      const microBtn = document.getElementById('filter-micro');
-      if (microBtn) microBtn.style.display = 'block';
+      document.getElementById('filter-micro').style.display = 'block';
 
       loadModalityData();
     }
 
     function filterCategory(category, btnElement) {
-      currentCategory = category;
-
       document.querySelectorAll('.champs-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
 
       document.getElementById('categoryPrompt').style.display = 'none';
 
-      const sections = document.querySelectorAll('.champs-category-section');
-      sections.forEach(sec => {
-        if (sec.getAttribute('data-category') === category) {
-          sec.style.display = 'block';
-        } else {
-          sec.style.display = 'none';
-        }
+      document.querySelectorAll('.champs-category-section').forEach(sec => {
+        sec.style.display = sec.getAttribute('data-category') === category ? 'block' : 'none';
       });
     }
 
     async function loadModalityData() {
       if (!currentModality) return;
 
-      const modalityMap = SHEETS_CONFIG[currentModality];
-
-      for (const [catKey, config] of Object.entries(modalityMap)) {
+      for (const config of Object.values(SHEETS_CONFIG[currentModality])) {
         if (!config || !config.url) continue;
 
         const tbody = document.getElementById(config.targetId);
         if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>';
 
         try {
-          const cacheBusterUrl = `${config.url}&_t=${Date.now()}`;
-          const res = await fetch(cacheBusterUrl);
+          const res = await fetch(`${config.url}&_t=${Date.now()}`);
           if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-          
-          const csvText = await res.text();
-          const rows = parseCSV(csvText);
 
-          renderTableRows(config.targetId, rows);
+          renderTableRows(config.targetId, parseCSV(await res.text()));
         } catch (err) {
           console.error(`Error al cargar ${config.targetId}:`, err);
           renderEmptyState(config.targetId, 'Error al cargar datos desde Google Sheets.');
@@ -707,49 +652,33 @@
       }
     }
 
-    /* RENDERIZADO CON SOPORTE DE ROWSPAN Y CEBRADO POR BLOQUE DE AÑO */
+    /* Renderizado con rowspan por temporada y cebrado por bloque */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;
 
-      if (!rows || rows.length < 1) {
-        renderEmptyState(targetId, 'Sin registros publicados aún.');
-        return;
-      }
-
       tbody.innerHTML = '';
-      
+
       const validRows = [];
       let lastSeason = '';
 
-      for (let i = 0; i < rows.length; i++) {
-        const row = rows[i];
+      for (const row of rows || []) {
         if (!row || row.length < 2) continue;
 
         const cleanRow = row.map(c => (c || '').trim());
         const c0 = cleanRow[0].toLowerCase();
         const c1 = (cleanRow[1] || '').toLowerCase();
 
-        if (
-          c0.includes('season') || c0.includes('año') || c0.includes('ano') || c0.includes('year') ||
-          c1.includes('season') || c1.includes('año') || c1.includes('ano') || c1.includes('campeon')
-        ) {
-          continue;
-        }
+        if (['season', 'año', 'ano', 'year'].some(w => c0.includes(w) || c1.includes(w)) || c1.includes('campeon')) continue;
 
         let season = cleanRow[0] || '';
-        let campeon = cleanRow[1] || '';
-        let subcampeon = cleanRow[2] || '';
+        const campeon = cleanRow[1] || '';
+        const subcampeon = cleanRow[2] || '';
 
-        if (season !== '') {
-          lastSeason = season;
-        } else {
-          season = lastSeason;
-        }
+        if (season !== '') lastSeason = season;
+        else season = lastSeason;
 
-        if (!campeon || campeon === '' || campeon.toLowerCase() === 'campeon') {
-          continue;
-        }
+        if (!campeon || campeon.toLowerCase() === 'campeon') continue;
 
         validRows.push({ season, campeon, subcampeon });
       }
@@ -763,40 +692,39 @@
       let blockIndex = 0;
 
       while (i < validRows.length) {
-        let currentSeason = validRows[i].season;
-        let group = [validRows[i]];
-        
+        const currentSeason = validRows[i].season;
+        const group = [validRows[i]];
+
         let j = i + 1;
         while (j < validRows.length && validRows[j].season === currentSeason) {
           group.push(validRows[j]);
           j++;
         }
 
-        const blockClass = (blockIndex % 2 === 0) ? 'block-even' : 'block-odd';
+        const blockClass = blockIndex % 2 === 0 ? 'block-even' : 'block-odd';
 
-        for (let k = 0; k < group.length; k++) {
+        group.forEach((item, k) => {
           const tr = document.createElement('tr');
           tr.className = blockClass;
 
-          const champName = group[k].campeon || '-';
-          const subName = group[k].subcampeon || '-';
-
-          const champInfo = getTeamLogoInfo(champName);
-          const subInfo = getTeamLogoInfo(subName);
-          
+          const champInfo = getTeamLogoInfo(item.campeon);
           const champCellHtml = `
-            <div class="kfl-table-team-cell">
-              <img src="${champInfo.logoUrl}" alt="${champName}" class="kfl-table-team-logo" onerror="this.src='${champInfo.fallbackUrl}'">
-              <span class="champs-team-name">${champName}</span>
+            <div class="champs-team-cell">
+              <img src="${champInfo.logoUrl}" alt="${item.campeon}" class="champs-team-logo" onerror="this.src='${champInfo.fallbackUrl}'">
+              <span class="champs-team-name">${item.campeon}</span>
             </div>
           `;
 
-          const subCellHtml = subName !== '-' ? `
-            <div class="kfl-table-team-cell">
-              <img src="${subInfo.logoUrl}" alt="${subName}" class="kfl-table-team-logo" onerror="this.src='${subInfo.fallbackUrl}'">
-              <span>${subName}</span>
-            </div>
-          ` : '-';
+          let subCellHtml = '-';
+          if (item.subcampeon) {
+            const subInfo = getTeamLogoInfo(item.subcampeon);
+            subCellHtml = `
+              <div class="champs-team-cell">
+                <img src="${subInfo.logoUrl}" alt="${item.subcampeon}" class="champs-team-logo" onerror="this.src='${subInfo.fallbackUrl}'">
+                <span>${item.subcampeon}</span>
+              </div>
+            `;
+          }
 
           if (k === 0) {
             tr.innerHTML = `
@@ -811,7 +739,7 @@
             `;
           }
           tbody.appendChild(tr);
-        }
+        });
 
         blockIndex++;
         i = j;
@@ -827,13 +755,11 @@
 
     function parseCSV(text) {
       if (!text) return [];
-      const lines = text.split(/\r?\n/);
-      return lines.map(line => {
+      return text.split(/\r?\n/).map(line => {
         const result = [];
         let insideQuote = false;
         let entry = '';
-        for (let i = 0; i < line.length; i++) {
-          const char = line[i];
+        for (const char of line) {
           if (char === '"') {
             insideQuote = !insideQuote;
           } else if (char === ',' && !insideQuote) {
@@ -848,5 +774,8 @@
       });
     }
   </script>
+
+  <!-- MENÚ, PIE Y BOTÓN VOLVER ARRIBA GLOBALES -->
+  <script src="js/components.js"></script>
 </body>
 </html>

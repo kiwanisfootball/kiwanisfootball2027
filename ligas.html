@@ -88,22 +88,22 @@
     .leagues-hero-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-      gap: clamp(16px, 3vw, 28px);
+      gap: 24px;
       width: 100%;
       max-width: 1200px;
-      margin: clamp(20px, 3vw, 32px) auto clamp(16px, 2.5vw, 24px) auto;
-      padding: 0 clamp(12px, 3vw, 20px);
+      margin: 24px auto 16px auto;
+      padding: 0 20px;
     }
 
     .league-hero-card {
       position: relative;
       cursor: pointer;
       border: none !important;
-      border-radius: clamp(14px, 2vw, 20px);
+      border-radius: 18px;
       overflow: hidden;
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      min-height: clamp(210px, 28vw, 280px);
+      min-height: 240px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -129,7 +129,7 @@
       position: relative;
       z-index: 2;
       background: linear-gradient(to top, rgba(11, 15, 25, 0.88) 0%, rgba(11, 15, 25, 0.4) 60%, transparent 100%);
-      padding: clamp(18px, 3vw, 26px);
+      padding: 22px;
       width: 100%;
       color: #ffffff;
       text-align: center;
@@ -137,7 +137,7 @@
 
     .hero-overlay h2 {
       font-family: var(--fuente-titulos);
-      font-size: clamp(24px, 3.5vw, 34px);
+      font-size: 30px;
       margin: 0 0 4px 0;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -145,7 +145,7 @@
     }
 
     .hero-overlay span {
-      font-size: clamp(11.5px, 1.4vw, 14px);
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -165,15 +165,15 @@
       box-shadow: 0 0 0 4px var(--rojo-kfl), 0 12px 30px rgba(235, 61, 64, 0.4);
     }
 
-    /* MOBILE LEAGUE SELECTOR PILLS (Consistentes y Uniformes) */
+    /* MOBILE LEAGUE SELECTOR PILLS (Evita recortes superiores con padding protector) */
     .mobile-league-selector-wrapper {
       display: none;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 12px;
       width: 100%;
       max-width: 600px;
-      margin: 16px auto 12px auto;
-      padding: 0 16px;
+      margin: 16px auto 8px auto;
+      padding: 8px 16px 4px 16px;
     }
 
     .mobile-league-btn {
@@ -182,7 +182,7 @@
       color: #334155;
       padding: 14px 10px;
       font-family: var(--fuente-titulos);
-      font-size: clamp(14px, 3.5vw, 16px);
+      font-size: 15px;
       border-radius: 30px;
       cursor: pointer;
       text-transform: uppercase;
@@ -201,7 +201,7 @@
 
     .mobile-league-btn span {
       font-family: var(--fuente-cuerpo);
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 800;
       margin-top: 3px;
       opacity: 0.85;
@@ -227,26 +227,36 @@
       .mobile-league-selector-wrapper { display: grid !important; }
     }
 
+    /* INSTRUCTION BAR IDÉNTICA A CAPTURA 4 (Compacta y sin espacios gigantes) */
     .league-instruction-bar {
       text-align: center;
-      margin: 12px auto 18px auto;
-      padding: 12px 18px;
-      background-color: #f0f7ff;
-      border: 1.5px dashed var(--azul-kfl);
-      border-radius: 12px;
-      width: min(92%, 1100px);
-      box-sizing: border-box;
-      color: var(--azul-kfl);
+      margin: 8px auto 16px auto;
+      padding: 8px 16px;
+      max-width: 580px;
+      color: #475569;
       font-weight: 700;
-      font-size: clamp(12.5px, 1.4vw, 14.5px);
-      display: block;
-      box-shadow: 0 2px 8px rgba(0,94,170,0.04);
+      font-size: 13.5px;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+    
+    .league-instruction-bar strong {
+      color: var(--azul-kfl);
+    }
+    body.flag-theme .league-instruction-bar strong {
+      color: var(--rojo-kfl);
     }
 
     .reset-selection-wrapper {
       display: none;
       text-align: center;
-      margin: 12px 0 20px 0;
+      margin: 8px 0 16px 0;
     }
 
     .btn-reset-league {
@@ -272,15 +282,15 @@
       transform: translateY(-2px);
     }
 
-    /* CATEGORY PILLS - PROPORCIONALES Y UNIFORMES */
+    /* CATEGORY PILLS */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
       flex-wrap: nowrap;
       overflow-x: auto;
-      padding: 4px 16px;
+      padding: 6px 16px;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
@@ -293,7 +303,7 @@
       color: #ffffff;
       font-family: var(--fuente-titulos);
       font-weight: 400;
-      font-size: clamp(14px, 1.6vw, 17px);
+      font-size: 16px;
       border-radius: 30px;
       cursor: pointer;
       text-transform: uppercase;
@@ -321,12 +331,12 @@
 
     .category-pill-btn:hover { opacity: 1; transform: translateY(-1.5px); }
 
-    /* SUB TABS BAR - UNA SOLA FILA FLUIDA SIN CORTES */
+    /* SUB TABS BAR */
     .sub-tabs-bar {
       display: flex;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       flex-wrap: nowrap;
       overflow-x: auto;
       border-bottom: 2px solid #e2e8f0;
@@ -342,7 +352,7 @@
       border: none;
       color: #64748b;
       font-weight: 800;
-      font-size: clamp(12px, 1.4vw, 14px);
+      font-size: 13px;
       cursor: pointer;
       text-transform: uppercase;
       transition: all 0.2s ease;
@@ -417,11 +427,11 @@
       width: 100%;
       max-width: 1160px;
       margin: 0 auto;
-      padding: 0 16px 50px 16px;
+      padding: 0 16px 30px 16px;
     }
 
     /* GRID Y CENTRADO DE PARTIDOS */
-    .kfl-week-section { margin-bottom: 36px; }
+    .kfl-week-section { margin-bottom: 32px; }
     .kfl-week-title {
       font-size: 17px;
       font-weight: 900;
@@ -500,7 +510,7 @@
     .kfl-score-vs { font-size: 18px; font-weight: 900; color: #94a3b8; letter-spacing: 1px; }
     .kfl-score-status { font-size: 11px; font-weight: 900; color: #16a34a; letter-spacing: 0.8px; margin-bottom: 2px; }
 
-    /* CARD DE JAMBOREE INDIVIDUAL Y CENTRADO */
+    /* CARD DE JAMBOREE */
     .kfl-jamboree-card {
       background: #ffffff;
       border: 1px solid #e2e8f0;
@@ -706,7 +716,7 @@
       letter-spacing: 0.5px;
     }
 
-    /* TABLA DE POSICIONES Y STATS (ORDENABLE Y PROTEGIDA CONTRA DESBORDE) */
+    /* TABLA DE POSICIONES Y STATS */
     .kfl-table {
       width: 100%;
       border-collapse: collapse;
@@ -716,7 +726,7 @@
       border: 1px solid #e2e8f0;
       box-shadow: 0 4px 16px rgba(0,0,0,0.04);
       margin-top: 10px;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       table-layout: auto;
     }
 
@@ -783,35 +793,26 @@
     .kfl-table tr:nth-child(even) { background-color: #f8fafc; }
     .kfl-table tr:hover { background-color: #f1f5f9; }
 
-    /* STATS BUTTONS GRID (2x2 SIMÉTRICO Y PROPORCIONAL) */
+    /* STATS BUTTONS GRID (FORZADO 2x2 SIMÉTRICO EN MOBILE Y TABLET) */
     .stats-buttons-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 260px));
+      grid-template-columns: repeat(2, minmax(0, 240px));
       justify-content: center;
       gap: 12px;
       margin-bottom: 24px;
       padding: 0 16px;
     }
 
-    @media (max-width: 600px) {
-      .stats-buttons-grid {
-        grid-template-columns: 1fr;
-        max-width: 340px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-
     .stat-type-btn {
-      padding: 12px 16px;
+      padding: 12px 14px;
       background: var(--azul-kfl);
       border: none;
       color: #ffffff;
       border-radius: 30px;
       font-family: var(--fuente-cuerpo);
       font-weight: 800;
-      font-size: 13px;
-      letter-spacing: 0.5px;
+      font-size: 12.5px;
+      letter-spacing: 0.4px;
       cursor: pointer;
       text-transform: uppercase;
       opacity: 0.75;
@@ -882,14 +883,14 @@
     }
     body.flag-theme .kfl-update-svg { fill: var(--rojo-kfl); }
 
-    /* PAGINATION BAR - PROPORCIONAL Y FLEXIBLE */
+    /* PAGINATION BAR */
     .kfl-pagination-bar {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 14px;
-      margin-top: 28px;
-      margin-bottom: 20px;
+      margin-top: 24px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
       padding: 0 12px;
     }
@@ -1105,8 +1106,10 @@
       </button>
     </div>
 
+    <!-- INSTRUCTION BAR IDÉNTICA A CAPTURA 4 -->
     <div class="league-instruction-bar" id="instructionBar">
-      <svg class="instruction-arrow" viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;fill:currentColor;vertical-align:middle;margin-right:6px;"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>Haz clic en <strong>Contact Football</strong> o <strong>Flag Football</strong> para desplegar sus categorías, calendarios, rosters y estadísticas.
+      <svg style="width:16px;height:16px;fill:currentColor;flex-shrink:0;" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+      <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para ver los registros de MVP.</span>
     </div>
 
     <div class="reset-selection-wrapper" id="resetBtnWrapper">
@@ -1458,7 +1461,7 @@
 
       document.getElementById('leagueContentSection').style.display = 'none';
       document.getElementById('resetBtnWrapper').style.display = 'none';
-      document.getElementById('instructionBar').style.display = 'block';
+      document.getElementById('instructionBar').style.display = 'flex';
       document.body.className = 'contact-theme';
     }
 

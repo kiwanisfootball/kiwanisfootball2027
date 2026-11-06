@@ -170,6 +170,18 @@
 
     body.flag-theme .form-section-title { color: var(--rojo-kfl); }
 
+    .form-subsection-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--azul-kfl);
+      text-transform: uppercase;
+      margin: 20px 0 15px 0;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed var(--gris-borde);
+    }
+
+    body.flag-theme .form-subsection-title { color: var(--rojo-kfl); }
+
     .form-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -216,7 +228,6 @@
       outline: none;
       transition: all 0.25s ease;
       box-sizing: border-box;
-      text-transform: uppercase;
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
@@ -225,6 +236,11 @@
       background-position: right 14px center;
       background-size: 16px;
       padding-right: 40px;
+    }
+
+    /* FORZAR MAYÚSCULA INICIAL EN NOMBRES COMPLETOS */
+    .form-input-capitalize {
+      text-transform: capitalize;
     }
 
     .form-select:disabled, .form-input:disabled {
@@ -236,10 +252,6 @@
     input.form-input {
       background-image: none;
       padding-right: 16px;
-    }
-
-    .form-input[type="email"] {
-      text-transform: none;
     }
 
     .form-input:focus, .form-select:focus {
@@ -434,7 +446,7 @@
     <div id="passwordGate">
       <h2 class="gate-title">Acceso Restringido</h2>
       <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
-      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none;">
+      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center;">
       <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px;">Ingresar</button>
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
@@ -490,32 +502,33 @@
         <input type="hidden" id="edadDias" name="edadDias">
         <input type="hidden" id="edadTextoFormateado" name="edadTextoFormateado">
 
-        <!-- INFORMACIÓN DEL ATLETA -->
+        <!-- INFORMACIÓN DEL ATLETA ORGANIZADA POR SUBSECCIONES -->
         <div class="form-card">
           <h3 class="form-section-title" id="secTitleAtleta">1. Información del Jugador</h3>
+
+          <!-- A. INFORMACIÓN PERSONAL -->
+          <h4 class="form-subsection-title">Información Personal</h4>
           <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Nombre Completo</label>
-              <input type="text" id="nombre" class="form-input" placeholder="EJ. CARLOS PÉREZ" required>
+              <input type="text" id="nombre" class="form-input form-input-capitalize" placeholder="Ej. Carlos Pérez" required>
             </div>
 
-            <!-- FECHA DE NACIMIENTO Y CÁLCULO DE EDAD AL 1 DE ENERO DE LA TEMPORADA -->
             <div class="form-group">
               <label class="form-label">Fecha de Nacimiento</label>
               <input type="text" id="fechaNacimiento" class="form-input" placeholder="DD/MM/AAAA" maxlength="10" pattern="\d{2}/\d{2}/\d{4}" oninput="formatAndCalculateAge(this)" required>
-              <span class="form-note" id="edadCalculadaNote">Formato: DD/MM/AAAA. Edad calculada automáticamente al 1 de enero.</span>
+              <span class="form-note">Introducir Día, Mes y Año en ese orden específico (DD/MM/AAAA).</span>
             </div>
 
             <div class="form-group">
               <label class="form-label">Cédula o Pasaporte</label>
-              <input type="text" id="cedula" class="form-input" placeholder="EJ. 8-123-4567" required>
+              <input type="text" id="cedula" class="form-input" placeholder="Ej. 8-123-4567" required>
             </div>
-            <div class="form-group">
-              <label class="form-label">Email de Contacto</label>
-              <input type="email" id="emailJugador" class="form-input" placeholder="correo@ejemplo.com" required>
-            </div>
+          </div>
 
-            <!-- UBICACIÓN GEOGRÁFICA DEPENDIENTE (PROVINCIA -> DISTRITO -> CORREGIMIENTO -> BARRIADA) -->
+          <!-- B. INFORMACIÓN RESIDENCIAL -->
+          <h4 class="form-subsection-title">Información Residencial</h4>
+          <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Provincia</label>
               <select id="provinciaSelect" class="form-select" onchange="onProvinciaChange()" required>
@@ -539,15 +552,19 @@
 
             <div class="form-group">
               <label class="form-label">Barriada / Lugar de Residencia</label>
-              <input type="text" id="barriadaInput" class="form-input" list="barriadasList" placeholder="ESCRIBE O SELECCIONA TU BARRIADA" disabled required style="padding-right: 16px;">
+              <input type="text" id="barriadaInput" class="form-input" list="barriadasList" placeholder="Escribe o selecciona tu barriada" disabled required style="padding-right: 16px;">
               <datalist id="barriadasList"></datalist>
             </div>
+          </div>
 
-            <!-- COLEGIO / UNIVERSIDAD PREDICTIVO -->
+          <!-- C. INFORMACIÓN ACADÉMICA -->
+          <h4 class="form-subsection-title">Información Académica</h4>
+          <div class="form-grid">
             <div class="form-group">
               <label class="form-label">Colegio o Universidad</label>
-              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="ESCRIBE O SELECCIONA TU CENTRO EDUCATIVO" required style="padding-right: 16px;">
+              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="Escribe o selecciona tu centro educativo" required style="padding-right: 16px;">
               <datalist id="colegiosList"></datalist>
+              <span class="form-note">Si el atleta cursa estudios en casa, elige "Home School". Si no cursa estudios actualmente, elige "No Aplica".</span>
             </div>
 
             <div class="form-group">
@@ -566,14 +583,18 @@
                 <option value="11.° GRADO">11.° Grado</option>
                 <option value="12.° GRADO">12.° Grado</option>
                 <option value="UNIVERSIDAD">Universidad</option>
+                <option value="HOME SCHOOL">Home School</option>
+                <option value="NO APLICA">No Aplica</option>
               </select>
             </div>
+
             <div class="form-group">
               <label class="form-label">Categoría</label>
               <select id="categoria" class="form-select" onchange="updateTeams()" required>
                 <option value="">Selecciona una categoría</option>
               </select>
             </div>
+
             <div class="form-group">
               <label class="form-label">Equipo</label>
               <select id="equipo" class="form-select" required>
@@ -581,6 +602,7 @@
               </select>
             </div>
           </div>
+
         </div>
 
         <!-- INFORMACIÓN DE LOS ACUDIENTES -->
@@ -591,15 +613,15 @@
           <div class="form-grid-3" style="margin-bottom: 25px;">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
-              <input type="text" id="padreNombre" class="form-input" placeholder="EJ. JUAN PÉREZ">
+              <input type="text" id="padreNombre" class="form-input form-input-capitalize" placeholder="Ej. Juan Pérez">
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono de Contacto</label>
-              <input type="tel" id="padreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
+              <input type="tel" id="padreTelefono" class="form-input" placeholder="Ej. +507 6000-0000">
             </div>
             <div class="form-group">
               <label class="form-label">Email</label>
-              <input type="email" id="padreEmail" class="form-input" placeholder="padre@ejemplo.com" style="text-transform: none;">
+              <input type="email" id="padreEmail" class="form-input" placeholder="padre@ejemplo.com">
             </div>
           </div>
 
@@ -607,15 +629,15 @@
           <div class="form-grid-3">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
-              <input type="text" id="madreNombre" class="form-input" placeholder="EJ. MARÍA RODRÍGUEZ">
+              <input type="text" id="madreNombre" class="form-input form-input-capitalize" placeholder="Ej. María Rodríguez">
             </div>
             <div class="form-group">
               <label class="form-label">Teléfono de Contacto</label>
-              <input type="tel" id="madreTelefono" class="form-input" placeholder="EJ. +507 6000-0000" style="text-transform: none;">
+              <input type="tel" id="madreTelefono" class="form-input" placeholder="Ej. +507 6000-0000">
             </div>
             <div class="form-group">
               <label class="form-label">Email</label>
-              <input type="email" id="madreEmail" class="form-input" placeholder="madre@ejemplo.com" style="text-transform: none;">
+              <input type="email" id="madreEmail" class="form-input" placeholder="madre@ejemplo.com">
             </div>
           </div>
         </div>
@@ -691,19 +713,19 @@
   <!-- SCRIPT DE LÓGICA DE INSCRIPCIÓN -->
   <script>
     const KFL_CONFIG = {
-      // ESTRUCTURA GEOGRÁFICA ENCADENADA: PROVINCIA -> DISTRITO -> CORREGIMIENTO -> BARRIADAS
+      // ESTRUCTURA COMPLETA DE PROVINCIAS, COMARCAS, DISTRITOS, CORREGIMIENTOS Y BARRIADAS REPRESENTATIVAS
       geografiaPanama: {
         "Panamá": {
           "Distrito de Panamá": {
             "Bella Vista": ["El Cangrejo", "Obarrio", "La Cresta", "Campo Alegre", "Bella Vista Centro"],
-            "Bethania": ["Condado del Rey", "El Dorado", "Villa de las Fuentes", "Dos Mares", "La Gloria", "Pontemar", "Club X", "Bethania Centro"],
+            "Bethania": ["Condado del Rey", "El Dorado", "Villa de las Fuentes", "Dos Mares", "La Gloria", "Pontemar", "Linda Vista", "Altos de Panamá", "Club X", "Bethania Centro"],
             "Juan Díaz": ["Costa del Este", "Santa María Country Club", "Versalles", "Ciudad Radial", "Don Bosco", "Concepción", "Juan Díaz Centro"],
             "San Francisco": ["Paitilla", "Punta Pacífica", "San Francisco Centro", "Coco del Mar", "Calle 50"],
-            "Parque Lefevre": ["Chanis", "Santa Elena", "Parque Lefevre Centro"],
-            "Ancón": ["Clayton", "Albrook", "Cárdenas", "Diablo", "Balboa", "Dos Mares (Ancón)"],
+            "Parque Lefevre": ["Chanis", "Santa Elena", "La Fontana", "Panamá Viejo", "Parque Lefevre Centro"],
+            "Ancón": ["Clayton", "Albrook", "Cárdenas", "Diablo", "Balboa", "Paraíso (Ancón)", "Pedro Miguel", "Los Ríos", "Dos Mares (Ancón)"],
             "Las Cumbres": ["Villa Zaita", "Las Cumbres Centro", "Alps of Lake"],
             "Chilibre": ["Chilibre Centro", "Agua Buena"],
-            "Tocumen": ["La Siesta", "Tocumen Centro", "Sector Sur"],
+            "Tocumen": ["La Siesta", "Nuevo Reparto", "Tocumen Centro", "Sector Sur"],
             "Pedregal": ["Rana de Oro", "Pedregal Centro", "Villalobos"]
           },
           "Distrito de San Miguelito": {
@@ -734,6 +756,54 @@
           "Distrito de David": {
             "David (Cabecera)": ["Terronal", "David Centro", "San Mateo"]
           }
+        },
+        "Bocas del Toro": {
+          "Distrito de Changuinola": {
+            "Changuinola (Cabecera)": ["Changuinola Centro", "Finca 60"]
+          }
+        },
+        "Coclé": {
+          "Distrito de Penonomé": {
+            "Penonomé (Cabecera)": ["Penonomé Centro", "Miraflores"]
+          }
+        },
+        "Herrera": {
+          "Distrito de Chitré": {
+            "Chitré (Cabecera)": ["Chitré Centro", "Monagrillo"]
+          }
+        },
+        "Los Santos": {
+          "Distrito de Las Tablas": {
+            "Las Tablas (Cabecera)": ["Las Tablas Centro", "Santo Domingo"]
+          }
+        },
+        "Veraguas": {
+          "Distrito de Santiago": {
+            "Santiago (Cabecera)": ["Santiago Centro", "La Primavera"]
+          }
+        },
+        "Darién": {
+          "Distrito de La Palma": {
+            "La Palma (Cabecera)": ["La Palma Centro"]
+          }
+        },
+        "Comarca Guna Yala": {
+          "Narganá": ["El Porvenir", "Cartí"]
+        },
+        "Comarca Ngäbe-Buglé": {
+          "Kadriri": ["Buäbití"]
+        },
+        "Comarca Emberá-Wounaan": {
+          "Címaco": ["Unión Chocó"]
+        },
+        "Comarca Naso Tjër Di": {
+          "Sieyic": ["Sieyic Centro"]
+        },
+        "Comarca Madungandí": {
+          "Madungandí": ["Akua Yala"]
+        },
+        "Comarca Wargandí": {
+          "Wargandí": ["Wala"]
         }
       },
 
@@ -745,8 +815,11 @@
         "⭐ EL COLEGIO DE PANAMÁ (ECP)",
         "⭐ COLEGIO REAL DE PANAMÁ",
         "⭐ COLEGIO DE LA SALLE",
-        "⭐ KIWANIS KOLTS",
         
+        // OPCIONES ESPECIALES
+        "HOME SCHOOL",
+        "NO APLICA (NO CURSA ESTUDIOS)",
+
         // OTROS COLEGIOS Y UNIVERSIDADES
         "INTERNATIONAL SCHOOL OF PANAMA (ISP)",
         "THE METROPOLITAN SCHOOL OF PANAMA (MET)",
@@ -912,7 +985,7 @@
       const barriadaInput = document.getElementById('barriadaInput');
 
       distritoSelect.innerHTML = '<option value="">Selecciona Distrito</option>';
-      corregimientoSelect.innerHTML = '<option value="">Primero selecciona un Distrito</option>';
+      corregimientoSelect.innerHTML = '<option value="">Primero selecciona una Provincia</option>';
       document.getElementById('barriadasList').innerHTML = '';
       barriadaInput.value = '';
       
@@ -980,7 +1053,7 @@
       }
     }
 
-    /* MÁSCARA Y CÁLCULO DE EDAD ASÍNCRONO AL 1 DE ENERO DE LA TEMPORADA CORRIENTE */
+    /* MÁSCARA Y CÁLCULO DE EDAD ASÍNCRONO AL 1 DE ENERO */
     function formatAndCalculateAge(input) {
       let val = input.value.replace(/\D/g, '');
       if (val.length > 2 && val.length <= 4) {
@@ -990,8 +1063,6 @@
       }
       input.value = val;
 
-      const note = document.getElementById('edadCalculadaNote');
-
       if (val.length === 10) {
         const parts = val.split('/');
         const day = parseInt(parts[0], 10);
@@ -999,53 +1070,33 @@
         const year = parseInt(parts[2], 10);
 
         const birthDate = new Date(year, month, day);
-
-        if (birthDate.getFullYear() !== year || birthDate.getMonth() !== month || birthDate.getDate() !== day) {
-          note.innerText = "⚠️ Fecha de nacimiento no válida.";
-          note.style.color = "#e11d48";
-          clearAgeFields();
-          return;
-        }
-
-        // Fecha de corte: 1 de Enero del año actual
         const currentSeasonYear = new Date().getFullYear();
         const cutoffDate = new Date(currentSeasonYear, 0, 1);
 
-        if (birthDate > cutoffDate) {
-          note.innerText = "⚠️ La fecha de nacimiento no puede ser posterior al 1 de enero de esta temporada.";
-          note.style.color = "#e11d48";
+        if (birthDate.getFullYear() === year && birthDate.getMonth() === month && birthDate.getDate() === day && birthDate <= cutoffDate) {
+          let years = cutoffDate.getFullYear() - birthDate.getFullYear();
+          let months = cutoffDate.getMonth() - birthDate.getMonth();
+          let days = cutoffDate.getDate() - birthDate.getDate();
+
+          if (days < 0) {
+            months--;
+            const prevMonth = new Date(cutoffDate.getFullYear(), cutoffDate.getMonth(), 0);
+            days += prevMonth.getDate();
+          }
+
+          if (months < 0) {
+            years--;
+            months += 12;
+          }
+
+          document.getElementById('edadAnios').value = years;
+          document.getElementById('edadMeses').value = months;
+          document.getElementById('edadDias').value = days;
+          document.getElementById('edadTextoFormateado').value = `${years} años, ${months} meses y ${days} días`;
+        } else {
           clearAgeFields();
-          return;
         }
-
-        // Cálculo exacto de Años, Meses y Días
-        let years = cutoffDate.getFullYear() - birthDate.getFullYear();
-        let months = cutoffDate.getMonth() - birthDate.getMonth();
-        let days = cutoffDate.getDate() - birthDate.getDate();
-
-        if (days < 0) {
-          months--;
-          const prevMonth = new Date(cutoffDate.getFullYear(), cutoffDate.getMonth(), 0);
-          days += prevMonth.getDate();
-        }
-
-        if (months < 0) {
-          years--;
-          months += 12;
-        }
-
-        // Guardar valores en campos ocultos para Google Sheets
-        document.getElementById('edadAnios').value = years;
-        document.getElementById('edadMeses').value = months;
-        document.getElementById('edadDias').value = days;
-        const textoEdad = `${years} años, ${months} meses y ${days} días`;
-        document.getElementById('edadTextoFormateado').value = textoEdad;
-
-        note.innerText = `✅ Edad al 1 de enero de ${currentSeasonYear}: ${textoEdad}`;
-        note.style.color = "#16a34a";
       } else {
-        note.innerText = "Formato: DD/MM/AAAA. Edad calculada automáticamente al 1 de enero.";
-        note.style.color = "#64748b";
         clearAgeFields();
       }
     }

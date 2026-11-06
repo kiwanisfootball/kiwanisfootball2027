@@ -84,14 +84,14 @@
       display: block !important;
     }
 
-    /* DESKTOP HERO CARDS (Ocultas en Mobile) */
+    /* DESKTOP HERO CARDS */
     .leagues-hero-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
       gap: clamp(16px, 3vw, 28px);
       width: 100%;
       max-width: 1200px;
-      margin: clamp(16px, 3vw, 28px) auto clamp(12px, 2vw, 20px) auto;
+      margin: clamp(20px, 3vw, 32px) auto clamp(16px, 2.5vw, 24px) auto;
       padding: 0 clamp(12px, 3vw, 20px);
     }
 
@@ -99,11 +99,11 @@
       position: relative;
       cursor: pointer;
       border: none !important;
-      border-radius: clamp(12px, 2vw, 20px);
+      border-radius: clamp(14px, 2vw, 20px);
       overflow: hidden;
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      min-height: clamp(200px, 30vw, 280px);
+      min-height: clamp(210px, 28vw, 280px);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -129,7 +129,7 @@
       position: relative;
       z-index: 2;
       background: linear-gradient(to top, rgba(11, 15, 25, 0.88) 0%, rgba(11, 15, 25, 0.4) 60%, transparent 100%);
-      padding: clamp(16px, 3vw, 26px);
+      padding: clamp(18px, 3vw, 26px);
       width: 100%;
       color: #ffffff;
       text-align: center;
@@ -165,14 +165,14 @@
       box-shadow: 0 0 0 4px var(--rojo-kfl), 0 12px 30px rgba(235, 61, 64, 0.4);
     }
 
-    /* MOBILE SELECTOR PILLS (Reemplazo táctil de Hero Cards en pantallas pequeñas) */
+    /* MOBILE LEAGUE SELECTOR PILLS (Consistentes y Uniformes) */
     .mobile-league-selector-wrapper {
       display: none;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
       width: 100%;
       max-width: 600px;
-      margin: 16px auto 10px auto;
+      margin: 16px auto 12px auto;
       padding: 0 16px;
     }
 
@@ -180,30 +180,31 @@
       background: #ffffff;
       border: 2px solid #cbd5e1;
       color: #334155;
-      padding: 12px 10px;
+      padding: 14px 10px;
       font-family: var(--fuente-titulos);
-      font-size: 15px;
-      border-radius: 12px;
+      font-size: clamp(14px, 3.5vw, 16px);
+      border-radius: 30px;
       cursor: pointer;
       text-transform: uppercase;
       text-align: center;
       transition: all 0.2s ease;
       letter-spacing: 0.5px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      min-height: 44px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      min-height: 52px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       line-height: 1.1;
+      width: 100%;
     }
 
     .mobile-league-btn span {
       font-family: var(--fuente-cuerpo);
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 800;
-      margin-top: 2px;
-      opacity: 0.8;
+      margin-top: 3px;
+      opacity: 0.85;
       letter-spacing: 0.8px;
     }
 
@@ -228,8 +229,8 @@
 
     .league-instruction-bar {
       text-align: center;
-      margin: clamp(8px, 2vw, 16px) auto clamp(12px, 2.5vw, 20px) auto;
-      padding: clamp(10px, 2vw, 14px) clamp(16px, 3vw, 24px);
+      margin: 12px auto 18px auto;
+      padding: 12px 18px;
       background-color: #f0f7ff;
       border: 1.5px dashed var(--azul-kfl);
       border-radius: 12px;
@@ -245,15 +246,15 @@
     .reset-selection-wrapper {
       display: none;
       text-align: center;
-      margin: clamp(10px, 2vw, 18px) 0 clamp(16px, 3vw, 24px) 0;
+      margin: 12px 0 20px 0;
     }
 
     .btn-reset-league {
       background: #ffffff;
       color: #334155;
       border: 2px solid #cbd5e1;
-      padding: clamp(9px, 1.5vh, 11px) clamp(18px, 2.5vw, 26px);
-      font-size: clamp(12px, 1.4vw, 13px);
+      padding: 10px 24px;
+      font-size: 13px;
       font-weight: 800;
       border-radius: 30px;
       cursor: pointer;
@@ -271,28 +272,28 @@
       transform: translateY(-2px);
     }
 
-    /* CATEGORY PILLS - PROPORCIONALES Y SIN DESBORDE */
+    /* CATEGORY PILLS - PROPORCIONALES Y UNIFORMES */
     .category-pills-wrapper {
       display: flex;
       justify-content: center;
-      gap: clamp(6px, 1.5vw, 12px);
-      margin-bottom: clamp(18px, 3vw, 26px);
+      gap: 10px;
+      margin-bottom: 22px;
       flex-wrap: nowrap;
       overflow-x: auto;
-      padding: 4px 12px;
+      padding: 4px 16px;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
     .category-pills-wrapper::-webkit-scrollbar { display: none; }
 
     .category-pill-btn {
-      padding: clamp(8px, 1.5vw, 11px) clamp(14px, 2vw, 24px);
+      padding: 10px 22px;
       background: #ffffff;
       border: none;
       color: #ffffff;
       font-family: var(--fuente-titulos);
       font-weight: 400;
-      font-size: clamp(13.5px, 1.6vw, 17px);
+      font-size: clamp(14px, 1.6vw, 17px);
       border-radius: 30px;
       cursor: pointer;
       text-transform: uppercase;
@@ -300,7 +301,7 @@
       letter-spacing: 0.8px;
       opacity: 0.75;
       box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-      min-height: 40px;
+      min-height: 42px;
       white-space: nowrap;
       flex-shrink: 0;
     }
@@ -320,28 +321,28 @@
 
     .category-pill-btn:hover { opacity: 1; transform: translateY(-1.5px); }
 
-    /* SUB TABS BAR - UNA SOLA FILA FLUIDA */
+    /* SUB TABS BAR - UNA SOLA FILA FLUIDA SIN CORTES */
     .sub-tabs-bar {
       display: flex;
       justify-content: center;
-      gap: clamp(4px, 1.5vw, 16px);
-      margin-bottom: clamp(20px, 3.5vw, 32px);
+      gap: 12px;
+      margin-bottom: 28px;
       flex-wrap: nowrap;
       overflow-x: auto;
       border-bottom: 2px solid #e2e8f0;
-      padding: 0 12px clamp(10px, 1.5vw, 14px) 12px;
+      padding: 0 16px 12px 16px;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
     .sub-tabs-bar::-webkit-scrollbar { display: none; }
 
     .sub-tab-btn {
-      padding: clamp(6px, 1.2vw, 9px) clamp(10px, 1.8vw, 18px);
+      padding: 8px 16px;
       background: transparent;
       border: none;
       color: #64748b;
       font-weight: 800;
-      font-size: clamp(11.5px, 1.4vw, 13.5px);
+      font-size: clamp(12px, 1.4vw, 14px);
       cursor: pointer;
       text-transform: uppercase;
       transition: all 0.2s ease;
@@ -358,7 +359,7 @@
     .sub-tab-btn.active::after {
       content: '';
       position: absolute;
-      bottom: -14px;
+      bottom: -12px;
       left: 0;
       width: 100%;
       height: 3px;
@@ -379,13 +380,13 @@
     }
 
     .kfl-filter-select {
-      padding: clamp(9px, 1.5vw, 11px) clamp(14px, 2vw, 18px);
+      padding: 10px 16px;
       border-radius: 10px;
       border: 1px solid #cbd5e1;
       background: #ffffff;
       font-weight: 600;
       color: #1e293b;
-      font-size: clamp(12.5px, 1.5vw, 13.5px);
+      font-size: 13.5px;
       cursor: pointer;
       outline: none;
       box-shadow: 0 1px 3px rgba(0,0,0,0.02);
@@ -396,8 +397,8 @@
       background: var(--azul-kfl);
       color: #ffffff;
       border: none;
-      padding: clamp(9px, 1.5vw, 11px) clamp(16px, 2.5vw, 20px);
-      font-size: clamp(12.5px, 1.5vw, 13.5px);
+      padding: 10px 18px;
+      font-size: 13.5px;
       font-weight: 800;
       border-radius: 10px;
       cursor: pointer;
@@ -416,13 +417,13 @@
       width: 100%;
       max-width: 1160px;
       margin: 0 auto;
-      padding: 0 clamp(12px, 3vw, 24px) clamp(30px, 5vw, 60px) clamp(12px, 3vw, 24px);
+      padding: 0 16px 50px 16px;
     }
 
     /* GRID Y CENTRADO DE PARTIDOS */
-    .kfl-week-section { margin-bottom: clamp(28px, 4.5vw, 40px); }
+    .kfl-week-section { margin-bottom: 36px; }
     .kfl-week-title {
-      font-size: clamp(16px, 2vw, 18px);
+      font-size: 17px;
       font-weight: 900;
       color: var(--azul-kfl);
       border-bottom: 2.5px solid var(--azul-kfl);
@@ -437,7 +438,7 @@
     .kfl-grid-matches { 
       display: grid; 
       grid-template-columns: repeat(2, minmax(0, 1fr)); 
-      gap: clamp(14px, 2vw, 20px); 
+      gap: 16px; 
       width: 100%; 
     }
 
@@ -479,9 +480,9 @@
     .kfl-match-header {
       background: var(--azul-kfl);
       color: #ffffff;
-      padding: clamp(8px, 1.5vw, 10px) clamp(14px, 2vw, 18px);
+      padding: 9px 16px;
       font-weight: 700;
-      font-size: clamp(11.5px, 1.5vw, 12.5px);
+      font-size: 12px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -491,13 +492,13 @@
     body.flag-theme .kfl-match-header { background: var(--rojo-kfl); }
     .kfl-info-item { display: flex; align-items: center; gap: 6px; }
     .kfl-icon-svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
-    .kfl-match-body { padding: clamp(16px, 2.5vw, 22px); display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .kfl-team-box { display: flex; flex-direction: column; align-items: center; width: 36%; text-align: center; font-weight: 800; font-size: clamp(13px, 1.5vw, 14.5px); color: #0f172a; }
-    .kfl-team-logo { width: clamp(42px, 6vw, 54px); height: clamp(42px, 6vw, 54px); object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06)); }
+    .kfl-match-body { padding: 18px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .kfl-team-box { display: flex; flex-direction: column; align-items: center; width: 36%; text-align: center; font-weight: 800; font-size: 14px; color: #0f172a; }
+    .kfl-team-logo { width: 48px; height: 48px; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06)); }
     .kfl-score-box { width: 28%; text-align: center; }
-    .kfl-score-num { font-size: clamp(22px, 3.5vw, 28px); font-weight: 900; color: #0f172a; letter-spacing: 0.5px; }
-    .kfl-score-vs { font-size: clamp(16px, 2.5vw, 20px); font-weight: 900; color: #94a3b8; letter-spacing: 1px; }
-    .kfl-score-status { font-size: clamp(10px, 1.2vw, 11.5px); font-weight: 900; color: #16a34a; letter-spacing: 0.8px; margin-bottom: 2px; }
+    .kfl-score-num { font-size: 26px; font-weight: 900; color: #0f172a; letter-spacing: 0.5px; }
+    .kfl-score-vs { font-size: 18px; font-weight: 900; color: #94a3b8; letter-spacing: 1px; }
+    .kfl-score-status { font-size: 11px; font-weight: 900; color: #16a34a; letter-spacing: 0.8px; margin-bottom: 2px; }
 
     /* CARD DE JAMBOREE INDIVIDUAL Y CENTRADO */
     .kfl-jamboree-card {
@@ -514,7 +515,7 @@
       width: 100%;
     }
     .kfl-jamboree-body {
-      padding: clamp(20px, 3.5vw, 28px) clamp(16px, 3vw, 24px);
+      padding: 24px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -525,7 +526,7 @@
     }
     .kfl-jamboree-title {
       font-family: var(--fuente-titulos);
-      font-size: clamp(24px, 4vw, 32px);
+      font-size: 28px;
       color: var(--azul-kfl);
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -535,7 +536,7 @@
     body.flag-theme .kfl-jamboree-title { color: var(--rojo-kfl); }
     .kfl-jamboree-sub {
       font-family: var(--fuente-cuerpo);
-      font-size: clamp(13px, 1.5vw, 14.5px);
+      font-size: 14px;
       font-weight: 800;
       color: #475569;
       text-transform: uppercase;
@@ -547,7 +548,7 @@
       align-items: center;
       gap: 6px;
       font-family: var(--fuente-cuerpo);
-      font-size: clamp(13px, 1.5vw, 14px);
+      font-size: 13.5px;
       font-weight: 700;
       color: #0f172a;
     }
@@ -561,8 +562,8 @@
       border-radius: 12px;
       display: inline-flex;
       align-items: center;
-      gap: clamp(12px, 2vw, 18px);
-      padding: clamp(10px, 1.5vw, 12px) clamp(16px, 2.5vw, 22px);
+      gap: 16px;
+      padding: 10px 20px;
       box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
     }
     body.contact-theme .kfl-bye-card-avenir { border-color: var(--azul-kfl); }
@@ -571,9 +572,9 @@
     .kfl-bye-pill-badge {
       background: #0f172a;
       color: #ffffff;
-      font-size: clamp(10px, 1.2vw, 11.5px);
+      font-size: 11px;
       font-weight: 900;
-      padding: clamp(5px, 1vw, 6px) clamp(10px, 1.5vw, 14px);
+      padding: 5px 12px;
       border-radius: 20px;
       letter-spacing: 0.8px;
       text-transform: uppercase;
@@ -583,10 +584,10 @@
     body.flag-theme .kfl-bye-pill-badge { background: var(--rojo-kfl); }
 
     .kfl-bye-team-cluster { display: flex; align-items: center; gap: 10px; }
-    .kfl-bye-logo-img { width: clamp(28px, 4vw, 34px); height: clamp(28px, 4vw, 34px); object-fit: contain; }
+    .kfl-bye-logo-img { width: 32px; height: 32px; object-fit: contain; }
     .kfl-bye-text-info { display: flex; flex-direction: column; text-align: left; }
     .kfl-bye-subtext { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
-    .kfl-bye-name-highlight { font-size: clamp(13.5px, 1.5vw, 15px); font-weight: 900; color: #0f172a; text-transform: uppercase; letter-spacing: 0.4px; line-height: 1.2; }
+    .kfl-bye-name-highlight { font-size: 14.5px; font-weight: 900; color: #0f172a; text-transform: uppercase; letter-spacing: 0.4px; line-height: 1.2; }
 
     /* ROSTERS */
     .rosters-grid {
@@ -594,7 +595,7 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: flex-start;
-      gap: clamp(16px, 3vw, 28px);
+      gap: 24px;
       width: 100%;
       margin: 20px auto 30px auto;
       padding: 0 10px;
@@ -604,7 +605,7 @@
       background: transparent !important;
       border: none !important;
       padding: 10px 6px;
-      width: clamp(110px, 15vw, 130px);
+      width: 120px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -615,8 +616,8 @@
     }
     .team-card-roster:hover { transform: translateY(-4px); }
     .team-roster-logo-wrap {
-      width: clamp(74px, 10vw, 86px);
-      height: clamp(74px, 10vw, 86px);
+      width: 82px;
+      height: 82px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -627,7 +628,7 @@
     .team-card-roster h4 {
       font-family: var(--fuente-cuerpo) !important;
       font-weight: 800;
-      font-size: clamp(12.5px, 1.5vw, 14px);
+      font-size: 13.5px;
       color: #475569;
       margin: 0;
       text-transform: uppercase;
@@ -637,7 +638,7 @@
       background: #ffffff;
       border: 1px solid #e2e8f0;
       border-radius: 16px;
-      padding: clamp(20px, 4vw, 32px);
+      padding: 28px 32px;
       margin: 25px auto 40px auto;
       max-width: 780px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.04);
@@ -654,10 +655,10 @@
       gap: 15px;
     }
     .roster-detail-title-group { display: flex; align-items: center; gap: 14px; }
-    .roster-detail-title-group img { width: clamp(40px, 6vw, 50px); height: clamp(40px, 6vw, 50px); object-fit: contain; }
+    .roster-detail-title-group img { width: 48px; height: 48px; object-fit: contain; }
     .roster-detail-title-group h3 {
       font-family: var(--fuente-titulos);
-      font-size: clamp(20px, 3vw, 26px);
+      font-size: 24px;
       color: var(--azul-kfl);
       margin: 0;
       text-transform: uppercase;
@@ -678,13 +679,13 @@
     }
     .btn-close-roster:hover { background: #e2e8f0; color: #0f172a; }
 
-    .roster-compact-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: clamp(12.5px, 1.5vw, 14px); }
+    .roster-compact-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13.5px; }
     .roster-compact-table th {
       background-color: #f8fafc;
       color: var(--azul-kfl);
       font-weight: 900;
       text-transform: uppercase;
-      font-size: clamp(11px, 1.3vw, 12px);
+      font-size: 11.5px;
       padding: 12px;
       border-bottom: 2.5px solid #cbd5e1;
       text-align: left;
@@ -694,18 +695,18 @@
     .roster-player-clickable-row { cursor: pointer; transition: background-color 0.15s; }
     .roster-player-clickable-row:hover { background-color: #f0f7ff !important; }
     body.flag-theme .roster-player-clickable-row:hover { background-color: #fff1f2 !important; }
-    .cell-jersey-badge { font-family: var(--fuente-titulos); font-size: clamp(15px, 2vw, 17px); color: var(--azul-kfl); }
+    .cell-jersey-badge { font-family: var(--fuente-titulos); font-size: 16px; color: var(--azul-kfl); }
     body.flag-theme .cell-jersey-badge { color: var(--rojo-kfl); }
     .staff-section-title {
       font-family: var(--fuente-titulos);
-      font-size: clamp(16px, 2vw, 19px);
+      font-size: 18px;
       color: #0f172a;
       margin: 24px 0 12px 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
-    /* TABLA DE POSICIONES Y STATS (CON ORDENAMIENTO INTERACTIVO) */
+    /* TABLA DE POSICIONES Y STATS (ORDENABLE Y PROTEGIDA CONTRA DESBORDE) */
     .kfl-table {
       width: 100%;
       border-collapse: collapse;
@@ -716,55 +717,45 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.04);
       margin-top: 10px;
       margin-bottom: 40px;
+      table-layout: auto;
     }
 
     .kfl-table th {
       background: var(--azul-kfl);
       color: #ffffff;
-      padding: clamp(10px, 1.5vw, 14px) clamp(6px, 1vw, 10px);
-      font-size: clamp(11px, 1.3vw, 12.5px);
+      padding: 12px 8px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
       text-align: center;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
       cursor: pointer;
       user-select: none;
       transition: background-color 0.2s ease;
-      position: relative;
+      white-space: nowrap;
     }
 
-    .kfl-table th:hover {
-      background-color: rgba(0, 0, 0, 0.12);
-    }
-
+    .kfl-table th:hover { background-color: rgba(0, 0, 0, 0.12); }
     body.flag-theme .kfl-table th { background: var(--rojo-kfl); }
     body.flag-theme .kfl-table th:hover { background-color: rgba(0, 0, 0, 0.12); }
 
     .kfl-table th::after {
       content: ' ↕';
-      font-size: 10px;
+      font-size: 9px;
       opacity: 0.6;
       margin-left: 2px;
     }
 
-    .kfl-table th.sort-asc::after {
-      content: ' ▲';
-      opacity: 1;
-      color: #ffffff;
-    }
-
-    .kfl-table th.sort-desc::after {
-      content: ' ▼';
-      opacity: 1;
-      color: #ffffff;
-    }
+    .kfl-table th.sort-asc::after { content: ' ▲'; opacity: 1; color: #ffffff; }
+    .kfl-table th.sort-desc::after { content: ' ▼'; opacity: 1; color: #ffffff; }
 
     .kfl-table td {
-      padding: clamp(10px, 1.5vw, 13px) clamp(6px, 1vw, 10px);
+      padding: 11px 8px;
       text-align: center;
       border-bottom: 1px solid #f1f5f9;
-      font-size: clamp(12px, 1.4vw, 13.5px);
+      font-size: 13px;
       color: #334155;
+      white-space: nowrap;
     }
 
     .kfl-table td.team-col-cell, .kfl-table th.team-col-cell {
@@ -776,15 +767,15 @@
     .kfl-table-team-cell {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-align: left;
       font-weight: 800;
       white-space: nowrap;
     }
 
     .kfl-table-team-logo {
-      width: clamp(24px, 3.5vw, 30px);
-      height: clamp(24px, 3.5vw, 30px);
+      width: 26px;
+      height: 26px;
       object-fit: contain;
       flex-shrink: 0;
     }
@@ -792,30 +783,42 @@
     .kfl-table tr:nth-child(even) { background-color: #f8fafc; }
     .kfl-table tr:hover { background-color: #f1f5f9; }
 
-    /* STATS BUTTONS */
+    /* STATS BUTTONS GRID (2x2 SIMÉTRICO Y PROPORCIONAL) */
     .stats-buttons-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 260px));
       justify-content: center;
-      gap: clamp(8px, 2vw, 14px);
+      gap: 12px;
       margin-bottom: 24px;
-      flex-wrap: wrap;
+      padding: 0 16px;
+    }
+
+    @media (max-width: 600px) {
+      .stats-buttons-grid {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
     .stat-type-btn {
-      padding: clamp(10px, 1.5vw, 12px) clamp(16px, 2.5vw, 26px);
+      padding: 12px 16px;
       background: var(--azul-kfl);
       border: none;
       color: #ffffff;
       border-radius: 30px;
       font-family: var(--fuente-cuerpo);
       font-weight: 800;
-      font-size: clamp(12px, 1.4vw, 13.5px);
+      font-size: 13px;
       letter-spacing: 0.5px;
       cursor: pointer;
       text-transform: uppercase;
       opacity: 0.75;
       transition: all 0.2s ease;
       min-height: 44px;
+      width: 100%;
+      text-align: center;
     }
 
     body.flag-theme .stat-type-btn { background: var(--rojo-kfl); }
@@ -861,7 +864,7 @@
       justify-content: center;
       gap: 10px;
       padding: 10px 18px;
-      font-size: clamp(13px, 1.5vw, 15px);
+      font-size: 14px;
       font-weight: 900;
       text-transform: uppercase;
       margin-bottom: 24px;
@@ -879,12 +882,12 @@
     }
     body.flag-theme .kfl-update-svg { fill: var(--rojo-kfl); }
 
-    /* PAGINATION BAR - PROPORCIONAL Y FLEXIBLE EN MOBILE */
+    /* PAGINATION BAR - PROPORCIONAL Y FLEXIBLE */
     .kfl-pagination-bar {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: clamp(8px, 2vw, 16px);
+      gap: 14px;
       margin-top: 28px;
       margin-bottom: 20px;
       flex-wrap: wrap;
@@ -892,12 +895,12 @@
     }
 
     .kfl-nav-btn {
-      padding: clamp(9px, 1.5vw, 10px) clamp(14px, 2.5vw, 20px);
+      padding: 10px 20px;
       background: #ffffff;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
       font-weight: 800;
-      font-size: clamp(12px, 1.4vw, 13px);
+      font-size: 13px;
       color: var(--azul-kfl);
       cursor: pointer;
       text-transform: uppercase;
@@ -920,7 +923,7 @@
 
     .kfl-page-indicator {
       font-family: var(--fuente-cuerpo);
-      font-size: clamp(12.5px, 1.5vw, 13.5px);
+      font-size: 13.5px;
       font-weight: 800;
       color: #475569;
       white-space: nowrap;
@@ -962,7 +965,7 @@
 
     .player-card-header {
       background-color: var(--azul-kfl);
-      padding: clamp(24px, 4vw, 32px) 20px 22px 20px;
+      padding: 28px 20px 22px 20px;
       color: #ffffff;
       text-align: center;
       position: relative;
@@ -1001,7 +1004,7 @@
     .player-card-photo { width: 100%; height: 100%; object-fit: contain; }
     .player-card-name {
       font-family: var(--fuente-titulos);
-      font-size: clamp(22px, 3.5vw, 26px);
+      font-size: 24px;
       color: #ffffff;
       text-transform: uppercase;
       margin: 0 0 4px 0;
@@ -1015,7 +1018,7 @@
       text-transform: uppercase;
       letter-spacing: 0.8px;
     }
-    .player-card-body { padding: clamp(20px, 3vw, 26px); background: #ffffff; }
+    .player-card-body { padding: 24px; background: #ffffff; }
     .player-stat-category-title {
       font-family: var(--fuente-titulos);
       font-size: 14.5px;
@@ -1029,7 +1032,7 @@
     body.flag-theme .player-stat-category-title { color: var(--rojo-kfl); }
     .player-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 10px; text-align: center; }
     .player-stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 6px; }
-    .player-stat-val { font-family: var(--fuente-titulos); font-size: clamp(17px, 2.5vw, 20px); color: var(--azul-kfl); }
+    .player-stat-val { font-family: var(--fuente-titulos); font-size: 19px; color: var(--azul-kfl); }
     body.flag-theme .player-stat-val { color: var(--rojo-kfl); }
     .player-stat-lbl { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.3px; margin-top: 2px; }
 
@@ -1103,7 +1106,7 @@
     </div>
 
     <div class="league-instruction-bar" id="instructionBar">
-      <svg class="instruction-arrow" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;fill:currentColor;vertical-align:middle;margin-right:6px;"><path d="M12 16l-6-6 1.41-1.41L12 13.17l4.59-4.58L18 10z"/></svg>Haz clic en <strong>Contact Football</strong> o <strong>Flag Football</strong> para desplegar sus categorías, calendarios, rosters y estadísticas.
+      <svg class="instruction-arrow" viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;fill:currentColor;vertical-align:middle;margin-right:6px;"><path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/></svg>Haz clic en <strong>Contact Football</strong> o <strong>Flag Football</strong> para desplegar sus categorías, calendarios, rosters y estadísticas.
     </div>
 
     <div class="reset-selection-wrapper" id="resetBtnWrapper">
@@ -1196,7 +1199,9 @@
 
         <!-- POSICIONES -->
         <div class="tab-pane" id="pane-posiciones">
-          <div id="posicionesNativeContent" class="kfl-render-container"></div>
+          <div style="overflow-x: auto;">
+            <div id="posicionesNativeContent" class="kfl-render-container"></div>
+          </div>
         </div>
 
         <!-- STATS -->
@@ -1285,9 +1290,8 @@
     let paginaActualStats = 1;
     const filasPorPagina = 10;
 
-    // Estado global de ordenamiento para tablas (Standings y Stats)
     let currentSortColumn = null;
-    let currentSortDirection = 'asc'; // 'asc' o 'desc'
+    let currentSortDirection = 'asc';
 
     const SVG_ICONS = {
       calendar: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>`,
@@ -1702,7 +1706,6 @@
         currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
       } else {
         currentSortColumn = colKey;
-        // Para PTS, JG y DIF el default intuitivo es descendente (mayor a menor)
         currentSortDirection = ['PTS', 'JG', 'DIF', 'PF'].includes(colKey) ? 'desc' : 'asc';
       }
 
@@ -2156,7 +2159,6 @@
         currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
       } else {
         currentSortColumn = colKey;
-        // Para métricas deportivas (Yards, TD, Carries, Comp, Tackles, etc.) el default es descendente
         currentSortDirection = ['JUGADOR', 'EQUIPO'].includes(colKey) ? 'asc' : 'desc';
       }
 
@@ -2336,7 +2338,7 @@
       document.querySelectorAll('.stat-type-btn').forEach(b => b.classList.remove('active-stat'));
       btn.classList.add('active-stat');
       tipoStatActivo = tipo;
-      paginaActualStats = paginaActualStats; // Mantiene o resetea según preferencia
+      paginaActualStats = 1;
       currentSortColumn = null;
       currentSortDirection = 'asc';
       document.getElementById('searchStatInput').value = '';

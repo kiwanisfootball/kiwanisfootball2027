@@ -9,20 +9,21 @@
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
+    /* ESTILOS ESPECÍFICOS DEL FORMULARIO DE REGISTRO */
     .inscripcion-container {
       max-width: 1100px;
       width: 100%;
       margin: 0 auto;
       padding: 20px;
-      font-family: 'Avenir', sans-serif;
       box-sizing: border-box;
     }
 
+    /* 1. GATE DE CONTRASEÑA */
     #passwordGate {
       max-width: 500px;
       margin: 60px auto;
       background: #ffffff;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--gris-borde);
       border-radius: 16px;
       padding: 40px;
       text-align: center;
@@ -30,20 +31,21 @@
     }
 
     .gate-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 28px;
-      color: #19547E;
+      color: var(--azul-kfl);
       margin-bottom: 12px;
       text-transform: uppercase;
     }
 
     .gate-desc {
       font-size: 14.5px;
-      color: #64748b;
+      color: var(--texto-suave);
       margin-bottom: 25px;
       line-height: 1.6;
     }
 
+    /* 2. SELECTOR DE MODALIDAD */
     #modalitySelector {
       display: none;
       max-width: 900px;
@@ -52,16 +54,16 @@
     }
 
     .selector-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 32px;
-      color: #19547E;
+      color: var(--azul-kfl);
       text-transform: uppercase;
       margin-bottom: 10px;
     }
 
     .selector-desc {
       font-size: 15px;
-      color: #64748b;
+      color: var(--texto-suave);
       margin-bottom: 30px;
     }
 
@@ -81,14 +83,13 @@
       border-radius: 14px;
       border: none;
       color: #ffffff;
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 22px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
 
     .modality-choice-btn svg {
@@ -97,12 +98,13 @@
       fill: #ffffff;
     }
 
-    .btn-contact-theme { background: #19547E; }
-    .btn-contact-theme:hover { background: #144265; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(25, 84, 126, 0.3); }
+    .btn-contact-theme { background: var(--azul-kfl); }
+    .btn-contact-theme:hover { background: #004a87; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 94, 170, 0.3); }
 
-    .btn-flag-theme { background: #C53030; }
-    .btn-flag-theme:hover { background: #9b2c2c; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(197, 48, 48, 0.3); }
+    .btn-flag-theme { background: var(--rojo-kfl); }
+    .btn-flag-theme:hover { background: #c92f32; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(235, 61, 64, 0.3); }
 
+    /* 3. VISTA DEL FORMULARIO */
     #inscripcionContent {
       display: none;
     }
@@ -123,7 +125,7 @@
     }
 
     .inscripcion-hero-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 38px;
       font-weight: 400;
       color: #ffffff;
@@ -141,7 +143,7 @@
 
     .privacy-notice {
       background: #f8fafc;
-      border-left: 4px solid #19547E;
+      border-left: 4px solid var(--azul-kfl);
       padding: 18px 22px;
       border-radius: 0 12px 12px 0;
       margin-bottom: 30px;
@@ -153,7 +155,7 @@
 
     .form-card {
       background: #ffffff;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--gris-borde);
       border-radius: 16px;
       padding: 35px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.04);
@@ -161,13 +163,13 @@
     }
 
     .form-section-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 22px;
-      color: #19547E;
+      color: var(--azul-kfl);
       text-transform: uppercase;
       margin-bottom: 20px;
       padding-bottom: 8px;
-      border-bottom: 2px solid #e2e8f0;
+      border-bottom: 2px solid var(--gris-borde);
     }
 
     .form-grid {
@@ -190,7 +192,7 @@
       display: block;
       font-size: 13.5px;
       font-weight: 800;
-      color: #334155;
+      color: var(--texto-oscuro);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 8px;
@@ -199,7 +201,7 @@
     .form-note {
       display: block;
       font-size: 12px;
-      color: #64748b;
+      color: var(--texto-suave);
       margin-top: 4px;
       font-weight: 600;
     }
@@ -207,7 +209,7 @@
     .form-input, .form-select {
       width: 100%;
       padding: 12px 16px;
-      font-family: 'Avenir', sans-serif;
+      font-family: var(--fuente-cuerpo);
       font-size: 14.5px;
       color: #1e293b;
       background: #f8fafc;
@@ -238,8 +240,8 @@
 
     .form-input:focus, .form-select:focus {
       background-color: #ffffff;
-      border-color: #19547E;
-      box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
+      border-color: var(--azul-kfl);
+      box-shadow: 0 0 0 4px rgba(0, 94, 170, 0.12);
     }
 
     .file-upload-box {
@@ -253,7 +255,7 @@
     }
 
     .file-upload-box:hover {
-      border-color: #19547E;
+      border-color: var(--azul-kfl);
       background: #f1f5f9;
     }
 
@@ -278,7 +280,7 @@
     }
 
     .payment-title {
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 20px;
       text-transform: uppercase;
       margin-bottom: 12px;
@@ -331,7 +333,7 @@
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--gris-borde);
       padding-top: 12px;
     }
 
@@ -352,22 +354,22 @@
 
     .submit-btn {
       width: 100%;
-      background: #19547E;
+      background: var(--azul-kfl);
       color: #ffffff;
       border: none;
       padding: 16px;
-      font-family: 'Anton', sans-serif;
+      font-family: var(--fuente-titulos);
       font-size: 22px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(25, 84, 126, 0.25);
+      box-shadow: 0 4px 15px rgba(0, 94, 170, 0.25);
     }
 
     .submit-btn:hover {
-      background: #144265;
+      background: #004a87;
       transform: translateY(-2px);
     }
 
@@ -388,7 +390,7 @@
       margin-bottom: 20px;
       font-size: 14px;
       font-weight: 800;
-      color: #19547E;
+      color: var(--azul-kfl);
       text-decoration: none;
       cursor: pointer;
     }
@@ -416,8 +418,8 @@
     <div id="passwordGate">
       <h2 class="gate-title">Acceso Restringido</h2>
       <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
-      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none; background-image: none;">
-      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px; background: #19547E;">Ingresar</button>
+      <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center; text-transform: none;">
+      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px;">Ingresar</button>
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
 
@@ -492,7 +494,7 @@
             <!-- COLEGIO / UNIVERSIDAD -->
             <div class="form-group">
               <label class="form-label">Colegio o Universidad</label>
-              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="ESCRIBE O SELECCIONA TU CENTRO EDUCATIVO" required style="background-image: none; padding-right: 16px;">
+              <input type="text" id="colegioInput" class="form-input" list="colegiosList" placeholder="ESCRIBE O SELECCIONA TU CENTRO EDUCATIVO" required style="padding-right: 16px;">
               <datalist id="colegiosList"></datalist>
             </div>
 
@@ -533,7 +535,7 @@
         <div class="form-card">
           <h3 class="form-section-title">2. Información de los Acudientes</h3>
           
-          <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
+          <h4 style="color: var(--azul-kfl); font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
           <div class="form-grid-3" style="margin-bottom: 25px;">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
@@ -549,7 +551,7 @@
             </div>
           </div>
 
-          <h4 style="color: #19547E; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
+          <h4 style="color: var(--azul-kfl); font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
           <div class="form-grid-3">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
@@ -631,51 +633,10 @@
   <!-- FOOTER GLOBAL INYECTADO -->
   <div id="globalFooter"></div>
 
-  <!-- BOTÓN VOLVER ARRIBA -->
-  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
-    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-  </button>
+  <!-- SCRIPT UNIFICADO DE COMPONENTES GLOBALES (NAV, FOOTER Y BOTÓN BACK TO TOP) -->
+  <script src="js/components.js"></script>
 
-  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
-      fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
-          
-          // Activar menú hamburguesa dinámicamente tras cargar
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-          }
-        });
-
-      // Inyectar Footer desde footer.html
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
-        });
-
-      // Botón volver arriba
-      const backToTopBtn = document.getElementById('backToTopBtn');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
-      });
-      backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    });
-  </script>
-
-  <!-- SCRIPT DE LA LÓGICA DE INSCRIPCIÓN -->
+  <!-- SCRIPT DE LÓGICA DE INSCRIPCIÓN -->
   <script>
     const KFL_CONFIG = {
       distritosCorregimientos: {

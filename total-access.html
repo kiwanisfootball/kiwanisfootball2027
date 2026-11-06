@@ -3,17 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KFL Total Access - Kiwanis Football League Panama</title>
-  
+
+  <!-- SEO & AEO Meta Tags -->
+  <title>KFL Total Access - Videos, Resúmenes y Transmisiones | Kiwanis Football League Panamá</title>
+  <meta name="description" content="KFL Total Access: resúmenes de partidos, programas, entrevistas y transmisiones en vivo de la Kiwanis Football League Panamá en Contact y Flag Football, categorías Micro, Mini, Juvenil y Varsity.">
+  <meta name="keywords" content="KFL Total Access, Kiwanis Football League, videos KFL, resúmenes de partidos KFL, transmisiones en vivo KFL, football americano Panamá, flag football Panamá">
+  <link rel="canonical" href="https://www.kiwanisfootball.com/total-access.html">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="KFL Total Access - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Videos, resúmenes y transmisiones en vivo de la KFL en Panamá.">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/logos/KFL-Logo.png">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/total-access.html">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- Schema.org Structured Data (JSON-LD) para GEO, SEO y AEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://www.kiwanisfootball.com/total-access.html",
+        "url": "https://www.kiwanisfootball.com/total-access.html",
+        "name": "KFL Total Access - Kiwanis Football League Panamá",
+        "inLanguage": "es",
+        "description": "Videos, resúmenes, programas y transmisiones en vivo de la Kiwanis Football League Panamá.",
+        "isPartOf": {
+          "@type": "WebSite",
+          "name": "Kiwanis Football League Panamá",
+          "url": "https://www.kiwanisfootball.com"
+        },
+        "about": {
+          "@type": "SportsOrganization",
+          "name": "Kiwanis Football League Panamá",
+          "alternateName": "KFL",
+          "sport": "American Football"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.kiwanisfootball.com/#kfl-total-access",
+        "name": "KFL Total Access",
+        "description": "Programa oficial de noticias, resúmenes y transmisiones de la Kiwanis Football League Panamá.",
+        "url": "https://www.kiwanisfootball.com/total-access.html",
+        "logo": "https://www.kiwanisfootball.com/assets/logos/KFL-Logo.png",
+        "founder": {
+          "@type": "Person",
+          "name": "Raúl Méndez de Obarrio"
+        },
+        "foundingDate": "2018",
+        "sameAs": [
+          "https://www.youtube.com/@KFLTotalAccess",
+          "https://www.instagram.com/kfl_total_access/",
+          "http://facebook.com/profile.php?id=61580980794081"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Anton & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos global y favicon local -->
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
   <style>
-    /* CONTENEDOR GENERAL */
+    /* ==========================================================================
+       TOTAL ACCESS - ESTILOS DE LA PÁGINA (variables globales de styles.css)
+       ========================================================================== */
     .ta-container {
       max-width: 1100px;
+      width: 100%;
       margin: 0 auto;
       padding: 20px;
+      box-sizing: border-box;
+      font-family: var(--fuente-cuerpo);
     }
 
     /* BANNER HERO */
@@ -23,7 +93,7 @@
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
       margin-bottom: 25px;
-      background: #19547E;
+      background: var(--azul-kfl);
     }
 
     .ta-banner-img {
@@ -33,26 +103,30 @@
       object-fit: cover;
     }
 
-    /* TARJETA RESEÑA */
+    /* RESEÑA */
     .ta-about-card {
       background: #ffffff;
       border-radius: 16px;
       padding: 30px;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       margin-bottom: 30px;
+      box-sizing: border-box;
     }
 
     .ta-title {
-      font-size: 26px;
-      font-weight: 900;
-      color: #19547E;
+      font-family: var(--fuente-titulos);
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 400;
+      color: var(--azul-kfl);
       text-transform: uppercase;
       margin-bottom: 15px;
       letter-spacing: 0.5px;
-      border-bottom: 3px solid #19547E;
+      border-bottom: 3px solid var(--azul-kfl);
       display: inline-block;
       padding-bottom: 5px;
+      max-width: 100%;
+      overflow-wrap: anywhere;
     }
 
     .ta-description {
@@ -70,14 +144,15 @@
     }
 
     .ta-backlink {
-      color: #19547E;
+      color: var(--azul-kfl);
       font-weight: 800;
       text-decoration: underline;
       transition: color 0.2s ease;
+      overflow-wrap: anywhere;
     }
 
     .ta-backlink:hover {
-      color: #0f3652;
+      color: #003f73;
     }
 
     /* REDES SOCIALES */
@@ -103,6 +178,7 @@
       text-decoration: none;
       color: #ffffff;
       transition: transform 0.2s ease, opacity 0.2s ease;
+      max-width: 100%;
     }
 
     .ta-social-link:hover {
@@ -118,9 +194,10 @@
       width: 18px;
       height: 18px;
       fill: #ffffff;
+      flex-shrink: 0;
     }
 
-    /* BANNER DE TRANSMISIÓN EN VIVO AHORA (SOLO SE MUESTRA SI HAY UN LIVE ACTIVO) */
+    /* TRANSMISIÓN EN VIVO (solo visible si hay un live activo) */
     .ta-live-stream-card {
       display: none;
       background: #ffffff;
@@ -129,6 +206,7 @@
       border: 2px solid #dc2626;
       box-shadow: 0 4px 15px rgba(220, 38, 38, 0.15);
       margin-bottom: 30px;
+      box-sizing: border-box;
     }
 
     .ta-live-badge-header {
@@ -155,12 +233,12 @@
     }
 
     @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.2); }
+      0%   { opacity: 1; transform: scale(1); }
+      50%  { opacity: 0.4; transform: scale(1.2); }
       100% { opacity: 1; transform: scale(1); }
     }
 
-    .ta-live-video-container {
+    .ta-video-16x9 {
       position: relative;
       width: 100%;
       padding-bottom: 56.25%;
@@ -170,7 +248,7 @@
       background: #000000;
     }
 
-    .ta-live-video-container iframe {
+    .ta-video-16x9 iframe {
       position: absolute;
       top: 0;
       left: 0;
@@ -179,17 +257,17 @@
       border: 0;
     }
 
-    /* SECCIÓN DE VIDEOTECA */
+    /* VIDEOTECA */
     .ta-gallery-section {
       background: #ffffff;
       border-radius: 16px;
       padding: 30px;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       margin-bottom: 30px;
+      box-sizing: border-box;
     }
 
-    /* FILTROS CENTRADOS */
     .ta-filter-bar {
       display: flex;
       gap: 12px;
@@ -209,6 +287,7 @@
       cursor: pointer;
       transition: all 0.2s ease;
       text-transform: uppercase;
+      max-width: 100%;
     }
 
     .ta-filter-btn:hover {
@@ -217,16 +296,16 @@
     }
 
     .ta-filter-btn.active {
-      background: #19547E;
+      background: var(--azul-kfl);
       color: #ffffff;
-      border-color: #19547E;
-      box-shadow: 0 4px 10px rgba(25, 84, 126, 0.25);
+      border-color: var(--azul-kfl);
+      box-shadow: 0 4px 10px rgba(0, 94, 170, 0.25);
     }
 
-    /* GRILLA DE VIDEOS */
+    /* GRILLA DE VIDEOS (nunca más ancha que su contenedor) */
     .ta-video-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
       gap: 20px;
     }
 
@@ -239,11 +318,12 @@
       transition: transform 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
+      min-width: 0;
     }
 
     .ta-video-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     }
 
     .ta-card-thumb-wrapper {
@@ -272,7 +352,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(25, 84, 126, 0.95);
+      background: rgba(0, 94, 170, 0.95);
       color: #ffffff;
       font-size: 10px;
       font-weight: 800;
@@ -281,6 +361,7 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       z-index: 2;
+      max-width: calc(100% - 20px);
     }
 
     .ta-card-tag.game-tag {
@@ -308,7 +389,7 @@
     }
 
     .ta-video-card:hover .ta-card-play-icon {
-      background: #19547E;
+      background: var(--azul-kfl);
       transform: translate(-50%, -50%) scale(1.1);
     }
 
@@ -325,6 +406,7 @@
       flex-direction: column;
       justify-content: space-between;
       flex-grow: 1;
+      min-width: 0;
     }
 
     .ta-card-title {
@@ -337,6 +419,7 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      overflow-wrap: anywhere;
     }
 
     .ta-card-date {
@@ -345,7 +428,7 @@
       font-weight: 600;
     }
 
-    /* BOTÓN MOSTRAR MÁS VIDEOS */
+    /* BOTÓN MOSTRAR MÁS */
     .ta-load-more-wrapper {
       text-align: center;
       margin-top: 30px;
@@ -353,8 +436,8 @@
 
     .btn-load-more {
       background: #ffffff;
-      color: #19547E;
-      border: 2px solid #19547E;
+      color: var(--azul-kfl);
+      border: 2px solid var(--azul-kfl);
       padding: 11px 32px;
       font-size: 14px;
       font-weight: 800;
@@ -363,13 +446,14 @@
       transition: all 0.25s ease;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      max-width: 100%;
     }
 
     .btn-load-more:hover {
-      background: #19547E;
+      background: var(--azul-kfl);
       color: #ffffff;
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(25, 84, 126, 0.25);
+      box-shadow: 0 4px 12px rgba(0, 94, 170, 0.25);
     }
 
     .btn-load-more:disabled {
@@ -378,15 +462,16 @@
       transform: none;
     }
 
-    /* SECCIÓN DE SUSCRIPCIÓN CON CAMPANITA */
+    /* SUSCRIPCIÓN */
     .ta-subscribe-box {
-      background: linear-gradient(135deg, #19547E 0%, #0f3652 100%);
+      background: linear-gradient(135deg, var(--azul-kfl) 0%, #003f73 100%);
       border-radius: 16px;
       padding: 35px 25px;
       text-align: center;
       color: #ffffff;
-      box-shadow: 0 6px 20px rgba(25, 84, 126, 0.2);
+      box-shadow: 0 6px 20px rgba(0, 94, 170, 0.2);
       margin-bottom: 30px;
+      box-sizing: border-box;
     }
 
     .ta-subscribe-text {
@@ -413,6 +498,8 @@
       letter-spacing: 0.5px;
       transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
       box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+      max-width: 100%;
+      text-align: center;
     }
 
     .ta-subscribe-btn:hover {
@@ -425,6 +512,7 @@
       width: 20px;
       height: 20px;
       fill: #ffffff;
+      flex-shrink: 0;
       animation: ringBell 2.5s infinite ease-in-out;
     }
 
@@ -432,10 +520,10 @@
       0%, 100% { transform: rotate(0); }
       10%, 30% { transform: rotate(14deg); }
       20%, 40% { transform: rotate(-14deg); }
-      50% { transform: rotate(0); }
+      50%      { transform: rotate(0); }
     }
 
-    /* MODAL REPRODUCTOR GRANDE Y FALLBACK DE YOUTUBE */
+    /* MODAL REPRODUCTOR */
     .ta-modal {
       display: none;
       position: fixed;
@@ -448,7 +536,8 @@
       z-index: 9999;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
+      box-sizing: border-box;
     }
 
     .ta-modal.active {
@@ -468,13 +557,14 @@
     .ta-modal-close {
       position: absolute;
       top: 12px;
-      right: 16px;
+      right: 12px;
       color: #ffffff;
       font-size: 28px;
       font-weight: bold;
+      line-height: 1;
       cursor: pointer;
       z-index: 10;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -488,29 +578,21 @@
       background: #dc2626;
     }
 
-    .ta-modal-iframe-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-    }
-
-    .ta-modal-iframe-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
     .ta-modal-footer {
       padding: 12px 20px;
       background: #1e293b;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
       color: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .ta-modal-footer-text {
+      font-size: 13px;
+      color: #94a3b8;
     }
 
     .ta-modal-yt-link {
@@ -530,6 +612,40 @@
     .ta-modal-yt-link:hover {
       background: #cc0000;
     }
+
+    /* ==========================================================================
+       RESPONSIVE: nada se corta, todo queda dentro de la pantalla
+       ========================================================================== */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .ta-container,
+    .ta-container * {
+      min-width: 0;
+    }
+
+    @media (max-width: 768px) {
+      .ta-container { padding: 14px 10px; }
+      .ta-about-card { padding: 20px 16px; }
+      .ta-gallery-section { padding: 20px 14px; }
+      .ta-live-stream-card { padding: 16px 12px; }
+      .ta-subscribe-box { padding: 26px 16px; }
+      .ta-subscribe-btn { font-size: 14px; padding: 11px 20px; }
+      .ta-social-link { padding: 9px 14px; font-size: 13px; }
+    }
+
+    @media (max-width: 480px) {
+      .ta-container { padding: 10px 8px; }
+      .ta-about-card { padding: 18px 14px; }
+      .ta-gallery-section { padding: 16px 10px; }
+      .ta-filter-btn { font-size: 12px; padding: 8px 14px; }
+      .ta-social-bar { gap: 10px; }
+      .ta-video-grid { gap: 14px; }
+      .ta-modal { padding: 8px; }
+      .ta-modal-footer { padding: 10px 12px; }
+    }
   </style>
 
   <!-- Vercel Speed Insights -->
@@ -540,82 +656,79 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER GLOBAL INYECTADO -->
+  <!-- 1. HEADER GLOBAL (Inyectado por components.js) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="ta-container">
 
     <!-- BANNER HERO -->
     <div class="ta-banner-wrapper">
-      <img src="assets/img/total-access-banner.jpg" alt="KFL Total Access Banner" class="ta-banner-img" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+      <img src="assets/img/total-access-banner.jpg" alt="KFL Total Access" class="ta-banner-img" onerror="this.src='assets/logos/KFL-Logo.png'">
     </div>
 
-    <!-- RESEÑA INSTITUCIONAL CON BACKLINK A FAFF Y FORMATO REFINADO -->
+    <!-- RESEÑA INSTITUCIONAL -->
     <section class="ta-about-card">
       <h1 class="ta-title">KFL Total Access</h1>
-      
+
       <div class="ta-description">
         <p><strong>KFL Total Access</strong> es la fuente oficial de noticias, resúmenes e información de la <strong>Kiwanis Football League (KFL)</strong> en la Ciudad de Panamá.</p>
-        
+
         <p>Creado en 2018 por <strong>Raúl Méndez de Obarrio</strong> y producido por la <a href="https://www.americanfootballfilms.org/" target="_blank" rel="noopener noreferrer" class="ta-backlink"><strong>Fundación American Football Films (FAFF)</strong></a>, el programa ofrece cobertura todo el año de sus cuatro divisiones masculinas y femeninas: <strong>Micro, Mini, Juvenil y Varsity</strong>.</p>
-        
+
         <p>Con sus transmisiones en vivo, entrevistas, fotos y todo tipo de contenido digital, se preserva la historia de la liga de fútbol americano con mayor historia y tradición del país e impulsa el deporte en Panamá.</p>
       </div>
 
       <!-- REDES SOCIALES -->
       <div class="ta-social-bar">
         <a href="https://www.instagram.com/kfl_total_access/" target="_blank" rel="noopener noreferrer" class="ta-social-link instagram">
-          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <svg class="ta-social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           Instagram
         </a>
 
         <a href="http://facebook.com/profile.php?id=61580980794081" target="_blank" rel="noopener noreferrer" class="ta-social-link facebook">
-          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
+          <svg class="ta-social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
           Facebook
         </a>
 
         <a href="https://www.youtube.com/@KFLTotalAccess" target="_blank" rel="noopener noreferrer" class="ta-social-link youtube">
-          <svg class="ta-social-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <svg class="ta-social-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           YouTube
         </a>
       </div>
     </section>
 
-    <!-- BANNER DINÁMICO DE TRANSMISIÓN EN VIVO AHORA -->
+    <!-- TRANSMISIÓN EN VIVO (solo si hay un live activo) -->
     <section class="ta-live-stream-card" id="liveStreamBanner">
       <div class="ta-live-badge-header">
         <span class="ta-live-dot"></span> TRANSMISIÓN EN VIVO AHORA
       </div>
-      <div class="ta-live-video-container" id="liveStreamContainer"></div>
+      <div class="ta-video-16x9" id="liveStreamContainer"></div>
     </section>
 
-    <!-- VIDEOTECA EN GRILLA CON FILTROS CENTRADOS -->
+    <!-- VIDEOTECA -->
     <section class="ta-gallery-section">
 
-      <!-- PESTAÑAS / FILTROS CENTRADOS -->
       <div class="ta-filter-bar">
         <button class="ta-filter-btn active" onclick="filterVideos('all', this)">Todos los Videos</button>
         <button class="ta-filter-btn" onclick="filterVideos('show', this)">KFL Total Access Show</button>
-        <button class="ta-filter-btn" onclick="filterVideos('games', this)">Partidos & Highlights</button>
+        <button class="ta-filter-btn" onclick="filterVideos('games', this)">Partidos &amp; Highlights</button>
         <button class="ta-filter-btn" onclick="filterVideos('live', this)">🔴 Transmisiones en Vivo</button>
       </div>
 
-      <!-- CONTENEDOR DEL GRID -->
       <div class="ta-video-grid" id="youtubeVideoGrid"></div>
 
-      <!-- BOTÓN MOSTRAR MÁS VIDEOS -->
       <div class="ta-load-more-wrapper" id="loadMoreWrapper" style="display: none;">
         <button class="btn-load-more" id="btnLoadMore" onclick="fetchNextBatch()">MOSTRAR MÁS VIDEOS +</button>
       </div>
     </section>
 
-    <!-- CAJA DE SUSCRIPCIÓN CON CAMPANITA -->
+    <!-- SUSCRIPCIÓN -->
     <section class="ta-subscribe-box">
       <div class="ta-subscribe-text">
         ¡Suscríbete a nuestro canal para enterarte cuando se sube cada resumen de partido, transmisión en vivo y episodio de KFL Total Access!
       </div>
       <a href="https://www.youtube.com/channel/UCCfOFTqXpHgxkPo0Poc0Mew?sub_confirmation=1" target="_blank" rel="noopener noreferrer" class="ta-subscribe-btn">
-        <svg class="ta-bell-icon" viewBox="0 0 24 24">
+        <svg class="ta-bell-icon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
         </svg>
         Suscribirse en YouTube
@@ -624,15 +737,15 @@
 
   </main>
 
-  <!-- MODAL / REPRODUCTOR FLOTANTE EN GRANDE -->
+  <!-- MODAL / REPRODUCTOR -->
   <div class="ta-modal" id="videoModal" onclick="closeVideoModal(event)">
     <div class="ta-modal-content">
       <span class="ta-modal-close" onclick="closeVideoModal(event)">&times;</span>
-      <div class="ta-modal-iframe-wrapper">
+      <div class="ta-video-16x9">
         <iframe id="modalIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
       <div class="ta-modal-footer">
-        <span style="font-size: 13px; color: #94a3b8;">¿El video no se reproduce en la web?</span>
+        <span class="ta-modal-footer-text">¿El video no se reproduce en la web?</span>
         <a id="modalDirectLink" href="#" target="_blank" rel="noopener noreferrer" class="ta-modal-yt-link">
           Ver directamente en YouTube ↗
         </a>
@@ -640,60 +753,40 @@
     </div>
   </div>
 
-  <!-- FOOTER GLOBAL INYECTADO -->
+  <!-- 2. FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
-
-  <!-- SCRIPT DE INYECCIÓN GLOBAL (NAV + FOOTER) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Inyectar Navbar desde nav.html
-      fetch('nav.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalNav').innerHTML = data;
-          
-          // Activar menú hamburguesa dinámicamente tras cargar
-          const hamburgerBtn = document.getElementById('hamburgerBtn');
-          const navMenu = document.getElementById('navMenu');
-          if (hamburgerBtn && navMenu) {
-            hamburgerBtn.addEventListener('click', () => navMenu.classList.toggle('open'));
-          }
-        });
-
-      // Inyectar Footer desde footer.html
-      fetch('footer.html')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('globalFooter').innerHTML = data;
-        });
-
-      checkActiveLiveStream();
-      loadCurrentFilterData();
-    });
-  </script>
 
   <!-- LÓGICA DE YOUTUBE & TOTAL ACCESS -->
   <script>
+    /* La clave de YouTube es visible en el código fuente de cualquier página pública.
+       Debe estar restringida por dominio (HTTP referrer) y por API en Google Cloud. */
     const YOUTUBE_API_KEY = 'AIzaSyBEjzSqVt1VdAZW8swDi215B4c4_IBnWR8';
     const CHANNEL_ID = 'UCCfOFTqXpHgxkPo0Poc0Mew';
     const UPLOADS_PLAYLIST_ID = 'UUCfOFTqXpHgxkPo0Poc0Mew';
-    
+
     let cacheUploads = { items: [], pageToken: '', hasMore: true };
     let cacheCompletedLives = { items: [], pageToken: '', hasMore: true };
     let currentFilter = 'all';
 
-    /* DETECTOR RIGUROSO DE CATEGORÍA */
+    /* Clasificación por título/descripción */
     function getCategoryForTitle(title, description = '') {
       const text = (title + ' ' + description).toUpperCase();
-      if (text.includes('STREAM') || text.includes('LIVESTREAM') || text.includes('EN VIVO') || text.includes('LIVE') || text.includes('DIRECTO') || text.includes('TRANSMISION') || text.includes('TRANSMISIÓN')) {
+      if (['STREAM', 'LIVESTREAM', 'EN VIVO', 'LIVE', 'DIRECTO', 'TRANSMISION', 'TRANSMISIÓN'].some(w => text.includes(w))) {
         return 'live';
       }
-      if (text.includes('TOTAL ACCESS')) {
-        return 'show';
-      }
+      if (text.includes('TOTAL ACCESS')) return 'show';
       return 'games';
     }
 
+    function formatDate(iso) {
+      return new Date(iso).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function pickThumb(thumbnails) {
+      return (thumbnails.high || thumbnails.medium || thumbnails.default).url;
+    }
+
+    /* Transmisión en vivo activa */
     function checkActiveLiveStream() {
       const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&type=video&eventType=live&key=${YOUTUBE_API_KEY}`;
       fetch(url)
@@ -701,14 +794,11 @@
         .then(data => {
           if (data.items && data.items.length > 0) {
             const liveVideoId = data.items[0].id.videoId;
-            const container = document.getElementById('liveStreamContainer');
-            container.innerHTML = `
-              <iframe src="https://www.youtube.com/embed/${liveVideoId}?autoplay=1" 
-                title="KFL Live Stream" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-              </iframe>
-            `;
+            document.getElementById('liveStreamContainer').innerHTML = `
+              <iframe src="https://www.youtube.com/embed/${liveVideoId}?autoplay=1"
+                title="KFL Live Stream"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>`;
             document.getElementById('liveStreamBanner').style.display = 'block';
           }
         })
@@ -719,32 +809,29 @@
       currentFilter = category;
       document.querySelectorAll('.ta-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
-
       loadCurrentFilterData();
     }
 
-    function getFilteredCount(category) {
-      if (category === 'live') return cacheCompletedLives.items.length;
+    function itemsForFilter() {
+      if (currentFilter === 'live') return cacheCompletedLives.items;
       return cacheUploads.items.filter(v => {
-        if (v.category === 'live') return false; // Exclusión estricta de directos
-        if (category === 'show') return v.category === 'show';
-        if (category === 'games') return v.category === 'games';
-        return true; // 'all' incluye solo 'show' y 'games'
-      }).length;
+        if (v.category === 'live') return false;
+        if (currentFilter === 'show') return v.category === 'show';
+        if (currentFilter === 'games') return v.category === 'games';
+        return true;
+      });
+    }
+
+    function hasMoreForFilter() {
+      return currentFilter === 'live' ? cacheCompletedLives.hasMore : cacheUploads.hasMore;
     }
 
     async function loadCurrentFilterData() {
-      const grid = document.getElementById('youtubeVideoGrid');
-      grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:25px;">Cargando videos...</p>';
+      document.getElementById('youtubeVideoGrid').innerHTML =
+        '<p class="ta-grid-message">Cargando videos...</p>';
 
-      if (currentFilter === 'live') {
-        while (cacheCompletedLives.items.length < 8 && cacheCompletedLives.hasMore) {
-          await fetchCompletedLivesAsync();
-        }
-      } else {
-        while (getFilteredCount(currentFilter) < 8 && cacheUploads.hasMore) {
-          await fetchUploadsBatchAsync();
-        }
+      while (itemsForFilter().length < 8 && hasMoreForFilter()) {
+        await fetchBatch();
       }
       renderGrid();
     }
@@ -753,19 +840,19 @@
       const btn = document.getElementById('btnLoadMore');
       if (btn) { btn.disabled = true; btn.textContent = 'CARGANDO...'; }
 
-      if (currentFilter === 'live') {
-        await fetchCompletedLivesAsync();
-      } else {
-        const targetCount = getFilteredCount(currentFilter) + 8;
-        while (getFilteredCount(currentFilter) < targetCount && cacheUploads.hasMore) {
-          await fetchUploadsBatchAsync();
-        }
+      const target = itemsForFilter().length + 8;
+      while (itemsForFilter().length < target && hasMoreForFilter()) {
+        await fetchBatch();
       }
       renderGrid();
     }
 
-    /* CARGA DE UPLOADS REGULARES (CON FILTRADO ANTI-LIVESTREAM) */
-    function fetchUploadsBatchAsync() {
+    function fetchBatch() {
+      return currentFilter === 'live' ? fetchCompletedLives() : fetchUploads();
+    }
+
+    /* Uploads del canal (filtra directos para no duplicarlos) */
+    function fetchUploads() {
       return new Promise((resolve) => {
         if (!cacheUploads.hasMore) return resolve();
 
@@ -788,34 +875,27 @@
               const videoId = snippet.resourceId ? snippet.resourceId.videoId : null;
               if (!videoId) return;
 
-              const title = snippet.title || 'Video KFL';
-              const description = snippet.description || '';
-              
-              let cat = getCategoryForTitle(title, description);
+              let cat = getCategoryForTitle(snippet.title || '', snippet.description || '');
               if (snippet.liveBroadcastContent === 'completed' || snippet.liveBroadcastContent === 'live') {
                 cat = 'live';
               }
 
               cacheUploads.items.push({
                 id: videoId,
-                title: title,
-                thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
-                date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                title: snippet.title || 'Video KFL',
+                thumb: pickThumb(snippet.thumbnails),
+                date: formatDate(snippet.publishedAt),
                 category: cat
               });
             });
-
             resolve();
           })
-          .catch(err => {
-            console.error(err);
-            resolve();
-          });
+          .catch(err => { console.error(err); resolve(); });
       });
     }
 
-    /* CARGA DE LIVES DESDE ENLACE ESPECÍFICO DE YOUTUBE SEARCH API */
-    function fetchCompletedLivesAsync() {
+    /* Transmisiones en vivo terminadas */
+    function fetchCompletedLives() {
       return new Promise((resolve) => {
         if (!cacheCompletedLives.hasMore) return resolve();
 
@@ -841,52 +921,35 @@
               cacheCompletedLives.items.push({
                 id: videoId,
                 title: snippet.title || 'Transmisión en Vivo KFL',
-                thumb: (snippet.thumbnails.high || snippet.thumbnails.medium || snippet.thumbnails.default).url,
-                date: new Date(snippet.publishedAt).toLocaleDateString('es-PA', { year: 'numeric', month: 'short', day: 'numeric' }),
+                thumb: pickThumb(snippet.thumbnails),
+                date: formatDate(snippet.publishedAt),
                 category: 'live'
               });
             });
-
             resolve();
           })
-          .catch(err => {
-            console.error(err);
-            resolve();
-          });
+          .catch(err => { console.error(err); resolve(); });
       });
     }
 
-    /* RENDERIZADO EXCLUSIVO POR PESTAÑA */
     function renderGrid() {
       const grid = document.getElementById('youtubeVideoGrid');
       grid.innerHTML = '';
 
-      let listToRender = [];
-      if (currentFilter === 'live') {
-        listToRender = cacheCompletedLives.items;
-      } else {
-        listToRender = cacheUploads.items.filter(v => {
-          if (v.category === 'live') return false; 
-          if (currentFilter === 'show') return v.category === 'show';
-          if (currentFilter === 'games') return v.category === 'games';
-          return true; // 'all'
-        });
-      }
-
-      if (listToRender.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:25px;">No se encontraron videos disponibles para esta categoría.</p>';
+      const list = itemsForFilter();
+      if (list.length === 0) {
+        grid.innerHTML = '<p class="ta-grid-message">No se encontraron videos disponibles para esta categoría.</p>';
         updateLoadMoreButton();
         return;
       }
 
-      listToRender.forEach(video => {
+      list.forEach(video => {
         const card = document.createElement('div');
         card.className = 'ta-video-card';
         card.onclick = () => openVideoModal(video.id);
 
         let tagText = 'PARTIDO / HIGHLIGHT';
         let tagClass = 'ta-card-tag game-tag';
-
         if (video.category === 'show') {
           tagText = 'Total Access Show';
           tagClass = 'ta-card-tag';
@@ -900,15 +963,13 @@
             <span class="${tagClass}">${tagText}</span>
             <img src="${video.thumb}" alt="${video.title}" class="ta-card-thumb" loading="lazy">
             <div class="ta-card-play-icon">
-              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
             </div>
           </div>
           <div class="ta-card-content">
             <div class="ta-card-title">${video.title}</div>
             <div class="ta-card-date">📅 ${video.date}</div>
-          </div>
-        `;
-
+          </div>`;
         grid.appendChild(card);
       });
 
@@ -916,44 +977,39 @@
     }
 
     function updateLoadMoreButton() {
-      const loadMoreWrapper = document.getElementById('loadMoreWrapper');
+      const wrapper = document.getElementById('loadMoreWrapper');
       const btn = document.getElementById('btnLoadMore');
-
-      let hasMore = (currentFilter === 'live') ? cacheCompletedLives.hasMore : cacheUploads.hasMore;
-
-      if (hasMore) {
-        loadMoreWrapper.style.display = 'block';
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = 'MOSTRAR MÁS VIDEOS +';
-        }
+      if (hasMoreForFilter()) {
+        wrapper.style.display = 'block';
+        if (btn) { btn.disabled = false; btn.textContent = 'MOSTRAR MÁS VIDEOS +'; }
       } else {
-        loadMoreWrapper.style.display = 'none';
+        wrapper.style.display = 'none';
       }
     }
 
-    /* REPRODUCTOR EN MODAL Y ENLACE DIRECTO A YOUTUBE */
+    /* Modal */
     function openVideoModal(videoId) {
-      const modal = document.getElementById('videoModal');
-      const iframe = document.getElementById('modalIframe');
-      const directLink = document.getElementById('modalDirectLink');
-
-      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-      directLink.href = `https://www.youtube.com/watch?v=${videoId}`;
-
-      modal.classList.add('active');
+      document.getElementById('modalIframe').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      document.getElementById('modalDirectLink').href = `https://www.youtube.com/watch?v=${videoId}`;
+      document.getElementById('videoModal').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function closeVideoModal(event) {
       if (event.target.id === 'videoModal' || event.target.classList.contains('ta-modal-close')) {
-        const modal = document.getElementById('videoModal');
-        const iframe = document.getElementById('modalIframe');
-        iframe.src = '';
-        modal.classList.remove('active');
+        document.getElementById('modalIframe').src = '';
+        document.getElementById('videoModal').classList.remove('active');
         document.body.style.overflow = 'auto';
       }
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkActiveLiveStream();
+      loadCurrentFilterData();
+    });
   </script>
+
+  <!-- MENÚ, PIE Y BOTÓN VOLVER ARRIBA GLOBALES -->
+  <script src="js/components.js"></script>
 </body>
 </html>

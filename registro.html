@@ -3,12 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de Jugadores - Kiwanis Football League Panama</title>
+  <title>Registro de Atletas | Kiwanis Football League Panamá</title>
   
+  <!-- FAVICON ACTUALIZADO -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- SEO / GEO / AEO METADATOS -->
+  <meta name="description" content="Formulario oficial de inscripción y registro para atletas de la Kiwanis Football League (KFL) en Panamá. Modalidades Contact Football y Flag Football Femenino.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panamá, Registro de Atletas, Contact Football, Flag Football Femenino, Liga Kiwanis, Inscripciones Football Panamá">
+  <meta name="author" content="Kiwanis Football League Panamá">
+  
+  <!-- GEOLOCALIZACIÓN (GEO) -->
+  <meta name="geo.region" content="PA-8">
+  <meta name="geo.placename" content="Panamá">
+  <meta name="geo.position" content="8.983333;-79.516667">
+  <meta name="ICBM" content="8.983333, -79.516667">
+
+  <!-- OPEN GRAPH (REDES SOCIALES & AEO) -->
+  <meta property="og:title" content="Registro Oficial de Jugadores - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Inscríbete en las ligas de Contact Football y Flag Football Femenino de la KFL Panamá. Proceso seguro y oficial.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/registro.html">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/favicon.png">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- SCHEMA.ORG / STRUCTURED DATA (JSON-LD PARA SEO Y AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SportsOrganization",
+        "name": "Kiwanis Football League",
+        "alternateName": "KFL Panamá",
+        "url": "https://www.kiwanisfootball.com",
+        "logo": "https://www.kiwanisfootball.com/assets/img/favicon.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ciudad de Panamá",
+          "addressCountry": "PA"
+        }
+      },
+      {
+        "@type": "RegisterAction",
+        "name": "Inscripción de Jugadores KFL",
+        "target": "https://www.kiwanisfootball.com/registro.html",
+        "description": "Formulario oficial para el registro de jugadores en categorías Contact y Flag Football Femenino."
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
+    /* ESTILOS ESTRUCTURALES Y DEL FORMULARIO */
     .inscripcion-container {
       max-width: 1100px;
       width: 100%;
@@ -238,7 +287,7 @@
       padding-right: 40px;
     }
 
-    /* FORZAR MAYÚSCULA INICIAL EN NOMBRES COMPLETOS */
+    /* CAPITALIZACIÓN SELECTIVA ÚNICAMENTE EN NOMBRES COMPLETOS */
     .form-input-capitalize {
       text-transform: capitalize;
     }
@@ -437,7 +486,7 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER GLOBAL INYECTADO -->
+  <!-- HEADER GLOBAL -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="inscripcion-container">
@@ -469,7 +518,7 @@
       </div>
     </div>
 
-    <!-- 3. CONTENIDO DEL FORMULARIO -->
+    <!-- 3. FORMULARIO DE REGISTRO -->
     <div id="inscripcionContent">
 
       <a class="back-link" onclick="goBackToSelector()">← Volver a selección de modalidad</a>
@@ -481,7 +530,7 @@
 
       <!-- AVISO DE PRIVACIDAD -->
       <div class="privacy-notice">
-        🔒 <strong>Aviso de Privacidad:</strong> Todos los datos suministrados en este formulario son revisados única y exclusivamente por el personal administrativo de la <strong>Kiwanis Football League</strong>. La información es utilizada strictly para validar temas de edad, elegibilidad de equipos y conformación de la base de datos de emergencia médica.
+        🔒 <strong>Aviso de Privacidad:</strong> Todos los datos suministrados en este formulario son revisados única y exclusivamente por el personal administrativo de la <strong>Kiwanis Football League</strong>. La información es utilizada estrictamente para validar temas de edad, elegibilidad de equipos y conformación de la base de datos de emergencia médica.
       </div>
 
       <!-- SECCIÓN DE COSTO DE INSCRIPCIÓN -->
@@ -496,7 +545,7 @@
 
       <form id="athleteForm" novalidate onsubmit="handleFormSubmit(event)">
         
-        <!-- CAMPOS OCULTOS PARA ENVÍO A GOOGLE SHEETS DE LA EDAD AL 1 DE ENERO DE FORMA SILENCIOSA -->
+        <!-- CAMPOS OCULTOS PARA ENVÍO A GOOGLE SHEETS DE LA EDAD AL 1 DE ENERO -->
         <input type="hidden" id="edadAnios" name="edadAnios">
         <input type="hidden" id="edadMeses" name="edadMeses">
         <input type="hidden" id="edadDias" name="edadDias">
@@ -704,16 +753,14 @@
 
   </main>
 
-  <!-- FOOTER GLOBAL INYECTADO -->
+  <!-- FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPT DE INYECCIÓN GLOBAL -->
+  <!-- COMPONENTES Y LÓGICA GENERAL -->
   <script src="js/components.js"></script>
 
-  <!-- SCRIPT DE LÓGICA DE INSCRIPCIÓN -->
   <script>
     const KFL_CONFIG = {
-      // BASE GEOGRÁFICA COMPLETA DE PANAMÁ: PROVINCIAS, COMARCAS, DISTRITOS, CORREGIMIENTOS Y BARRIADAS
       geografiaPanama: {
         "Panamá": {
           "Distrito de Panamá": {
@@ -1526,48 +1573,29 @@
           }
         },
         "Comarca Naso Tjër Di": {
-          "Sieyic": {
-            "Sieyic": ["Sieyic Centro"]
-          },
-          "Sieyikin": {
-            "Sieyikin": ["Sieyikin Centro"]
-          },
-          "Teribe": {
-            "Teribe": ["Teribe Centro"]
-          },
-          "San San Drui": {
-            "San San Drui": ["San San Drui Centro"]
-          },
-          "Bonyic": {
-            "Bonyic": ["Bonyic Centro"]
-          }
+          "Sieyic": { "Sieyic": ["Sieyic Centro"] },
+          "Sieyikin": { "Sieyikin": ["Sieyikin Centro"] },
+          "Teribe": { "Teribe": ["Teribe Centro"] },
+          "San San Drui": { "San San Drui": ["San San Drui Centro"] },
+          "Bonyic": { "Bonyic": ["Bonyic Centro"] }
         },
         "Comarca Guna de Madungandí": {
-          "Chepo": {
-            "Madungandí": ["Akua Yala", "Madungandí Centro"]
-          }
+          "Chepo": { "Madungandí": ["Akua Yala", "Madungandí Centro"] }
         },
         "Comarca Guna de Wargandí": {
-          "Pinogana": {
-            "Wargandí": ["Wala", "Mortí", "Nurra"]
-          }
+          "Pinogana": { "Wargandí": ["Wala", "Mortí", "Nurra"] }
         }
       },
 
       colegios: [
-        // DESTACADOS KFL
         "⭐ ACADEMIA INTERAMERICANA DE PANAMÁ (AIP)",
         "⭐ COLEGIO BRADER",
         "⭐ BALBOA ACADEMY",
         "⭐ EL COLEGIO DE PANAMÁ (ECP)",
         "⭐ COLEGIO REAL DE PANAMÁ",
         "⭐ COLEGIO DE LA SALLE",
-        
-        // OPCIONES ESPECIALES
         "HOME SCHOOL",
         "NO APLICA (NO CURSA ESTUDIOS)",
-
-        // OTROS COLEGIOS Y UNIVERSIDADES
         "INTERNATIONAL SCHOOL OF PANAMA (ISP)",
         "THE METROPOLITAN SCHOOL OF PANAMA (MET)",
         "KING'S COLLEGE PANAMA",
@@ -1704,7 +1732,6 @@
       document.getElementById('modalitySelector').style.display = 'block';
     }
 
-    /* INICIALIZACIÓN DE DROPDOWNS Y COLEGIOS */
     function initDropdowns() {
       const provinciaSelect = document.getElementById('provinciaSelect');
       provinciaSelect.innerHTML = '<option value="">Selecciona Provincia</option>';
@@ -1724,7 +1751,6 @@
       });
     }
 
-    /* LÓGICA DE SELECCIÓN GEOGRÁFICA ENCADENADA */
     function onProvinciaChange() {
       const prov = document.getElementById('provinciaSelect').value;
       const distritoSelect = document.getElementById('distritoSelect');
@@ -1800,7 +1826,6 @@
       }
     }
 
-    /* MÁSCARA Y CÁLCULO DE EDAD ASÍNCRONO AL 1 DE ENERO DE FORMA SILENCIOSA */
     function formatAndCalculateAge(input) {
       let val = input.value.replace(/\D/g, '');
       if (val.length > 2 && val.length <= 4) {

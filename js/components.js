@@ -82,7 +82,7 @@
     font-family: 'Avenir', sans-serif !important;
     font-size: 11.5px;
     font-weight: 800;
-    color: #19547E;
+    color: #005EAA;
     text-decoration: none;
     text-transform: uppercase;
     white-space: nowrap;
@@ -96,12 +96,12 @@
 
   .nav-menu li a:hover {
     background-color: #f1f5f9;
-    color: #19547E; 
+    color: #005EAA; 
   }
 
   /* ESTILO DE LA PÁGINA ACTIVA (Fondo azul institucional y texto blanco como indicabas) */
   .nav-menu li a.active {
-    background-color: #19547E !important;
+    background-color: #005EAA !important;
     color: #ffffff !important;
   }
 
@@ -110,7 +110,7 @@
     background: none;
     border: none;
     font-size: 24px;
-    color: #19547E;
+    color: #005EAA;
     cursor: pointer;
   }
 
@@ -231,7 +231,7 @@
   }
 
   .social-circle-btn:hover {
-    background-color: #19547E;
+    background-color: #005EAA;
     transform: translateY(-2px);
   }
 
@@ -316,6 +316,88 @@
     if (footerEl) {
       footerEl.innerHTML = FOOTER_HTML;
     }
+
+    inicializarVolverArriba();
+  }
+
+
+  /* ==========================================================================
+     BOTÓN "VOLVER ARRIBA" (GLOBAL)
+     Las reglas se inyectan aquí, así no dependen de css/styles.css publicado.
+     Si la página ya trae #backToTopBtn, lo usa; si no, lo crea.
+     ========================================================================== */
+  const BACK_TO_TOP_CSS = `
+    .back-to-top-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 48px;
+      height: 48px;
+      background-color: #005EAA;
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      padding: 0;
+    }
+    .back-to-top-btn.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top-btn:hover {
+      background-color: #EB3D40;
+      transform: translateY(-4px);
+    }
+    .back-to-top-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      display: block;
+    }
+  `;
+
+  const BACK_TO_TOP_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>';
+
+  function inicializarVolverArriba() {
+    // 1. Estilos (una sola vez)
+    if (!document.getElementById('kfl-back-to-top-style')) {
+      const style = document.createElement('style');
+      style.id = 'kfl-back-to-top-style';
+      style.textContent = BACK_TO_TOP_CSS;
+      document.head.appendChild(style);
+    }
+
+    // 2. Botón (usa el de la página si existe; si no, lo crea)
+    let btn = document.getElementById('backToTopBtn');
+    if (!btn) {
+      btn = document.createElement('button');
+      btn.id = 'backToTopBtn';
+      btn.className = 'back-to-top-btn';
+      btn.setAttribute('aria-label', 'Volver arriba');
+      btn.innerHTML = BACK_TO_TOP_SVG;
+      document.body.appendChild(btn);
+    } else {
+      btn.classList.add('back-to-top-btn');
+      if (!btn.querySelector('svg')) btn.innerHTML = BACK_TO_TOP_SVG;
+    }
+
+    // 3. Comportamiento
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    }, { passive: true });
+
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
   if (document.readyState === 'loading') {

@@ -6,7 +6,10 @@
   <title>Ligas - Kiwanis Football League Panama</title>
   
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- CONFIGURACIÓN CENTRALIZADA KFL -->
   <script src="js/config-ligas.js"></script>
@@ -765,7 +768,7 @@
       const cleanTeam = (teamName || "").toUpperCase().trim();
       return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) ||
              (cfg && cfg.FALLBACK_LOGOS && cfg.FALLBACK_LOGOS[cleanTeam]) ||
-             "https://i.imgur.com/wrPDjDN.png";
+             "assets/img/KFL-logo.svg";
     }
 
     /* OBTENCIÓN ROBUSTA DE LA URL DE APPS SCRIPT POR LIGA */
@@ -1092,7 +1095,7 @@
                 </div>
                 <div class="kfl-match-body">
                   <div class="kfl-team-box">
-                    <img src="${getTeamLogo(p.home)}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                    <img src="${getTeamLogo(p.home)}" alt="${p.home}" class="kfl-team-logo" onerror="this.src='assets/img/KFL-logo.svg'">
                     <span>${p.home}</span>
                   </div>
                   <div class="kfl-score-box">
@@ -1101,7 +1104,7 @@
                       : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
                   </div>
                   <div class="kfl-team-box">
-                    <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                    <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" onerror="this.src='assets/img/KFL-logo.svg'">
                     <span>${p.away}</span>
                   </div>
                 </div>
@@ -1120,7 +1123,7 @@
                 <div class="kfl-bye-card-avenir">
                   <span class="kfl-bye-pill-badge">LIBRE / DESCANSO</span>
                   <div class="kfl-bye-team-cluster">
-                    <img src="${getTeamLogo(teamLibre)}" class="kfl-bye-logo-img" alt="${teamLibre}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                    <img src="${getTeamLogo(teamLibre)}" class="kfl-bye-logo-img" alt="${teamLibre}" onerror="this.src='assets/img/KFL-logo.svg'">
                     <div class="kfl-bye-text-info">
                       <span class="kfl-bye-subtext">EQUIPO LIBRE ESTA SEMANA</span>
                       <span class="kfl-bye-name-highlight">${teamLibre}</span>
@@ -1191,7 +1194,7 @@
             <td><strong>${idx + 1}</strong></td>
             <td class="team-col-cell">
               <div class="kfl-table-team-cell">
-                <img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                <img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'">
                 <span>${equipo}</span>
               </div>
             </td>
@@ -1234,7 +1237,7 @@
         card.onclick = () => abrirRosterEquipo(equipo);
         card.innerHTML = `
           <div class="team-roster-logo-wrap">
-            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+            <img src="${logoUrl}" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'">
           </div>
           <h4>${equipo}</h4>
         `;
@@ -1608,7 +1611,7 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'"><span>${equipo}</span></div></td>
             <td style="text-align: center;">${row.CARRIES || row.REC || "0"}</td>
             <td style="text-align: center; font-weight: 700; color: var(--azul-kfl);">${row.YARDS || "0"}</td>
             <td style="text-align: center;">${row.AVG || "0.0"}</td>
@@ -1620,7 +1623,7 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'"><span>${equipo}</span></div></td>
             <td style="text-align: center;">${row.COMP || "0"}</td>
             <td style="text-align: center;">${row.ATT || "0"}</td>
             <td style="text-align: center;">${row["COMP %"] || "0.0%"}</td>
@@ -1634,7 +1637,7 @@
           tr.innerHTML = `
             <td style="text-align: center; font-weight: 700; color: #64748b;">${indiceReal + 1}</td>
             <td style="font-weight: 700; color: #1e293b; text-align: left;">${jugador}</td>
-            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='https://i.imgur.com/wrPDjDN.png'"><span>${equipo}</span></div></td>
+            <td class="team-col-cell"><div class="kfl-table-team-cell"><img src="${getTeamLogo(equipo)}" class="kfl-table-team-logo" alt="${equipo}" onerror="this.src='assets/img/KFL-logo.svg'"><span>${equipo}</span></div></td>
             <td style="text-align: center; font-weight: 700; color: var(--azul-kfl);">${tacklesVal}</td>
             <td style="text-align: center;">${row.SACK || "0"}</td>
             <td style="text-align: center; font-weight: 700;">${row.TD || "0"}</td>

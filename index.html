@@ -6,7 +6,7 @@
   <title>Kiwanis Football League Panama - Sitio Oficial</title>
 
   <!-- SEO & Meta Tags Avanzados -->
-  <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programación de partidos, resultados, estadísticas y noticias de Contact y Flag Football.">
+  <meta name="description" content="Sitio oficial de la Kiwanis Football League. Calendario de partidos, resultados, estadísticas, noticias de Contact y Flag Football.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panama, Futbol Americano Panama, Flag Football Panama, Contact Football">
   <meta name="author" content="Kiwanis Football League">
 
@@ -536,27 +536,14 @@
     </div>
   </div>
 
-  <!-- BOTÓN VOLVER ARRIBA -->
+  <!-- BOTÓN VOLVER ARRIBA (estilos y comportamiento en components.js) -->
   <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT MAESTRO (BACK TO TOP + NOTICIAS) -->
+  <!-- SCRIPT MAESTRO (NOTICIAS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Botón volver arriba
-      const backToTopBtn = document.getElementById('backToTopBtn');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-          backToTopBtn.classList.add('visible');
-        } else {
-          backToTopBtn.classList.remove('visible');
-        }
-      });
-      backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
       // Lista de slugs de tus artículos publicados
       const slugsArticulosIndex = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
@@ -766,6 +753,6 @@
   </script>
 
   <!-- MENÚ Y PIE DE PÁGINA GLOBALES -->
-  <script src="components.js"></script>
+  <script src="js/components.js"></script>
 </body>
 </html>

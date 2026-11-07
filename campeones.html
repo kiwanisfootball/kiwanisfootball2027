@@ -273,18 +273,18 @@
     /* CARD DE MÁXIMO GANADOR / COUNTER POR CATEGORÍA */
     .champs-leaderboard-card {
       max-width: 850px;
-      margin: 0 auto 20px auto;
+      margin: 0 auto 25px auto;
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-      border-radius: 12px;
-      padding: 18px 24px;
+      border-radius: 16px;
+      padding: 20px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       color: #ffffff;
       box-sizing: border-box;
-      gap: 15px;
+      gap: 20px;
       animation: fadeIn 0.4s ease-in-out;
       font-family: var(--fuente-cuerpo);
     }
@@ -292,71 +292,126 @@
     .champs-leaderboard-left {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
+      flex: 1;
+    }
+
+    .champs-leaderboard-trophy-box {
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      border: 1px solid rgba(234, 179, 8, 0.2);
     }
 
     .champs-leaderboard-trophy-png {
-      width: 44px;
-      height: 54px;
+      width: 38px;
+      height: 38px;
       object-fit: contain;
-      flex-shrink: 0;
-      filter: drop-shadow(0 2px 6px rgba(234, 179, 8, 0.4));
+      filter: drop-shadow(0 2px 8px rgba(234, 179, 8, 0.5));
     }
 
     .champs-leaderboard-info {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 6px;
+      flex: 1;
     }
 
     .champs-leaderboard-label {
       font-family: var(--fuente-cuerpo);
-      font-size: 12px;
-      font-weight: 800;
+      font-size: 11px;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.5px;
       color: #eab308;
     }
 
-    .champs-leaderboard-team-wrap {
+    .champs-leaderboard-teams-list {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
     }
 
-    .champs-leaderboard-team-item {
-      display: inline-flex;
+    .champs-leaderboard-team-row {
+      display: flex;
       align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .champs-leaderboard-team-logo {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     .champs-leaderboard-team-name {
       font-family: var(--fuente-titulos);
-      font-size: 22px;
+      font-size: 24px;
       letter-spacing: 0.5px;
       color: #ffffff;
       line-height: 1;
     }
 
-    .champs-leaderboard-years {
-      font-family: var(--fuente-cuerpo);
+    /* Años con Tooltip e Insignia Inteligente */
+    .champs-leaderboard-years-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 3px 10px;
+      border-radius: 20px;
       font-size: 12px;
       font-weight: 600;
-      color: #94a3b8;
-      letter-spacing: 0.3px;
+      color: #cbd5e1;
+      position: relative;
+      cursor: help;
+      margin-left: 6px;
+      white-space: nowrap;
     }
 
+    .champs-leaderboard-years-badge:hover .champs-years-tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .champs-years-tooltip {
+      position: absolute;
+      bottom: 125%;
+      left: 0;
+      background: #090d16;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+      color: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.4;
+      white-space: normal;
+      width: max-content;
+      max-width: 260px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* BADGE DE CONTADOR MEJORADO (Mayor contraste) */
     .champs-leaderboard-counter {
-      background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
-      color: #0f172a;
+      background: rgba(15, 23, 42, 0.8);
+      border: 2px solid #eab308;
+      color: #ffffff;
       padding: 8px 18px;
       border-radius: 50px;
       display: flex;
@@ -364,15 +419,18 @@
       gap: 8px;
       font-family: var(--fuente-cuerpo);
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       white-space: nowrap;
-      box-shadow: 0 3px 10px rgba(234, 179, 8, 0.3);
+      box-shadow: 0 0 15px rgba(234, 179, 8, 0.25);
       flex-shrink: 0;
     }
 
     .champs-leaderboard-counter span.count-num {
       font-family: var(--fuente-titulos);
-      font-size: 24px;
+      font-size: 26px;
+      color: #eab308;
       line-height: 1;
     }
 
@@ -580,12 +638,14 @@
       <!-- BANNER MÁXIMO GANADOR / COUNTER DINÁMICO POR CATEGORÍA -->
       <div id="leaderboardCard" class="champs-leaderboard-card" style="display: none;">
         <div class="champs-leaderboard-left">
-          <img src="assets/img/trophy.png" alt="Trofeo Máximo Ganador" class="champs-leaderboard-trophy-png" onerror="this.src='assets/logos/KFL-Logo.png'">
+          <div class="champs-leaderboard-trophy-box">
+            <img src="assets/img/trophy.png" alt="Trofeo KFL" class="champs-leaderboard-trophy-png" onerror="this.src='assets/img/trophy.svg'">
+          </div>
 
           <div class="champs-leaderboard-info">
             <span class="champs-leaderboard-label">Máximo Ganador</span>
-            <div class="champs-leaderboard-team-wrap" id="leaderboardTeams">
-              <!-- Se inyecta dinámicamente -->
+            <div class="champs-leaderboard-teams-list" id="leaderboardTeams">
+              <!-- Se inyecta dinámicamente cada equipo en su propia línea -->
             </div>
           </div>
         </div>
@@ -903,6 +963,29 @@
       return validRows;
     }
 
+    /* Helper para formatear inteligentemente los años */
+    function formatYearsBadge(yearsArray) {
+      if (!yearsArray || yearsArray.length === 0) return '';
+      const fullList = yearsArray.join(', ');
+
+      if (yearsArray.length <= 4) {
+        return `<span class="champs-leaderboard-years-badge">${fullList}</span>`;
+      }
+
+      // Si son muchos años, mostramos los últimos 3 + resumen y tooltip con la lista completa
+      const lastThree = yearsArray.slice(-3).join(', ');
+      const hiddenCount = yearsArray.length - 3;
+
+      return `
+        <span class="champs-leaderboard-years-badge">
+          ...${lastThree}
+          <div class="champs-years-tooltip">
+            <strong>Historial completo (${yearsArray.length} títulos):</strong><br>${fullList}
+          </div>
+        </span>
+      `;
+    }
+
     /* Lógica del Counter y Máximo Ganador Dinámico */
     function renderCategoryLeaderboard(category) {
       const card = document.getElementById('leaderboardCard');
@@ -916,7 +999,6 @@
         return;
       }
 
-      // Conteo de campeonatos y años por equipo
       const tally = {};
       const teamYears = {};
 
@@ -946,19 +1028,15 @@
         return;
       }
 
-      // Renderizar equipos líderes con sus años
-      teamsContainer.innerHTML = topTeams.map((team, idx) => {
+      // Renderizar equipos en líneas individuales (sin & y ordenados verticalmente si hay empate)
+      teamsContainer.innerHTML = topTeams.map(team => {
         const info = getTeamLogoInfo(team);
-        const yearsStr = (teamYears[team] || []).join(', ');
-        const separator = (idx > 0) ? '<span style="color:#eab308; font-weight:800; margin: 0 4px;">&</span>' : '';
+        const yearsBadge = formatYearsBadge(teamYears[team] || []);
         return `
-          ${separator}
-          <div class="champs-leaderboard-team-item">
+          <div class="champs-leaderboard-team-row">
             <img src="${info.logoUrl}" alt="${team}" class="champs-leaderboard-team-logo" onerror="this.src='${info.fallbackUrl}'">
-            <div>
-              <span class="champs-leaderboard-team-name">${team}</span>
-              ${yearsStr ? `<div class="champs-leaderboard-years">(${yearsStr})</div>` : ''}
-            </div>
+            <span class="champs-leaderboard-team-name">${team}</span>
+            ${yearsBadge}
           </div>
         `;
       }).join('');
@@ -966,8 +1044,8 @@
       textEl.textContent = maxTitles === 1 ? 'Campeonato' : 'Campeonatos';
       card.style.display = 'flex';
 
-      // Animación progresiva fluida del contador
-      animateCounter(countEl, maxTitles, 1200);
+      // Animación progresiva del contador
+      animateCounter(countEl, maxTitles, 1000);
     }
 
     function animateCounter(element, targetNum, durationMs) {
@@ -979,7 +1057,6 @@
       function update(now) {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / durationMs, 1);
-        // Easing suave (easeOutQuad)
         const current = Math.floor(progress * (2 - progress) * targetNum);
         element.textContent = current;
 

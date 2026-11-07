@@ -6,7 +6,7 @@
   <title>Kiwanis Football League Panama - Sitio Oficial</title>
 
   <!-- SEO & Meta Tags Avanzados -->
-  <meta name="description" content="Sitio oficial de la Kiwanis Football League. Calendario de partidos, resultados, estadísticas, noticias de Contact y Flag Football.">
+  <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programación de partidos, resultados, estadísticas y noticias de Contact y Flag Football.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panama, Futbol Americano Panama, Flag Football Panama, Contact Football">
   <meta name="author" content="Kiwanis Football League">
 
@@ -14,7 +14,7 @@
   <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
   <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/img/KFL-logo.svg">
+  <meta property="og:image" content="assets/logos/KFL-Logo.png">
 
   <!-- Hojas de Estilo y Favicon Local -->
   <link rel="stylesheet" href="css/styles.css">
@@ -34,7 +34,7 @@
     "name": "Kiwanis Football League Panama",
     "alternateName": "KFL",
     "url": "https://kiwanisfootball.com",
-    "logo": "assets/img/KFL-logo.svg",
+    "logo": "assets/logos/KFL-Logo.png",
     "sameAs": [
       "https://www.youtube.com/@KFLTotalAccess"
     ],
@@ -42,13 +42,6 @@
   }
   </script>
 
-  <!-- Vercel Speed Insights -->
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
-
-  <!-- ESTILOS LIMPIOS Y UNIVERSALES (SIN INLINE STYLES) -->
   <style>
     /* Control global contra desbordamientos horizontales */
     img, video, canvas, svg {
@@ -331,6 +324,18 @@
     .pwa-btn-secondary:hover {
       color: #ffffff;
     }
+
+    /* ===== INDICADORES DEL BANNER (puntos) ===== */
+    .promo-dots { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+    .promo-dot {
+      width: 10px; height: 10px; border-radius: 50%; border: none; padding: 0;
+      background: #cbd5e1; cursor: pointer; transition: all 0.25s ease;
+    }
+    .promo-dot.active { background: #005EAA; width: 26px; border-radius: 10px; }
+    .promo-dot:focus-visible { outline: 2px solid #005EAA; outline-offset: 3px; }
+    .slide a { display: block; width: 100%; height: 100%; }
+    .slide a img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .sponsor-card a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
   </style>
 </head>
 <body>
@@ -439,26 +444,10 @@
       </section>
     </div>
 
-    <!-- 5. BANNER PROMOCIONAL / SLIDESHOW (1200x250) -->
+    <!-- 5. BANNER PROMOCIONAL (los banners se configuran en PROMO_BANNERS, al final de la página) -->
     <section class="promo-banner-section">
-      <div class="slider-container">
-
-        <div class="slide active">
-          <a href="contacto.html">
-            <img src="assets/img/banner-promo-1.jpg" alt="Anuncia Tu Marca Aquí - Espacio Publicitario KFL">
-          </a>
-        </div>
-
-        <div class="slide">
-          <a href="registro-jugadores.html">
-            <img src="assets/img/banner-promo-2.jpg" alt="Inscripciones Abiertas Temporada 2026">
-          </a>
-        </div>
-
-        <button class="slider-btn prev" onclick="moveSlide(-1)" aria-label="Anterior">&#10094;</button>
-        <button class="slider-btn next" onclick="moveSlide(1)" aria-label="Siguiente">&#10095;</button>
-
-      </div>
+      <div class="slider-container" id="promoSlider"></div>
+      <div class="promo-dots" id="promoDots" role="tablist" aria-label="Banners promocionales"></div>
     </section>
 
     <!-- 6. MÓDULO DE NOTICIAS CONECTADO A LOS MARKDOWN -->
@@ -483,45 +472,13 @@
       </div>
     </section>
 
-    <!-- 7. SECCIÓN DE PATROCINADORES -->
+    <!-- 7. SECCIÓN DE PATROCINADORES (se configuran en SPONSORS, al final de la página) -->
     <section class="sponsors-section">
       <div class="sponsors-container">
-
         <div class="sponsors-tier">
           <h3 class="tier-title">PATROCINADORES OFICIALES</h3>
-          <div class="sponsors-grid tier-gold">
-
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor1.png" alt="Sponsor 1" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor2.png" alt="Sponsor 2" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor3.png" alt="Sponsor 3" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor4.png" alt="Sponsor 4" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor5.png" alt="Sponsor 5" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor6.png" alt="Sponsor 6" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor7.png" alt="Sponsor 7" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor8.png" alt="Sponsor 8" class="sponsor-logo">
-            </div>
-            <div class="sponsor-card">
-              <img src="assets/sponsors/sponsor9.png" alt="Sponsor 9" class="sponsor-logo">
-            </div>
-
-          </div>
+          <div class="sponsors-grid tier-gold" id="sponsorsGrid"></div>
         </div>
-
       </div>
     </section>
   </main>
@@ -532,7 +489,7 @@
   <!-- BANNER DE INSTALACIÓN PWA (TODOS LOS DISPOSITIVOS) -->
   <div id="pwaBanner" class="pwa-banner" role="region" aria-label="Instalar KFL App">
     <div class="pwa-banner-head">
-      <img src="assets/img/KFL-logo.svg" alt="KFL" class="pwa-banner-logo">
+      <img src="assets/logos/KFL-Logo.png" alt="KFL" class="pwa-banner-logo">
       <p id="pwaText" class="pwa-banner-text">
         Instala la <strong>KFL App</strong> y ten partidos, resultados y noticias en tu pantalla de inicio.
       </p>
@@ -580,7 +537,7 @@
           let titulo = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
           let categoria = "KFL";
           let excerpt = "Haz clic para leer el comunicado oficial...";
-          let coverImage = "assets/img/KFL-logo.svg";
+          let coverImage = "assets/logos/KFL-Logo.png";
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
@@ -648,26 +605,69 @@
     }
   </script>
 
-  <!-- SCRIPT DEL SLIDESHOW -->
+  <!-- CONFIGURACIÓN DE BANNERS Y PATROCINADORES
+       Para agregar uno: copia una línea, cambia img, alt y url. url vacía = sin enlace. -->
   <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
+    /* Banners del carrusel (1200x250 px, ver guía de tamaños) */
+    const PROMO_BANNERS = [
+      { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },
+      { img: 'assets/img/banner-promo-2.jpg', alt: 'Inscripciones Abiertas Temporada 2026', url: 'registro-jugadores.html' }
+    ];
 
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        if (i === index) slide.classList.add('active');
-      });
+    /* Patrocinadores oficiales. Para una URL externa usa https://... */
+    const SPONSORS = [
+      { img: 'assets/sponsors/sponsor1.png', alt: 'Sponsor 1', url: '' },
+      { img: 'assets/sponsors/sponsor2.png', alt: 'Sponsor 2', url: '' },
+      { img: 'assets/sponsors/sponsor3.png', alt: 'Sponsor 3', url: '' },
+      { img: 'assets/sponsors/sponsor4.png', alt: 'Sponsor 4', url: '' },
+      { img: 'assets/sponsors/sponsor5.png', alt: 'Sponsor 5', url: '' },
+      { img: 'assets/sponsors/sponsor6.png', alt: 'Sponsor 6', url: '' },
+      { img: 'assets/sponsors/sponsor7.png', alt: 'Sponsor 7', url: '' },
+      { img: 'assets/sponsors/sponsor8.png', alt: 'Sponsor 8', url: '' },
+      { img: 'assets/sponsors/sponsor9.png', alt: 'Sponsor 9', url: '' }
+    ];
+
+    /* Enlace: interno abre en la misma pestaña; externo abre nueva pestaña y lleva rel="sponsored" */
+    function envolverEnlace(contenido, url) {
+      if (!url) return contenido;
+      const externo = /^https?:\/\//.test(url);
+      const attrs = externo ? ' target="_blank" rel="sponsored noopener"' : '';
+      return `<a href="${url}"${attrs}>${contenido}</a>`;
     }
 
-    function moveSlide(step) {
-      currentSlide = (currentSlide + step + slides.length) % slides.length;
-      showSlide(currentSlide);
+    /* Render de banners y puntos */
+    const slider = document.getElementById('promoSlider');
+    const dotsEl = document.getElementById('promoDots');
+    let slideActual = 0;
+
+    slider.innerHTML = PROMO_BANNERS.map((b, i) =>
+      `<div class="slide${i === 0 ? ' active' : ''}">${envolverEnlace(`<img src="${b.img}" alt="${b.alt}">`, b.url)}</div>`
+    ).join('');
+
+    dotsEl.innerHTML = PROMO_BANNERS.map((b, i) =>
+      `<button class="promo-dot${i === 0 ? ' active' : ''}" aria-label="Ver banner ${i + 1}" data-i="${i}"></button>`
+    ).join('');
+
+    function mostrarSlide(i) {
+      const slides = slider.querySelectorAll('.slide');
+      const dots = dotsEl.querySelectorAll('.promo-dot');
+      slideActual = (i + slides.length) % slides.length;
+      slides.forEach((el, k) => el.classList.toggle('active', k === slideActual));
+      dots.forEach((el, k) => el.classList.toggle('active', k === slideActual));
     }
 
-    setInterval(() => {
-      moveSlide(1);
-    }, 5000);
+    dotsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.promo-dot');
+      if (btn) mostrarSlide(Number(btn.dataset.i));
+    });
+
+    if (PROMO_BANNERS.length <= 1) dotsEl.style.display = 'none';
+    else setInterval(() => mostrarSlide(slideActual + 1), 5000);
+
+    /* Render de patrocinadores */
+    document.getElementById('sponsorsGrid').innerHTML = SPONSORS.map(s =>
+      `<div class="sponsor-card">${envolverEnlace(`<img src="${s.img}" alt="${s.alt}" class="sponsor-logo">`, s.url)}</div>`
+    ).join('');
   </script>
 
   <!-- SCRIPT PWA Y SERVICE WORKER -->
@@ -751,11 +751,6 @@
         deferredPrompt = null;
       });
 
-      // Registro del Service Worker
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('sw.js')
-          .catch((err) => console.log('Fallo al registrar Service Worker:', err));
-      }
     })();
   </script>
 

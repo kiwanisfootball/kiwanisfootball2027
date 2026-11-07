@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://www.kiwanisfootball.com/conocenos.html">
   <meta property="og:locale" content="es_PA">
 
-  <!-- Schema.org Structured Data (JSON-LD) para GEO, SEO y AEO -->
+  <!-- Schema.org Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -52,122 +52,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- ESTILOS MODULARES -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/conocenos.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
-
-  <style>
-    /* ==========================================================================
-       BLINDAJE RESPONSIVO SIN ALTERAR DESKTOP
-       ========================================================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      max-width: 100%;
-    }
-
-    body {
-      overflow-x: hidden;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    main {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .executive-league-section, 
-    .conocenos-hero, 
-    .counters-section, 
-    .history-banner-container, 
-    .timeline-section-wrapper {
-      width: 100%;
-      max-width: min(1200px, 100% - 30px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .executive-league-banner,
-    .history-banner-grid {
-      display: grid;
-      width: 100%;
-      grid-template-columns: 330px minmax(0, 1fr);
-    }
-
-    @media (max-width: 900px) {
-      .executive-league-banner,
-      .history-banner-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .executive-card-side,
-    .league-red-box,
-    .history-banner-blue,
-    .history-banner-image {
-      min-width: 0;
-      word-break: break-word;
-    }
-
-    .league-red-content {
-      overflow-wrap: break-word;
-    }
-
-    /* ==========================================================================
-       CORRECCIÓN ESPECÍFICA PARA TABLET (CONTADORES / MÉTRICAS)
-       ========================================================================== */
-    @media (min-width: 650px) and (max-width: 1024px) {
-      .counters-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 12px;
-      }
-      .counter-card {
-        padding: 16px 10px;
-      }
-      .counter-number {
-        font-size: 32px;
-      }
-    }
-
-    /* ==========================================================================
-       CORRECCIÓN ESPECÍFICA PARA MOBILE (CRONOLOGÍA Y BOTONES)
-       ========================================================================== */
-    .timeline-viewport-container {
-      position: relative;
-      width: 100%;
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .timeline-scroll-track {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    @media (max-width: 768px) {
-      /* Ocultar los botones flotantes en móviles para permitir scroll táctil limpio sin estorbar texto */
-      .tl-float-btn, .tl-fade-overlay {
-        display: none !important;
-      }
-      /* Reducir ancho de tarjetas de cronología para que no se corten en pantallas chicas */
-      .timeline-h-card {
-        width: 260px;
-        padding: 16px;
-      }
-      .timeline-scroll-track {
-        padding: 10px 15px;
-      }
-    }
-  </style>
 </head>
 <body>
 
-  <!-- 1. HEADER GLOBAL (Inyectado por components.js) -->
+  <!-- 1. HEADER GLOBAL -->
   <header class="header-nav" id="globalNav" role="banner"></header>
 
   <main id="main-content" role="main">
-    <!-- 1. ENCABEZADO H1 CON RESEÑA DE PÁGINA -->
+    <!-- 1. ENCABEZADO H1 -->
     <section class="conocenos-hero">
       <h1>CONÓCENOS</h1>
       <p>Conoce la historia de la Kiwanis Football League desde sus inicios hasta la actualidad.</p>
@@ -193,7 +89,7 @@
       </div>
     </section>
 
-    <!-- 3. BLOQUE UNIFICADO: CARD EJECUTIVO RAÚL MÉNDEZ + TEXT BOX ROJO KFL -->
+    <!-- 3. BLOQUE UNIFICADO: CARD EJECUTIVO + TEXT BOX ROJO -->
     <section class="executive-league-section">
       <div class="executive-league-banner">
         
@@ -249,7 +145,6 @@
     <section class="history-banner-container">
       <div class="history-banner-grid">
         
-        <!-- Bloque Azul Institucional -->
         <div class="history-banner-blue">
           <h2>NUESTRA HISTORIA</h2>
           <p>
@@ -257,7 +152,6 @@
           </p>
         </div>
 
-        <!-- Imagen de Historia -->
         <div class="history-banner-image">
           <img src="assets/img/conocenos-historia-kfl.jpg" alt="Historia de la Kiwanis Football League Panamá" loading="lazy">
         </div>
@@ -268,22 +162,17 @@
     <!-- 5. CRONOLOGÍA DE LA LIGA -->
     <section class="timeline-section-wrapper" aria-label="Cronología histórica">
       <h2 class="timeline-title-main">CRONOLOGÍA DE LA LIGA</h2>
+      
+      <!-- INDICADOR DISCRETO DE INTERACCIÓN -->
+      <div class="timeline-hint">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+        <span>Desliza horizontalmente para ver la historia completa</span>
+      </div>
 
       <div class="timeline-viewport-container">
         
-        <!-- Capas de Difuminación Lateral -->
-        <div class="tl-fade-overlay tl-fade-left" id="tlFadeLeft" aria-hidden="true"></div>
-        <div class="tl-fade-overlay tl-fade-right" id="tlFadeRight" aria-hidden="true"></div>
-
-        <!-- Botones Flotantes de Navegación -->
-        <button class="tl-float-btn prev-btn" id="tlPrevBtn" aria-label="Anterior">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        </button>
-        <button class="tl-float-btn next-btn" id="tlNextBtn" aria-label="Siguiente">
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-        </button>
-
-        <!-- Track con Scroll Oculto -->
         <div class="timeline-scroll-track" id="timelineTrack">
           <div class="timeline-cards-row">
             
@@ -477,13 +366,12 @@
     </section>
   </main>
 
-  <!-- 2. FOOTER GLOBAL (Inyectado por components.js) -->
+  <!-- 2. FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPTS DE INTERACCIÓN Y CONTROLES -->
+  <!-- SCRIPT SOLO PARA CONTADORES -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Contadores Numéricos Optimizados
       const counters = document.querySelectorAll('.counter-val');
       let animated = false;
 
@@ -521,58 +409,10 @@
       if (countersSection) {
         observer.observe(countersSection);
       }
-
-      // 2. Control de Navegación del Timeline
-      const track = document.getElementById('timelineTrack');
-      const prevBtn = document.getElementById('tlPrevBtn');
-      const nextBtn = document.getElementById('tlNextBtn');
-      const fadeLeft = document.getElementById('tlFadeLeft');
-      const fadeRight = document.getElementById('tlFadeRight');
-
-      function updateTimelineState() {
-        if (!track) return;
-
-        const scrollLeft = track.scrollLeft;
-        const maxScroll = track.scrollWidth - track.clientWidth;
-
-        if (scrollLeft <= 10) {
-          prevBtn.style.opacity = '0';
-          prevBtn.style.pointerEvents = 'none';
-          fadeLeft.style.opacity = '0';
-        } else {
-          prevBtn.style.opacity = '1';
-          prevBtn.style.pointerEvents = 'auto';
-          fadeLeft.style.opacity = '1';
-        }
-
-        if (scrollLeft >= maxScroll - 10) {
-          nextBtn.style.opacity = '0';
-          nextBtn.style.pointerEvents = 'none';
-          fadeRight.style.opacity = '0';
-        } else {
-          nextBtn.style.opacity = '1';
-          nextBtn.style.pointerEvents = 'auto';
-          fadeRight.style.opacity = '1';
-        }
-      }
-
-      if (track && prevBtn && nextBtn) {
-        track.addEventListener('scroll', updateTimelineState);
-
-        nextBtn.addEventListener('click', () => {
-          track.scrollBy({ left: 350, behavior: 'smooth' });
-        });
-
-        prevBtn.addEventListener('click', () => {
-          track.scrollBy({ left: -350, behavior: 'smooth' });
-        });
-
-        updateTimelineState();
-      }
     });
   </script>
 
-  <!-- MENÚ, PIE Y BOTÓN VOLVER ARRIBA GLOBALES -->
+  <!-- MENÚ Y COMPONENTES GLOBALES -->
   <script src="js/components.js"></script>
 </body>
 </html>

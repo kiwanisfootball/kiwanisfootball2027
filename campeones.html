@@ -45,7 +45,7 @@
   <!-- Google Fonts: Anton & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Hoja de estilos global y favicon local -->
   <link rel="stylesheet" href="css/styles.css">
@@ -286,6 +286,7 @@
       box-sizing: border-box;
       gap: 15px;
       animation: fadeIn 0.4s ease-in-out;
+      font-family: var(--fuente-cuerpo);
     }
 
     .champs-leaderboard-left {
@@ -294,9 +295,10 @@
       gap: 16px;
     }
 
-    .lombardi-svg-icon {
+    .champs-leaderboard-trophy-png {
       width: 44px;
       height: 54px;
+      object-fit: contain;
       flex-shrink: 0;
       filter: drop-shadow(0 2px 6px rgba(234, 179, 8, 0.4));
     }
@@ -308,11 +310,12 @@
     }
 
     .champs-leaderboard-label {
-      font-size: 11px;
+      font-family: var(--fuente-cuerpo);
+      font-size: 12px;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #cbd5e1;
-      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: #eab308;
     }
 
     .champs-leaderboard-team-wrap {
@@ -322,9 +325,16 @@
       flex-wrap: wrap;
     }
 
+    .champs-leaderboard-team-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .champs-leaderboard-team-logo {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       object-fit: contain;
     }
 
@@ -333,16 +343,26 @@
       font-size: 22px;
       letter-spacing: 0.5px;
       color: #ffffff;
+      line-height: 1;
+    }
+
+    .champs-leaderboard-years {
+      font-family: var(--fuente-cuerpo);
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: 0.3px;
     }
 
     .champs-leaderboard-counter {
       background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
       color: #0f172a;
-      padding: 8px 16px;
+      padding: 8px 18px;
       border-radius: 50px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      font-family: var(--fuente-cuerpo);
       font-weight: 800;
       font-size: 14px;
       white-space: nowrap;
@@ -352,7 +372,7 @@
 
     .champs-leaderboard-counter span.count-num {
       font-family: var(--fuente-titulos);
-      font-size: 22px;
+      font-size: 24px;
       line-height: 1;
     }
 
@@ -560,42 +580,10 @@
       <!-- BANNER MÁXIMO GANADOR / COUNTER DINÁMICO POR CATEGORÍA -->
       <div id="leaderboardCard" class="champs-leaderboard-card" style="display: none;">
         <div class="champs-leaderboard-left">
-          <!-- SVG TROFEO VINCE LOMBARDI -->
-          <svg class="lombardi-svg-icon" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="lombardiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FFFFFF" />
-                <stop offset="35%" stop-color="#E2E8F0" />
-                <stop offset="70%" stop-color="#94A3B8" />
-                <stop offset="100%" stop-color="#475569" />
-              </linearGradient>
-              <linearGradient id="ballGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#F8FAFC" />
-                <stop offset="50%" stop-color="#CBD5E1" />
-                <stop offset="100%" stop-color="#64748B" />
-              </linearGradient>
-            </defs>
-            <!-- Balón de Football en la cima estilo Lombardi -->
-            <g transform="rotate(-35 50 32)">
-              <ellipse cx="50" cy="32" rx="26" ry="16" fill="url(#ballGrad)" stroke="#334155" stroke-width="1.5" />
-              <path d="M 28 32 Q 50 18 72 32" stroke="#475569" stroke-width="1" fill="none" />
-              <path d="M 28 32 Q 50 46 72 32" stroke="#475569" stroke-width="1" fill="none" />
-              <!-- Costura del balón -->
-              <line x1="38" y1="32" x2="62" y2="32" stroke="#0F172A" stroke-width="2.5" stroke-linecap="round"/>
-              <line x1="42" y1="28" x2="42" y2="36" stroke="#0F172A" stroke-width="1.5"/>
-              <line x1="47" y1="28" x2="47" y2="36" stroke="#0F172A" stroke-width="1.5"/>
-              <line x1="52" y1="28" x2="52" y2="36" stroke="#0F172A" stroke-width="1.5"/>
-              <line x1="57" y1="28" x2="57" y2="36" stroke="#0F172A" stroke-width="1.5"/>
-            </g>
-            <!-- Base piramidal estilizada Vince Lombardi -->
-            <path d="M 40 45 L 60 45 L 68 118 L 32 118 Z" fill="url(#lombardiGrad)" stroke="#334155" stroke-width="1" />
-            <path d="M 50 45 L 60 45 L 68 118 L 50 118 Z" fill="rgba(0,0,0,0.15)" />
-            <!-- Peana inferior -->
-            <rect x="26" y="118" width="48" height="8" rx="2" fill="#334155" />
-          </svg>
+          <img src="assets/img/trophy.png" alt="Trofeo Máximo Ganador" class="champs-leaderboard-trophy-png" onerror="this.src='assets/logos/KFL-Logo.png'">
 
           <div class="champs-leaderboard-info">
-            <span class="champs-leaderboard-label">Máximo Ganador de la Categoría</span>
+            <span class="champs-leaderboard-label">Máximo Ganador</span>
             <div class="champs-leaderboard-team-wrap" id="leaderboardTeams">
               <!-- Se inyecta dinámicamente -->
             </div>
@@ -732,7 +720,8 @@
 
     let currentModality = null;
     let activeCategory = null;
-    // Almacena los conteos de campeonatos procesados por categoría
+    let counterAnimationTimer = null;
+
     const categoryStats = {
       varsity: [],
       juvenil: [],
@@ -783,7 +772,6 @@
 
       document.getElementById('categoryPrompt').style.display = 'none';
 
-      // Mostrar card de líder de campeonatos y tabla correspondiente
       renderCategoryLeaderboard(category);
 
       document.querySelectorAll('.champs-category-section').forEach(sec => {
@@ -808,7 +796,6 @@
           const validRows = renderTableRows(config.targetId, rows);
           categoryStats[catKey] = validRows || [];
 
-          // Si el usuario ya presionó una categoría mientras cargaban los datos, actualizar leaderboard
           if (activeCategory === catKey) {
             renderCategoryLeaderboard(catKey);
           }
@@ -929,11 +916,17 @@
         return;
       }
 
-      // Conteo de campeonatos por equipo
+      // Conteo de campeonatos y años por equipo
       const tally = {};
+      const teamYears = {};
+
       rows.forEach(r => {
         const teamName = r.campeon;
         tally[teamName] = (tally[teamName] || 0) + 1;
+        if (!teamYears[teamName]) teamYears[teamName] = [];
+        if (r.season && !teamYears[teamName].includes(r.season)) {
+          teamYears[teamName].push(r.season);
+        }
       });
 
       let maxTitles = 0;
@@ -953,21 +946,50 @@
         return;
       }
 
-      // Renderizar equipos líderes
+      // Renderizar equipos líderes con sus años
       teamsContainer.innerHTML = topTeams.map((team, idx) => {
         const info = getTeamLogoInfo(team);
+        const yearsStr = (teamYears[team] || []).join(', ');
         const separator = (idx > 0) ? '<span style="color:#eab308; font-weight:800; margin: 0 4px;">&</span>' : '';
         return `
           ${separator}
-          <img src="${info.logoUrl}" alt="${team}" class="champs-leaderboard-team-logo" onerror="this.src='${info.fallbackUrl}'">
-          <span class="champs-leaderboard-team-name">${team}</span>
+          <div class="champs-leaderboard-team-item">
+            <img src="${info.logoUrl}" alt="${team}" class="champs-leaderboard-team-logo" onerror="this.src='${info.fallbackUrl}'">
+            <div>
+              <span class="champs-leaderboard-team-name">${team}</span>
+              ${yearsStr ? `<div class="champs-leaderboard-years">(${yearsStr})</div>` : ''}
+            </div>
+          </div>
         `;
       }).join('');
 
-      countEl.textContent = maxTitles;
       textEl.textContent = maxTitles === 1 ? 'Campeonato' : 'Campeonatos';
-
       card.style.display = 'flex';
+
+      // Animación progresiva fluida del contador
+      animateCounter(countEl, maxTitles, 1200);
+    }
+
+    function animateCounter(element, targetNum, durationMs) {
+      if (counterAnimationTimer) clearInterval(counterAnimationTimer);
+      element.textContent = '0';
+      if (targetNum <= 0) return;
+
+      const startTime = performance.now();
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / durationMs, 1);
+        // Easing suave (easeOutQuad)
+        const current = Math.floor(progress * (2 - progress) * targetNum);
+        element.textContent = current;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = targetNum;
+        }
+      }
+      requestAnimationFrame(update);
     }
 
     function renderEmptyState(targetId, message) {

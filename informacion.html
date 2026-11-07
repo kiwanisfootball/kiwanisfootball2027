@@ -3,65 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Información y Contacto - Kiwanis Football League Panama</title>
   
+  <!-- Meta Tags de Optimización SEO / GEO / AEO -->
+  <title>Preguntas Frecuentes e Información | Kiwanis Football League Panamá (KFL)</title>
+  <meta name="description" content="Resuelve tus dudas sobre la Kiwanis Football League (KFL) en Panamá: inscripciones, categorías Contact y Flag Football, límites de edad, pesos y el programa Kiwanis Kolts.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panama, futbol americano panama, flag football panama, Kiwanis Kolts, Costa del Este Sportcenter, liga interescolar panama">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.kflpanama.com/informacion.html">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Preguntas Frecuentes e Información - Kiwanis Football League (KFL)">
+  <meta property="og:description" content="Información oficial sobre inscripciones, categorías, reglamento de pesajes, sedes y contacto de la KFL en Panamá.">
+  <meta property="og:url" content="https://www.kflpanama.com/informacion.html">
+  <meta property="og:image" content="https://i.imgur.com/wrPDjDN.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Preguntas Frecuentes - Kiwanis Football League (KFL)">
+  <meta name="twitter:description" content="Todo lo que necesitas saber para participar en la Kiwanis Football League Panamá.">
+  <meta name="twitter:image" content="https://i.imgur.com/wrPDjDN.png">
+
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
 
   <style>
+    :root {
+      --primary-color: #19547E;
+      --primary-hover: #144265;
+      --text-main: #1e293b;
+      --text-muted: #475569;
+      --bg-light: #f8fafc;
+      --border-color: #e2e8f0;
+    }
+
     .contact-container {
-      max-width: 1100px;
+      max-width: 1000px;
       width: 100%;
       margin: 40px auto;
       padding: 0 20px;
-      font-family: 'Avenir', sans-serif;
+      font-family: 'Avenir', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       box-sizing: border-box;
     }
 
     .section-header-clean {
       text-align: center;
       margin-bottom: 40px;
-      padding: 20px 0;
+      padding: 10px 0;
     }
 
     .section-header-clean h1 {
       font-family: 'Anton', sans-serif;
       font-size: 42px;
-      color: #19547E;
+      color: var(--primary-color);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .section-header-clean p {
-      font-size: 15px;
-      color: #475569;
-      font-weight: 600;
-      max-width: 700px;
+      font-size: 16px;
+      color: var(--text-muted);
+      font-weight: 500;
+      max-width: 750px;
       margin: 0 auto;
       line-height: 1.6;
     }
 
+    /* Estilos de FAQ (AEO/SEO Optimized) */
+    .faq-section {
+      margin-bottom: 40px;
+    }
+
+    .faq-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 28px;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-item[open] {
+      border-color: var(--primary-color);
+    }
+
+    .faq-summary {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      padding: 18px 24px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-summary::after {
+      content: '+';
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--primary-color);
+      transition: transform 0.25s ease;
+    }
+
+    .faq-item[open] .faq-summary::after {
+      content: '−';
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 24px 20px 24px;
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .faq-answer ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    .faq-answer li {
+      margin-bottom: 6px;
+    }
+
+    /* Sección de Transición al Formulario */
+    .contact-cta-banner {
+      text-align: center;
+      margin: 50px 0 30px 0;
+      padding: 20px;
+    }
+
+    .contact-cta-banner h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: 30px;
+      color: var(--primary-color);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .contact-cta-banner p {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Estilos del Formulario de Contacto */
     .contact-form-wrapper {
       max-width: 750px;
-      margin: 0 auto;
+      margin: 0 auto 40px auto;
       background: #ffffff;
       border-radius: 16px;
       padding: 40px;
-      border: 1px solid #e2e8f0;
+      border: 1px solid var(--border-color);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
       box-sizing: border-box;
     }
 
     .form-group {
       margin-bottom: 22px;
-      position: relative;
     }
 
     .form-label {
       display: block;
-      font-family: 'Avenir', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 800;
       color: #334155;
       text-transform: uppercase;
@@ -87,10 +210,10 @@
     .form-input, .form-textarea {
       width: 100%;
       padding: 14px 14px 14px 48px;
-      font-family: 'Avenir', sans-serif;
+      font-family: inherit;
       font-size: 15px;
-      color: #1e293b;
-      background: #f8fafc;
+      color: var(--text-main);
+      background: var(--bg-light);
       border: 1px solid #cbd5e1;
       border-radius: 10px;
       outline: none;
@@ -106,13 +229,13 @@
 
     .form-input:focus, .form-textarea:focus {
       background: #ffffff;
-      border-color: #19547E;
+      border-color: var(--primary-color);
       box-shadow: 0 0 0 4px rgba(25, 84, 126, 0.12);
     }
 
     .form-submit-btn {
       width: 100%;
-      background: #19547E;
+      background: var(--primary-color);
       color: #ffffff;
       border: none;
       padding: 16px;
@@ -128,7 +251,7 @@
     }
 
     .form-submit-btn:hover {
-      background: #144265;
+      background: var(--primary-hover);
       transform: translateY(-2px);
       box-shadow: 0 6px 18px rgba(25, 84, 126, 0.35);
     }
@@ -138,7 +261,6 @@
       margin-top: 20px;
       padding: 15px;
       border-radius: 8px;
-      font-family: 'Avenir', sans-serif;
       font-size: 14px;
       font-weight: 700;
       text-align: center;
@@ -157,37 +279,287 @@
     }
 
     @media (max-width: 768px) {
-      .contact-container { padding: 15px 10px; }
+      .contact-container { padding: 15px 12px; }
       .section-header-clean h1 { font-size: 32px; }
-      .contact-form-wrapper { padding: 25px 15px; }
+      .faq-summary { font-size: 15px; padding: 16px 18px; }
+      .contact-form-wrapper { padding: 25px 18px; }
     }
   </style>
 
-  <!-- Vercel Speed Insights -->
+  <!-- Vercel Speed Insights INTACTO -->
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+
+  <!-- Schema.org Structural Data (AEO & GEO Optimization) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SportsOrganization",
+        "@id": "https://www.kflpanama.com/#organization",
+        "name": "Kiwanis Football League",
+        "alternateName": "KFL",
+        "url": "https://www.kflpanama.com",
+        "logo": "https://i.imgur.com/wrPDjDN.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Ciudad de Panamá",
+          "addressCountry": "PA"
+        },
+        "location": {
+          "@type": "SportsActivityLocation",
+          "name": "Costa del Este Sportcenter",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Costa del Este, Ciudad de Panamá",
+            "addressCountry": "PA"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué es la Kiwanis Football League?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La Kiwanis Football League es la liga de fútbol americano interescolar más destacada de Panamá, operada bajo la organización del Club Kiwanis. Su propósito principal es coordinar, regular y fiscalizar la competición oficial entre instituciones educativas, promoviendo el desarrollo deportivo, la formación integral y el nivel competitivo escolar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo puedo participar o inscribirme en la liga?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Las inscripciones se gestionan a través de las instituciones educativas oficiales (Academia Interamericana de Panamá [AIP], Brader School, Colegio de Panamá, Balboa Academy, La Salle y Colegio Real de Panamá). Si el atleta no pertenece a ninguna de estas escuelas, debe integrarse al programa de los Kiwanis Kolts."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo puedo inscribirme si mi colegio no tiene equipo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Si tu colegio no cuenta con un programa inscrito en la KFL, puedes unirte al programa Kiwanis Kolts, la organización independiente oficial diseñada para acoger y desarrollar atletas cuyos colegios no participan en el torneo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa si mi colegio quiere ingresar a la liga como un programa oficial?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La institución educativa debe entablar comunicación directa con el comité administrativo de la liga completando el formulario de contacto oficial al final de esta sección para iniciar la evaluación y afiliación."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Realizan clases de prueba?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Al no ser un club tradicional, la KFL no otorga clases de prueba. Sin embargo, el programa abierto de los Kiwanis Kolts realiza tryouts para sus categorías Micro, Mini y Juvenil tanto en contact como flag football."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Dónde se juegan los partidos de la temporada?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Los encuentros oficiales de la temporada se disputan en la sede oficial principal: Costa del Este Sportcenter en Ciudad de Panamá."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué modalidades y categorías ofrece la KFL?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La KFL ofrece Contact Football (masculino) y Flag Football (femenino). Las categorías son Varsity (Mayor de 15 años), Juvenil (13 a 15 años), Mini (10 a 12 años) y Micro (8 a 10 años)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuáles son las reglas de edades y los rangos de peso exactos en Contact?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Las normas de peso solo aplican para Contact. Varsity: Sin límite de peso. Juvenil (11-12 años): 140 lbs mín - peso máx ilimitado; (13-14 años): 80 a 165 lbs; (15 años mayor/liviano): 95 a 155 lbs; X-Man: máx 175 lbs. Mini (10-12 años): 70 a 130 lbs (X-Man máx 140 lbs). Micro (8-10 años): máx 90 lbs (X-Man máx 100 lbs)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué requisitos de elegibilidad y documentación se exigen?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Se exige: Cédula juvenil o pasaporte vigente, certificado de buena salud física, cumplir con la edad requerida y cumplir con la norma de pesos establecida (en Contact)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo funciona el proceso del Combine y el Draft?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Aplica para Varsity Contact (atletas de 16 a 18 años). La liga organiza jornadas de evaluación física (Combine) para medir capacidades y realizar el draft garantizando paridad competitiva."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo se transmiten los partidos y se siguen las estadísticas?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Los encuentros se transmiten por UniCOS y el canal oficial KFL Total Access. Estadísticas y calendarios se actualizan digitalmente en las plataformas oficiales de la liga."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- NAV MAESTRO -->
+  <!-- NAV MAESTRO (Se inyecta vía js/components.js) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="contact-container">
 
-    <div class="section-header-clean">
+    <header class="section-header-clean">
       <h1>Información y Preguntas Frecuentes</h1>
-      <p>¿Listo para formar parte de la gran familia KFL? Infórmate sobre cómo unirte a nuestros equipos, inscribir a tu colegio o resolver cualquier duda sobre las temporadas de Football Americano y Flag Football.</p>
+      <p>¿Listo para formar parte de la gran familia KFL? Infórmate sobre cómo unirte a nuestros equipos, inscribir a tu colegio o resolver cualquier duda sobre las temporadas de Football Americano y Flag Football en Panamá.</p>
+    </header>
+
+    <!-- SECCIÓN FAQ -->
+    <section class="faq-section" aria-label="Preguntas Frecuentes">
+      <h2 class="faq-title">Preguntas Frecuentes (FAQ)</h2>
+
+      <details class="faq-item">
+        <summary class="faq-summary">1. ¿Qué es la Kiwanis Football League?</summary>
+        <div class="faq-answer">
+          <p>La Kiwanis Football League es la liga de fútbol americano interescolar más destacada de Panamá, operada bajo la organización del Club Kiwanis. Su propósito principal es coordinar, regular y fiscalizar la competición oficial entre instituciones educativas, promoviendo de manera estructurada el desarrollo deportivo, la formación integral y el nivel competitivo de los atletas en el ámbito escolar.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">2. ¿Cómo puedo participar o inscribirme en la liga?</summary>
+        <div class="faq-answer">
+          <p>Las inscripciones se gestionan a través de las instituciones educativas oficiales de la liga (Academia Interamericana de Panamá [AIP], Brader School, Colegio de Panamá, Balboa Academy, La Salle y Colegio Real de Panamá). Si el atleta no pertenece a ninguna de estas escuelas oficiales, debe integrarse obligatoriamente al programa de los Kiwanis Kolts.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">3. ¿Cómo puedo inscribirme si mi colegio no tiene equipo?</summary>
+        <div class="faq-answer">
+          <p>Si tu institución educativa no cuenta con un programa o equipo inscrito en la KFL, tienes la vía abierta para unirte al programa de los Kiwanis Kolts. Esta es la organización independiente oficial de la liga diseñada específicamente para acoger, entrenar y desarrollar a aquellos atletas que desean competir pero cuyos colegios no participan en el torneo.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">4. ¿Qué pasa si mi colegio quiere ingresar a la liga como un programa oficial?</summary>
+        <div class="faq-answer">
+          <p>Si una institución educativa desea formar parte de la KFL e incorporar su propio equipo u oficializar un programa deportivo, el colegio interesado debe entablar comunicación directa con el comité administrativo de la liga. Para iniciar formalmente el proceso de evaluación y afiliación, se debe completar el formulario de contacto al final de esta sección.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">5. ¿Realizan clases de prueba?</summary>
+        <div class="faq-answer">
+          <p>Al no ser un club como tal, la KFL no otorga clases de prueba. Sin embargo, el programa abierto de los Kiwanis Kolts realiza tryouts para sus categorías Micro, Mini y Juvenil, tanto en contact como flag football, lo cual puede brindar una oportunidad a nuevos atletas de probar el deporte.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">6. ¿Dónde se juegan los partidos de la temporada?</summary>
+        <div class="faq-answer">
+          <p>Los encuentros oficiales de la temporada se disputan en las instalaciones de nuestra sede oficial principal, el <strong>Costa del Este Sportcenter</strong>, un complejo con infraestructura adecuada para albergar partidos de alto nivel tanto en la modalidad de Contact como de Flag Football.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">7. ¿Qué modalidades y categorías ofrece la KFL?</summary>
+        <div class="faq-answer">
+          <p>La liga ofrece dos modalidades principales: <strong>Contact Football</strong> (rama masculina) y <strong>Flag Football</strong> (rama exclusivamente femenina). Las divisiones por edades se estructuran de la siguiente manera:</p>
+          <ul>
+            <li><strong>Varsity:</strong> Mayor de 15 años.</li>
+            <li><strong>Juvenil:</strong> Desde los 13 hasta los 15 años.</li>
+            <li><strong>Mini:</strong> 10 a 12 años.</li>
+            <li><strong>Micro:</strong> 8 a 10 años.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">8. ¿Cuáles son las reglas de edades y los rangos de peso exactos en Contact?</summary>
+        <div class="faq-answer">
+          <p>Las normas de peso solo aplican para la modalidad de Contact (la edad del atleta al 31 de diciembre del año previo al año de temporada debe ajustarse a los límites de la categoría):</p>
+          <ul>
+            <li><strong>Varsity:</strong> Mayor de 15 años — Sin límite de peso (Peso ilimitado).</li>
+            <li><strong>Juvenil:</strong>
+              <ul>
+                <li>Edades 11–12 años: Mínimo 140 lbs – Peso máximo ilimitado.</li>
+                <li>Edades 13–14 años: Rango de 80 a 165 lbs.</li>
+                <li>Edad 15 años (Mayor/Liviano): Rango de 95 a 155 lbs.</li>
+                <li>Categoría X-Man (13–15 años): Peso máximo de 175 lbs.</li>
+              </ul>
+            </li>
+            <li><strong>Mini:</strong>
+              <ul>
+                <li>Edades 10–12 años: Rango de 70 a 130 lbs.</li>
+                <li>Categoría X-Man (10–12 años): Peso máximo de 140 lbs.</li>
+              </ul>
+            </li>
+            <li><strong>Micro:</strong>
+              <ul>
+                <li>Edades 8–10 años: Peso máximo de 90 lbs.</li>
+                <li>Categoría X-Man (8–10 años): Peso máximo de 100 lbs.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">9. ¿Qué requisitos de elegibilidad y documentación se exigen?</summary>
+        <div class="faq-answer">
+          <p>Cada atleta debe presentar:</p>
+          <ul>
+            <li>Cédula juvenil o pasaporte vigente.</li>
+            <li>Certificado de buena salud física.</li>
+            <li>Cumplir con las edades requeridas para cada categoría.</li>
+            <li>Cumplir con la norma de pesos para cada categoría (solo aplica para Contact).</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">10. ¿Cómo funciona el proceso del Combine y el Draft?</summary>
+        <div class="faq-answer">
+          <p>Este proceso aplica exclusivamente para la categoría Varsity Contact, siendo exclusivo para atletas mayores de 16 años y hasta 18 años. La liga organiza jornadas de evaluación física (Combine) para medir las capacidades atléticas de los participantes, alimentando los procesos de asignación y draft regulados para garantizar paridad competitiva entre los equipos. Asimismo, a aquellos atletas de 13 años en adelante que se encuentren muy por encima de los pesos establecidos para la categoría Juvenil se les recomienda dar el salto e ir directamente a Varsity.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-summary">11. ¿Cómo se transmiten los partidos y se siguen las estadísticas?</summary>
+        <div class="faq-answer">
+          <p>Los encuentros se transmiten a través de UniCOS y el canal oficial de la liga <strong>KFL Total Access</strong>. Las estadísticas en vivo, calendarios y tablas de posiciones se actualizan de forma digital mediante las herramientas oficiales de gestión de la liga.</p>
+        </div>
+      </details>
+
+    </section>
+
+    <!-- BANNER DE TRANSICIÓN A CONTACTO -->
+    <div class="contact-cta-banner">
+      <h2>¿Tienes más preguntas?</h2>
+      <p>Si aún tienes dudas o consultas, no dudes en escribirnos.</p>
     </div>
 
-    <div class="contact-form-wrapper">
+    <!-- FORMULARIO DE CONTACTO -->
+    <section class="contact-form-wrapper" aria-label="Formulario de contacto">
       <form id="contactForm" onsubmit="handleContactSubmit(event)">
         
         <div class="form-group">
-          <label class="form-label" for="nombre">Nombre</label>
+          <label class="form-label" for="nombre">Nombre Completo</label>
           <div class="input-icon-wrapper">
-            <svg class="input-icon" viewBox="0 0 24 24">
+            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
             <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre completo" required>
@@ -195,9 +567,9 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="email">Email</label>
+          <label class="form-label" for="email">Correo Electrónico</label>
           <div class="input-icon-wrapper">
-            <svg class="input-icon" viewBox="0 0 24 24">
+            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
             <input type="email" id="email" name="email" class="form-input" placeholder="tucorreo@ejemplo.com" required>
@@ -205,9 +577,9 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="telefono">Teléfono</label>
+          <label class="form-label" for="telefono">Teléfono / WhatsApp</label>
           <div class="input-icon-wrapper">
-            <svg class="input-icon" viewBox="0 0 24 24">
+            <svg class="input-icon" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
             </svg>
             <input type="tel" id="telefono" name="telefono" class="form-input" placeholder="+507 0000-0000" required>
@@ -217,29 +589,29 @@
         <div class="form-group">
           <label class="form-label" for="consulta">Consulta</label>
           <div class="input-icon-wrapper" style="align-items: flex-start;">
-            <svg class="input-icon" style="top: 15px;" viewBox="0 0 24 24">
+            <svg class="input-icon" style="top: 15px;" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
             </svg>
-            <textarea id="consulta" name="consulta" class="form-textarea" placeholder="Escribe aquí tu consulta sobre cómo unirte a un equipo, inscripciones, categorías, etc..." required></textarea>
+            <textarea id="consulta" name="consulta" class="form-textarea" placeholder="Escribe aquí tu consulta sobre cómo unirte a un equipo, inscripciones, afiliación de colegios, etc..." required></textarea>
           </div>
         </div>
 
-        <button type="submit" class="form-submit-btn" id="submitBtn">Enviar</button>
+        <button type="submit" class="form-submit-btn" id="submitBtn">Enviar Consulta</button>
 
-        <div id="formAlert" class="form-alert"></div>
+        <div id="formAlert" class="form-alert" role="alert"></div>
       </form>
-    </div>
+    </section>
 
   </main>
 
-  <div id="globalFooter"></div>
+  <!-- FOOTER MAESTRO (Se inyecta vía js/components.js) -->
+  <footer id="globalFooter"></footer>
 
+  <!-- SCRIPT EXTERNO DE COMPONENTES DE NAV Y FOOTER -->
+  <script src="js/components.js"></script>
+
+  <!-- LÓGICA DE ENVÍO DEL FORMULARIO -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
-      fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
-    });
-
     function handleContactSubmit(event) {
       event.preventDefault();
       
@@ -250,7 +622,7 @@
       btn.innerText = 'ENVIANDO...';
       alertBox.style.display = 'none';
 
-      // PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
+      // URL DE GOOGLE APPS SCRIPT PRESERVADA
       const scriptURL = "https://script.google.com/macros/s/AKfycbwTYyCiBdwG1YvjwmptoQ-WtBqFffM8ZUqTIwSLfEZPo7SBRxlr1txTfqSjVPibuKaBJg/exec";
 
       const formData = {
@@ -283,7 +655,7 @@
       
       document.getElementById('contactForm').reset();
       btn.disabled = false;
-      btn.innerText = 'ENVIAR';
+      btn.innerText = 'ENVIAR CONSULTA';
 
       setTimeout(() => {
         alertBox.style.display = 'none';

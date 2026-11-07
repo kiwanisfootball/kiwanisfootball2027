@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  
-  <!-- SEO & AEO Meta Tags -->
   <title>Ligas - Contact y Flag Football | Kiwanis Football League Panamá</title>
+
+  <!-- SEO & AEO Meta Tags -->
   <meta name="description" content="Calendario, tabla de posiciones, rosters y estadísticas de la Kiwanis Football League en Panamá. Contact Football Masculino y Flag Football Femenino en categorías Micro, Mini, Juvenil y Varsity.">
   <meta name="keywords" content="Ligas KFL, Contact Football Panamá, Flag Football Panamá, calendario KFL, tabla de posiciones KFL, rosters KFL, estadísticas KFL, Kiwanis Football League">
   <link rel="canonical" href="https://www.kiwanisfootball.com/ligas.html">
@@ -45,7 +45,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- ENLACES CSS MODULARES (ORDEN ESTRICTO: GLOBAL PRIMERO, LUEGO PÁGINA) -->
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/ligas.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -61,10 +60,10 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER GLOBAL INYECTADO (js/components.js) -->
-  <header class="header-nav" id="globalNav" role="banner"></header>
+  <!-- HEADER GLOBAL INYECTADO -->
+  <header class="header-nav" id="globalNav"></header>
 
-  <main class="ligas-container" role="main">
+  <main class="ligas-container">
 
     <!-- HERO BANNER -->
     <section class="ligas-hero-banner">
@@ -99,8 +98,9 @@
       <button class="ligas-filter-btn" id="filter-micro" onclick="selectCategory('micro', this)">MICRO</button>
     </div>
 
+    <!-- PROMPT DE SELECCIÓN CON SVG BLINDADO CON ATRIBUTOS FIX -->
     <div id="selectPrompt" class="ligas-select-prompt">
-      <svg class="prompt-icon-svg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+      <svg class="prompt-icon-svg" width="18" height="18" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
       <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para comenzar.</span>
     </div>
 

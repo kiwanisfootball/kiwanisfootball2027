@@ -45,7 +45,7 @@
   <!-- Google Fonts: Anton & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Hoja de estilos global y favicon local -->
   <link rel="stylesheet" href="css/styles.css">
@@ -120,7 +120,7 @@
       font-weight: 800;
     }
 
-    /* TROFEO (animación) */
+    /* TROFEO HERO (animación) */
     .champs-trophy-wrapper {
       width: 80px;
       height: 80px;
@@ -270,6 +270,112 @@
       box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
     }
 
+    /* CARD DE MÁXIMO GANADOR / COUNTER POR CATEGORÍA */
+    .champs-leaderboard-card {
+      max-width: 850px;
+      margin: 0 auto 20px auto;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      box-sizing: border-box;
+      gap: 15px;
+      animation: fadeIn 0.4s ease-in-out;
+      font-family: var(--fuente-cuerpo);
+    }
+
+    .champs-leaderboard-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .champs-leaderboard-trophy-png {
+      width: 44px;
+      height: 54px;
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 6px rgba(234, 179, 8, 0.4));
+    }
+
+    .champs-leaderboard-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .champs-leaderboard-label {
+      font-family: var(--fuente-cuerpo);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #eab308;
+    }
+
+    .champs-leaderboard-team-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .champs-leaderboard-team-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .champs-leaderboard-team-logo {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .champs-leaderboard-team-name {
+      font-family: var(--fuente-titulos);
+      font-size: 22px;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .champs-leaderboard-years {
+      font-family: var(--fuente-cuerpo);
+      font-size: 12px;
+      font-weight: 600;
+      color: #94a3b8;
+      letter-spacing: 0.3px;
+    }
+
+    .champs-leaderboard-counter {
+      background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+      color: #0f172a;
+      padding: 8px 18px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--fuente-cuerpo);
+      font-weight: 800;
+      font-size: 14px;
+      white-space: nowrap;
+      box-shadow: 0 3px 10px rgba(234, 179, 8, 0.3);
+      flex-shrink: 0;
+    }
+
+    .champs-leaderboard-counter span.count-num {
+      font-family: var(--fuente-titulos);
+      font-size: 24px;
+      line-height: 1;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-6px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -406,6 +512,15 @@
       .champs-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
       .champs-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
       .champs-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
+
+      .champs-leaderboard-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+      }
+      .champs-leaderboard-counter {
+        align-self: flex-start;
+      }
     }
   </style>
 
@@ -460,6 +575,25 @@
       <div id="categoryPrompt" class="champs-category-prompt">
         <svg class="prompt-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
         <span>Selecciona una categoría arriba para visualizar los campeones correspondientes.</span>
+      </div>
+
+      <!-- BANNER MÁXIMO GANADOR / COUNTER DINÁMICO POR CATEGORÍA -->
+      <div id="leaderboardCard" class="champs-leaderboard-card" style="display: none;">
+        <div class="champs-leaderboard-left">
+          <img src="assets/img/trophy.png" alt="Trofeo Máximo Ganador" class="champs-leaderboard-trophy-png" onerror="this.src='assets/logos/KFL-Logo.png'">
+
+          <div class="champs-leaderboard-info">
+            <span class="champs-leaderboard-label">Máximo Ganador</span>
+            <div class="champs-leaderboard-team-wrap" id="leaderboardTeams">
+              <!-- Se inyecta dinámicamente -->
+            </div>
+          </div>
+        </div>
+
+        <div class="champs-leaderboard-counter">
+          <span class="count-num" id="leaderboardCount">0</span>
+          <span id="leaderboardText">Campeonatos</span>
+        </div>
       </div>
 
       <!-- VARSITY -->
@@ -577,7 +711,6 @@
 
     function getTeamLogoInfo(fullTeamName) {
       const clean = (fullTeamName || "").toUpperCase().trim();
-      // Coincidencia con la clave más larga primero (ej. "E.C.P MIGHTY EAGLES" antes que "EAGLES")
       const key = Object.keys(TEAM_LOGOS_MAP)
         .sort((a, b) => b.length - a.length)
         .find(k => clean.includes(k));
@@ -586,9 +719,19 @@
     }
 
     let currentModality = null;
+    let activeCategory = null;
+    let counterAnimationTimer = null;
+
+    const categoryStats = {
+      varsity: [],
+      juvenil: [],
+      mini: [],
+      micro: []
+    };
 
     function selectModality(modality, btnElement) {
       currentModality = modality;
+      activeCategory = null;
 
       document.querySelectorAll('.champs-modality-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
@@ -611,6 +754,7 @@
       document.getElementById('filterBar').style.display = 'flex';
       document.getElementById('champsTablesContainer').style.display = 'block';
       document.getElementById('categoryPrompt').style.display = 'flex';
+      document.getElementById('leaderboardCard').style.display = 'none';
 
       document.querySelectorAll('.champs-category-section').forEach(sec => {
         sec.style.display = 'none';
@@ -622,10 +766,13 @@
     }
 
     function filterCategory(category, btnElement) {
+      activeCategory = category;
       document.querySelectorAll('.champs-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
 
       document.getElementById('categoryPrompt').style.display = 'none';
+
+      renderCategoryLeaderboard(category);
 
       document.querySelectorAll('.champs-category-section').forEach(sec => {
         sec.style.display = sec.getAttribute('data-category') === category ? 'block' : 'none';
@@ -635,7 +782,7 @@
     async function loadModalityData() {
       if (!currentModality) return;
 
-      for (const config of Object.values(SHEETS_CONFIG[currentModality])) {
+      for (const [catKey, config] of Object.entries(SHEETS_CONFIG[currentModality])) {
         if (!config || !config.url) continue;
 
         const tbody = document.getElementById(config.targetId);
@@ -645,10 +792,17 @@
           const res = await fetch(`${config.url}&_t=${Date.now()}`);
           if (!res.ok) throw new Error(`HTTP error ${res.status}`);
 
-          renderTableRows(config.targetId, parseCSV(await res.text()));
+          const rows = parseCSV(await res.text());
+          const validRows = renderTableRows(config.targetId, rows);
+          categoryStats[catKey] = validRows || [];
+
+          if (activeCategory === catKey) {
+            renderCategoryLeaderboard(catKey);
+          }
         } catch (err) {
           console.error(`Error al cargar ${config.targetId}:`, err);
           renderEmptyState(config.targetId, 'Error al cargar datos desde Google Sheets.');
+          categoryStats[catKey] = [];
         }
       }
     }
@@ -656,7 +810,7 @@
     /* Renderizado con rowspan por temporada y cebrado por bloque */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
-      if (!tbody) return;
+      if (!tbody) return [];
 
       tbody.innerHTML = '';
 
@@ -686,7 +840,7 @@
 
       if (validRows.length === 0) {
         renderEmptyState(targetId, 'Sin registros publicados aún.');
-        return;
+        return [];
       }
 
       let i = 0;
@@ -745,6 +899,97 @@
         blockIndex++;
         i = j;
       }
+
+      return validRows;
+    }
+
+    /* Lógica del Counter y Máximo Ganador Dinámico */
+    function renderCategoryLeaderboard(category) {
+      const card = document.getElementById('leaderboardCard');
+      const teamsContainer = document.getElementById('leaderboardTeams');
+      const countEl = document.getElementById('leaderboardCount');
+      const textEl = document.getElementById('leaderboardText');
+
+      const rows = categoryStats[category] || [];
+      if (rows.length === 0) {
+        card.style.display = 'none';
+        return;
+      }
+
+      // Conteo de campeonatos y años por equipo
+      const tally = {};
+      const teamYears = {};
+
+      rows.forEach(r => {
+        const teamName = r.campeon;
+        tally[teamName] = (tally[teamName] || 0) + 1;
+        if (!teamYears[teamName]) teamYears[teamName] = [];
+        if (r.season && !teamYears[teamName].includes(r.season)) {
+          teamYears[teamName].push(r.season);
+        }
+      });
+
+      let maxTitles = 0;
+      let topTeams = [];
+
+      for (const [team, count] of Object.entries(tally)) {
+        if (count > maxTitles) {
+          maxTitles = count;
+          topTeams = [team];
+        } else if (count === maxTitles) {
+          topTeams.push(team);
+        }
+      }
+
+      if (maxTitles === 0 || topTeams.length === 0) {
+        card.style.display = 'none';
+        return;
+      }
+
+      // Renderizar equipos líderes con sus años
+      teamsContainer.innerHTML = topTeams.map((team, idx) => {
+        const info = getTeamLogoInfo(team);
+        const yearsStr = (teamYears[team] || []).join(', ');
+        const separator = (idx > 0) ? '<span style="color:#eab308; font-weight:800; margin: 0 4px;">&</span>' : '';
+        return `
+          ${separator}
+          <div class="champs-leaderboard-team-item">
+            <img src="${info.logoUrl}" alt="${team}" class="champs-leaderboard-team-logo" onerror="this.src='${info.fallbackUrl}'">
+            <div>
+              <span class="champs-leaderboard-team-name">${team}</span>
+              ${yearsStr ? `<div class="champs-leaderboard-years">(${yearsStr})</div>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      textEl.textContent = maxTitles === 1 ? 'Campeonato' : 'Campeonatos';
+      card.style.display = 'flex';
+
+      // Animación progresiva fluida del contador
+      animateCounter(countEl, maxTitles, 1200);
+    }
+
+    function animateCounter(element, targetNum, durationMs) {
+      if (counterAnimationTimer) clearInterval(counterAnimationTimer);
+      element.textContent = '0';
+      if (targetNum <= 0) return;
+
+      const startTime = performance.now();
+      function update(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / durationMs, 1);
+        // Easing suave (easeOutQuad)
+        const current = Math.floor(progress * (2 - progress) * targetNum);
+        element.textContent = current;
+
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          element.textContent = targetNum;
+        }
+      }
+      requestAnimationFrame(update);
     }
 
     function renderEmptyState(targetId, message) {

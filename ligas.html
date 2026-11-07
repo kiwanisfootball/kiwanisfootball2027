@@ -68,7 +68,7 @@
     <!-- HERO BANNER -->
     <section class="ligas-hero-banner">
       <div class="ligas-badge-wrapper">
-        <img src="assets/img/KFL-logo.svg" alt="Logo Kiwanis Football League">
+        <img src="assets/img/KFL-logo.svg" alt="Logo Kiwanis Football League" class="ligas-badge-img" onerror="this.src='assets/logos/KFL-Logo.png'">
       </div>
 
       <div class="ligas-hero-content">
@@ -85,7 +85,7 @@
       <button class="ligas-modality-btn" id="btnLeagueFlag" onclick="selectLeague('flag', this)">Flag Football</button>
     </div>
 
-    <!-- 1.5 BOTÓN RESTABLECER SELECCIÓN -->
+    <!-- 1.5 BOTÓN RESTABLECER SELECCIÓN (visible solo al elegir modalidad) -->
     <div class="ligas-reset-wrapper" id="resetWrapper">
       <button type="button" class="ligas-reset-btn" id="btnResetSeleccion" onclick="resetSeleccion()">RESTABLECER SELECCIÓN</button>
     </div>
@@ -98,9 +98,8 @@
       <button class="ligas-filter-btn" id="filter-micro" onclick="selectCategory('micro', this)">MICRO</button>
     </div>
 
-    <!-- PROMPT DE SELECCIÓN CON SVG BLINDADO CON ATRIBUTOS FIX -->
     <div id="selectPrompt" class="ligas-select-prompt">
-      <svg class="prompt-icon-svg" width="18" height="18" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+      <svg class="prompt-icon-svg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
       <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para comenzar.</span>
     </div>
 
@@ -239,7 +238,7 @@
     </div>
   </div>
 
-  <!-- FOOTER GLOBAL INYECTADO -->
+  <!-- FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
   <!-- COMPONENTES JS CENTRALIZADOS -->
@@ -415,7 +414,9 @@
       if (btnElement) btnElement.classList.add('active');
 
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
       document.getElementById('leagueContentSection').style.display = 'block';
 
       cerrarDetalleRoster();

@@ -1,0 +1,204 @@
+/* ==========================================================================
+   KIWANIS FOOTBALL LEAGUE PANAMA - ESTILOS GLOBALES BASE
+   ========================================================================== */
+
+:root {
+  --azul-kfl: #005EAA;
+  --rojo-kfl: #EB3D40;
+  --celeste-hover: #E0F2FE;
+  --blanco-fondo: #f8fafc;
+  --tarjeta-bg: #ffffff;
+  --gris-borde: #e2e8f0;
+  --negro-footer: #0a0a0a;
+  --texto-oscuro: #0f172a;
+  --texto-suave: #475569;
+  --ancho-maximo: 1200px;
+  --fuente-titulos: 'Anton', Impact, sans-serif;
+  --fuente-cuerpo: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fuente-cuerpo);
+  background-color: var(--blanco-fondo);
+  color: var(--texto-oscuro);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding-bottom: 60px;
+}
+
+h1 {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(34px, 5vw, 56px);
+  text-transform: uppercase;
+  color: var(--texto-oscuro);
+  line-height: 1.05;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(26px, 4vw, 38px);
+  text-transform: uppercase;
+  color: var(--azul-kfl);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(20px, 3vw, 28px);
+  text-transform: uppercase;
+  color: var(--texto-oscuro);
+  line-height: 1.2;
+}
+
+p, span, label, input, textarea, select, button {
+  font-family: var(--fuente-cuerpo);
+}
+
+p {
+  font-size: 15px;
+  color: var(--texto-suave);
+  line-height: 1.7;
+}
+
+/* NAVEGACIÓN SUPERIOR */
+.header-nav {
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--gris-borde);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.nav-logo img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 6px;
+  align-items: center;
+}
+
+.nav-menu li a {
+  font-family: var(--fuente-cuerpo);
+  color: var(--azul-kfl);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.nav-menu li a:hover {
+  background-color: var(--celeste-hover);
+}
+
+.nav-menu li a.active {
+  background-color: var(--azul-kfl);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--azul-kfl);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 992px) {
+  .hamburger-btn { display: block; }
+  .nav-menu {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background-color: #ffffff;
+    flex-direction: column;
+    padding: 20px;
+    display: none;
+    gap: 10px;
+    border-bottom: 2px solid var(--gris-borde);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  .nav-menu.open { display: flex; }
+  .nav-menu li { width: 100%; text-align: center; }
+  .nav-menu li a { display: block; padding: 12px; }
+}
+
+/* PATROCINADORES */
+.sponsors-section {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto 60px auto;
+  padding: 0 15px;
+}
+.sponsors-container { text-align: center; }
+.tier-title {
+  font-family: var(--fuente-titulos);
+  font-size: 24px;
+  color: var(--azul-kfl);
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+.sponsors-grid {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 20px; max-width: 1100px; margin: 0 auto;
+}
+.sponsor-card {
+  background: #ffffff; border: 1px solid var(--gris-borde); border-radius: 10px;
+  padding: 15px 20px; display: flex; align-items: center; justify-content: center;
+  flex: 0 1 calc(20% - 20px); min-width: 170px; height: 85px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03); transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.sponsor-card:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); }
+.sponsor-logo { max-width: 130px; max-height: 60px; width: auto; height: auto; object-fit: contain; }
+
+@media (max-width: 900px) { .sponsor-card { flex: 0 1 calc(33.333% - 20px); } }
+@media (max-width: 600px) { .sponsor-card { flex: 0 1 calc(50% - 15px); min-width: 140px; height: 75px; } }
+
+/* BOTÓN VOLVER ARRIBA */
+.back-to-top-btn {
+  position: fixed; bottom: 25px; right: 25px; width: 48px; height: 48px;
+  background-color: var(--azul-kfl); color: #ffffff; border: none; border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); cursor: pointer; display: none;
+  align-items: center; justify-content: center; opacity: 0; visibility: hidden;
+  transition: all 0.3s ease; z-index: 999;
+}
+.back-to-top-btn.visible { display: flex; opacity: 1; visibility: visible; }
+.back-to-top-btn:hover { background-color: var(--rojo-kfl); transform: translateY(-4px); }
+.back-to-top-btn svg { width: 22px; height: 22px; fill: currentColor; }

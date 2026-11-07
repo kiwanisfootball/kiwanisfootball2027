@@ -273,6 +273,7 @@
   border-radius: 30px;
   color: #64748b;
   font-family: var(--fuente-cuerpo);
+  font-weight: 800;
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.2s ease;

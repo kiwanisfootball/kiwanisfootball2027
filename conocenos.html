@@ -18,7 +18,7 @@
   <meta property="og:url" content="https://www.kiwanisfootball.com/conocenos.html">
   <meta property="og:locale" content="es_PA">
 
-  <!-- Schema.org Structured Data (JSON-LD) para GEO, SEO y AEO -->
+  <!-- Schema.org Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -52,114 +52,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- ENLACES CSS MODULARES (ORDEN ESTRICTO: GLOBAL PRIMERO, LUEGO PÁGINA) -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/conocenos.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
-
-  <style>
-    /* ==========================================================================
-       BLINDAJE RESPONSIVO SIN ALTERAR DESKTOP
-       ========================================================================== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      max-width: 100%;
-    }
-
-    body {
-      overflow-x: hidden;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    main {
-      width: 100%;
-      overflow: hidden;
-    }
-
-    .executive-league-section, 
-    .conocenos-hero, 
-    .counters-section, 
-    .history-banner-container, 
-    .timeline-section-wrapper {
-      width: 100%;
-      max-width: min(1200px, 100% - 30px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .executive-league-banner,
-    .history-banner-grid {
-      display: grid;
-      width: 100%;
-      grid-template-columns: 330px minmax(0, 1fr);
-    }
-
-    @media (max-width: 900px) {
-      .executive-league-banner,
-      .history-banner-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .executive-card-side,
-    .league-red-box,
-    .history-banner-blue,
-    .history-banner-image {
-      min-width: 0;
-      word-break: break-word;
-    }
-
-    .league-red-content {
-      overflow-wrap: break-word;
-    }
-
-    /* ==========================================================================
-       CORRECCIÓN ESPECÍFICA PARA TABLET (CONTADORES / MÉTRICAS)
-       ========================================================================== */
-    @media (min-width: 650px) and (max-width: 1024px) {
-      .counters-grid {
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 12px;
-      }
-      .counter-card {
-        padding: 16px 10px;
-      }
-      .counter-number {
-        font-size: 32px;
-      }
-    }
-
-    /* ==========================================================================
-       CORRECCIÓN ESPECÍFICA PARA MOBILE (CRONOLOGÍA Y BOTONES)
-       ========================================================================== */
-    .timeline-viewport-container {
-      position: relative;
-      width: 100%;
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .timeline-scroll-track {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    @media (max-width: 768px) {
-      /* Ocultar los botones flotantes en móviles para permitir scroll táctil limpio sin estorbar texto */
-      .tl-float-btn, .tl-fade-overlay {
-        display: none !important;
-      }
-      /* Reducir ancho de tarjetas de cronología para que no se corten en pantallas chicas */
-      .timeline-h-card {
-        width: 260px;
-        padding: 16px;
-      }
-      .timeline-scroll-track {
-        padding: 10px 15px;
-      }
-    }
-  </style>
 </head>
 <body>
 

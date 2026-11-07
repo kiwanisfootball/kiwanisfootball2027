@@ -1,0 +1,17 @@
+{
+  "name": "kiwanisfootball2027",
+  "version": "1.0.0",
+  "description": "Kiwanis Football League Panama - Official Website",
+  "type": "module",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'No linter configured'"
+  },
+  "keywords": ["kfl", "football", "panama"],
+  "author": "Kiwanis Football League",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}

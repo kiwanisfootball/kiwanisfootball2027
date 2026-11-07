@@ -4,9 +4,16 @@
    Reemplaza a nav.html y footer.html (ya no se necesitan esos archivos).
    ========================================================================== */
 (function () {
+  /* Desregistra service workers viejos (causaban páginas con contenido antiguo, p. ej. en iPhone) */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations()
+      .then(function (regs) { regs.forEach(function (r) { r.unregister(); }); })
+      .catch(function () {});
+  }
+
   const NAV_HTML = `<nav class="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="assets/img/KFL-logo.svg" alt="Kiwanis Football League Panama">
+    <img src="assets/logos/KFL-Logo.png" alt="Kiwanis Football League Panama">
   </a>
 
   <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>
@@ -180,7 +187,7 @@
     <!-- Logo inferior centrado -->
     <div class="footer-bottom-row">
       <div class="footer-logo-container">
-        <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="footer-brand-logo">
+        <img src="assets/logos/KFL-Logo.png" alt="KFL Logo" class="footer-brand-logo">
       </div>
     </div>
 

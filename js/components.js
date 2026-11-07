@@ -13,7 +13,7 @@
 
   const NAV_HTML = `<nav class="navbar">
   <a href="index.html" class="nav-logo">
-    <img src="assets/logos/KFL-Logo.png" alt="Kiwanis Football League Panama">
+    <img src="assets/img/KFL-logo.svg" alt="Kiwanis Football League Panama">
   </a>
 
   <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir Menú">&#9776;</button>

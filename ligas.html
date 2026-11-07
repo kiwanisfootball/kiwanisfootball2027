@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
@@ -150,10 +150,13 @@
     .ligas-modality-bar {
       display: flex;
       gap: 20px;
-      margin-bottom: 25px;
+      margin-bottom: 0;
+      padding: 6px 8px 14px 8px;
       justify-content: center;
       width: 100%;
       box-sizing: border-box;
+      position: relative;
+      z-index: 2;
     }
 
     .ligas-modality-btn {
@@ -194,105 +197,156 @@
       box-shadow: 0 6px 20px rgba(235, 61, 64, 0.35);
     }
 
+    /* BOTÓN RESTABLECER SELECCIÓN (oculto por defecto) */
+    .ligas-reset-wrapper {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      margin: 14px 0 22px 0;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .ligas-reset-wrapper.visible {
+      display: flex;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .ligas-reset-btn {
+      font-family: var(--fuente-cuerpo);
+      background: #ffffff;
+      color: #64748b;
+      border: 2px solid #64748b;
+      border-radius: 50px;
+      padding: 10px 26px;
+      font-size: clamp(12px, 2.2vw, 14px);
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      min-height: 44px;
+      max-width: 100%;
+      text-align: center;
+      line-height: 1.2;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .ligas-reset-btn:hover {
+      background: #f8fafc;
+      color: #475569;
+      border-color: #475569;
+      transform: translateY(-1px);
+    }
+
+    .ligas-reset-btn:focus-visible {
+      outline: 3px solid rgba(100, 116, 139, 0.35);
+      outline-offset: 3px;
+    }
+
     /* BOTONES DE CATEGORÍA (PÍLDORAS MVP.HTML) */
-   .ligas-filter-bar {
-  display: none;
-  gap: 12px;
-  margin-bottom: 25px;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-  box-sizing: border-box;
-  animation: fadeIn 0.3s ease-in-out;
-}
+    .ligas-filter-bar {
+      display: none;
+      gap: 12px;
+      margin-bottom: 25px;
+      padding: 6px 8px 14px 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      box-sizing: border-box;
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 0.3s ease-in-out;
+    }
 
-.ligas-filter-btn {
-  flex: 1;
-  background: #ffffff;
-  color: #64748b;
-  border: 2px solid #cbd5e1;
-  padding: 10px 16px;
-  font-family: var(--fuente-cuerpo);
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-}
+    .ligas-filter-btn {
+      flex: 1;
+      background: #ffffff;
+      color: #64748b;
+      border: 2px solid #cbd5e1;
+      padding: 10px 16px;
+      font-family: var(--fuente-cuerpo);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    }
 
-.ligas-filter-btn:hover {
-  background: #f1f5f9;
-  transform: translateY(-2px);
-  border-color: #94a3b8;
-}
+    .ligas-filter-btn:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+      border-color: #94a3b8;
+    }
 
-.ligas-filter-btn.active.contact-active {
-  background: var(--azul-kfl);
-  color: #ffffff;
-  border-color: var(--azul-kfl);
-  box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
-}
+    .ligas-filter-btn.active.contact-active {
+      background: var(--azul-kfl);
+      color: #ffffff;
+      border-color: var(--azul-kfl);
+      box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
+    }
 
-.ligas-filter-btn.active.flag-active {
-  background: var(--rojo-kfl);
-  color: #ffffff;
-  border-color: var(--rojo-kfl);
-  box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
-}
+    .ligas-filter-btn.active.flag-active {
+      background: var(--rojo-kfl);
+      color: #ffffff;
+      border-color: var(--rojo-kfl);
+      box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
+    }
 
+    /* PESTAÑAS SECUNDARIAS (CALENDARIO, ROSTERS, POSICIONES, STATS) */
+    .sub-tabs-bar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 900px;
+      margin: 0 auto 24px auto;
+      padding-bottom: 12px;
+    }
 
-/* PESTAÑAS SECUNDARIAS (CALENDARIO, ROSTERS, POSICIONES, STATS) */
-.sub-tabs-bar {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  max-width: 900px;
-  margin: 0 auto 24px auto;
-  padding-bottom: 12px;
-}
+    @media (max-width: 768px) {
+      .sub-tabs-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
-@media (max-width: 768px) {
-  .sub-tabs-bar {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
+    .sub-tab-btn {
+      padding: 10px 14px;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 30px;
+      color: #64748b;
+      font-family: var(--fuente-cuerpo);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      text-align: center;
+      letter-spacing: 0.4px;
+      min-height: 42px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
 
-.sub-tab-btn {
-  padding: 10px 14px;
-  background: #ffffff;
-  border: 2px solid #cbd5e1;
-  border-radius: 30px;
-  color: #64748b;
-  font-family: var(--fuente-cuerpo);
+    /* Estado activo asegurando texto blanco en todas las pantallas y temas */
+    .sub-tab-btn.active,
+    body.contact-theme .sub-tab-btn.active {
+      background: var(--azul-kfl);
+      border-color: var(--azul-kfl);
+      color: #ffffff !important;
+      box-shadow: 0 3px 10px rgba(0, 94, 170, 0.25);
+    }
 
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: all 0.2s ease;
-  text-align: center;
-  letter-spacing: 0.4px;
-  min-height: 42px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-}
-
-/* Estado activo asegurando texto blanco en todas las pantallas y temas */
-.sub-tab-btn.active,
-body.contact-theme .sub-tab-btn.active {
-  background: var(--azul-kfl);
-  border-color: var(--azul-kfl);
-  color: #ffffff !important;
-  box-shadow: 0 3px 10px rgba(0, 94, 170, 0.25);
-}
-
-body.flag-theme-active .sub-tab-btn.active {
-  background: var(--rojo-kfl);
-  border-color: var(--rojo-kfl);
-  color: #ffffff !important;
-  box-shadow: 0 3px 10px rgba(235, 61, 64, 0.25);
-}
+    body.flag-theme-active .sub-tab-btn.active {
+      background: var(--rojo-kfl);
+      border-color: var(--rojo-kfl);
+      color: #ffffff !important;
+      box-shadow: 0 3px 10px rgba(235, 61, 64, 0.25);
+    }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-6px); }
@@ -319,51 +373,6 @@ body.flag-theme-active .sub-tab-btn.active {
       fill: #64748b;
       vertical-align: middle;
       flex-shrink: 0;
-    }
-
-    /* PESTAÑAS SECUNDARIAS (CALENDARIO, ROSTERS, POSICIONES, STATS) */
-    .sub-tabs-bar {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      max-width: 900px;
-      margin: 0 auto 24px auto;
-      padding-bottom: 12px;
-    }
-
-    @media (max-width: 768px) {
-      .sub-tabs-bar {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .sub-tab-btn {
-      background: #ffffff;
-      border: 2px solid #cbd5e1;
-      border-radius: 30px;
-      color: #64748b;
-      font-weight: 700;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-      text-align: center;
-      letter-spacing: 0.4px;
-      min-height: 42px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
-
-    .sub-tab-btn.active {
-      background: var(--azul-kfl);
-      border-color: var(--azul-kfl);
-      color: #ffffff;
-      box-shadow: 0 3px 10px rgba(0, 94, 170, 0.25);
-    }
-
-    body.flag-theme-active .sub-tab-btn.active {
-      background: var(--rojo-kfl);
-      border-color: var(--rojo-kfl);
-      color: #ffffff;
-      box-shadow: 0 3px 10px rgba(235, 61, 64, 0.25);
     }
 
     .tab-pane { display: none; }
@@ -426,12 +435,12 @@ body.flag-theme-active .sub-tab-btn.active {
       letter-spacing: 0.5px;
     }
     body.flag-theme-active .kfl-week-title { color: var(--rojo-kfl); border-color: var(--rojo-kfl); }
-    
-    .kfl-grid-matches { 
-      display: grid; 
-      grid-template-columns: repeat(2, minmax(0, 1fr)); 
-      gap: 16px; 
-      width: 100%; 
+
+    .kfl-grid-matches {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      width: 100%;
     }
 
     .kfl-grid-matches.kfl-grid-single { display: flex; justify-content: center; width: 100%; }
@@ -445,8 +454,8 @@ body.flag-theme-active .sub-tab-btn.active {
       width: 100%;
     }
 
-    @media (max-width: 768px) { 
-      .kfl-grid-matches { grid-template-columns: 1fr; } 
+    @media (max-width: 768px) {
+      .kfl-grid-matches { grid-template-columns: 1fr; }
       .kfl-grid-matches.kfl-grid-odd > .kfl-match-card:last-child { max-width: 100%; }
     }
 
@@ -867,10 +876,13 @@ body.flag-theme-active .sub-tab-btn.active {
       .ligas-container { padding: 15px 10px; }
       .ligas-hero-banner { padding: 30px 15px; }
       .ligas-hero-title { font-size: 34px; }
-      .ligas-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
+      .ligas-modality-bar { flex-direction: column; gap: 12px; align-items: center; padding: 6px 4px 14px 4px; }
       .ligas-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
+      .ligas-reset-wrapper { margin: 10px 0 18px 0; }
+      .ligas-reset-btn { width: 100%; max-width: 320px; white-space: normal; padding: 10px 18px; }
+      .ligas-filter-bar { padding: 6px 4px 14px 4px; }
       .ligas-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
-      .sub-tab-btn { min-widhh: 45%, font-size 14px; padding: 10px 14px;
+      .sub-tab-btn { min-width: 45%; font-size: 14px; padding: 10px 14px; }
     }
   </style>
 
@@ -907,6 +919,11 @@ body.flag-theme-active .sub-tab-btn.active {
       <button class="ligas-modality-btn" id="btnLeagueFlag" onclick="selectLeague('flag', this)">Flag Football</button>
     </div>
 
+    <!-- 1.5 BOTÓN RESTABLECER SELECCIÓN (visible solo al elegir modalidad) -->
+    <div class="ligas-reset-wrapper" id="resetWrapper">
+      <button type="button" class="ligas-reset-btn" id="btnResetSeleccion" onclick="resetSeleccion()">RESTABLECER SELECCIÓN</button>
+    </div>
+
     <!-- 2. CATEGORÍA (PÍLDORAS) -->
     <div class="ligas-filter-bar" id="filterBar">
       <button class="ligas-filter-btn active" id="filter-varsity" onclick="selectCategory('varsity', this)">VARSITY</button>
@@ -921,7 +938,7 @@ body.flag-theme-active .sub-tab-btn.active {
     </div>
 
     <div id="leagueContentSection" style="display: none;">
-      
+
       <!-- SUB PESTAÑAS INTERNAS -->
       <div class="sub-tabs-bar">
         <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
@@ -1156,7 +1173,7 @@ body.flag-theme-active .sub-tab-btn.active {
     function getCategoryData(league, category) {
       const l = (league || activeLeague || 'contact').toLowerCase();
       const cat = (category || activeCategory || 'varsity').toLowerCase();
-      
+
       let db = getMasterDB(l);
       if (!db) return { partidos: [], tabla: [] };
 
@@ -1183,10 +1200,12 @@ body.flag-theme-active .sub-tab-btn.active {
 
     function selectLeague(league, btnElement) {
       activeLeague = league;
-      activeCategory = 'varsity';
+      activeCategory = null;
+      activeSubTab = null;
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
+      // 1. Activar botón de modalidad y pintar tema (Azul o Rojo)
       document.querySelectorAll('.ligas-modality-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
       });
@@ -1199,33 +1218,102 @@ body.flag-theme-active .sub-tab-btn.active {
         document.body.className = 'flag-theme-active';
       }
 
+      // 2. Aplicar colores a categorías pero NINGUNA marcada como active
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-active', 'flag-active');
         btn.classList.add(league === 'contact' ? 'contact-active' : 'flag-active');
       });
 
-      document.getElementById('filter-varsity').classList.add('active');
+      // 3. Desmarcar sub-pestañas
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // 4. Ocultar paneles
+      document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.classList.remove('active');
+      });
+
+      // 5. Ocultar prompt inicial y mostrar categorías, subtabs y botón de reset
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
       document.getElementById('leagueContentSection').style.display = 'block';
+      document.getElementById('resetWrapper').classList.add('visible');
 
-      precargarStatsCategoria();
-      fetchMasterDB(league, () => {
-        selectSubTab('calendario');
-      });
+      // 6. Cargar la base de datos en silencio
+      fetchMasterDB(league);
     }
 
     function selectCategory(category, btnElement) {
       activeCategory = category;
+      activeSubTab = null;
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
+      // 1. Marcar únicamente la categoría seleccionada
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
-      
+
+      // 2. Limpiar sub-pestañas
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+      // 3. Ocultar paneles
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+      // 4. Mostrar la barra de sub-pestañas
+      document.getElementById('leagueContentSection').style.display = 'block';
+
+      // 5. Preparar datos en segundo plano
       cerrarDetalleRoster();
       precargarStatsCategoria();
-      updateActiveView();
+    }
+
+    /* RESTABLECER SELECCIÓN: regresa la página al estado inicial */
+    function resetSeleccion() {
+      activeLeague = null;
+      activeCategory = null;
+      activeSubTab = null;
+      currentSortColumn = null;
+      currentSortDirection = 'asc';
+      cachedStandingsData = [];
+      seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
+      paginaActualStats = 1;
+
+      // Modalidad: quitar activos y restaurar tema por defecto
+      document.querySelectorAll('.ligas-modality-btn').forEach(btn => {
+        btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
+      });
+      document.body.className = 'contact-theme';
+
+      // Categorías: quitar activos y colores
+      document.querySelectorAll('.ligas-filter-btn').forEach(btn => {
+        btn.classList.remove('active', 'contact-active', 'flag-active');
+      });
+
+      // Sub-pestañas y paneles
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+
+      // Roster, buscador de stats y modal
+      cerrarDetalleRoster();
+      const searchInput = document.getElementById('searchStatInput');
+      if (searchInput) searchInput.value = '';
+      forzarCerrarModal();
+
+      // Vaciar contenido renderizado
+      document.getElementById('calendarioNativeContent').innerHTML = '';
+      document.getElementById('posicionesNativeContent').innerHTML = '';
+      document.getElementById('statsTableBody').innerHTML = '';
+      document.getElementById('statsPaginationBar').innerHTML = '';
+
+      // Visibilidad: ocultar botón de reset, categorías y contenido; mostrar prompt inicial
+      document.getElementById('resetWrapper').classList.remove('visible');
+      document.getElementById('filterBar').style.display = 'none';
+      document.getElementById('leagueContentSection').style.display = 'none';
+      document.getElementById('selectPrompt').style.display = 'flex';
+
+      // Llevar al usuario a la selección de modalidad
+      document.querySelector('.ligas-modality-bar').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function selectSubTab(subTab) {
@@ -1309,7 +1397,7 @@ body.flag-theme-active .sub-tab-btn.active {
     function populateCalendarFilters(partidos) {
       const weekSelect = document.getElementById('filterWeek');
       const teamSelect = document.getElementById('filterTeam');
-      
+
       const weeks = [...new Set(partidos.map(p => p.week).filter(Boolean))];
       const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => {
         if (!t) return false;
@@ -1326,7 +1414,7 @@ body.flag-theme-active .sub-tab-btn.active {
       const partidos = catData.partidos || [];
       const selectedWeek = document.getElementById('filterWeek').value;
       const selectedTeam = document.getElementById('filterTeam').value;
-      
+
       const filtered = partidos.filter(p => {
         const matchWeek = selectedWeek === 'ALL' || p.week === selectedWeek;
         const matchTeam = selectedTeam === 'ALL' || p.home === selectedTeam || p.away === selectedTeam;
@@ -1403,8 +1491,8 @@ body.flag-theme-active .sub-tab-btn.active {
                     <span>${p.home}</span>
                   </div>
                   <div class="kfl-score-box">
-                    ${p.hasScore 
-                      ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>` 
+                    ${p.hasScore
+                      ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>`
                       : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
                   </div>
                   <div class="kfl-team-box">

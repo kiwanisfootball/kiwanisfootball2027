@@ -45,846 +45,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/ligas.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
   <!-- CONFIGURACIÓN CENTRALIZADA KFL -->
   <script src="js/config-ligas.js"></script>
-
-  <style>
-    /* CONTENEDOR PRINCIPAL BASADO EN MVP.HTML */
-    .ligas-container {
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 20px;
-      font-family: var(--fuente-cuerpo);
-      box-sizing: border-box;
-    }
-
-    /* HERO BANNER ESTILO MVP.HTML */
-    .ligas-hero-banner {
-      position: relative;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.82)),
-                  url('assets/img/ligas-banner.jpg') center/cover no-repeat;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      margin-bottom: 25px;
-      padding: 35px 25px 30px 25px;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 8px;
-      box-sizing: border-box;
-    }
-
-    .ligas-hero-content {
-      max-width: 850px;
-      width: 100%;
-      margin: 0 auto;
-      z-index: 2;
-    }
-
-    .ligas-hero-title {
-      font-family: var(--fuente-titulos);
-      font-size: 40px;
-      font-weight: 400;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-top: 10px;
-      margin-bottom: 12px;
-      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
-      line-height: 1.1;
-      display: inline-block;
-    }
-
-    .ligas-hero-description {
-      font-family: var(--fuente-cuerpo);
-      font-size: 16px;
-      line-height: 1.65;
-      color: #f8fafc;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-      margin: 0 auto;
-    }
-
-    .ligas-hero-description strong {
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    /* INSIGNIA/LOGO ARRIBA DEL TÍTULO */
-    .ligas-badge-wrapper {
-      width: 80px;
-      height: 80px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-      perspective: 800px;
-      margin-bottom: 5px;
-    }
-
-    .ligas-badge-img {
-      width: 100%;
-      height: auto;
-      max-height: 80px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
-      animation: buildLogo 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-
-    @keyframes buildLogo {
-      0%   { opacity: 0; transform: translateY(25px) scale(0.3); }
-      60%  { opacity: 1; transform: translateY(-5px) scale(1.08); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    /* BOTONES DE MODALIDAD / LIGAS (PÍLDORAS MVP.HTML) */
-    .ligas-modality-bar {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 0;
-      padding: 6px 8px 14px 8px;
-      justify-content: center;
-      width: 100%;
-      box-sizing: border-box;
-      position: relative;
-      z-index: 2;
-    }
-
-    .ligas-modality-btn {
-      flex: 1;
-      max-width: 480px;
-      background: #ffffff;
-      color: #334155;
-      border: 2px solid #cbd5e1;
-      padding: 16px 24px;
-      font-family: var(--fuente-titulos);
-      font-size: 22px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-    }
-
-    .ligas-modality-btn:hover {
-      background: #f1f5f9;
-      transform: translateY(-2px);
-      border-color: #94a3b8;
-    }
-
-    .ligas-modality-btn.active.contact-theme-btn {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      border-color: var(--azul-kfl);
-      box-shadow: 0 6px 20px rgba(0, 94, 170, 0.35);
-    }
-
-    .ligas-modality-btn.active.flag-theme-btn {
-      background: var(--rojo-kfl);
-      color: #ffffff;
-      border-color: var(--rojo-kfl);
-      box-shadow: 0 6px 20px rgba(235, 61, 64, 0.35);
-    }
-
-    /* BOTÓN RESTABLECER SELECCIÓN (oculto por defecto) */
-    .ligas-reset-wrapper {
-      display: none;
-      justify-content: center;
-      align-items: center;
-      margin: 14px 0 22px 0;
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .ligas-reset-wrapper.visible {
-      display: flex;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .ligas-reset-btn {
-      font-family: var(--fuente-cuerpo);
-      background: #ffffff;
-      color: #64748b;
-      border: 2px solid #64748b;
-      border-radius: 50px;
-      padding: 10px 26px;
-      font-size: clamp(12px, 2.2vw, 14px);
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      cursor: pointer;
-      min-height: 44px;
-      max-width: 100%;
-      text-align: center;
-      line-height: 1.2;
-      box-sizing: border-box;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-    }
-
-    .ligas-reset-btn:hover {
-      background: #f8fafc;
-      color: #475569;
-      border-color: #475569;
-      transform: translateY(-1px);
-    }
-
-    .ligas-reset-btn:focus-visible {
-      outline: 3px solid rgba(100, 116, 139, 0.35);
-      outline-offset: 3px;
-    }
-
-    /* BOTONES DE CATEGORÍA (PÍLDORAS MVP.HTML) */
-    .ligas-filter-bar {
-      display: none;
-      gap: 12px;
-      margin-bottom: 25px;
-      padding: 6px 8px 14px 8px;
-      justify-content: center;
-      flex-wrap: wrap;
-      width: 100%;
-      box-sizing: border-box;
-      position: relative;
-      z-index: 2;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .ligas-filter-btn {
-      flex: 1;
-      background: #ffffff;
-      color: #64748b;
-      border: 2px solid #cbd5e1;
-      padding: 10px 16px;
-      font-family: var(--fuente-cuerpo);
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-    }
-
-    .ligas-filter-btn:hover {
-      background: #f1f5f9;
-      transform: translateY(-2px);
-      border-color: #94a3b8;
-    }
-
-    .ligas-filter-btn.active.contact-active {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      border-color: var(--azul-kfl);
-      box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
-    }
-
-    .ligas-filter-btn.active.flag-active {
-      background: var(--rojo-kfl);
-      color: #ffffff;
-      border-color: var(--rojo-kfl);
-      box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
-    }
-
-    /* PESTAÑAS SECUNDARIAS (CALENDARIO, ROSTERS, POSICIONES, STATS) */
-    .sub-tabs-bar {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      max-width: 900px;
-      margin: 0 auto 24px auto;
-      padding-bottom: 12px;
-    }
-
-    @media (max-width: 768px) {
-      .sub-tabs-bar {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    .sub-tab-btn {
-      padding: 10px 14px;
-      background: #ffffff;
-      border: 2px solid #cbd5e1;
-      border-radius: 30px;
-      color: #64748b;
-      font-family: var(--fuente-cuerpo);
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-      text-align: center;
-      letter-spacing: 0.4px;
-      min-height: 42px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
-
-    /* Estado activo asegurando texto blanco en todas las pantallas y temas */
-    .sub-tab-btn.active,
-    body.contact-theme .sub-tab-btn.active {
-      background: var(--azul-kfl);
-      border-color: var(--azul-kfl);
-      color: #ffffff !important;
-      box-shadow: 0 3px 10px rgba(0, 94, 170, 0.25);
-    }
-
-    body.flag-theme-active .sub-tab-btn.active {
-      background: var(--rojo-kfl);
-      border-color: var(--rojo-kfl);
-      color: #ffffff !important;
-      box-shadow: 0 3px 10px rgba(235, 61, 64, 0.25);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* MENSAJE DE SELECCIÓN INICIAL */
-    .ligas-select-prompt {
-      text-align: center;
-      padding: 35px 20px;
-      font-size: 16px;
-      color: #64748b;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .prompt-icon-svg {
-      width: 18px;
-      height: 18px;
-      fill: #64748b;
-      vertical-align: middle;
-      flex-shrink: 0;
-    }
-
-    .tab-pane { display: none; }
-    .tab-pane.active { display: block; }
-
-    /* FILTROS Y BOTONES INTERNOS */
-    .kfl-filter-bar {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-
-    .kfl-filter-select {
-      padding: 10px 16px;
-      border-radius: 10px;
-      border: 1px solid #cbd5e1;
-      background: #ffffff;
-      font-weight: 600;
-      color: #1e293b;
-      font-size: 13.5px;
-      cursor: pointer;
-      outline: none;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-      min-height: 44px;
-    }
-
-    .btn-export-pdf {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      border: none;
-      padding: 10px 18px;
-      font-size: 13.5px;
-      font-weight: 800;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      min-height: 44px;
-    }
-
-    body.flag-theme-active .btn-export-pdf { background: var(--rojo-kfl); }
-
-    /* CALENDARIO & TARJETAS DE PARTIDOS */
-    .kfl-week-section { margin-bottom: 32px; }
-    .kfl-week-title {
-      font-size: 17px;
-      font-weight: 900;
-      color: var(--azul-kfl);
-      border-bottom: 2.5px solid var(--azul-kfl);
-      padding-bottom: 8px;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      text-align: left;
-      letter-spacing: 0.5px;
-    }
-    body.flag-theme-active .kfl-week-title { color: var(--rojo-kfl); border-color: var(--rojo-kfl); }
-
-    .kfl-grid-matches {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-      width: 100%;
-    }
-
-    .kfl-grid-matches.kfl-grid-single { display: flex; justify-content: center; width: 100%; }
-    .kfl-grid-matches.kfl-grid-single .kfl-match-card,
-    .kfl-grid-matches.kfl-grid-single .kfl-jamboree-card { max-width: 580px; width: 100%; }
-
-    .kfl-grid-matches.kfl-grid-odd > .kfl-match-card:last-child {
-      grid-column: 1 / -1;
-      max-width: 580px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    @media (max-width: 768px) {
-      .kfl-grid-matches { grid-template-columns: 1fr; }
-      .kfl-grid-matches.kfl-grid-odd > .kfl-match-card:last-child { max-width: 100%; }
-    }
-
-    .kfl-match-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .kfl-match-header {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      padding: 9px 16px;
-      font-weight: 700;
-      font-size: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    body.flag-theme-active .kfl-match-header { background: var(--rojo-kfl); }
-    .kfl-info-item { display: flex; align-items: center; gap: 6px; }
-    .kfl-icon-svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
-    .kfl-match-body { padding: 18px; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .kfl-team-box { display: flex; flex-direction: column; align-items: center; width: 36%; text-align: center; font-weight: 800; font-size: 14px; color: #0f172a; }
-    .kfl-team-logo { width: 48px; height: 48px; object-fit: contain; margin-bottom: 8px; }
-    .kfl-score-box { width: 28%; text-align: center; }
-    .kfl-score-num { font-size: 26px; font-weight: 700; color: #0f172a; letter-spacing: 0.5px; }
-    .kfl-score-vs { font-size: 18px; font-weight: 900; color: #94a3b8; letter-spacing: 1px; }
-    .kfl-score-status { font-size: 11px; font-weight: 900; color: #16a34a; letter-spacing: 0.8px; margin-bottom: 2px; }
-
-    /* JAMBOREE */
-    .kfl-jamboree-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.04);
-      display: flex;
-      flex-direction: column;
-      grid-column: 1 / -1;
-      max-width: 580px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .kfl-jamboree-body { padding: 24px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-    .kfl-jamboree-title { font-family: var(--fuente-titulos); font-size: 28px; color: var(--azul-kfl); letter-spacing: 1px; text-transform: uppercase; margin: 0; line-height: 1.1; }
-    body.flag-theme-active .kfl-jamboree-title { color: var(--rojo-kfl); }
-    .kfl-jamboree-sub { font-family: var(--fuente-cuerpo); font-size: 14px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 1.2px; }
-    .kfl-jamboree-time { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; font-family: var(--fuente-cuerpo); font-size: 13.5px; font-weight: 700; color: #0f172a; }
-
-    /* EQUIPO LIBRE / DESCANSO */
-    .kfl-bye-week-wrapper { width: 100%; display: flex; justify-content: center; margin-top: 16px; }
-    .kfl-bye-card-avenir {
-      font-family: var(--fuente-cuerpo);
-      background: #ffffff;
-      border: 2px solid #0f172a;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 16px;
-      padding: 10px 20px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
-    }
-    body.contact-theme .kfl-bye-card-avenir { border-color: var(--azul-kfl); }
-    body.flag-theme-active .kfl-bye-card-avenir { border-color: var(--rojo-kfl); }
-
-    .kfl-bye-pill-badge {
-      background: #0f172a;
-      color: #ffffff;
-      font-size: 11px;
-      font-weight: 900;
-      padding: 5px 12px;
-      border-radius: 20px;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    body.contact-theme .kfl-bye-pill-badge { background: var(--azul-kfl); }
-    body.flag-theme-active .kfl-bye-pill-badge { background: var(--rojo-kfl); }
-
-    .kfl-bye-team-cluster { display: flex; align-items: center; gap: 10px; }
-    .kfl-bye-logo-img { width: 32px; height: 32px; object-fit: contain; }
-    .kfl-bye-text-info { display: flex; flex-direction: column; text-align: left; }
-    .kfl-bye-subtext { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
-    .kfl-bye-name-highlight { font-size: 14.5px; font-weight: 900; color: #0f172a; text-transform: uppercase; letter-spacing: 0.4px; line-height: 1.2; }
-
-    /* ROSTERS Grid & Details */
-    .rosters-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 24px;
-      width: 100%;
-      margin: 20px auto 30px auto;
-    }
-    .team-card-roster {
-      background: transparent;
-      border: none;
-      padding: 10px 6px;
-      width: 120px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.25s ease;
-    }
-    .team-card-roster:hover { transform: translateY(-4px); }
-    .team-roster-logo-wrap {
-      width: 82px;
-      height: 82px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 10px;
-    }
-    .team-card-roster img { max-width: 100%; max-height: 100%; object-fit: contain; }
-    .team-card-roster h4 {
-      font-family: var(--fuente-cuerpo);
-      font-weight: 800;
-      font-size: 13.5px;
-      color: #475569;
-      margin: 0;
-      text-transform: uppercase;
-    }
-
-    .roster-detail-container {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin: 25px auto 40px auto;
-      max-width: 780px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-      display: none;
-    }
-    .roster-detail-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #f1f5f9;
-      padding-bottom: 16px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .roster-detail-title-group { display: flex; align-items: center; gap: 14px; }
-    .roster-detail-title-group img { width: 48px; height: 48px; object-fit: contain; }
-    .roster-detail-title-group h3 {
-      font-family: var(--fuente-titulos);
-      font-size: 24px;
-      color: var(--azul-kfl);
-      margin: 0;
-      text-transform: uppercase;
-    }
-    body.flag-theme-active .roster-detail-title-group h3 { color: var(--rojo-kfl); }
-    .btn-close-roster {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 800;
-      color: #475569;
-      cursor: pointer;
-      text-transform: uppercase;
-      min-height: 44px;
-    }
-
-    .roster-compact-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 13.5px; }
-    .roster-compact-table th {
-      background-color: #f8fafc;
-      color: var(--azul-kfl);
-      font-weight: 900;
-      text-transform: uppercase;
-      font-size: 11.5px;
-      padding: 12px;
-      border-bottom: 2.5px solid #cbd5e1;
-      text-align: left;
-    }
-    body.flag-theme-active .roster-compact-table th { color: var(--rojo-kfl); }
-    .roster-compact-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; }
-    .roster-player-clickable-row { cursor: pointer; transition: background-color 0.15s; }
-    .roster-player-clickable-row:hover { background-color: #f0f7ff; }
-    body.flag-theme-active .roster-player-clickable-row:hover { background-color: #fff1f2; }
-    .cell-jersey-badge { font-family: var(--fuente-titulos); font-size: 16px; color: var(--azul-kfl); }
-    body.flag-theme-active .cell-jersey-badge { color: var(--rojo-kfl); }
-
-    /* TABLAS DE POSICIONES Y STATS */
-    .kfl-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin-top: 10px;
-      margin-bottom: 30px;
-    }
-
-    .kfl-table th {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      padding: 14px 12px;
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      text-align: center;
-      letter-spacing: 0.3px;
-      cursor: pointer;
-      user-select: none;
-      white-space: nowrap;
-    }
-    .kfl-table th::after { content: ' ↕'; font-size: 9px; opacity: 0.6; margin-left: 2px; }
-    .kfl-table th.sort-asc::after { content: ' ▲'; opacity: 1; color: #ffffff; }
-    .kfl-table th.sort-desc::after { content: ' ▼'; opacity: 1; color: #ffffff; }
-
-    body.flag-theme-active .kfl-table th { background: var(--rojo-kfl); }
-
-    .kfl-table td {
-      padding: 12px 10px;
-      text-align: center;
-      border-bottom: 1px solid #f1f5f9;
-      font-size: 13.5px;
-      color: #334155;
-      white-space: nowrap;
-    }
-
-    .kfl-table-team-cell {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-align: left;
-      font-weight: 800;
-    }
-
-    .kfl-table-team-logo { width: 26px; height: 26px; object-fit: contain; flex-shrink: 0; }
-    .kfl-table tr:nth-child(even) { background-color: #f8fafc; }
-    .kfl-table tr:hover { background-color: #f1f5f9; }
-
-    /* STATS BUTTONS & SEARCH */
-    .stats-buttons-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 240px));
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .stat-type-btn {
-      padding: 12px 14px;
-      background: var(--azul-kfl);
-      border: none;
-      color: #ffffff;
-      border-radius: 30px;
-      font-family: var(--fuente-cuerpo);
-      font-weight: 800;
-      font-size: 12.5px;
-      letter-spacing: 0.4px;
-      cursor: pointer;
-      text-transform: uppercase;
-      opacity: 0.75;
-      transition: all 0.2s ease;
-      min-height: 44px;
-      width: 100%;
-      text-align: center;
-    }
-
-    body.flag-theme-active .stat-type-btn { background: var(--rojo-kfl); }
-
-    .stat-type-btn.active-stat {
-      opacity: 1;
-      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--azul-kfl), 0 4px 12px rgba(0,0,0,0.15);
-    }
-    body.flag-theme-active .stat-type-btn.active-stat {
-      box-shadow: 0 0 0 3px #ffffff, 0 0 0 6px var(--rojo-kfl), 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    .search-box-stats {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-
-    .search-stats-input {
-      padding: 10px 16px;
-      width: 100%;
-      max-width: 320px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 13.5px;
-      background: #ffffff;
-      outline: none;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-      min-height: 44px;
-    }
-
-    .kfl-last-update-banner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px 18px;
-      font-size: 14px;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      text-align: center;
-      background: #f1f5f9;
-      border-radius: 10px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .kfl-update-svg { width: 20px; height: 20px; fill: var(--azul-kfl); flex-shrink: 0; }
-    body.flag-theme-active .kfl-update-svg { fill: var(--rojo-kfl); }
-
-    /* PAGINACIÓN DE STATS */
-    .kfl-nav-btn {
-      padding: 10px 20px;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-weight: 800;
-      font-size: 13px;
-      color: var(--azul-kfl);
-      cursor: pointer;
-      text-transform: uppercase;
-      min-height: 44px;
-      transition: all 0.2s;
-    }
-    body.flag-theme-active .kfl-nav-btn { color: var(--rojo-kfl); }
-    .kfl-nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
-
-    /* MODAL DE PLAYER CARD */
-    .player-card-modal-backdrop {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(11, 15, 25, 0.8);
-      backdrop-filter: blur(5px);
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .player-card-modal-backdrop.active { display: flex; }
-
-    .player-card {
-      background: #ffffff;
-      border-radius: 20px;
-      max-width: 480px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    .player-card-header {
-      background-color: var(--azul-kfl);
-      padding: 28px 20px 22px 20px;
-      color: #ffffff;
-      text-align: center;
-      position: relative;
-    }
-    body.flag-theme-active .player-card-header { background-color: var(--rojo-kfl); }
-
-    .btn-modal-close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: #ffffff;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-weight: 800;
-    }
-    .player-card-photo-container {
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 14px auto;
-      border-radius: 50%;
-      background-color: #ffffff;
-      border: 4px solid #ffffff;
-      overflow: hidden;
-    }
-    .player-card-photo { width: 100%; height: 100%; object-fit: contain; }
-    .player-card-name { font-family: var(--fuente-titulos); font-size: 24px; color: #ffffff; text-transform: uppercase; margin: 0 0 4px 0; }
-    .player-card-jersey-tag { font-size: 12.5px; font-weight: 800; color: #ffffff; opacity: 0.92; text-transform: uppercase; }
-    .player-card-body { padding: 24px; background: #ffffff; }
-    .player-stat-category-title { font-family: var(--fuente-titulos); font-size: 14.5px; color: var(--azul-kfl); text-transform: uppercase; margin: 16px 0 10px 0; border-bottom: 2px solid #f1f5f9; padding-bottom: 4px; }
-    body.flag-theme-active .player-stat-category-title { color: var(--rojo-kfl); }
-    .player-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(72px, 1fr)); gap: 10px; text-align: center; }
-    .player-stat-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 10px 6px; }
-    .player-stat-val { font-family: var(--fuente-titulos); font-size: 19px; color: var(--azul-kfl); }
-    body.flag-theme-active .player-stat-val { color: var(--rojo-kfl); }
-    .player-stat-lbl { font-size: 10px; font-weight: 800; color: #64748b; text-transform: uppercase; margin-top: 2px; }
-
-    /* RESPONSIVE SEGÚN MVP.HTML */
-    @media (max-width: 768px) {
-      .ligas-container { padding: 15px 10px; }
-      .ligas-hero-banner { padding: 30px 15px; }
-      .ligas-hero-title { font-size: 34px; }
-      .ligas-modality-bar { flex-direction: column; gap: 12px; align-items: center; padding: 6px 4px 14px 4px; }
-      .ligas-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
-      .ligas-reset-wrapper { margin: 10px 0 18px 0; }
-      .ligas-reset-btn { width: 100%; max-width: 320px; white-space: normal; padding: 10px 18px; }
-      .ligas-filter-bar { padding: 6px 4px 14px 4px; }
-      .ligas-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
-      .sub-tab-btn { min-width: 45%; font-size: 14px; padding: 10px 14px; }
-    }
-  </style>
 
   <!-- Vercel Speed Insights -->
   <script>
@@ -1205,7 +371,6 @@
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
-      // 1. Activar botón de modalidad y pintar tema (Azul o Rojo)
       document.querySelectorAll('.ligas-modality-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
       });
@@ -1218,29 +383,24 @@
         document.body.className = 'flag-theme-active';
       }
 
-      // 2. Aplicar colores a categorías pero NINGUNA marcada como active
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-active', 'flag-active');
         btn.classList.add(league === 'contact' ? 'contact-active' : 'flag-active');
       });
 
-      // 3. Desmarcar sub-pestañas
       document.querySelectorAll('.sub-tab-btn').forEach(btn => {
         btn.classList.remove('active');
       });
 
-      // 4. Ocultar paneles
       document.querySelectorAll('.tab-pane').forEach(pane => {
         pane.classList.remove('active');
       });
 
-      // 5. Ocultar prompt inicial y mostrar categorías, subtabs y botón de reset
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
       document.getElementById('leagueContentSection').style.display = 'block';
       document.getElementById('resetWrapper').classList.add('visible');
 
-      // 6. Cargar la base de datos en silencio
       fetchMasterDB(league);
     }
 
@@ -1250,25 +410,19 @@
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
-      // 1. Marcar únicamente la categoría seleccionada
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
 
-      // 2. Limpiar sub-pestañas
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
 
-      // 3. Ocultar paneles
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
 
-      // 4. Mostrar la barra de sub-pestañas
       document.getElementById('leagueContentSection').style.display = 'block';
 
-      // 5. Preparar datos en segundo plano
       cerrarDetalleRoster();
       precargarStatsCategoria();
     }
 
-    /* RESTABLECER SELECCIÓN: regresa la página al estado inicial */
     function resetSeleccion() {
       activeLeague = null;
       activeCategory = null;
@@ -1279,40 +433,33 @@
       seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
       paginaActualStats = 1;
 
-      // Modalidad: quitar activos y restaurar tema por defecto
       document.querySelectorAll('.ligas-modality-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-theme-btn', 'flag-theme-btn');
       });
       document.body.className = 'contact-theme';
 
-      // Categorías: quitar activos y colores
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-active', 'flag-active');
       });
 
-      // Sub-pestañas y paneles
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
 
-      // Roster, buscador de stats y modal
       cerrarDetalleRoster();
       const searchInput = document.getElementById('searchStatInput');
       if (searchInput) searchInput.value = '';
       forzarCerrarModal();
 
-      // Vaciar contenido renderizado
       document.getElementById('calendarioNativeContent').innerHTML = '';
       document.getElementById('posicionesNativeContent').innerHTML = '';
       document.getElementById('statsTableBody').innerHTML = '';
       document.getElementById('statsPaginationBar').innerHTML = '';
 
-      // Visibilidad: ocultar botón de reset, categorías y contenido; mostrar prompt inicial
       document.getElementById('resetWrapper').classList.remove('visible');
       document.getElementById('filterBar').style.display = 'none';
       document.getElementById('leagueContentSection').style.display = 'none';
       document.getElementById('selectPrompt').style.display = 'flex';
 
-      // Llevar al usuario a la selección de modalidad
       document.querySelector('.ligas-modality-bar').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
@@ -1386,7 +533,6 @@
              (h === 'KFL' && (!a || a === 'TODOS JUEGAN'));
     }
 
-    /* CALENDARIO */
     function loadCalendarioData() {
       const catData = getCategoryData(activeLeague, activeCategory);
       const partidos = catData.partidos || [];
@@ -1532,7 +678,6 @@
       container.innerHTML = html;
     }
 
-    /* POSICIONES */
     function loadPosicionesData() {
       const catData = getCategoryData(activeLeague, activeCategory);
       cachedStandingsData = catData.tabla || [];
@@ -1642,7 +787,6 @@
       container.innerHTML = html;
     }
 
-    /* ROSTERS Y STAFF */
     function renderRostersGrid() {
       const grid = document.getElementById('rostersGrid');
       if (!grid) return;
@@ -1762,7 +906,6 @@
       document.getElementById('rosterDetailBox').style.display = 'none';
     }
 
-    /* MODAL Y STATS DE JUGADOR */
     function precargarStatsCategoria() {
       const cfg = getKFLConfig();
       const linksLiga = cfg && cfg.STATS_CSV_LINKS && cfg.STATS_CSV_LINKS[activeLeague];
@@ -1897,7 +1040,6 @@
       document.getElementById('playerCardModal').classList.remove('active');
     }
 
-    /* CARGA Y PARSEO DE CSV DE ESTADÍSTICAS */
     function loadStatsData() {
       const cfg = getKFLConfig();
       const linksLiga = cfg && cfg.STATS_CSV_LINKS && cfg.STATS_CSV_LINKS[activeLeague];

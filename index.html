@@ -25,7 +25,7 @@
   <!-- Preconexión y Fuentes Google Optimizadas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Estilos optimizados para el Loop Infinito y Tamaño de Logos -->
   <style>
@@ -192,13 +192,13 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (SCORES vs LOOP INFINITO DE LOGOS) -->
+  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (CONECTADO AL GAS MASTER) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      gestionarTickerInteligente();
+      gestionarTickerMasterGAS();
     });
 
-    async function gestionarTickerInteligente() {
+    async function gestionarTickerMasterGAS() {
       const tickerContainer = document.getElementById('tickerContainer');
       
       const logosEquipos = [
@@ -211,20 +211,21 @@
         { name: "SPARTANS", file: "assets/logos/spartans.png" }
       ];
 
+      const MASTER_GAS_URL = 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
+
       try {
-        let respuesta = await fetch('data/scores.json');
-        if (!respuesta.ok) throw new Error('No se pudo acceder a scores.json');
+        let respuesta = await fetch(MASTER_GAS_URL);
+        if (!respuesta.ok) throw new Error('Error al conectar con el backend de Google Sheets');
         let data = await respuesta.json();
 
-        let semanaActiva = data.currentWeek;
-        let partidos = data.matches || data;
+        let semanaActiva = data.currentWeek; 
+        let partidos = data.matches || [];
 
-        let partidosSemanaActual = partidos.filter(p => p.week === semanaActiva && p.active === true);
+        let partidosSemanaActual = partidos.filter(p => p.sem === semanaActiva && p.active === true);
 
         if (!partidosSemanaActual || partidosSemanaActual.length === 0) {
           tickerContainer.classList.add('is-logo-slide');
           
-          // Triplicamos el array para garantizar que el bucle cubra pantallas ultra-anchas sin espacios vacíos
           let loopLogos = [...logosEquipos, ...logosEquipos, ...logosEquipos];
           let htmlLogos = '<div class="logos-slide-track">';
           
@@ -244,32 +245,55 @@
         tickerContainer.classList.remove('is-logo-slide');
         let htmlTicker = "";
         partidosSemanaActual.forEach(partido => {
-          htmlTicker += `
-            <article class="game-card">
-              <div class="game-team">
-                <div class="team-info">
-                  <img src="${partido.homeLogo}" alt="${partido.homeTeam}" class="team-logo-small">
-                  <span>${partido.homeTeam}</span>
+          if (partido.isJam) {
+            htmlTicker += `
+              <article class="game-card">
+                <div class="tag"><span>${partido.cat}</span> <span>${partido.sem}</span></div>
+                <div class="jam-box" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                  <img src="assets/img/KFL-logo.png" class="jam-logo" style="width:38px; height:38px; object-fit:contain;">
+                  <div class="jam-txt" style="font-size:15px; font-weight:900; color:#19547E; margin-top:3px;">TODOS JUEGAN</div>
                 </div>
-                <span class="game-score">${partido.homeScore}</span>
-              </div>
-              <div class="game-team">
-                <div class="team-info">
-                  <img src="${partido.awayLogo}" alt="${partido.awayTeam}" class="team-logo-small">
-                  <span>${partido.awayTeam}</span>
+                <div class="footer" style="font-size:10px; color:#444; text-align:center; margin-top:10px; font-weight:bold; background:#E0F2FE; padding:4px; border-radius:4px;">${partido.dia} | ${partido.hora}</div>
+              </article>
+            `;
+          } else {
+            let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.png';
+            let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.png';
+            
+            htmlTicker += `
+              <article class="game-card">
+                <div class="game-team">
+                  <div class="team-info">
+                    <img src="${logoLocal}" alt="${partido.h}" class="team-logo-small">
+                    <span>${partido.h}</span>
+                  </div>
+                  <span class="game-score">${partido.sL}</span>
                 </div>
-                <span class="game-score">${partido.awayScore}</span>
-              </div>
-              <div class="game-status">${partido.status}</div>
-            </article>
-          `;
+                <div class="game-team">
+                  <div class="team-info">
+                    <img src="${logoVisita}" alt="${partido.v}" class="team-logo-small">
+                    <span>${partido.v}</span>
+                  </div>
+                  <span class="game-score">${partido.sV}</span>
+                </div>
+                <div class="game-status">${partido.final ? "FINAL" : partido.dia + " | " + partido.hora}</div>
+              </article>
+            `;
+          }
         });
 
         tickerContainer.innerHTML = htmlTicker;
 
       } catch (error) {
-        console.error("Error al gestionar el ticker inteligente:", error);
-        tickerContainer.innerHTML = "<p style='padding:20px; text-align:center; color:#64748b;'>KFL - Temporada Oficial</p>";
+        console.error("Fallo en sincronización con Google Sheets:", error);
+        tickerContainer.classList.add('is-logo-slide');
+        let loopLogos = [...logosEquipos, ...logosEquipos, ...logosEquipos];
+        let htmlLogos = '<div class="logos-slide-track">';
+        loopLogos.forEach(logo => {
+          htmlLogos += `<div class="logo-slide-item"><img src="${logo.file}" alt="${logo.name}"></div>`;
+        });
+        htmlLogos += '</div>';
+        tickerContainer.innerHTML = htmlLogos;
       }
     }
   </script>
@@ -454,7 +478,7 @@
       function mostrarBanner() {
         if (isStandalone || yaDescartado()) return;
         banner.style.display = 'block';
-        setTimeout(() => banner.classList.0('show'), 2000);
+        setTimeout(() => banner.classList.add('show'), 2000);
       }
 
       function ocultarBanner() {

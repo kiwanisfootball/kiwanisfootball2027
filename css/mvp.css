@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMA - CSS - MVP
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - MVP
    ========================================================================== */
 
 .mvp-container {
@@ -167,7 +167,7 @@
   box-shadow: 0 6px 20px rgba(235, 61, 64, 0.35);
 }
 
-/* FILTROS DE CATEGORÍA */
+/* FILTROS DE CATEGORÍA (Con fuente-cuerpo y color #64748B) */
 .mvp-container .mvp-filter-bar {
   display: none;
   gap: 10px;
@@ -184,11 +184,11 @@
   min-width: 100px;
   max-width: 180px;
   background: #ffffff;
-  color: #334155;
+  color: #64748b;
   border: 2px solid #cbd5e1;
   padding: 10px 12px;
   font-family: var(--fuente-cuerpo);
-  font-size: clamp(14px, 3vw, 18px);
+  font-size: clamp(12px, 2.5vw, 15px);
   font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -204,18 +204,19 @@
   background: #f1f5f9;
   transform: translateY(-2px);
   border-color: #94a3b8;
+  color: #475569;
 }
 
 .mvp-container .mvp-filter-btn.active.contact-active {
   background: var(--azul-kfl);
-  color: #ffffff;
+  color: #ffffff !important;
   border-color: var(--azul-kfl);
   box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
 }
 
 .mvp-container .mvp-filter-btn.active.flag-active {
   background: var(--rojo-kfl);
-  color: #ffffff;
+  color: #ffffff !important;
   border-color: var(--rojo-kfl);
   box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
 }
@@ -234,14 +235,13 @@
 }
 
 .mvp-container .mvp-single-table-container {
-  max-width: 850px;
+  max-width: 780px;
   margin: 0 auto;
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-/* Tabla fluida sin anchos forzados destructivos */
 .mvp-container .mvp-table {
   width: 100%;
   border-collapse: collapse;
@@ -255,7 +255,6 @@
   table-layout: auto; 
 }
 
-/* Columna Season centrada y compacta */
 .mvp-container .mvp-table th:nth-child(1),
 .mvp-container .mvp-table td:nth-child(1) { 
   white-space: nowrap;
@@ -264,14 +263,12 @@
   padding-right: 20px;
 }
 
-/* Columna Equipo alineada a la izquierda de forma natural (sin afectar rowspan) */
 .mvp-container .mvp-table th:nth-child(2),
 .mvp-container .mvp-table td:nth-child(2) { 
   text-align: left; 
   white-space: nowrap;
 }
 
-/* Columna Jugador con espacio libre en una sola línea limpia */
 .mvp-container .mvp-table th:nth-child(3),
 .mvp-container .mvp-table td:nth-child(3) { 
   text-align: left; 
@@ -329,7 +326,6 @@ body.flag-theme-active .mvp-container .mvp-table th {
   flex-shrink: 0;
 }
 
-/* Nombre del jugador estrictamente en una sola línea limpia, sin puntos y sin saltos */
 .mvp-container .mvp-player-name {
   color: #334155;
   font-weight: 800;
@@ -362,13 +358,12 @@ body.flag-theme-active .mvp-container .mvp-table th {
   flex-shrink: 0;
 }
 
-/* RESPONSIVE EXTREMO CON SCROLL TÁCTIL FLUIDO */
+/* RESPONSIVE MÓVIL */
 @media (max-width: 768px) {
   .mvp-container { padding: 15px 8px; }
   .mvp-container .mvp-hero-banner { padding: 25px 12px; }
   .mvp-container .mvp-modality-bar { flex-direction: column; gap: 10px; align-items: stretch; }
   .mvp-container .mvp-modality-btn { max-width: 100%; width: 100%; font-size: 18px; padding: 12px; }
   .mvp-container .mvp-filter-btn { min-width: 45%; font-size: 14px; padding: 8px 10px; }
-  /* La tabla toma su ancho real necesario y permite scroll horizontal limpio */
   .mvp-container .mvp-table { min-width: 540px; }
 }

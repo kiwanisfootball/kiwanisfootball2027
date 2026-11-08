@@ -254,14 +254,24 @@
   table-layout: fixed;
 }
 
+/* Anchos de columnas y alineaciones */
 .mvp-container .mvp-table th:nth-child(1),
-.mvp-container .mvp-table td:nth-child(1) { width: 22%; }
+.mvp-container .mvp-table td:nth-child(1) { 
+  width: 18%; 
+  text-align: center; 
+}
 
 .mvp-container .mvp-table th:nth-child(2),
-.mvp-container .mvp-table td:nth-child(2) { width: 39%; }
+.mvp-container .mvp-table td:nth-child(2) { 
+  width: 38%; 
+  text-align: center; 
+}
 
 .mvp-container .mvp-table th:nth-child(3),
-.mvp-container .mvp-table td:nth-child(3) { width: 39%; }
+.mvp-container .mvp-table td:nth-child(3) { 
+  width: 44%; 
+  text-align: left; 
+}
 
 .mvp-container .mvp-table th {
   background: var(--azul-kfl);
@@ -272,9 +282,12 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  text-align: left;
   white-space: nowrap;
 }
+
+.mvp-container .mvp-table th:nth-child(1),
+.mvp-container .mvp-table th:nth-child(2) { text-align: center; }
+.mvp-container .mvp-table th:nth-child(3) { text-align: left; }
 
 body.flag-theme-active .mvp-container .mvp-table th {
   background: var(--rojo-kfl);
@@ -282,31 +295,31 @@ body.flag-theme-active .mvp-container .mvp-table th {
 
 .mvp-container .mvp-table td {
   padding: 14px 16px;
-  text-align: left;
   border-bottom: 1px solid #f1f5f9;
   font-size: clamp(12px, 2.2vw, 14px);
   font-weight: 600;
   color: #334155;
   font-family: var(--fuente-cuerpo);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   vertical-align: middle;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
+  word-break: break-word;
 }
 
 .mvp-container .mvp-table tr.block-even td { background-color: #ffffff; }
 .mvp-container .mvp-table tr.block-odd td  { background-color: #f8fafc; }
 
 .mvp-container .mvp-table-team-cell {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   text-align: left;
   font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   font-family: var(--fuente-cuerpo);
+  white-space: normal;
+  margin: 0 auto;
 }
 
 .mvp-container .mvp-table-team-logo {
@@ -320,9 +333,8 @@ body.flag-theme-active .mvp-container .mvp-table th {
   color: #334155;
   font-weight: 800;
   font-family: var(--fuente-cuerpo);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 
 /* PROMPTS INICIALES */

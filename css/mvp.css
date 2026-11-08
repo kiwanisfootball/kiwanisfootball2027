@@ -241,6 +241,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
+/* Tabla fluida sin anchos forzados destructivos */
 .mvp-container .mvp-table {
   width: 100%;
   border-collapse: collapse;
@@ -251,32 +252,36 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin: 10px 0 20px 0;
   font-family: var(--fuente-cuerpo);
-  table-layout: fixed;
+  table-layout: auto; 
 }
 
-/* Anchos de columnas y alineaciones */
+/* Columna Season centrada y compacta */
 .mvp-container .mvp-table th:nth-child(1),
 .mvp-container .mvp-table td:nth-child(1) { 
-  width: 18%; 
+  white-space: nowrap;
   text-align: center; 
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
+/* Columna Equipo alineada a la izquierda de forma natural (sin afectar rowspan) */
 .mvp-container .mvp-table th:nth-child(2),
 .mvp-container .mvp-table td:nth-child(2) { 
-  width: 38%; 
-  text-align: center; 
+  text-align: left; 
+  white-space: nowrap;
 }
 
+/* Columna Jugador con espacio libre en una sola línea limpia */
 .mvp-container .mvp-table th:nth-child(3),
 .mvp-container .mvp-table td:nth-child(3) { 
-  width: 44%; 
   text-align: left; 
+  white-space: nowrap;
 }
 
 .mvp-container .mvp-table th {
   background: var(--azul-kfl);
   color: #ffffff;
-  padding: 14px 16px;
+  padding: 14px 18px;
   font-family: var(--fuente-cuerpo);
   font-size: clamp(10px, 2vw, 13px);
   font-weight: 800;
@@ -285,8 +290,8 @@
   white-space: nowrap;
 }
 
-.mvp-container .mvp-table th:nth-child(1),
-.mvp-container .mvp-table th:nth-child(2) { text-align: center; }
+.mvp-container .mvp-table th:nth-child(1) { text-align: center; }
+.mvp-container .mvp-table th:nth-child(2),
 .mvp-container .mvp-table th:nth-child(3) { text-align: left; }
 
 body.flag-theme-active .mvp-container .mvp-table th {
@@ -294,32 +299,27 @@ body.flag-theme-active .mvp-container .mvp-table th {
 }
 
 .mvp-container .mvp-table td {
-  padding: 14px 16px;
+  padding: 14px 18px;
   border-bottom: 1px solid #f1f5f9;
   font-size: clamp(12px, 2.2vw, 14px);
   font-weight: 600;
   color: #334155;
   font-family: var(--fuente-cuerpo);
   vertical-align: middle;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
-  word-break: break-word;
 }
 
 .mvp-container .mvp-table tr.block-even td { background-color: #ffffff; }
 .mvp-container .mvp-table tr.block-odd td  { background-color: #f8fafc; }
 
 .mvp-container .mvp-table-team-cell {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   text-align: left;
   font-weight: 700;
   font-family: var(--fuente-cuerpo);
-  white-space: normal;
-  margin: 0 auto;
+  white-space: nowrap;
 }
 
 .mvp-container .mvp-table-team-logo {
@@ -329,12 +329,12 @@ body.flag-theme-active .mvp-container .mvp-table th {
   flex-shrink: 0;
 }
 
+/* Nombre del jugador estrictamente en una sola línea limpia, sin puntos y sin saltos */
 .mvp-container .mvp-player-name {
   color: #334155;
   font-weight: 800;
   font-family: var(--fuente-cuerpo);
-  white-space: normal;
-  word-break: break-word;
+  white-space: nowrap;
 }
 
 /* PROMPTS INICIALES */
@@ -362,12 +362,13 @@ body.flag-theme-active .mvp-container .mvp-table th {
   flex-shrink: 0;
 }
 
-/* RESPONSIVE EXTREMO */
+/* RESPONSIVE EXTREMO CON SCROLL TÁCTIL FLUIDO */
 @media (max-width: 768px) {
   .mvp-container { padding: 15px 8px; }
   .mvp-container .mvp-hero-banner { padding: 25px 12px; }
   .mvp-container .mvp-modality-bar { flex-direction: column; gap: 10px; align-items: stretch; }
   .mvp-container .mvp-modality-btn { max-width: 100%; width: 100%; font-size: 18px; padding: 12px; }
   .mvp-container .mvp-filter-btn { min-width: 45%; font-size: 14px; padding: 8px 10px; }
-  .mvp-container .mvp-table { min-width: 460px; }
+  /* La tabla toma su ancho real necesario y permite scroll horizontal limpio */
+  .mvp-container .mvp-table { min-width: 540px; }
 }

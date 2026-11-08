@@ -60,12 +60,12 @@
       }
 
       try {
-        const response = await fetch(`/blog/${encodeURIComponent(slug)}.md`, { cache: 'no-store' });
+        const response = await fetch(`/blog/${encodeURIComponent(slug)}/index.md`, { cache: 'no-store' });
         if (!response.ok) throw new Error("No se pudo cargar el artículo");
         const markdownText = await response.text();
 
         const matchFrontmatter = markdownText.match(/^---[\s\S]*?---/);
-        let title = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
+        let title = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ');
         let fecha = "";
         let categoria = "";
         let excerpt = "";

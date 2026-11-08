@@ -3,7 +3,7 @@ title: AIP y Eagles sellan su pase a la Gran Final de la KFL Mini Contact 2026
 date: 2026-10-26T12:00:00-05:00
 coverImage: clipboard-image-1794117347.webp
 author: kiwanisfootball
-excerpt: Conoce los resultados de las semifinales de la KFL Mini Contact 2026.
+excerpt: Conoce los resultados de las semifinales de contact football Mini 2026.
 category: contact football
 subcategory: contact mini
 ---

@@ -5,20 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <title>Noticias y Artículos - Kiwanis Football League</title>
   
+  <!-- SEO, GEO y AEO Institucionales -->
   <meta name="description" content="Noticias, comunicados oficiales y cobertura de la Kiwanis Football League (KFL) en Panamá.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panama, Noticias Futbol Americano Panama, Flag Football">
   <meta name="author" content="Kiwanis Football League">
   <meta name="robots" content="index, follow">
 
+  <!-- Open Graph / Redes Sociales -->
   <meta property="og:title" content="Noticias y Artículos - Kiwanis Football League">
   <meta property="og:description" content="Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football en Panamá.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/assets/img/KFL-logo.png">
+  <meta property="og:image" content="assets/img/KFL-logo.png">
   <meta property="og:locale" content="es_PA">
 
-  <link rel="stylesheet" href="/css/global.css">
-  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <!-- Hojas de Estilo Oficiales -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
+  <!-- Fuentes Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -139,11 +143,13 @@
     }
   </style>
 
+  <!-- Vercel Speed Insights -->
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 
+  <!-- Schema.org Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -151,7 +157,7 @@
     "name": "Kiwanis Football League Panama",
     "alternateName": "KFL",
     "url": "https://kiwanisfootball2027.vercel.app",
-    "logo": "/assets/img/KFL-logo.png",
+    "logo": "assets/img/KFL-logo.png",
     "sameAs": ["https://www.youtube.com/@KFLTotalAccess"],
     "sport": "American Football"
   }
@@ -159,26 +165,31 @@
 </head>
 <body>
 
+  <!-- NAV MAESTRO -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="blog-container">
+
     <div class="section-header-clean">
       <h1>Noticias y Artículos KFL</h1>
       <p>Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football</p>
     </div>
 
+    <!-- CONTENEDOR DE PUBLICACIONES -->
     <div id="lista-posts">
       <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando publicaciones...</p>
     </div>
+
   </main>
 
+  <!-- FOOTER MAESTRO -->
   <div id="globalFooter"></div>
 
+  <!-- SCRIPT DE CARGA DIRECTA DE CARPETAS MARKDOWN -->
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const contenedor = document.getElementById('lista-posts');
 
-      // Agrega aquí los slugs exactos de tus noticias creadas en el CMS
       const slugsArticulos = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
@@ -192,7 +203,7 @@
 
       for (let slug of slugsArticulos) {
         try {
-          let respuesta = await fetch(`/blog/${slug}/index.md`);
+          let respuesta = await fetch(`blog/${slug}/index.md`);
           if (!respuesta.ok) continue;
           let textoMd = await respuesta.text();
 
@@ -201,23 +212,18 @@
           let fecha = "26/10/2026";
           let categoria = "KFL";
           let excerpt = "Haz clic para leer el comunicado oficial completo...";
-          let coverImage = "/assets/img/KFL-logo.png";
+          let coverImage = "";
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
-            
             let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
             if (tMatch) titulo = tMatch[1];
-
             let dMatch = frontmatter.match(/date:\s*["']?([^"'\n]+)["']?/);
             if (dMatch) fecha = dMatch[1];
-
             let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
             if (catMatch) categoria = catMatch[1];
-
             let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
             if (eMatch) excerpt = eMatch[1];
-
             let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
             if (imgMatch) {
               coverImage = imgMatch[1];
@@ -228,7 +234,7 @@
           }
 
           html += `
-            <div class="post-card" onclick="window.location.href='/articulo/${slug}'">
+            <div class="post-card" onclick="window.location.href='posts.html?slug=${slug}'">
               ${coverImage ? `
                 <div class="post-card-img-container">
                   <img src="${coverImage}" alt="${titulo}" class="post-card-img">
@@ -252,6 +258,7 @@
     });
   </script>
 
-  <script src="/js/components.js"></script>
+  <!-- Script global de componentes -->
+  <script src="js/components.js"></script>
 </body>
 </html>

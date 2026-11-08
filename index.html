@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Estilos optimizados para el Loop Infinito y Tamaño de Logos -->
+  <!-- Estilos puros para el Slide Continuo de Logos -->
   <style>
     .ticker-container.is-logo-slide {
       overflow: hidden;
@@ -192,7 +192,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (CONECTADO AL GAS MASTER) -->
+  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       gestionarTickerMasterGAS();
@@ -215,7 +215,7 @@
 
       try {
         let respuesta = await fetch(MASTER_GAS_URL);
-        if (!respuesta.ok) throw new Error('Error al conectar con el backend de Google Sheets');
+        if (!respuesta.ok) throw new Error('Error al conectar con Google Sheets');
         let data = await respuesta.json();
 
         let semanaActiva = data.currentWeek; 
@@ -225,10 +225,8 @@
 
         if (!partidosSemanaActual || partidosSemanaActual.length === 0) {
           tickerContainer.classList.add('is-logo-slide');
-          
           let loopLogos = [...logosEquipos, ...logosEquipos, ...logosEquipos];
           let htmlLogos = '<div class="logos-slide-track">';
-          
           loopLogos.forEach(logo => {
             htmlLogos += `
               <div class="logo-slide-item">
@@ -237,7 +235,6 @@
             `;
           });
           htmlLogos += '</div>';
-
           tickerContainer.innerHTML = htmlLogos;
           return;
         }
@@ -248,10 +245,11 @@
           if (partido.isJam) {
             htmlTicker += `
               <article class="game-card">
-                <div class="game-team" style="justify-content: center; text-align: center; flex-direction: column; gap: 4px; padding: 6px 0;">
-                  <span style="font-size: 10px; font-weight: 700; color: #19547E; letter-spacing: 0.5px; text-transform: uppercase;">${partido.cat}</span>
-                  <img src="assets/img/KFL-logo.png" alt="KFL" class="team-logo-small" style="width: 32px; height: 32px; object-fit: contain; margin: 0 auto;">
-                  <span style="font-size: 12px; font-weight: 800; color: #1e293b;">TODOS JUEGAN</span>
+                <div class="game-team">
+                  <div class="team-info" style="margin: 0 auto; justify-content: center;">
+                    <img src="assets/img/KFL-logo.png" alt="KFL" class="team-logo-small">
+                    <span>${partido.cat} - JAMBOREE</span>
+                  </div>
                 </div>
                 <div class="game-status">${partido.dia} | ${partido.hora}</div>
               </article>
@@ -285,7 +283,7 @@
         tickerContainer.innerHTML = htmlTicker;
 
       } catch (error) {
-        console.error("Fallo en sincronización con Google Sheets:", error);
+        console.error("Fallo:", error);
         tickerContainer.classList.add('is-logo-slide');
         let loopLogos = [...logosEquipos, ...logosEquipos, ...logosEquipos];
         let htmlLogos = '<div class="logos-slide-track">';
@@ -500,10 +498,11 @@
         mostrarBanner();
       }
 
+      installBtn.timestamp = 'click';
       installBtn.addEventListener('click', async () => {
         if (deferredPrompt) {
           deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
+          const { outcome } = await deferredPrompt.userCardChoice || deferredPrompt.userChoice;
           deferredPrompt = null;
           ocultarBanner();
           if (outcome !== 'accepted') recordarDescarte();

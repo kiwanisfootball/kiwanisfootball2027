@@ -6,8 +6,9 @@ backend:
   auth_endpoint: api/auth
   site_domain: kiwanisfootball2027.vercel.app
 
-display_url:
-  logo: assets/img/KFL-logo.svg
+display_url: "https://kiwanisfootball2027.vercel.app"
+
+logo_url: "assets/img/KFL-logo.svg"
 
 media_folder: "assets/uploads/blog"
 public_folder: "/assets/uploads/blog"
@@ -17,7 +18,6 @@ collections:
     label: "Noticias KFL"
     folder: "blog"
     create: true
-    # Slug con fecha al final en formato dd-mm-aaaa (ej: mi-noticia-26-10-2026)
     slug: "{{slug}}-{{day}}-{{month}}-{{year}}"
     path: "{{slug}}-{{day}}-{{month}}-{{year}}/index"
     fields:

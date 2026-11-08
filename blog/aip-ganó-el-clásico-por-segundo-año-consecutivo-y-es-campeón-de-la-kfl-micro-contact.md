@@ -4,6 +4,7 @@ title: AIP ganó El Clásico por segundo año consecutivo y es Campeón de la KF
 date: 08/11/2026
 coverImage: clipboard-image-1794117731.webp
 author: kiwanisfootball
+excerpt: Resumen de la Final de contact football Micro 2026.
 category: contact football
 subcategory: contact micro
 ---

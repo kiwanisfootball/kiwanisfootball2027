@@ -1,0 +1,110 @@
+/* ==========================================================================
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - ARTÍCULO
+   ========================================================================== */
+
+.article-container {
+  max-width: 850px;
+  width: 100%;
+  margin: 40px auto;
+  padding: clamp(20px, 4vw, 40px);
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+/* Cabecera del Artículo */
+.article-header {
+  margin-bottom: 30px;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 25px;
+}
+
+.article-title {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(28px, 6vw, 42px);
+  font-weight: 400;
+  color: var(--azul-kfl, #005EAA);
+  text-transform: uppercase;
+  line-height: 1.15;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+.article-meta {
+  font-family: var(--fuente-cuerpo);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Imagen de Portada */
+.article-cover-container {
+  width: 100%;
+  max-height: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  background-color: #f1f5f9;
+}
+
+.article-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Cuerpo del Artículo (Markdown renderizado) */
+.article-body {
+  font-family: var(--fuente-cuerpo);
+  font-size: clamp(15px, 2.2vw, 17px);
+  color: #334155;
+  line-height: 1.8;
+}
+
+.article-body h2 {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(22px, 4vw, 28px);
+  color: #0f172a;
+  text-transform: uppercase;
+  margin-top: 35px;
+  margin-bottom: 15px;
+}
+
+.article-body h3 {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(18px, 3vw, 22px);
+  color: #005EAA;
+  text-transform: uppercase;
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
+.article-body p {
+  margin-bottom: 20px;
+}
+
+.article-body strong {
+  color: #0f172a;
+  font-weight: 800;
+}
+
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+/* Responsive Móvil */
+@media (max-width: 768px) {
+  .article-container {
+    margin: 15px auto;
+    padding: 20px 15px;
+    border-radius: 12px;
+  }
+}

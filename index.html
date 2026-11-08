@@ -248,12 +248,12 @@
           if (partido.isJam) {
             htmlTicker += `
               <article class="game-card">
-                <div class="tag"><span>${partido.cat}</span> <span>${partido.sem}</span></div>
-                <div class="jam-box" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                  <img src="assets/img/KFL-logo.png" class="jam-logo" style="width:38px; height:38px; object-fit:contain;">
-                  <div class="jam-txt" style="font-size:15px; font-weight:900; color:#19547E; margin-top:3px;">TODOS JUEGAN</div>
+                <div class="game-team" style="justify-content: center; text-align: center; flex-direction: column; gap: 4px; padding: 6px 0;">
+                  <span style="font-size: 10px; font-weight: 700; color: #19547E; letter-spacing: 0.5px; text-transform: uppercase;">${partido.cat}</span>
+                  <img src="assets/img/KFL-logo.png" alt="KFL" class="team-logo-small" style="width: 32px; height: 32px; object-fit: contain; margin: 0 auto;">
+                  <span style="font-size: 12px; font-weight: 800; color: #1e293b;">TODOS JUEGAN</span>
                 </div>
-                <div class="footer" style="font-size:10px; color:#444; text-align:center; margin-top:10px; font-weight:bold; background:#E0F2FE; padding:4px; border-radius:4px;">${partido.dia} | ${partido.hora}</div>
+                <div class="game-status">${partido.dia} | ${partido.hora}</div>
               </article>
             `;
           } else {

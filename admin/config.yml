@@ -7,7 +7,6 @@ backend:
   site_domain: kiwanisfootball2027.vercel.app
 
 display_url: "https://kiwanisfootball2027.vercel.app"
-
 logo_url: "assets/img/KFL-logo.svg"
 
 media_folder: "assets/uploads/blog"

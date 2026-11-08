@@ -49,10 +49,10 @@
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- 2. TICKER DE MARCADORES DINÁMICO -->
+    <!-- 2. TICKER INTELIGENTE DE SCORES / SLIDE DE LOGOS -->
     <section class="ticker-section">
       <div class="ticker-container" id="tickerContainer">
-        <div style="padding: 20px; text-align: center; color: #64748b; width: 100%;">Cargando marcadores en vivo...</div>
+        <div style="padding: 20px; text-align: center; color: #64748b; width: 100%;">Cargando cartelera de la liga...</div>
       </div>
     </section>
 
@@ -138,27 +138,58 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT DE CARGA DINÁMICA DEL TICKER DE SCORES -->
+  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (SCORES vs SLIDE DE LOGOS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      cargarTickerScores();
+      gestionarTickerInteligente();
     });
 
-    async function cargarTickerScores() {
+    async function gestionarTickerInteligente() {
       const tickerContainer = document.getElementById('tickerContainer');
-      try {
-        // Puedes cambiar esta ruta por tu endpoint de API o archivo json de scores
-        let respuesta = await fetch('data/scores.json');
-        if (!respuesta.ok) throw new Error('No se pudo cargar la data de scores');
-        let partidos = await respuesta.json();
+      
+      // Logos oficiales para el fallback de slide cuando no hay partidos activos
+      const logosEquipos = [
+        { name: "OWLS", file: "assets/logos/owls.png" },
+        { name: "RAIDERS", file: "assets/logos/raiders.png" },
+        { name: "KOLTS", file: "assets/logos/kolts.png" },
+        { name: "EAGLES", file: "assets/logos/eagles.png" },
+        { name: "DRAGONS", file: "assets/logos/dragons.png" },
+        { name: "LIONS", file: "assets/logos/lions.png" },
+        { name: "SPARTANS", file: "assets/logos/spartans.png" }
+      ];
 
-        if (!partidos || partidos.length === 0) {
-          tickerContainer.innerHTML = "<p style='padding:20px; text-align:center; color:#64748b;'>No hay marcadores disponibles en este momento.</p>";
+      try {
+        let respuesta = await fetch('data/scores.json');
+        if (!respuesta.ok) throw new Error('No se pudo acceder a scores.json');
+        let data = await respuesta.json();
+
+        // data puede estructurarse como { currentWeek: "SEMANA 5", matches: [...] }
+        let semanaActiva = data.currentWeek;
+        let partidos = data.matches || data; // Soporta array directo o objeto estructurado
+
+        // Filtramos los partidos que correspondan a la semana actual en curso
+        let partidosSemanaActual = partidos.filter(p => p.week === semanaActiva && p.active === true);
+
+        if (!partidosSemanaActual || partidosSemanaActual.length === 0) {
+          // CONDICIONAL: Si no hay partidos programados/activos, mostramos el slide de logos de la liga
+          let htmlLogos = "";
+          logosEquipos.forEach(logo => {
+            htmlLogos += `
+              <article class="game-card logo-slide-card" style="display: flex; align-items: center; justify-content: center; padding: 15px;">
+                <div class="team-info" style="display: flex; align-items: center; gap: 10px;">
+                  <img src="${logo.file}" alt="${logo.name}" class="team-logo-small" style="width: 40px; height: 40px; object-fit: contain;">
+                  <span style="font-family: 'Anton', sans-serif; font-size: 1.1rem; letter-spacing: 1px; color: #1e293b;">${logo.name}</span>
+                </div>
+              </article>
+            `;
+          });
+          tickerContainer.innerHTML = htmlLogos;
           return;
         }
 
+        // Renderizado normal de los resultados de la semana actual
         let htmlTicker = "";
-        partidos.forEach(partido => {
+        partidosSemanaActual.forEach(partido => {
           htmlTicker += `
             <article class="game-card">
               <div class="game-team">
@@ -181,10 +212,10 @@
         });
 
         tickerContainer.innerHTML = htmlTicker;
+
       } catch (error) {
-        console.error("Error al cargar el ticker:", error);
-        // Fallback visual en caso de fallo de red
-        tickerContainer.innerHTML = "<p style='padding:20px; text-align:center; color:#64748b;'>Error al actualizar los marcadores en vivo.</p>";
+        console.error("Error al gestionar el ticker inteligente:", error);
+        tickerContainer.innerHTML = "<p style='padding:20px; text-align:center; color:#64748b;'>KFL - Temporada Oficial</p>";
       }
     }
   </script>
@@ -361,13 +392,13 @@
       let deferredPrompt = null;
       let instruccionesMostradas = false;
 
-      fnDescartado = function() {
+      function yaDescartado() {
         const fecha = localStorage.getItem('pwaDismissed');
         return fecha && (Date.now() - Number(fecha)) < 7 * 24 * 60 * 60 * 1000;
-      };
+      }
 
       function mostrarBanner() {
-        if (isStandalone || fnDescartado()) return;
+        if (isStandalone || yaDescartado()) return;
         banner.style.display = 'block';
         setTimeout(() => banner.classList.add('show'), 2000);
       }

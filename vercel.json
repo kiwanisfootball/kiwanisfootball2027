@@ -1,4 +1,6 @@
 {
+  "buildCommand": "node generate-index.js",
+  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/articulo/:slug",

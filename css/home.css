@@ -1,0 +1,297 @@
+/* ==========================================================================
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - HOME
+   ========================================================================== */
+
+/* Control global contra desbordamientos horizontales */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.news-grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+  align-items: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 950px) {
+  .news-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featured-main-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.featured-main-card:hover {
+  border-color: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 94, 170, 0.1);
+}
+
+.featured-img-container {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background-color: #f1f5f9;
+}
+
+.featured-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.featured-body {
+  padding: clamp(20px, 4vw, 30px);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.badge-category {
+  background-color: #005EAA;
+  color: #ffffff;
+  padding: 5px 12px;
+  font-size: clamp(10px, 2vw, 11px);
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.featured-body h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(20px, 4vw, 26px);
+  color: #0b0f19;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.featured-body p {
+  font-size: clamp(13.5px, 2.2vw, 14.5px);
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.latest-sidebar-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: clamp(18px, 3vw, 25px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.latest-sidebar-card h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(18px, 3vw, 20px);
+  color: #005EAA;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+#sidebarNewsList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.sidebar-news-item {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.sidebar-news-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sidebar-news-item:hover h4 {
+  color: #005EAA;
+}
+
+.sidebar-thumb {
+  width: 65px;
+  height: 65px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background-color: #f1f5f9;
+}
+
+.sidebar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sidebar-tag {
+  font-size: clamp(9px, 1.8vw, 10px);
+  font-weight: 800;
+  color: #005EAA;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-info h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(12px, 2.2vw, 13px);
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.3;
+  margin: 0;
+  word-break: break-word;
+}
+
+/* ===== BANNER PWA (TODOS LOS DISPOSITIVOS) ===== */
+.pwa-banner {
+  display: none;
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%) translateY(160px);
+  width: 92%;
+  max-width: 420px;
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  padding: 18px 20px;
+  box-sizing: border-box;
+  z-index: 9999;
+  transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.pwa-banner.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.pwa-banner-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.pwa-banner-logo {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.pwa-banner-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(12.5px, 2.2vw, 13.5px);
+  line-height: 1.45;
+  margin: 0;
+  color: #cbd5e1;
+}
+
+.pwa-banner-text strong {
+  color: #ffffff;
+}
+
+.pwa-share-icon {
+  display: inline-block;
+  background: #005EAA;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 0 6px;
+  font-weight: 800;
+}
+
+.pwa-banner-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.pwa-banner-actions button {
+  flex: 1;
+}
+
+.pwa-btn-install {
+  background: #EB3D40;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 2.2vw, 13px);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pwa-btn-install:hover {
+  background: #c52a2d;
+}
+
+.pwa-btn-secondary {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 2.2vw, 13px);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.pwa-btn-secondary:hover {
+  color: #ffffff;
+}
+
+/* ===== INDICADORES DEL BANNER (puntos) ===== */
+.promo-dots { display: flex; justify-content: center; gap: 10px; margin-top: 14px; }
+.promo-dot {
+  width: 10px; height: 10px; border-radius: 50%; border: none; padding: 0;
+  background: #cbd5e1; cursor: pointer; transition: all 0.25s ease;
+}
+.promo-dot.active { background: #005EAA; width: 26px; border-radius: 10px; }
+.promo-dot:focus-visible { outline: 2px solid #005EAA; outline-offset: 3px; }
+.slide a { display: block; width: 100%; height: 100%; }
+.slide a img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sponsor-card a { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }

@@ -5,10 +5,8 @@ const blogDir = path.join(__dirname, 'blog');
 const outputFile = path.join(blogDir, 'index.json');
 
 function getPosts() {
-  if (!fs.existsSync(blogDir)) {
-    console.log('La carpeta blog/ no existe.');
-    return;
-  }
+  // Garantiza que blog/ exista, incluso sin posts todavía
+  fs.mkdirSync(blogDir, { recursive: true });
 
   const folders = fs.readdirSync(blogDir, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
@@ -46,10 +44,6 @@ function getPosts() {
 
   // Más reciente primero según la fecha del frontmatter; el slug queda como desempate
   posts.sort((a, b) => (b.date || '').localeCompare(a.date || '') || b.slug.localeCompare(a.slug));
-
-  if (!fs.existsSync(blogDir)) {
-    fs.mkdirSync(blogDir, { recursive: true });
-  }
 
   fs.writeFileSync(outputFile, JSON.stringify(posts, null, 2));
   console.log('Índice de blog generado con éxito:', posts.length, 'artículos encontrados.');

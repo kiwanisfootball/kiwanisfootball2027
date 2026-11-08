@@ -1,0 +1,93 @@
+/* ==========================================================================
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - FOTOS
+   ========================================================================== */
+
+/* CONTENEDOR FOTOS */
+.fotos-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(15px, 3vw, 25px);
+  box-sizing: border-box;
+}
+
+/* TARJETA RESEÑA */
+.fotos-header-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: clamp(25px, 4vw, 35px) clamp(20px, 3vw, 30px);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.fotos-title {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(24px, 5.5vw, 32px);
+  font-weight: 400;
+  color: #19547E;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+  border-bottom: 3px solid #19547E;
+  display: inline-block;
+  padding-bottom: 5px;
+  line-height: 1.2;
+}
+
+.fotos-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(13.5px, 2.5vw, 15px);
+  line-height: 1.7;
+  color: #334155;
+  max-width: 750px;
+  margin: 0 auto 22px auto;
+}
+
+.fotos-backlink {
+  color: #19547E;
+  font-weight: 800;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.fotos-backlink:hover {
+  color: #0f3652;
+}
+
+/* BOTÓN PRINCIPAL A FACEBOOK */
+.btn-fb-official {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #1877f2;
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(13.5px, 2.5vw, 15px);
+  padding: clamp(12px, 2.5vw, 14px) clamp(20px, 4vw, 30px);
+  border-radius: 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(24, 119, 242, 0.3);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.btn-fb-official:hover {
+  background: #1464cc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(24, 119, 242, 0.4);
+}
+
+.btn-fb-official svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+  flex-shrink: 0;
+}

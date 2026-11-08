@@ -1,7 +1,7 @@
 ---
 title: Owls y Eagles Sellan su Pase a la Gran Final de la KFL Mini Contact 2026
 date: 26/10/2026
-coverImage: clipboard-image-1794117347.webp
+coverImage: owls-ganan-semifinales.webp
 author: kiwanisfootball
 excerpt: La emoción de la Kiwanis Football League (KFL) alcanzó su punto álgido
   durante la séptima semana de llaves semifinales del segundo semestre de la KFL

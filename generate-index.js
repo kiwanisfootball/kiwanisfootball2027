@@ -2,10 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 const blogDir = path.join(__dirname, 'blog');
-const outputFile = path.join(__dirname, 'blog', 'index.json');
+const outputFile = path.join(blogDir, 'index.json');
 
 function getPosts() {
-  if (!fs.existsSync(blogDir)) return [];
+  if (!fs.existsSync(blogDir)) {
+    console.log('La carpeta blog/ no existe.');
+    return;
+  }
   
   const folders = fs.readdirSync(blogDir, { withFileTypes: true })
     .filter(dirent => dirent.isDirectory())
@@ -18,7 +21,6 @@ function getPosts() {
     if (fs.existsSync(indexPath)) {
       const content = fs.readFileSync(indexPath, 'utf8');
       
-      // Extraer frontmatter básico por regex
       const match = content.match(/^---[\s\S]*?---/);
       if (match) {
         const fm = match[0];
@@ -40,9 +42,13 @@ function getPosts() {
     }
   }
 
-  // Ordenar por fecha o nombre descendente
   posts.sort((a, b) => b.slug.localeCompare(a.slug));
   
+  // Asegura que la carpeta blog exista y escribe el JSON
+  if (!fs.existsSync(blogDir)) {
+    fs.mkdirSync(blogDir, { recursive: true });
+  }
+
   fs.writeFileSync(outputFile, JSON.stringify(posts, null, 2));
   console.log('Índice de blog generado con éxito:', posts.length, 'artículos encontrados.');
 }

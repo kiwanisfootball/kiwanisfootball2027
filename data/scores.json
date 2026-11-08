@@ -1,0 +1,38 @@
+[
+  {
+    "homeTeam": "OWLS",
+    "homeLogo": "assets/logos/owls.png",
+    "homeScore": 21,
+    "awayTeam": "RAIDERS",
+    "awayLogo": "assets/logos/raiders.png",
+    "awayScore": 14,
+    "status": "FINAL - SEMANA 4"
+  },
+  {
+    "homeTeam": "EAGLES",
+    "homeLogo": "assets/logos/eagles.png",
+    "homeScore": 7,
+    "awayTeam": "KOLTS",
+    "awayLogo": "assets/logos/kolts.png",
+    "awayScore": 12,
+    "status": "FINAL - SEMANA 4"
+  },
+  {
+    "homeTeam": "DRAGONS",
+    "homeLogo": "assets/logos/dragons.png",
+    "homeScore": 28,
+    "awayTeam": "SPARTANS",
+    "awayLogo": "assets/logos/spartans.png",
+    "awayScore": 0,
+    "status": "FINAL - SEMANA 4"
+  },
+  {
+    "homeTeam": "LIONS",
+    "homeLogo": "assets/logos/lions.png",
+    "homeScore": 14,
+    "awayTeam": "OWLS",
+    "awayLogo": "assets/logos/owls.png",
+    "awayScore": 14,
+    "status": "FINAL - SEMANA 4"
+  }
+]

@@ -13,66 +13,18 @@
   <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
   <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="/assets/img/KFL-logo.png">
+  <meta property="og:image" content="assets/img/KFL-logo.png">
   <meta property="og:locale" content="es_PA">
 
-  <link rel="stylesheet" href="/css/global.css">
-  <link rel="stylesheet" href="/css/home.css">
-  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <!-- Hojas de Estilo Oficiales (Rutas relativas limpias) -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="manifest" href="manifest.json">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    .ticker-container.is-logo-slide {
-      overflow: hidden;
-      display: flex;
-      width: 100%;
-      background: transparent;
-      box-shadow: none;
-      border: none;
-      padding: 15px 0;
-      white-space: nowrap;
-      position: relative;
-    }
-    .logos-slide-track {
-      display: flex;
-      width: max-content;
-      animation: scrollLogos 25s linear infinite;
-      align-items: center;
-      gap: 80px;
-      will-change: transform;
-    }
-    .logos-slide-track:hover {
-      animation-play-state: paused;
-    }
-    .logo-slide-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 0;
-      flex-shrink: 0;
-    }
-    .logo-slide-item img {
-      height: 75px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
-      transition: transform 0.3s ease;
-    }
-    .logo-slide-item img:hover {
-      transform: scale(1.15);
-    }
-    @keyframes scrollLogos {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-  </style>
 
   <script type="application/ld+json">
   {
@@ -81,7 +33,7 @@
     "name": "Kiwanis Football League Panama",
     "alternateName": "KFL",
     "url": "https://kiwanisfootball2027.vercel.app",
-    "logo": "/assets/img/KFL-logo.png",
+    "logo": "assets/img/KFL-logo.png",
     "sameAs": ["https://www.youtube.com/@KFLTotalAccess"],
     "sport": "American Football"
   }
@@ -260,7 +212,6 @@
       const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
       const sidebarContainer = document.getElementById('sidebarNewsList');
 
-      // Agrega aquí los slugs exactos creados en tu CMS
       const slugsArticulos = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
@@ -269,14 +220,14 @@
         let postsCargados = [];
         for (let slug of slugsArticulos) {
           try {
-            let res = await fetch(`/blog/${slug}/index.md`);
+            let res = await fetch(`blog/${slug}/index.md`);
             if (!res.ok) continue;
             let text = await res.text();
             let match = text.match(/^---[\s\S]*?---/);
             let title = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ').toUpperCase();
             let category = "KFL";
             let excerpt = "Comunicado oficial de la liga...";
-            let coverImage = "/assets/img/KFL-logo.png";
+            let coverImage = "assets/img/KFL-logo.png";
 
             if (match) {
               let fm = match[0];
@@ -289,7 +240,6 @@
               let imgMatch = fm.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
               if (imgMatch) {
                 coverImage = imgMatch[1];
-                if (coverImage.startsWith('assets/')) coverImage = '/' + coverImage;
               }
             }
             postsCargados.push({ slug, title, category, excerpt, coverImage });
@@ -305,7 +255,7 @@
         }
 
         const featured = postsCargados[0];
-        mainFeaturedContainer.onclick = () => window.location.href = `/articulo/${featured.slug}`;
+        mainFeaturedContainer.onclick = () => window.location.href = `articulo/${featured.slug}`;
         mainFeaturedContainer.innerHTML = `
           <div class="featured-img-container">
             <img src="${featured.coverImage}" alt="${featured.title}" class="featured-img">
@@ -326,7 +276,7 @@
         let listaSidebarHtml = "";
         sidebarPosts.forEach(post => {
           listaSidebarHtml += `
-            <div class="sidebar-news-item" onclick="window.location.href='/articulo/${post.slug}'">
+            <div class="sidebar-news-item" onclick="window.location.href='articulo/${post.slug}'">
               <img src="${post.coverImage}" alt="${post.title}" class="sidebar-thumb">
               <div class="sidebar-info">
                 <span class="sidebar-tag">${post.category}</span>
@@ -401,6 +351,85 @@
     ).join('');
   </script>
 
-  <script src="/js/components.js"></script>
+  <script>
+    (function () {
+      const banner = document.getElementById('pwaBanner');
+      const text = document.getElementById('pwaText');
+      const installBtn = document.getElementById('pwaInstallBtn');
+      const laterBtn = document.getElementById('pwaLaterBtn');
+
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                           navigator.standalone === true;
+
+      let deferredPrompt = null;
+      let instruccionesMostradas = false;
+
+      function yaDescartado() {
+        const fecha = localStorage.getItem('pwaDismissed');
+        return fecha && (Date.now() - Number(fecha)) < 7 * 24 * 60 * 60 * 1000;
+      }
+
+      function mostrarBanner() {
+        if (isStandalone || yaDescartado()) return;
+        banner.style.display = 'block';
+        setTimeout(() => banner.classList.add('show'), 2000);
+      }
+
+      function ocultarBanner() {
+        banner.classList.remove('show');
+      }
+
+      function recordarDescarte() {
+        localStorage.setItem('pwaDismissed', String(Date.now()));
+      }
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        mostrarBanner();
+      });
+
+      if (isIOS) {
+        installBtn.textContent = 'Cómo instalar';
+        mostrarBanner();
+      }
+
+      installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          deferredPrompt = null;
+          ocultarBanner();
+          if (outcome !== 'accepted') recordarDescarte();
+          return;
+        }
+
+        if (isIOS && !instruccionesMostradas) {
+          instruccionesMostradas = true;
+          text.innerHTML = 'Toca <span class="pwa-share-icon">⬆︎</span> en Safari o Chrome y luego <strong>"Agregar a pantalla de inicio"</strong>.';
+          installBtn.textContent = 'Entendido';
+          return;
+        }
+
+        ocultarBanner();
+        recordarDescarte();
+      });
+
+      laterBtn.addEventListener('click', () => {
+        ocultarBanner();
+        recordarDescarte();
+      });
+
+      window.addEventListener('appinstalled', () => {
+        ocultarBanner();
+        deferredPrompt = null;
+      });
+
+    })();
+  </script>
+
+  <script src="js/components.js"></script>
 </body>
 </html>

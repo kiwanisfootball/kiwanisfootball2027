@@ -234,7 +234,7 @@
           }
 
           html += `
-            <div class="post-card" onclick="window.location.href='posts.html?slug=${slug}'">
+            <div class="post-card" onclick="window.location.href='articulo.html?slug=${encodeURIComponent(p.slug)}'">
               ${coverImage ? `
                 <div class="post-card-img-container">
                   <img src="${coverImage}" alt="${titulo}" class="post-card-img">

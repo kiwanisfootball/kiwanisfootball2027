@@ -186,7 +186,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER -->
+  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (INTACTO) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       gestionarTickerMasterGAS();
@@ -276,7 +276,7 @@
     }
   </script>
 
-    <!-- SCRIPT DE NOTICIAS (LEE blog/index.json GENERADO EN EL BUILD) -->
+  <!-- SCRIPT DE NOTICIAS (LEE blog/index.json - INTACTO) -->
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
@@ -335,6 +335,71 @@
         vacio('No se pudieron cargar las noticias.', 'Sin noticias recientes.');
       }
     });
+  </script>
+
+  <!-- CONFIGURACIÓN DE BANNERS Y PATROCINADORES (RESTAURADA Y RESPONSIVE) -->
+  <script>
+    const PROMO_BANNERS = [
+      { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },
+      { img: 'assets/img/banner-promo-2.jpg', alt: 'Inscripciones Abiertas Temporada 2026', url: 'registro-jugadores.html' }
+    ];
+
+    const SPONSORS = [
+      { img: 'assets/sponsors/sponsor1.png', alt: 'Sponsor 1', url: '' },
+      { img: 'assets/sponsors/sponsor2.png', alt: 'Sponsor 2', url: '' },
+      { img: 'assets/sponsors/sponsor3.png', alt: 'Sponsor 3', url: '' },
+      { img: 'assets/sponsors/sponsor4.png', alt: 'Sponsor 4', url: '' },
+      { img: 'assets/sponsors/sponsor5.png', alt: 'Sponsor 5', url: '' },
+      { img: 'assets/sponsors/sponsor6.png', alt: 'Sponsor 6', url: '' },
+      { img: 'assets/sponsors/sponsor7.png', alt: 'Sponsor 7', url: '' },
+      { img: 'assets/sponsors/sponsor8.png', alt: 'Sponsor 8', url: '' },
+      { img: 'assets/sponsors/sponsor9.png', alt: 'Sponsor 9', url: '' }
+    ];
+
+    function envolverEnlace(contenido, url) {
+      if (!url) return contenido;
+      const externo = /^https?:\/\//.test(url);
+      const attrs = externo ? ' target="_blank" rel="sponsored noopener"' : '';
+      return `<a href="${url}"${attrs}>${contenido}</a>`;
+    }
+
+    const slider = document.getElementById('promoSlider');
+    const dotsEl = document.getElementById('promoDots');
+    let slideActual = 0;
+
+    if (slider && dotsEl) {
+      slider.innerHTML = PROMO_BANNERS.map((b, i) =>
+        `<div class="slide${i === 0 ? ' active' : ''}">${envolverEnlace(`<img src="${b.img}" alt="${b.alt}">`, b.url)}</div>`
+      ).join('');
+
+      dotsEl.innerHTML = PROMO_BANNERS.map((b, i) =>
+        `<button class="promo-dot${i === 0 ? ' active' : ''}" aria-label="Ver banner ${i + 1}" data-i="${i}"></button>`
+      ).join('');
+
+      function mostrarSlide(i) {
+        const slides = slider.querySelectorAll('.slide');
+        const dots = dotsEl.querySelectorAll('.promo-dot');
+        if (!slides.length) return;
+        slideActual = (i + slides.length) % slides.length;
+        slides.forEach((el, k) => el.classList.toggle('active', k === slideActual));
+        dots.forEach((el, k) => el.classList.toggle('active', k === slideActual));
+      }
+
+      dotsEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.promo-dot');
+        if (btn) mostrarSlide(Number(btn.dataset.i));
+      });
+
+      if (PROMO_BANNERS.length <= 1) dotsEl.style.display = 'none';
+      else setInterval(() => mostrarSlide(slideActual + 1), 5000);
+    }
+
+    const sponsorsGrid = document.getElementById('sponsorsGrid');
+    if (sponsorsGrid) {
+      sponsorsGrid.innerHTML = SPONSORS.map(s =>
+        `<div class="sponsor-card">${envolverEnlace(`<img src="${s.img}" alt="${s.alt}" class="sponsor-logo">`, s.url)}</div>`
+      ).join('');
+    }
   </script>
 
   <!-- MENÚ Y PIE DE PÁGINA GLOBALES -->

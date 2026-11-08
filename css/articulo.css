@@ -88,6 +88,18 @@
   margin-bottom: 20px;
 }
 
+/* Corrección de alineación para listas con viñetas y numeradas */
+.article-body ul,
+.article-body ol {
+  margin-bottom: 20px;
+  padding-left: 25px;
+}
+
+.article-body li {
+  margin-bottom: 8px;
+  padding-left: 5px;
+}
+
 .article-body strong {
   color: #0f172a;
   font-weight: 800;

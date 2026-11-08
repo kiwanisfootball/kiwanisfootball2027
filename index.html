@@ -137,25 +137,20 @@
       <div class="promo-dots" id="promoDots" role="tablist" aria-label="Banners promocionales"></div>
     </section>
 
-    <!-- 6. MÓDULO DE NOTICIAS CONECTADO A LOS MARKDOWN -->
+    <!-- 6. MÓDULO DE NOTICIAS -->
     <section class="news-section">
       <h2 class="section-headline">NOTICIAS</h2>
 
       <div class="news-grid-layout">
-
-        <!-- COLUMNA IZQUIERDA: ÚLTIMA NOTICIA EN GRANDE -->
         <div id="mainFeaturedPost" class="featured-main-card">
           <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
         </div>
-
-        <!-- COLUMNA DERECHA: ÚLTIMAS 4 NOTICIAS -->
         <div class="latest-sidebar-card">
           <h3>ÚLTIMAS NOTICIAS</h3>
           <div id="sidebarNewsList">
             <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
           </div>
         </div>
-
       </div>
     </section>
 
@@ -170,10 +165,10 @@
     </section>
   </main>
 
-  <!-- 8. FOOTER GLOBAL (Inyectado por components.js) -->
+  <!-- 8. FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
-  <!-- BANNER DE INSTALACIÓN PWA (TODOS LOS DISPOSITIVOS) -->
+  <!-- BANNER DE INSTALACIÓN PWA -->
   <div id="pwaBanner" class="pwa-banner" role="region" aria-label="Instalar KFL App">
     <div class="pwa-banner-head">
       <img src="assets/img/KFL-logo.png" alt="KFL" class="pwa-banner-logo">
@@ -187,7 +182,6 @@
     </div>
   </div>
 
-  <!-- BOTÓN VOLVER ARRIBA -->
   <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
@@ -200,7 +194,6 @@
 
     async function gestionarTickerMasterGAS() {
       const tickerContainer = document.getElementById('tickerContainer');
-      
       const logosEquipos = [
         { name: "OWLS", file: "assets/logos/owls.png" },
         { name: "RAIDERS", file: "assets/logos/raiders.png" },
@@ -210,14 +203,12 @@
         { name: "LIONS", file: "assets/logos/lions.png" },
         { name: "SPARTANS", file: "assets/logos/spartans.png" }
       ];
-
       const MASTER_GAS_URL = 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
 
       try {
         let respuesta = await fetch(MASTER_GAS_URL);
         if (!respuesta.ok) throw new Error('Error al conectar con Google Sheets');
         let data = await respuesta.json();
-
         let semanaActiva = data.currentWeek; 
         let partidos = data.matches || [];
 
@@ -227,7 +218,6 @@
         }
 
         let partidosSemanaActual = partidos.filter(p => p.sem === semanaActiva && p.active === true);
-
         if (!partidosSemanaActual || partidosSemanaActual.length === 0) {
           activarSlideLogos(tickerContainer, logosEquipos);
           return;
@@ -235,11 +225,9 @@
 
         tickerContainer.classList.remove('is-logo-slide');
         let htmlTicker = "";
-        
         partidosSemanaActual.forEach(partido => {
           let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.png';
           let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.png';
-          
           let categoriaLimpia = partido.cat.replace("FLAG", "").replace("CONTACT", "").trim();
           
           htmlTicker += `
@@ -265,9 +253,7 @@
             </article>
           `;
         });
-
         tickerContainer.innerHTML = htmlTicker;
-
       } catch (error) {
         console.error("Fallo:", error);
         activarSlideLogos(tickerContainer, logosEquipos);
@@ -290,10 +276,9 @@
     }
   </script>
 
-  <!-- SCRIPT MAESTRO (NOTICIAS) -->
+  <!-- SCRIPT DE NOTICIAS (LEE DESDE LA CARPETA DEL CMS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Agrega aquí los slugs exactos de las noticias que crees en el CMS
       const slugsArticulosIndex = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
@@ -314,46 +299,44 @@
 
       for (let slug of slugs) {
         try {
-          // Apunta correctamente a la ruta de tu archivo markdown o carpeta generada
-          let respuesta = await fetch(`blog/${slug}.md`);
+          let respuesta = await fetch(`blog/${slug}/index.md`);
           if (!respuesta.ok) continue;
           let textoMd = await respuesta.text();
 
           let matchFrontmatter = textoMd.match(/^---[\s\S]*?---/);
-          let titulo = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
+          let titulo = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ').toUpperCase();
           let categoria = "KFL";
           let excerpt = "Haz clic para leer el comunicado oficial...";
           let coverImage = "assets/img/KFL-logo.png";
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
-
             let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
             if (tMatch) titulo = tMatch[1];
-
             let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
             if (catMatch) categoria = catMatch[1];
-
             let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
             if (eMatch) excerpt = eMatch[1];
-
             let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
             if (imgMatch) {
               coverImage = imgMatch[1];
               if (coverImage.startsWith('assets/')) coverImage = '/' + coverImage;
             }
           }
-
           postsCargados.push({ slug, titulo, categoria, excerpt, coverImage });
         } catch (e) {
           console.error("Error cargando post:", slug);
         }
       }
 
-      if (postsCargados.length === 0) return;
+      if (postsCargados.length === 0) {
+        mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
+        sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
+        return;
+      }
 
       let postPrincipal = postsCargados[0];
-      mainFeaturedContainer.onclick = () => window.location.href = `articulo.html?slug=${postPrincipal.slug}`;
+      mainFeaturedContainer.onclick = () => window.location.href = `posts.html?slug=${postPrincipal.slug}`;
       mainFeaturedContainer.innerHTML = `
         <div class="featured-img-container">
           <img src="${postPrincipal.coverImage}" alt="${postPrincipal.titulo}" class="featured-img">
@@ -366,25 +349,23 @@
       `;
 
       let postsSecundarios = postsCargados.slice(1, 5);
-      let listaSidebarHtml = "";
-
       if (postsSecundarios.length === 0) {
         sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
         return;
       }
 
+      let listaSidebarHtml = "";
       postsSecundarios.forEach(post => {
         listaSidebarHtml += `
-          <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${post.slug}'">
+          <div class="sidebar-news-item" onclick="window.location.href='posts.html?slug=${post.slug}'">
             <img src="${post.coverImage}" alt="${post.titulo}" class="sidebar-thumb">
             <div class="sidebar-info">
-              <span class="sidebar-tag">${post.categoria}</span>
-              <h4>${post.titulo}</h4>
+              <span class="sidebar-tag">${post.category}</span>
+              <h4>${post.title}</h4>
             </div>
           </div>
         `;
       });
-
       sidebarContainer.innerHTML = listaSidebarHtml;
     }
   </script>

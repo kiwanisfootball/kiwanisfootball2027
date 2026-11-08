@@ -221,32 +221,32 @@
         let semanaActiva = data.currentWeek; 
         let partidos = data.matches || [];
 
+        // Si la temporada terminó o no hay semana activa, mostramos el slide de logos
+        if (semanaActiva === "TEMPORADA_FINALIZADA") {
+          activarSlideLogos(tickerContainer, logosEquipos);
+          return;
+        }
+
         let partidosSemanaActual = partidos.filter(p => p.sem === semanaActiva && p.active === true);
 
         if (!partidosSemanaActual || partidosSemanaActual.length === 0) {
-          tickerContainer.classList.add('is-logo-slide');
-          let loopLogos = [...logosEquipos, ...logosEquipos, ...logosEquipos];
-          let htmlLogos = '<div class="logos-slide-track">';
-          loopLogos.forEach(logo => {
-            htmlLogos += `
-              <div class="logo-slide-item">
-                <img src="${logo.file}" alt="${logo.name}" title="${logo.name}">
-              </div>
-            `;
-          });
-          htmlLogos += '</div>';
-          tickerContainer.innerHTML = htmlLogos;
+          activarSlideLogos(tickerContainer, logosEquipos);
           return;
         }
 
         tickerContainer.classList.remove('is-logo-slide');
         let htmlTicker = "";
+        
         partidosSemanaActual.forEach(partido => {
           let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.png';
           let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.png';
           
+          // Se añade la etiqueta de categoría en la parte superior de cada tarjeta del ticker
           htmlTicker += `
             <article class="game-card">
+              <div style="font-size: 9px; font-weight: 800; color: #19547E; text-align: center; margin-bottom: 6px; letter-spacing: 0.5px; text-transform: uppercase;">
+                ${partido.cat} (${partido.modalidad})
+              </div>
               <div class="game-team">
                 <div class="team-info">
                   <img src="${logoLocal}" alt="${partido.h}" class="team-logo-small">
@@ -270,15 +270,23 @@
 
       } catch (error) {
         console.error("Fallo:", error);
-        tickerContainer.classList.add('is-logo-slide');
-        let loopLogos = [...logosEquipos, ...logosEquipos, ...logosEquipos];
-        let htmlLogos = '<div class="logos-slide-track">';
-        loopLogos.forEach(logo => {
-          htmlLogos += `<div class="logo-slide-item"><img src="${logo.file}" alt="${logo.name}"></div>`;
-        });
-        htmlLogos += '</div>';
-        tickerContainer.innerHTML = htmlLogos;
+        activarSlideLogos(tickerContainer, logosEquipos);
       }
+    }
+
+    function activarSlideLogos(container, logos) {
+      container.classList.add('is-logo-slide');
+      let loopLogos = [...logos, ...logos, ...logos];
+      let htmlLogos = '<div class="logos-slide-track">';
+      loopLogos.forEach(logo => {
+        htmlLogos += `
+          <div class="logo-slide-item">
+            <img src="${logo.file}" alt="${logo.name}" title="${logo.name}">
+          </div>
+        `;
+      });
+      htmlLogos += '</div>';
+      container.innerHTML = htmlLogos;
     }
   </script>
 

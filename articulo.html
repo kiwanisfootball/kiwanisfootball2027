@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="meta-title">Artículo - Kiwanis Football League</title>
-  
+
   <meta name="description" id="meta-desc" content="Cobertura oficial, resultados y noticias de la Kiwanis Football League en Panamá.">
   <meta name="author" content="Kiwanis Football League">
   <meta name="robots" content="index, follow">
-  
+
   <meta property="og:type" content="article">
   <meta property="og:title" id="og-title" content="Artículo - Kiwanis Football League">
   <meta property="og:description" id="og-desc" content="Cobertura oficial, resultados y noticias de la Kiwanis Football League en Panamá.">
   <meta property="og:image" id="og-image" content="/assets/img/KFL-logo.png">
-  <meta property="og:url" content="">
+  <meta property="og:url" id="og-url" content="">
   <meta property="og:locale" content="es_PA">
 
   <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
@@ -34,10 +34,11 @@
   <div id="footer-container"></div>
 
   <script src="/js/components.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
-      const pathSegments = window.location.pathname.split('/');
-      const slug = pathSegments[pathSegments.indexOf('articulo') + 1];
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
 
       if (!slug) {
         document.getElementById('art-title').innerText = "Artículo no encontrado";
@@ -45,36 +46,60 @@
       }
 
       try {
-        const response = await fetch(`/blog/${slug}/index.md`);
+        const response = await fetch(`/blog/${encodeURIComponent(slug)}/index.md`, { cache: 'no-store' });
         if (!response.ok) throw new Error("No se pudo cargar el artículo");
         const markdownText = await response.text();
 
         const matchFrontmatter = markdownText.match(/^---[\s\S]*?---/);
         let title = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ');
-        let cover = "/assets/img/KFL-logo.png";
+        let fecha = "";
+        let categoria = "";
+        let excerpt = "";
+        let cover = "";
         let body = markdownText;
 
         if (matchFrontmatter) {
           const fm = matchFrontmatter[0];
           body = markdownText.replace(fm, '').trim();
-          const tMatch = fm.match(/title:\s*["']?([^"'\n]+)["']?/);
-          if (tMatch) title = tMatch[1];
-          const imgMatch = fm.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
-          if (imgMatch) {
-            cover = imgMatch[1];
-            if (cover.startsWith('assets/')) cover = '/' + cover;
-          }
+
+          const get = (key) => {
+            const m = fm.match(new RegExp(`${key}:\\s*["']?([^"'\\n]+)["']?`));
+            return m ? m[1].trim() : "";
+          };
+
+          title = get('title') || title;
+          fecha = get('date');
+          categoria = get('category');
+          excerpt = get('excerpt');
+          cover = get('coverImage');
+          if (cover.startsWith('assets/')) cover = '/' + cover;
         }
 
-        document.getElementById('meta-title').innerText = title + " - Kiwanis Football League";
-        document.getElementById('og-title').innerText = title;
+        const esc = (s) => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        const tituloSeguro = esc(title);
+        const descripcion = excerpt || "Cobertura oficial de la Kiwanis Football League en Panamá.";
+        const urlActual = window.location.href;
+
+        document.title = `${title} - Kiwanis Football League`;
+        document.getElementById('meta-title').innerText = `${title} - Kiwanis Football League`;
+        document.getElementById('meta-desc').setAttribute('content', descripcion);
+        document.getElementById('og-title').setAttribute('content', title);
+        document.getElementById('og-desc').setAttribute('content', descripcion);
+        document.getElementById('og-url').setAttribute('content', urlActual);
+        if (cover) document.getElementById('og-image').setAttribute('content', cover);
+
         document.getElementById('art-title').innerText = title;
+        document.getElementById('art-meta').innerText = [fecha, categoria].filter(Boolean).join(" • ");
+
         const imgEl = document.getElementById('art-cover');
         if (cover) {
+          imgEl.onerror = () => { imgEl.style.display = 'none'; };
           imgEl.src = cover;
+          imgEl.alt = tituloSeguro;
           imgEl.style.display = 'block';
         }
-        document.getElementById('art-body').innerHTML = body;
+
+        document.getElementById('art-body').innerHTML = marked.parse(body);
       } catch (error) {
         console.error("Error al cargar el artículo:", error);
         document.getElementById('art-title').innerText = "Error al cargar el artículo";

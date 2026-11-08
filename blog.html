@@ -2,11 +2,30 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <title>Noticias y Artículos - Kiwanis Football League</title>
   
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <!-- SEO, GEO y AEO Institucionales -->
+  <meta name="description" content="Noticias, comunicados oficiales y cobertura de la Kiwanis Football League (KFL) en Panamá.">
+  <meta name="keywords" content="Kiwanis Football League, KFL Panama, Noticias Futbol Americano Panama, Flag Football">
+  <meta name="author" content="Kiwanis Football League">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:title" content="Noticias y Artículos - Kiwanis Football League">
+  <meta property="og:description" content="Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football en Panamá.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/assets/img/KFL-logo.png">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- Hojas de Estilo y Favicon Local -->
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+
+  <!-- Tipografías Oficiales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     .blog-container {
@@ -14,7 +33,7 @@
       width: 100%;
       margin: 40px auto;
       padding: 0 20px;
-      font-family: 'Avenir', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       box-sizing: border-box;
     }
 
@@ -39,7 +58,6 @@
       font-weight: 600;
     }
 
-    /* GRILLA ADAPTABLE: Se acomodarán en columnas ordenadas al tener más noticias */
     #lista-posts {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -66,10 +84,9 @@
       box-shadow: 0 8px 20px rgba(25, 84, 126, 0.1);
     }
 
-    /* CONTENEDOR DE IMAGEN SIN CORTES (CONTAIN Y FONDO LIMPIO) */
     .post-card-img-container {
       width: 100%;
-      background-color: #0b0f19; /* Fondo elegante para rellenar espacios si la proporción varía */
+      background-color: #0b0f19;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -81,7 +98,7 @@
       width: 100%;
       height: auto;
       max-height: 220px;
-      object-fit: contain; /* Garantiza que NUNCA se corte la imagen */
+      object-fit: contain;
     }
 
     .post-card-body {
@@ -131,14 +148,27 @@
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
+
+  <!-- Schema.org Data (JSON-LD para SEO y AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Kiwanis Football League Panama",
+    "alternateName": "KFL",
+    "url": "https://kiwanisfootball2027.vercel.app",
+    "logo": "/assets/img/KFL-logo.png",
+    "sameAs": ["https://www.youtube.com/@KFLTotalAccess"],
+    "sport": "American Football"
+  }
+  </script>
 </head>
 <body>
 
-  <!-- NAV MAESTRO -->
+  <!-- HEADER GLOBAL (Inyectado por components.js) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="blog-container">
-
     <div class="section-header-clean">
       <h1>Noticias y Artículos KFL</h1>
       <p>Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football</p>
@@ -148,28 +178,20 @@
     <div id="lista-posts">
       <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando publicaciones...</p>
     </div>
-
   </main>
 
-  <!-- FOOTER MAESTRO -->
+  <!-- FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
 
+  <!-- SCRIPT MAESTRO DE CARGA DE ARTÍCULOS -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // 1. Inyectar Nav y Footer maestros
-      fetch('nav.html').then(res => res.text()).then(data => document.getElementById('globalNav').innerHTML = data);
-      fetch('footer.html').then(res => res.text()).then(data => document.getElementById('globalFooter').innerHTML = data);
-
-      // 2. Cargar los artículos automáticamente desde la carpeta blog/
-      cargarArticulosMarkdown();
-    });
-
-    const slugsArticulos = [
-      "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
-    ];
-
-    async function cargarArticulosMarkdown() {
+    document.addEventListener("DOMContentLoaded", async () => {
       const contenedor = document.getElementById('lista-posts');
+
+      // Lista de slugs correspondientes a la estructura de carpetas generada por Decap CMS
+      const slugsArticulos = [
+        "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
+      ];
 
       if (slugsArticulos.length === 0) {
         contenedor.innerHTML = '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No hay publicaciones disponibles todavía.</p>';
@@ -180,16 +202,17 @@
 
       for (let slug of slugsArticulos) {
         try {
-          let respuesta = await fetch(`blog/${slug}.md`);
+          // Apunta a la estructura de carpetas configurada en Decap CMS: /blog/[slug]/index.md
+          let respuesta = await fetch(`/blog/${slug}/index.md`);
           if (!respuesta.ok) continue;
           let textoMd = await respuesta.text();
 
           let matchFrontmatter = textoMd.match(/^---[\s\S]*?---/);
-          let titulo = slug.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' ').toUpperCase();
+          let titulo = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ').toUpperCase();
           let fecha = "26/10/2026";
           let categoria = "KFL";
           let excerpt = "Haz clic para leer el comunicado oficial completo...";
-          let coverImage = "";
+          let coverImage = "/assets/img/KFL-logo.png";
 
           if (matchFrontmatter) {
             let frontmatter = matchFrontmatter[0];
@@ -199,6 +222,9 @@
 
             let dMatch = frontmatter.match(/date:\s*["']?([^"'\n]+)["']?/);
             if (dMatch) fecha = dMatch[1];
+
+            let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
+            if (catMatch) categoria = catMatch[1];
 
             let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
             if (eMatch) excerpt = eMatch[1];
@@ -213,7 +239,7 @@
           }
 
           html += `
-            <div class="post-card" onclick="window.location.href='articulo.html?slug=${slug}'">
+            <div class="post-card" onclick="window.location.href='/articulo/${slug}'">
               ${coverImage ? `
                 <div class="post-card-img-container">
                   <img src="${coverImage}" alt="${titulo}" class="post-card-img">
@@ -234,7 +260,10 @@
       }
 
       contenedor.innerHTML = html || '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No se pudieron cargar las publicaciones.</p>';
-    }
+    });
   </script>
+
+  <!-- Script global de componentes (nav y footer institucionales) -->
+  <script src="/js/components.js"></script>
 </body>
 </html>

@@ -186,77 +186,46 @@
   <div id="globalFooter"></div>
 
   <!-- SCRIPT DE CARGA DIRECTA DE CARPETAS MARKDOWN -->
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const contenedor = document.getElementById('lista-posts');
+ <script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const contenedor = document.getElementById('lista-posts');
 
-      const slugsArticulos = [
-        "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
-      ];
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-      if (slugsArticulos.length === 0) {
+    try {
+      const respuesta = await fetch('blog/index.json', { cache: 'no-store' });
+      if (!respuesta.ok) throw new Error('No se pudo cargar blog/index.json (' + respuesta.status + ')');
+      const posts = await respuesta.json();
+
+      if (!Array.isArray(posts) || posts.length === 0) {
         contenedor.innerHTML = '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No hay publicaciones disponibles todavía.</p>';
         return;
       }
 
-      let html = "";
-
-      for (let slug of slugsArticulos) {
-        try {
-          let respuesta = await fetch(`blog/${slug}/index.md`);
-          if (!respuesta.ok) continue;
-          let textoMd = await respuesta.text();
-
-          let matchFrontmatter = textoMd.match(/^---[\s\S]*?---/);
-          let titulo = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ').toUpperCase();
-          let fecha = "26/10/2026";
-          let categoria = "KFL";
-          let excerpt = "Haz clic para leer el comunicado oficial completo...";
-          let coverImage = "";
-
-          if (matchFrontmatter) {
-            let frontmatter = matchFrontmatter[0];
-            let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
-            if (tMatch) titulo = tMatch[1];
-            let dMatch = frontmatter.match(/date:\s*["']?([^"'\n]+)["']?/);
-            if (dMatch) fecha = dMatch[1];
-            let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
-            if (catMatch) categoria = catMatch[1];
-            let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
-            if (eMatch) excerpt = eMatch[1];
-            let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
-            if (imgMatch) {
-              coverImage = imgMatch[1];
-              if (coverImage.startsWith('assets/')) {
-                coverImage = '/' + coverImage;
-              }
-            }
-          }
-
-          html += `
-            <div class="post-card" onclick="window.location.href='articulo.html?slug=${encodeURIComponent(p.slug)}'">
-              ${coverImage ? `
-                <div class="post-card-img-container">
-                  <img src="${coverImage}" alt="${titulo}" class="post-card-img">
-                </div>` : ''}
-              <div class="post-card-body">
-                <div>
-                  <span class="post-meta">${fecha} • ${categoria}</span>
-                  <h3>${titulo}</h3>
-                  <p>${excerpt}</p>
-                </div>
-                <span class="leer-mas-link">Leer artículo →</span>
+      contenedor.innerHTML = posts.map(p => {
+        const cover = p.coverImage || '';
+        return `
+          <div class="post-card" onclick="window.location.href='articulo.html?slug=${encodeURIComponent(p.slug)}'">
+            ${cover ? `
+              <div class="post-card-img-container">
+                <img src="${esc(cover)}" alt="${esc(p.title)}" class="post-card-img" onerror="this.parentElement.style.display='none'">
+              </div>` : ''}
+            <div class="post-card-body">
+              <div>
+                <span class="post-meta">${esc(p.date)} • ${esc(p.category)}</span>
+                <h3>${esc(p.title)}</h3>
+                <p>${esc(p.excerpt)}</p>
               </div>
+              <span class="leer-mas-link">Leer artículo →</span>
             </div>
-          `;
-        } catch (e) {
-          console.error("Error leyendo artículo:", slug, e);
-        }
-      }
-
-      contenedor.innerHTML = html || '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No se pudieron cargar las publicaciones.</p>';
-    });
-  </script>
+          </div>`;
+      }).join('');
+    } catch (e) {
+      console.error(e);
+      contenedor.innerHTML = '<p style="text-align: center; color: #64748b; grid-column: 1 / -1;">No se pudieron cargar las publicaciones.</p>';
+    }
+  });
+</script>
 
   <!-- Script global de componentes -->
   <script src="js/components.js"></script>

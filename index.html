@@ -242,42 +242,28 @@
         tickerContainer.classList.remove('is-logo-slide');
         let htmlTicker = "";
         partidosSemanaActual.forEach(partido => {
-          if (partido.isJam) {
-            htmlTicker += `
-              <article class="game-card">
-                <div class="game-team">
-                  <div class="team-info" style="margin: 0 auto; justify-content: center;">
-                    <img src="assets/img/KFL-logo.png" alt="KFL" class="team-logo-small">
-                    <span>${partido.cat} - JAMBOREE</span>
-                  </div>
+          let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.png';
+          let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.png';
+          
+          htmlTicker += `
+            <article class="game-card">
+              <div class="game-team">
+                <div class="team-info">
+                  <img src="${logoLocal}" alt="${partido.h}" class="team-logo-small">
+                  <span>${partido.h}</span>
                 </div>
-                <div class="game-status">${partido.dia} | ${partido.hora}</div>
-              </article>
-            `;
-          } else {
-            let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.png';
-            let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.png';
-            
-            htmlTicker += `
-              <article class="game-card">
-                <div class="game-team">
-                  <div class="team-info">
-                    <img src="${logoLocal}" alt="${partido.h}" class="team-logo-small">
-                    <span>${partido.h}</span>
-                  </div>
-                  <span class="game-score">${partido.sL}</span>
+                <span class="game-score">${partido.sL}</span>
+              </div>
+              <div class="game-team">
+                <div class="team-info">
+                  <img src="${logoVisita}" alt="${partido.v}" class="team-logo-small">
+                  <span>${partido.v}</span>
                 </div>
-                <div class="game-team">
-                  <div class="team-info">
-                    <img src="${logoVisita}" alt="${partido.v}" class="team-logo-small">
-                    <span>${partido.v}</span>
-                  </div>
-                  <span class="game-score">${partido.sV}</span>
-                </div>
-                <div class="game-status">${partido.final ? "FINAL" : partido.dia + " | " + partido.hora}</div>
-              </article>
-            `;
-          }
+                <span class="game-score">${partido.sV}</span>
+              </div>
+              <div class="game-status">${partido.final ? "FINAL" : partido.dia + " | " + partido.hora}</div>
+            </article>
+          `;
         });
 
         tickerContainer.innerHTML = htmlTicker;
@@ -498,11 +484,10 @@
         mostrarBanner();
       }
 
-      installBtn.timestamp = 'click';
       installBtn.addEventListener('click', async () => {
         if (deferredPrompt) {
           deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userCardChoice || deferredPrompt.userChoice;
+          const { outcome } = await deferredPrompt.userChoice;
           deferredPrompt = null;
           ocultarBanner();
           if (outcome !== 'accepted') recordarDescarte();

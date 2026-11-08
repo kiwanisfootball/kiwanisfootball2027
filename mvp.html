@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
   <!-- SEO & AEO Meta Tags -->
   <title>MVP - Most Valuable Players | Kiwanis Football League Panamá</title>
@@ -50,371 +50,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Hoja de estilos global y favicon local -->
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Hojas de estilos oficiales -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/mvp.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
-  <style>
-    /* ==========================================================================
-       MVP - ESTILOS DE LA PÁGINA (usan las variables globales de styles.css)
-       ========================================================================== */
-    .mvp-container {
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 20px;
-      font-family: var(--fuente-cuerpo);
-      box-sizing: border-box;
-    }
-
-    /* HERO */
-    .mvp-hero-banner {
-      position: relative;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.82)),
-                  url('assets/img/mvp-banner.jpg') center/cover no-repeat;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      margin-bottom: 25px;
-      padding: 35px 25px 30px 25px;
-      color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 8px;
-      box-sizing: border-box;
-    }
-
-    .mvp-hero-content {
-      max-width: 850px;
-      width: 100%;
-      margin: 0 auto;
-      z-index: 2;
-    }
-
-    .mvp-hero-title {
-      font-family: var(--fuente-titulos);
-      font-size: 40px;
-      font-weight: 400;
-      color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-top: 10px;
-      margin-bottom: 12px;
-      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
-      line-height: 1.1;
-      display: inline-block;
-    }
-
-    .mvp-hero-description {
-      font-family: var(--fuente-cuerpo);
-      font-size: 16px;
-      line-height: 1.65;
-      color: #f8fafc;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-      margin: 0 auto;
-    }
-
-    .mvp-hero-description strong {
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    /* TROFEO (animación) */
-    .mvp-trophy-wrapper {
-      width: 80px;
-      height: 80px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-      perspective: 800px;
-      margin-bottom: 5px;
-    }
-
-    .mvp-trophy-wrapper::before {
-      content: '';
-      position: absolute;
-      width: 75px;
-      height: 75px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(234, 179, 8, 0.45) 0%, rgba(234, 179, 8, 0) 70%);
-      animation: pulseAura 3s ease-in-out infinite alternate;
-      z-index: -1;
-    }
-
-    .mvp-trophy-img {
-      width: 100%;
-      height: auto;
-      max-height: 80px;
-      filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.65));
-      animation: buildTrophy 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-                 floatTrophy 3.8s ease-in-out 1.4s infinite alternate;
-      transform-origin: center bottom;
-    }
-
-    @keyframes buildTrophy {
-      0%   { opacity: 0; transform: translateY(25px) scale(0.3) rotateX(45deg); filter: drop-shadow(0 0 0px rgba(234, 179, 8, 0)); }
-      60%  { opacity: 1; transform: translateY(-5px) scale(1.08) rotateX(0deg); filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.9)); }
-      80%  { transform: translateY(2px) scale(0.96); }
-      100% { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.65)); }
-    }
-
-    @keyframes floatTrophy {
-      0%   { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(-6px) rotate(2deg); filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.85)); }
-    }
-
-    @keyframes pulseAura {
-      0%   { transform: scale(0.85); opacity: 0.5; }
-      100% { transform: scale(1.18); opacity: 0.95; }
-    }
-
-    /* BOTONES DE MODALIDAD (píldora) */
-    .mvp-modality-bar {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 25px;
-      justify-content: center;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .mvp-modality-btn {
-      flex: 1;
-      max-width: 480px;
-      background: #ffffff;
-      color: #334155;
-      border: 2px solid #cbd5e1;
-      padding: 16px 24px;
-      font-family: var(--fuente-titulos);
-      font-size: 22px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-    }
-
-    .mvp-modality-btn:hover {
-      background: #f1f5f9;
-      transform: translateY(-2px);
-      border-color: #94a3b8;
-    }
-
-    .mvp-modality-btn.active.contact-theme-btn {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      border-color: var(--azul-kfl);
-      box-shadow: 0 6px 20px rgba(0, 94, 170, 0.35);
-    }
-
-    .mvp-modality-btn.active.flag-theme-btn {
-      background: var(--rojo-kfl);
-      color: #ffffff;
-      border-color: var(--rojo-kfl);
-      box-shadow: 0 6px 20px rgba(235, 61, 64, 0.35);
-    }
-
-    /* FILTROS DE CATEGORÍA (píldora) */
-    .mvp-filter-bar {
-      display: none;
-      gap: 12px;
-      margin-bottom: 25px;
-      justify-content: center;
-      flex-wrap: wrap;
-      width: 100%;
-      box-sizing: border-box;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .mvp-filter-btn {
-      flex: 1;
-      min-width: 120px;
-      max-width: 180px;
-      background: #ffffff;
-      color: #334155;
-      border: 2px solid #cbd5e1;
-      padding: 10px 16px;
-      font-family: var(--fuente-titulos);
-      font-size: 18px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
-    }
-
-    .mvp-filter-btn:hover {
-      background: #f1f5f9;
-      transform: translateY(-2px);
-      border-color: #94a3b8;
-    }
-
-    .mvp-filter-btn.active.contact-active {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      border-color: var(--azul-kfl);
-      box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
-    }
-
-    .mvp-filter-btn.active.flag-active {
-      background: var(--rojo-kfl);
-      color: #ffffff;
-      border-color: var(--rojo-kfl);
-      box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* TABLAS POR CATEGORÍA */
-    .mvp-category-section {
-      display: none;
-      margin-bottom: 35px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .mvp-single-table-container {
-      max-width: 850px;
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .mvp-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin: 10px 0 20px 0;
-      font-family: var(--fuente-cuerpo);
-      table-layout: fixed;
-    }
-
-    .mvp-table th:nth-child(1),
-    .mvp-table td:nth-child(1) { width: 22%; }
-
-    .mvp-table th:nth-child(2),
-    .mvp-table td:nth-child(2) { width: 39%; }
-
-    .mvp-table th:nth-child(3),
-    .mvp-table td:nth-child(3) { width: 39%; }
-
-    .mvp-table th {
-      background: var(--azul-kfl);
-      color: #ffffff;
-      padding: 14px 16px;
-      font-family: var(--fuente-cuerpo);
-      font-size: 13px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      text-align: left;
-    }
-
-    body.flag-theme-active .mvp-table th {
-      background: var(--rojo-kfl);
-    }
-
-    .mvp-table td {
-      padding: 14px 16px;
-      text-align: left;
-      border-bottom: 1px solid #f1f5f9;
-      font-size: 14px;
-      font-weight: 600;
-      color: #334155;
-      font-family: var(--fuente-cuerpo);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      vertical-align: middle;
-    }
-
-    /* Cebrado por bloque de temporada (incluye rowspan) */
-    .mvp-table tr.block-even td { background-color: #ffffff; }
-    .mvp-table tr.block-odd td  { background-color: #f8fafc; }
-
-    .mvp-table-team-cell {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-align: left;
-      font-weight: 700;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-family: var(--fuente-cuerpo);
-    }
-
-    .mvp-table-team-logo {
-      width: 26px;
-      height: 26px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .mvp-player-name {
-      color: #334155;
-      font-weight: 800;
-      font-family: var(--fuente-cuerpo);
-    }
-
-    /* MENSAJES INICIALES */
-    .mvp-select-prompt,
-    .mvp-category-prompt {
-      text-align: center;
-      padding: 35px 20px;
-      font-size: 16px;
-      color: #64748b;
-      font-family: var(--fuente-cuerpo);
-      font-weight: 700;
-      letter-spacing: 0.3px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .prompt-icon-svg {
-      width: 18px;
-      height: 18px;
-      fill: #64748b;
-      vertical-align: middle;
-      flex-shrink: 0;
-    }
-
-    /* RESPONSIVE (mismas reglas de botones que campeones.html) */
-    @media (max-width: 768px) {
-      .mvp-container { padding: 15px 10px; }
-      .mvp-hero-banner { padding: 30px 15px; }
-      .mvp-hero-title { font-size: 34px; }
-      .mvp-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
-      .mvp-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
-      .mvp-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
-    }
-
-    /* Tabla: se desliza dentro de su contenedor en vez de cortarse */
-    .mvp-single-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-    @media (max-width: 768px) {
-      .mvp-table { min-width: 460px; }
-      .mvp-table th, .mvp-table td { white-space: normal; }
-    }
-  </style>
   <!-- Vercel Speed Insights -->
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
@@ -531,7 +171,7 @@
   <!-- 4. FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
 
-  <!-- LÓGICA DE MVP -->
+  <!-- LÓGICA DE MVP (INTACTA) -->
   <script>
     const SHEETS_CONFIG = {
       contact: {
@@ -548,7 +188,6 @@
       }
     };
 
-    /* Nombre de equipo (con variantes) -> logo local en assets/logos/ */
     const TEAM_LOGOS_MAP = {
       "E.C.P MIGHTY EAGLES": "assets/logos/eagles.png",
       "E.C.P EAGLES": "assets/logos/eagles.png",
@@ -580,7 +219,6 @@
 
     function getTeamLogoInfo(fullTeamName) {
       const clean = (fullTeamName || "").toUpperCase().trim();
-      // Coincidencia con la clave más larga primero (ej. "E.C.P MIGHTY EAGLES" antes que "EAGLES")
       const key = Object.keys(TEAM_LOGOS_MAP)
         .sort((a, b) => b.length - a.length)
         .find(k => clean.includes(k));
@@ -663,7 +301,6 @@
       }
     }
 
-    /* Renderizado con cebrado por bloque de temporada (rowspan) */
     function renderTableRows(targetId, rows) {
       const tbody = document.getElementById(targetId);
       if (!tbody) return;

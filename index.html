@@ -72,7 +72,7 @@
     }
   </style>
 
-  <script type="application/ld+json">
+  < type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SportsOrganization",
@@ -253,12 +253,13 @@
     }
   </script>
 
+  <!-- SCRIPT MAESTRO DE NOTICIAS (AUTÓNOMO - SIN INDEX.JSON) -->
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
       const sidebarContainer = document.getElementById('sidebarNewsList');
 
-      // Lista de slugs conocidos generados por Decap CMS (actualizar o expandir al crear posts)
+      // Coloca aquí los slugs exactos de tus noticias creadas (puedes agregar los nuevos que crees)
       const slugsArticulos = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
@@ -325,7 +326,7 @@
         sidebarPosts.forEach(post => {
           listaSidebarHtml += `
             <div class="sidebar-news-item" onclick="window.location.href='/articulo/${post.slug}'">
-              <img src="${post.sidebarThumb || post.coverImage}" alt="${post.title}" class="sidebar-thumb">
+              <img src="${post.coverImage}" alt="${post.title}" class="sidebar-thumb">
               <div class="sidebar-info">
                 <span class="sidebar-tag">${post.category}</span>
                 <h4>${post.title}</h4>
@@ -340,7 +341,7 @@
       }
     });
   </script>
-
+  
   <script>
     const PROMO_BANNERS = [
       { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },

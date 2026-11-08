@@ -46,8 +46,38 @@
 
       try {
         const response = await fetch(`/blog/${slug}/index.md`);
+        if (!response.ok) throw new Error("No se pudo cargar el artículo");
+        const markdownText = await response.text();
+
+        const matchFrontmatter = markdownText.match(/^---[\s\S]*?---/);
+        let title = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ');
+        let cover = "/assets/img/KFL-logo.png";
+        let body = markdownText;
+
+        if (matchFrontmatter) {
+          const fm = matchFrontmatter[0];
+          body = markdownText.replace(fm, '').trim();
+          const tMatch = fm.match(/title:\s*["']?([^"'\n]+)["']?/);
+          if (tMatch) title = tMatch[1];
+          const imgMatch = fm.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
+          if (imgMatch) {
+            cover = imgMatch[1];
+            if (cover.startsWith('assets/')) cover = '/' + cover;
+          }
+        }
+
+        document.getElementById('meta-title').innerText = title + " - Kiwanis Football League";
+        document.getElementById('og-title').innerText = title;
+        document.getElementById('art-title').innerText = title;
+        const imgEl = document.getElementById('art-cover');
+        if (cover) {
+          imgEl.src = cover;
+          imgEl.style.display = 'block';
+        }
+        document.getElementById('art-body').innerHTML = body;
       } catch (error) {
         console.error("Error al cargar el artículo:", error);
+        document.getElementById('art-title').innerText = "Error al cargar el artículo";
       }
     });
   </script>

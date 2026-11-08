@@ -19,6 +19,17 @@ function toSortDate(raw) {
   return '';
 }
 
+// Resuelve la ruta pública de la portada.
+// - "/ruta" se deja igual
+// - "assets/..." se convierte a "/assets/..."
+// - solo nombre de archivo se busca dentro de la carpeta del post
+function resolveCover(img, folder) {
+  if (!img) return '';
+  if (img.startsWith('/')) return img;
+  if (img.startsWith('assets/')) return '/' + img;
+  return `/blog/${folder}/${img}`;
+}
+
 function getPosts() {
   fs.mkdirSync(blogDir, { recursive: true });
 
@@ -43,17 +54,16 @@ function getPosts() {
         const imgMatch = fm.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
 
         const date = dateMatch ? dateMatch[1].trim() : '';
+        const coverRaw = imgMatch ? imgMatch[1].trim() : '';
 
         posts.push({
           slug: folder,
           title: titleMatch ? titleMatch[1].trim() : folder,
-          date,                       // para mostrar: DD/MM/AAAA
-          sortDate: toSortDate(date), // para ordenar: AAAA-MM-DD
+          date,                        // para mostrar: DD/MM/AAAA
+          sortDate: toSortDate(date),  // para ordenar: AAAA-MM-DD
           category: catMatch ? catMatch[1].trim() : 'KFL',
           excerpt: excerptMatch ? excerptMatch[1].trim() : '',
-          coverImage: imgMatch
-            ? (imgMatch[1].trim().startsWith('assets/') ? '/' + imgMatch[1].trim() : imgMatch[1].trim())
-            : ''
+          coverImage: resolveCover(coverRaw, folder)
         });
       }
     }

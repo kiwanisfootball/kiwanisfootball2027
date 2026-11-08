@@ -5,26 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <title>Kiwanis Football League Panama - Sitio Oficial</title>
 
+  <!-- SEO & Meta Tags Avanzados -->
   <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programación de partidos, resultados, estadísticas y noticias de Contact y Flag Football.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panama, Futbol Americano Panama, Flag Football Panama, Contact Football">
   <meta name="author" content="Kiwanis Football League">
-  <meta name="robots" content="index, follow">
 
+  <!-- Open Graph / Redes Sociales -->
   <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
   <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/img/KFL-logo.png">
-  <meta property="og:locale" content="es_PA">
 
-  <link rel="stylesheet" href="css/global.css">
+  <!-- Hojas de Estilo y Favicon Local -->
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
   <link rel="manifest" href="manifest.json">
 
+  <!-- Preconexión y Fuentes Google Optimizadas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <!-- Estilos puros para el Slide Continuo de Logos -->
   <style>
     .ticker-container.is-logo-slide {
       overflow: hidden;
@@ -69,40 +72,51 @@
       transform: scale(1.15);
     }
     @keyframes scrollLogos {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
   </style>
 
+  <!-- Schema.org Data (JSON-LD para Google y AEO) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SportsOrganization",
     "name": "Kiwanis Football League Panama",
     "alternateName": "KFL",
-    "url": "https://kiwanisfootball2027.vercel.app",
+    "url": "https://kiwanisfootball.com",
     "logo": "assets/img/KFL-logo.png",
-    "sameAs": ["https://www.youtube.com/@KFLTotalAccess"],
+    "sameAs": [
+      "https://www.youtube.com/@KFLTotalAccess"
+    ],
     "sport": "American Football"
   }
   </script>
 </head>
 <body>
 
+  <!-- 1. HEADER GLOBAL (Inyectado por components.js) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main>
+    <!-- 2. TICKER INTELIGENTE DE SCORES / SLIDE DE LOGOS -->
     <section class="ticker-section">
       <div class="ticker-container" id="tickerContainer">
         <div style="padding: 20px; text-align: center; color: #64748b; width: 100%;">Cargando cartelera de la liga...</div>
       </div>
     </section>
 
+    <!-- 3. TITULO INSTITUCIONAL -->
     <section class="welcome-header">
       <div class="welcome-subtitle">BIENVENIDOS A</div>
       <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
     </section>
 
+    <!-- 4. ACERCA DE LA LIGA -->
     <div class="about-wrapper">
       <section class="about-section">
         <div class="about-image">
@@ -117,13 +131,16 @@
       </section>
     </div>
 
+    <!-- 5. BANNER PROMOCIONAL -->
     <section class="promo-banner-section">
       <div class="slider-container" id="promoSlider"></div>
       <div class="promo-dots" id="promoDots" role="tablist" aria-label="Banners promocionales"></div>
     </section>
 
+    <!-- 6. MÓDULO DE NOTICIAS -->
     <section class="news-section">
       <h2 class="section-headline">NOTICIAS</h2>
+
       <div class="news-grid-layout">
         <div id="mainFeaturedPost" class="featured-main-card">
           <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
@@ -137,6 +154,7 @@
       </div>
     </section>
 
+    <!-- 7. SECCIÓN DE PATROCINADORES -->
     <section class="sponsors-section">
       <div class="sponsors-container">
         <div class="sponsors-tier">
@@ -147,8 +165,10 @@
     </section>
   </main>
 
+  <!-- 8. FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
+  <!-- BANNER DE INSTALACIÓN PWA -->
   <div id="pwaBanner" class="pwa-banner" role="region" aria-label="Instalar KFL App">
     <div class="pwa-banner-head">
       <img src="assets/img/KFL-logo.png" alt="KFL" class="pwa-banner-logo">
@@ -166,6 +186,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
+  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       gestionarTickerMasterGAS();
@@ -255,94 +276,101 @@
     }
   </script>
 
+  <!-- SCRIPT DE NOTICIAS (LEE DESDE LA CARPETA DEL CMS) -->
   <script>
-    document.addEventListener("DOMContentLoaded", async () => {
+    document.addEventListener("DOMContentLoaded", function() {
+      const slugsArticulosIndex = [
+        "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
+      ];
+      cargarSeccionNoticiasIndex(slugsArticulosIndex);
+    });
+
+    async function cargarSeccionNoticiasIndex(slugs) {
       const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
       const sidebarContainer = document.getElementById('sidebarNewsList');
 
-      const slugsArticulos = [
-        "fighting-owls-ganan-la-final-del-contact-footbal",
-        "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
-      ];
+      if (!slugs || slugs.length === 0) {
+        mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
+        sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
+        return;
+      }
 
-      try {
-        let postsCargados = [];
-        for (let slug of slugsArticulos) {
-          try {
-            let res = await fetch(`blog/${slug}/index.md`);
-            if (!res.ok) continue;
-            let text = await res.text();
-            let match = text.match(/^---[\s\S]*?---/);
-            let title = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ').toUpperCase();
-            let category = "KFL";
-            let excerpt = "Comunicado oficial de la liga...";
-            let coverImage = "assets/img/KFL-logo.png";
+      let postsCargados = [];
 
-            if (match) {
-              let fm = match[0];
-              let tMatch = fm.match(/title:\s*["']?([^"'\n]+)["']?/);
-              if (tMatch) title = tMatch[1];
-              let catMatch = fm.match(/category:\s*["']?([^"'\n]+)["']?/);
-              if (catMatch) category = catMatch[1];
-              let eMatch = fm.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
-              if (eMatch) excerpt = eMatch[1];
-              let imgMatch = fm.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
-              if (imgMatch) {
-                coverImage = imgMatch[1];
-                if (coverImage.startsWith('assets/')) coverImage = '/' + coverImage;
-              }
+      for (let slug of slugs) {
+        try {
+          let respuesta = await fetch(`blog/${slug}/index.md`);
+          if (!respuesta.ok) continue;
+          let textoMd = await respuesta.text();
+
+          let matchFrontmatter = textoMd.match(/^---[\s\S]*?---/);
+          let titulo = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ').toUpperCase();
+          let categoria = "KFL";
+          let excerpt = "Haz clic para leer el comunicado oficial...";
+          let coverImage = "assets/img/KFL-logo.png";
+
+          if (matchFrontmatter) {
+            let frontmatter = matchFrontmatter[0];
+            let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
+            if (tMatch) titulo = tMatch[1];
+            let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
+            if (catMatch) categoria = catMatch[1];
+            let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
+            if (eMatch) excerpt = eMatch[1];
+            let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
+            if (imgMatch) {
+              coverImage = imgMatch[1];
+              if (coverImage.startsWith('assets/')) coverImage = '/' + coverImage;
             }
-            postsCargados.push({ slug, title, category, excerpt, coverImage });
-          } catch (e) {
-            console.error("Error leyendo post:", slug);
           }
+          postsCargados.push({ slug, titulo, categoria, excerpt, coverImage });
+        } catch (e) {
+          console.error("Error cargando post:", slug);
         }
+      }
 
-        if (postsCargados.length === 0) {
-          mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
-          sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
-          return;
-        }
+      if (postsCargados.length === 0) {
+        mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
+        sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
+        return;
+      }
 
-        const featured = postsCargados[0];
-        mainFeaturedContainer.onclick = () => window.location.href = `posts.html?slug=${featured.slug}`;
-        mainFeaturedContainer.innerHTML = `
-          <div class="featured-img-container">
-            <img src="${featured.coverImage}" alt="${featured.title}" class="featured-img">
-          </div>
-          <div class="featured-body">
-            <span class="badge-category">${featured.category}</span>
-            <h3>${featured.title}</h3>
-            <p>${featured.excerpt}</p>
+      let postPrincipal = postsCargados[0];
+      mainFeaturedContainer.onclick = () => window.location.href = `posts.html?slug=${postPrincipal.slug}`;
+      mainFeaturedContainer.innerHTML = `
+        <div class="featured-img-container">
+          <img src="${postPrincipal.coverImage}" alt="${postPrincipal.titulo}" class="featured-img">
+        </div>
+        <div class="featured-body">
+          <span class="badge-category">${postPrincipal.categoria}</span>
+          <h3>${postPrincipal.titulo}</h3>
+          <p>${postPrincipal.excerpt}</p>
+        </div>
+      `;
+
+      let postsSecundarios = postsCargados.slice(1, 5);
+      if (postsSecundarios.length === 0) {
+        sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
+        return;
+      }
+
+      let listaSidebarHtml = "";
+      postsSecundarios.forEach(post => {
+        listaSidebarHtml += `
+          <div class="sidebar-news-item" onclick="window.location.href='posts.html?slug=${post.slug}'">
+            <img src="${post.coverImage}" alt="${post.titulo}" class="sidebar-thumb">
+            <div class="sidebar-info">
+              <span class="sidebar-tag">${post.category}</span>
+              <h4>${post.title}</h4>
+            </div>
           </div>
         `;
-
-        const sidebarPosts = postsCargados.slice(1, 5);
-        if (sidebarPosts.length === 0) {
-          sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
-          return;
-        }
-
-        let listaSidebarHtml = "";
-        sidebarPosts.forEach(post => {
-          listaSidebarHtml += `
-            <div class="sidebar-news-item" onclick="window.location.href='posts.html?slug=${post.slug}'">
-              <img src="${post.coverImage}" alt="${post.title}" class="sidebar-thumb">
-              <div class="sidebar-info">
-                <span class="sidebar-tag">${post.category}</span>
-                <h4>${post.title}</h4>
-              </div>
-            </div>
-          `;
-        });
-        sidebarContainer.innerHTML = listaSidebarHtml;
-
-      } catch (error) {
-        console.error("Error al actualizar la sección de noticias:", error);
-      }
-    });
+      });
+      sidebarContainer.innerHTML = listaSidebarHtml;
+    }
   </script>
 
+  <!-- CONFIGURACIÓN DE BANNERS Y PATROCINADORES -->
   <script>
     const PROMO_BANNERS = [
       { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },
@@ -401,6 +429,7 @@
     ).join('');
   </script>
 
+  <!-- SCRIPT PWA Y SERVICE WORKER -->
   <script>
     (function () {
       const banner = document.getElementById('pwaBanner');
@@ -480,6 +509,7 @@
     })();
   </script>
 
+  <!-- MENÚ Y PIE DE PÁGINA GLOBALES -->
   <script src="js/components.js"></script>
 </body>
 </html>

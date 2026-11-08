@@ -3,13 +3,12 @@ title: Owls y Eagles Sellan su Pase a la Gran Final de la KFL Mini Contact 2026
 date: 26/10/2026
 coverImage: owls-ganan-semifinales.webp
 author: kiwanisfootball
-excerpt: La emoción de la Kiwanis Football League (KFL) alcanzó su punto álgido
-  durante la séptima semana de llaves semifinales del segundo semestre de la KFL
-  Mini Contact 2026, celebrada en la cancha del Copa Airlines Field en el
-  complejo deportivo Sportcenter Costa del Este.
+excerpt: Resumen de las semifinales del segundo semestre de la KFL Mini Contact 2026.
 category: contact football
 subcategory: contact mini
 ---
+La emoción de la Kiwanis Football League (KFL) alcanzó su punto álgido durante la séptima semana de llaves semifinales del segundo semestre de la KFL Mini Contact 2026, celebrada en la cancha del Copa Airlines Field en el complejo deportivo Sportcenter Costa del Este.
+
 #### Los Owls regresan a la Gran Final
 
 Los chicos de la AIP empezaron su primera serie ofensiva desde su propia 40, en primer down el corredor Nicolás Vallarino se fue por la vía central, en segundo down el corredor Felipe Ugueto se escapó por la banda derecha, cruzó el medio campo y llevó el ovoide hasta la yarda 22 en ataque, suficiente para mover las cadenas; el corredor Nicolás Vallarino logró importantes yardas por el centro en las dos primeras oportunidades, en tercer down el keeper Camilo Salazar lanzó un pase corto lateral derecho a Nicolás Vallarino y fue detenido en la yarda 3, suficiente para cuatro nuevas oportunidades; después de un mal snap y un balón suelto recuperado, adicional a una penalización en contra de la defensa por un contacto ilegal, el keeper Camilo Salazar lanzó un pase corto lateral izquierdo a Nicolás Vallarino que con fuerza y velocidad ingresó a la zona de gol, para tomar ventaja en la pizarra 6 a 0 al culminar el primer cuarto.

@@ -1,7 +1,7 @@
 ---
 title: AIP y Eagles sellan su pase a la Gran Final de la KFL Mini Contact 2026
 date: 2026-10-26T12:00:00-05:00
-coverImage: https://scontent.fpac1-3.fna.fbcdn.net/v/t39.30808-6/865991713_122146787907032693_8720268658411926723_n.jpg?stp=dst-jpg_tt6&cstp=mx1350x900&ctp=s1350x900&_nc_cat=109&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=7BQQ1lJs-ycQ7kNvwFMzatC&_nc_oc=AdrUEU-gGZfyvsrAYCtu5f4ZsuufhiE_ZFb_mPnmabD4rj15jEwkPIkZxxGMd7FESIQ&_nc_zt=23&_nc_ht=scontent.fpac1-3.fna&_nc_gid=mi79dBzKHF0dYDWjDg0KNQ&_nc_ss=7b2a8&oh=00_AQT2WIaiiAdlUtvg6K1pJOngKu3drwarJYK-mDJGGEu5PA&oe=6AEFE9CA
+coverImage: clipboard-image-1794117347.webp
 author: kiwanisfootball
 excerpt: Conoce los resultados de las semifinales de la KFL Mini Contact 2026.
 category: contact football
@@ -12,8 +12,6 @@ La emoción del emparrillado escolar vivió su punto álgido el pasado **viernes
 - - -
 
 ## AIP mantiene el invicto y blanquea a los Dragons
-
-![](https://scontent.fpac1-4.fna.fbcdn.net/v/t39.30808-6/872998896_122146785837032693_1772419312950077299_n.jpg?stp=dst-jpg_tt6&cstp=mx1350x900&ctp=s1350x900&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=Nl4t8_ZTtH0Q7kNvwH9DM60&_nc_oc=AdqTSzOzrxyaOD5BDS7wFYYtygKe5D6J1IfCnjSoU8JvKAQ1b7-L66GOJYqqnkJhtas&_nc_zt=23&_nc_ht=scontent.fpac1-4.fna&_nc_gid=X81ea-_Y4trqKP8A8MfEEA&_nc_ss=7b2a8&oh=00_AQTZlH3Rm_v1Ik5X4jGiUkQPjDGpzrYImFg_voq_UQeOkQ&oe=6AF00641)
 
 Los chicos de la AIP empezaron su primera serie ofensiva desde su propia 40. En primer down el corredor Nicolás Vallarino se fue por la vía central; en segundo down el corredor Felipe Ugueto se escapó por la banda derecha, cruzó el medio campo y llevó el ovoide hasta la yarda 22 en ataque, suficiente para mover las cadenas. El corredor Nicolás Vallarino logró importantes yardas por el centro en las dos primeras oportunidades; en tercer down el keeper Camilo Salazar lanzó un pase corto lateral derecho a Nicolás Vallarino y fue detenido en la yarda 3, suficiente para cuatro nuevas oportunidades. Después de un mal snap y un balón suelto recuperado, adicional a una penalización en contra de la defensa por un contacto ilegal, el keeper Camilo Salazar lanzó un pase corto lateral izquierdo a Nicolás Vallarino, quien con fuerza y velocidad ingresó a la zona de gol para tomar ventaja en la pizarra de 6 a 0 al culminar el primer cuarto.
 
@@ -32,8 +30,6 @@ En el inicio de la segunda mitad desde la yarda 32 en ataque, los Fighting Owls 
 En primer down desde su propia yarda 44, el mariscal Camilo Salazar lanzó un pase corto lateral a su receptor Nicolás Vallarino, quien cruzó el medio campo (suficiente para cuatro nuevas oportunidades). En una jugada reversible en primer down, el corredor Eduardo Orvieto evitó dos tacleos y con cambio de dirección se fue solo hasta el end zone, sumado a los dos puntos extras de la cuarta patada efectiva de Eduardo Orvieto, para finalizar el encuentro con la victoria de los Fighting Owls por tablero de 38 a 0 ante los Dragons.
 
 ## Eagles muestra poderío ofensivo y domina a los Kolts
-
-![](https://scontent.fpac1-1.fna.fbcdn.net/v/t39.30808-6/870770774_122146792815032693_8903478917178255130_n.jpg?stp=dst-jpg_tt6&cstp=mx1350x900&ctp=s1350x900&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=f727a1&_nc_ohc=4AuFB1fgXPoQ7kNvwGDfySc&_nc_oc=AdokpAa10VyoIbEScwsZne7t4DLyRhrJSo6jr8qWLo0ViycQ32tbE6qK2gbZIkJBcOI&_nc_zt=23&_nc_ht=scontent.fpac1-1.fna&_nc_gid=yT9df8egsGyz7h5Bns4jWw&_nc_ss=7b2a8&oh=00_AQSwFaeYWovUGvZ4gLziFcXAzwRPJuGuTaAD6rkWePuXKA&oe=6AF002D8)
 
 En la primera serie ofensiva de los chicos de El Colegio de Panamá desde su propia yarda 43, iniciaron con una corta corrida de Luis Felipe Clement por el centro. En la siguiente jugada el corredor Aaron Arroyo se escapó por la vía derecha y cruzó la media cancha; en tercer down desde la yarda 48 en ataque, Aaron Arroyo se escapó solo por la vía derecha y anotó el primer touchdown para tomar ventaja de 6 por 0.
 

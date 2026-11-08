@@ -8,15 +8,17 @@
   <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programación de partidos, resultados, estadísticas y noticias de Contact y Flag Football.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panama, Futbol Americano Panama, Flag Football Panama, Contact Football">
   <meta name="author" content="Kiwanis Football League">
+  <meta name="robots" content="index, follow">
 
   <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
   <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/img/KFL-logo.png">
+  <meta property="og:image" content="/assets/img/KFL-logo.png">
+  <meta property="og:locale" content="es_PA">
 
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/home.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
   <link rel="manifest" href="manifest.json">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,14 +74,14 @@
     }
   </style>
 
-  < type="application/ld+json">
+  <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SportsOrganization",
     "name": "Kiwanis Football League Panama",
     "alternateName": "KFL",
-    "url": "https://kiwanisfootball.com",
-    "logo": "assets/img/KFL-logo.png",
+    "url": "https://kiwanisfootball2027.vercel.app",
+    "logo": "/assets/img/KFL-logo.png",
     "sameAs": ["https://www.youtube.com/@KFLTotalAccess"],
     "sport": "American Football"
   }
@@ -253,13 +255,12 @@
     }
   </script>
 
-  <!-- SCRIPT MAESTRO DE NOTICIAS (AUTÓNOMO - SIN INDEX.JSON) -->
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
       const sidebarContainer = document.getElementById('sidebarNewsList');
 
-      // Coloca aquí los slugs exactos de tus noticias creadas (puedes agregar los nuevos que crees)
+      // Agrega aquí los slugs exactos creados en tu CMS
       const slugsArticulos = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
@@ -341,7 +342,7 @@
       }
     });
   </script>
-  
+
   <script>
     const PROMO_BANNERS = [
       { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },
@@ -400,85 +401,6 @@
     ).join('');
   </script>
 
-  <script>
-    (function () {
-      const banner = document.getElementById('pwaBanner');
-      const text = document.getElementById('pwaText');
-      const installBtn = document.getElementById('pwaInstallBtn');
-      const laterBtn = document.getElementById('pwaLaterBtn');
-
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                           navigator.standalone === true;
-
-      let deferredPrompt = null;
-      let instruccionesMostradas = false;
-
-      function yaDescartado() {
-        const fecha = localStorage.getItem('pwaDismissed');
-        return fecha && (Date.now() - Number(fecha)) < 7 * 24 * 60 * 60 * 1000;
-      }
-
-      function mostrarBanner() {
-        if (isStandalone || yaDescartado()) return;
-        banner.style.display = 'block';
-        setTimeout(() => banner.classList.add('show'), 2000);
-      }
-
-      function ocultarBanner() {
-        banner.classList.remove('show');
-      }
-
-      function recordarDescarte() {
-        localStorage.setItem('pwaDismissed', String(Date.now()));
-      }
-
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        mostrarBanner();
-      });
-
-      if (isIOS) {
-        installBtn.textContent = 'Cómo instalar';
-        mostrarBanner();
-      }
-
-      installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          deferredPrompt = null;
-          ocultarBanner();
-          if (outcome !== 'accepted') recordarDescarte();
-          return;
-        }
-
-        if (isIOS && !instruccionesMostradas) {
-          instruccionesMostradas = true;
-          text.innerHTML = 'Toca <span class="pwa-share-icon">⬆︎</span> en Safari o Chrome y luego <strong>"Agregar a pantalla de inicio"</strong>.';
-          installBtn.textContent = 'Entendido';
-          return;
-        }
-
-        ocultarBanner();
-        recordarDescarte();
-      });
-
-      laterBtn.addEventListener('click', () => {
-        ocultarBanner();
-        recordarDescarte();
-      });
-
-      window.addEventListener('appinstalled', () => {
-        ocultarBanner();
-        deferredPrompt = null;
-      });
-
-    })();
-  </script>
-
-  <script src="js/components.js"></script>
+  <script src="/js/components.js"></script>
 </body>
 </html>

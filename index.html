@@ -49,82 +49,10 @@
   <header class="header-nav" id="globalNav"></header>
 
   <main>
-    <!-- 2. TICKER DE MARCADORES CON LOGOS -->
+    <!-- 2. TICKER DE MARCADORES DINÁMICO -->
     <section class="ticker-section">
-      <div class="ticker-container">
-
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
-              <span>OWLS</span>
-            </div>
-            <span class="game-score">21</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/raiders.png" alt="Raiders" class="team-logo-small">
-              <span>RAIDERS</span>
-            </div>
-            <span class="game-score">14</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/eagles.png" alt="Eagles" class="team-logo-small">
-              <span>EAGLES</span>
-            </div>
-            <span class="game-score">7</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/kolts.png" alt="Kolts" class="team-logo-small">
-              <span>KOLTS</span>
-            </div>
-            <span class="game-score">12</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/dragons.png" alt="Dragons" class="team-logo-small">
-              <span>DRAGONS</span>
-            </div>
-            <span class="game-score">28</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/spartans.png" alt="Spartans" class="team-logo-small">
-              <span>SPARTANS</span>
-            </div>
-            <span class="game-score">0</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
-        <article class="game-card">
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/lions.png" alt="Lions" class="team-logo-small">
-              <span>LIONS</span>
-            </div>
-            <span class="game-score">14</span>
-          </div>
-          <div class="game-team">
-            <div class="team-info">
-              <img src="assets/logos/owls.png" alt="Owls" class="team-logo-small">
-              <span>OWLS</span>
-            </div>
-            <span class="game-score">14</span>
-          </div>
-          <div class="game-status">FINAL - SEMANA 4</div>
-        </article>
-
+      <div class="ticker-container" id="tickerContainer">
+        <div style="padding: 20px; text-align: center; color: #64748b; width: 100%;">Cargando marcadores en vivo...</div>
       </div>
     </section>
 
@@ -209,6 +137,57 @@
   <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
+
+  <!-- SCRIPT DE CARGA DINÁMICA DEL TICKER DE SCORES -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      cargarTickerScores();
+    });
+
+    async function cargarTickerScores() {
+      const tickerContainer = document.getElementById('tickerContainer');
+      try {
+        // Puedes cambiar esta ruta por tu endpoint de API o archivo json de scores
+        let respuesta = await fetch('data/scores.json');
+        if (!respuesta.ok) throw new Error('No se pudo cargar la data de scores');
+        let partidos = await respuesta.json();
+
+        if (!partidos || partidos.length === 0) {
+          tickerContainer.innerHTML = "<p style='padding:20px; text-align:center; color:#64748b;'>No hay marcadores disponibles en este momento.</p>";
+          return;
+        }
+
+        let htmlTicker = "";
+        partidos.forEach(partido => {
+          htmlTicker += `
+            <article class="game-card">
+              <div class="game-team">
+                <div class="team-info">
+                  <img src="${partido.homeLogo}" alt="${partido.homeTeam}" class="team-logo-small">
+                  <span>${partido.homeTeam}</span>
+                </div>
+                <span class="game-score">${partido.homeScore}</span>
+              </div>
+              <div class="game-team">
+                <div class="team-info">
+                  <img src="${partido.awayLogo}" alt="${partido.awayTeam}" class="team-logo-small">
+                  <span>${partido.awayTeam}</span>
+                </div>
+                <span class="game-score">${partido.awayScore}</span>
+              </div>
+              <div class="game-status">${partido.status}</div>
+            </article>
+          `;
+        });
+
+        tickerContainer.innerHTML = htmlTicker;
+      } catch (error) {
+        console.error("Error al cargar el ticker:", error);
+        // Fallback visual en caso de fallo de red
+        tickerContainer.innerHTML = "<p style='padding:20px; text-align:center; color:#64748b;'>Error al actualizar los marcadores en vivo.</p>";
+      }
+    }
+  </script>
 
   <!-- SCRIPT MAESTRO (NOTICIAS) -->
   <script>
@@ -382,13 +361,13 @@
       let deferredPrompt = null;
       let instruccionesMostradas = false;
 
-      function yaDescartado() {
+      fnDescartado = function() {
         const fecha = localStorage.getItem('pwaDismissed');
         return fecha && (Date.now() - Number(fecha)) < 7 * 24 * 60 * 60 * 1000;
-      }
+      };
 
       function mostrarBanner() {
-        if (isStandalone || yaDescartado()) return;
+        if (isStandalone || fnDescartado()) return;
         banner.style.display = 'block';
         setTimeout(() => banner.classList.add('show'), 2000);
       }

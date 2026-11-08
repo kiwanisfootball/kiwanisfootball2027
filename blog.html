@@ -5,24 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
   <title>Noticias y Artículos - Kiwanis Football League</title>
   
-  <!-- SEO, GEO y AEO Institucionales -->
   <meta name="description" content="Noticias, comunicados oficiales y cobertura de la Kiwanis Football League (KFL) en Panamá.">
   <meta name="keywords" content="Kiwanis Football League, KFL Panama, Noticias Futbol Americano Panama, Flag Football">
   <meta name="author" content="Kiwanis Football League">
   <meta name="robots" content="index, follow">
 
-  <!-- Open Graph / Redes Sociales -->
   <meta property="og:title" content="Noticias y Artículos - Kiwanis Football League">
   <meta property="og:description" content="Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football en Panamá.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="/assets/img/KFL-logo.png">
   <meta property="og:locale" content="es_PA">
 
-  <!-- Hojas de Estilo y Favicon Local -->
   <link rel="stylesheet" href="/css/global.css">
   <link rel="icon" type="image/png" href="/assets/img/favicon.png">
 
-  <!-- Tipografías Oficiales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -143,13 +139,11 @@
     }
   </style>
 
-  <!-- Vercel Speed Insights -->
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 
-  <!-- Schema.org Data (JSON-LD para SEO y AEO) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -165,7 +159,6 @@
 </head>
 <body>
 
-  <!-- HEADER GLOBAL (Inyectado por components.js) -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="blog-container">
@@ -174,21 +167,18 @@
       <p>Entérate de todo lo que pasa en la Liga de Football Americano y Flag Football</p>
     </div>
 
-    <!-- CONTENEDOR DE PUBLICACIONES -->
     <div id="lista-posts">
       <p style="text-align: center; color: #64748b; grid-column: 1 / -1;">Cargando publicaciones...</p>
     </div>
   </main>
 
-  <!-- FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
 
-  <!-- SCRIPT MAESTRO DE CARGA DE ARTÍCULOS -->
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
       const contenedor = document.getElementById('lista-posts');
 
-      // Lista de slugs correspondientes a la estructura de carpetas generada por Decap CMS
+      // Agrega aquí los slugs exactos de tus noticias creadas en el CMS
       const slugsArticulos = [
         "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
       ];
@@ -202,7 +192,6 @@
 
       for (let slug of slugsArticulos) {
         try {
-          // Apunta a la estructura de carpetas configurada en Decap CMS: /blog/[slug]/index.md
           let respuesta = await fetch(`/blog/${slug}/index.md`);
           if (!respuesta.ok) continue;
           let textoMd = await respuesta.text();
@@ -263,7 +252,6 @@
     });
   </script>
 
-  <!-- Script global de componentes (nav y footer institucionales) -->
   <script src="/js/components.js"></script>
 </body>
 </html>

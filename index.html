@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Estilos para el Slide Continuo de Logos (Sin contenedores ni botones) -->
+  <!-- Estilos optimizados para el Loop Infinito y Tamaño de Logos -->
   <style>
     .ticker-container.is-logo-slide {
       overflow: hidden;
@@ -36,14 +36,17 @@
       background: transparent;
       box-shadow: none;
       border: none;
-      padding: 10px 0;
+      padding: 15px 0;
+      white-space: nowrap;
+      position: relative;
     }
     .logos-slide-track {
       display: flex;
       width: max-content;
-      animation: scrollLogos 30s linear infinite;
+      animation: scrollLogos 25s linear infinite;
       align-items: center;
-      gap: 60px;
+      gap: 80px;
+      will-change: transform;
     }
     .logos-slide-track:hover {
       animation-play-state: paused;
@@ -56,16 +59,17 @@
       border: none;
       box-shadow: none;
       padding: 0;
+      flex-shrink: 0;
     }
     .logo-slide-item img {
-      height: 50px;
+      height: 75px;
       width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
       transition: transform 0.3s ease;
     }
     .logo-slide-item img:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
     @keyframes scrollLogos {
       0% {
@@ -188,7 +192,7 @@
     <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
   </button>
 
-  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (SCORES vs SLIDE CONTINUO DE LOGOS) -->
+  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (SCORES vs LOOP INFINITO DE LOGOS) -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       gestionarTickerInteligente();
@@ -218,11 +222,10 @@
         let partidosSemanaActual = partidos.filter(p => p.week === semanaActiva && p.active === true);
 
         if (!partidosSemanaActual || partidosSemanaActual.length === 0) {
-          // Remueve estilos de tarjeta y añade clase para slide continuo transparente sin botones
           tickerContainer.classList.add('is-logo-slide');
           
-          // Duplicamos el array para garantizar un loop continuo sin saltos visuales
-          let loopLogos = [...logosEquipos, ...logosEquipos];
+          // Triplicamos el array para garantizar que el bucle cubra pantallas ultra-anchas sin espacios vacíos
+          let loopLogos = [...logosEquipos, ...logosEquipos, ...logosEquipos];
           let htmlLogos = '<div class="logos-slide-track">';
           
           loopLogos.forEach(logo => {
@@ -238,7 +241,6 @@
           return;
         }
 
-        // Renderizado de partidos si hay semana activa
         tickerContainer.classList.remove('is-logo-slide');
         let htmlTicker = "";
         partidosSemanaActual.forEach(partido => {
@@ -452,7 +454,7 @@
       function mostrarBanner() {
         if (isStandalone || yaDescartado()) return;
         banner.style.display = 'block';
-        setTimeout(() => banner.classList.add('show'), 2000);
+        setTimeout(() => banner.classList.0('show'), 2000);
       }
 
       function ocultarBanner() {

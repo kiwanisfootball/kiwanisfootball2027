@@ -276,237 +276,65 @@
     }
   </script>
 
-  <!-- SCRIPT DE NOTICIAS (LEE DESDE LA CARPETA DEL CMS) -->
+    <!-- SCRIPT DE NOTICIAS (LEE blog/index.json GENERADO EN EL BUILD) -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const slugsArticulosIndex = [
-        "2026-10-26-aip-y-eagles-sellan-su-pase-a-la-gran-final-de-la-kfl-mini-contact-2026"
-      ];
-      cargarSeccionNoticiasIndex(slugsArticulosIndex);
-    });
-
-    async function cargarSeccionNoticiasIndex(slugs) {
+    document.addEventListener("DOMContentLoaded", async () => {
       const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
       const sidebarContainer = document.getElementById('sidebarNewsList');
 
-      if (!slugs || slugs.length === 0) {
-        mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
-        sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
-        return;
-      }
+      const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-      let postsCargados = [];
+      const vacio = (msgFeatured, msgSidebar) => {
+        mainFeaturedContainer.innerHTML = `<p style="padding:20px; text-align:center;">${msgFeatured}</p>`;
+        sidebarContainer.innerHTML = `<p style="padding:10px; text-align:center;">${msgSidebar}</p>`;
+      };
 
-      for (let slug of slugs) {
-        try {
-          let respuesta = await fetch(`blog/${slug}/index.md`);
-          if (!respuesta.ok) continue;
-          let textoMd = await respuesta.text();
+      try {
+        const respuesta = await fetch('blog/index.json', { cache: 'no-store' });
+        if (!respuesta.ok) throw new Error('No se pudo cargar blog/index.json (' + respuesta.status + ')');
+        const posts = await respuesta.json();
 
-          let matchFrontmatter = textoMd.match(/^---[\s\S]*?---/);
-          let titulo = slug.replace(/-\d{2}-\d{2}-\d{4}$/, '').replace(/-/g, ' ').toUpperCase();
-          let categoria = "KFL";
-          let excerpt = "Haz clic para leer el comunicado oficial...";
-          let coverImage = "assets/img/KFL-logo.png";
-
-          if (matchFrontmatter) {
-            let frontmatter = matchFrontmatter[0];
-            let tMatch = frontmatter.match(/title:\s*["']?([^"'\n]+)["']?/);
-            if (tMatch) titulo = tMatch[1];
-            let catMatch = frontmatter.match(/category:\s*["']?([^"'\n]+)["']?/);
-            if (catMatch) categoria = catMatch[1];
-            let eMatch = frontmatter.match(/excerpt:\s*["']?([^"'\n]+)["']?/);
-            if (eMatch) excerpt = eMatch[1];
-            let imgMatch = frontmatter.match(/coverImage:\s*["']?([^"'\n]+)["']?/);
-            if (imgMatch) {
-              coverImage = imgMatch[1];
-              if (coverImage.startsWith('assets/')) coverImage = '/' + coverImage;
-            }
-          }
-          postsCargados.push({ slug, titulo, categoria, excerpt, coverImage });
-        } catch (e) {
-          console.error("Error cargando post:", slug);
+        if (!Array.isArray(posts) || posts.length === 0) {
+          vacio('No hay noticias destacadas.', 'Sin noticias recientes.');
+          return;
         }
-      }
 
-      if (postsCargados.length === 0) {
-        mainFeaturedContainer.innerHTML = "<p style='padding:20px; text-align:center;'>No hay noticias destacadas.</p>";
-        sidebarContainer.innerHTML = "<p style='padding:10px; text-align:center;'>Sin noticias recientes.</p>";
-        return;
-      }
+        const principal = posts[0];
+        const imgPrincipal = principal.coverImage || 'assets/img/KFL-logo.png';
 
-      let postPrincipal = postsCargados[0];
-      mainFeaturedContainer.onclick = () => window.location.href = `posts.html?slug=${postPrincipal.slug}`;
-      mainFeaturedContainer.innerHTML = `
-        <div class="featured-img-container">
-          <img src="${postPrincipal.coverImage}" alt="${postPrincipal.titulo}" class="featured-img">
-        </div>
-        <div class="featured-body">
-          <span class="badge-category">${postPrincipal.categoria}</span>
-          <h3>${postPrincipal.titulo}</h3>
-          <p>${postPrincipal.excerpt}</p>
-        </div>
-      `;
-
-      let postsSecundarios = postsCargados.slice(1, 5);
-      if (postsSecundarios.length === 0) {
-        sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
-        return;
-      }
-
-      let listaSidebarHtml = "";
-      postsSecundarios.forEach(post => {
-        listaSidebarHtml += `
-          <div class="sidebar-news-item" onclick="window.location.href='posts.html?slug=${post.slug}'">
-            <img src="${post.coverImage}" alt="${post.titulo}" class="sidebar-thumb">
-            <div class="sidebar-info">
-              <span class="sidebar-tag">${post.category}</span>
-              <h4>${post.title}</h4>
-            </div>
+        mainFeaturedContainer.onclick = () => {
+          window.location.href = `articulo.html?slug=${encodeURIComponent(principal.slug)}`;
+        };
+        mainFeaturedContainer.innerHTML = `
+          <div class="featured-img-container">
+            <img src="${esc(imgPrincipal)}" alt="${esc(principal.title)}" class="featured-img">
           </div>
-        `;
-      });
-      sidebarContainer.innerHTML = listaSidebarHtml;
-    }
-  </script>
+          <div class="featured-body">
+            <span class="badge-category">${esc(principal.category)}</span>
+            <h3>${esc(principal.title)}</h3>
+            <p>${esc(principal.excerpt)}</p>
+          </div>`;
 
-  <!-- CONFIGURACIÓN DE BANNERS Y PATROCINADORES -->
-  <script>
-    const PROMO_BANNERS = [
-      { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },
-      { img: 'assets/img/banner-promo-2.jpg', alt: 'Inscripciones Abiertas Temporada 2026', url: 'registro-jugadores.html' }
-    ];
+        const secundarios = posts.slice(1, 5);
+        if (secundarios.length === 0) {
+          sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
+          return;
+        }
 
-    const SPONSORS = [
-      { img: 'assets/sponsors/sponsor1.png', alt: 'Sponsor 1', url: '' },
-      { img: 'assets/sponsors/sponsor2.png', alt: 'Sponsor 2', url: '' },
-      { img: 'assets/sponsors/sponsor3.png', alt: 'Sponsor 3', url: '' },
-      { img: 'assets/sponsors/sponsor4.png', alt: 'Sponsor 4', url: '' },
-      { img: 'assets/sponsors/sponsor5.png', alt: 'Sponsor 5', url: '' },
-      { img: 'assets/sponsors/sponsor6.png', alt: 'Sponsor 6', url: '' },
-      { img: 'assets/sponsors/sponsor7.png', alt: 'Sponsor 7', url: '' },
-      { img: 'assets/sponsors/sponsor8.png', alt: 'Sponsor 8', url: '' },
-      { img: 'assets/sponsors/sponsor9.png', alt: 'Sponsor 9', url: '' }
-    ];
+        sidebarContainer.innerHTML = secundarios.map(p => `
+          <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${encodeURIComponent(p.slug)}'">
+            <img src="${esc(p.coverImage || 'assets/img/KFL-logo.png')}" alt="${esc(p.title)}" class="sidebar-thumb">
+            <div class="sidebar-info">
+              <span class="sidebar-tag">${esc(p.category)}</span>
+              <h4>${esc(p.title)}</h4>
+            </div>
+          </div>`).join('');
 
-    function envolverEnlace(contenido, url) {
-      if (!url) return contenido;
-      const externo = /^https?:\/\//.test(url);
-      const attrs = externo ? ' target="_blank" rel="sponsored noopener"' : '';
-      return `<a href="${url}"${attrs}>${contenido}</a>`;
-    }
-
-    const slider = document.getElementById('promoSlider');
-    const dotsEl = document.getElementById('promoDots');
-    let slideActual = 0;
-
-    slider.innerHTML = PROMO_BANNERS.map((b, i) =>
-      `<div class="slide${i === 0 ? ' active' : ''}">${envolverEnlace(`<img src="${b.img}" alt="${b.alt}">`, b.url)}</div>`
-    ).join('');
-
-    dotsEl.innerHTML = PROMO_BANNERS.map((b, i) =>
-      `<button class="promo-dot${i === 0 ? ' active' : ''}" aria-label="Ver banner ${i + 1}" data-i="${i}"></button>`
-    ).join('');
-
-    function mostrarSlide(i) {
-      const slides = slider.querySelectorAll('.slide');
-      const dots = dotsEl.querySelectorAll('.promo-dot');
-      slideActual = (i + slides.length) % slides.length;
-      slides.forEach((el, k) => el.classList.toggle('active', k === slideActual));
-      dots.forEach((el, k) => el.classList.toggle('active', k === slideActual));
-    }
-
-    dotsEl.addEventListener('click', (e) => {
-      const btn = e.target.closest('.promo-dot');
-      if (btn) mostrarSlide(Number(btn.dataset.i));
+      } catch (e) {
+        console.error('Error cargando noticias:', e);
+        vacio('No se pudieron cargar las noticias.', 'Sin noticias recientes.');
+      }
     });
-
-    if (PROMO_BANNERS.length <= 1) dotsEl.style.display = 'none';
-    else setInterval(() => mostrarSlide(slideActual + 1), 5000);
-
-    document.getElementById('sponsorsGrid').innerHTML = SPONSORS.map(s =>
-      `<div class="sponsor-card">${envolverEnlace(`<img src="${s.img}" alt="${s.alt}" class="sponsor-logo">`, s.url)}</div>`
-    ).join('');
-  </script>
-
-  <!-- SCRIPT PWA Y SERVICE WORKER -->
-  <script>
-    (function () {
-      const banner = document.getElementById('pwaBanner');
-      const text = document.getElementById('pwaText');
-      const installBtn = document.getElementById('pwaInstallBtn');
-      const laterBtn = document.getElementById('pwaLaterBtn');
-
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
-                           navigator.standalone === true;
-
-      let deferredPrompt = null;
-      let instruccionesMostradas = false;
-
-      function yaDescartado() {
-        const fecha = localStorage.getItem('pwaDismissed');
-        return fecha && (Date.now() - Number(fecha)) < 7 * 24 * 60 * 60 * 1000;
-      }
-
-      function mostrarBanner() {
-        if (isStandalone || yaDescartado()) return;
-        banner.style.display = 'block';
-        setTimeout(() => banner.classList.add('show'), 2000);
-      }
-
-      function ocultarBanner() {
-        banner.classList.remove('show');
-      }
-
-      function recordarDescarte() {
-        localStorage.setItem('pwaDismissed', String(Date.now()));
-      }
-
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        mostrarBanner();
-      });
-
-      if (isIOS) {
-        installBtn.textContent = 'Cómo instalar';
-        mostrarBanner();
-      }
-
-      installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          deferredPrompt = null;
-          ocultarBanner();
-          if (outcome !== 'accepted') recordarDescarte();
-          return;
-        }
-
-        if (isIOS && !instruccionesMostradas) {
-          instruccionesMostradas = true;
-          text.innerHTML = 'Toca <span class="pwa-share-icon">⬆︎</span> en Safari o Chrome y luego <strong>"Agregar a pantalla de inicio"</strong>.';
-          installBtn.textContent = 'Entendido';
-          return;
-        }
-
-        ocultarBanner();
-        recordarDescarte();
-      });
-
-      laterBtn.addEventListener('click', () => {
-        ocultarBanner();
-        recordarDescarte();
-      });
-
-      window.addEventListener('appinstalled', () => {
-        ocultarBanner();
-        deferredPrompt = null;
-      });
-
-    })();
   </script>
 
   <!-- MENÚ Y PIE DE PÁGINA GLOBALES -->

@@ -1,5 +1,5 @@
 ---
-title: Raiders y Kolts Brillan en el Cierre de la ronda regular de la KFL Micro
+title: Raiders y Kolts Brillan en el cierre de la ronda regular de la KFL Micro
   Flag Football 2026
 date: 25/10/2026
 coverImage: lions-owls-flag-micro.webp

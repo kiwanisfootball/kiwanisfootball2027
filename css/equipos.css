@@ -29,7 +29,7 @@
 .equipos-selector-sub {
   font-size: 14px;
   color: #64748b;
-  max-width: 700px;
+  max-width: 720px;
   margin: 0 auto 20px auto;
 }
 
@@ -45,8 +45,8 @@
   background: #ffffff;
   border: 2px solid #cbd5e1;
   border-radius: 14px;
-  padding: 12px 16px;
-  width: 130px;
+  padding: 12px 14px;
+  width: 135px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,7 +77,7 @@
 }
 
 .equipo-card-name {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 800;
   color: #1e293b;
   text-transform: uppercase;
@@ -213,11 +213,6 @@
   border: 1px solid #fecdd3;
 }
 
-.part-badge.default-badge {
-  background: #f1f5f9;
-  color: #475569;
-}
-
 /* SUB PESTAÑAS (PAGE-IN-A-PAGE) */
 .sub-tabs-bar {
   display: grid;
@@ -276,6 +271,48 @@
   letter-spacing: 0.5px;
   border-bottom: 2px solid #f1f5f9;
   padding-bottom: 8px;
+}
+
+/* SECCIÓN COLEGIO INSTITUCIONAL */
+.team-institution-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.school-logo-wrap {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 6px;
+  background: #ffffff;
+}
+
+.school-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.school-external-link {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--azul-kfl, #005eaa);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.school-external-link:hover {
+  text-decoration: underline;
 }
 
 .team-description-body {

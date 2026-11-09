@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Equipos Oficiales - Kiwanis Football League Panamá</title>
+
+  <!-- SEO, GEO & AEO Meta Tags -->
+  <meta name="description" content="Conoce los equipos oficiales de la Kiwanis Football League en Panamá. Historia, colegio representativo, rosters actualizados, categorías y estadísticas por equipo.">
+  <meta name="keywords" content="Equipos KFL, Equipos Kiwanis Football League, colegios KFL Panamá, rosters de equipos KFL, Contact Football Panamá, Flag Football Panamá">
+  <link rel="canonical" href="https://www.kiwanisfootball.com/equipos.html">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Equipos Oficiales - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Perfiles oficiales, historia, rosters y calendario por equipo de la Kiwanis Football League Panamá.">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/KFL-logo.svg">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/equipos.html">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- Schema.org Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Kiwanis Football League Panamá",
+    "alternateName": "KFL",
+    "url": "https://www.kiwanisfootball.com/equipos.html",
+    "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
+    "sport": "American Football",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Panamá",
+      "addressCountry": "PA"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: Anton & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/equipos.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- CONFIGURACIÓN CENTRALIZADA KFL -->
+  <script src="js/config-ligas.js"></script>
+
+  <!-- Vercel Speed Insights -->
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body class="contact-theme">
+
+  <!-- HEADER GLOBAL INYECTADO -->
+  <header class="header-nav" id="globalNav"></header>
+
+  <main class="equipos-container">
+
+    <!-- SELECTOR GENERAL DE EQUIPOS -->
+    <section class="equipos-selector-section">
+      <h2 class="equipos-selector-title">EQUIPOS KFL</h2>
+      <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, categorías activas, plantilla de jugadores y estadísticas.</p>
+      
+      <div class="equipos-grid-selector" id="equiposGridSelector">
+        <!-- Generado dinámicamente -->
+      </div>
+    </section>
+
+    <!-- PROMPT INICIAL -->
+    <div id="teamPrompt" class="equipos-select-prompt">
+      <svg class="prompt-icon-svg" width="20" height="20" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+      </svg>
+      <span>Selecciona un equipo arriba para cargar su información oficial.</span>
+    </div>
+
+    <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO (PAGE-IN-A-PAGE) -->
+    <div id="teamProfileSection" style="display: none;">
+
+      <!-- HERO BANNER DINÁMICO CON COLOR DEL EQUIPO -->
+      <section class="team-hero-banner" id="teamHeroBanner">
+        <div class="team-badge-wrapper">
+          <img id="teamHeroLogo" src="" alt="Logo Equipo" class="team-badge-img" onerror="this.src='assets/img/KFL-logo.svg'">
+        </div>
+        <div class="team-hero-content">
+          <h1 class="team-hero-title" id="teamHeroTitle">NOMBRE DEL EQUIPO</h1>
+          <div class="team-school-tag" id="teamHeroSchool">Colegio / Institución Representada</div>
+        </div>
+      </section>
+
+      <!-- BARRA INTELIGENTE DE PARTICIPACIÓN (MODALIDADES Y CATEGORÍAS) -->
+      <div class="team-participation-bar">
+        <div class="participation-group">
+          <span class="participation-label">Participación Activa KFL:</span>
+          <div class="participation-badges" id="teamParticipationBadges">
+            <!-- Insignias inyectadas dinámicamente -->
+          </div>
+        </div>
+      </div>
+
+      <!-- NAVEGACIÓN PAGE-IN-A-PAGE (SUB-PESTAÑAS) -->
+      <div class="sub-tabs-bar">
+        <button class="sub-tab-btn active" id="btn-tab-resena" onclick="selectTeamSubTab('resena')">Reseña</button>
+        <button class="sub-tab-btn" id="btn-tab-roster" onclick="selectTeamSubTab('roster')">Roster Oficial</button>
+        <button class="sub-tab-btn" id="btn-tab-partidos" onclick="selectTeamSubTab('partidos')">Calendario</button>
+        <button class="sub-tab-btn" id="btn-tab-posicion" onclick="selectTeamSubTab('posicion')">Posición</button>
+        <button class="sub-tab-btn" id="btn-tab-estadisticas" onclick="selectTeamSubTab('estadisticas')">Estadísticas</button>
+      </div>
+
+      <!-- CONTENIDO PESTAÑA 1: RESEÑA -->
+      <div class="tab-pane active" id="pane-resena">
+        <div class="team-card-pane">
+          <h3 class="pane-section-title">Historia y Representación Institucional</h3>
+          <div class="team-description-body" id="teamDescriptionText">
+            Cargando información del equipo...
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENIDO PESTAÑA 2: ROSTER OFICIAL -->
+      <div class="tab-pane" id="pane-roster">
+        <div class="team-card-pane">
+          <div class="pane-header-actions">
+            <h3 class="pane-section-title">Plantilla Oficial de Jugadores</h3>
+            <select id="rosterCategorySelect" class="kfl-filter-select" onchange="cargarRosterEquipoCategoria()">
+              <!-- Filtro de categoría activa -->
+            </select>
+          </div>
+          <div style="overflow-x: auto; margin-top: 15px;">
+            <table class="roster-compact-table">
+              <thead>
+                <tr>
+                  <th style="width: 50px; text-align: center;">#</th>
+                  <th style="min-width: 160px;">NOMBRE</th>
+                  <th style="min-width: 160px;">APELLIDO</th>
+                  <th style="width: 90px; text-align: center;">DORSAL</th>
+                </tr>
+              </thead>
+              <tbody id="teamRosterTableBody">
+                <tr><td colspan="4" style="text-align: center; padding: 20px;">Selecciona una categoría.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENIDO PESTAÑA 3: CALENDARIO -->
+      <div class="tab-pane" id="pane-partidos">
+        <div class="team-card-pane">
+          <h3 class="pane-section-title">Próximos Partidos y Resultados</h3>
+          <div id="teamCalendarContainer" style="margin-top: 15px;">
+            <!-- Partidos del equipo -->
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENIDO PESTAÑA 4: POSICIÓN -->
+      <div class="tab-pane" id="pane-posicion">
+        <div class="team-card-pane">
+          <h3 class="pane-section-title">Ubicación en Tabla de Posiciones</h3>
+          <div style="overflow-x: auto; margin-top: 15px;">
+            <div id="teamStandingsContainer"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENIDO PESTAÑA 5: ESTADÍSTICAS -->
+      <div class="tab-pane" id="pane-estadisticas">
+        <div class="team-card-pane">
+          <h3 class="pane-section-title">Líderes Individuales y Acumulados</h3>
+          <div style="overflow-x: auto; margin-top: 15px;">
+            <table class="kfl-table" id="teamStatsTable">
+              <thead>
+                <tr id="teamStatsHeader"></tr>
+              </thead>
+              <tbody id="teamStatsBody">
+                <tr><td colspan="8" style="text-align: center; padding: 20px;">Cargando datos...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER GLOBAL INYECTADO -->
+  <div id="globalFooter"></div>
+
+  <!-- COMPONENTES JS CENTRALIZADOS -->
+  <script src="js/components.js"></script>
+
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS -->
+  <script>
+    let currentSelectedTeam = null;
+    let activeTeamSubTab = 'resena';
+
+    // BASE DE DATOS INSTITUCIONAL Y PALETA DE COLORES DE EQUIPOS
+    const EQUIPOS_METADATA = {
+      "AIP EAGLES": {
+        escuela: "Academia Interamericana de Panamá (AIP)",
+        colorPrimario: "#002B49",
+        colorSecundario: "#C59B27",
+        resena: "Los AIP Eagles son una de las franquicias tradicionales de la Kiwanis Football League, destacándose por su disciplina táctica y alto nivel competitivo tanto en las modalidades de Contact Football Masculino como en Flag Football Femenino."
+      },
+      "BRADER RAIDERS": {
+        escuela: "Colegio Brader",
+        colorPrimario: "#800020",
+        colorSecundario: "#FFFFFF",
+        resena: "Con una trayectoria llena de campeonatos y tradición en las categorías deportivas escolares, los Brader Raiders representan el espíritu combativo y trabajo en equipo en la liga Kiwanis."
+      },
+      "LA SALLE SPARTANS": {
+        escuela: "Colegio La Salle",
+        colorPrimario: "#003366",
+        colorSecundario: "#FFCC00",
+        resena: "Los La Salle Spartans aportan mística, entrega e intensidad en cada juego de la KFL, respaldados por una sólida base estudiantil y programas deportivos de alto rendimiento."
+      },
+      "KOLBE KOLTS": {
+        escuela: "Colegio San Agustín / Kolbe",
+        colorPrimario: "#1B4D3E",
+        colorSecundario: "#FFFFFF",
+        resena: "Los Kolbe Kolts se caracterizan por su agilidad táctica y desarrollo técnico desde las categorías formativas Micro y Mini hasta los niveles de alta competencia Varsity."
+      },
+      "OWLS": {
+        escuela: "Academia Interamericana de Costa del Este / Owls",
+        colorPrimario: "#333333",
+        colorSecundario: "#E65100",
+        resena: "La franquicia Owls combina versatilidad ofensiva y sólida ejecución defensiva, compitiendo activamente en las divisiones juveniles y varsity de la liga."
+      }
+    };
+
+    function getKFLConfig() {
+      return (typeof KFL_CONFIG !== 'undefined') ? KFL_CONFIG : (window.KFL_CONFIG || null);
+    }
+
+    function getTeamLogo(teamName) {
+      const cfg = getKFLConfig();
+      const cleanTeam = (teamName || "").toUpperCase().trim();
+      return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) || "assets/img/KFL-logo.svg";
+    }
+
+    // INICIALIZACIÓN
+    document.addEventListener('DOMContentLoaded', () => {
+      renderizarGridSelectorEquipos();
+    });
+
+    function renderizarGridSelectorEquipos() {
+      const grid = document.getElementById('equiposGridSelector');
+      const cfg = getKFLConfig();
+
+      let listaEquipos = Object.keys(EQUIPOS_METADATA);
+      if (cfg && cfg.EQUIPOS_LOGOS) {
+        listaEquipos = [...new Set([...listaEquipos, ...Object.keys(cfg.EQUIPOS_LOGOS)])];
+      }
+
+      grid.innerHTML = '';
+      listaEquipos.forEach(equipo => {
+        const meta = EQUIPOS_METADATA[equipo] || {};
+        const logo = getTeamLogo(equipo);
+        const card = document.createElement('div');
+        card.className = 'equipo-selector-card';
+        card.onclick = () => seleccionarEquipo(equipo);
+        card.innerHTML = `
+          <div class="equipo-card-logo-wrap">
+            <img src="${logo}" alt="${equipo}" loading="lazy" width="60" height="60" onerror="this.src='assets/img/KFL-logo.svg'">
+          </div>
+          <span class="equipo-card-name">${equipo}</span>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // DETECTOR INTELIGENTE DE PARTICIPACIÓN
+    function detectarParticipacionEquipo(nombreEquipo) {
+      const cfg = getKFLConfig();
+      if (!cfg || !cfg.CATEGORIAS_EQUIPOS) return [];
+
+      const participaciones = [];
+      const equipoUpper = nombreEquipo.toUpperCase().trim();
+
+      for (const modalidad in cfg.CATEGORIAS_EQUIPOS) {
+        for (const categoria in cfg.CATEGORIAS_EQUIPOS[modalidad]) {
+          const lista = cfg.CATEGORIAS_EQUIPOS[modalidad][categoria] || [];
+          if (lista.some(item => item.toUpperCase().trim() === equipoUpper)) {
+            participaciones.push({
+              modalidad: modalidad.toUpperCase(),
+              categoria: categoria.toUpperCase()
+            });
+          }
+        }
+      }
+      return participaciones;
+    }
+
+    function seleccionarEquipo(nombreEquipo) {
+      currentSelectedTeam = nombreEquipo;
+      const meta = EQUIPOS_METADATA[nombreEquipo] || {
+        escuela: "Institución Educativa Representada",
+        colorPrimario: "#005eaa",
+        colorSecundario: "#eb3d40",
+        resena: `Perfil oficial y trayectoria deportiva de ${nombreEquipo} en la Kiwanis Football League.`
+      };
+
+      // 1. Inyección cromática en el Hero Banner
+      const hero = document.getElementById('teamHeroBanner');
+      hero.style.background = `linear-gradient(135deg, ${meta.colorPrimario} 0%, rgba(15,23,42,0.92) 100%)`;
+      hero.style.borderBottom = `4px solid ${meta.colorSecundario}`;
+
+      document.getElementById('teamHeroTitle').innerText = nombreEquipo;
+      document.getElementById('teamHeroTitle').style.color = "#FFFFFF";
+      document.getElementById('teamHeroSchool').innerText = meta.escuela;
+      document.getElementById('teamHeroLogo').src = getTeamLogo(nombreEquipo);
+      document.getElementById('teamDescriptionText').innerHTML = `<p>${meta.resena}</p>`;
+
+      // 2. Renderizar Insignias de Participación Inteligente
+      const participaciones = detectarParticipacionEquipo(nombreEquipo);
+      const badgesContainer = document.getElementById('teamParticipationBadges');
+      badgesContainer.innerHTML = '';
+
+      if (participaciones.length > 0) {
+        participaciones.forEach(p => {
+          const badge = document.createElement('span');
+          badge.className = `part-badge ${p.modalidad.toLowerCase()}-badge`;
+          badge.innerText = `${p.modalidad} • ${p.categoria}`;
+          badgesContainer.appendChild(badge);
+        });
+      } else {
+        badgesContainer.innerHTML = `<span class="part-badge default-badge">KFL PANAMÁ</span>`;
+      }
+
+      // 3. Poblar filtro de rosters según categorías en que participa
+      poblarFiltroRosterCategorias(participaciones);
+
+      // Mostrar interfaz de perfil
+      document.getElementById('teamPrompt').style.display = 'none';
+      document.getElementById('teamProfileSection').style.display = 'block';
+
+      // resetear pestaña activa a reseña
+      selectTeamSubTab('resena');
+
+      hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function poblarFiltroRosterCategorias(participaciones) {
+      const select = document.getElementById('rosterCategorySelect');
+      select.innerHTML = '';
+      if (participaciones.length === 0) {
+        select.innerHTML = '<option value="">Sin categorías activas</option>';
+        return;
+      }
+
+      participaciones.forEach(p => {
+        const val = `${p.modalidad.toLowerCase()}_${p.categoria.toLowerCase()}`;
+        const label = `${p.modalidad} ${p.categoria}`;
+        select.innerHTML += `<option value="${val}">${label}</option>`;
+      });
+    }
+
+    function selectTeamSubTab(subTab) {
+      activeTeamSubTab = subTab;
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-tab-' + subTab);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      const targetPane = document.getElementById('pane-' + subTab);
+      if (targetPane) targetPane.classList.add('active');
+
+      if (subTab === 'roster') {
+        cargarRosterEquipoCategoria();
+      }
+    }
+
+    function cargarRosterEquipoCategoria() {
+      const tbody = document.getElementById('team

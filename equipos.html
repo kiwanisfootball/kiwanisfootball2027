@@ -61,7 +61,7 @@
 
   <main class="equipos-container">
 
-    <!-- SELECTOR GENERAL DE EQUIPOS -->
+    <!-- SELECTOR GENERAL DE EQUIPOS (DISEÑO LIQUID) -->
     <section class="equipos-selector-section">
       <h2 class="equipos-selector-title">EQUIPOS KFL</h2>
       <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y estadísticas.</p>
@@ -82,7 +82,7 @@
     <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO (PAGE-IN-A-PAGE) -->
     <div id="teamProfileSection" style="display: none;">
 
-      <!-- HERO BANNER DINÁMICO CON COLOR DEL EQUIPO -->
+      <!-- HERO BANNER SÓLIDO SIN DEGRADADO -->
       <section class="team-hero-banner" id="teamHeroBanner">
         <div class="team-badge-wrapper">
           <img id="teamHeroLogo" src="" alt="Logo Equipo" class="team-badge-img" onerror="this.src='assets/img/KFL-logo.svg'">
@@ -93,7 +93,7 @@
         </div>
       </section>
 
-      <!-- BARRA INTELIGENTE DE PARTICIPACIÓN (MODALIDADES Y CATEGORÍAS) -->
+      <!-- BARRA INTELIGENTE DE PARTICIPACIÓN -->
       <div class="team-participation-bar">
         <div class="participation-group">
           <span class="participation-label">Participación Activa KFL:</span>
@@ -103,7 +103,7 @@
         </div>
       </div>
 
-      <!-- NAVEGACIÓN PAGE-IN-A-PAGE (SUB-PESTAÑAS) -->
+      <!-- NAVEGACIÓN PAGE-IN-A-PAGE -->
       <div class="sub-tabs-bar">
         <button class="sub-tab-btn active" id="btn-tab-resena" onclick="selectTeamSubTab('resena')">Reseña</button>
         <button class="sub-tab-btn" id="btn-tab-roster" onclick="selectTeamSubTab('roster')">Roster Oficial</button>
@@ -212,12 +212,12 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS OFICIALES -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
 
-    // BASE DE DATOS DE EQUIPOS OFICIALES KFL CON LOGOS EN RUTA ESPECÍFICA DE COLEGIOS
+    // BASE DE DATOS DE EQUIPOS OFICIALES CON COLORES INVERTIDOS DE RAIDERS
     const EQUIPOS_OFICIALES = {
       "AIP FIGHTING OWLS": {
         escuela: "Academia Interamericana de Panamá",
@@ -231,8 +231,8 @@
         escuela: "Colegio Brader",
         url: "https://colegiobrader.edu.pa/",
         logoColegio: "assets/img/colegios/brader.png",
-        colorPrimario: "#9b9e9f",
-        colorSecundario: "#231f20",
+        colorPrimario: "#231f20", // Invertido
+        colorSecundario: "#9b9e9f", // Invertido
         resena: "Los Brader Raiders del Colegio Brader se caracterizan por su alto rendimiento técnico y espíritu deportivo, disputando los primeros puestos en todas las categorías formativas y juveniles de la KFL."
       },
       "ECP MIGHTY EAGLES": {
@@ -303,15 +303,18 @@
 
       grid.innerHTML = '';
       Object.keys(EQUIPOS_OFICIALES).forEach(equipo => {
-        const logo = getTeamLogo(equipo);
+        const meta = EQUIPOS_OFICIALES[equipo];
+        const logoEquipo = getTeamLogo(equipo);
         const card = document.createElement('div');
         card.className = 'equipo-selector-card';
         card.onclick = () => seleccionarEquipo(equipo);
         card.innerHTML = `
-          <div class="equipo-card-logo-wrap">
-            <img src="${logo}" alt="${equipo}" loading="lazy" width="60" height="60" onerror="this.src='assets/img/KFL-logo.svg'">
+          <div class="equipo-card-logos-dual">
+            <img src="${logoEquipo}" alt="${equipo}" class="logo-equipo-img" loading="lazy" width="44" height="44" onerror="this.src='assets/img/KFL-logo.svg'">
+            <img src="${meta.logoColegio}" alt="${meta.escuela}" class="logo-colegio-img" loading="lazy" width="44" height="44" onerror="this.src='assets/img/KFL-logo.svg'">
           </div>
           <span class="equipo-card-name">${equipo}</span>
+          <span class="equipo-card-school">${meta.escuela}</span>
         `;
         grid.appendChild(card);
       });
@@ -350,22 +353,22 @@
       currentSelectedTeam = nombreEquipo;
       const meta = EQUIPOS_OFICIALES[nombreEquipo];
 
+      // Color sólido sin degradado
       const hero = document.getElementById('teamHeroBanner');
-      hero.style.background = `linear-gradient(135deg, ${meta.colorPrimario} 0%, rgba(15,23,42,0.95) 100%)`;
-      hero.style.borderBottom = `5px solid ${meta.colorSecundario}`;
+      hero.style.background = meta.colorPrimario;
+      hero.style.borderBottom = `6px solid ${meta.colorSecundario}`;
 
       document.getElementById('teamHeroTitle').innerText = nombreEquipo;
-      document.getElementById('teamHeroTitle').style.color = meta.colorSecundario === "#ffffff" || meta.colorSecundario === "#FFFFFF" ? "#FFFFFF" : meta.colorSecundario;
+      document.getElementById('teamHeroTitle').style.color = (meta.colorSecundario === "#ffffff" || meta.colorSecundario === "#FFFFFF") ? "#FFFFFF" : meta.colorSecundario;
       document.getElementById('teamHeroSchool').innerText = meta.escuela;
       document.getElementById('teamHeroLogo').src = getTeamLogo(nombreEquipo);
 
-      // Datos de la Pestaña de Reseña
+      // Pestaña Reseña
       document.getElementById('teamSchoolTitle').innerText = meta.escuela;
       document.getElementById('teamSchoolLogo').src = meta.logoColegio;
       document.getElementById('teamSchoolLink').href = meta.url;
       document.getElementById('teamDescriptionText').innerHTML = `<p>${meta.resena}</p>`;
 
-      // Badges de Participación
       const participaciones = detectarParticipacionEquipo(nombreEquipo);
       const badgesContainer = document.getElementById('teamParticipationBadges');
       badgesContainer.innerHTML = '';

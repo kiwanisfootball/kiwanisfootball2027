@@ -29,8 +29,8 @@
 
 .equipos-selector-sub {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: clamp(14px, 1.8vw, 15px);
-  font-weight: 500;
+  font-size: clamp(16px, 1.8vw, 15px);
+  font-weight: 600;
   color: #475569;
   max-width: 780px;
   margin: 0 auto 30px auto;

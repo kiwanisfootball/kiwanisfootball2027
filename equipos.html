@@ -61,9 +61,9 @@
 
   <main class="equipos-container">
 
-    <!-- SELECTOR GENERAL DE EQUIPOS (DISTRIBUCIÓN 4 ARRIBA Y 3 ABAJO CENTRADOS) -->
+    <!-- HEADER SUPERIOR CON EL ESTILO EXACTO DEL SITIO (IGUAL A CONÓCENOS) -->
     <section class="equipos-selector-section">
-      <h2 class="equipos-selector-title">EQUIPOS KFL</h2>
+      <h1 class="equipos-selector-title">EQUIPOS</h1>
       <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y calendario.</p>
       
       <div class="equipos-grid-selector" id="equiposGridSelector">
@@ -71,7 +71,7 @@
       </div>
     </section>
 
-    <!-- PROMPT SOBRE EL FONDO DIRECTO -->
+    <!-- PROMPT DIRECTO SOBRE EL FONDO GENERAL -->
     <div id="teamPrompt" class="equipos-select-prompt">
       <svg class="prompt-icon-svg" width="20" height="20" viewBox="0 0 24 24">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
@@ -79,7 +79,7 @@
       <span>Selecciona un equipo arriba para cargar su información oficial.</span>
     </div>
 
-    <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO (PAGE-IN-A-PAGE SIN ESTADÍSTICAS) -->
+    <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO (PAGE-IN-A-PAGE) -->
     <div id="teamProfileSection" style="display: none;">
 
       <!-- HERO BANNER SÓLIDO SIN DEGRADADO -->
@@ -189,12 +189,12 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS CON RUTAS REALES DE NOMBRES DE ARCHIVOS -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS CON RUTAS REALES DE LOGOS -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
 
-    // BASE DE DATOS OFICIAL APUNTANDO A LOS ARCHIVOS EXACTOS DE TU CAPTURA EN assets/logos/
+    // BASE DE DATOS OFICIAL APUNTANDO A RUTAS EXACTAS EN assets/logos/
     const EQUIPOS_OFICIALES = {
       "AIP FIGHTING OWLS": {
         escuela: "Academia Interamericana de Panamá",

@@ -293,7 +293,7 @@ img, video, canvas, svg {
 .promo-dot.active { background: #005EAA; width: 26px; border-radius: 10px; }
 .promo-dot:focus-visible { outline: 2px solid #005EAA; outline-offset: 3px; }
 
-/* ===== SLIDER FLUIDO SIN CONTENEDOR RÍGIDO ===== */
+/* ===== SLIDER DE BANNERS DEFINITIVO (BLOQUEO DE HUECOS BLANCOS) ===== */
 .promo-banner-section {
   width: 100%;
   max-width: 1100px;
@@ -303,31 +303,43 @@ img, video, canvas, svg {
 }
 
 .slider-container {
+  position: relative;
   width: 100%;
+  aspect-ratio: 1200 / 250; /* Fija la proporción exacta de tu diseño horizontal */
   border-radius: 14px;
   overflow: hidden;
-  background: transparent;
+  background: #ffffff;
   box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 }
 
 .slide {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .slide.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 .slide a, 
 .slide img {
   width: 100%;
-  height: auto;       /* La imagen manda: escala de forma 100% proporcional sin recortes ni espacios blancos */
+  height: 100%;
+  object-fit: cover; /* Llena el espacio de la caja de forma perfecta en cualquier pantalla */
   display: block;
 }
 
+/* En móviles ajustamos ligeramente la proporción de la caja para que los textos queden más cómodos a la vista sin deformarse */
 @media (max-width: 768px) {
   .slider-container {
+    aspect-ratio: 16 / 9; 
     border-radius: 10px;
   }
 }

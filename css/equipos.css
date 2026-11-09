@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMA - MÓDULO EQUIPOS
+   KIWANIS FOOTBALL LEAGUE PANAMA - MÓDULO EQUIPOS Y CALENDARIO
    ========================================================================== */
 
 .equipos-container {
@@ -30,7 +30,6 @@
 .equipos-selector-sub {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
   font-size: clamp(14px, 1.8vw, 15px);
-  font-weight: 700;
   color: #475569;
   max-width: 780px;
   margin: 0 auto 30px auto;
@@ -345,6 +344,78 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.kfl-filter-select {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+}
+
+/* TARJETAS DE CALENDARIO Y PARTIDOS */
+.team-schedule-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.schedule-match-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+
+.match-card-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #cbd5e1;
+}
+
+.match-card-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.match-team-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90px;
+  text-align: center;
+}
+
+.match-team-name {
+  font-size: 11px;
+  font-weight: 800;
+  color: #0f172a;
+  text-transform: uppercase;
+  margin-top: 6px;
+  line-height: 1.2;
+}
+
+.match-score-badge {
+  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-size: 18px;
+  color: var(--azul-kfl, #005eaa);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  padding: 4px 12px;
+  border-radius: 20px;
 }
 
 /* TABLAS COMPACTAS */

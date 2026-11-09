@@ -61,17 +61,17 @@
 
   <main class="equipos-container">
 
-    <!-- SELECTOR GENERAL DE EQUIPOS (DISEÑO LIQUID) -->
+    <!-- SELECTOR GENERAL DE EQUIPOS (DISTRIBUCIÓN 4 ARRIBA Y 3 ABAJO CENTRADOS) -->
     <section class="equipos-selector-section">
       <h2 class="equipos-selector-title">EQUIPOS KFL</h2>
-      <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y estadísticas.</p>
+      <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y calendario.</p>
       
       <div class="equipos-grid-selector" id="equiposGridSelector">
         <!-- Generado dinámicamente -->
       </div>
     </section>
 
-    <!-- PROMPT INICIAL -->
+    <!-- PROMPT SOBRE EL FONDO DIRECTO -->
     <div id="teamPrompt" class="equipos-select-prompt">
       <svg class="prompt-icon-svg" width="20" height="20" viewBox="0 0 24 24">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
@@ -79,7 +79,7 @@
       <span>Selecciona un equipo arriba para cargar su información oficial.</span>
     </div>
 
-    <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO (PAGE-IN-A-PAGE) -->
+    <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO (PAGE-IN-A-PAGE SIN ESTADÍSTICAS) -->
     <div id="teamProfileSection" style="display: none;">
 
       <!-- HERO BANNER SÓLIDO SIN DEGRADADO -->
@@ -103,13 +103,12 @@
         </div>
       </div>
 
-      <!-- NAVEGACIÓN PAGE-IN-A-PAGE -->
+      <!-- NAVEGACIÓN PAGE-IN-A-PAGE (4 PESTAÑAS) -->
       <div class="sub-tabs-bar">
         <button class="sub-tab-btn active" id="btn-tab-resena" onclick="selectTeamSubTab('resena')">Reseña</button>
         <button class="sub-tab-btn" id="btn-tab-roster" onclick="selectTeamSubTab('roster')">Roster Oficial</button>
         <button class="sub-tab-btn" id="btn-tab-partidos" onclick="selectTeamSubTab('partidos')">Calendario</button>
         <button class="sub-tab-btn" id="btn-tab-posicion" onclick="selectTeamSubTab('posicion')">Posición</button>
-        <button class="sub-tab-btn" id="btn-tab-estadisticas" onclick="selectTeamSubTab('estadisticas')">Estadísticas</button>
       </div>
 
       <!-- CONTENIDO PESTAÑA 1: RESEÑA E INSTITUCIÓN -->
@@ -180,28 +179,6 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 5: ESTADÍSTICAS -->
-      <div class="tab-pane" id="pane-estadisticas">
-        <div class="team-card-pane">
-          <h3 class="pane-section-title">Líderes Individuales y Acumulados</h3>
-          <div style="overflow-x: auto; margin-top: 15px;">
-            <table class="kfl-table" id="teamStatsTable">
-              <thead>
-                <tr id="teamStatsHeader">
-                  <th>Rank</th>
-                  <th>Jugador</th>
-                  <th>Categoría</th>
-                  <th>Estadística Principal</th>
-                </tr>
-              </thead>
-              <tbody id="teamStatsBody">
-                <tr><td colspan="4" style="text-align: center; padding: 20px; color: #64748b;">Selecciona un equipo para cargar sus líderes estadísticos.</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
     </div>
 
   </main>
@@ -212,16 +189,17 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS CON RUTAS REALES DE NOMBRES DE ARCHIVOS -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
 
-    // BASE DE DATOS DE EQUIPOS OFICIALES CON COLORES INVERTIDOS DE RAIDERS
+    // BASE DE DATOS OFICIAL APUNTANDO A LOS ARCHIVOS EXACTOS DE TU CAPTURA EN assets/logos/
     const EQUIPOS_OFICIALES = {
       "AIP FIGHTING OWLS": {
         escuela: "Academia Interamericana de Panamá",
         url: "https://aip.edu.pa/",
+        logoEquipo: "assets/logos/owls.png",
         logoColegio: "assets/img/colegios/aip.png",
         colorPrimario: "#485592",
         colorSecundario: "#caa35e",
@@ -230,14 +208,16 @@
       "BRADER RAIDERS": {
         escuela: "Colegio Brader",
         url: "https://colegiobrader.edu.pa/",
+        logoEquipo: "assets/logos/raiders.png",
         logoColegio: "assets/img/colegios/brader.png",
-        colorPrimario: "#231f20", // Invertido
-        colorSecundario: "#9b9e9f", // Invertido
+        colorPrimario: "#231f20",
+        colorSecundario: "#9b9e9f",
         resena: "Los Brader Raiders del Colegio Brader se caracterizan por su alto rendimiento técnico y espíritu deportivo, disputando los primeros puestos en todas las categorías formativas y juveniles de la KFL."
       },
       "ECP MIGHTY EAGLES": {
         escuela: "El Colegio de Panamá",
         url: "https://elcolegiodepanama.edu.pa/",
+        logoEquipo: "assets/logos/eagles.png",
         logoColegio: "assets/img/colegios/ecp.png",
         colorPrimario: "#004e38",
         colorSecundario: "#bcbdc0",
@@ -246,6 +226,7 @@
       "LA SALLE SPARTANS": {
         escuela: "Colegio De La Salle",
         url: "https://lasalle.edu.pa/",
+        logoEquipo: "assets/logos/spartans.png",
         logoColegio: "assets/img/colegios/lasalle.png",
         colorPrimario: "#d93c35",
         colorSecundario: "#ffffff",
@@ -254,6 +235,7 @@
       "CRP LIONS": {
         escuela: "Colegio Real de Panamá",
         url: "https://www.colegioreal.edu.pa/",
+        logoEquipo: "assets/logos/lions.png",
         logoColegio: "assets/img/colegios/crp.png",
         colorPrimario: "#fce070",
         colorSecundario: "#0a4d90",
@@ -262,6 +244,7 @@
       "BALBOA DRAGONS": {
         escuela: "Balboa Academy",
         url: "https://www.balboaacademy.edu.pa/",
+        logoEquipo: "assets/logos/dragons.png",
         logoColegio: "assets/img/colegios/balboa.png",
         colorPrimario: "#2ec3e8",
         colorSecundario: "#030506",
@@ -270,6 +253,7 @@
       "KIWANIS KOLTS": {
         escuela: "Equipo Abierto Kiwanis",
         url: "https://www.kiwanisfootball.com",
+        logoEquipo: "assets/logos/kolts.png",
         logoColegio: "assets/img/colegios/kiwanis-kolts.png",
         colorPrimario: "#f5eb14",
         colorSecundario: "#000000",
@@ -282,6 +266,9 @@
     }
 
     function getTeamLogo(teamName) {
+      const meta = EQUIPOS_OFICIALES[teamName];
+      if (meta && meta.logoEquipo) return meta.logoEquipo;
+
       const cfg = getKFLConfig();
       const cleanTeam = (teamName || "").toUpperCase().trim();
       return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) || "assets/img/KFL-logo.svg";
@@ -309,9 +296,8 @@
         card.className = 'equipo-selector-card';
         card.onclick = () => seleccionarEquipo(equipo);
         card.innerHTML = `
-          <div class="equipo-card-logos-dual">
-            <img src="${logoEquipo}" alt="${equipo}" class="logo-equipo-img" loading="lazy" width="44" height="44" onerror="this.src='assets/img/KFL-logo.svg'">
-            <img src="${meta.logoColegio}" alt="${meta.escuela}" class="logo-colegio-img" loading="lazy" width="44" height="44" onerror="this.src='assets/img/KFL-logo.svg'">
+          <div class="equipo-card-logo-wrap">
+            <img src="${logoEquipo}" alt="${equipo}" class="logo-equipo-img" loading="lazy" width="56" height="56" onerror="this.src='assets/img/KFL-logo.svg'">
           </div>
           <span class="equipo-card-name">${equipo}</span>
           <span class="equipo-card-school">${meta.escuela}</span>
@@ -353,7 +339,6 @@
       currentSelectedTeam = nombreEquipo;
       const meta = EQUIPOS_OFICIALES[nombreEquipo];
 
-      // Color sólido sin degradado
       const hero = document.getElementById('teamHeroBanner');
       hero.style.background = meta.colorPrimario;
       hero.style.borderBottom = `6px solid ${meta.colorSecundario}`;
@@ -363,7 +348,7 @@
       document.getElementById('teamHeroSchool').innerText = meta.escuela;
       document.getElementById('teamHeroLogo').src = getTeamLogo(nombreEquipo);
 
-      // Pestaña Reseña
+      // Datos de la Pestaña de Reseña
       document.getElementById('teamSchoolTitle').innerText = meta.escuela;
       document.getElementById('teamSchoolLogo').src = meta.logoColegio;
       document.getElementById('teamSchoolLink').href = meta.url;

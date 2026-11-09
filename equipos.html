@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS CON CONEXIÓN CON FALLBACK GARANTIZADO -->
+      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS CON CONEXIÓN CON SHORT NAMES -->
       <div class="tab-pane" id="pane-partidos">
         <div class="team-card-pane">
           <div class="pane-header-actions">
@@ -192,10 +192,21 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS Y MOTOR DE CALENDARIO -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS Y MAPEADO DE NOMBRES CORTOS -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
+
+    // MAPEO OFICIAL DE NOMBRES CORTOS DE LA BASE DE DATOS KFL
+    const KFL_EQUIPO_CORTO = {
+      "AIP FIGHTING OWLS": "OWLS",
+      "BRADER RAIDERS": "RAIDERS",
+      "ECP MIGHTY EAGLES": "EAGLES",
+      "LA SALLE SPARTANS": "SPARTANS",
+      "CRP LIONS": "LIONS",
+      "BALBOA DRAGONS": "DRAGONS",
+      "KIWANIS KOLTS": "KOLTS"
+    };
 
     const EQUIPOS_OFICIALES = {
       "AIP FIGHTING OWLS": {
@@ -263,16 +274,6 @@
       }
     };
 
-    // FIXTURE DE RESERVA (FALLBACK LOCAL) EN CASO DE ERROR DE RED DE GAS
-    const LOCAL_SCHEDULE_FALLBACK = [
-      { equipoLocal: "BRADER RAIDERS", equipoVisitante: "AIP FIGHTING OWLS", fecha: "Sab 15 Nov", hora: "4:00 PM", cancha: "Costa del Este", marcadorLocal: 14, marcadorVisitante: 12, modalidad: "CONTACT", categoria: "VARSITY" },
-      { equipoLocal: "LA SALLE SPARTANS", equipoVisitante: "BRADER RAIDERS", fecha: "Sab 22 Nov", hora: "5:30 PM", cancha: "Costa del Este", marcadorLocal: 6, marcadorVisitante: 20, modalidad: "CONTACT", categoria: "VARSITY" },
-      { equipoLocal: "BRADER RAIDERS", equipoVisitante: "ECP MIGHTY EAGLES", fecha: "Sab 29 Nov", hora: "3:00 PM", cancha: "Costa del Este", modalidad: "CONTACT", categoria: "VARSITY" },
-      { equipoLocal: "AIP FIGHTING OWLS", equipoVisitante: "BALBOA DRAGONS", fecha: "Dom 16 Nov", hora: "10:00 AM", cancha: "Costa del Este", marcadorLocal: 21, marcadorVisitante: 0, modalidad: "FLAG", categoria: "JUVENIL" },
-      { equipoLocal: "CRP LIONS", equipoVisitante: "BRADER RAIDERS", fecha: "Dom 23 Nov", hora: "11:30 AM", cancha: "Costa del Este", modalidad: "FLAG", categoria: "JUVENIL" },
-      { equipoLocal: "KIWANIS KOLTS", equipoVisitante: "LA SALLE SPARTANS", fecha: "Sab 15 Nov", hora: "2:00 PM", cancha: "Costa del Este", marcadorLocal: 0, marcadorVisitante: 18, modalidad: "CONTACT", categoria: "JUVENIL" }
-    ];
-
     function normalizarTexto(texto) {
       if (!texto) return '';
       return texto.toString()
@@ -285,13 +286,20 @@
       return (typeof KFL_CONFIG !== 'undefined') ? KFL_CONFIG : (window.KFL_CONFIG || null);
     }
 
+    // RESOLVER LOGO DESDE NOMBRE LARGO O NOMBRE CORTO (OWLS, RAIDERS, ETC.)
     function getTeamLogo(teamName) {
-      const meta = EQUIPOS_OFICIALES[teamName];
-      if (meta && meta.logoEquipo) return meta.logoEquipo;
+      const normName = normalizarTexto(teamName);
+      
+      // Buscar coincidencia en EQUIPOS_OFICIALES por nombre completo o por nombre corto
+      for (const fullname in EQUIPOS_OFICIALES) {
+        const shortName = KFL_EQUIPO_CORTO[fullname];
+        if (normalizarTexto(fullname) === normName || normalizarTexto(shortName) === normName || normName.includes(normalizarTexto(shortName))) {
+          return EQUIPOS_OFICIALES[fullname].logoEquipo;
+        }
+      }
 
       const cfg = getKFLConfig();
-      const cleanTeam = normalizarTexto(teamName);
-      return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) || "assets/img/KFL-logo.svg";
+      return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[normName]) || "assets/img/KFL-logo.svg";
     }
 
     function inicializarModuloEquipos() {
@@ -328,6 +336,7 @@
       const cfg = getKFLConfig();
       const participaciones = [];
       const equipoUpper = normalizarTexto(nombreEquipo);
+      const shortNameUpper = normalizarTexto(KFL_EQUIPO_CORTO[nombreEquipo] || '');
 
       if (cfg && cfg.CATEGORIAS_EQUIPOS) {
         for (const modalidad in cfg.CATEGORIAS_EQUIPOS) {
@@ -335,7 +344,7 @@
             const lista = cfg.CATEGORIAS_EQUIPOS[modalidad][categoria] || [];
             if (lista.some(item => {
               const itemNorm = normalizarTexto(item);
-              return itemNorm === equipoUpper || equipoUpper.includes(itemNorm) || itemNorm.includes(equipoUpper);
+              return itemNorm === equipoUpper || itemNorm === shortNameUpper || equipoUpper.includes(itemNorm) || itemNorm.includes(shortNameUpper);
             })) {
               participaciones.push({
                 modalidad: modalidad.toUpperCase(),
@@ -426,7 +435,6 @@
       }
     }
 
-    // EXTRAER ARREGLOS RECURSIVAMENTE DE CUALQUIER ESTRUCTURA DE PAYLOAD
     function deepExtractArray(obj) {
       if (Array.isArray(obj)) return obj;
       if (obj && typeof obj === 'object') {
@@ -441,7 +449,7 @@
       return [];
     }
 
-    // CONSULTA ROBUSTA A GAS CON DESEMPAQUETADO Y FALLBACK LOCAL
+    // CONSULTA Y FILTRADO EXACTO MEDIANTE NOMBRES CORTOS DE LA BD (OWLS, RAIDERS, ETC.)
     async function consultarCalendarioEquipoCategoria() {
       const container = document.getElementById('teamCalendarContainer');
       const select = document.getElementById('calendarCategorySelect');
@@ -469,29 +477,28 @@
         const data = await response.json();
         partidosRaw = deepExtractArray(data);
       } catch (err) {
-        console.warn("Fallo fetch a Apps Script, activando datos de reserva KFL:", err);
+        console.warn("Fallo fetch a Apps Script:", err);
       }
 
-      // Si GAS no devolvió partidos, usar dataset de reserva local
-      if (!partidosRaw || partidosRaw.length === 0) {
-        partidosRaw = LOCAL_SCHEDULE_FALLBACK;
-      }
-
-      const equipoNorm = normalizarTexto(currentSelectedTeam);
+      // Nombre corto oficial de la BD (ejemplo: "RAIDERS" para "BRADER RAIDERS")
+      const shortNameBD = KFL_EQUIPO_CORTO[currentSelectedTeam] || currentSelectedTeam;
+      const shortNameNorm = normalizarTexto(shortNameBD);
       const catNorm = normalizarTexto(catTarget);
       const modNorm = normalizarTexto(modTarget);
-      const equipoKeywords = equipoNorm.split(' ').filter(word => word.length > 2);
 
       const partidosFiltrados = partidosRaw.filter(p => {
+        // Extraer valores del objeto JSON de Apps Script
         const localStr = normalizarTexto(p.equipoLocal || p.local || p.Home || p.home || p.Equipo1 || p.equipo1);
         const visitanteStr = normalizarTexto(p.equipoVisitante || p.visitante || p.Away || p.away || p.Equipo2 || p.equipo2);
         const catStr = normalizarTexto(p.categoria || p.Categoria || p.category || p.Category || p.liga || p.Liga);
         const modStr = normalizarTexto(p.modalidad || p.Modalidad || p.tipo || p.Tipo);
 
-        const coincideLocal = localStr.includes(equipoNorm) || equipoKeywords.some(kw => localStr.includes(kw));
-        const coincideVisitante = visitanteStr.includes(equipoNorm) || equipoKeywords.some(kw => visitanteStr.includes(kw));
+        // Coincidencia exacta o parcial con el Nombre Corto de la base de datos
+        const coincideLocal = localStr === shortNameNorm || localStr.includes(shortNameNorm);
+        const coincideVisitante = visitanteStr === shortNameNorm || visitanteStr.includes(shortNameNorm);
         const coincideEquipo = coincideLocal || coincideVisitante;
 
+        // Coincidencia con la categoría
         const coincideCategoria = (catStr === '') 
           || (catStr.includes(catNorm)) 
           || (modStr.includes(modNorm) && catStr.includes(catNorm));
@@ -502,7 +509,7 @@
       if (partidosFiltrados.length === 0) {
         container.innerHTML = `
           <div style="text-align: center; padding: 30px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
-            <p style="color: #475569; font-weight: 700; margin: 0;">No se encontraron partidos programados para ${currentSelectedTeam} en ${modTarget} ${catTarget}.</p>
+            <p style="color: #475569; font-weight: 700; margin: 0;">No se encontraron partidos programados para ${currentSelectedTeam} (${shortNameBD}) en ${modTarget} ${catTarget}.</p>
           </div>
         `;
         return;

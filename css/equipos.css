@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMA - MÓDULO EQUIPOS COMPLETO
+   KIWANIS FOOTBALL LEAGUE PANAMA - MÓDULO EQUIPOS (DISEÑO LIQUID)
    ========================================================================== */
 
 .equipos-container {
@@ -11,15 +11,15 @@
   box-sizing: border-box;
 }
 
-/* SELECTOR DE EQUIPOS (GRID DE TARJETAS) */
+/* SELECTOR DE EQUIPOS (LAYOUT LIQUID FLUIDO & DOBLE LOGO) */
 .equipos-selector-section {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .equipos-selector-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 32px;
+  font-size: 34px;
   color: var(--azul-kfl, #005eaa);
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -30,56 +30,70 @@
   font-size: 14px;
   color: #64748b;
   max-width: 720px;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 24px auto;
+  line-height: 1.5;
 }
 
 .equipos-grid-selector {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 16px;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .equipo-selector-card {
   background: #ffffff;
-  border: 2px solid #cbd5e1;
-  border-radius: 14px;
-  padding: 12px 14px;
-  width: 135px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 16px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .equipo-selector-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   border-color: var(--azul-kfl, #005eaa);
-  box-shadow: 0 6px 16px rgba(0, 94, 170, 0.15);
+  box-shadow: 0 8px 20px rgba(0, 94, 170, 0.12);
 }
 
-.equipo-card-logo-wrap {
-  width: 60px;
-  height: 60px;
+.equipo-card-logos-dual {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  gap: 8px;
+  margin-bottom: 12px;
+  width: 100%;
 }
 
-.equipo-card-logo-wrap img {
-  max-width: 100%;
-  max-height: 100%;
+.equipo-card-logos-dual .logo-equipo-img,
+.equipo-card-logos-dual .logo-colegio-img {
+  width: 44px;
+  height: 44px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .equipo-card-name {
-  font-size: 11px;
-  font-weight: 800;
-  color: #1e293b;
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  font-size: 11.5px;
+  font-weight: 900;
+  color: #0f172a;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.equipo-card-school {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
   text-transform: uppercase;
   text-align: center;
   line-height: 1.2;
@@ -106,7 +120,7 @@
   flex-shrink: 0;
 }
 
-/* HERO BANNER DINÁMICO DEL EQUIPO */
+/* HERO BANNER DINÁMICO (COLOR SÓLIDO SIN DEGRADADO) */
 .team-hero-banner {
   position: relative;
   width: 100%;
@@ -119,8 +133,8 @@
   text-align: center;
   box-sizing: border-box;
   margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  transition: background 0.4s ease, border-color 0.4s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .team-badge-wrapper {
@@ -130,33 +144,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   padding: 10px;
-  backdrop-filter: blur(4px);
 }
 
 .team-badge-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
 }
 
 .team-hero-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 38px;
+  font-size: 40px;
   margin: 6px 0;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .team-school-tag {
   font-size: 15px;
   font-weight: 700;
-  color: #f8fafc;
-  opacity: 0.95;
+  color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }

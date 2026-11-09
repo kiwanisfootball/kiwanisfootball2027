@@ -11,7 +11,7 @@
   box-sizing: border-box;
 }
 
-/* HEADER SUPERIOR IDÉNTICO A LA PÁGINA DE CONÓCENOS / LIGAS */
+/* HEADER SUPERIOR (TAMAÑO CALIBRADO CON EL RESTO DE SECCIONES) */
 .equipos-selector-section {
   text-align: center;
   margin-bottom: 35px;
@@ -19,21 +19,21 @@
 
 .equipos-selector-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: clamp(44px, 5.5vw, 64px);
+  font-size: clamp(36px, 4.5vw, 48px);
   color: var(--azul-kfl, #005eaa);
-  margin: 0 0 12px 0;
+  margin: 0 0 10px 0;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  line-height: 1;
+  letter-spacing: 1px;
+  line-height: 1.1;
 }
 
 .equipos-selector-sub {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: clamp(14px, 1.8vw, 16px);
+  font-size: clamp(14px, 1.8vw, 15px);
   font-weight: 500;
   color: #475569;
   max-width: 780px;
-  margin: 0 auto 32px auto;
+  margin: 0 auto 30px auto;
   line-height: 1.6;
 }
 
@@ -180,44 +180,53 @@
   letter-spacing: 0.5px;
 }
 
-/* BARRA DE PARTICIPACIÓN */
+/* BARRA DE PARTICIPACIÓN (REESTRUCTURADA: TÍTULO ARRIBA Y BADGES CENTRADOS Y BALANCEADOS) */
 .team-participation-bar {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 14px 20px;
+  border-radius: 16px;
+  padding: 20px 24px;
   margin-bottom: 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
 .participation-group {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 14px;
+  width: 100%;
 }
 
 .participation-label {
   font-size: 13px;
-  font-weight: 800;
-  color: #475569;
+  font-weight: 900;
+  color: #334155;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
 }
 
 .participation-badges {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .part-badge {
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 800;
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 30px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
 .part-badge.contact-badge {
@@ -232,7 +241,7 @@
   border: 1px solid #fecdd3;
 }
 
-/* SUB PESTAÑAS (PAGE-IN-A-PAGE - 4 COLUMNAS) */
+/* SUB PESTAÑAS (PAGE-IN-A-PAGE) */
 .sub-tabs-bar {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

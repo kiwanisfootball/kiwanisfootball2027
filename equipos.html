@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS CON CONEXIÓN ROBUTA POR APPS SCRIPT -->
+      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS CON CONEXIÓN ADAPTATIVA -->
       <div class="tab-pane" id="pane-partidos">
         <div class="team-card-pane">
           <div class="pane-header-actions">
@@ -192,7 +192,7 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS Y FETCH CORREGIDO -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS Y FETCH ADAPTATIVO A APPS SCRIPT -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
@@ -405,49 +405,50 @@
       }
     }
 
-    // CONEXIÓN ROBUSTA CON APPS SCRIPT Y CONSULTA MULTI-PARAMÉTRICA
+    // CONEXIÓN ADAPTATIVA A LA API REAL DE GOOGLE SHEETS DE LA KFL
     async function consultarCalendarioEquipoCategoria() {
       const container = document.getElementById('teamCalendarContainer');
       const select = document.getElementById('calendarCategorySelect');
       if (!container || !currentSelectedTeam || !select) return;
 
-      const selectedVal = select.value; // formato ej: CONTACT_VARSITY
+      const selectedVal = select.value; // ej: CONTACT_VARSITY
       const [modalidad, categoria] = selectedVal.split('_');
 
       container.innerHTML = `
         <div style="text-align: center; padding: 30px; color: #64748b;">
           <p style="font-weight: 700; margin-bottom: 5px;">Cargando calendario oficial...</p>
-          <span style="font-size: 12px;">Sincronizando con base de datos KFL</span>
+          <span style="font-size: 12px;">Sincronizando con la base de datos de la liga</span>
         </div>
       `;
 
       try {
         const cfg = getKFLConfig();
-        const baseEndpoint = (cfg && cfg.ENDPOINTS && cfg.ENDPOINTS.CALENDARIO_TIKER) 
-                             || (cfg && cfg.API_URL) 
-                             || 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
+        const endpoint = (cfg && cfg.ENDPOINTS && cfg.ENDPOINTS.CALENDARIO_TIKER) 
+                         || (cfg && cfg.API_URL) 
+                         || 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
 
-        // Probar fetch directo al endpoint de Google Apps Script
-        const targetUrl = `${baseEndpoint}?action=getSchedule&modalidad=${modalidad}&categoria=${categoria}`;
-        const response = await fetch(targetUrl);
+        // Petición limpia al endpoint
+        const response = await fetch(endpoint);
         const data = await response.json();
         
-        let partidosRaw = [];
-        if (Array.isArray(data)) {
-          partidosRaw = data;
-        } else if (data && typeof data === 'object') {
-          partidosRaw = data.partidos || data.schedule || data.data || [];
-        }
+        const partidosRaw = Array.isArray(data) ? data : (data.partidos || data.schedule || data.data || []);
 
-        // Filtro defensivo del equipo local/visitante
         const equipoClean = currentSelectedTeam.toUpperCase().trim();
-        const partidosEquipo = partidosRaw.filter(p => {
-          const local = (p.equipoLocal || p.local || p.team1 || '').toUpperCase().trim();
-          const visitante = (p.equipoVisitante || p.visitante || p.team2 || '').toUpperCase().trim();
-          return local.includes(equipoClean) || visitante.includes(equipoClean) || equipoClean.includes(local) || equipoClean.includes(visitante);
+        const catTarget = categoria.toUpperCase().trim();
+
+        // Filtro flexible por Equipo y por Categoría en el payload JSON
+        const partidosFiltrados = partidosRaw.filter(p => {
+          const local = (p.equipoLocal || p.local || p.Home || p.home || '').toString().toUpperCase().trim();
+          const visitante = (p.equipoVisitante || p.visitante || p.Away || p.away || '').toString().toUpperCase().trim();
+          const pCat = (p.categoria || p.Categoria || p.category || p.Category || '').toString().toUpperCase().trim();
+
+          const coincideEquipo = local.includes(equipoClean) || visitante.includes(equipoClean) || equipoClean.includes(local) || equipoClean.includes(visitante);
+          const coincideCategoria = pCat === '' || pCat.includes(catTarget);
+
+          return coincideEquipo && coincideCategoria;
         });
 
-        if (partidosEquipo.length === 0) {
+        if (partidosFiltrados.length === 0) {
           container.innerHTML = `
             <div style="text-align: center; padding: 30px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
               <p style="color: #475569; font-weight: 700; margin: 0;">No se encontraron partidos programados para ${currentSelectedTeam} en esta categoría.</p>
@@ -457,14 +458,16 @@
         }
 
         let html = `<div class="team-schedule-cards-grid">`;
-        partidosEquipo.forEach(p => {
-          const local = p.equipoLocal || p.local || p.team1 || 'Local';
-          const visitante = p.equipoVisitante || p.visitante || p.team2 || 'Visitante';
-          const fecha = p.fecha || p.date || 'Por definir';
-          const hora = p.hora || p.time || '';
-          const cancha = p.cancha || p.estadio || p.location || 'Costa del Este';
-          const marcador = (p.marcadorLocal !== undefined && p.marcadorVisitante !== undefined) 
-            ? `${p.marcadorLocal} - ${p.marcadorVisitante}` 
+        partidosFiltrados.forEach(p => {
+          const local = p.equipoLocal || p.local || p.Home || p.home || 'Local';
+          const visitante = p.equipoVisitante || p.visitante || p.Away || p.away || 'Visitante';
+          const fecha = p.fecha || p.Fecha || p.date || 'Por definir';
+          const hora = p.hora || p.Hora || p.time || '';
+          const cancha = p.cancha || p.Cancha || p.estadio || 'Costa del Este';
+          const marcadorLocal = p.marcadorLocal ?? p.score1 ?? p.MarcadorLocal;
+          const marcadorVisitante = p.marcadorVisitante ?? p.score2 ?? p.MarcadorVisitante;
+          const marcador = (marcadorLocal !== undefined && marcadorVisitante !== undefined) 
+            ? `${marcadorLocal} - ${marcadorVisitante}` 
             : 'VS';
 
           html += `
@@ -491,9 +494,9 @@
         container.innerHTML = html;
 
       } catch (err) {
-        console.warn("Error en fetch de Apps Script:", err);
+        console.warn("Error consultando la API de Google Sheets:", err);
         container.innerHTML = `
-          <div style="text-align: center; padding: 25px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
+          <div style="text-align: center; padding: 30px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
             <p style="color: #475569; font-weight: 700; margin: 0;">No se encontraron partidos programados para ${currentSelectedTeam} en esta categoría.</p>
           </div>
         `;

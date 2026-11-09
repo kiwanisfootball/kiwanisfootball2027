@@ -61,7 +61,7 @@
 
   <main class="equipos-container">
 
-    <!-- HEADER SUPERIOR CON EL ESTILO EXACTO DEL SITIO (IGUAL A CONÓCENOS) -->
+    <!-- HEADER SUPERIOR (AJUSTADO EN TAMAÑO PROPORCIONAL) -->
     <section class="equipos-selector-section">
       <h1 class="equipos-selector-title">EQUIPOS</h1>
       <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y calendario.</p>
@@ -71,7 +71,7 @@
       </div>
     </section>
 
-    <!-- PROMPT DIRECTO SOBRE EL FONDO GENERAL -->
+    <!-- PROMPT SOBRE EL FONDO DIRECTO -->
     <div id="teamPrompt" class="equipos-select-prompt">
       <svg class="prompt-icon-svg" width="20" height="20" viewBox="0 0 24 24">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
@@ -79,10 +79,10 @@
       <span>Selecciona un equipo arriba para cargar su información oficial.</span>
     </div>
 
-    <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO (PAGE-IN-A-PAGE) -->
+    <!-- SECCIÓN DINÁMICA DEL EQUIPO SELECCIONADO -->
     <div id="teamProfileSection" style="display: none;">
 
-      <!-- HERO BANNER SÓLIDO SIN DEGRADADO -->
+      <!-- HERO BANNER SÓLIDO -->
       <section class="team-hero-banner" id="teamHeroBanner">
         <div class="team-badge-wrapper">
           <img id="teamHeroLogo" src="" alt="Logo Equipo" class="team-badge-img" onerror="this.src='assets/img/KFL-logo.svg'">
@@ -93,17 +93,17 @@
         </div>
       </section>
 
-      <!-- BARRA INTELIGENTE DE PARTICIPACIÓN -->
+      <!-- BARRA DE PARTICIPACIÓN ESTRUCTURADA Y CENTRADA -->
       <div class="team-participation-bar">
         <div class="participation-group">
-          <span class="participation-label">Participación Activa KFL:</span>
+          <span class="participation-label">PARTICIPACIÓN ACTIVA KFL:</span>
           <div class="participation-badges" id="teamParticipationBadges">
             <!-- Insignias inyectadas dinámicamente -->
           </div>
         </div>
       </div>
 
-      <!-- NAVEGACIÓN PAGE-IN-A-PAGE (4 PESTAÑAS) -->
+      <!-- NAVEGACIÓN PAGE-IN-A-PAGE -->
       <div class="sub-tabs-bar">
         <button class="sub-tab-btn active" id="btn-tab-resena" onclick="selectTeamSubTab('resena')">Reseña</button>
         <button class="sub-tab-btn" id="btn-tab-roster" onclick="selectTeamSubTab('roster')">Roster Oficial</button>
@@ -189,12 +189,11 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS CON RUTAS REALES DE LOGOS -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
 
-    // BASE DE DATOS OFICIAL APUNTANDO A RUTAS EXACTAS EN assets/logos/
     const EQUIPOS_OFICIALES = {
       "AIP FIGHTING OWLS": {
         escuela: "Academia Interamericana de Panamá",
@@ -348,7 +347,6 @@
       document.getElementById('teamHeroSchool').innerText = meta.escuela;
       document.getElementById('teamHeroLogo').src = getTeamLogo(nombreEquipo);
 
-      // Datos de la Pestaña de Reseña
       document.getElementById('teamSchoolTitle').innerText = meta.escuela;
       document.getElementById('teamSchoolLogo').src = meta.logoColegio;
       document.getElementById('teamSchoolLink').href = meta.url;

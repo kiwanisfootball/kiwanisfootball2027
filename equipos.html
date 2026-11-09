@@ -191,6 +191,13 @@
 
   <!-- COMPONENTES JS CENTRALIZADOS Y MÓDULO DE EQUIPOS -->
   <script src="js/components.js"></script>
+
+  <!-- INICIALIZACIÓN DIRECTA GARANTIZADA -->
   <script src="js/equipos.js"></script>
+  <script>
+    if (typeof renderizarGridSelectorEquipos === 'function') {
+      renderizarGridSelectorEquipos();
+    }
+  </script>
 </body>
 </html>

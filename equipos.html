@@ -6,14 +6,14 @@
   <title>Equipos Oficiales - Kiwanis Football League Panamá</title>
 
   <!-- SEO, GEO & AEO Meta Tags -->
-  <meta name="description" content="Conoce los equipos oficiales de la Kiwanis Football League en Panamá. Historia, colegio representativo, rosters actualizados, categorías y estadísticas por equipo.">
-  <meta name="keywords" content="Equipos KFL, Equipos Kiwanis Football League, colegios KFL Panamá, rosters de equipos KFL, Contact Football Panamá, Flag Football Panamá">
+  <meta name="description" content="Conoce los equipos oficiales de la Kiwanis Football League en Panamá: AIP Fighting Owls, Brader Raiders, ECP Mighty Eagles, La Salle Spartans, CRP Lions, Balboa Dragons y Kiwanis Kolts.">
+  <meta name="keywords" content="Equipos KFL, AIP Fighting Owls, Brader Raiders, ECP Mighty Eagles, La Salle Spartans, CRP Lions, Balboa Dragons, Kiwanis Kolts, Kiwanis Football League">
   <link rel="canonical" href="https://www.kiwanisfootball.com/equipos.html">
 
   <!-- Open Graph / Social Media Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Equipos Oficiales - Kiwanis Football League Panamá">
-  <meta property="og:description" content="Perfiles oficiales, historia, rosters y calendario por equipo de la Kiwanis Football League Panamá.">
+  <meta property="og:description" content="Perfiles oficiales, historia, instituciones educativas, rosters y calendario por equipo de la Kiwanis Football League Panamá.">
   <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/KFL-logo.svg">
   <meta property="og:url" content="https://www.kiwanisfootball.com/equipos.html">
   <meta property="og:locale" content="es_PA">
@@ -64,7 +64,7 @@
     <!-- SELECTOR GENERAL DE EQUIPOS -->
     <section class="equipos-selector-section">
       <h2 class="equipos-selector-title">EQUIPOS KFL</h2>
-      <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, categorías activas, plantilla de jugadores y estadísticas.</p>
+      <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y estadísticas.</p>
       
       <div class="equipos-grid-selector" id="equiposGridSelector">
         <!-- Generado dinámicamente -->
@@ -112,11 +112,20 @@
         <button class="sub-tab-btn" id="btn-tab-estadisticas" onclick="selectTeamSubTab('estadisticas')">Estadísticas</button>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 1: RESEÑA -->
+      <!-- CONTENIDO PESTAÑA 1: RESEÑA E INSTITUCIÓN -->
       <div class="tab-pane active" id="pane-resena">
         <div class="team-card-pane">
-          <h3 class="pane-section-title">Historia y Representación Institucional</h3>
-          <div class="team-description-body" id="teamDescriptionText">
+          <div class="team-institution-header">
+            <div class="school-logo-wrap">
+              <img id="teamSchoolLogo" src="" alt="Logo Colegio" class="school-logo-img" onerror="this.src='assets/img/KFL-logo.svg'">
+            </div>
+            <div>
+              <h3 class="pane-section-title" id="teamSchoolTitle" style="border:none; margin:0; padding:0;">Institución Representada</h3>
+              <a id="teamSchoolLink" href="#" target="_blank" rel="noopener noreferrer" class="school-external-link">Visitar sitio web oficial ↗</a>
+            </div>
+          </div>
+
+          <div class="team-description-body" id="teamDescriptionText" style="margin-top:20px;">
             Cargando información del equipo...
           </div>
         </div>
@@ -154,7 +163,7 @@
         <div class="team-card-pane">
           <h3 class="pane-section-title">Próximos Partidos y Resultados</h3>
           <div id="teamCalendarContainer" style="margin-top: 15px;">
-            <p style="text-align: center; color: #64748b; padding: 20px;">Calendario sincronizado por equipo disponible al seleccionar una categoría.</p>
+            <p style="text-align: center; color: #64748b; padding: 20px;">Calendario sincronizado con el sistema de la Kiwanis Football League.</p>
           </div>
         </div>
       </div>
@@ -165,7 +174,7 @@
           <h3 class="pane-section-title">Ubicación en Tabla de Posiciones</h3>
           <div style="overflow-x: auto; margin-top: 15px;">
             <div id="teamStandingsContainer">
-              <p style="text-align: center; color: #64748b; padding: 20px;">Tabla de posiciones del equipo sincronizada con el módulo de ligas.</p>
+              <p style="text-align: center; color: #64748b; padding: 20px;">Tabla de posiciones sincronizada en tiempo real.</p>
             </div>
           </div>
         </div>
@@ -203,60 +212,68 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS CON RENDERIZADO GARANTIZADO -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS OFICIALES -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
 
-    // BASE DE DATOS INSTITUCIONAL Y PALETA DE COLORES DE EQUIPOS
-    const EQUIPOS_METADATA = {
-      "AIP EAGLES": {
-        escuela: "Academia Interamericana de Panamá (AIP)",
-        colorPrimario: "#002B49",
-        colorSecundario: "#C59B27",
-        resena: "Los AIP Eagles son una de las franquicias tradicionales de la Kiwanis Football League, destacándose por su disciplina táctica y alto nivel competitivo tanto en las modalidades de Contact Football Masculino como en Flag Football Femenino."
+    // BASE DE DATOS DE EQUIPOS OFICIALES KFL CON LOGOS EN RUTA ESPECÍFICA DE COLEGIOS
+    const EQUIPOS_OFICIALES = {
+      "AIP FIGHTING OWLS": {
+        escuela: "Academia Interamericana de Panamá",
+        url: "https://aip.edu.pa/",
+        logoColegio: "assets/img/colegios/aip.png",
+        colorPrimario: "#485592",
+        colorSecundario: "#caa35e",
+        resena: "Los AIP Fighting Owls representan a la Academia Interamericana de Panamá en las modalidades de Contact y Flag Football, manteniendo una destacada tradición competitiva y múltiples títulos dentro de la Kiwanis Football League."
       },
       "BRADER RAIDERS": {
         escuela: "Colegio Brader",
-        colorPrimario: "#800020",
-        colorSecundario: "#FFFFFF",
-        resena: "Con una trayectoria llena de campeonatos y tradición en las categorías deportivas escolares, los Brader Raiders representan el espíritu combativo y trabajo en equipo en la liga Kiwanis."
+        url: "https://colegiobrader.edu.pa/",
+        logoColegio: "assets/img/colegios/brader.png",
+        colorPrimario: "#9b9e9f",
+        colorSecundario: "#231f20",
+        resena: "Los Brader Raiders del Colegio Brader se caracterizan por su alto rendimiento técnico y espíritu deportivo, disputando los primeros puestos en todas las categorías formativas y juveniles de la KFL."
+      },
+      "ECP MIGHTY EAGLES": {
+        escuela: "El Colegio de Panamá",
+        url: "https://elcolegiodepanama.edu.pa/",
+        logoColegio: "assets/img/colegios/ecp.png",
+        colorPrimario: "#004e38",
+        colorSecundario: "#bcbdc0",
+        resena: "Los ECP Mighty Eagles representan al Colegio de Panamá en el emparrillado de la liga Kiwanis, enfocados en el desarrollo integral y la excelencia colectiva."
       },
       "LA SALLE SPARTANS": {
-        escuela: "Colegio La Salle",
-        colorPrimario: "#003366",
-        colorSecundario: "#FFCC00",
-        resena: "Los La Salle Spartans aportan mística, entrega e intensidad en cada juego de la KFL, respaldados por una sólida base estudiantil y programas deportivos de alto rendimiento."
+        escuela: "Colegio De La Salle",
+        url: "https://lasalle.edu.pa/",
+        logoColegio: "assets/img/colegios/lasalle.png",
+        colorPrimario: "#d93c35",
+        colorSecundario: "#ffffff",
+        resena: "Los La Salle Spartans aportan la entrega y mística tradicional del Colegio De La Salle en las divisiones de Contact Football y Flag Football Femenino."
       },
-      "KOLBE KOLTS": {
-        escuela: "Colegio San Agustín / Kolbe",
-        colorPrimario: "#1B4D3E",
-        colorSecundario: "#FFFFFF",
-        resena: "Los Kolbe Kolts se caracterizan por su agilidad táctica y desarrollo técnico desde las categorías formativas Micro y Mini hasta los niveles de alta competencia Varsity."
+      "CRP LIONS": {
+        escuela: "Colegio Real de Panamá",
+        url: "https://www.colegioreal.edu.pa/",
+        logoColegio: "assets/img/colegios/crp.png",
+        colorPrimario: "#fce070",
+        colorSecundario: "#0a4d90",
+        resena: "Los CRP Lions del Colegio Real de Panamá compiten activamente con garra y disciplina en el circuito escolar de la Kiwanis Football League."
       },
-      "OWLS": {
-        escuela: "Academia Interamericana de Costa del Este / Owls",
-        colorPrimario: "#333333",
-        colorSecundario: "#E65100",
-        resena: "La franquicia Owls combina versatilidad ofensiva y sólida ejecución defensiva, compitiendo activamente en las divisiones juveniles y varsity de la liga."
-      },
-      "DRAGONS": {
+      "BALBOA DRAGONS": {
         escuela: "Balboa Academy",
-        colorPrimario: "#1E3A8A",
-        colorSecundario: "#F59E0B",
-        resena: "Los Dragons de Balboa Academy representan tenacidad y garra en el emparrillado de la KFL, disputando podios en divisiones masculinas y femeninas."
+        url: "https://www.balboaacademy.edu.pa/",
+        logoColegio: "assets/img/colegios/balboa.png",
+        colorPrimario: "#2ec3e8",
+        colorSecundario: "#030506",
+        resena: "Los Balboa Dragons representan a Balboa Academy en las categorías competitivas de la KFL, combinando estrategia y fuerza atlética."
       },
-      "FIGHTING OWLS": {
-        escuela: "Academia Interamericana de Panamá",
-        colorPrimario: "#002B49",
-        colorSecundario: "#C59B27",
-        resena: "Representación tradicional en las categorías de flag football de la KFL."
-      },
-      "TITANS": {
-        escuela: "The Panama Prep School",
-        colorPrimario: "#4C1D95",
-        colorSecundario: "#10B981",
-        resena: "Los Titans integran fuerza y ejecución técnica en el desarrollo de atletas juveniles."
+      "KIWANIS KOLTS": {
+        escuela: "Equipo Abierto Kiwanis",
+        url: "https://www.kiwanisfootball.com",
+        logoColegio: "assets/img/colegios/kiwanis-kolts.png",
+        colorPrimario: "#f5eb14",
+        colorSecundario: "#000000",
+        resena: "Los Kiwanis Kolts conforman la franquicia de equipo abierto de la liga, permitiendo la integración y participación de jóvenes atletas de diversas comunidades."
       }
     };
 
@@ -270,7 +287,6 @@
       return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) || "assets/img/KFL-logo.svg";
     }
 
-    // INICIALIZACIÓN CON DOBLE VERIFICACIÓN (GARANTIZA RENDER)
     function inicializarModuloEquipos() {
       renderizarGridSelectorEquipos();
     }
@@ -285,16 +301,8 @@
       const grid = document.getElementById('equiposGridSelector');
       if (!grid) return;
 
-      const cfg = getKFLConfig();
-      let listaEquipos = Object.keys(EQUIPOS_METADATA);
-
-      if (cfg && cfg.EQUIPOS_LOGOS) {
-        const equiposConfig = Object.keys(cfg.EQUIPOS_LOGOS);
-        listaEquipos = [...new Set([...listaEquipos, ...equiposConfig])];
-      }
-
       grid.innerHTML = '';
-      listaEquipos.forEach(equipo => {
+      Object.keys(EQUIPOS_OFICIALES).forEach(equipo => {
         const logo = getTeamLogo(equipo);
         const card = document.createElement('div');
         card.className = 'equipo-selector-card';
@@ -309,7 +317,6 @@
       });
     }
 
-    // DETECTOR INTELIGENTE DE PARTICIPACIÓN
     function detectarParticipacionEquipo(nombreEquipo) {
       const cfg = getKFLConfig();
       const participaciones = [];
@@ -319,7 +326,7 @@
         for (const modalidad in cfg.CATEGORIAS_EQUIPOS) {
           for (const categoria in cfg.CATEGORIAS_EQUIPOS[modalidad]) {
             const lista = cfg.CATEGORIAS_EQUIPOS[modalidad][categoria] || [];
-            if (lista.some(item => item.toUpperCase().trim() === equipoUpper)) {
+            if (lista.some(item => item.toUpperCase().trim() === equipoUpper || equipoUpper.includes(item.toUpperCase().trim()))) {
               participaciones.push({
                 modalidad: modalidad.toUpperCase(),
                 categoria: categoria.toUpperCase()
@@ -329,7 +336,6 @@
         }
       }
 
-      // Si no se encuentra en la config global, asignar participaciones por defecto
       if (participaciones.length === 0) {
         participaciones.push(
           { modalidad: 'CONTACT', categoria: 'VARSITY' },
@@ -342,25 +348,24 @@
 
     function seleccionarEquipo(nombreEquipo) {
       currentSelectedTeam = nombreEquipo;
-      const meta = EQUIPOS_METADATA[nombreEquipo] || {
-        escuela: "Institución Educativa Representada",
-        colorPrimario: "#005eaa",
-        colorSecundario: "#eb3d40",
-        resena: `Perfil oficial y trayectoria deportiva de ${nombreEquipo} en la Kiwanis Football League.`
-      };
+      const meta = EQUIPOS_OFICIALES[nombreEquipo];
 
-      // 1. Inyección cromática en el Hero Banner
       const hero = document.getElementById('teamHeroBanner');
-      hero.style.background = `linear-gradient(135deg, ${meta.colorPrimario} 0%, rgba(15,23,42,0.92) 100%)`;
-      hero.style.borderBottom = `4px solid ${meta.colorSecundario}`;
+      hero.style.background = `linear-gradient(135deg, ${meta.colorPrimario} 0%, rgba(15,23,42,0.95) 100%)`;
+      hero.style.borderBottom = `5px solid ${meta.colorSecundario}`;
 
       document.getElementById('teamHeroTitle').innerText = nombreEquipo;
-      document.getElementById('teamHeroTitle').style.color = "#FFFFFF";
+      document.getElementById('teamHeroTitle').style.color = meta.colorSecundario === "#ffffff" || meta.colorSecundario === "#FFFFFF" ? "#FFFFFF" : meta.colorSecundario;
       document.getElementById('teamHeroSchool').innerText = meta.escuela;
       document.getElementById('teamHeroLogo').src = getTeamLogo(nombreEquipo);
+
+      // Datos de la Pestaña de Reseña
+      document.getElementById('teamSchoolTitle').innerText = meta.escuela;
+      document.getElementById('teamSchoolLogo').src = meta.logoColegio;
+      document.getElementById('teamSchoolLink').href = meta.url;
       document.getElementById('teamDescriptionText').innerHTML = `<p>${meta.resena}</p>`;
 
-      // 2. Renderizar Insignias de Participación Inteligente
+      // Badges de Participación
       const participaciones = detectarParticipacionEquipo(nombreEquipo);
       const badgesContainer = document.getElementById('teamParticipationBadges');
       badgesContainer.innerHTML = '';
@@ -372,16 +377,12 @@
         badgesContainer.appendChild(badge);
       });
 
-      // 3. Poblar filtro de rosters según categorías en que participa
       poblarFiltroRosterCategorias(participaciones);
 
-      // Mostrar interfaz de perfil
       document.getElementById('teamPrompt').style.display = 'none';
       document.getElementById('teamProfileSection').style.display = 'block';
 
-      // Resetear pestaña activa a reseña
       selectTeamSubTab('resena');
-
       hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -414,7 +415,7 @@
       const tbody = document.getElementById('teamRosterTableBody');
       if (!currentSelectedTeam) return;
 
-      tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #64748b;">Consultando plantilla oficial...</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px; color: #64748b;">Consultando plantilla oficial de ${currentSelectedTeam}...</td></tr>`;
 
       setTimeout(() => {
         tbody.innerHTML = `

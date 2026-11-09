@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS CON CONEXIÓN ADAPTATIVA -->
+      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS CON CONEXIÓN COMPROBADA A GAS -->
       <div class="tab-pane" id="pane-partidos">
         <div class="team-card-pane">
           <div class="pane-header-actions">
@@ -192,7 +192,7 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS Y FETCH ADAPTATIVO A APPS SCRIPT -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS Y CLIENT-SIDE FILTERING DE APPS SCRIPT -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
@@ -263,6 +263,14 @@
       }
     };
 
+    function normalizarTexto(texto) {
+      if (!texto) return '';
+      return texto.toString()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .toUpperCase()
+        .trim();
+    }
+
     function getKFLConfig() {
       return (typeof KFL_CONFIG !== 'undefined') ? KFL_CONFIG : (window.KFL_CONFIG || null);
     }
@@ -272,7 +280,7 @@
       if (meta && meta.logoEquipo) return meta.logoEquipo;
 
       const cfg = getKFLConfig();
-      const cleanTeam = (teamName || "").toUpperCase().trim();
+      const cleanTeam = normalizarTexto(teamName);
       return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) || "assets/img/KFL-logo.svg";
     }
 
@@ -309,13 +317,16 @@
     function detectarParticipacionEquipo(nombreEquipo) {
       const cfg = getKFLConfig();
       const participaciones = [];
-      const equipoUpper = nombreEquipo.toUpperCase().trim();
+      const equipoUpper = normalizarTexto(nombreEquipo);
 
       if (cfg && cfg.CATEGORIAS_EQUIPOS) {
         for (const modalidad in cfg.CATEGORIAS_EQUIPOS) {
           for (const categoria in cfg.CATEGORIAS_EQUIPOS[modalidad]) {
             const lista = cfg.CATEGORIAS_EQUIPOS[modalidad][categoria] || [];
-            if (lista.some(item => item.toUpperCase().trim() === equipoUpper || equipoUpper.includes(item.toUpperCase().trim()))) {
+            if (lista.some(item => {
+              const itemNorm = normalizarTexto(item);
+              return itemNorm === equipoUpper || equipoUpper.includes(itemNorm) || itemNorm.includes(equipoUpper);
+            })) {
               participaciones.push({
                 modalidad: modalidad.toUpperCase(),
                 categoria: categoria.toUpperCase()
@@ -405,19 +416,19 @@
       }
     }
 
-    // CONEXIÓN ADAPTATIVA A LA API REAL DE GOOGLE SHEETS DE LA KFL
+    // CONSULTA COMPLETA A GAS Y FILTRADO RIGUROSO EN MEMORIA (CLIENT-SIDE)
     async function consultarCalendarioEquipoCategoria() {
       const container = document.getElementById('teamCalendarContainer');
       const select = document.getElementById('calendarCategorySelect');
       if (!container || !currentSelectedTeam || !select) return;
 
       const selectedVal = select.value; // ej: CONTACT_VARSITY
-      const [modalidad, categoria] = selectedVal.split('_');
+      const [modTarget, catTarget] = selectedVal.split('_');
 
       container.innerHTML = `
         <div style="text-align: center; padding: 30px; color: #64748b;">
           <p style="font-weight: 700; margin-bottom: 5px;">Cargando calendario oficial...</p>
-          <span style="font-size: 12px;">Sincronizando con la base de datos de la liga</span>
+          <span style="font-size: 12px;">Sincronizando con base de datos KFL</span>
         </div>
       `;
 
@@ -427,26 +438,42 @@
                          || (cfg && cfg.API_URL) 
                          || 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
 
-        // Petición limpia al endpoint
+        // Petición limpia directa a Google Apps Script
         const response = await fetch(endpoint);
         const data = await response.json();
         
-        const partidosRaw = Array.isArray(data) ? data : (data.partidos || data.schedule || data.data || []);
+        let partidosRaw = Array.isArray(data) ? data : (data.partidos || data.schedule || data.data || []);
+        
+        console.log("KFL Debug - Partidos cargados desde GAS:", partidosRaw.length);
 
-        const equipoClean = currentSelectedTeam.toUpperCase().trim();
-        const catTarget = categoria.toUpperCase().trim();
+        const equipoNorm = normalizarTexto(currentSelectedTeam);
+        const modNorm = normalizarTexto(modTarget);
+        const catNorm = normalizarTexto(catTarget);
 
-        // Filtro flexible por Equipo y por Categoría en el payload JSON
+        // Palabras clave reducidas del equipo para búsqueda flexible (ej: "OWLS", "RAIDERS")
+        const equipoKeywords = equipoNorm.split(' ').filter(word => word.length > 2);
+
         const partidosFiltrados = partidosRaw.filter(p => {
-          const local = (p.equipoLocal || p.local || p.Home || p.home || '').toString().toUpperCase().trim();
-          const visitante = (p.equipoVisitante || p.visitante || p.Away || p.away || '').toString().toUpperCase().trim();
-          const pCat = (p.categoria || p.Categoria || p.category || p.Category || '').toString().toUpperCase().trim();
+          // Extraer cualquier propiedad posible de equipo local, visitante y categoría
+          const localStr = normalizarTexto(p.equipoLocal || p.local || p.Home || p.home || p.Equipo1 || p.equipo1);
+          const visitanteStr = normalizarTexto(p.equipoVisitante || p.visitante || p.Away || p.away || p.Equipo2 || p.equipo2);
+          const catStr = normalizarTexto(p.categoria || p.Categoria || p.category || p.Category || p.liga || p.Liga);
+          const modStr = normalizarTexto(p.modalidad || p.Modalidad || p.tipo || p.Tipo);
 
-          const coincideEquipo = local.includes(equipoClean) || visitante.includes(equipoClean) || equipoClean.includes(local) || equipoClean.includes(visitante);
-          const coincideCategoria = pCat === '' || pCat.includes(catTarget);
+          // Verificar si coincide el equipo
+          const coincideLocal = localStr.includes(equipoNorm) || equipoKeywords.some(kw => localStr.includes(kw));
+          const coincideVisitante = visitanteStr.includes(equipoNorm) || equipoKeywords.some(kw => visitanteStr.includes(kw));
+          const coincideEquipo = coincideLocal || coincideVisitante;
+
+          // Verificar si coincide la categoría o si la categoría viene vacía en el registro
+          const coincideCategoria = (catStr === '') 
+            || (catStr.includes(catNorm)) 
+            || (modStr.includes(modNorm) && catStr.includes(catNorm));
 
           return coincideEquipo && coincideCategoria;
         });
+
+        console.log(`KFL Debug - Partidos filtrados para ${currentSelectedTeam} (${modTarget} ${catTarget}):`, partidosFiltrados.length);
 
         if (partidosFiltrados.length === 0) {
           container.innerHTML = `
@@ -459,14 +486,15 @@
 
         let html = `<div class="team-schedule-cards-grid">`;
         partidosFiltrados.forEach(p => {
-          const local = p.equipoLocal || p.local || p.Home || p.home || 'Local';
-          const visitante = p.equipoVisitante || p.visitante || p.Away || p.away || 'Visitante';
+          const local = p.equipoLocal || p.local || p.Home || p.home || p.Equipo1 || p.equipo1 || 'Local';
+          const visitante = p.equipoVisitante || p.visitante || p.Away || p.away || p.Equipo2 || p.equipo2 || 'Visitante';
           const fecha = p.fecha || p.Fecha || p.date || 'Por definir';
           const hora = p.hora || p.Hora || p.time || '';
-          const cancha = p.cancha || p.Cancha || p.estadio || 'Costa del Este';
-          const marcadorLocal = p.marcadorLocal ?? p.score1 ?? p.MarcadorLocal;
-          const marcadorVisitante = p.marcadorVisitante ?? p.score2 ?? p.MarcadorVisitante;
-          const marcador = (marcadorLocal !== undefined && marcadorVisitante !== undefined) 
+          const cancha = p.cancha || p.Cancha || p.estadio || p.lugar || 'Costa del Este';
+          const marcadorLocal = p.marcadorLocal ?? p.score1 ?? p.MarcadorLocal ?? p.puntosLocal;
+          const marcadorVisitante = p.marcadorVisitante ?? p.score2 ?? p.MarcadorVisitante ?? p.puntosVisitante;
+          
+          const marcador = (marcadorLocal !== undefined && marcadorVisitante !== undefined && marcadorLocal !== "" && marcadorVisitante !== "") 
             ? `${marcadorLocal} - ${marcadorVisitante}` 
             : 'VS';
 

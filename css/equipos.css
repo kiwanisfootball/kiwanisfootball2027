@@ -6,41 +6,45 @@
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 20px 50px 20px;
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
   box-sizing: border-box;
 }
 
-/* SELECTOR DE EQUIPOS (4 ARRIBA Y 3 ABAJO CENTRADOS SIN BORDE AZUL EN HOVER) */
+/* HEADER SUPERIOR IDÉNTICO A LA PÁGINA DE CONÓCENOS / LIGAS */
 .equipos-selector-section {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .equipos-selector-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 34px;
+  font-size: clamp(44px, 5.5vw, 64px);
   color: var(--azul-kfl, #005eaa);
-  margin-bottom: 6px;
+  margin: 0 0 12px 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  line-height: 1;
 }
 
 .equipos-selector-sub {
-  font-size: 14px;
-  color: #64748b;
-  max-width: 720px;
-  margin: 0 auto 24px auto;
-  line-height: 1.5;
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: 500;
+  color: #475569;
+  max-width: 780px;
+  margin: 0 auto 32px auto;
+  line-height: 1.6;
 }
 
+/* GRID DE EQUIPOS (4 ARRIBA Y 3 ABAJO CENTRADOS) */
 .equipos-grid-selector {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  gap: 14px;
-  max-width: 820px;
+  gap: 16px;
+  max-width: 840px;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -49,8 +53,8 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-  padding: 16px 12px;
-  width: 170px;
+  padding: 18px 14px;
+  width: 175px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -73,7 +77,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .equipo-card-logo-wrap img {

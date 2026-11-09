@@ -7,7 +7,7 @@
 let currentSelectedTeam = null;
 let activeTeamSubTab = 'resena';
 
-// MASEO INSTITUCIONAL CON NOMBRES CORTOS EXACTOS DE KFL_CONFIG
+// ESTRUCTURA DE EQUIPOS ALINEADA CON KFL_CONFIG Y RECURSOS LOCALES
 const EQUIPOS_OFICIALES = {
   "OWLS": {
     nombreCompleto: "AIP FIGHTING OWLS",
@@ -101,10 +101,16 @@ function getTeamLogo(teamCodeOrName) {
   return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[norm]) || "assets/img/KFL-logo.svg";
 }
 
-// INICIALIZACIÓN
-document.addEventListener('DOMContentLoaded', () => {
+// INICIALIZACIÓN GARANTIZADA DE LA INTERFAZ DE EQUIPOS
+function inicializarModuloEquipos() {
   renderizarGridSelectorEquipos();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', inicializarModuloEquipos);
+} else {
+  inicializarModuloEquipos();
+}
 
 function renderizarGridSelectorEquipos() {
   const grid = document.getElementById('equiposGridSelector');
@@ -235,13 +241,12 @@ function deepExtractArray(obj) {
   return [];
 }
 
-// CONSULTA AL ENDPOINT CORRECTO SEGÚN CONFIG-LIGAS.JS
 async function consultarCalendarioEquipoCategoria() {
   const container = document.getElementById('teamCalendarContainer');
   const select = document.getElementById('calendarCategorySelect');
   if (!container || !currentSelectedTeam || !select) return;
 
-  const [modalidad, categoria] = select.value.split('_'); // ej: contact, juvenil
+  const [modalidad, categoria] = select.value.split('_');
   const metaTeam = EQUIPOS_OFICIALES[currentSelectedTeam];
 
   container.innerHTML = `
@@ -253,20 +258,16 @@ async function consultarCalendarioEquipoCategoria() {
 
   try {
     const cfg = getKFLConfig();
-    
-    // 1. Obtener la URL oficial del Apps Script desde KFL_CONFIG.API_CALENDARIO_URL
     const endpointUrl = cfg?.API_CALENDARIO_URL?.[modalidad];
 
     if (!endpointUrl) {
       throw new Error(`No hay API configurada para modalidad ${modalidad}`);
     }
 
-    // 2. Consultar enviando la categoría a la API de Calendario correspondiente
     const response = await fetch(`${endpointUrl}?action=getSchedule&categoria=${categoria}`);
     const data = await response.json();
     const partidosRaw = deepExtractArray(data);
 
-    // 3. Filtrar partidos donde participe el equipo (buscando por su código "OWLS" o nombre completo)
     const targetCode = normalizarTexto(currentSelectedTeam);
     const targetFullName = normalizarTexto(metaTeam.nombreCompleto);
 
@@ -289,7 +290,6 @@ async function consultarCalendarioEquipoCategoria() {
       return;
     }
 
-    // 4. Renderizar tarjetas de partidos
     let html = `<div class="team-schedule-cards-grid">`;
     partidosFiltrados.forEach(p => {
       const local = p.equipoLocal || p.local || p.Home || p.home || 'Local';

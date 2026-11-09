@@ -7,7 +7,7 @@
 let currentSelectedTeam = null;
 let activeTeamSubTab = 'resena';
 
-// ESTRUCTURA DE EQUIPOS ALINEADA CON KFL_CONFIG Y RECURSOS LOCALES
+// BASE DE DATOS LOCAL DE EQUIPOS KFL
 const EQUIPOS_OFICIALES = {
   "OWLS": {
     nombreCompleto: "AIP FIGHTING OWLS",
@@ -101,17 +101,6 @@ function getTeamLogo(teamCodeOrName) {
   return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[norm]) || "assets/img/KFL-logo.svg";
 }
 
-// INICIALIZACIÓN GARANTIZADA DE LA INTERFAZ DE EQUIPOS
-function inicializarModuloEquipos() {
-  renderizarGridSelectorEquipos();
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', inicializarModuloEquipos);
-} else {
-  inicializarModuloEquipos();
-}
-
 function renderizarGridSelectorEquipos() {
   const grid = document.getElementById('equiposGridSelector');
   if (!grid) return;
@@ -130,6 +119,16 @@ function renderizarGridSelectorEquipos() {
     `;
     grid.appendChild(card);
   });
+}
+
+function inicializarModuloEquipos() {
+  renderizarGridSelectorEquipos();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', inicializarModuloEquipos);
+} else {
+  inicializarModuloEquipos();
 }
 
 function detectarParticipacionEquipo(codeEquipo) {
@@ -151,7 +150,11 @@ function detectarParticipacionEquipo(codeEquipo) {
   }
 
   if (participaciones.length === 0) {
-    participaciones.push({ modalidad: 'CONTACT', categoria: 'VARSITY' });
+    participaciones.push(
+      { modalidad: 'CONTACT', categoria: 'VARSITY' },
+      { modalidad: 'CONTACT', categoria: 'JUVENIL' },
+      { modalidad: 'FLAG', categoria: 'VARSITY' }
+    );
   }
 
   return participaciones;
@@ -258,11 +261,8 @@ async function consultarCalendarioEquipoCategoria() {
 
   try {
     const cfg = getKFLConfig();
-    const endpointUrl = cfg?.API_CALENDARIO_URL?.[modalidad];
-
-    if (!endpointUrl) {
-      throw new Error(`No hay API configurada para modalidad ${modalidad}`);
-    }
+    const fallbackEndpoint = "https://script.google.com/macros/s/AKfycbxU6knUi6orz37wYKqv6hbf3k75l64gwRTxU2yB3LD8DBvRyw02ATEfJFm6rSXFC2WZ/exec";
+    const endpointUrl = cfg?.API_CALENDARIO_URL?.[modalidad] || fallbackEndpoint;
 
     const response = await fetch(`${endpointUrl}?action=getSchedule&categoria=${categoria}`);
     const data = await response.json();

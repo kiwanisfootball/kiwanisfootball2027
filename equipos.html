@@ -103,7 +103,7 @@
         </div>
       </div>
 
-      <!-- NAVEGACIÓN PAGE-IN-A-PAGE (4 PESTAÑAS SOLICITADAS) -->
+      <!-- NAVEGACIÓN PAGE-IN-A-PAGE -->
       <div class="sub-tabs-bar">
         <button class="sub-tab-btn active" id="btn-tab-resena" onclick="selectTeamSubTab('resena')">RESEÑA</button>
         <button class="sub-tab-btn" id="btn-tab-partidos" onclick="selectTeamSubTab('partidos')">CALENDARIOS</button>
@@ -130,12 +130,17 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS -->
+      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS CON CONEXIÓN Y FILTRO POR CATEGORÍA -->
       <div class="tab-pane" id="pane-partidos">
         <div class="team-card-pane">
-          <h3 class="pane-section-title">Calendario de Partidos y Resultados</h3>
-          <div id="teamCalendarContainer" style="margin-top: 15px;">
-            <p style="text-align: center; color: #64748b; padding: 20px;">Calendario sincronizado con el sistema oficial de la Kiwanis Football League.</p>
+          <div class="pane-header-actions">
+            <h3 class="pane-section-title" style="margin:0;">Calendario de Partidos y Resultados</h3>
+            <select id="calendarCategorySelect" class="kfl-filter-select" onchange="consultarCalendarioEquipoCategoria()">
+              <!-- Filtro dinámico inyectado -->
+            </select>
+          </div>
+          <div id="teamCalendarContainer" style="margin-top: 20px;">
+            <p style="text-align: center; color: #64748b; padding: 20px;">Selecciona una categoría para cargar el calendario de partidos.</p>
           </div>
         </div>
       </div>
@@ -144,9 +149,9 @@
       <div class="tab-pane" id="pane-roster">
         <div class="team-card-pane">
           <div class="pane-header-actions">
-            <h3 class="pane-section-title">Plantilla Oficial de Jugadores</h3>
+            <h3 class="pane-section-title" style="margin:0;">Plantilla Oficial de Jugadores</h3>
             <select id="rosterCategorySelect" class="kfl-filter-select" onchange="cargarRosterEquipoCategoria()">
-              <!-- Filtro de categoría activa -->
+              <!-- Filtro dinámico inyectado -->
             </select>
           </div>
           <div style="overflow-x: auto; margin-top: 15px;">
@@ -187,7 +192,7 @@
   <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA DE GESTIÓN DE EQUIPOS -->
+  <!-- LÓGICA DE GESTIÓN DE EQUIPOS Y CALENDARIO DINÁMICO POR APPS SCRIPT -->
   <script>
     let currentSelectedTeam = null;
     let activeTeamSubTab = 'resena';
@@ -359,7 +364,7 @@
         badgesContainer.appendChild(badge);
       });
 
-      poblarFiltroRosterCategorias(participaciones);
+      poblarFiltrosCategoria(participaciones);
 
       document.getElementById('teamPrompt').style.display = 'none';
       document.getElementById('teamProfileSection').style.display = 'block';
@@ -368,14 +373,19 @@
       hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function poblarFiltroRosterCategorias(participaciones) {
-      const select = document.getElementById('rosterCategorySelect');
-      select.innerHTML = '';
+    function poblarFiltrosCategoria(participaciones) {
+      const selectRoster = document.getElementById('rosterCategorySelect');
+      const selectCalendar = document.getElementById('calendarCategorySelect');
+      
+      let optionsHTML = '';
       participaciones.forEach(p => {
         const val = `${p.modalidad.toLowerCase()}_${p.categoria.toLowerCase()}`;
         const label = `${p.modalidad} ${p.categoria}`;
-        select.innerHTML += `<option value="${val}">${label}</option>`;
+        optionsHTML += `<option value="${val}">${label}</option>`;
       });
+
+      if (selectRoster) selectRoster.innerHTML = optionsHTML;
+      if (selectCalendar) selectCalendar.innerHTML = optionsHTML;
     }
 
     function selectTeamSubTab(subTab) {
@@ -390,6 +400,96 @@
 
       if (subTab === 'roster') {
         cargarRosterEquipoCategoria();
+      } else if (subTab === 'partidos') {
+        consultarCalendarioEquipoCategoria();
+      }
+    }
+
+    // CONEXIÓN Y FILTRADO REAL DEL CALENDARIO POR APPS SCRIPT
+    async function consultarCalendarioEquipoCategoria() {
+      const container = document.getElementById('teamCalendarContainer');
+      const select = document.getElementById('calendarCategorySelect');
+      if (!container || !currentSelectedTeam || !select) return;
+
+      const categoriaVal = select.value;
+      container.innerHTML = `
+        <div style="text-align: center; padding: 30px; color: #64748b;">
+          <p style="font-weight: 700; margin-bottom: 5px;">Cargando calendario oficial...</p>
+          <span style="font-size: 12px;">Consultando base de datos KFL</span>
+        </div>
+      `;
+
+      try {
+        const cfg = getKFLConfig();
+        const endpoint = (cfg && cfg.ENDPOINTS && cfg.ENDPOINTS.CALENDARIO_TIKER) 
+                         || (cfg && cfg.API_URL) 
+                         || 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
+
+        const response = await fetch(`${endpoint}?action=getSchedule&categoria=${categoriaVal}`);
+        const data = await response.json();
+        
+        const partidosRaw = Array.isArray(data) ? data : (data.partidos || data.schedule || []);
+
+        // Filtrar partidos donde participe el equipo activo
+        const equipoClean = currentSelectedTeam.toUpperCase().trim();
+        const partidosEquipo = partidosRaw.filter(p => {
+          const local = (p.equipoLocal || p.local || '').toUpperCase().trim();
+          const visitante = (p.equipoVisitante || p.visitante || '').toUpperCase().trim();
+          return local.includes(equipoClean) || visitante.includes(equipoClean) || equipoClean.includes(local) || equipoClean.includes(visitante);
+        });
+
+        if (partidosEquipo.length === 0) {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 30px; background: #f8fafc; border-radius: 12px; border: 1px dashed #cbd5e1;">
+              <p style="color: #475569; font-weight: 700; margin: 0;">No se encontraron partidos programados para ${currentSelectedTeam} en esta categoría.</p>
+            </div>
+          `;
+          return;
+        }
+
+        // Renderizado de tarjetas de calendario
+        let html = `<div class="team-schedule-cards-grid">`;
+        partidosEquipo.forEach(p => {
+          const local = p.equipoLocal || p.local || 'Local';
+          const visitante = p.equipoVisitante || p.visitante || 'Visitante';
+          const fecha = p.fecha || 'Por definir';
+          const hora = p.hora || '';
+          const cancha = p.cancha || p.estadio || 'Costa del Este';
+          const marcador = (p.marcadorLocal !== undefined && p.marcadorVisitante !== undefined) 
+            ? `${p.marcadorLocal} - ${p.marcadorVisitante}` 
+            : 'VS';
+
+          html += `
+            <div class="schedule-match-card">
+              <div class="match-card-meta">
+                <span>📅 ${fecha} ${hora ? '• ' + hora : ''}</span>
+                <span>📍 ${cancha}</span>
+              </div>
+              <div class="match-card-teams">
+                <div class="match-team-col">
+                  <img src="${getTeamLogo(local)}" width="36" height="36" alt="${local}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${local}</span>
+                </div>
+                <div class="match-score-badge">${marcador}</div>
+                <div class="match-team-col">
+                  <img src="${getTeamLogo(visitante)}" width="36" height="36" alt="${visitante}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${visitante}</span>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+        container.innerHTML = html;
+
+      } catch (err) {
+        console.warn("Error al consultar el calendario desde Google Sheets:", err);
+        container.innerHTML = `
+          <div style="text-align: center; padding: 25px; background: #fff1f2; border-radius: 12px; border: 1px solid #fecdd3; color: #9f1239;">
+            <p style="font-weight: 700; margin-bottom: 4px;">Sincronización en curso</p>
+            <p style="font-size: 13px; margin: 0;">El calendario oficial para esta categoría se actualizará con la publicación del fixture semanal de la KFL.</p>
+          </div>
+        `;
       }
     }
 

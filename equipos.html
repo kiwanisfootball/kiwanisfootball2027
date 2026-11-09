@@ -61,10 +61,10 @@
 
   <main class="equipos-container">
 
-    <!-- HEADER SUPERIOR (AJUSTADO EN TAMAÑO PROPORCIONAL) -->
+    <!-- HEADER SUPERIOR -->
     <section class="equipos-selector-section">
       <h1 class="equipos-selector-title">EQUIPOS</h1>
-      <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y calendario.</p>
+      <p class="equipos-selector-sub">Selecciona un equipo para explorar su perfil institucional, colegio que representa, categorías activas, plantilla de jugadores y palmarés.</p>
       
       <div class="equipos-grid-selector" id="equiposGridSelector">
         <!-- Generado dinámicamente -->
@@ -93,7 +93,7 @@
         </div>
       </section>
 
-      <!-- BARRA DE PARTICIPACIÓN ESTRUCTURADA Y CENTRADA -->
+      <!-- BARRA DE PARTICIPACIÓN -->
       <div class="team-participation-bar">
         <div class="participation-group">
           <span class="participation-label">PARTICIPACIÓN ACTIVA KFL:</span>
@@ -103,15 +103,15 @@
         </div>
       </div>
 
-      <!-- NAVEGACIÓN PAGE-IN-A-PAGE -->
+      <!-- NAVEGACIÓN PAGE-IN-A-PAGE (4 PESTAÑAS SOLICITADAS) -->
       <div class="sub-tabs-bar">
-        <button class="sub-tab-btn active" id="btn-tab-resena" onclick="selectTeamSubTab('resena')">Reseña</button>
-        <button class="sub-tab-btn" id="btn-tab-roster" onclick="selectTeamSubTab('roster')">Roster Oficial</button>
-        <button class="sub-tab-btn" id="btn-tab-partidos" onclick="selectTeamSubTab('partidos')">Calendario</button>
-        <button class="sub-tab-btn" id="btn-tab-posicion" onclick="selectTeamSubTab('posicion')">Posición</button>
+        <button class="sub-tab-btn active" id="btn-tab-resena" onclick="selectTeamSubTab('resena')">RESEÑA</button>
+        <button class="sub-tab-btn" id="btn-tab-partidos" onclick="selectTeamSubTab('partidos')">CALENDARIOS</button>
+        <button class="sub-tab-btn" id="btn-tab-roster" onclick="selectTeamSubTab('roster')">ROSTERS</button>
+        <button class="sub-tab-btn" id="btn-tab-palmares" onclick="selectTeamSubTab('palmares')">PALMARÉS</button>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 1: RESEÑA E INSTITUCIÓN -->
+      <!-- CONTENIDO PESTAÑA 1: RESEÑA -->
       <div class="tab-pane active" id="pane-resena">
         <div class="team-card-pane">
           <div class="team-institution-header">
@@ -130,7 +130,17 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 2: ROSTER OFICIAL -->
+      <!-- CONTENIDO PESTAÑA 2: CALENDARIOS -->
+      <div class="tab-pane" id="pane-partidos">
+        <div class="team-card-pane">
+          <h3 class="pane-section-title">Calendario de Partidos y Resultados</h3>
+          <div id="teamCalendarContainer" style="margin-top: 15px;">
+            <p style="text-align: center; color: #64748b; padding: 20px;">Calendario sincronizado con el sistema oficial de la Kiwanis Football League.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENIDO PESTAÑA 3: ROSTERS -->
       <div class="tab-pane" id="pane-roster">
         <div class="team-card-pane">
           <div class="pane-header-actions">
@@ -157,24 +167,12 @@
         </div>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 3: CALENDARIO -->
-      <div class="tab-pane" id="pane-partidos">
+      <!-- CONTENIDO PESTAÑA 4: PALMARÉS -->
+      <div class="tab-pane" id="pane-palmares">
         <div class="team-card-pane">
-          <h3 class="pane-section-title">Próximos Partidos y Resultados</h3>
-          <div id="teamCalendarContainer" style="margin-top: 15px;">
-            <p style="text-align: center; color: #64748b; padding: 20px;">Calendario sincronizado con el sistema de la Kiwanis Football League.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- CONTENIDO PESTAÑA 4: POSICIÓN -->
-      <div class="tab-pane" id="pane-posicion">
-        <div class="team-card-pane">
-          <h3 class="pane-section-title">Ubicación en Tabla de Posiciones</h3>
-          <div style="overflow-x: auto; margin-top: 15px;">
-            <div id="teamStandingsContainer">
-              <p style="text-align: center; color: #64748b; padding: 20px;">Tabla de posiciones sincronizada en tiempo real.</p>
-            </div>
+          <h3 class="pane-section-title">Títulos y Palmarés Histórico</h3>
+          <div id="teamPalmaresContainer" style="margin-top: 15px;">
+            <p style="text-align: center; color: #64748b; padding: 20px;">Historial de campeonatos y trofeos obtenidos en la KFL.</p>
           </div>
         </div>
       </div>
@@ -289,7 +287,6 @@
 
       grid.innerHTML = '';
       Object.keys(EQUIPOS_OFICIALES).forEach(equipo => {
-        const meta = EQUIPOS_OFICIALES[equipo];
         const logoEquipo = getTeamLogo(equipo);
         const card = document.createElement('div');
         card.className = 'equipo-selector-card';
@@ -299,7 +296,6 @@
             <img src="${logoEquipo}" alt="${equipo}" class="logo-equipo-img" loading="lazy" width="56" height="56" onerror="this.src='assets/img/KFL-logo.svg'">
           </div>
           <span class="equipo-card-name">${equipo}</span>
-          <span class="equipo-card-school">${meta.escuela}</span>
         `;
         grid.appendChild(card);
       });

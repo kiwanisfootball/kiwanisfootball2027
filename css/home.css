@@ -293,7 +293,7 @@ img, video, canvas, svg {
 .promo-dot.active { background: #005EAA; width: 26px; border-radius: 10px; }
 .promo-dot:focus-visible { outline: 2px solid #005EAA; outline-offset: 3px; }
 
-/* ===== SLIDER DE BANNERS RESPONSIVO Y LIMPIO ===== */
+/* ===== SLIDER DE BANNERS RESPONSIVO PERFECTO (SIN HUECOS BLANCOS) ===== */
 .promo-banner-section {
   width: 100%;
   max-width: 1100px;
@@ -305,31 +305,42 @@ img, video, canvas, svg {
 .slider-container {
   position: relative;
   width: 100%;
+  aspect-ratio: 1200 / 250; /* Mantiene la proporción exacta horizontal en desktop y tablet */
   border-radius: 14px;
   overflow: hidden;
-  background: transparent;
+  background: #ffffff;
   box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 }
 
 .slide {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .slide.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 .slide a, 
 .slide img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain; /* Encaja la imagen completa sin cortar los lados */
+  background-color: #ffffff; /* Fondo blanco impecable para que se funda con la tarjeta */
   display: block;
-  object-fit: contain;
 }
 
+/* Ajuste específico para celulares para que el banner no quede muy delgado */
 @media (max-width: 768px) {
   .slider-container {
+    aspect-ratio: 16 / 9; /* Proporción ideal en móviles para evitar espacios vacíos */
     border-radius: 10px;
   }
 }

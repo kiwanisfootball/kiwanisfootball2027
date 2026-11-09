@@ -1,12 +1,12 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMA - MÓDULO EQUIPOS
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - EQUIPOS
    ========================================================================== */
 
 .equipos-container {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 30px 20px 50px 20px;
+  padding: 30px 16px 50px 16px;
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
   box-sizing: border-box;
 }
@@ -14,14 +14,14 @@
 /* HEADER SUPERIOR */
 .equipos-selector-section {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
 }
 
 .equipos-selector-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: clamp(36px, 4.5vw, 48px);
+  font-size: clamp(32px, 4.5vw, 48px);
   color: var(--azul-kfl, #005eaa);
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   text-transform: uppercase;
   letter-spacing: 1px;
   line-height: 1.1;
@@ -29,32 +29,39 @@
 
 .equipos-selector-sub {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: #475569;
   max-width: 780px;
-  margin: 0 auto 30px auto;
-  line-height: 1.6;
+  margin: 0 auto 24px auto;
+  line-height: 1.5;
+  padding: 0 10px;
 }
 
-/* GRID DE EQUIPOS (4 ARRIBA Y 3 ABAJO CENTRADOS) */
+/* GRID DE EQUIPOS (RESPONSIVE DE 2 COLUMNAS EN MÓVIL Y GRID FLUIDO EN DESKTOP) */
 .equipos-grid-selector {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  gap: 16px;
-  max-width: 840px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 720px;
   margin: 0 auto;
   box-sizing: border-box;
+  padding: 0 4px;
+}
+
+@media (min-width: 768px) {
+  .equipos-grid-selector {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
 }
 
 .equipo-selector-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 20px 14px;
-  width: 175px;
+  border-radius: 14px;
+  padding: 16px 10px;
+  width: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -72,12 +79,12 @@
 }
 
 .equipo-card-logo-wrap {
-  width: 56px;
-  height: 56px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .equipo-card-logo-wrap img {
@@ -88,28 +95,25 @@
 
 .equipo-card-name {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 900;
   color: #0f172a;
   text-transform: uppercase;
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 /* PROMPT DIRECTO SOBRE EL FONDO GENERAL */
 .equipos-select-prompt {
   text-align: center;
-  padding: 25px 20px;
-  font-size: 15px;
+  padding: 20px 16px;
+  font-size: 14px;
   color: #64748b;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background: transparent;
-  border: none;
-  box-shadow: none;
+  gap: 8px;
 }
 
 .prompt-icon-svg {
@@ -122,7 +126,7 @@
   position: relative;
   width: 100%;
   border-radius: 16px;
-  padding: 35px 25px;
+  padding: 30px 16px;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -131,19 +135,18 @@
   box-sizing: border-box;
   margin-bottom: 20px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .team-badge-wrapper {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  padding: 10px;
+  padding: 8px;
 }
 
 .team-badge-img {
@@ -155,19 +158,20 @@
 
 .team-hero-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 40px;
+  font-size: clamp(28px, 6vw, 40px);
   margin: 6px 0;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .team-school-tag {
-  font-size: 15px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding: 0 10px;
 }
 
 /* BARRA DE PARTICIPACIÓN */
@@ -175,8 +179,8 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-  padding: 20px 24px;
-  margin-bottom: 24px;
+  padding: 18px 16px;
+  margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
@@ -185,12 +189,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
 }
 
 .participation-label {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
   color: #334155;
   text-transform: uppercase;
@@ -203,20 +207,21 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  max-width: 650px;
+  gap: 8px;
+  width: 100%;
+  max-width: 600px;
   margin: 0 auto;
-  text-align: center;
 }
 
 .part-badge {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 800;
-  padding: 8px 16px;
-  border-radius: 30px;
+  padding: 7px 14px;
+  border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  white-space: nowrap;
 }
 
 .part-badge.contact-badge {
@@ -234,31 +239,32 @@
 /* SUB PESTAÑAS (PAGE-IN-A-PAGE) */
 .sub-tabs-bar {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
   max-width: 900px;
-  margin: 0 auto 24px auto;
+  margin: 0 auto 20px auto;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 640px) {
   .sub-tabs-bar {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 .sub-tab-btn {
-  padding: 10px 12px;
+  padding: 10px 10px;
   background: #ffffff;
   border: 2px solid #cbd5e1;
-  border-radius: 30px;
+  border-radius: 24px;
   color: #64748b;
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 800;
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.2s ease;
   text-align: center;
+  white-space: nowrap;
 }
 
 .sub-tab-btn.active {
@@ -276,33 +282,54 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-  padding: 28px 32px;
+  padding: 20px 16px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+@media (min-width: 640px) {
+  .team-card-pane {
+    padding: 28px 32px;
+  }
 }
 
 .pane-section-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 22px;
+  font-size: 20px;
   color: #0f172a;
-  margin: 0 0 16px 0;
+  margin: 0 0 14px 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   border-bottom: 2px solid #f1f5f9;
   padding-bottom: 8px;
 }
 
+@media (min-width: 640px) {
+  .pane-section-title {
+    font-size: 22px;
+  }
+}
+
 /* SECCIÓN COLEGIO INSTITUCIONAL */
 .team-institution-header {
   display: flex;
-  align-items: center;
-  gap: 20px;
-  padding-bottom: 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 16px;
   border-bottom: 2px solid #f1f5f9;
 }
 
+@media (min-width: 540px) {
+  .team-institution-header {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
 .school-logo-wrap {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -323,7 +350,7 @@
 .school-external-link {
   display: inline-block;
   margin-top: 6px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 800;
   color: var(--azul-kfl, #005eaa);
   text-decoration: none;
@@ -335,26 +362,47 @@
 }
 
 .team-description-body {
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 14px;
+  line-height: 1.6;
   color: #334155;
 }
 
-.pane-header-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+@media (min-width: 640px) {
+  .team-description-body {
+    font-size: 15px;
+  }
 }
 
-/* SELECTOR FILTRO CORREGIDO CON FLECHA PERSONALIZADA CENTRADA */
+/* ENCABEZADOS DE PESTAÑAS Y ACCIONES (ALINEACIÓN PERFECTA) */
+.pane-header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 640px) {
+  .pane-header-actions {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pane-header-actions .pane-section-title {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+/* SELECTOR FILTRO ALINEADO Y LIMPIO */
 .kfl-filter-select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  width: 100%;
   padding: 10px 38px 10px 16px;
-  border-radius: 30px;
+  border-radius: 24px;
   border: 1.5px solid #cbd5e1;
   background-color: #ffffff;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
@@ -370,6 +418,14 @@
   outline: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .kfl-filter-select {
+    width: auto;
+    min-width: 220px;
+  }
 }
 
 .kfl-filter-select:hover,
@@ -380,26 +436,32 @@
 /* TARJETAS DE CALENDARIO Y PARTIDOS */
 .team-schedule-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 768px) {
+  .team-schedule-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 }
 
 .schedule-match-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
-  padding: 16px;
+  padding: 14px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.02);
 }
 
 .match-card-meta {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   color: #64748b;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
   border-bottom: 1px dashed #cbd5e1;
 }
 
@@ -407,41 +469,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
 }
 
 .match-team-col {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90px;
+  width: 85px;
   text-align: center;
 }
 
 .match-team-name {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
   color: #0f172a;
   text-transform: uppercase;
-  margin-top: 6px;
+  margin-top: 4px;
   line-height: 1.2;
 }
 
 .match-score-badge {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--azul-kfl, #005eaa);
   background: #ffffff;
   border: 1px solid #cbd5e1;
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  white-space: nowrap;
 }
 
 /* TABLAS COMPACTAS */
 .roster-compact-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13.5px;
+  font-size: 13px;
 }
 
 .roster-compact-table th {
@@ -449,20 +512,20 @@
   color: var(--azul-kfl, #005eaa);
   font-weight: 900;
   text-transform: uppercase;
-  font-size: 11.5px;
-  padding: 12px;
+  font-size: 11px;
+  padding: 10px;
   border-bottom: 2.5px solid #cbd5e1;
   text-align: left;
 }
 
 .roster-compact-table td {
-  padding: 10px 12px;
+  padding: 10px;
   border-bottom: 1px solid #f1f5f9;
   color: #334155;
 }
 
 .cell-jersey-badge {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 16px;
+  font-size: 15px;
   color: var(--azul-kfl, #005eaa);
 }

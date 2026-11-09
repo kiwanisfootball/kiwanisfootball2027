@@ -111,7 +111,7 @@
         <button class="sub-tab-btn" id="btn-tab-palmares" onclick="selectTeamSubTab('palmares')">PALMARÉS</button>
       </div>
 
-      <!-- CONTENIDO PESTAÑA 1: RESEÑA -->
+      <!-- CONTENIDO PESTAÑA 1: RESEÑA (CON LOGO DE COLEGIO AMPLIADO) -->
       <div class="tab-pane active" id="pane-resena">
         <div class="team-card-pane">
           <div class="team-institution-header">
@@ -405,7 +405,6 @@
       }
     }
 
-    // CONEXIÓN Y FILTRADO REAL DEL CALENDARIO POR APPS SCRIPT
     async function consultarCalendarioEquipoCategoria() {
       const container = document.getElementById('teamCalendarContainer');
       const select = document.getElementById('calendarCategorySelect');
@@ -430,7 +429,6 @@
         
         const partidosRaw = Array.isArray(data) ? data : (data.partidos || data.schedule || []);
 
-        // Filtrar partidos donde participe el equipo activo
         const equipoClean = currentSelectedTeam.toUpperCase().trim();
         const partidosEquipo = partidosRaw.filter(p => {
           const local = (p.equipoLocal || p.local || '').toUpperCase().trim();
@@ -447,7 +445,6 @@
           return;
         }
 
-        // Renderizado de tarjetas de calendario
         let html = `<div class="team-schedule-cards-grid">`;
         partidosEquipo.forEach(p => {
           const local = p.equipoLocal || p.local || 'Local';

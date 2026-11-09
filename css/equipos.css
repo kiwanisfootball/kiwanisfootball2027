@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMA - MÓDULO EQUIPOS Y CALENDARIO
+   KIWANIS FOOTBALL LEAGUE PANAMA - MÓDULO EQUIPOS
    ========================================================================== */
 
 .equipos-container {
@@ -30,6 +30,7 @@
 .equipos-selector-sub {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
   font-size: clamp(14px, 1.8vw, 15px);
+  font-weight: 500;
   color: #475569;
   max-width: 780px;
   margin: 0 auto 30px auto;
@@ -290,26 +291,27 @@
   padding-bottom: 8px;
 }
 
-/* SECCIÓN COLEGIO INSTITUCIONAL */
+/* SECCIÓN COLEGIO INSTITUCIONAL (AMPLIADA DE 64PX A 90PX) */
 .team-institution-header {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding-bottom: 18px;
+  gap: 20px;
+  padding-bottom: 20px;
   border-bottom: 2px solid #f1f5f9;
 }
 
 .school-logo-wrap {
-  width: 64px;
-  height: 64px;
+  width: 90px;
+  height: 90px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 6px;
+  border-radius: 14px;
+  padding: 8px;
   background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
 .school-logo-img {
@@ -320,8 +322,8 @@
 
 .school-external-link {
   display: inline-block;
-  margin-top: 4px;
-  font-size: 12.5px;
+  margin-top: 6px;
+  font-size: 13px;
   font-weight: 800;
   color: var(--azul-kfl, #005eaa);
   text-decoration: none;

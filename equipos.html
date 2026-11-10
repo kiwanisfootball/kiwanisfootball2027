@@ -198,7 +198,6 @@
       }
     };
 
-    /* Fuentes de palmarés: mismas hojas CSV que campeones.html */
     const PALMARES_CSV = {
       contact: {
         varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1851185525&single=true&output=csv',
@@ -213,8 +212,6 @@
         micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1922547672&single=true&output=csv'
       }
     };
-
-    /* ---------- UTILIDADES ---------- */
 
     function normalizarTexto(txt) {
       if (txt === null || txt === undefined) return '';
@@ -250,8 +247,6 @@
       return n === largo || n === corto || n.includes(corto);
     }
 
-    /* ---------- CATEGORÍAS ---------- */
-
     function detectarParticipacionEquipo(nombreEquipo) {
       const cfg = getKFLConfig();
       const meta = EQUIPOS_OFICIALES[nombreEquipo];
@@ -280,8 +275,6 @@
       if (selRoster) selRoster.innerHTML = opts;
       if (selCal) selCal.innerHTML = opts;
     }
-
-    /* ---------- BASE DE DATOS CALENDARIO (igual que ligas.html) ---------- */
 
     const masterDBMemoria = {};
     const masterDBPromesas = {};
@@ -331,8 +324,6 @@
       const marca = (s) => s.includes('libre') || s.includes('descanso') || s === 'bye';
       return marca(hora) || marca(local) || marca(visit);
     }
-
-    /* ---------- SELECCIÓN DE EQUIPO ---------- */
 
     function inicializarModuloEquipos() {
       const grid = document.getElementById('equiposGridSelector');
@@ -400,8 +391,6 @@
       else if (subTab === 'palmares') cargarPalmaresEquipo();
     }
 
-    /* ---------- CALENDARIO ---------- */
-
     async function consultarCalendarioEquipoCategoria() {
       const container = document.getElementById('teamCalendarContainer');
       const select = document.getElementById('calendarCategorySelect');
@@ -423,7 +412,6 @@
           return;
         }
 
-        // Agrupa por semana, igual que ligas.html
         const porSemana = {};
         filtrados.forEach(p => {
           const semana = p.week || 'CALENDARIO';
@@ -485,8 +473,6 @@
       </div>`;
     }
 
-    /* ---------- ROSTERS ---------- */
-
     async function cargarRosterEquipoCategoria() {
       const tbody = document.getElementById('teamRosterTableBody');
       const select = document.getElementById('rosterCategorySelect');
@@ -527,7 +513,7 @@
       }
     }
 
-    /* ---------- PALMARÉS ---------- */
+    /* ---------- PALMARÉS PREMIUM DINÁMICO ---------- */
 
     const palmaresMemoria = {};
 
@@ -604,7 +590,7 @@
       const cont = document.getElementById('teamPalmaresContainer');
       if (!currentSelectedTeam) return;
 
-      cont.innerHTML = `<p style="text-align:center;color:#64748b;padding:20px;">Cargando palmarés...</p>`;
+      cont.innerHTML = `<p style="text-align:center;color:#64748b;padding:20px;font-weight:700;">Cargando palmarés histórico...</p>`;
 
       try {
         const resultados = await cargarTodasHojasPalmares();
@@ -629,30 +615,43 @@
         });
 
         if (porCategoria.length === 0) {
-          cont.innerHTML = mensajeVacio(`${currentSelectedTeam} aún no tiene campeonatos ni subcampeonatos registrados.`);
+          cont.innerHTML = mensajeVacio(`${currentSelectedTeam} aún no tiene campeonatos ni subcampeonatos registrados en el sistema.`);
           return;
         }
 
         cont.innerHTML = `
-          <div class="palmares-totales">
-            <div class="palmares-stat">
-              <span class="palmares-stat-num">${totalCampeon}</span>
-              <span class="palmares-stat-label">Campeonatos</span>
+          <div class="palmares-hero-stats">
+            <div class="palmares-stat-card">
+              <div class="palmares-stat-num">🏆 ${totalCampeon}</div>
+              <div class="palmares-stat-label">Total Campeonatos</div>
             </div>
-            <div class="palmares-stat">
-              <span class="palmares-stat-num">${totalSub}</span>
-              <span class="palmares-stat-label">Subcampeonatos</span>
+            <div class="palmares-stat-card">
+              <div class="palmares-stat-num">🥈 ${totalSub}</div>
+              <div class="palmares-stat-label">Total Subcampeonatos</div>
             </div>
           </div>
-          <h4 class="palmares-subtitulo">Desglose por modalidad y categoría</h4>
-          ${porCategoria.map(c => `
-            <div class="palmares-fila">
-              <div class="palmares-fila-titulo">${c.modalidad.toUpperCase()} ${c.categoria.toUpperCase()}</div>
-              <div class="palmares-fila-datos">
-                <span><strong>${c.titulos}</strong> campeonato(s)${c.anios.length ? ` · ${escapeHTML(c.anios.join(', '))}` : ''}</span>
-                <span><strong>${c.subs}</strong> subcampeonato(s)</span>
+          <div class="palmares-categories-grid">
+            ${porCategoria.map(c => `
+              <div class="palmares-cat-card ${c.modalidad.toLowerCase().includes('flag') ? 'flag-cat' : ''}">
+                <div class="palmares-cat-header">
+                  <h4 class="palmares-cat-name">${escapeHTML(c.modalidad.toUpperCase())} • ${escapeHTML(c.categoria.toUpperCase())}</h4>
+                  <div class="palmares-cat-badges">
+                    <span class="palmares-badge-pill pill-titles">🏆 ${c.titulos} Título(s)</span>
+                    <span class="palmares-badge-pill pill-subs">🥈 ${c.subs} Subcampeonato(s)</span>
+                  </div>
+                </div>
+                ${c.anios.length > 0 ? `
+                  <div class="palmares-years-section">
+                    <span class="palmares-years-label">Años de campeonato:</span>
+                    <div class="palmares-years-flex">
+                      ${c.anios.map(anio => `<span class="year-chip">${escapeHTML(anio)}</span>`).join('')}
+                    </div>
+                  </div>
+                ` : ''}
               </div>
-            </div>`).join('')}`;
+            `).join('')}
+          </div>
+        `;
 
       } catch (err) {
         console.error('Error palmarés:', err);

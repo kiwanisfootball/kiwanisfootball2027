@@ -201,7 +201,6 @@
   transform: translateY(-1px);
 }
 
-/* BARRA DE FILTROS DE CATEGORÍA (PÍLDORAS ESTRICTAS) */
 .ligas-container .ligas-filter-bar {
   display: none;
   gap: 12px;
@@ -257,7 +256,6 @@
   box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
 }
 
-/* SUB PESTAÑAS (PÍLDORAS) */
 .ligas-container .sub-tabs-bar {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -339,7 +337,7 @@ body.flag-theme-active .ligas-container .sub-tab-btn.active {
 .ligas-container .tab-pane { display: none; }
 .ligas-container .tab-pane.active { display: block; }
 
-/* FILTROS SELECTOR INTERNO (FLECHAS ALINEADAS Y PÍLDORA) */
+/* CONTENEDOR DE PÍLDORA SELECTOR PERSONALIZADA (IDÉNTICA A LA REFERENCIA) */
 .ligas-container .kfl-filter-bar {
   display: flex;
   gap: 12px;
@@ -351,27 +349,59 @@ body.flag-theme-active .ligas-container .sub-tab-btn.active {
   width: 100%;
 }
 
-.ligas-container .kfl-filter-select {
-  padding: 10px 18px;
-  border-radius: 50px;
-  border: 2px solid #cbd5e1;
+.kfl-custom-select-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
   background: #ffffff;
-  font-weight: 700;
-  color: #1e293b;
-  font-size: clamp(12px, 2.2vw, 13.5px);
+  border: 2px solid #cbd5e1;
+  border-radius: 50px;
+  padding: 10px 22px;
+  min-height: 48px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
   cursor: pointer;
-  outline: none;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-  min-height: 44px;
   box-sizing: border-box;
-  appearance: auto;
+  transition: border-color 0.2s;
+}
+
+.kfl-custom-select-wrapper:hover {
+  border-color: #94a3b8;
+}
+
+.kfl-custom-select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--fuente-titulos);
+  font-weight: 700;
+  color: #0f172a;
+  font-size: clamp(13px, 2.3vw, 15px);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding-right: 28px;
+  width: 100%;
+}
+
+.kfl-select-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  fill: #0f172a;
+  pointer-events: none;
 }
 
 .ligas-container .btn-export-pdf {
   background: var(--azul-kfl);
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 22px;
   font-size: clamp(12px, 2.2vw, 13.5px);
   font-weight: 800;
   border-radius: 50px;
@@ -381,9 +411,11 @@ body.flag-theme-active .ligas-container .sub-tab-btn.active {
   align-items: center;
   gap: 6px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  min-height: 44px;
+  min-height: 48px;
   white-space: nowrap;
   box-sizing: border-box;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 body.flag-theme-active .ligas-container .btn-export-pdf { background: var(--rojo-kfl); }

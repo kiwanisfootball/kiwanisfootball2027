@@ -86,14 +86,14 @@
     </div>
 
     <!-- 1.5 BOTÓN RESTABLECER SELECCIÓN (visible solo al elegir modalidad) -->
-<div class="ligas-reset-wrapper" id="resetWrapper">
-  <button type="button" class="ligas-reset-btn" id="btnResetSeleccion" onclick="resetSeleccion()">
-    <svg class="ligas-reset-icon" viewBox="0 0 24 24">
-      <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
-    </svg>
-    RESTABLECER SELECCIÓN
-  </button>
-</div>
+    <div class="ligas-reset-wrapper" id="resetWrapper">
+      <button type="button" class="ligas-reset-btn" id="btnResetSeleccion" onclick="resetSeleccion()">
+        <svg class="ligas-reset-icon" viewBox="0 0 24 24">
+          <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+        </svg>
+        RESTABLECER SELECCIÓN
+      </button>
+    </div>
 
     <!-- 2. CATEGORÍA (PÍLDORAS) -->
     <div class="ligas-filter-bar" id="filterBar">
@@ -553,7 +553,7 @@
       const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => {
         if (!t) return false;
         const up = t.toUpperCase().trim();
-        return up !== 'KFL' && up !== 'TODOS JUEGAN' && !up.includes('LIBRE') && !up.includes('DESCANSO') && !up.includes('BYE');
+        return up !== 'KFL' && !up.includes('KFL_') && !up.includes('KFL-') && !up.includes('LOGO') && up !== 'TODOS JUEGAN' && !up.includes('LIBRE') && !up.includes('DESCANSO') && !up.includes('BYE');
       }))];
 
       weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
@@ -1327,7 +1327,7 @@
       paginaActualStats = 1;
       currentSortColumn = null;
       currentSortDirection = 'asc';
-      document.getElementById('searchStatInput').value = '';
+      document.getElementById('searchStatInput.value = '';
       renderizarSeccionActivaStats();
     }
   </script>

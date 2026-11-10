@@ -38,7 +38,7 @@
   padding: 0 10px;
 }
 
-/* GRID FLEXIBLE Y LÍQUIDO CON CENTRADO AUTOMÁTICO */
+/* GRID FLEXIBLE Y LÍQUIDO CON CENTRADO AUTOMÁTICO DE FILAS INCOMPLETAS */
 .equipos-grid-selector {
   display: flex;
   flex-wrap: wrap;
@@ -51,7 +51,7 @@
   padding: 0 4px;
 }
 
-/* TARJETAS FLUIDAS */
+/* TARJETAS FLUIDAS DE EQUIPOS */
 .equipo-selector-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -186,7 +186,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
 
@@ -199,35 +199,27 @@
   text-align: center;
 }
 
-/* CONTENEDOR DE FILAS DE PÍLDORAS (SEPARACIÓN POR MODALIDAD) */
+/* CONTENEDOR DE PÍLDORAS FLUIDAS Y CENTRADAS */
 .participation-badges {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* CADA FILA DE PÍLDORAS CENTRADA Y UNIFORME */
-.badge-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 8px;
   width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
-/* PÍLDORAS CON ANCHO MÍNIMO FIJO PARA QUE TODAS TENGAN EL MISMO TAMAÑO */
+/* PÍLDORAS UNIFORMES Y FIJAS (SIN MODIFICAR EL JS) */
 .part-badge {
-  flex: 1 1 130px;
-  max-width: 170px;
-  min-width: 130px;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 155px;
+  height: 34px;
   font-size: 11px;
   font-weight: 800;
-  padding: 8px 12px;
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;

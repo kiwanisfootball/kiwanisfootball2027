@@ -208,36 +208,13 @@
     }
 
     function getKFLConfig() {
-      return (typeof KFL_CONFIG !== 'undefined') ? KFL_CONFIG : (window.KFL_CONFIG || null);
+      if (typeof KFL_CONFIG !== 'undefined') return KFL_CONFIG;
+      if (typeof window !== 'undefined' && window.KFL_CONFIG) return window.KFL_CONFIG;
+      return null;
     }
 
     function escapeHTML(txt) {
       return String(txt ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-    }
-
-    // Busca el valor de la primera clave existente en un objeto
-    function pick(obj, keys) {
-      for (const k of keys) {
-        if (obj[k] !== undefined && obj[k] !== null && obj[k] !== '') return obj[k];
-      }
-      return undefined;
-    }
-
-    // Extrae el primer array que encuentre en la respuesta (soporta respuestas anidadas)
-    function extraerArray(data) {
-      if (Array.isArray(data)) return data;
-      if (data && typeof data === 'object') {
-        for (const k in data) {
-          if (Array.isArray(data[k])) return data[k];
-        }
-        for (const k in data) {
-          if (data[k] && typeof data[k] === 'object') {
-            const r = extraerArray(data[k]);
-            if (r.length) return r;
-          }
-        }
-      }
-      return [];
     }
 
     function getTeamLogo(teamName) {
@@ -254,10 +231,10 @@
     function esDelEquipo(nombreCelda) {
       const meta = EQUIPOS_OFICIALES[currentSelectedTeam];
       const n = normalizarTexto(nombreCelda);
-      if (!n) return false;
+      if (!n || !meta) return false;
       const largo = normalizarTexto(currentSelectedTeam);
-      const corto = normalizarTexto(meta?.codigoShort);
-      return n === largo || n === corto || n.includes(corto);
+      const corto = normalizarTexto(meta.codigoShort);
+      return n === largo || n === corto;
     }
 
     /* ---------- CATEGORÍAS ---------- */
@@ -289,6 +266,60 @@
       const selCal = document.getElementById('calendarCategorySelect');
       if (selRoster) selRoster.innerHTML = opts;
       if (selCal) selCal.innerHTML = opts;
+    }
+
+    /* ---------- BASE DE DATOS (misma lógica que ligas.html) ---------- */
+
+    // Caché por liga: una sola petición modulo=all_data por liga
+    const masterDBMemoria = {};
+    const masterDBPromesas = {};
+
+    function fetchMasterDB(liga) {
+      const l = liga.toLowerCase();
+      if (masterDBMemoria[l]) return Promise.resolve(masterDBMemoria[l]);
+      if (masterDBPromesas[l]) return masterDBPromesas[l];
+
+      const cfg = getKFLConfig();
+      const apiUrl = cfg?.API_CALENDARIO_URL?.[l];
+      if (!apiUrl) return Promise.reject(new Error(`No hay URL de calendario configurada para ${liga.toUpperCase()}.`));
+
+      masterDBPromesas[l] = fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then(db => {
+          masterDBMemoria[l] = db;
+          return db;
+        })
+        .finally(() => { delete masterDBPromesas[l]; });
+
+      return masterDBPromesas[l];
+    }
+
+    // Extrae partidos de una liga/categoría, igual que getCategoryData de ligas.html
+    function getPartidosCategoria(db, liga, categoria) {
+      let scope = db;
+      if (scope.data && typeof scope.data === 'object') scope = scope.data;
+      if (scope.result && typeof scope.result === 'object') scope = scope.result;
+
+      const keyLiga = Object.keys(scope).find(k => k.toLowerCase() === liga.toLowerCase());
+      if (keyLiga && typeof scope[keyLiga] === 'object') scope = scope[keyLiga];
+
+      const keyCat = Object.keys(scope).find(k => k.toLowerCase() === categoria.toLowerCase());
+      if (!keyCat || !scope[keyCat]) return [];
+
+      const target = scope[keyCat];
+      return target.partidos || target.matches || target.calendario || (Array.isArray(target) ? target : []);
+    }
+
+    // Partido "libre" (bye/descanso): no es un enfrentamiento
+    function esPartidoLibre(p) {
+      const hora = String(p.time || p.hora || '').toLowerCase();
+      const local = String(p.home || p.local || '').toLowerCase();
+      const visit = String(p.away || p.visitante || '').toLowerCase();
+      const marca = (s) => s.includes('libre') || s.includes('descanso') || s === 'bye';
+      return marca(hora) || marca(local) || marca(visit);
     }
 
     /* ---------- SELECCIÓN DE EQUIPO ---------- */
@@ -366,25 +397,14 @@
       if (!currentSelectedTeam || !select || !select.value) return;
 
       const [modalidad, categoria] = select.value.split('_');
-      const cfg = getKFLConfig();
-      const url = cfg?.API_CALENDARIO_URL?.[modalidad];
-
       container.innerHTML = `<div style="text-align:center;padding:30px;color:#64748b;"><p style="font-weight:700;">Cargando calendario oficial...</p></div>`;
 
-      if (!url) {
-        container.innerHTML = mensajeVacio(`No hay URL de calendario configurada para ${modalidad.toUpperCase()}.`);
-        return;
-      }
-
       try {
-        const resp = await fetch(`${url}?action=getSchedule&categoria=${encodeURIComponent(categoria)}`);
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json();
-        const partidos = extraerArray(data);
+        const db = await fetchMasterDB(modalidad);
+        const partidos = getPartidosCategoria(db, modalidad, categoria);
 
         const filtrados = partidos.filter(p =>
-          esDelEquipo(pick(p, ['equipoLocal','local','Local','Home','home','Equipo1','equipo1'])) ||
-          esDelEquipo(pick(p, ['equipoVisitante','visitante','Visitante','Away','away','Equipo2','equipo2']))
+          !esPartidoLibre(p) && (esDelEquipo(p.home) || esDelEquipo(p.away))
         );
 
         if (filtrados.length === 0) {
@@ -392,38 +412,30 @@
           return;
         }
 
-        let html = `<div class="team-schedule-cards-grid">`;
-        filtrados.forEach(p => {
-          const local = pick(p, ['equipoLocal','local','Local','Home','home','Equipo1','equipo1']) || 'Local';
-          const visitante = pick(p, ['equipoVisitante','visitante','Visitante','Away','away','Equipo2','equipo2']) || 'Visitante';
-          const fecha = pick(p, ['fecha','Fecha','date','Date']) || 'Por definir';
-          const hora = pick(p, ['hora','Hora','time','Time']) || '';
-          const cancha = pick(p, ['cancha','Cancha','estadio','Estadio']) || '';
-          const sL = pick(p, ['marcadorLocal','score1','MarcadorLocal','Marcador Local']);
-          const sV = pick(p, ['marcadorVisitante','score2','MarcadorVisitante','Marcador Visitante']);
-          const marcador = (sL !== undefined && sV !== undefined) ? `${escapeHTML(sL)} - ${escapeHTML(sV)}` : 'VS';
-
-          html += `
+        container.innerHTML = `<div class="team-schedule-cards-grid">` + filtrados.map(p => {
+          const marcador = p.hasScore
+            ? `<div class="match-score-badge">${escapeHTML(p.scoreH)} - ${escapeHTML(p.scoreA)}</div>`
+            : `<div class="match-score-badge">VS</div>`;
+          return `
             <div class="schedule-match-card">
               <div class="match-card-meta">
-                <span>📅 ${escapeHTML(fecha)} ${hora ? '• ' + escapeHTML(hora) : ''}</span>
-                <span>📍 ${escapeHTML(cancha)}</span>
+                <span>📅 ${escapeHTML(p.date || 'Por confirmar')}</span>
+                <span>📍 ${escapeHTML(p.field || 'TBD')}</span>
               </div>
               <div class="match-card-teams">
                 <div class="match-team-col">
-                  <img src="${getTeamLogo(local)}" width="36" height="36" alt="${escapeHTML(local)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                  <span class="match-team-name">${escapeHTML(local)}</span>
+                  <img src="${getTeamLogo(p.home)}" width="36" height="36" alt="${escapeHTML(p.home)}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${escapeHTML(p.home)}</span>
                 </div>
-                <div class="match-score-badge">${marcador}</div>
+                ${marcador}
                 <div class="match-team-col">
-                  <img src="${getTeamLogo(visitante)}" width="36" height="36" alt="${escapeHTML(visitante)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                  <span class="match-team-name">${escapeHTML(visitante)}</span>
+                  <img src="${getTeamLogo(p.away)}" width="36" height="36" alt="${escapeHTML(p.away)}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${escapeHTML(p.away)}</span>
                 </div>
               </div>
+              ${!p.hasScore ? `<div class="match-card-meta" style="justify-content:center;"><span>🕒 ${escapeHTML(p.time || 'TBD')}</span></div>` : ''}
             </div>`;
-        });
-        html += `</div>`;
-        container.innerHTML = html;
+        }).join('') + `</div>`;
 
       } catch (err) {
         console.error('Error calendario:', err);
@@ -437,7 +449,7 @@
       </div>`;
     }
 
-    /* ---------- ROSTERS ---------- */
+    /* ---------- ROSTERS (misma lógica que abrirRosterEquipo de ligas.html) ---------- */
 
     async function cargarRosterEquipoCategoria() {
       const tbody = document.getElementById('teamRosterTableBody');
@@ -446,41 +458,36 @@
 
       const [modalidad, categoria] = select.value.split('_');
       const cfg = getKFLConfig();
-      const url = cfg?.API_ROSTERS_URL?.[modalidad]?.[categoria];
-
+      const apiUrl = cfg?.API_ROSTERS_URL?.[modalidad]?.[categoria] || "";
       const fila = (html) => `<tr><td colspan="4" style="text-align:center;padding:20px;color:#64748b;">${html}</td></tr>`;
 
-      if (!url) {
-        tbody.innerHTML = fila('Plantilla aún no disponible para esta categoría.');
+      if (!apiUrl) {
+        tbody.innerHTML = fila('Rosters de esta categoría próximamente disponibles.');
         return;
       }
 
       tbody.innerHTML = fila(`Consultando plantilla de ${escapeHTML(currentSelectedTeam)}...`);
 
       try {
-        const resp = await fetch(`${url}?action=getRoster`);
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json();
-        const jugadores = extraerArray(data).filter(j => {
-          const equipo = pick(j, ['equipo','Equipo','team','Team','Franquicia']);
-          return esDelEquipo(equipo);
-        });
+        const url = `${apiUrl}?action=getPublicRoster&sheetName=${encodeURIComponent(currentSelectedTeam)}&_t=${Date.now()}`;
+        const res = await fetch(url);
+        const data = await res.json();
 
-        if (jugadores.length === 0) {
-          tbody.innerHTML = fila(`No hay jugadores registrados para ${escapeHTML(currentSelectedTeam)} en esta categoría.`);
+        if (data.status !== 'success' || !Array.isArray(data.players) || data.players.length === 0) {
+          tbody.innerHTML = fila('No hay jugadores registrados oficialmente aún.');
           return;
         }
 
-        tbody.innerHTML = jugadores.map((j, i) => `
+        tbody.innerHTML = data.players.map((j, i) => `
           <tr>
             <td style="text-align:center;font-weight:800;">${i + 1}</td>
-            <td>${escapeHTML(pick(j, ['nombre','Nombre','name','Name']) || '')}</td>
-            <td>${escapeHTML(pick(j, ['apellido','Apellido','lastName','Apellidos']) || '')}</td>
-            <td style="text-align:center;"><span class="cell-jersey-badge">#${escapeHTML(pick(j, ['dorsal','Dorsal','numero','Numero','jersey','#']) || '-')}</span></td>
+            <td>${escapeHTML(j.nombre || j.name || '')}</td>
+            <td>${escapeHTML(j.apellido || j.lastName || '')}</td>
+            <td style="text-align:center;"><span class="cell-jersey-badge">#${escapeHTML(j.dorsal ?? j.jersey ?? '-')}</span></td>
           </tr>`).join('');
       } catch (err) {
         console.error('Error roster:', err);
-        tbody.innerHTML = fila(`No se pudo cargar la plantilla. Detalle: ${escapeHTML(err.message)}`);
+        tbody.innerHTML = fila(`Error al conectar con la base de datos del equipo. Detalle: ${escapeHTML(err.message)}`);
       }
     }
 

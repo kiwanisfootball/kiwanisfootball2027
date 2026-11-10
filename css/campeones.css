@@ -1,12 +1,12 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMA - CSS DE CAMPEONES
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - CAMPEONES
    ========================================================================== */
 
 .champs-container {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: clamp(12px, 3vw, 20px);
   font-family: var(--fuente-cuerpo);
   box-sizing: border-box;
 }
@@ -21,7 +21,7 @@
               url('../assets/img/rings.jpg') center/cover no-repeat;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
   margin-bottom: 25px;
-  padding: 35px 25px 30px 25px;
+  padding: clamp(25px, 5vw, 35px) clamp(15px, 4vw, 25px);
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
 
 .champs-hero-title {
   font-family: var(--fuente-titulos);
-  font-size: 40px;
+  font-size: clamp(28px, 6vw, 40px);
   font-weight: 400;
   color: #ffffff;
   text-transform: uppercase;
@@ -55,7 +55,7 @@
 
 .champs-hero-description {
   font-family: var(--fuente-cuerpo);
-  font-size: 16px;
+  font-size: clamp(13px, 2.5vw, 16px);
   line-height: 1.65;
   color: #f8fafc;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
@@ -121,7 +121,7 @@
 /* BOTONES DE MODALIDAD */
 .champs-modality-bar {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   margin-bottom: 25px;
   justify-content: center;
   width: 100%;
@@ -134,9 +134,9 @@
   background: #ffffff;
   color: #334155;
   border: 2px solid #cbd5e1;
-  padding: 16px 24px;
+  padding: 14px 20px;
   font-family: var(--fuente-titulos);
-  font-size: 22px;
+  font-size: clamp(16px, 4vw, 22px);
   letter-spacing: 1px;
   text-transform: uppercase;
   border-radius: 50px;
@@ -180,14 +180,14 @@
 
 .champs-filter-btn {
   flex: 1;
-  min-width: 120px;
+  min-width: 110px;
   max-width: 180px;
   background: #ffffff;
   color: #334155;
   border: 2px solid #cbd5e1;
-  padding: 10px 16px;
+  padding: 11px 18px;
   font-family: var(--fuente-titulos);
-  font-size: 18px;
+  font-size: clamp(14px, 3vw, 18px);
   letter-spacing: 0.5px;
   text-transform: uppercase;
   border-radius: 50px;
@@ -217,13 +217,13 @@
   box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
 }
 
-/* CARD DE MÁXIMO GANADOR / COUNTER (Centrado vertical y sin sombras en trofeo) */
+/* CARD DE MÁXIMO GANADOR / COUNTER (Centrado vertical estricto) */
 .champs-leaderboard-card {
   max-width: 850px;
   margin: 0 auto 25px auto;
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   border-radius: 16px;
-  padding: 20px 24px;
+  padding: clamp(16px, 3vw, 22px) clamp(16px, 4vw, 24px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -231,48 +231,23 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #ffffff;
   box-sizing: border-box;
-  gap: 20px;
+  gap: 16px;
   animation: fadeIn 0.4s ease-in-out;
   font-family: var(--fuente-cuerpo);
 }
 
 .champs-leaderboard-left {
   display: flex;
-  align-items: center;
-  gap: 18px;
-  flex: 1;
-}
-
-.champs-leaderboard-trophy-box {
-  width: 52px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
-  border: 1px solid rgba(234, 179, 8, 0.2);
-}
-
-.champs-leaderboard-trophy-png {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
-  /* Sombra removida según requerimiento */
-}
-
-.champs-leaderboard-info {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 6px;
   flex: 1;
+  min-width: 0;
 }
 
 .champs-leaderboard-label {
   font-family: var(--fuente-cuerpo);
-  font-size: 11px;
+  font-size: clamp(10px, 2vw, 11px);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -289,22 +264,27 @@
 .champs-leaderboard-team-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-wrap: nowrap;
+  min-width: 0;
 }
 
 .champs-leaderboard-team-logo {
-  width: 32px;
-  height: 32px;
+  width: clamp(26px, 5vw, 32px);
+  height: clamp(26px, 5vw, 32px);
   object-fit: contain;
   flex-shrink: 0;
 }
 
 .champs-leaderboard-team-name {
   font-family: var(--fuente-titulos);
-  font-size: 24px;
+  font-size: clamp(18px, 4vw, 24px);
   letter-spacing: 0.5px;
   color: #ffffff;
-  line-height: 1;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Insignia del Último Año */
@@ -315,26 +295,28 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 3px 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: clamp(10px, 2vw, 12px);
   font-weight: 600;
   color: #cbd5e1;
-  margin-left: 6px;
+  margin-left: 4px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* COUNTER PLANO (Sin animación ni sombreado) */
+/* COUNTER PLANO Y SIEMPRE CENTRADO */
 .champs-leaderboard-counter {
   background: rgba(15, 23, 42, 0.8);
   border: 2px solid #eab308;
   color: #ffffff;
-  padding: 8px 18px;
+  padding: 8px clamp(12px, 3vw, 18px);
   border-radius: 50px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   font-family: var(--fuente-cuerpo);
   font-weight: 800;
-  font-size: 13px;
+  font-size: clamp(11px, 2.2vw, 13px);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   white-space: nowrap;
@@ -343,7 +325,7 @@
 
 .champs-leaderboard-counter span.count-num {
   font-family: var(--fuente-titulos);
-  font-size: 26px;
+  font-size: clamp(20px, 4.5vw, 26px);
   color: #eab308;
   line-height: 1;
 }
@@ -353,7 +335,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* TABLAS POR CATEGORÍA */
+/* TABLAS POR CATEGORÍA (Con máxima liquidez y sin cortes) */
 .champs-category-section {
   display: none;
   margin-bottom: 35px;
@@ -365,6 +347,7 @@
   max-width: 850px;
   margin: 0 auto;
   width: 100%;
+  overflow-x: auto;
 }
 
 .champs-table {
@@ -378,27 +361,29 @@
   margin: 10px 0 20px 0;
   font-family: var(--fuente-cuerpo);
   table-layout: fixed;
+  min-width: 480px;
 }
 
 .champs-table th:nth-child(1),
-.champs-table td:nth-child(1) { width: 22%; }
+.champs-table td:nth-child(1) { width: 20%; }
 
 .champs-table th:nth-child(2),
-.champs-table td:nth-child(2) { width: 39%; }
+.champs-table td:nth-child(2) { width: 40%; }
 
 .champs-table th:nth-child(3),
-.champs-table td:nth-child(3) { width: 39%; }
+.champs-table td:nth-child(3) { width: 40%; }
 
 .champs-table th {
   background: var(--azul-kfl);
   color: #ffffff;
-  padding: 14px 16px;
+  padding: clamp(10px, 2.5vw, 14px) clamp(10px, 2.5vw, 16px);
   font-family: var(--fuente-cuerpo);
-  font-size: 13px;
+  font-size: clamp(11px, 2.2vw, 13px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-align: left;
+  white-space: nowrap;
 }
 
 body.flag-theme-active .champs-table th {
@@ -406,10 +391,10 @@ body.flag-theme-active .champs-table th {
 }
 
 .champs-table td {
-  padding: 14px 16px;
+  padding: clamp(10px, 2.5vw, 14px) clamp(10px, 2.5vw, 16px);
   text-align: left;
   border-bottom: 1px solid #f1f5f9;
-  font-size: 14px;
+  font-size: clamp(12px, 2.3vw, 14px);
   font-weight: 600;
   color: #334155;
   font-family: var(--fuente-cuerpo);
@@ -432,6 +417,13 @@ body.flag-theme-active .champs-table th {
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: var(--fuente-cuerpo);
+  min-width: 0;
+}
+
+.champs-team-cell span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .champs-team-logo {
@@ -445,6 +437,9 @@ body.flag-theme-active .champs-table th {
   color: var(--azul-kfl);
   font-weight: 800;
   font-family: var(--fuente-cuerpo);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 body.flag-theme-active .champs-team-name {
@@ -456,7 +451,7 @@ body.flag-theme-active .champs-team-name {
 .champs-category-prompt {
   text-align: center;
   padding: 35px 20px;
-  font-size: 16px;
+  font-size: clamp(13px, 2.5vw, 16px);
   color: #64748b;
   font-family: var(--fuente-cuerpo);
   font-weight: 700;
@@ -465,6 +460,7 @@ body.flag-theme-active .champs-team-name {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .prompt-icon-svg {
@@ -477,19 +473,16 @@ body.flag-theme-active .champs-team-name {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-  .champs-container { padding: 15px 10px; }
-  .champs-hero-banner { padding: 30px 15px; }
-  .champs-hero-title { font-size: 34px; }
-  .champs-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
-  .champs-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
-  .champs-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
+  .champs-container { padding: 12px 8px; }
+  .champs-hero-banner { padding: 25px 12px; }
+  .champs-hero-title { font-size: clamp(24px, 5.5vw, 34px); }
+  .champs-modality-bar { flex-direction: column; gap: 10px; align-items: stretch; }
+  .champs-modality-btn { max-width: 100%; width: 100%; font-size: 18px; padding: 12px; }
+  .champs-filter-btn { min-width: 45%; font-size: 14px; padding: 10px 12px; }
 
   .champs-leaderboard-card {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-  }
-  .champs-leaderboard-counter {
-    align-self: flex-start;
+    flex-direction: row;
+    align-items: center;
+    padding: 14px 16px;
   }
 }

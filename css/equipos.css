@@ -464,7 +464,7 @@
 }
 
 .kfl-week-title {
-  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-family: var(--fuente-cuerpo);
   font-size: 15px;
   color: var(--azul-kfl, #005eaa);
   text-transform: uppercase;

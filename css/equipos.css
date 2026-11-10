@@ -6,9 +6,15 @@
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 30px 16px 50px 16px;
+  padding: 30px 10px 50px 10px;
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
   box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .equipos-container {
+    padding: 30px 16px 50px 16px;
+  }
 }
 
 /* HEADER SUPERIOR */
@@ -38,25 +44,32 @@
   padding: 0 10px;
 }
 
-/* GRID DE EQUIPOS */
+/* GRID DE EQUIPOS: AJUSTADO PARA MANTENIMIENTO DE 2 COLUMNAS EN PANTALLAS ESTRECHAS */
 .equipos-grid-selector {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
-  gap: 16px;
+  gap: 10px;
   max-width: 860px;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0 4px;
+  padding: 0 2px;
+}
+
+@media (min-width: 420px) {
+  .equipos-grid-selector {
+    gap: 16px;
+    padding: 0 4px;
+  }
 }
 
 .equipo-selector-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
-  padding: 16px 12px;
-  flex: 1 1 180px;
+  padding: 14px 8px;
+  flex: 1 1 140px;
   max-width: 200px;
   box-sizing: border-box;
   display: flex;
@@ -66,6 +79,13 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+@media (min-width: 420px) {
+  .equipo-selector-card {
+    padding: 16px 12px;
+    flex: 1 1 180px;
+  }
 }
 
 .equipo-selector-card:hover {
@@ -91,12 +111,18 @@
 
 .equipo-card-name {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 900;
   color: #0f172a;
   text-transform: uppercase;
   text-align: center;
   line-height: 1.2;
+}
+
+@media (min-width: 420px) {
+  .equipo-card-name {
+    font-size: 11.5px;
+  }
 }
 
 .equipos-select-prompt {
@@ -291,7 +317,6 @@
   }
 }
 
-/* CONTENEDOR ESPECÍFICO DE PARTIDOS SIN PADDING LATERAL RESTRINGIDO EN MOBILE */
 #pane-partidos .team-card-pane {
   padding: 16px 8px;
 }
@@ -443,7 +468,7 @@
 }
 
 /* ==========================================================================
-   ESTILOS IDÉNTICOS A LIGAS.CSS (RESPONSIVE MÓVIL PERFECTO)
+   ESTILOS IDÉNTICOS A LIGAS.CSS
    ========================================================================== */
 
 .team-schedule-wrapper {
@@ -492,7 +517,6 @@ body.flag-theme-active .kfl-week-title {
   box-sizing: border-box;
 }
 
-/* HEADER AZUL FLUIDO Y ADAPTADO PARA DISPOSITIVOS MÓVILES PEQUEÑOS */
 .kfl-match-header {
   background: var(--azul-kfl, #005eaa);
   color: #ffffff;
@@ -589,7 +613,7 @@ body.flag-theme-active .kfl-match-header {
 }
 
 /* ==========================================================================
-   PALMARÉS PREMIUM (MODERNO, DINÁMICO Y RESPONSIVO)
+   PALMARÉS PREMIUM
    ========================================================================== */
 
 .palmares-hero-stats {

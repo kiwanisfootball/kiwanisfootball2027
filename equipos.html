@@ -138,10 +138,21 @@
 
       <div class="tab-pane" id="pane-palmares">
         <div class="team-card-pane">
-          <h3 class="pane-section-title">Títulos y Palmarés Histórico</h3>
-          <div id="teamPalmaresContainer" style="margin-top: 15px;">
-            <p style="text-align: center; color: #64748b; padding: 20px;">Historial de campeonatos y trofeos obtenidos en la KFL.</p>
+          <h3 class="pane-section-title">Palmarés Histórico</h3>
+
+          <div class="palmares-totales">
+            <div class="palmares-stat">
+              <span class="palmares-stat-num" id="palmaresTotalCampeon">0</span>
+              <span class="palmares-stat-label">Campeonatos</span>
+            </div>
+            <div class="palmares-stat">
+              <span class="palmares-stat-num" id="palmaresTotalSub">0</span>
+              <span class="palmares-stat-label">Subcampeonatos</span>
+            </div>
           </div>
+
+          <h4 class="palmares-subtitulo">Desglose por modalidad y categoría</h4>
+          <div id="palmaresDesglose"></div>
         </div>
       </div>
 
@@ -200,6 +211,22 @@
       }
     };
 
+    /* Fuentes de palmarés: mismas hojas CSV que campeones.html */
+    const PALMARES_CSV = {
+      contact: {
+        varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1851185525&single=true&output=csv',
+        juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1923785476&single=true&output=csv',
+        mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1354661673&single=true&output=csv',
+        micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=0&single=true&output=csv'
+      },
+      flag: {
+        varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1617652434&single=true&output=csv',
+        juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1984583554&single=true&output=csv',
+        mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1736736585&single=true&output=csv',
+        micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1922547672&single=true&output=csv'
+      }
+    };
+
     /* ---------- UTILIDADES ---------- */
 
     function normalizarTexto(txt) {
@@ -227,13 +254,14 @@
       return 'assets/img/KFL-logo.svg';
     }
 
+    // Verdadero si el nombre de la celda corresponde al equipo seleccionado
     function esDelEquipo(nombreCelda) {
       const meta = EQUIPOS_OFICIALES[currentSelectedTeam];
       const n = normalizarTexto(nombreCelda);
       if (!n || !meta) return false;
       const largo = normalizarTexto(currentSelectedTeam);
       const corto = normalizarTexto(meta.codigoShort);
-      return n === largo || n === corto;
+      return n === largo || n === corto || n.includes(corto);
     }
 
     /* ---------- CATEGORÍAS ---------- */
@@ -267,7 +295,7 @@
       if (selCal) selCal.innerHTML = opts;
     }
 
-    /* ---------- BASE DE DATOS ---------- */
+    /* ---------- BASE DE DATOS (misma lógica que ligas.html) ---------- */
 
     const masterDBMemoria = {};
     const masterDBPromesas = {};
@@ -383,9 +411,10 @@
 
       if (subTab === 'roster') cargarRosterEquipoCategoria();
       else if (subTab === 'partidos') consultarCalendarioEquipoCategoria();
+      else if (subTab === 'palmares') cargarPalmaresEquipo();
     }
 
-    /* ---------- CALENDARIO EXACTO A LIGAS.HTML ---------- */
+    /* ---------- CALENDARIO ---------- */
 
     async function consultarCalendarioEquipoCategoria() {
       const container = document.getElementById('teamCalendarContainer');
@@ -408,65 +437,30 @@
           return;
         }
 
-        const grupos = {};
-        filtrados.forEach(p => {
-          const semana = p.week || p.jornada || p.Jornada || 'JORNADA GENERAL';
-          if (!grupos[semana]) grupos[semana] = [];
-          grupos[semana].push(p);
-        });
-
-        let html = `<div class="team-schedule-wrapper">`;
-        for (const semana in grupos) {
-          html += `
-            <div class="kfl-week-group">
-              <h3 class="kfl-week-title">${escapeHTML(semana)}</h3>
-          `;
-          grupos[semana].forEach(p => {
-            const local = p.home || 'Local';
-            const visitante = p.away || 'Visitante';
-            const fecha = p.date || 'Por definir';
-            const cancha = p.field || 'CDE Sports Center';
-            
-            const scoreLoc = p.scoreH;
-            const scoreVis = p.scoreA;
-            const hasScore = p.hasScore;
-
-            const scoreHTML = hasScore 
-              ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${escapeHTML(scoreLoc)} - ${escapeHTML(scoreVis)}</div>`
-              : `<div class="kfl-score-vs">VS</div>${p.time ? '<span style="font-size:10px; font-weight:700; color:#64748b;">' + escapeHTML(p.time) + '</span>' : ''}`;
-
-            html += `
-              <div class="kfl-match-card">
-                <div class="kfl-match-header">
-                  <div class="kfl-info-item">
-                    <svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
-                    <span>${escapeHTML(fecha)}</span>
-                  </div>
-                  <div class="kfl-info-item">
-                    <svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <span>${escapeHTML(cancha)}</span>
-                  </div>
+        container.innerHTML = `<div class="team-schedule-cards-grid">` + filtrados.map(p => {
+          const marcador = p.hasScore
+            ? `<div class="match-score-badge">${escapeHTML(p.scoreH)} - ${escapeHTML(p.scoreA)}</div>`
+            : `<div class="match-score-badge">VS</div>`;
+          return `
+            <div class="schedule-match-card">
+              <div class="match-card-meta">
+                <span>📅 ${escapeHTML(p.date || 'Por confirmar')}</span>
+                <span>📍 ${escapeHTML(p.field || 'TBD')}</span>
+              </div>
+              <div class="match-card-teams">
+                <div class="match-team-col">
+                  <img src="${getTeamLogo(p.home)}" width="36" height="36" alt="${escapeHTML(p.home)}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${escapeHTML(p.home)}</span>
                 </div>
-                <div class="kfl-match-body">
-                  <div class="kfl-team-box">
-                    <img src="${getTeamLogo(local)}" class="kfl-team-logo" alt="${escapeHTML(local)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                    <span class="match-team-name">${escapeHTML(local)}</span>
-                  </div>
-                  <div class="kfl-score-box">
-                    ${scoreHTML}
-                  </div>
-                  <div class="kfl-team-box">
-                    <img src="${getTeamLogo(visitante)}" class="kfl-team-logo" alt="${escapeHTML(visitante)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                    <span class="match-team-name">${escapeHTML(visitante)}</span>
-                  </div>
+                ${marcador}
+                <div class="match-team-col">
+                  <img src="${getTeamLogo(p.away)}" width="36" height="36" alt="${escapeHTML(p.away)}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${escapeHTML(p.away)}</span>
                 </div>
               </div>
-            `;
-          });
-          html += `</div>`;
-        }
-        html += `</div>`;
-        container.innerHTML = html;
+              ${!p.hasScore ? `<div class="match-card-meta" style="justify-content:center;"><span>🕒 ${escapeHTML(p.time || 'TBD')}</span></div>` : ''}
+            </div>`;
+        }).join('') + `</div>`;
 
       } catch (err) {
         console.error('Error calendario:', err);
@@ -519,6 +513,136 @@
       } catch (err) {
         console.error('Error roster:', err);
         tbody.innerHTML = fila(`Error al conectar con la base de datos del equipo. Detalle: ${escapeHTML(err.message)}`);
+      }
+    }
+
+    /* ---------- PALMARÉS ---------- */
+
+    const palmaresMemoria = {};
+
+    function parseCSVPalmares(text) {
+      if (!text) return [];
+      return text.split(/\r?\n/).map(line => {
+        const result = [];
+        let inside = false;
+        let entry = '';
+        for (const ch of line) {
+          if (ch === '"') inside = !inside;
+          else if (ch === ',' && !inside) { result.push(entry.trim().replace(/^"|"$/g, '')); entry = ''; }
+          else entry += ch;
+        }
+        result.push(entry.trim().replace(/^"|"$/g, ''));
+        return result;
+      });
+    }
+
+    // Lee una hoja y devuelve filas válidas { season, campeon, subcampeon }
+    async function leerHojaPalmares(url) {
+      const res = await fetch(`${url}&_t=${Date.now()}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const rows = parseCSVPalmares(await res.text());
+
+      const validas = [];
+      let lastSeason = '';
+      for (const row of rows) {
+        if (!row || row.length < 2) continue;
+        const c = row.map(x => (x || '').trim());
+        const c0 = c[0].toLowerCase();
+        const c1 = (c[1] || '').toLowerCase();
+        if (['season', 'año', 'ano', 'year'].some(w => c0.includes(w) || c1.includes(w)) || c1.includes('campeon')) continue;
+
+        let season = c[0] || '';
+        if (season !== '') lastSeason = season; else season = lastSeason;
+        const campeon = c[1] || '';
+        const subcampeon = c[2] || '';
+        if (!campeon || campeon.toLowerCase() === 'campeon') continue;
+
+        validas.push({ season, campeon, subcampeon });
+      }
+      return validas;
+    }
+
+    // Carga todas las hojas (modalidad x categoría) una sola vez
+    async function cargarTodasHojasPalmares() {
+      if (palmaresMemoria.ready) return palmaresMemoria.data;
+      if (palmaresMemoria.promise) return palmaresMemoria.promise;
+
+      const entradas = [];
+      for (const mod of Object.keys(PALMARES_CSV)) {
+        for (const cat of Object.keys(PALMARES_CSV[mod])) {
+          entradas.push({ modalidad: mod, categoria: cat, url: PALMARES_CSV[mod][cat] });
+        }
+      }
+
+      palmaresMemoria.promise = Promise.all(entradas.map(async e => {
+        try {
+          const filas = await leerHojaPalmares(e.url);
+          return { ...e, filas };
+        } catch (err) {
+          console.error(`Error palmarés ${e.modalidad}/${e.categoria}:`, err);
+          return { ...e, filas: [], error: err.message };
+        }
+      })).then(resultados => {
+        palmaresMemoria.data = resultados;
+        palmaresMemoria.ready = true;
+        return resultados;
+      });
+
+      return palmaresMemoria.promise;
+    }
+
+    async function cargarPalmaresEquipo() {
+      const totalC = document.getElementById('palmaresTotalCampeon');
+      const totalS = document.getElementById('palmaresTotalSub');
+      const desglose = document.getElementById('palmaresDesglose');
+      if (!currentSelectedTeam) return;
+
+      totalC.textContent = '…';
+      totalS.textContent = '…';
+      desglose.innerHTML = `<p style="text-align:center;color:#64748b;padding:20px;">Cargando palmarés...</p>`;
+
+      try {
+        const resultados = await cargarTodasHojasPalmares();
+
+        let totalCampeon = 0;
+        let totalSub = 0;
+        const porCategoria = [];
+
+        resultados.forEach(r => {
+          let titulos = 0;
+          let subs = 0;
+          const anios = [];
+          r.filas.forEach(f => {
+            if (esDelEquipo(f.campeon)) { titulos++; anios.push(f.season); }
+            if (esDelEquipo(f.subcampeon)) subs++;
+          });
+          totalCampeon += titulos;
+          totalSub += subs;
+          if (titulos > 0 || subs > 0) {
+            porCategoria.push({ modalidad: r.modalidad, categoria: r.categoria, titulos, subs, anios, error: r.error });
+          }
+        });
+
+        totalC.textContent = totalCampeon;
+        totalS.textContent = totalSub;
+
+        if (porCategoria.length === 0) {
+          desglose.innerHTML = mensajeVacio(`${currentSelectedTeam} aún no tiene campeonatos ni subcampeonatos registrados.`);
+          return;
+        }
+
+        desglose.innerHTML = porCategoria.map(c => `
+          <div class="palmares-fila">
+            <div class="palmares-fila-titulo">${c.modalidad.toUpperCase()} ${c.categoria.toUpperCase()}</div>
+            <div class="palmares-fila-datos">
+              <span><strong>${c.titulos}</strong> campeonato(s)${c.anios.length ? ` · ${escapeHTML(c.anios.join(', '))}` : ''}</span>
+              <span><strong>${c.subs}</strong> subcampeonato(s)</span>
+            </div>
+          </div>`).join('');
+
+      } catch (err) {
+        console.error('Error palmarés:', err);
+        desglose.innerHTML = mensajeVacio(`No se pudo cargar el palmarés. Detalle: ${err.message}`);
       }
     }
 

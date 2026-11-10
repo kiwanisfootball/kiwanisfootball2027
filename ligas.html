@@ -85,7 +85,6 @@
       </button>
     </div>
 
-    <!-- BOTONES DE CATEGORÍA: INICIAN TOTALMENTE INACTIVOS (NINGUNO SELECCIONADO) -->
     <div class="ligas-filter-bar" id="filterBar">
       <button class="ligas-filter-btn" id="filter-varsity" onclick="selectCategory('varsity', this)">VARSITY</button>
       <button class="ligas-filter-btn" id="filter-juvenil" onclick="selectCategory('juvenil', this)">JUVENIL</button>
@@ -101,25 +100,33 @@
     <div id="leagueContentSection" style="display: none;">
 
       <div class="sub-tabs-bar">
-        <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
+        <button class="sub-tab-btn" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
         <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
         <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Posiciones</button>
         <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Stats</button>
       </div>
 
-      <div class="tab-pane active" id="pane-calendario">
+      <div class="tab-pane" id="pane-calendario">
         <div class="kfl-filter-bar">
-          <select id="filterWeek" class="kfl-filter-select" onchange="applyCalendarFilters()">
-            <option value="ALL">Todas las Semanas</option>
-          </select>
-          <select id="filterTeam" class="kfl-filter-select" onchange="applyCalendarFilters()">
-            <option value="ALL">Todos los Equipos</option>
-          </select>
+          <div class="kfl-custom-select-wrapper">
+            <select id="filterWeek" onchange="applyCalendarFilters()">
+              <option value="ALL">Todas las Semanas</option>
+            </select>
+            <svg class="kfl-select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+
+          <div class="kfl-custom-select-wrapper">
+            <select id="filterTeam" onchange="applyCalendarFilters()">
+              <option value="ALL">Todos los Equipos</option>
+            </select>
+            <svg class="kfl-select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+
           <button class="btn-export-pdf" onclick="window.print()">📄 Imprimir Calendario</button>
         </div>
         <div id="calendarioNativeContent">
           <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
-            Selecciona una categoría arriba para visualizar el calendario.
+            Selecciona una sub-pestaña arriba para visualizar el contenido.
           </div>
         </div>
       </div>
@@ -238,7 +245,7 @@
   <script>
     let activeLeague = null;
     let activeCategory = null;
-    let activeSubTab = 'calendario';
+    let activeSubTab = null;
 
     let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
     let tipoStatActivo = 'RUSHING';
@@ -357,8 +364,8 @@
 
     function selectLeague(league, btnElement) {
       activeLeague = league;
-      activeCategory = null; // NINGUNA CATEGORÍA SELECCIONADA AL CAMBIAR MODALIDAD
-      activeSubTab = 'calendario';
+      activeCategory = null;
+      activeSubTab = null;
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
@@ -374,37 +381,24 @@
         document.body.className = 'flag-theme-active';
       }
 
-      // LIMPIAR SELECCIÓN DE TODOS LOS BOTONES DE CATEGORÍA
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-active', 'flag-active');
       });
 
-      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      const defaultSubTab = document.getElementById('btn-tab-calendario');
-      if (defaultSubTab) defaultSubTab.classList.add('active');
-
-      document.querySelectorAll('.tab-pane').forEach(pane => {
-        pane.classList.remove('active');
-      });
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
 
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
-      document.getElementById('leagueContentSection').style.display = 'none'; // OCULTO HASTA ELEGIR CATEGORÍA
+      document.getElementById('leagueContentSection').style.display = 'none';
       document.getElementById('resetWrapper').classList.add('visible');
-
-      document.getElementById('calendarioNativeContent').innerHTML = `
-        <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
-          Selecciona una categoría arriba para visualizar el contenido.
-        </div>
-      `;
 
       fetchMasterDB(league);
     }
 
     function selectCategory(category, btnElement) {
       activeCategory = category;
+      activeSubTab = 'calendario';
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
@@ -412,6 +406,14 @@
       if (btnElement) {
         btnElement.classList.add('active', activeLeague === 'contact' ? 'contact-active' : 'flag-active');
       }
+
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const defaultSubTab = document.getElementById('btn-tab-calendario');
+      if (defaultSubTab) defaultSubTab.classList.add('active');
+
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      const defaultPane = document.getElementById('pane-calendario');
+      if (defaultPane) defaultPane.classList.add('active');
 
       document.getElementById('leagueContentSection').style.display = 'block';
 
@@ -423,7 +425,7 @@
     function resetSeleccion() {
       activeLeague = null;
       activeCategory = null;
-      activeSubTab = 'calendario';
+      activeSubTab = null;
       currentSortColumn = null;
       currentSortDirection = 'asc';
       cachedStandingsData = [];

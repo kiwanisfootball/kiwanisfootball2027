@@ -38,12 +38,12 @@
   padding: 0 10px;
 }
 
-/* GRID FLUIDO Y LÍQUIDO AUTOMÁTICO */
+/* GRID FLEXIBLE Y LÍQUIDO CON CENTRADO ABSOLUTO EN LA ÚLTIMA FILA */
 .equipos-grid-selector {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  justify-items: center;
+  align-items: stretch;
   gap: 16px;
   max-width: 860px;
   margin: 0 auto;
@@ -51,20 +51,15 @@
   padding: 0 4px;
 }
 
-@media (min-width: 768px) {
-  .equipos-grid-selector {
-    grid-template-columns: repeat(4, minmax(180px, 1fr));
-  }
-}
-
-/* TARJETAS FLUIDAS Y CENTRADAS */
+/* TARJETAS FLUIDAS CON ANCHO IDEAL PARA QUE ENCAJEN EXACTO 4 Y 3 */
 .equipo-selector-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 16px 12px;
   width: 100%;
-  max-width: 210px;
+  flex: 1 1 180px;
+  max-width: 200px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -419,7 +414,7 @@
   cursor: pointer;
   line-height: 1.2;
   outline: none;
-  box-shadow: 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: border-color 0.2s ease;
   box-sizing: border-box;
 }

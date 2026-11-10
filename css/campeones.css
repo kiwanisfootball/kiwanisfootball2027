@@ -1,0 +1,495 @@
+/* ==========================================================================
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS DE CAMPEONES
+   ========================================================================== */
+
+.champs-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--fuente-cuerpo);
+  box-sizing: border-box;
+}
+
+/* HERO */
+.champs-hero-banner {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.82)),
+              url('../assets/img/rings.jpg') center/cover no-repeat;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  margin-bottom: 25px;
+  padding: 35px 25px 30px 25px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.champs-hero-content {
+  max-width: 850px;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.champs-hero-title {
+  font-family: var(--fuente-titulos);
+  font-size: 40px;
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+  line-height: 1.1;
+  display: inline-block;
+}
+
+.champs-hero-description {
+  font-family: var(--fuente-cuerpo);
+  font-size: 16px;
+  line-height: 1.65;
+  color: #f8fafc;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  margin: 0 auto;
+}
+
+.champs-hero-description strong {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* TROFEO HERO (animación) */
+.champs-trophy-wrapper {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  perspective: 800px;
+  margin-bottom: 5px;
+}
+
+.champs-trophy-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.45) 0%, rgba(234, 179, 8, 0) 70%);
+  animation: pulseAura 3s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+.champs-trophy-img {
+  width: 100%;
+  height: auto;
+  max-height: 80px;
+  filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.65));
+  animation: buildTrophy 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+             floatTrophy 3.8s ease-in-out 1.4s infinite alternate;
+  transform-origin: center bottom;
+}
+
+@keyframes buildTrophy {
+  0%   { opacity: 0; transform: translateY(25px) scale(0.3) rotateX(45deg); filter: drop-shadow(0 0 0px rgba(234, 179, 8, 0)); }
+  60%  { opacity: 1; transform: translateY(-5px) scale(1.08) rotateX(0deg); filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.9)); }
+  80%  { transform: translateY(2px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 12px rgba(234, 179, 8, 0.65)); }
+}
+
+@keyframes floatTrophy {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-6px) rotate(2deg); filter: drop-shadow(0 0 15px rgba(234, 179, 8, 0.85)); }
+}
+
+@keyframes pulseAura {
+  0%   { transform: scale(0.85); opacity: 0.5; }
+  100% { transform: scale(1.18); opacity: 0.95; }
+}
+
+/* BOTONES DE MODALIDAD */
+.champs-modality-bar {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.champs-modality-btn {
+  flex: 1;
+  max-width: 480px;
+  background: #ffffff;
+  color: #334155;
+  border: 2px solid #cbd5e1;
+  padding: 16px 24px;
+  font-family: var(--fuente-titulos);
+  font-size: 22px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.champs-modality-btn:hover {
+  background: #f1f5f9;
+  transform: translateY(-2px);
+  border-color: #94a3b8;
+}
+
+.champs-modality-btn.active.contact-theme-btn {
+  background: var(--azul-kfl);
+  color: #ffffff;
+  border-color: var(--azul-kfl);
+  box-shadow: 0 6px 20px rgba(0, 94, 170, 0.35);
+}
+
+.champs-modality-btn.active.flag-theme-btn {
+  background: var(--rojo-kfl);
+  color: #ffffff;
+  border-color: var(--rojo-kfl);
+  box-shadow: 0 6px 20px rgba(235, 61, 64, 0.35);
+}
+
+/* FILTROS DE CATEGORÍA */
+.champs-filter-bar {
+  display: none;
+  gap: 12px;
+  margin-bottom: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.champs-filter-btn {
+  flex: 1;
+  min-width: 120px;
+  max-width: 180px;
+  background: #ffffff;
+  color: #334155;
+  border: 2px solid #cbd5e1;
+  padding: 10px 16px;
+  font-family: var(--fuente-titulos);
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.champs-filter-btn:hover {
+  background: #f1f5f9;
+  transform: translateY(-2px);
+  border-color: #94a3b8;
+}
+
+.champs-filter-btn.active.contact-active {
+  background: var(--azul-kfl);
+  color: #ffffff;
+  border-color: var(--azul-kfl);
+  box-shadow: 0 4px 12px rgba(0, 94, 170, 0.3);
+}
+
+.champs-filter-btn.active.flag-active {
+  background: var(--rojo-kfl);
+  color: #ffffff;
+  border-color: var(--rojo-kfl);
+  box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
+}
+
+/* CARD DE MÁXIMO GANADOR / COUNTER (Centrado vertical y sin sombras en trofeo) */
+.champs-leaderboard-card {
+  max-width: 850px;
+  margin: 0 auto 25px auto;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  box-sizing: border-box;
+  gap: 20px;
+  animation: fadeIn 0.4s ease-in-out;
+  font-family: var(--fuente-cuerpo);
+}
+
+.champs-leaderboard-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex: 1;
+}
+
+.champs-leaderboard-trophy-box {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.champs-leaderboard-trophy-png {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  /* Sombra removida según requerimiento */
+}
+
+.champs-leaderboard-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.champs-leaderboard-label {
+  font-family: var(--fuente-cuerpo);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #eab308;
+}
+
+.champs-leaderboard-teams-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.champs-leaderboard-team-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.champs-leaderboard-team-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.champs-leaderboard-team-name {
+  font-family: var(--fuente-titulos);
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  line-height: 1;
+}
+
+/* Insignia del Último Año */
+.champs-leaderboard-years-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+/* COUNTER PLANO (Sin animación ni sombreado) */
+.champs-leaderboard-counter {
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid #eab308;
+  color: #ffffff;
+  padding: 8px 18px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--fuente-cuerpo);
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.champs-leaderboard-counter span.count-num {
+  font-family: var(--fuente-titulos);
+  font-size: 26px;
+  color: #eab308;
+  line-height: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* TABLAS POR CATEGORÍA */
+.champs-category-section {
+  display: none;
+  margin-bottom: 35px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.champs-single-table-container {
+  max-width: 850px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.champs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 10px 0 20px 0;
+  font-family: var(--fuente-cuerpo);
+  table-layout: fixed;
+}
+
+.champs-table th:nth-child(1),
+.champs-table td:nth-child(1) { width: 22%; }
+
+.champs-table th:nth-child(2),
+.champs-table td:nth-child(2) { width: 39%; }
+
+.champs-table th:nth-child(3),
+.champs-table td:nth-child(3) { width: 39%; }
+
+.champs-table th {
+  background: var(--azul-kfl);
+  color: #ffffff;
+  padding: 14px 16px;
+  font-family: var(--fuente-cuerpo);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+body.flag-theme-active .champs-table th {
+  background: var(--rojo-kfl);
+}
+
+.champs-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  font-family: var(--fuente-cuerpo);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.champs-table tr.block-even td { background-color: #ffffff; }
+.champs-table tr.block-odd td  { background-color: #f8fafc; }
+
+.champs-team-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--fuente-cuerpo);
+}
+
+.champs-team-logo {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.champs-team-name {
+  color: var(--azul-kfl);
+  font-weight: 800;
+  font-family: var(--fuente-cuerpo);
+}
+
+body.flag-theme-active .champs-team-name {
+  color: #1e293b;
+}
+
+/* MENSAJES INICIALES */
+.champs-select-prompt,
+.champs-category-prompt {
+  text-align: center;
+  padding: 35px 20px;
+  font-size: 16px;
+  color: #64748b;
+  font-family: var(--fuente-cuerpo);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.prompt-icon-svg {
+  width: 18px;
+  height: 18px;
+  fill: #64748b;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .champs-container { padding: 15px 10px; }
+  .champs-hero-banner { padding: 30px 15px; }
+  .champs-hero-title { font-size: 34px; }
+  .champs-modality-bar { flex-direction: column; gap: 12px; align-items: center; }
+  .champs-modality-btn { max-width: 100%; width: 100%; font-size: 20px; padding: 14px; }
+  .champs-filter-btn { min-width: 45%; font-size: 16px; padding: 10px 8px; }
+
+  .champs-leaderboard-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+  }
+  .champs-leaderboard-counter {
+    align-self: flex-start;
+  }
+}

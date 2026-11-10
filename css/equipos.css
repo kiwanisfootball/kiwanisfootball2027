@@ -438,7 +438,7 @@
 }
 
 /* ==========================================================================
-   UNIFICACIÓN DE CALENDARIOS: ESTILOS IDÉNTICOS A LIGAS.HTML
+   UNIFICACIÓN DE CALENDARIOS: ESTILOS IDÉNTICOS A LIGAS.HTML (RESPONSIVE)
    ========================================================================== */
 
 .team-schedule-cards-grid {
@@ -454,87 +454,103 @@
   }
 }
 
-.schedule-match-card {
+.kfl-match-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
-  box-sizing: border-box;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.04);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.match-card-meta {
-  background: #005eaa;
+.kfl-match-header {
+  background: var(--azul-kfl, #005eaa);
   color: #ffffff;
-  padding: 10px 14px;
-  font-size: 11px;
+  padding: 9px 14px;
   font-weight: 700;
+  font-size: clamp(10px, 2vw, 11.5px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: none;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
-.match-card-teams {
-  padding: 20px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  flex-grow: 1;
+body.flag-theme-active .kfl-match-header { 
+  background: var(--rojo-kfl, #eb3d40); 
 }
 
-.match-team-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90px;
-  text-align: center;
+.kfl-info-item { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+  white-space: nowrap;
 }
 
-.match-team-col img {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  margin-bottom: 8px;
+.kfl-icon-svg { 
+  width: 14px; 
+  height: 14px; 
+  fill: currentColor; 
+  flex-shrink: 0; 
 }
 
-.match-team-name {
-  font-size: 11.5px;
-  font-weight: 900;
-  color: #0f172a;
+.kfl-match-body { 
+  padding: 18px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 8px; 
+}
+
+.kfl-team-box { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  width: 36%; 
+  text-align: center; 
+  font-weight: 800; 
+  font-size: clamp(11px, 2.5vw, 13.5px); 
+  color: #0f172a; 
+}
+
+.kfl-team-logo { 
+  width: 44px; 
+  height: 44px; 
+  object-fit: contain; 
+  margin-bottom: 8px; 
+}
+
+.kfl-score-box { 
+  width: 28%; 
+  text-align: center; 
+}
+
+.kfl-score-num { 
+  font-size: clamp(20px, 5vw, 24px); 
+  font-weight: 700; 
+  color: #0f172a; 
+  letter-spacing: 0.5px; 
+}
+
+.kfl-score-vs { 
+  font-size: clamp(14px, 3.5vw, 17px); 
+  font-weight: 900; 
+  color: #94a3b8; 
+  letter-spacing: 1px; 
+}
+
+.kfl-score-status { 
+  font-size: 10px; 
+  font-weight: 900; 
+  color: #16a34a; 
+  letter-spacing: 0.8px; 
+  margin-bottom: 2px; 
   text-transform: uppercase;
-  line-height: 1.2;
-}
-
-.match-score-badge {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 20px;
-  color: #0f172a;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 6px 14px;
-  border-radius: 12px;
-  min-width: 70px;
-  letter-spacing: 1px;
-}
-
-.match-score-badge::before {
-  content: "FINAL";
-  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 9px;
-  font-weight: 900;
-  color: #16a34a;
-  margin-bottom: 2px;
-  letter-spacing: 0.5px;
 }
 
 /* TABLAS COMPACTAS */

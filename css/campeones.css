@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - CAMPEONES
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS DE CAMPEONES
    ========================================================================== */
 
 .champs-container {
@@ -217,7 +217,7 @@
   box-shadow: 0 4px 12px rgba(235, 61, 64, 0.3);
 }
 
-/* CARD DE MÁXIMO GANADOR / COUNTER (Centrado vertical estricto) */
+/* CARD DE MÁXIMO GANADOR / COUNTER (Estructura fluida y robusta en móviles) */
 .champs-leaderboard-card {
   max-width: 850px;
   margin: 0 auto 25px auto;
@@ -257,7 +257,7 @@
 .champs-leaderboard-teams-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -265,7 +265,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap; /* Permite salto limpio de la insignia si el ancho es extremo */
   min-width: 0;
 }
 
@@ -287,18 +287,17 @@
   text-overflow: ellipsis;
 }
 
-/* Insignia del Último Año */
+/* Insignia del Último Año adaptable */
 .champs-leaderboard-years-badge {
   display: inline-flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  padding: 3px 10px;
+  padding: 2px 8px;
   border-radius: 20px;
-  font-size: clamp(10px, 2vw, 12px);
+  font-size: clamp(10px, 1.8vw, 11px);
   font-weight: 600;
   color: #cbd5e1;
-  margin-left: 4px;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -335,7 +334,7 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* TABLAS POR CATEGORÍA (Con máxima liquidez y sin cortes) */
+/* TABLAS POR CATEGORÍA */
 .champs-category-section {
   display: none;
   margin-bottom: 35px;

@@ -1,87 +1,604 @@
-async function consultarCalendarioEquipoCategoria() {
-      const container = document.getElementById('teamCalendarContainer');
-      const select = document.getElementById('calendarCategorySelect');
-      if (!currentSelectedTeam || !select || !select.value) return;
+/* ==========================================================================
+   KIWANIS FOOTBALL LEAGUE PANAMA - CSS RESPONSIVE - EQUIPOS
+   ========================================================================== */
 
-      const [modalidad, categoria] = select.value.split('_');
-      container.innerHTML = `<div style="text-align:center;padding:30px;color:#64748b;"><p style="font-weight:700;">Cargando calendario oficial...</p></div>`;
+.equipos-container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 16px 50px 16px;
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  box-sizing: border-box;
+}
 
-      try {
-        const db = await fetchMasterDB(modalidad);
-        const partidos = getPartidosCategoria(db, modalidad, categoria);
+/* HEADER SUPERIOR */
+.equipos-selector-section {
+  text-align: center;
+  margin-bottom: 35px;
+}
 
-        const filtrados = partidos.filter(p =>
-          !esPartidoLibre(p) && (esDelEquipo(p.home) || esDelEquipo(p.away))
-        );
+.equipos-selector-title {
+  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-size: clamp(32px, 4.5vw, 48px);
+  color: var(--azul-kfl, #005eaa);
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
 
-        if (filtrados.length === 0) {
-          container.innerHTML = mensajeVacio(`No hay partidos programados para ${currentSelectedTeam} en ${modalidad.toUpperCase()} ${categoria.toUpperCase()}.`);
-          return;
-        }
+.equipos-selector-sub {
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: #475569;
+  max-width: 780px;
+  margin: 0 auto 30px auto;
+  line-height: 1.5;
+  padding: 0 10px;
+}
 
-        // Agrupar por jornada / week
-        const grupos = {};
-        filtrados.forEach(p => {
-          const semana = p.week || p.jornada || p.Jornada || 'JORNADA GENERAL';
-          if (!grupos[semana]) grupos[semana] = [];
-          grupos[semana].push(p);
-        });
+/* GRID DE EQUIPOS */
+.equipos-grid-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 16px;
+  max-width: 860px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 4px;
+}
 
-        let html = `<div class="team-schedule-wrapper">`;
-        for (const semana in grupos) {
-          html += `
-            <div class="kfl-week-group">
-              <h3 class="kfl-week-title">${escapeHTML(semana)}</h3>
-          `;
-          grupos[semana].forEach(p => {
-            const local = p.home || 'Local';
-            const visitante = p.away || 'Visitante';
-            const fecha = p.date || 'Por definir';
-            const cancha = p.field || 'CDE Sports Center';
-            
-            const scoreLoc = p.scoreH;
-            const scoreVis = p.scoreA;
-            const hasScore = p.hasScore;
+.equipo-selector-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 12px;
+  flex: 1 1 180px;
+  max-width: 200px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
 
-            const scoreHTML = hasScore 
-              ? `<div class="kfl-score-status">Final</div><div class="kfl-score-num">${escapeHTML(scoreLoc)} - ${escapeHTML(scoreVis)}</div>`
-              : `<div class="kfl-score-vs">VS</div>${p.time ? '<span style="font-size:10px; font-weight:700; color:#64748b;">' + escapeHTML(p.time) + '</span>' : ''}`;
+.equipo-selector-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
 
-            html += `
-              <div class="kfl-match-card">
-                <div class="kfl-match-header">
-                  <div class="kfl-info-item">
-                    <svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
-                    <span>${escapeHTML(fecha)}</span>
-                  </div>
-                  <div class="kfl-info-item">
-                    <svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                    <span>${escapeHTML(cancha)}</span>
-                  </div>
-                </div>
-                <div class="kfl-match-body">
-                  <div class="kfl-team-box">
-                    <img src="${getTeamLogo(local)}" class="kfl-team-logo" alt="${escapeHTML(local)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                    <span class="match-team-name">${escapeHTML(local)}</span>
-                  </div>
-                  <div class="kfl-score-box">
-                    ${scoreHTML}
-                  </div>
-                  <div class="kfl-team-box">
-                    <img src="${getTeamLogo(visitante)}" class="kfl-team-logo" alt="${escapeHTML(visitante)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                    <span class="match-team-name">${escapeHTML(visitante)}</span>
-                  </div>
-                </div>
-              </div>
-            `;
-          });
-          html += `</div>`;
-        }
-        html += `</div>`;
-        container.innerHTML = html;
+.equipo-card-logo-wrap {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
 
-      } catch (err) {
-        console.error('Error calendario:', err);
-        container.innerHTML = mensajeVacio(`No se pudo cargar el calendario. Detalle: ${err.message}`);
-      }
-    }
+.equipo-card-logo-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.equipo-card-name {
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  font-size: 11.5px;
+  font-weight: 900;
+  color: #0f172a;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.equipos-select-prompt {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.prompt-icon-svg {
+  fill: #64748b;
+  flex-shrink: 0;
+}
+
+/* HERO BANNER DINÁMICO */
+.team-hero-banner {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  padding: 30px 16px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.team-badge-wrapper {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 8px;
+}
+
+.team-badge-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+}
+
+.team-hero-title {
+  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-size: clamp(28px, 6vw, 40px);
+  margin: 6px 0;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.team-school-tag {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0 10px;
+}
+
+/* BARRA DE PARTICIPACIÓN */
+.team-participation-bar {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.participation-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.participation-label {
+  font-size: 12px;
+  font-weight: 900;
+  color: #334155;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.participation-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.part-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 155px;
+  height: 34px;
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.part-badge.contact-badge {
+  background: #e0f2fe;
+  color: var(--azul-kfl, #005eaa);
+  border: 1px solid #bae6fd;
+}
+
+.part-badge.flag-badge {
+  background: #ffe4e6;
+  color: var(--rojo-kfl, #eb3d40);
+  border: 1px solid #fecdd3;
+}
+
+/* SUB PESTAÑAS */
+.sub-tabs-bar {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-width: 900px;
+  margin: 0 auto 20px auto;
+}
+
+@media (min-width: 640px) {
+  .sub-tabs-bar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.sub-tab-btn {
+  padding: 10px 10px;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  border-radius: 24px;
+  color: #64748b;
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sub-tab-btn.active {
+  background: var(--azul-kfl, #005eaa);
+  border-color: var(--azul-kfl, #005eaa);
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(0, 94, 170, 0.25);
+}
+
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+.team-card-pane {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+@media (min-width: 640px) {
+  .team-card-pane {
+    padding: 28px 32px;
+  }
+}
+
+.pane-section-title {
+  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-size: 20px;
+  color: #0f172a;
+  margin: 0 0 14px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2.5px solid #f1f5f9;
+  padding-bottom: 8px;
+}
+
+@media (min-width: 640px) {
+  .pane-section-title {
+    font-size: 22px;
+  }
+}
+
+.team-institution-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+@media (min-width: 540px) {
+  .team-institution-header {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
+.school-logo-wrap {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 8px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.school-logo-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.school-external-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--azul-kfl, #005eaa);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.school-external-link:hover {
+  text-decoration: underline;
+}
+
+.team-description-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #334155;
+}
+
+@media (min-width: 640px) {
+  .team-description-body {
+    font-size: 15px;
+  }
+}
+
+.pane-header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+@media (min-width: 640px) {
+  .pane-header-actions {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pane-header-actions .pane-section-title {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.kfl-filter-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 10px 38px 10px 16px;
+  border-radius: 24px;
+  border: 1.5px solid #cbd5e1;
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+  font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #0f172a;
+  cursor: pointer;
+  line-height: 1.2;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .kfl-filter-select {
+    width: auto;
+    min-width: 220px;
+  }
+}
+
+.kfl-filter-select:hover,
+.kfl-filter-select:focus {
+  border-color: var(--azul-kfl, #005eaa);
+}
+
+/* ==========================================================================
+   ESTILO EXACTO DE LIGAS.HTML (TÍTULO DE JORNADA FUERA Y CARD LIMPIO)
+   ========================================================================== */
+
+.team-schedule-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 16px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.kfl-week-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kfl-week-title {
+  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-size: 16px;
+  color: var(--azul-kfl, #005eaa);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 2px solid var(--azul-kfl, #005eaa);
+  padding-bottom: 4px;
+  margin: 0;
+}
+
+body.flag-theme-active .kfl-week-title {
+  color: var(--rojo-kfl, #eb3d40);
+  border-bottom-color: var(--rojo-kfl, #eb3d40);
+}
+
+.kfl-match-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* HEADER AZUL: SOLO FECHA Y ESTADIO (CABE PERFECTO Y NUNCA SE CORTE) */
+.kfl-match-header {
+  background: var(--azul-kfl, #005eaa);
+  color: #ffffff;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+body.flag-theme-active .kfl-match-header { 
+  background: var(--rojo-kfl, #eb3d40); 
+}
+
+.kfl-info-item { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+}
+
+.kfl-icon-svg { 
+  width: 14px; 
+  height: 14px; 
+  fill: currentColor; 
+  flex-shrink: 0; 
+}
+
+.kfl-match-body { 
+  padding: 18px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  gap: 8px; 
+}
+
+.kfl-team-box { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  width: 36%; 
+  text-align: center; 
+  font-weight: 800; 
+  font-size: 13px; 
+  color: #0f172a; 
+}
+
+.kfl-team-logo { 
+  width: 48px; 
+  height: 48px; 
+  object-fit: contain; 
+  margin-bottom: 8px; 
+}
+
+.kfl-score-box { 
+  width: 28%; 
+  text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.kfl-score-num { 
+  font-size: 24px; 
+  font-weight: 700; 
+  color: #0f172a; 
+  letter-spacing: 0.5px; 
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.kfl-score-vs { 
+  font-size: 16px; 
+  font-weight: 900; 
+  color: #94a3b8; 
+  letter-spacing: 1px; 
+  white-space: nowrap;
+}
+
+.kfl-score-status { 
+  font-size: 10px; 
+  font-weight: 900; 
+  color: #16a34a; 
+  letter-spacing: 0.8px; 
+  margin-bottom: 2px; 
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* TABLAS COMPACTAS */
+.roster-compact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.roster-compact-table th {
+  background-color: #f8fafc;
+  color: var(--azul-kfl, #005eaa);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 10px;
+  border-bottom: 2.5px solid #cbd5e1;
+  text-align: left;
+}
+
+.roster-compact-table td {
+  padding: 10px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+
+.cell-jersey-badge {
+  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-size: 15px;
+  color: var(--azul-kfl, #005eaa);
+}

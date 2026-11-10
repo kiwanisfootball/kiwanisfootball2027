@@ -38,7 +38,7 @@
   padding: 0 10px;
 }
 
-/* GRID FLEXIBLE Y LÍQUIDO CON CENTRADO AUTOMÁTICO DE FILAS INCOMPLETAS */
+/* GRID DE EQUIPOS */
 .equipos-grid-selector {
   display: flex;
   flex-wrap: wrap;
@@ -51,7 +51,6 @@
   padding: 0 4px;
 }
 
-/* TARJETAS FLUIDAS DE EQUIPOS */
 .equipo-selector-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -100,7 +99,6 @@
   line-height: 1.2;
 }
 
-/* PROMPT DIRECTO SOBRE EL FONDO GENERAL */
 .equipos-select-prompt {
   text-align: center;
   padding: 20px 16px;
@@ -199,7 +197,6 @@
   text-align: center;
 }
 
-/* CONTENEDOR DE PÍLDORAS FLUIDAS Y CENTRADAS */
 .participation-badges {
   display: flex;
   flex-wrap: wrap;
@@ -211,7 +208,6 @@
   margin: 0 auto;
 }
 
-/* PÍLDORAS UNIFORMES Y FIJAS */
 .part-badge {
   display: inline-flex;
   align-items: center;
@@ -240,7 +236,7 @@
   border: 1px solid #fecdd3;
 }
 
-/* SUB PESTAÑAS (PAGE-IN-A-PAGE) */
+/* SUB PESTAÑAS */
 .sub-tabs-bar {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -281,7 +277,6 @@
 .tab-pane { display: none; }
 .tab-pane.active { display: block; }
 
-/* CONTENEDOR DE TARJETA DE PESTAÑA */
 .team-card-pane {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -313,7 +308,6 @@
   }
 }
 
-/* SECCIÓN COLEGIO INSTITUCIONAL */
 .team-institution-header {
   display: flex;
   flex-direction: column;
@@ -377,7 +371,6 @@
   }
 }
 
-/* ENCABEZADOS DE PESTAÑAS Y ACCIONES */
 .pane-header-actions {
   display: flex;
   flex-direction: column;
@@ -399,7 +392,6 @@
   }
 }
 
-/* SELECTOR FILTRO ALINEADO */
 .kfl-filter-select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -438,7 +430,7 @@
 }
 
 /* ==========================================================================
-   UNIFICACIÓN EXACTA CON LIGAS.CSS (UN CARD POR FILA)
+   CALENDARIOS IDÉNTICOS A LIGAS.CSS (UN CARD POR FILA)
    ========================================================================== */
 
 .team-schedule-cards-grid {
@@ -463,20 +455,21 @@
   width: 100%;
 }
 
+/* HEADER DEL CARD: CORREGIDO CON CLAMP PARA QUE NUNCA DESBORDE */
 .kfl-match-header {
   background: var(--azul-kfl, #005eaa);
   color: #ffffff;
   padding: 10px 16px;
   font-weight: 700;
-  font-size: clamp(10px, 2vw, 12px);
+  font-size: clamp(9px, 1.8vw, 12px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  white-space: nowrap;
+  letter-spacing: 0.3px;
   box-sizing: border-box;
   width: 100%;
+  gap: 8px;
 }
 
 body.flag-theme-active .kfl-match-header { 
@@ -486,13 +479,16 @@ body.flag-theme-active .kfl-match-header {
 .kfl-info-item { 
   display: flex; 
   align-items: center; 
-  gap: 6px; 
+  gap: 5px; 
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .kfl-icon-svg { 
-  width: 15px; 
-  height: 15px; 
+  width: 14px; 
+  height: 14px; 
   fill: currentColor; 
   flex-shrink: 0; 
 }
@@ -532,6 +528,7 @@ body.flag-theme-active .kfl-match-header {
   justify-content: center;
 }
 
+/* MARCADOR EXACTO A LIGAS.CSS */
 .kfl-score-num { 
   font-size: clamp(20px, 5vw, 26px); 
   font-weight: 700; 

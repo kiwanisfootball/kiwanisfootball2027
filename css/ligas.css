@@ -337,7 +337,6 @@ body.flag-theme-active .ligas-container .sub-tab-btn.active {
 .ligas-container .tab-pane { display: none; }
 .ligas-container .tab-pane.active { display: block; }
 
-/* CONTENEDOR DE PÍLDORA SELECTOR PERSONALIZADA (IDÉNTICA A LA REFERENCIA) */
 .ligas-container .kfl-filter-bar {
   display: flex;
   gap: 12px;
@@ -375,11 +374,11 @@ body.flag-theme-active .ligas-container .sub-tab-btn.active {
   background: transparent;
   border: none;
   outline: none;
-  font-family: var(--fuente-titulos);
+  font-family: var(--fuente-cuerpo); /* FUENTE DE CUERPO ESTRICTA PARA LOS FILTROS */
   font-weight: 700;
   color: #0f172a;
-  font-size: clamp(13px, 2.3vw, 15px);
-  letter-spacing: 0.8px;
+  font-size: clamp(12px, 2.2vw, 14px);
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   cursor: pointer;
   padding-right: 28px;

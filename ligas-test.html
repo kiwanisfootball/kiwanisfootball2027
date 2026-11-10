@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Ligas - Contact y Flag Football | Kiwanis Football League Panamá</title>
+
+  <!-- SEO & AEO Meta Tags -->
+  <meta name="description" content="Calendario, tabla de posiciones, rosters y estadísticas de la Kiwanis Football League en Panamá. Contact Football Masculino y Flag Football Femenino en categorías Micro, Mini, Juvenil y Varsity.">
+  <meta name="keywords" content="Ligas KFL, Contact Football Panamá, Flag Football Panamá, calendario KFL, tabla de posiciones KFL, rosters KFL, estadísticas KFL, Kiwanis Football League">
+  <link rel="canonical" href="https://www.kiwanisfootball.com/ligas.html">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ligas - Kiwanis Football League Panamá">
+  <meta property="og:description" content="Calendario, tabla de posiciones, rosters y estadísticas de KFL Contact y Flag Football en Panamá.">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/KFL-logo.svg">
+  <meta property="og:url" content="https://www.kiwanisfootball.com/ligas.html">
+  <meta property="og:locale" content="es_PA">
+
+  <!-- Schema.org Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    "name": "Kiwanis Football League Panamá",
+    "alternateName": "KFL",
+    "url": "https://www.kiwanisfootball.com",
+    "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
+    "sport": "American Football",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Panamá",
+      "addressCountry": "PA"
+    },
+    "sameAs": [
+      "https://www.instagram.com/kiwanisfootball",
+      "https://www.youtube.com/@KFLTotalAccess"
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Anton & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/ligas.css">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- CONFIGURACIÓN CENTRALIZADA KFL CON TUS URLS REALES -->
+  <script>
+    window.KFL_CONFIG = {
+      API_CALENDARIO_URL: {
+        "contact": "https://script.google.com/macros/s/AKfycbxU6knUi6orz37wYKqv6hbf3k75l64gwRTxU2yB3LD8DBvRyw02ATEfJFm6rSXFC2WZ/exec",
+        "flag": "https://script.google.com/macros/s/AKfycbwiZ73jSuTV6XOXZeSSdQpozBonJfhe7Qg8bi0sjgG78tyEIOSq9ir9ya5sxs4TfBOS/exec"
+      },
+      EQUIPOS_LOGOS: {
+        "OWLS": "https://i.imgur.com/KRjk1AV.png",
+        "RAIDERS": "https://i.imgur.com/HP1WeCM.png",
+        "EAGLES": "https://i.imgur.com/lxfq565.png",
+        "KOLTS": "https://i.imgur.com/id2gPdH.png",
+        "DRAGONS": "https://i.imgur.com/SP6wgNT.png",
+        "LIONS": "https://i.imgur.com/XQaNhUb.png",
+        "SPARTANS": "https://i.imgur.com/JGvY0Zk.png"
+      },
+      FALLBACK_LOGOS: {}
+    };
+  </script>
+
+  <!-- Vercel Speed Insights -->
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body class="contact-theme">
+
+  <!-- HEADER GLOBAL INYECTADO -->
+  <header class="header-nav" id="globalNav"></header>
+
+  <main class="ligas-container">
+
+    <!-- HERO BANNER -->
+    <section class="ligas-hero-banner">
+      <div class="ligas-badge-wrapper">
+        <img src="assets/img/KFL-logo.svg" alt="Logo Kiwanis Football League" class="ligas-badge-img" onerror="this.src='assets/logos/KFL-Logo.png'">
+      </div>
+
+      <div class="ligas-hero-content">
+        <h1 class="ligas-hero-title">LIGAS KFL (TEST)</h1>
+        <p class="ligas-hero-description">
+          Entorno de pruebas integrado directamente con los endpoints oficiales de Google Sheets.
+        </p>
+      </div>
+    </section>
+
+    <!-- 1. MODALIDAD / LIGAS (PÍLDORAS) -->
+    <div class="ligas-modality-bar">
+      <button class="ligas-modality-btn" id="btnLeagueContact" onclick="selectLeague('contact', this)">Contact Football</button>
+      <button class="ligas-modality-btn" id="btnLeagueFlag" onclick="selectLeague('flag', this)">Flag Football</button>
+    </div>
+
+    <!-- 1.5 BOTÓN RESTABLECER SELECCIÓN -->
+    <div class="ligas-reset-wrapper" id="resetWrapper">
+      <button type="button" class="ligas-reset-btn" id="btnResetSeleccion" onclick="resetSeleccion()">
+        <svg class="ligas-reset-icon" viewBox="0 0 24 24">
+          <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+        </svg>
+        RESTABLECER SELECCIÓN
+      </button>
+    </div>
+
+    <!-- 2. CATEGORÍA (PÍLDORAS) -->
+    <div class="ligas-filter-bar" id="filterBar" style="display: none;">
+      <button class="ligas-filter-btn active" id="filter-varsity" onclick="selectCategory('varsity', this)">VARSITY</button>
+      <button class="ligas-filter-btn" id="filter-juvenil" onclick="selectCategory('juvenil', this)">JUVENIL</button>
+      <button class="ligas-filter-btn" id="filter-mini" onclick="selectCategory('mini', this)">MINI</button>
+      <button class="ligas-filter-btn" id="filter-micro" onclick="selectCategory('micro', this)">MICRO</button>
+    </div>
+
+    <div id="selectPrompt" class="ligas-select-prompt">
+      <svg class="prompt-icon-svg" viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+      <span>Selecciona arriba <strong>Contact Football</strong> o <strong>Flag Football</strong> para comenzar.</span>
+    </div>
+
+    <div id="leagueContentSection" style="display: none;">
+
+      <!-- SUB PESTAÑAS INTERNAS -->
+      <div class="sub-tabs-bar">
+        <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
+        <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Posiciones</button>
+        <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Stats</button>
+      </div>
+
+      <!-- CALENDARIO -->
+      <div class="tab-pane active" id="pane-calendario">
+        <div class="kfl-filter-bar">
+          <select id="filterWeek" class="kfl-filter-select" onchange="applyCalendarFilters()">
+            <option value="ALL">Todas las Semanas</option>
+          </select>
+          <select id="filterTeam" class="kfl-filter-select" onchange="applyCalendarFilters()">
+            <option value="ALL">Todos los Equipos</option>
+          </select>
+          <button class="btn-export-pdf" onclick="window.print()">📄 Imprimir Calendario</button>
+        </div>
+        <div id="calendarioNativeContent"></div>
+      </div>
+
+      <!-- POSICIONES -->
+      <div class="tab-pane" id="pane-posiciones">
+        <div style="overflow-x: auto;">
+          <div id="posicionesNativeContent"></div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="tab-pane" id="pane-stats">
+        <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
+          <span id="kflLastUpdateLabel">Estadísticas integradas desde Google Sheets.</span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER GLOBAL -->
+  <div id="globalFooter"></div>
+  <script src="js/components.js"></script>
+
+  <!-- MOTOR CENTRALIZADO KFL TEST -->
+  <script>
+    let activeLeague = null;
+    let activeCategory = 'varsity';
+    let activeSubTab = 'calendario';
+    let currentSortColumn = null;
+    let currentSortDirection = 'asc';
+    let cachedStandingsData = [];
+
+    const masterDBMemoria = {};
+
+    const SVG_ICONS = {
+      calendar: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>`,
+      clock: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`,
+      pin: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>`
+    };
+
+    function getKFLConfig() {
+      return window.KFL_CONFIG || null;
+    }
+
+    function getTeamLogo(teamName) {
+      const cfg = getKFLConfig();
+      const cleanTeam = (teamName || "").toUpperCase().trim();
+      return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) || "https://i.imgur.com/wrPDjDN.png";
+    }
+
+    function getCalendarApiUrl(league) {
+      const cfg = getKFLConfig();
+      if (!cfg || !cfg.API_CALENDARIO_URL) return "";
+      const l = (league || activeLeague || 'contact').toLowerCase();
+      return cfg.API_CALENDARIO_URL[l] || "";
+    }
+
+    function getMasterDB(league) {
+      const l = (league || activeLeague || 'contact').toLowerCase();
+      return masterDBMemoria[l] || null;
+    }
+
+    function fetchMasterDB(league, callback) {
+      const l = (league || activeLeague || 'contact').toLowerCase();
+      if (getMasterDB(l)) {
+        if (callback) callback();
+        return;
+      }
+
+      const apiUrl = getCalendarApiUrl(l);
+      if (!apiUrl) {
+        console.error(`URL de API no encontrada para la liga: ${l}`);
+        if (callback) callback();
+        return;
+      }
+
+      // PETICIÓN DIRECTA AL MÓDULO ALL_DATA DE TUS APPS SCRIPTS REALES
+      fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then(db => {
+          masterDBMemoria[l] = db;
+          if (callback) callback();
+        })
+        .catch(err => {
+          console.error(`Error conectando con GAS [${l}]:`, err);
+          if (callback) callback();
+        });
+    }
+
+    function getCategoryData(league, category) {
+      const l = (league || activeLeague || 'contact').toLowerCase();
+      const cat = (category || activeCategory || 'varsity').toLowerCase();
+      let db = getMasterDB(l);
+      if (!db) return { partidos: [], tabla: [] };
+
+      const target = db[cat] || db[cat.toUpperCase()];
+      if (target) {
+        return {
+          partidos: target.partidos || [],
+          tabla: target.tabla || []
+        };
+      }
+      return { partidos: [], tabla: [] };
+    }
+
+    function selectLeague(league, btnElement) {
+      activeLeague = league;
+      activeCategory = 'varsity';
+      activeSubTab = 'calendario';
+
+      document.querySelectorAll('.ligas-modality-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      if (league === 'contact') {
+        document.body.className = 'contact-theme';
+      } else {
+        document.body.className = 'flag-theme-active';
+      }
+
+      document.getElementById('selectPrompt').style.display = 'none';
+      document.getElementById('filterBar').style.display = 'flex';
+      document.getElementById('leagueContentSection').style.display = 'block';
+      document.getElementById('resetWrapper').classList.add('visible');
+
+      document.querySelectorAll('.ligas-filter-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('filter-varsity').classList.add('active');
+
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-tab-calendario').classList.add('active');
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      document.getElementById('pane-calendario').classList.add('active');
+
+      fetchMasterDB(league, () => {
+        updateActiveView();
+      });
+    }
+
+    function selectCategory(category, btnElement) {
+      activeCategory = category;
+      document.querySelectorAll('.ligas-filter-btn').forEach(btn => btn.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
+      updateActiveView();
+    }
+
+    function selectSubTab(subTab) {
+      activeSubTab = subTab;
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-tab-' + subTab);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      const targetPane = document.getElementById('pane-' + subTab);
+      if (targetPane) targetPane.classList.add('active');
+
+      updateActiveView();
+    }
+
+    function resetSeleccion() {
+      activeLeague = null;
+      activeCategory = 'varsity';
+      activeSubTab = 'calendario';
+      document.querySelectorAll('.ligas-modality-btn').forEach(btn => btn.classList.remove('active'));
+      document.body.className = 'contact-theme';
+      document.getElementById('resetWrapper').classList.remove('visible');
+      document.getElementById('filterBar').style.display = 'none';
+      document.getElementById('leagueContentSection').style.display = 'none';
+      document.getElementById('selectPrompt').style.display = 'flex';
+    }
+
+    function updateActiveView() {
+      if (!activeLeague) return;
+      const db = getMasterDB(activeLeague);
+      if (!db) {
+        fetchMasterDB(activeLeague, () => updateActiveView());
+        return;
+      }
+
+      if (activeSubTab === 'calendario') {
+        loadCalendarioData();
+      } else if (activeSubTab === 'posiciones') {
+        loadPosicionesData();
+      }
+    }
+
+    function loadCalendarioData() {
+      const catData = getCategoryData(activeLeague, activeCategory);
+      const partidos = catData.partidos || [];
+      populateCalendarFilters(partidos);
+      renderCalendar(partidos);
+    }
+
+    function populateCalendarFilters(partidos) {
+      const weekSelect = document.getElementById('filterWeek');
+      const teamSelect = document.getElementById('filterTeam');
+      const weeks = [...new Set(partidos.map(p => p.week).filter(Boolean))];
+      const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => t && !t.includes('BYE')))];
+
+      weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
+      teamSelect.innerHTML = '<option value="ALL">Todos los Equipos</option>' + teams.map(t => `<option value="${t}">${t}</option>`).join('');
+    }
+
+    function applyCalendarFilters() {
+      const catData = getCategoryData(activeLeague, activeCategory);
+      const partidos = catData.partidos || [];
+      const selectedWeek = document.getElementById('filterWeek').value;
+      const selectedTeam = document.getElementById('filterTeam').value;
+
+      const filtered = partidos.filter(p => {
+        const matchWeek = selectedWeek === 'ALL' || p.week === selectedWeek;
+        const matchTeam = selectedTeam === 'ALL' || p.home === selectedTeam || p.away === selectedTeam;
+        return matchWeek && matchTeam;
+      });
+      renderCalendar(filtered);
+    }
+
+    function renderCalendar(partidos) {
+      const container = document.getElementById('calendarioNativeContent');
+      if (!partidos || partidos.length === 0) {
+        container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay partidos registrados en esta categoría.</p>`;
+        return;
+      }
+
+      const grouped = {};
+      partidos.forEach(p => {
+        const week = p.week || 'CALENDARIO';
+        if (!grouped[week]) grouped[week] = [];
+        grouped[week].push(p);
+      });
+
+      let html = '';
+      for (const weekName in grouped) {
+        html += `<div class="kfl-week-section"><div class="kfl-week-title" style="font-size:16px; font-weight:800; margin-bottom:12px; text-transform:uppercase;">${weekName}</div><div class="kfl-grid-matches" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">`;
+        grouped[weekName].forEach(p => {
+          html += `
+            <div class="kfl-match-card" style="background:#fff; border:1px solid #ddd; border-radius:10px; overflow:hidden; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
+              <div style="background:${activeLeague==='contact'?'#19547E':'#A91C00'}; color:#fff; padding:8px 12px; font-size:11px; font-weight:bold; display:flex; justify-content:space-between;">
+                <span>${p.date || 'TBD'}</span><span>${p.field || 'TBD'}</span>
+              </div>
+              <div style="padding:15px; display:flex; align-items:center; justify-content:space-between;">
+                <div style="text-align:center; width:38%; font-weight:bold; font-size:13px;">
+                  <img src="${getTeamLogo(p.home)}" width="40" height="40" style="object-fit:contain; margin-bottom:5px;" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                  <div>${p.home}</div>
+                </div>
+                <div style="text-align:center; width:24%;">
+                  ${p.hasScore ? `<div style="font-size:10px; font-weight:bold; color:#10b981;">FINAL</div><div style="font-size:18px; font-weight:900;">${p.scoreH} - ${p.scoreA}</div>` : `<div style="font-size:14px; font-weight:bold; color:#94a3b8;">VS</div><div style="font-size:11px; color:#64748b;">${p.time}</div>`}
+                </div>
+                <div style="text-align:center; width:38%; font-weight:bold; font-size:13px;">
+                  <img src="${getTeamLogo(p.away)}" width="40" height="40" style="object-fit:contain; margin-bottom:5px;" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+                  <div>${p.away}</div>
+                </div>
+              </div>
+            </div>`;
+        });
+        html += `</div></div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function loadPosicionesData() {
+      const catData = getCategoryData(activeLeague, activeCategory);
+      cachedStandingsData = catData.tabla || [];
+      renderPosiciones(cachedStandingsData);
+    }
+
+    function renderPosiciones(tabla) {
+      const container = document.getElementById('posicionesNativeContent');
+      if (!tabla || tabla.length === 0) {
+        container.innerHTML = `<p style="text-align:center; padding:30px; color:#64748b;">No hay tabla de posiciones disponible para esta categoría.</p>`;
+        return;
+      }
+
+      let html = `<table style="width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; border:1px solid #ddd;">
+        <thead>
+          <tr style="background:${activeLeague==='contact'?'#19547E':'#A91C00'}; color:#fff; text-align:center; font-size:13px;">
+            <th style="padding:10px;">#</th>
+            <th style="text-align:left; padding:10px;">EQUIPO</th>
+            <th>JJ</th><th>JG</th><th>JP</th><th>JE</th><th>PF</th><th>PC</th><th>DIF</th><th>PTS</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      tabla.forEach((eq, idx) => {
+        const diff = eq.dif || (eq.pf - eq.pc);
+        const cls = diff > 0 ? "color:#059669; font-weight:bold;" : (diff < 0 ? "color:#dc2626; font-weight:bold;" : "");
+        html += `<tr style="border-bottom:1px solid #eee; text-align:center; font-size:13px;">
+          <td style="padding:10px; font-weight:bold;">${eq.rank || (idx + 1)}</td>
+          <td style="text-align:left; padding:10px; font-weight:bold; display:flex; align-items:center; gap:8px;">
+            <img src="${getTeamLogo(eq.equipo)}" width="24" height="24" style="object-fit:contain;" onerror="this.src='https://i.imgur.com/wrPDjDN.png'">
+            ${eq.equipo}
+          </td>
+          <td>${eq.jj}</td><td>${eq.jg}</td><td>${eq.jp}</td><td>${eq.je}</td><td>${eq.pf}</td><td>${eq.pc}</td>
+          <td style="${cls}">${diff > 0 ? "+" + diff : diff}</td>
+          <td style="font-weight:bold; font-size:15px;">${eq.pts}</td>
+        </tr>`;
+      });
+      html += `</tbody></table>`;
+      container.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

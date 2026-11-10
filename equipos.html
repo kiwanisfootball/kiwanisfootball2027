@@ -227,7 +227,6 @@
       return 'assets/img/KFL-logo.svg';
     }
 
-    // Verdadero si el nombre de la celda corresponde al equipo seleccionado
     function esDelEquipo(nombreCelda) {
       const meta = EQUIPOS_OFICIALES[currentSelectedTeam];
       const n = normalizarTexto(nombreCelda);
@@ -268,9 +267,8 @@
       if (selCal) selCal.innerHTML = opts;
     }
 
-    /* ---------- BASE DE DATOS (misma lógica que ligas.html) ---------- */
+    /* ---------- BASE DE DATOS ---------- */
 
-    // Caché por liga: una sola petición modulo=all_data por liga
     const masterDBMemoria = {};
     const masterDBPromesas = {};
 
@@ -297,7 +295,6 @@
       return masterDBPromesas[l];
     }
 
-    // Extrae partidos de una liga/categoría, igual que getCategoryData de ligas.html
     function getPartidosCategoria(db, liga, categoria) {
       let scope = db;
       if (scope.data && typeof scope.data === 'object') scope = scope.data;
@@ -313,7 +310,6 @@
       return target.partidos || target.matches || target.calendario || (Array.isArray(target) ? target : []);
     }
 
-    // Partido "libre" (bye/descanso): no es un enfrentamiento
     function esPartidoLibre(p) {
       const hora = String(p.time || p.hora || '').toLowerCase();
       const local = String(p.home || p.local || '').toLowerCase();
@@ -389,7 +385,7 @@
       else if (subTab === 'partidos') consultarCalendarioEquipoCategoria();
     }
 
-    /* ---------- CALENDARIO ---------- */
+    /* ---------- CALENDARIO UNIFICADO (IGUAL A LIGAS.HTML) ---------- */
 
     async function consultarCalendarioEquipoCategoria() {
       const container = document.getElementById('teamCalendarContainer');
@@ -413,27 +409,45 @@
         }
 
         container.innerHTML = `<div class="team-schedule-cards-grid">` + filtrados.map(p => {
-          const marcador = p.hasScore
-            ? `<div class="match-score-badge">${escapeHTML(p.scoreH)} - ${escapeHTML(p.scoreA)}</div>`
-            : `<div class="match-score-badge">VS</div>`;
+          const local = p.home || 'Local';
+          const visitante = p.away || 'Visitante';
+          const fecha = p.date || 'Por definir';
+          const cancha = p.field || 'CDE Sports Center';
+          const semana = p.week || p.jornada || 'WEEK';
+          
+          const scoreLoc = p.scoreH;
+          const scoreVis = p.scoreA;
+          const hasScore = p.hasScore;
+
+          const scoreHTML = hasScore 
+            ? `<div class="kfl-score-status">Final</div><div class="kfl-score-num">${escapeHTML(scoreLoc)} - ${escapeHTML(scoreVis)}</div>`
+            : `<div class="kfl-score-vs">VS</div>${p.time ? '<span style="font-size:10px; font-weight:700; color:#64748b;">' + escapeHTML(p.time) + '</span>' : ''}`;
+
           return `
-            <div class="schedule-match-card">
-              <div class="match-card-meta">
-                <span>📅 ${escapeHTML(p.date || 'Por confirmar')}</span>
-                <span>📍 ${escapeHTML(p.field || 'TBD')}</span>
-              </div>
-              <div class="match-card-teams">
-                <div class="match-team-col">
-                  <img src="${getTeamLogo(p.home)}" width="36" height="36" alt="${escapeHTML(p.home)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                  <span class="match-team-name">${escapeHTML(p.home)}</span>
+            <div class="kfl-match-card">
+              <div class="kfl-match-header">
+                <div class="kfl-info-item">
+                  <svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+                  <span>${escapeHTML(semana)} • ${escapeHTML(fecha)}</span>
                 </div>
-                ${marcador}
-                <div class="match-team-col">
-                  <img src="${getTeamLogo(p.away)}" width="36" height="36" alt="${escapeHTML(p.away)}" onerror="this.src='assets/img/KFL-logo.svg'">
-                  <span class="match-team-name">${escapeHTML(p.away)}</span>
+                <div class="kfl-info-item">
+                  <svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>${escapeHTML(cancha)}</span>
                 </div>
               </div>
-              ${!p.hasScore ? `<div class="match-card-meta" style="justify-content:center;"><span>🕒 ${escapeHTML(p.time || 'TBD')}</span></div>` : ''}
+              <div class="kfl-match-body">
+                <div class="kfl-team-box">
+                  <img src="${getTeamLogo(local)}" class="kfl-team-logo" alt="${escapeHTML(local)}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${escapeHTML(local)}</span>
+                </div>
+                <div class="kfl-score-box">
+                  ${scoreHTML}
+                </div>
+                <div class="kfl-team-box">
+                  <img src="${getTeamLogo(visitante)}" class="kfl-team-logo" alt="${escapeHTML(visitante)}" onerror="this.src='assets/img/KFL-logo.svg'">
+                  <span class="match-team-name">${escapeHTML(visitante)}</span>
+                </div>
+              </div>
             </div>`;
         }).join('') + `</div>`;
 
@@ -449,7 +463,7 @@
       </div>`;
     }
 
-    /* ---------- ROSTERS (misma lógica que abrirRosterEquipo de ligas.html) ---------- */
+    /* ---------- ROSTERS ---------- */
 
     async function cargarRosterEquipoCategoria() {
       const tbody = document.getElementById('teamRosterTableBody');

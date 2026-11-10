@@ -410,6 +410,7 @@
   border: 1.5px solid #cbd5e1;
   background-color: #ffffff;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-ref;
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 14px;
@@ -466,19 +467,21 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* HEADER DEL CARD CORREGIDO: CLAMP FLUIDO Y 100% UNA SOLA LÍNEA */
 .kfl-match-header {
   background: var(--azul-kfl, #005eaa);
   color: #ffffff;
-  padding: 9px 14px;
+  padding: 8px 12px;
   font-weight: 700;
-  font-size: clamp(10px, 2vw, 11.5px);
+  font-size: clamp(9px, 1.45vw, 11px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   white-space: nowrap;
   box-sizing: border-box;
+  width: 100%;
 }
 
 body.flag-theme-active .kfl-match-header { 
@@ -488,53 +491,61 @@ body.flag-theme-active .kfl-match-header {
 .kfl-info-item { 
   display: flex; 
   align-items: center; 
-  gap: 6px; 
+  gap: 4px; 
   white-space: nowrap;
 }
 
 .kfl-icon-svg { 
-  width: 14px; 
-  height: 14px; 
+  width: 13px; 
+  height: 13px; 
   fill: currentColor; 
   flex-shrink: 0; 
 }
 
 .kfl-match-body { 
-  padding: 18px; 
+  padding: 18px 12px; 
   display: flex; 
   align-items: center; 
   justify-content: space-between; 
-  gap: 8px; 
+  gap: 6px; 
 }
 
 .kfl-team-box { 
   display: flex; 
   flex-direction: column; 
   align-items: center; 
-  width: 36%; 
+  width: 35%; 
   text-align: center; 
   font-weight: 800; 
-  font-size: clamp(11px, 2.5vw, 13.5px); 
+  font-size: clamp(10px, 2.2vw, 12.5px); 
   color: #0f172a; 
 }
 
 .kfl-team-logo { 
-  width: 44px; 
-  height: 44px; 
+  width: 42px; 
+  height: 42px; 
   object-fit: contain; 
-  margin-bottom: 8px; 
+  margin-bottom: 6px; 
 }
 
 .kfl-score-box { 
-  width: 28%; 
+  width: 30%; 
   text-align: center; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+/* CAJA DE MARCADOR CORREGIDA: EN UNA SOLA LÍNEA HORIZONTAL SIN PARTIRSE */
 .kfl-score-num { 
-  font-size: clamp(20px, 5vw, 24px); 
-  font-weight: 700; 
+  font-family: var(--fuente-titulos, 'Anton', sans-serif);
+  font-size: clamp(17px, 3.8vw, 22px); 
+  font-weight: 400; 
   color: #0f172a; 
   letter-spacing: 0.5px; 
+  white-space: nowrap;
+  line-height: 1.1;
 }
 
 .kfl-score-vs { 
@@ -542,15 +553,17 @@ body.flag-theme-active .kfl-match-header {
   font-weight: 900; 
   color: #94a3b8; 
   letter-spacing: 1px; 
+  white-space: nowrap;
 }
 
 .kfl-score-status { 
-  font-size: 10px; 
+  font-size: 9.5px; 
   font-weight: 900; 
   color: #16a34a; 
-  letter-spacing: 0.8px; 
+  letter-spacing: 0.5px; 
   margin-bottom: 2px; 
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* TABLAS COMPACTAS */

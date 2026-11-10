@@ -38,34 +38,27 @@
   padding: 0 10px;
 }
 
-/* 
-  CONTENEDOR FLEXIBLE Y FLUIDO 
-  - justify-content: center asegura que cualquier fila incompleta (como una de 3 o de 1 equipo) quede perfectamente centrada.
-*/
+/* GRID FLEXIBLE Y LÍQUIDO CON CENTRADO AUTOMÁTICO */
 .equipos-grid-selector {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: stretch;
   gap: 16px;
-  max-width: 900px;
+  max-width: 860px;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 0 4px;
 }
 
-/* 
-  TARJETAS FLUIDAS CON ANCHO CONTROLADO 
-  - flex: 1 1 200px permite que crezcan y se encojan de forma fluida.
-  - max-width evita que se estiren demasiado cuando quedan pocas en una fila.
-*/
+/* TARJETAS FLUIDAS */
 .equipo-selector-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
-  padding: 18px 14px;
-  flex: 1 1 190px;
-  max-width: 210px;
+  padding: 16px 12px;
+  flex: 1 1 180px;
+  max-width: 200px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -183,7 +176,7 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-  padding: 18px 16px;
+  padding: 20px 16px;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
@@ -193,7 +186,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
 }
 
@@ -206,26 +199,41 @@
   text-align: center;
 }
 
+/* CONTENEDOR DE FILAS DE PÍLDORAS (SEPARACIÓN POR MODALIDAD) */
 .participation-badges {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* CADA FILA DE PÍLDORAS CENTRADA Y UNIFORME */
+.badge-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 8px;
   width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
 }
 
+/* PÍLDORAS CON ANCHO MÍNIMO FIJO PARA QUE TODAS TENGAN EL MISMO TAMAÑO */
 .part-badge {
+  flex: 1 1 130px;
+  max-width: 170px;
+  min-width: 130px;
+  text-align: center;
   font-size: 11px;
   font-weight: 800;
-  padding: 7px 14px;
+  padding: 8px 12px;
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.02);
   white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .part-badge.contact-badge {

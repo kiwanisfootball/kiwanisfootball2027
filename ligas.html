@@ -85,8 +85,9 @@
       </button>
     </div>
 
+    <!-- BOTONES DE CATEGORÍA: INICIAN TOTALMENTE INACTIVOS (NINGUNO SELECCIONADO) -->
     <div class="ligas-filter-bar" id="filterBar">
-      <button class="ligas-filter-btn active" id="filter-varsity" onclick="selectCategory('varsity', this)">VARSITY</button>
+      <button class="ligas-filter-btn" id="filter-varsity" onclick="selectCategory('varsity', this)">VARSITY</button>
       <button class="ligas-filter-btn" id="filter-juvenil" onclick="selectCategory('juvenil', this)">JUVENIL</button>
       <button class="ligas-filter-btn" id="filter-mini" onclick="selectCategory('mini', this)">MINI</button>
       <button class="ligas-filter-btn" id="filter-micro" onclick="selectCategory('micro', this)">MICRO</button>
@@ -116,7 +117,11 @@
           </select>
           <button class="btn-export-pdf" onclick="window.print()">📄 Imprimir Calendario</button>
         </div>
-        <div id="calendarioNativeContent"></div>
+        <div id="calendarioNativeContent">
+          <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
+            Selecciona una categoría arriba para visualizar el calendario.
+          </div>
+        </div>
       </div>
 
       <div class="tab-pane" id="pane-rosters">
@@ -232,7 +237,7 @@
 
   <script>
     let activeLeague = null;
-    let activeCategory = 'varsity';
+    let activeCategory = null;
     let activeSubTab = 'calendario';
 
     let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
@@ -323,7 +328,8 @@
 
     function getCategoryData(league, category) {
       const l = (league || activeLeague || 'contact').toLowerCase();
-      const cat = (category || activeCategory || 'varsity').toLowerCase();
+      const cat = (category || activeCategory || '').toLowerCase();
+      if (!cat) return { partidos: [], tabla: [] };
 
       let db = getMasterDB(l);
       if (!db) return { partidos: [], tabla: [] };
@@ -351,7 +357,7 @@
 
     function selectLeague(league, btnElement) {
       activeLeague = league;
-      activeCategory = 'varsity';
+      activeCategory = null; // NINGUNA CATEGORÍA SELECCIONADA AL CAMBIAR MODALIDAD
       activeSubTab = 'calendario';
       currentSortColumn = null;
       currentSortDirection = 'asc';
@@ -368,13 +374,10 @@
         document.body.className = 'flag-theme-active';
       }
 
+      // LIMPIAR SELECCIÓN DE TODOS LOS BOTONES DE CATEGORÍA
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-active', 'flag-active');
       });
-      const defaultCatBtn = document.getElementById('filter-varsity');
-      if (defaultCatBtn) {
-        defaultCatBtn.classList.add('active', league === 'contact' ? 'contact-active' : 'flag-active');
-      }
 
       document.querySelectorAll('.sub-tab-btn').forEach(btn => {
         btn.classList.remove('active');
@@ -385,17 +388,19 @@
       document.querySelectorAll('.tab-pane').forEach(pane => {
         pane.classList.remove('active');
       });
-      const defaultPane = document.getElementById('pane-calendario');
-      if (defaultPane) defaultPane.classList.add('active');
 
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
-      document.getElementById('leagueContentSection').style.display = 'block';
+      document.getElementById('leagueContentSection').style.display = 'none'; // OCULTO HASTA ELEGIR CATEGORÍA
       document.getElementById('resetWrapper').classList.add('visible');
 
-      fetchMasterDB(league, () => {
-        updateActiveView();
-      });
+      document.getElementById('calendarioNativeContent').innerHTML = `
+        <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
+          Selecciona una categoría arriba para visualizar el contenido.
+        </div>
+      `;
+
+      fetchMasterDB(league);
     }
 
     function selectCategory(category, btnElement) {
@@ -417,7 +422,7 @@
 
     function resetSeleccion() {
       activeLeague = null;
-      activeCategory = 'varsity';
+      activeCategory = null;
       activeSubTab = 'calendario';
       currentSortColumn = null;
       currentSortDirection = 'asc';
@@ -468,11 +473,11 @@
       const targetPane = document.getElementById('pane-' + subTab);
       if (targetPane) targetPane.classList.add('active');
 
-      if (activeLeague) updateActiveView();
+      if (activeLeague && activeCategory) updateActiveView();
     }
 
     function updateActiveView() {
-      if (!activeLeague) return;
+      if (!activeLeague || !activeCategory) return;
 
       const db = getMasterDB(activeLeague);
       if (!db) {

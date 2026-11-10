@@ -105,18 +105,12 @@
         <span>Selecciona una categoría arriba para visualizar los campeones correspondientes.</span>
       </div>
 
-      <!-- BANNER MÁXIMO GANADOR / COUNTER DINÁMICO POR CATEGORÍA -->
+      <!-- BANNER MÁXIMO GANADOR / COUNTER DINÁMICO POR CATEGORÍA (Sin trofeo y con centrado estricto) -->
       <div id="leaderboardCard" class="champs-leaderboard-card" style="display: none;">
         <div class="champs-leaderboard-left">
-          <div class="champs-leaderboard-trophy-box">
-            <img src="assets/img/trophy.png" alt="Trofeo KFL" class="champs-leaderboard-trophy-png" onerror="this.src='assets/img/trophy.svg'">
-          </div>
-
-          <div class="champs-leaderboard-info">
-            <span class="champs-leaderboard-label">Máximo Ganador</span>
-            <div class="champs-leaderboard-teams-list" id="leaderboardTeams">
-              <!-- Se inyecta dinámicamente cada equipo en su propia línea -->
-            </div>
+          <span class="champs-leaderboard-label">Máximo Ganador</span>
+          <div class="champs-leaderboard-teams-list" id="leaderboardTeams">
+            <!-- Se inyecta dinámicamente cada equipo en su propia línea -->
           </div>
         </div>
 
@@ -189,7 +183,7 @@
   <!-- 4. FOOTER GLOBAL (Inyectado por components.js) -->
   <div id="globalFooter"></div>
 
-  <!-- LÓGICA DE CAMPEONES (INTACTA SEGÚN INSTRUCCIÓN) -->
+  <!-- LÓGICA DE CAMPEONES (INTACTA E INMUTABLE) -->
   <script>
     const SHEETS_CONFIG = {
       contact: {
@@ -430,14 +424,12 @@
       return validRows;
     }
 
-    /* Helper simplificado para mostrar solo el último año en que ganaron */
     function formatLastYearBadge(yearsArray) {
       if (!yearsArray || yearsArray.length === 0) return '';
       const lastYear = yearsArray[yearsArray.length - 1];
       return `<span class="champs-leaderboard-years-badge">Último: ${lastYear}</span>`;
     }
 
-    /* Lógica del Counter Plano y Máximo Ganador Dinámico */
     function renderCategoryLeaderboard(category) {
       const card = document.getElementById('leaderboardCard');
       const teamsContainer = document.getElementById('leaderboardTeams');
@@ -492,8 +484,6 @@
       }).join('');
 
       textEl.textContent = maxTitles === 1 ? 'Campeonato' : 'Campeonatos';
-      
-      /* Asignación numérica directa sin animación ni efectos */
       countEl.textContent = maxTitles;
       card.style.display = 'flex';
     }

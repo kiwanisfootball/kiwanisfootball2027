@@ -99,6 +99,7 @@
 
     <div id="leagueContentSection" style="display: none;">
 
+      <!-- Sub-pestañas inician completamente limpias (ninguna seleccionada por defecto) -->
       <div class="sub-tabs-bar">
         <button class="sub-tab-btn" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
         <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
@@ -245,7 +246,7 @@
   <script>
     let activeLeague = null;
     let activeCategory = null;
-    let activeSubTab = null;
+    let activeSubTab = null; // NINGUNA SUB-PESTAÑA SELECCIONADA POR DEFECTO
 
     let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
     let tipoStatActivo = 'RUSHING';
@@ -398,7 +399,7 @@
 
     function selectCategory(category, btnElement) {
       activeCategory = category;
-      activeSubTab = 'calendario';
+      activeSubTab = null; // NO SELECCIONA NINGUNA SUB-PESTAÑA AUTOMÁTICAMENTE AL CAMBIAR CATEGORÍA
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
@@ -407,19 +408,19 @@
         btnElement.classList.add('active', activeLeague === 'contact' ? 'contact-active' : 'flag-active');
       }
 
+      // Limpiar pestañas de contenido y sub-pestañas para que aparezcan vacías esperando que el usuario elija
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
-      const defaultSubTab = document.getElementById('btn-tab-calendario');
-      if (defaultSubTab) defaultSubTab.classList.add('active');
-
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-      const defaultPane = document.getElementById('pane-calendario');
-      if (defaultPane) defaultPane.classList.add('active');
 
       document.getElementById('leagueContentSection').style.display = 'block';
+      document.getElementById('calendarioNativeContent').innerHTML = `
+        <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
+          Selecciona una sub-pestaña arriba (Calendario, Rosters, Posiciones o Stats) para visualizar el contenido.
+        </div>
+      `;
 
       cerrarDetalleRoster();
       precargarStatsCategoria();
-      updateActiveView();
     }
 
     function resetSeleccion() {
@@ -479,7 +480,7 @@
     }
 
     function updateActiveView() {
-      if (!activeLeague || !activeCategory) return;
+      if (!activeLeague || !activeCategory || !activeSubTab) return;
 
       const db = getMasterDB(activeLeague);
       if (!db) {

@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Ligas - Contact y Flag Football | Kiwanis Football League Panamá</title>
 
-  <!-- SEO & AEO Meta Tags -->
   <meta name="description" content="Calendario, tabla de posiciones, rosters y estadísticas de la Kiwanis Football League en Panamá. Contact Football Masculino y Flag Football Femenino en categorías Micro, Mini, Juvenil y Varsity.">
   <meta name="keywords" content="Ligas KFL, Contact Football Panamá, Flag Football Panamá, calendario KFL, tabla de posiciones KFL, rosters KFL, estadísticas KFL, Kiwanis Football League">
   <link rel="canonical" href="https://www.kiwanisfootball.com/ligas.html">
 
-  <!-- Open Graph / Social Media Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Ligas - Kiwanis Football League Panamá">
   <meta property="og:description" content="Calendario, tabla de posiciones, rosters y estadísticas de KFL Contact y Flag Football en Panamá.">
@@ -18,7 +16,6 @@
   <meta property="og:url" content="https://www.kiwanisfootball.com/ligas.html">
   <meta property="og:locale" content="es_PA">
 
-  <!-- Schema.org Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -40,7 +37,6 @@
   }
   </script>
 
-  <!-- Google Fonts: Anton & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -49,10 +45,8 @@
   <link rel="stylesheet" href="css/ligas.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
-  <!-- CONFIGURACIÓN CENTRALIZADA KFL -->
   <script src="js/config-ligas.js"></script>
 
-  <!-- Vercel Speed Insights -->
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
@@ -60,12 +54,10 @@
 </head>
 <body class="contact-theme">
 
-  <!-- HEADER GLOBAL INYECTADO -->
   <header class="header-nav" id="globalNav"></header>
 
   <main class="ligas-container">
 
-    <!-- HERO BANNER -->
     <section class="ligas-hero-banner">
       <div class="ligas-badge-wrapper">
         <img src="assets/img/KFL-logo.svg" alt="Logo Kiwanis Football League" class="ligas-badge-img" onerror="this.src='assets/logos/KFL-Logo.png'">
@@ -79,25 +71,22 @@
       </div>
     </section>
 
-    <!-- 1. MODALIDAD / LIGAS (PÍLDORAS) -->
     <div class="ligas-modality-bar">
       <button class="ligas-modality-btn" id="btnLeagueContact" onclick="selectLeague('contact', this)">Contact Football</button>
       <button class="ligas-modality-btn" id="btnLeagueFlag" onclick="selectLeague('flag', this)">Flag Football</button>
     </div>
 
-    <!-- 1.5 BOTÓN RESTABLECER SELECCIÓN (visible solo al elegir modalidad) -->
-<div class="ligas-reset-wrapper" id="resetWrapper">
-  <button type="button" class="ligas-reset-btn" id="btnResetSeleccion" onclick="resetSeleccion()">
-    <svg class="ligas-reset-icon" viewBox="0 0 24 24">
-      <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
-    </svg>
-    RESTABLECER SELECCIÓN
-  </button>
-</div>
+    <div class="ligas-reset-wrapper" id="resetWrapper">
+      <button type="button" class="ligas-reset-btn" id="btnResetSeleccion" onclick="resetSeleccion()">
+        <svg class="ligas-reset-icon" viewBox="0 0 24 24">
+          <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+        </svg>
+        RESTABLECER SELECCIÓN
+      </button>
+    </div>
 
-    <!-- 2. CATEGORÍA (PÍLDORAS) -->
     <div class="ligas-filter-bar" id="filterBar">
-      <button class="ligas-filter-btn active" id="filter-varsity" onclick="selectCategory('varsity', this)">VARSITY</button>
+      <button class="ligas-filter-btn" id="filter-varsity" onclick="selectCategory('varsity', this)">VARSITY</button>
       <button class="ligas-filter-btn" id="filter-juvenil" onclick="selectCategory('juvenil', this)">JUVENIL</button>
       <button class="ligas-filter-btn" id="filter-mini" onclick="selectCategory('mini', this)">MINI</button>
       <button class="ligas-filter-btn" id="filter-micro" onclick="selectCategory('micro', this)">MICRO</button>
@@ -110,29 +99,39 @@
 
     <div id="leagueContentSection" style="display: none;">
 
-      <!-- SUB PESTAÑAS INTERNAS -->
+      <!-- Sub-pestañas inician completamente limpias (ninguna seleccionada por defecto) -->
       <div class="sub-tabs-bar">
-        <button class="sub-tab-btn active" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
+        <button class="sub-tab-btn" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
         <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
         <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Posiciones</button>
         <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Stats</button>
       </div>
 
-      <!-- CALENDARIO -->
-      <div class="tab-pane active" id="pane-calendario">
+      <div class="tab-pane" id="pane-calendario">
         <div class="kfl-filter-bar">
-          <select id="filterWeek" class="kfl-filter-select" onchange="applyCalendarFilters()">
-            <option value="ALL">Todas las Semanas</option>
-          </select>
-          <select id="filterTeam" class="kfl-filter-select" onchange="applyCalendarFilters()">
-            <option value="ALL">Todos los Equipos</option>
-          </select>
+          <div class="kfl-custom-select-wrapper">
+            <select id="filterWeek" onchange="applyCalendarFilters()">
+              <option value="ALL">Todas las Semanas</option>
+            </select>
+            <svg class="kfl-select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+
+          <div class="kfl-custom-select-wrapper">
+            <select id="filterTeam" onchange="applyCalendarFilters()">
+              <option value="ALL">Todos los Equipos</option>
+            </select>
+            <svg class="kfl-select-arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+          </div>
+
           <button class="btn-export-pdf" onclick="window.print()">📄 Imprimir Calendario</button>
         </div>
-        <div id="calendarioNativeContent"></div>
+        <div id="calendarioNativeContent">
+          <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
+            Selecciona una sub-pestaña arriba para visualizar el contenido.
+          </div>
+        </div>
       </div>
 
-      <!-- ROSTERS -->
       <div class="tab-pane" id="pane-rosters">
         <div class="rosters-grid" id="rostersGrid"></div>
 
@@ -180,14 +179,12 @@
         </div>
       </div>
 
-      <!-- POSICIONES -->
       <div class="tab-pane" id="pane-posiciones">
         <div style="overflow-x: auto;">
           <div id="posicionesNativeContent"></div>
         </div>
       </div>
 
-      <!-- STATS -->
       <div class="tab-pane" id="pane-stats">
         <div class="kfl-last-update-banner" id="kflLastUpdateBanner">
           <svg class="kfl-update-svg" viewBox="0 0 24 24">
@@ -226,7 +223,6 @@
 
   </main>
 
-  <!-- MODAL: PLAYER CARD -->
   <div class="player-card-modal-backdrop" id="playerCardModal" onclick="cerrarPlayerCardModal(event)">
     <div class="player-card" onclick="event.stopPropagation()">
       <div class="player-card-header">
@@ -243,17 +239,14 @@
     </div>
   </div>
 
-  <!-- FOOTER GLOBAL -->
   <div id="globalFooter"></div>
 
-  <!-- COMPONENTES JS CENTRALIZADOS -->
   <script src="js/components.js"></script>
 
-  <!-- LÓGICA COMPLETA DE BACKEND Y DATA KFL -->
   <script>
     let activeLeague = null;
-    let activeCategory = 'varsity';
-    let activeSubTab = 'calendario';
+    let activeCategory = null;
+    let activeSubTab = null; // NINGUNA SUB-PESTAÑA SELECCIONADA POR DEFECTO
 
     let seccionesStatsGlobal = { RUSHING: [], PASSING: [], RECEIVING: [], DEFENSIVE: [] };
     let tipoStatActivo = 'RUSHING';
@@ -343,7 +336,8 @@
 
     function getCategoryData(league, category) {
       const l = (league || activeLeague || 'contact').toLowerCase();
-      const cat = (category || activeCategory || 'varsity').toLowerCase();
+      const cat = (category || activeCategory || '').toLowerCase();
+      if (!cat) return { partidos: [], tabla: [] };
 
       let db = getMasterDB(l);
       if (!db) return { partidos: [], tabla: [] };
@@ -390,20 +384,14 @@
 
       document.querySelectorAll('.ligas-filter-btn').forEach(btn => {
         btn.classList.remove('active', 'contact-active', 'flag-active');
-        btn.classList.add(league === 'contact' ? 'contact-active' : 'flag-active');
       });
 
-      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-      });
-
-      document.querySelectorAll('.tab-pane').forEach(pane => {
-        pane.classList.remove('active');
-      });
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
 
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
-      document.getElementById('leagueContentSection').style.display = 'block';
+      document.getElementById('leagueContentSection').style.display = 'none';
       document.getElementById('resetWrapper').classList.add('visible');
 
       fetchMasterDB(league);
@@ -411,18 +399,25 @@
 
     function selectCategory(category, btnElement) {
       activeCategory = category;
-      activeSubTab = null;
+      activeSubTab = null; // NO SELECCIONA NINGUNA SUB-PESTAÑA AUTOMÁTICAMENTE AL CAMBIAR CATEGORÍA
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
-      document.querySelectorAll('.ligas-filter-btn').forEach(btn => btn.classList.remove('active'));
-      if (btnElement) btnElement.classList.add('active');
+      document.querySelectorAll('.ligas-filter-btn').forEach(btn => btn.classList.remove('active', 'contact-active', 'flag-active'));
+      if (btnElement) {
+        btnElement.classList.add('active', activeLeague === 'contact' ? 'contact-active' : 'flag-active');
+      }
 
+      // Limpiar pestañas de contenido y sub-pestañas para que aparezcan vacías esperando que el usuario elija
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
-
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
 
       document.getElementById('leagueContentSection').style.display = 'block';
+      document.getElementById('calendarioNativeContent').innerHTML = `
+        <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
+          Selecciona una sub-pestaña arriba (Calendario, Rosters, Posiciones o Stats) para visualizar el contenido.
+        </div>
+      `;
 
       cerrarDetalleRoster();
       precargarStatsCategoria();
@@ -481,11 +476,11 @@
       const targetPane = document.getElementById('pane-' + subTab);
       if (targetPane) targetPane.classList.add('active');
 
-      if (activeLeague) updateActiveView();
+      if (activeLeague && activeCategory) updateActiveView();
     }
 
     function updateActiveView() {
-      if (!activeLeague) return;
+      if (!activeLeague || !activeCategory || !activeSubTab) return;
 
       const db = getMasterDB(activeLeague);
       if (!db) {
@@ -553,7 +548,7 @@
       const teams = [...new Set(partidos.flatMap(p => [p.home, p.away]).filter(t => {
         if (!t) return false;
         const up = t.toUpperCase().trim();
-        return up !== 'KFL' && up !== 'TODOS JUEGAN' && !up.includes('LIBRE') && !up.includes('DESCANSO') && !up.includes('BYE');
+        return up !== 'KFL' && !up.includes('KFL_') && !up.includes('KFL-') && !up.includes('LOGO') && up !== 'TODOS JUEGAN' && !up.includes('LIBRE') && !up.includes('DESCANSO') && !up.includes('BYE');
       }))];
 
       weekSelect.innerHTML = '<option value="ALL">Todas las Semanas</option>' + weeks.map(w => `<option value="${w}">${w}</option>`).join('');
@@ -1327,7 +1322,8 @@
       paginaActualStats = 1;
       currentSortColumn = null;
       currentSortDirection = 'asc';
-      document.getElementById('searchStatInput').value = '';
+      const searchInput = document.getElementById('searchStatInput');
+      if (searchInput) searchInput.value = '';
       renderizarSeccionActivaStats();
     }
   </script>

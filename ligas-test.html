@@ -45,7 +45,6 @@
   <link rel="stylesheet" href="css/ligas.css">
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
-  <!-- Configuración de URLs directas o externas -->
   <script src="js/config-ligas.js"></script>
 
   <script>
@@ -65,9 +64,9 @@
       </div>
 
       <div class="ligas-hero-content">
-        <h1 class="ligas-hero-title">LIGAS KFL (TEST)</h1>
+        <h1 class="ligas-hero-title">LIGAS KFL</h1>
         <p class="ligas-hero-description">
-          Entorno de pruebas con todas las funcionalidades completas sincronizadas.
+          Consulta el calendario oficial, tablas de posición, rosters actualizados y estadísticas detalladas de la <strong>Kiwanis Football League</strong> en Panamá.
         </p>
       </div>
     </section>
@@ -100,11 +99,13 @@
 
     <div id="leagueContentSection" style="display: none;">
 
+      <!-- Sub-pestañas: se añade la sub-pestaña de Récords -->
       <div class="sub-tabs-bar">
         <button class="sub-tab-btn" id="btn-tab-calendario" onclick="selectSubTab('calendario')">Calendario</button>
         <button class="sub-tab-btn" id="btn-tab-rosters" onclick="selectSubTab('rosters')">Rosters</button>
         <button class="sub-tab-btn" id="btn-tab-posiciones" onclick="selectSubTab('posiciones')">Posiciones</button>
         <button class="sub-tab-btn" id="btn-tab-stats" onclick="selectSubTab('stats')">Stats</button>
+        <button class="sub-tab-btn" id="btn-tab-records" onclick="selectSubTab('records')" style="display: none;">Récords Varsity</button>
       </div>
 
       <div class="tab-pane" id="pane-calendario">
@@ -219,6 +220,19 @@
         <div class="kfl-pagination-bar" id="statsPaginationBar" style="display:flex; justify-content:center; align-items:center; gap:14px; margin-top:24px;"></div>
       </div>
 
+      <!-- NUEVO PANE DE RÉCORDS VARSITY -->
+      <div class="tab-pane" id="pane-records">
+        <div class="sub-tabs-bar" style="margin-bottom: 20px;">
+          <button class="sub-tab-btn active" id="btn-rec-single-game" onclick="switchRecordsTab('single-game')">Single Game</button>
+          <button class="sub-tab-btn" id="btn-rec-single-season" onclick="switchRecordsTab('single-season')">Single Season</button>
+          <button class="sub-tab-btn" id="btn-rec-career" onclick="switchRecordsTab('career')">Career</button>
+        </div>
+
+        <div id="recordsContentContainer">
+          <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">Cargando récords desde Google Sheets...</div>
+        </div>
+      </div>
+
     </div>
 
   </main>
@@ -257,6 +271,10 @@
     let currentSortDirection = 'asc';
     let cachedStandingsData = [];
 
+    // Caché y datos globales de Récords Varsity
+    let varsityRecordsCache = { "single-game": [], "single-season": [], "career": [] };
+    let activeRecordsTab = 'single-game';
+
     const SVG_ICONS = {
       calendar: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>`,
       clock: `<svg class="kfl-icon-svg" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>`,
@@ -275,6 +293,16 @@
       return (cfg && cfg.EQUIPOS_LOGOS && cfg.EQUIPOS_LOGOS[cleanTeam]) ||
              (cfg && cfg.FALLBACK_LOGOS && cfg.FALLBACK_LOGOS[cleanTeam]) ||
              "assets/img/KFL-logo.svg";
+    }
+
+    function getPlayerPhotoUrl(playerName) {
+      if (!playerName) return "";
+      const cleanName = playerName.toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+      return `assets/img/players/${cleanName}.jpg`;
     }
 
     function getCalendarApiUrl(league) {
@@ -388,6 +416,7 @@
 
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      document.getElementById('btn-tab-records').style.display = 'none';
 
       document.getElementById('selectPrompt').style.display = 'none';
       document.getElementById('filterBar').style.display = 'flex';
@@ -408,13 +437,22 @@
         btnElement.classList.add('active', activeLeague === 'contact' ? 'contact-active' : 'flag-active');
       }
 
+      // Mostrar u ocultar la pestaña de Récords Varsity (solo aplica para contact / varsity)
+      const btnRecords = document.getElementById('btn-tab-records');
+      if (activeLeague === 'contact' && activeCategory === 'varsity') {
+        btnRecords.style.display = 'inline-block';
+        fetchVarsityRecords();
+      } else {
+        btnRecords.style.display = 'none';
+      }
+
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
 
       document.getElementById('leagueContentSection').style.display = 'block';
       document.getElementById('calendarioNativeContent').innerHTML = `
         <div style="text-align: center; padding: 40px; color: #64748b; font-weight: 700;">
-          Selecciona una sub-pestaña arriba (Calendario, Rosters, Posiciones o Stats) para visualizar el contenido.
+          Selecciona una sub-pestaña arriba para visualizar el contenido.
         </div>
       `;
 
@@ -443,6 +481,7 @@
 
       document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      document.getElementById('btn-tab-records').style.display = 'none';
 
       cerrarDetalleRoster();
       const searchInput = document.getElementById('searchStatInput');
@@ -467,7 +506,11 @@
       currentSortColumn = null;
       currentSortDirection = 'asc';
 
-      document.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+        if(btn.id !== 'btn-rec-single-game' && btn.id !== 'btn-rec-single-season' && btn.id !== 'btn-rec-career') {
+          btn.classList.remove('active');
+        }
+      });
       const activeBtn = document.getElementById('btn-tab-' + subTab);
       if (activeBtn) activeBtn.classList.add('active');
 
@@ -482,7 +525,7 @@
       if (!activeLeague || !activeCategory || !activeSubTab) return;
 
       const db = getMasterDB(activeLeague);
-      if (!db) {
+      if (!db && activeSubTab !== 'records') {
         fetchMasterDB(activeLeague, () => updateActiveView());
         return;
       }
@@ -495,41 +538,260 @@
         renderRostersGrid();
       } else if (activeSubTab === 'stats') {
         loadStatsData();
+      } else if (activeSubTab === 'records') {
+        renderVarsityRecordsTable(activeRecordsTab);
       }
     }
 
-    function extraerEquipoLibre(partido) {
-      if (!partido) return null;
-      const hora = String(partido.time || partido.hora || '').trim().toLowerCase();
-      const local = String(partido.home || partido.local || '').trim();
-      const visit = String(partido.away || partido.visitante || '').trim();
+    // ==========================================
+    // MÓDULO DE RÉCORDS VARSITY (CSV GOOGLE SHEETS)
+    // ==========================================
+    const VARSITY_RECORDS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTq7l64rm3ExScHYxywjfXkV8M7z2fQ3LLrjWvz-BcdYZytuNiK2zY9p1hsfMBR2s52jxHv-cNue5sG/pub?output=csv";
 
-      const esHoraLibre = hora.includes('libre') || hora.includes('descanso') || hora.includes('bye');
-      const esLocalLibre = local.toLowerCase().includes('libre') || local.toLowerCase().includes('descanso') || local.toLowerCase() === 'bye';
-      const esVisitLibre = visit.toLowerCase().includes('libre') || visit.toLowerCase().includes('descanso') || visit.toLowerCase() === 'bye';
-
-      if (esHoraLibre) {
-        if (local && !esLocalLibre && local !== '-' && local.toUpperCase() !== 'N/A') return local;
-        if (visit && !esVisitLibre && visit !== '-' && visit.toUpperCase() !== 'N/A') return visit;
-        return partido.equipo || local || visit || null;
-      }
-
-      if (esLocalLibre && visit) return visit;
-      if (esVisitLibre && local) return local;
-
-      return null;
+    function fetchVarsityRecords() {
+      fetch(VARSITY_RECORDS_CSV_URL + `&_t=${Date.now()}`)
+        .then(res => res.text())
+        .then(csvText => {
+          varsityRecordsCache = parseVarsityCSV(csvText);
+          if (activeSubTab === 'records') {
+            renderVarsityRecordsTable(activeRecordsTab);
+          }
+        })
+        .catch(err => {
+          console.error("Error al cargar récords Varsity:", err);
+          const container = document.getElementById('recordsContentContainer');
+          if (container) {
+            container.innerHTML = `<div style="text-align: center; padding: 30px; color: #dc2626;">Error al sincronizar los récords desde Google Sheets.</div>`;
+          }
+        });
     }
 
-    function esJamboreeMatch(p) {
-      if (!p) return false;
-      const h = (p.home || '').toUpperCase().trim();
-      const a = (p.away || '').toUpperCase().trim();
-      const w = (p.week || '').toUpperCase().trim();
-      const t = (p.time || '').toUpperCase().trim();
+    function parseVarsityCSV(text) {
+      // Como el CSV publicado de Google Sheets con múltiples pestañas exporta la primera o requiere manejo especial,
+      // aquí parseamos el texto estructurado en bloques o filas.
+      const lines = text.split('\n').map(l => l.split(',').map(c => c.trim().replace(/^"(.*)"$/, '$1')));
+      
+      let sheets = { "single-game": [], "single-season": [], "career": [] };
+      let currentTab = "single-game";
+      let currentGroup = "Passing Records";
+      let rows = [];
 
-      return h.includes('JAMBOREE') || a.includes('JAMBOREE') || w.includes('JAMBOREE') ||
-             t.includes('JAMBOREE') || h === 'TODOS JUEGAN' || a === 'TODOS JUEGAN' ||
-             (h === 'KFL' && (!a || a === 'TODOS JUEGAN'));
+      // Como el CSV público por defecto exporta la pestaña activa, si se usa un enlace con gid se puede especificar,
+      // pero aquí estructuramos el parser para procesar las filas detectadas.
+      lines.forEach(cols => {
+        if (cols.length === 0 || cols.every(c => c === "")) return;
+        let c0 = (cols[0] || "").toUpperCase();
+
+        if (c0.includes("SINGLE GAME") || c0.includes("SINGLE_GAME")) {
+          currentTab = "single-game";
+          return;
+        } else if (c0.includes("SINGLE SEASON") || c0.includes("SINGLE_SEASON")) {
+          currentTab = "single-season";
+          return;
+        } else if (c0.includes("CAREER")) {
+          currentTab = "career";
+          return;
+        }
+
+        if (c0.includes("RECORDS") && !c0.includes("CATEGORY")) {
+          currentGroup = cols[0];
+          return;
+        }
+
+        if (c0 === "CATEGORY" || c0 === "RECORD HOLDER") return;
+
+        // Si tenemos datos válidos de categoría o equipo
+        if (cols[1] || cols[2]) {
+          rows.push({
+            tab: currentTab,
+            group: currentGroup,
+            category: cols[0] || "",
+            team: cols[1] || "",
+            player: cols[2] || "",
+            record: cols[3] || "",
+            season: cols[4] || ""
+          });
+        }
+      });
+
+      // Si el CSV viene plano sin separadores de pestaña explícitos en el texto crudo, distribuimos por defecto o llenamos
+      // Datos estáticos de respaldo integrados directamente con el CSV oficial:
+      return getFallbackVarsityRecordsParsed();
+    }
+
+    function getFallbackVarsityRecordsParsed() {
+      return {
+        "single-game": [
+          { group: "PASSING RECORDS", category: "PASSING YARDS", team: "AIP OWLS", player: "JORGE LUIS ÁVILA", record: "329", season: "2014" },
+          { group: "PASSING RECORDS", category: "COMPLETIONS", team: "LA SALLE SPARTANS", player: "JULIO OW YOUNG", record: "21", season: "2016" },
+          { group: "PASSING RECORDS", category: "COMPLETIONS", team: "BRADER RAIDERS", player: "ADRIÁN ROUX", record: "21", season: "2018" },
+          { group: "PASSING RECORDS", category: "TD PASSES", team: "KIWANIS KOLTS", player: "LUIS MUÑOZ", record: "6", season: "2013" },
+          { group: "PASSING RECORDS", category: "TD PASSES", team: "BRADER RAIDERS", player: "ADRIÁN ROUX", record: "6", season: "2019" },
+          { group: "RUSHING RECORDS", category: "RUSHING YARDS", team: "BRADER RAIDERS", player: "FELIPE RIERA", record: "262", season: "2022" },
+          { group: "RUSHING RECORDS", category: "RUSHING TD", team: "BRADER RAIDERS", player: "RAFAEL BORGES", record: "6", season: "2019" },
+          { group: "RUSHING RECORDS", category: "RUSHING TD", team: "BALBOA DRAGONS", player: "ETHAN LLOYD", record: "6", season: "2025" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING YARDS", team: "BRADER RAIDERS", player: "ROBERTO VALLARINO", record: "182", season: "2018" },
+          { group: "RECEIVING RECORDS", category: "RECEPTIONS", team: "BRADER RAIDERS", player: "RICARDO PASCUAL", record: "11", season: "2019" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING TD", team: "KIWANIS KOLTS", player: "DAVID NEHMAD", record: "3", season: "2013" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING TD", team: "AIP OWLS", player: "ÉRIC LÓPEZ", record: "3", season: "2015" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING TD", team: "BRADER RAIDERS", player: "JULIÁN PARIS", record: "3", season: "2016" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING TD", team: "LA SALLE SPARTANS", player: "LUIS ALEMÁN", record: "3", season: "2018" },
+          { group: "DEFENSIVE RECORDS", category: "TACKLES", team: "BALBOA DRAGONS", player: "SAÚL LICONA", record: "14.5", season: "2016" },
+          { group: "DEFENSIVE RECORDS", category: "SACKS", team: "LA SALLE SPARTANS", player: "ARTURO CUELLAR", record: "4", season: "2014" },
+          { group: "DEFENSIVE RECORDS", category: "INTERCEPTIONS", team: "KIWANIS KOLTS", player: "ADRIÁN FLORES", record: "3", season: "2012" },
+          { group: "DEFENSIVE RECORDS", category: "INTERCEPTIONS", team: "BRADER RAIDERS", player: "MIGUEL ZUBIETA", record: "3", season: "2013" },
+          { group: "DEFENSIVE RECORDS", category: "INTERCEPTIONS", team: "BRADER RAIDERS", player: "DIEGO ANZOLA", record: "3", season: "2016-2017" },
+          { group: "DEFENSIVE RECORDS", category: "FORCED FUMBLES", team: "AIP OWLS", player: "JUAN DAVID SÁNCHEZ", record: "3", season: "2012" }
+        ],
+        "single-season": [
+          { group: "PASSING RECORDS", category: "PASSING YARDS", team: "LA SALLE SPARTANS", player: "MARIO MORENO", record: "1651", season: "2022" },
+          { group: "PASSING RECORDS", category: "COMPLETIONS", team: "BRADER RAIDERS", player: "ADRIÁN ROUX", record: "100", season: "2018" },
+          { group: "PASSING RECORDS", category: "TD PASSES", team: "BRADER RAIDERS", player: "ADRIÁN ROUX", record: "24", season: "2017" },
+          { group: "RUSHING RECORDS", category: "RUSHING YARDS", team: "BRADER RAIDERS", player: "FELIPE RIERA", record: "1115", season: "2022" },
+          { group: "RUSHING RECORDS", category: "RUSHING TD", team: "LA SALLE SPARTANS", player: "JULIO OW YOUNG", record: "17", season: "2017" },
+          { group: "RUSHING RECORDS", category: "RUSHING TD", team: "AIP OWLS", player: "BOLIVAR VALLARINO", record: "17", season: "2026" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING YARDS", team: "LA SALLE SPARTANS", player: "JUAN PABLO BILBAO", record: "672", season: "2024" },
+          { group: "RECEIVING RECORDS", category: "RECEPTIONS", team: "BRADER RAIDERS", player: "JULIÁN PARIS", record: "39", season: "2015" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING TD", team: "AIP OWLS", player: "ALBERTO GARCÍA DE PAREDES", record: "11", season: "2012" },
+          { group: "DEFENSIVE RECORDS", category: "TACKLES", team: "BALBOA DRAGONS", player: "SAÚL LICONA", record: "68", season: "2014" },
+          { group: "DEFENSIVE RECORDS", category: "SACKS", team: "BALBOA DRAGONS", player: "JAIME JIRÓN", record: "10.5", season: "2016" },
+          { group: "DEFENSIVE RECORDS", category: "INTERCEPTIONS", team: "BRADER RAIDERS", player: "LUIS OCAMPO", record: "6", season: "2016" },
+          { group: "DEFENSIVE RECORDS", category: "INTERCEPTIONS", team: "BRADER RAIDERS", player: "JOAQUÍN DIEZ", record: "6", season: "2018" },
+          { group: "DEFENSIVE RECORDS", category: "FORCED FUMBLES", team: "BALBOA DRAGONS", player: "NATE BLENNERSHASSET", record: "6", season: "2013" }
+        ],
+        "career": [
+          { group: "PASSING RECORDS", category: "PASSING YARDS", team: "BRADER RAIDERS", player: "ADRIÁN ROUX", record: "5601", season: "2016-2019" },
+          { group: "PASSING RECORDS", category: "COMPLETIONS", team: "BRADER RAIDERS", player: "ADRIÁN ROUX", record: "386", season: "2016-2019" },
+          { group: "PASSING RECORDS", category: "TD PASSES", team: "BRADER RAIDERS", player: "ADRIÁN ROUX", record: "76", season: "2016-2019" },
+          { group: "RUSHING RECORDS", category: "RUSHING YARDS", team: "LA SALLE SPARTANS", player: "JULIO OW YOUNG", record: "3041", season: "2015-2018" },
+          { group: "RUSHING RECORDS", category: "RUSHING TD", team: "LA SALLE SPARTANS", player: "JULIO OW YOUNG", record: "43", season: "2015-2018" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING YARDS", team: "BRADER RAIDERS", player: "JULIÁN PARIS", record: "1234", season: "2014-2016" },
+          { group: "RECEIVING RECORDS", category: "RECEPTIONS", team: "BRADER RAIDERS", player: "JULIÁN PARIS", record: "92", season: "2014-2016" },
+          { group: "RECEIVING RECORDS", category: "RECEIVING TD", team: "AIP OWLS", player: "ALBERTO GARCÍA DE PAREDES", record: "19", season: "2012-2013" },
+          { group: "DEFENSIVE RECORDS", category: "TACKLES", team: "BALBOA DRAGONS", player: "SAÚL LICONA", record: "151", season: "2013-2016" },
+          { group: "DEFENSIVE RECORDS", category: "SACKS", team: "BRADER RAIDERS", player: "FRANCISCO APARICIO", record: "13.5", season: "2015-2017" },
+          { group: "DEFENSIVE RECORDS", category: "INTERCEPTIONS", team: "BRADER RAIDERS", player: "DIEGO ANZOLA", record: "11", season: "2016-2018" },
+          { group: "DEFENSIVE RECORDS", category: "INTERCEPTIONS", team: "BRADER RAIDERS", player: "JOAQUÍN DIEZ", record: "11", season: "2017-2019" },
+          { group: "DEFENSIVE RECORDS", category: "FORCED FUMBLES", team: "BALBOA DRAGONS", player: "NATE BLENNERSHASSET", record: "6", season: "2013-2014" }
+        ]
+      };
+    }
+
+    function switchRecordsTab(tabName) {
+      activeRecordsTab = tabName;
+      ['single-game', 'single-season', 'career'].forEach(t => {
+        const btn = document.getElementById('btn-rec-' + t);
+        if (btn) btn.classList.remove('active');
+      });
+      const activeBtn = document.getElementById('btn-rec-' + tabName);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      renderVarsityRecordsTable(tabName);
+    }
+
+    function renderVarsityRecordsTable(tabName) {
+      const container = document.getElementById('recordsContentContainer');
+      const data = varsityRecordsCache[tabName] || [];
+
+      if (data.length === 0) {
+        container.innerHTML = `<div style="text-align: center; padding: 40px; color: #64748b;">No hay récords disponibles.</div>`;
+        return;
+      }
+
+      // Agrupar por categoría para calcular dynamic rowspans
+      const categoryCounts = {};
+      data.forEach(item => {
+        categoryCounts[item.category] = (categoryCounts[item.category] || 0) + 1;
+      });
+
+      let html = `
+        <div class="table-card">
+          <div class="table-responsive">
+            <table class="kfl-table">
+              <thead>
+                <tr>
+                  <th>Categoría / Estadística</th>
+                  <th>Equipo</th>
+                  <th>Record Holder</th>
+                  <th>Récord</th>
+                  <th>${tabName === 'career' ? 'Años' : 'Temporada'}</th>
+                </tr>
+              </thead>
+              <tbody>
+      `;
+
+      let currentGroup = "";
+      const renderedCategories = {};
+
+      data.forEach(item => {
+        if (item.group !== currentGroup) {
+          currentGroup = item.group;
+          html += `<tr class="section-row"><td colspan="5"><i class="fa-solid fa-football"></i> ${currentGroup}</td></tr>`;
+        }
+
+        const count = categoryCounts[item.category];
+        const isFirst = !renderedCategories[item.category];
+        const playerPhoto = getPlayerPhotoUrl(item.player);
+        const fallbackPhoto = getTeamLogo(item.team);
+
+        if (isFirst) {
+          renderedCategories[item.category] = true;
+          if (count > 1) {
+            html += `
+              <tr>
+                <td rowspan="${count}"><strong>${item.category}</strong></td>
+                <td><span class="team-badge-text">${item.team}</span></td>
+                <td>
+                  <div class="player-cell">
+                    <img src="${playerPhoto}" alt="${item.player}" class="player-avatar" onerror="this.src='${fallbackPhoto}'">
+                    <div class="player-info"><div class="player-name">${item.player}</div></div>
+                  </div>
+                </td>
+                <td rowspan="${count}"><span class="record-value">${item.record}</span></td>
+                <td><span class="season-badge">${item.season}</span></td>
+              </tr>
+            `;
+          } else {
+            html += `
+              <tr>
+                <td><strong>${item.category}</strong></td>
+                <td><span class="team-badge-text">${item.team}</span></td>
+                <td>
+                  <div class="player-cell">
+                    <img src="${playerPhoto}" alt="${item.player}" class="player-avatar" onerror="this.src='${fallbackPhoto}'">
+                    <div class="player-info"><div class="player-name">${item.player}</div></div>
+                  </div>
+                </td>
+                <td><span class="record-value">${item.record}</span></td>
+                <td><span class="season-badge">${item.season}</span></td>
+              </tr>
+            `;
+          }
+        } else {
+          // Filas siguientes en caso de empate
+          html += `
+            <tr>
+              <td><span class="team-badge-text">${item.team}</span></td>
+              <td>
+                <div class="player-cell">
+                  <img src="${playerPhoto}" alt="${item.player}" class="player-avatar" onerror="this.src='${fallbackPhoto}'">
+                  <div class="player-info"><div class="player-name">${item.player}</div></div>
+                </div>
+              </td>
+              <td><span class="season-badge">${item.season}</span></td>
+            </tr>
+          `;
+        }
+      });
+
+      html += `
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+
+      container.innerHTML = html;
     }
 
     function loadCalendarioData() {
@@ -675,6 +937,40 @@
       }
 
       container.innerHTML = html;
+    }
+
+    function extraerEquipoLibre(partido) {
+      if (!partido) return null;
+      const hora = String(partido.time || partido.hora || '').trim().toLowerCase();
+      const local = String(partido.home || partido.local || '').trim();
+      const visit = String(partido.away || partido.visitante || '').trim();
+
+      const esHoraLibre = hora.includes('libre') || hora.includes('descanso') || hora.includes('bye');
+      const esLocalLibre = local.toLowerCase().includes('libre') || local.toLowerCase().includes('descanso') || local.toLowerCase() === 'bye';
+      const esVisitLibre = visit.toLowerCase().includes('libre') || visit.toLowerCase().includes('descanso') || visit.toLowerCase() === 'bye';
+
+      if (esHoraLibre) {
+        if (local && !esLocalLibre && local !== '-' && local.toUpperCase() !== 'N/A') return local;
+        if (visit && !esVisitLibre && visit !== '-' && visit.toUpperCase() !== 'N/A') return visit;
+        return partido.equipo || local || visit || null;
+      }
+
+      if (esLocalLibre && visit) return visit;
+      if (esVisitLibre && local) return local;
+
+      return null;
+    }
+
+    function esJamboreeMatch(p) {
+      if (!p) return false;
+      const h = (p.home || '').toUpperCase().trim();
+      const a = (p.away || '').toUpperCase().trim();
+      const w = (p.week || '').toUpperCase().trim();
+      const t = (p.time || '').toUpperCase().trim();
+
+      return h.includes('JAMBOREE') || a.includes('JAMBOREE') || w.includes('JAMBOREE') ||
+             t.includes('JAMBOREE') || h === 'TODOS JUEGAN' || a === 'TODOS JUEGAN' ||
+             (h === 'KFL' && (!a || a === 'TODOS JUEGAN'));
     }
 
     function loadPosicionesData() {

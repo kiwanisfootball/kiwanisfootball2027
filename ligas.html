@@ -305,35 +305,30 @@
       }
     }
 
-    function fetchMasterDB(league, callback) {
-      const l = (league || activeLeague || 'contact').toLowerCase();
-      if (getMasterDB(l)) {
-        if (callback) callback();
-        return;
-      }
-
-      const apiUrl = getCalendarApiUrl(l);
-      if (!apiUrl) {
-        console.error(`URL de API no encontrada para la liga: ${l}`);
-        if (callback) callback();
-        return;
-      }
-
-      fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`)
-        .then(res => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          return res.json();
-        })
-        .then(db => {
-          setMasterDB(l, db);
-          if (callback) callback();
-        })
-        .catch(err => {
-          console.error(`Error BD KFL [${l}]:`, err);
-          if (callback) callback();
-        });
+function fetchMasterDB(league, callback) {
+  const l = (league || activeLeague || 'contact').toLowerCase();
+  if (getMasterDB(l)) {
+    if (callback) callback();
+    return;
+  }
+  if (l !== 'contact') {
+    const apiUrl = getCalendarApiUrl(l);
+    if (!apiUrl) {
+      console.error(`URL de API no encontrada para la liga: ${l}`);
+      if (callback) callback();
+      return;
     }
-
+    fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`)
+      .then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+      .then(db => { setMasterDB(l, db); if (callback) callback(); })
+      .catch(err => { console.error(`Error BD KFL [${l}]:`, err); if (callback) callback(); });
+    return;
+  }
+  fetch('data/contact-db.json?_t=' + Date.now(), { cache: 'no-cache' })
+    .then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+    .then(db => { setMasterDB(l, db); if (callback) callback(); })
+    .catch(err => { console.error('Error leyendo data/contact-db.json:', err); if (callback) callback(); });
+}
     function getCategoryData(league, category) {
       const l = (league || activeLeague || 'contact').toLowerCase();
       const cat = (category || activeCategory || '').toLowerCase();

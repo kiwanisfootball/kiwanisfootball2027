@@ -6,7 +6,7 @@
   <title>Portal de Coaches - Kiwanis Football League</title>
   
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="https://i.imgur.com/wrPDjDN.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <style>
     :root {
@@ -674,6 +674,7 @@
 
   <!-- INCLUIMOS EL CONFIG DE URLS -->
   <script src="js/config-coaches.js"></script>
+  <script src="js/components.js"></script>
 
   <script>
     let currentUser = null;
@@ -681,48 +682,8 @@
     let limiteMaximoRoster = null;
 
     document.addEventListener("DOMContentLoaded", function() {
-      fetch('nav.html')
-        .then(response => response.ok ? response.text() : '')
-        .then(html => {
-          if (html) {
-            document.getElementById('globalNav').innerHTML = html;
-            activarMenuHamburguesa();
-          }
-        })
-        .catch(err => console.warn('nav cargado', err));
-
-      fetch('footer.html')
-        .then(response => response.ok ? response.text() : '')
-        .then(html => {
-          if (html) document.getElementById('globalFooter').innerHTML = html;
-        })
-        .catch(err => console.warn('footer cargado', err));
-
       verificarSesionExistente();
     });
-
-    function activarMenuHamburguesa() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn') || document.querySelector('.hamburger-btn');
-      const navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu');
-
-      if (hamburgerBtn && navMenu) {
-        hamburgerBtn.replaceWith(hamburgerBtn.cloneNode(true));
-        const newHamburgerBtn = document.getElementById('hamburgerBtn') || document.querySelector('.hamburger-btn');
-
-        newHamburgerBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          navMenu.classList.toggle('open');
-          navMenu.classList.toggle('active');
-        });
-
-        document.addEventListener('click', function(e) {
-          if (!navMenu.contains(e.target) && !newHamburgerBtn.contains(e.target)) {
-            navMenu.classList.remove('open');
-            navMenu.classList.remove('active');
-          }
-        });
-      }
-    }
 
     // Función inteligente para obtener la URL correcta según la categoría del coach
     function obtenerApiUrl(categoria) {

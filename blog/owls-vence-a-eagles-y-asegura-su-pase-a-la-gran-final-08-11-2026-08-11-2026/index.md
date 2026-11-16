@@ -1,12 +1,11 @@
 ---
-title: Owls vence a Eagles y asegura su pase a la Gran Final
-date: 25/10/2026
-coverImage: owls-catch-contact-micro.webp
-author: kiwanisfootball
-excerpt: Conoce los detalles de la victoria de los Fighting Owls ante los Eagles
-  en la última fecha de la KFL Micro Contact 2026
-category: contact football
-subcategory: contact micro
+title: "Owls vence a Eagles y asegura su pase a la Gran Final"
+date: "25/10/2026"
+coverImage: "owls-catch-contact-micro.webp"
+author: "kiwanisfootball"
+excerpt: "Conoce los detalles de la victoria de los Fighting Owls ante los Eagles en la última fecha de la KFL Micro Contact 2026"
+category: "contact football"
+subcategory: "contact micro"
 ---
 ### Resumen del Partido 
 

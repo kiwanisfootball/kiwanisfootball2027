@@ -14,7 +14,7 @@
   <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
   <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/img/KFL-logo.png">
+  <meta property="og:image" content="assets/img/KFL-logo.svg">
 
   <!-- Hojas de Estilo y Favicon Local -->
   <link rel="stylesheet" href="css/styles.css">
@@ -89,7 +89,7 @@
     "name": "Kiwanis Football League Panama",
     "alternateName": "KFL",
     "url": "https://kiwanisfootball.com",
-    "logo": "assets/img/KFL-logo.png",
+    "logo": "assets/img/KFL-logo.svg",
     "sameAs": [
       "https://www.youtube.com/@KFLTotalAccess"
     ],
@@ -171,7 +171,7 @@
   <!-- BANNER DE INSTALACIÓN PWA -->
   <div id="pwaBanner" class="pwa-banner" role="region" aria-label="Instalar KFL App">
     <div class="pwa-banner-head">
-      <img src="assets/img/KFL-logo.png" alt="KFL" class="pwa-banner-logo">
+      <img src="assets/img/KFL-logo.svg" alt="KFL" class="pwa-banner-logo">
       <p id="pwaText" class="pwa-banner-text">
         Instala la <strong>KFL App</strong> y ten partidos, resultados y noticias en tu pantalla de inicio.
       </p>
@@ -226,8 +226,8 @@
         tickerContainer.classList.remove('is-logo-slide');
         let htmlTicker = "";
         partidosSemanaActual.forEach(partido => {
-          let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.png';
-          let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.png';
+          let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.svg';
+          let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.svg';
           let categoriaLimpia = partido.cat.replace("FLAG", "").replace("CONTACT", "").trim();
           
           htmlTicker += `
@@ -300,7 +300,7 @@
         }
 
         const principal = posts[0];
-        const imgPrincipal = principal.coverImage || 'assets/img/KFL-logo.png';
+        const imgPrincipal = principal.coverImage || 'assets/img/KFL-logo.svg';
 
         mainFeaturedContainer.onclick = () => {
           window.location.href = `articulo.html?slug=${encodeURIComponent(principal.slug)}`;
@@ -323,7 +323,7 @@
 
         sidebarContainer.innerHTML = secundarios.map(p => `
           <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${encodeURIComponent(p.slug)}'">
-            <img src="${esc(p.coverImage || 'assets/img/KFL-logo.png')}" alt="${esc(p.title)}" class="sidebar-thumb">
+            <img src="${esc(p.coverImage || 'assets/img/KFL-logo.svg')}" alt="${esc(p.title)}" class="sidebar-thumb">
             <div class="sidebar-info">
               <span class="sidebar-tag">${esc(p.category)}</span>
               <h4>${esc(p.title)}</h4>
@@ -340,8 +340,8 @@
   <!-- CONFIGURACIÓN DE BANNERS Y PATROCINADORES (RESTAURADA Y RESPONSIVE) -->
   <script>
     const PROMO_BANNERS = [
-      { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },
-      { img: 'assets/img/banner-promo-2.jpg', alt: 'Inscripciones Abiertas Temporada 2026', url: 'registro-jugadores.html' }
+      { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'informacion.html' },
+      { img: 'assets/img/banner-promo-2.jpg', alt: 'Inscripciones Abiertas Temporada 2026', url: 'informacion.html' }
     ];
 
     const SPONSORS = [

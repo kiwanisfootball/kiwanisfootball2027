@@ -1,5 +1,5 @@
-const CACHE_NAME = 'kfl-store-v5';
-const urlsToCache = ['./', 'index.html', 'css/global.css', 'components.js'];
+const CACHE_NAME = 'kfl-store-v6';
+const urlsToCache = ['./', 'index.html', 'css/global.css', 'js/components.js'];
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();

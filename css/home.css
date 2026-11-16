@@ -1,409 +1,362 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
-  <title>Kiwanis Football League Panama - Sitio Oficial</title>
+/* Estilos de la página de inicio */
+.ticker-section {
+  width: 100%;
+  min-width: 0;
+  max-width: var(--ancho-maximo);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
 
-  <!-- SEO & Meta Tags Avanzados -->
-  <meta name="description" content="Sitio oficial de la Kiwanis Football League (KFL) en Panamá. Programación de partidos, resultados, estadísticas y noticias de Contact y Flag Football.">
-  <meta name="keywords" content="Kiwanis Football League, KFL Panama, Futbol Americano Panama, Flag Football Panama, Contact Football">
-  <meta name="author" content="Kiwanis Football League">
+.ticker-container {
+  align-items: stretch;
+  min-width: 0;
+}
 
-  <!-- Open Graph / Redes Sociales -->
-  <meta property="og:title" content="Kiwanis Football League Panama - Sitio Oficial">
-  <meta property="og:description" content="Programa escolar pionero de Football Americano y Flag Football en Panamá.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="assets/img/KFL-logo.png">
+.game-card {
+  width: min(240px, calc(100vw - 48px));
+  min-width: min(220px, calc(100vw - 48px));
+  overflow-wrap: anywhere;
+}
 
-  <!-- Hojas de Estilo y Favicon Local -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/home.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
-  <link rel="manifest" href="manifest.json">
+.team-info {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 
-  <!-- Preconexión y Fuentes Google Optimizadas -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+.team-info span {
+  font-size: clamp(0.7rem, 3.2vw, 0.8125rem);
+}
 
-  <!-- Estilos puros para el Slide Continuo de Logos -->
-  <style>
-    .ticker-container.is-logo-slide {
-      overflow: hidden;
-      display: flex;
-      width: 100%;
-      background: transparent;
-      box-shadow: none;
-      border: none;
-      padding: 15px 0;
-      white-space: nowrap;
-      position: relative;
-    }
-    .logos-slide-track {
-      display: flex;
-      width: max-content;
-      animation: scrollLogos 25s linear infinite;
-      align-items: center;
-      gap: 80px;
-      will-change: transform;
-    }
-    .logos-slide-track:hover {
-      animation-play-state: paused;
-    }
-    .logo-slide-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 0;
-      flex-shrink: 0;
-    }
-    .logo-slide-item img {
-      height: 75px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
-      transition: transform 0.3s ease;
-    }
-    .logo-slide-item img:hover {
-      transform: scale(1.15);
-    }
-    @keyframes scrollLogos {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
-    }
-  </style>
+.ticker-container.is-logo-slide {
+  width: 100%;
+  overflow: hidden;
+  padding: 15px 0;
+}
 
-  <!-- Schema.org Data (JSON-LD para Google y AEO) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SportsOrganization",
-    "name": "Kiwanis Football League Panama",
-    "alternateName": "KFL",
-    "url": "https://kiwanisfootball.com",
-    "logo": "assets/img/KFL-logo.png",
-    "sameAs": [
-      "https://www.youtube.com/@KFLTotalAccess"
-    ],
-    "sport": "American Football"
+.logos-slide-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: clamp(28px, 8vw, 80px);
+  animation: scrollLogos 25s linear infinite;
+  will-change: transform;
+}
+
+.logo-slide-item {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-slide-item img {
+  width: auto;
+  height: clamp(48px, 14vw, 75px);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.logo-slide-item img:hover {
+  transform: scale(1.15);
+}
+
+.logos-slide-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollLogos {
+  from {
+    transform: translateX(0);
   }
-  </script>
-</head>
-<body>
 
-  <!-- 1. HEADER GLOBAL (Inyectado por components.js) -->
-  <header class="header-nav" id="globalNav"></header>
+  to {
+    transform: translateX(-50%);
+  }
+}
 
-  <main>
-    <!-- 2. TICKER INTELIGENTE DE SCORES / SLIDE DE LOGOS -->
-    <section class="ticker-section">
-      <div class="ticker-container" id="tickerContainer">
-        <div style="padding: 20px; text-align: center; color: #64748b; width: 100%;">Cargando cartelera de la liga...</div>
-      </div>
-    </section>
+.welcome-header {
+  width: 100%;
+  margin: clamp(24px, 6vw, 40px) auto clamp(20px, 5vw, 30px);
+}
 
-    <!-- 3. TITULO INSTITUCIONAL -->
-    <section class="welcome-header">
-      <div class="welcome-subtitle">BIENVENIDOS A</div>
-      <h1 class="welcome-title">KIWANIS FOOTBALL LEAGUE</h1>
-    </section>
+.welcome-subtitle {
+  gap: clamp(8px, 3vw, 15px);
+  font-size: clamp(0.7rem, 3vw, 0.875rem);
+}
 
-    <!-- 4. ACERCA DE LA LIGA -->
-    <div class="about-wrapper">
-      <section class="about-section">
-        <div class="about-image">
-          <img src="assets/img/home-about.jpg" alt="Jugadores Kiwanis Football League Sosteniendo Bandera de Panama">
-        </div>
-        <article class="about-card">
-          <h2>ACERCA DE LA LIGA</h2>
-          <p>La Liga de Football Americano Kiwanis se ha convertido en un programa escolar pionero.</p>
-          <p>Ofrecemos dos ligas, la de <strong>Contact Football Masculino</strong> y la de <strong>Flag Football Femenino</strong>, ambas con las categorías Micro (U10), Mini (U13), Juvenil (U16) y Varsity (U19).</p>
-          <p>Nos orgullece que actualmente contamos con un aproximado de <strong>1,600 jugadores</strong> entre ambas ligas.</p>
-        </article>
-      </section>
-    </div>
+.welcome-subtitle::before,
+.welcome-subtitle::after {
+  flex: 0 1 35px;
+}
 
-    <!-- 5. BANNER PROMOCIONAL -->
-    <section class="promo-banner-section">
-      <div class="slider-container" id="promoSlider"></div>
-      <div class="promo-dots" id="promoDots" role="tablist" aria-label="Banners promocionales"></div>
-    </section>
+.welcome-title {
+  max-width: 100%;
+  font-size: clamp(1.25rem, 6.4vw, 4.25rem);
+  letter-spacing: clamp(0px, 0.15vw, 1px);
+  white-space: nowrap;
+}
 
-    <!-- 6. MÓDULO DE NOTICIAS -->
-    <section class="news-section">
-      <h2 class="section-headline">NOTICIAS</h2>
+.about-wrapper {
+  width: 100%;
+  margin-bottom: clamp(28px, 6vw, 40px);
+}
 
-      <div class="news-grid-layout">
-        <div id="mainFeaturedPost" class="featured-main-card">
-          <div style="padding: 40px; text-align: center; color: #64748b;">Cargando noticia destacada...</div>
-        </div>
-        <div class="latest-sidebar-card">
-          <h3>ÚLTIMAS NOTICIAS</h3>
-          <div id="sidebarNewsList">
-            <div style="padding: 20px; text-align: center; color: #64748b;">Cargando listado...</div>
-          </div>
-        </div>
-      </div>
-    </section>
+.about-section {
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
+}
 
-    <!-- 7. SECCIÓN DE PATROCINADORES -->
-    <section class="sponsors-section">
-      <div class="sponsors-container">
-        <div class="sponsors-tier">
-          <h3 class="tier-title">PATROCINADORES OFICIALES</h3>
-          <div class="sponsors-grid tier-gold" id="sponsorsGrid"></div>
-        </div>
-      </div>
-    </section>
-  </main>
+.about-image {
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+}
 
-  <!-- 8. FOOTER GLOBAL -->
-  <div id="globalFooter"></div>
+.about-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  <!-- BANNER DE INSTALACIÓN PWA -->
-  <div id="pwaBanner" class="pwa-banner" role="region" aria-label="Instalar KFL App">
-    <div class="pwa-banner-head">
-      <img src="assets/img/KFL-logo.png" alt="KFL" class="pwa-banner-logo">
-      <p id="pwaText" class="pwa-banner-text">
-        Instala la <strong>KFL App</strong> y ten partidos, resultados y noticias en tu pantalla de inicio.
-      </p>
-    </div>
-    <div class="pwa-banner-actions">
-      <button id="pwaInstallBtn" class="pwa-btn-install">Instalar</button>
-      <button id="pwaLaterBtn" class="pwa-btn-secondary">Ahora no</button>
-    </div>
-  </div>
+.about-card {
+  min-width: 0;
+  padding: clamp(22px, 5vw, 40px) clamp(18px, 5vw, 35px);
+  overflow-wrap: anywhere;
+}
 
-  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Volver arriba">
-    <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
-  </button>
+.about-card h2 {
+  font-size: clamp(1.5rem, 6vw, 2.375rem);
+}
 
-  <!-- SCRIPT DE GESTIÓN INTELIGENTE DEL TICKER (INTACTO) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      gestionarTickerMasterGAS();
-    });
+.about-card p {
+  font-size: clamp(0.875rem, 3.8vw, 0.9375rem);
+}
 
-    async function gestionarTickerMasterGAS() {
-      const tickerContainer = document.getElementById('tickerContainer');
-      const logosEquipos = [
-        { name: "OWLS", file: "assets/logos/owls.png" },
-        { name: "RAIDERS", file: "assets/logos/raiders.png" },
-        { name: "KOLTS", file: "assets/logos/kolts.png" },
-        { name: "EAGLES", file: "assets/logos/eagles.png" },
-        { name: "DRAGONS", file: "assets/logos/dragons.png" },
-        { name: "LIONS", file: "assets/logos/lions.png" },
-        { name: "SPARTANS", file: "assets/logos/spartans.png" }
-      ];
-      const MASTER_GAS_URL = 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
+.promo-banner-section {
+  width: 100%;
+  margin-bottom: clamp(32px, 7vw, 50px);
+}
 
-      try {
-        let respuesta = await fetch(MASTER_GAS_URL);
-        if (!respuesta.ok) throw new Error('Error al conectar con Google Sheets');
-        let data = await respuesta.json();
-        let semanaActiva = data.currentWeek; 
-        let partidos = data.matches || [];
+.slider-container {
+  height: clamp(120px, 42vw, 250px);
+  min-width: 0;
+}
 
-        if (semanaActiva === "TEMPORADA_FINALIZADA") {
-          activarSlideLogos(tickerContainer, logosEquipos);
-          return;
-        }
+.slide,
+.slide a,
+.slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
-        let partidosSemanaActual = partidos.filter(p => p.sem === semanaActiva && p.active === true);
-        if (!partidosSemanaActual || partidosSemanaActual.length === 0) {
-          activarSlideLogos(tickerContainer, logosEquipos);
-          return;
-        }
+.slide img {
+  object-fit: cover;
+}
 
-        tickerContainer.classList.remove('is-logo-slide');
-        let htmlTicker = "";
-        partidosSemanaActual.forEach(partido => {
-          let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.png';
-          let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.png';
-          let categoriaLimpia = partido.cat.replace("FLAG", "").replace("CONTACT", "").trim();
-          
-          htmlTicker += `
-            <article class="game-card">
-              <div style="font-size: 9px; font-weight: 800; color: #19547E; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px; text-transform: uppercase;">
-                ${partido.sem} &bull; ${partido.modalidad} ${categoriaLimpia}
-              </div>
-              <div class="game-team">
-                <div class="team-info">
-                  <img src="${logoLocal}" alt="${partido.h}" class="team-logo-small">
-                  <span>${partido.h}</span>
-                </div>
-                <span class="game-score">${partido.sL}</span>
-              </div>
-              <div class="game-team">
-                <div class="team-info">
-                  <img src="${logoVisita}" alt="${partido.v}" class="team-logo-small">
-                  <span>${partido.v}</span>
-                </div>
-                <span class="game-score">${partido.sV}</span>
-              </div>
-              <div class="game-status">${partido.final ? "FINAL" : partido.dia + " | " + partido.hora}</div>
-            </article>
-          `;
-        });
-        tickerContainer.innerHTML = htmlTicker;
-      } catch (error) {
-        console.error("Fallo:", error);
-        activarSlideLogos(tickerContainer, logosEquipos);
-      }
-    }
+.promo-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+}
 
-    function activarSlideLogos(container, logos) {
-      container.classList.add('is-logo-slide');
-      let loopLogos = [...logos, ...logos, ...logos];
-      let htmlLogos = '<div class="logos-slide-track">';
-      loopLogos.forEach(logo => {
-        htmlLogos += `
-          <div class="logo-slide-item">
-            <img src="${logo.file}" alt="${logo.name}" title="${logo.name}">
-          </div>
-        `;
-      });
-      htmlLogos += '</div>';
-      container.innerHTML = htmlLogos;
-    }
-  </script>
+.promo-dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+}
 
-  <!-- SCRIPT DE NOTICIAS (LEE blog/index.json - Ajustado a 3 recientes) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const mainFeaturedContainer = document.getElementById('mainFeaturedPost');
-      const sidebarContainer = document.getElementById('sidebarNewsList');
+.promo-dot.active {
+  background: var(--azul-kfl);
+}
 
-      const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+.news-section {
+  width: 100%;
+  margin-bottom: clamp(32px, 7vw, 50px);
+}
 
-      const vacio = (msgFeatured, msgSidebar) => {
-        mainFeaturedContainer.innerHTML = `<p style="padding:20px; text-align:center;">${msgFeatured}</p>`;
-        sidebarContainer.innerHTML = `<p style="padding:10px; text-align:center;">${msgSidebar}</p>`;
-      };
+.section-headline {
+  font-size: clamp(1.75rem, 6vw, 2rem);
+  overflow-wrap: anywhere;
+}
 
-      try {
-        const respuesta = await fetch('blog/index.json', { cache: 'no-store' });
-        if (!respuesta.ok) throw new Error('No se pudo cargar blog/index.json (' + respuesta.status + ')');
-        const posts = await respuesta.json();
+.news-grid-layout {
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 30px);
+}
 
-        if (!Array.isArray(posts) || posts.length === 0) {
-          vacio('No hay noticias destacadas.', 'Sin noticias recientes.');
-          return;
-        }
+.featured-main-card,
+.latest-sidebar-card {
+  min-width: 0;
+}
 
-        const principal = posts[0];
-        const imgPrincipal = principal.coverImage || 'assets/img/KFL-logo.png';
+.featured-body {
+  padding: clamp(18px, 4vw, 30px);
+  overflow-wrap: anywhere;
+}
 
-        mainFeaturedContainer.onclick = () => {
-          window.location.href = `articulo.html?slug=${encodeURIComponent(principal.slug)}`;
-        };
-        mainFeaturedContainer.innerHTML = `
-          <div class="featured-img-container">
-            <img src="${esc(imgPrincipal)}" alt="${esc(principal.title)}" class="featured-img">
-          </div>
-          <div class="featured-body">
-            <span class="badge-category">${esc(principal.category)}</span>
-            <h3>${esc(principal.title)}</h3>
-            <p>${esc(principal.excerpt)}</p>
-          </div>`;
+.badge-category {
+  font-size: clamp(0.625rem, 2.8vw, 0.6875rem);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
 
-        // Ajustado de 4 a 3 noticias recientes para eliminar white space excesivo
-        const secundarios = posts.slice(1, 4);
-        if (secundarios.length === 0) {
-          sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
-          return;
-        }
+.featured-body h3 {
+  font-size: clamp(1.25rem, 5vw, 1.625rem);
+  overflow-wrap: anywhere;
+}
 
-        sidebarContainer.innerHTML = secundarios.map(p => `
-          <div class="sidebar-news-item" onclick="window.location.href='articulo.html?slug=${encodeURIComponent(p.slug)}'">
-            <img src="${esc(p.coverImage || 'assets/img/KFL-logo.png')}" alt="${esc(p.title)}" class="sidebar-thumb">
-            <div class="sidebar-info">
-              <span class="sidebar-tag">${esc(p.category)}</span>
-              <h4>${esc(p.title)}</h4>
-            </div>
-          </div>`).join('');
+.featured-body p {
+  font-size: clamp(0.875rem, 3.8vw, 0.90625rem);
+  overflow-wrap: anywhere;
+}
 
-      } catch (e) {
-        console.error('Error cargando noticias:', e);
-        vacio('No se pudieron cargar las noticias.', 'Sin noticias recientes.');
-      }
-    });
-  </script>
+.latest-sidebar-card {
+  padding: clamp(16px, 4vw, 25px);
+}
 
-  <!-- CONFIGURACIÓN DE BANNERS Y PATROCINADORES (RESTAURADA Y RESPONSIVE) -->
-  <script>
-    const PROMO_BANNERS = [
-      { img: 'assets/img/banner-promo-1.jpg', alt: 'Anuncia Tu Marca Aquí - Espacio Publicitario KFL', url: 'contacto.html' },
-      { img: 'assets/img/banner-promo-2.jpg', alt: 'Inscripciones Abiertas Temporada 2026', url: 'registro-jugadores.html' }
-    ];
+.latest-sidebar-card h3 {
+  font-size: clamp(1.25rem, 5vw, 1.375rem);
+  overflow-wrap: anywhere;
+}
 
-    const SPONSORS = [
-      { img: 'assets/sponsors/sponsor1.png', alt: 'Sponsor 1', url: '' },
-      { img: 'assets/sponsors/sponsor2.png', alt: 'Sponsor 2', url: '' },
-      { img: 'assets/sponsors/sponsor3.png', alt: 'Sponsor 3', url: '' },
-      { img: 'assets/sponsors/sponsor4.png', alt: 'Sponsor 4', url: '' },
-      { img: 'assets/sponsors/sponsor5.png', alt: 'Sponsor 5', url: '' },
-      { img: 'assets/sponsors/sponsor6.png', alt: 'Sponsor 6', url: '' },
-      { img: 'assets/sponsors/sponsor7.png', alt: 'Sponsor 7', url: '' },
-      { img: 'assets/sponsors/sponsor8.png', alt: 'Sponsor 8', url: '' },
-      { img: 'assets/sponsors/sponsor9.png', alt: 'Sponsor 9', url: '' }
-    ];
+.sidebar-news-item {
+  min-width: 0;
+  gap: clamp(10px, 3vw, 15px);
+}
 
-    function envolverEnlace(contenido, url) {
-      if (!url) return contenido;
-      const externo = /^https?:\/\//.test(url);
-      const attrs = externo ? ' target="_blank" rel="sponsored noopener"' : '';
-      return `<a href="${url}"${attrs}>${contenido}</a>`;
-    }
+.sidebar-thumb {
+  width: clamp(52px, 16vw, 65px);
+  height: clamp(52px, 16vw, 65px);
+}
 
-    const slider = document.getElementById('promoSlider');
-    const dotsEl = document.getElementById('promoDots');
-    let slideActual = 0;
+.sidebar-info {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 
-    if (slider && dotsEl) {
-      slider.innerHTML = PROMO_BANNERS.map((b, i) =>
-        `<div class="slide${i === 0 ? ' active' : ''}">${envolverEnlace(`<img src="${b.img}" alt="${b.alt}">`, b.url)}</div>`
-      ).join('');
+.sidebar-tag {
+  font-size: clamp(0.625rem, 2.8vw, 0.6875rem);
+  overflow-wrap: anywhere;
+}
 
-      dotsEl.innerHTML = PROMO_BANNERS.map((b, i) =>
-        `<button class="promo-dot${i === 0 ? ' active' : ''}" aria-label="Ver banner ${i + 1}" data-i="${i}"></button>`
-      ).join('');
+.sidebar-info h4 {
+  font-size: clamp(0.75rem, 3.4vw, 0.8125rem);
+  overflow-wrap: anywhere;
+}
 
-      function mostrarSlide(i) {
-        const slides = slider.querySelectorAll('.slide');
-        const dots = dotsEl.querySelectorAll('.promo-dot');
-        if (!slides.length) return;
-        slideActual = (i + slides.length) % slides.length;
-        slides.forEach((el, k) => el.classList.toggle('active', k === slideActual));
-        dots.forEach((el, k) => el.classList.toggle('active', k === slideActual));
-      }
+.sponsors-section {
+  width: 100%;
+  margin-bottom: clamp(36px, 8vw, 60px);
+}
 
-      dotsEl.addEventListener('click', (e) => {
-        const btn = e.target.closest('.promo-dot');
-        if (btn) mostrarSlide(Number(btn.dataset.i));
-      });
+.tier-title {
+  font-size: clamp(1.25rem, 5.5vw, 1.5rem);
+  overflow-wrap: anywhere;
+}
 
-      if (PROMO_BANNERS.length <= 1) dotsEl.style.display = 'none';
-      else setInterval(() => mostrarSlide(slideActual + 1), 5000);
-    }
+.sponsors-grid {
+  gap: clamp(12px, 3vw, 20px);
+}
 
-    const sponsorsGrid = document.getElementById('sponsorsGrid');
-    if (sponsorsGrid) {
-      sponsorsGrid.innerHTML = SPONSORS.map(s =>
-        `<div class="sponsor-card">${envolverEnlace(`<img src="${s.img}" alt="${s.alt}" class="sponsor-logo">`, s.url)}</div>`
-      ).join('');
-    }
-  </script>
+.sponsor-card {
+  min-width: min(140px, calc(50% - 8px));
+  flex-basis: calc(50% - 8px);
+}
 
-  <!-- MENÚ Y PIE DE PÁGINA GLOBALES -->
-  <script src="js/components.js"></script>
-</body>
-</html>
+.pwa-banner {
+  position: fixed;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 1100;
+  width: min(420px, calc(100vw - 24px));
+  padding: clamp(12px, 3.5vw, 20px);
+  border: 1px solid var(--gris-borde);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.2);
+}
+
+.pwa-banner-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.pwa-banner-logo {
+  flex: 0 0 auto;
+  width: clamp(38px, 11vw, 52px);
+  height: clamp(38px, 11vw, 52px);
+  object-fit: contain;
+}
+
+.pwa-banner-text {
+  min-width: 0;
+  margin: 0;
+  font-size: clamp(0.8125rem, 3.4vw, 0.9375rem);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.pwa-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.pwa-btn-install,
+.pwa-btn-secondary {
+  flex: 1 1 120px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  font-size: clamp(0.8125rem, 3.4vw, 0.875rem);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pwa-btn-install {
+  color: #ffffff;
+  background: var(--azul-kfl);
+}
+
+.pwa-btn-secondary {
+  color: var(--texto-oscuro);
+  background: #e2e8f0;
+}
+
+@media (min-width: 850px) {
+  .about-section {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+
+  .about-image {
+    min-height: 350px;
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 950px) {
+  .news-grid-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .sponsor-card {
+    height: 75px;
+  }
+}

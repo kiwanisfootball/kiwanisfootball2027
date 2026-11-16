@@ -187,7 +187,7 @@
     <!-- Logo inferior centrado -->
     <div class="footer-bottom-row">
       <div class="footer-logo-container">
-        <img src="assets/logos/KFL-Logo.png" alt="KFL Logo" class="footer-brand-logo">
+        <img src="assets/img/KFL-logo.svg" alt="KFL Logo" class="footer-brand-logo">
       </div>
     </div>
 

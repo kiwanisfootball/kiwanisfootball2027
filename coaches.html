@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portal de Coaches - Kiwanis Football League</title>
   
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/global.css">
   <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <style>
@@ -49,7 +49,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       font-weight: 800;
       color: var(--kfl-blue);
       text-decoration: none;
@@ -81,7 +81,7 @@
 
     .section-header-clean h1 {
       font-family: 'Anton', sans-serif;
-      font-size: 44px;
+      font-size: clamp(30.8px, 4vw, 44px);
       color: var(--kfl-blue);
       text-transform: uppercase;
       letter-spacing: 1.5px;
@@ -89,7 +89,7 @@
     }
 
     .section-header-clean p {
-      font-size: 16px;
+      font-size: clamp(11.2px, 4vw, 16px);
       color: #475569;
       font-weight: 600;
       margin: 0;
@@ -102,7 +102,7 @@
       padding: 14px 18px;
       border-radius: 8px;
       color: #991b1b;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       font-weight: 600;
       margin-bottom: 25px;
       display: none;
@@ -125,7 +125,7 @@
 
     .legal-instructions-card h3 {
       font-family: 'Anton', sans-serif;
-      font-size: 18px;
+      font-size: clamp(12.6px, 4vw, 18px);
       color: var(--kfl-blue);
       text-transform: uppercase;
       margin: 0 0 12px 0;
@@ -136,7 +136,7 @@
       margin: 0;
       padding-left: 20px;
       color: #334155;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       line-height: 1.65;
     }
 
@@ -159,7 +159,7 @@
 
     .auth-card h2 {
       font-family: 'Anton', sans-serif;
-      font-size: 26px;
+      font-size: clamp(18.2px, 4vw, 26px);
       color: var(--kfl-blue);
       text-transform: uppercase;
       margin-top: 0;
@@ -172,7 +172,7 @@
       border-left: 4px solid var(--kfl-blue);
       padding: 15px;
       border-radius: 0 8px 8px 0;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       color: #475569;
       line-height: 1.5;
       margin-bottom: 25px;
@@ -185,7 +185,7 @@
     .form-group label {
       display: block;
       font-weight: 800;
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       color: var(--kfl-text-dark);
       text-transform: uppercase;
       margin-bottom: 8px;
@@ -196,7 +196,7 @@
       padding: 12px 16px;
       border: 1px solid var(--kfl-border-table);
       border-radius: 10px;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       outline: none;
       box-sizing: border-box;
       font-family: 'Avenir', sans-serif;
@@ -214,7 +214,7 @@
       color: #ffffff;
       border: none;
       padding: 14px 28px;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       font-weight: 800;
       text-transform: uppercase;
       border-radius: 8px;
@@ -242,7 +242,7 @@
       color: #334155;
       border: 1px solid #cbd5e1;
       padding: 8px 16px;
-      font-size: 12px;
+      font-size: clamp(8.4px, 4vw, 12px);
       font-weight: 800;
       text-transform: uppercase;
       border-radius: 6px;
@@ -267,7 +267,7 @@
 
     .coach-profile-headline {
       font-family: 'Avenir', sans-serif !important;
-      font-size: 19px;
+      font-size: clamp(13.3px, 4vw, 19px);
       color: #475569;
       font-weight: 500;
       display: inline-flex;
@@ -284,7 +284,7 @@
     .badge-lock-status {
       display: inline-flex;
       align-items: center;
-      font-size: 11.5px;
+      font-size: clamp(8.05px, 4vw, 11.5px);
       font-weight: 800;
       padding: 4px 12px;
       border-radius: 20px;
@@ -317,7 +317,7 @@
     .roster-grid-simulator {
       width: 100%;
       border-collapse: collapse;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       white-space: nowrap;
     }
 
@@ -334,7 +334,7 @@
       color: var(--kfl-blue);
       font-weight: 800;
       text-transform: uppercase;
-      font-size: 11.5px;
+      font-size: clamp(8.05px, 4vw, 11.5px);
       letter-spacing: 0.5px;
       position: sticky;
       top: 0;
@@ -347,7 +347,7 @@
       background: transparent;
       outline: none;
       font-family: 'Avenir', sans-serif !important;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       color: #1e293b;
       padding: 4px 2px;
       box-sizing: border-box;
@@ -385,7 +385,7 @@
     .badge-photo-yes {
       background-color: #dcfce7;
       color: #166534;
-      font-size: 11px;
+      font-size: clamp(7.7px, 4vw, 11px);
       font-weight: 800;
       padding: 3px 10px;
       border-radius: 6px;
@@ -396,7 +396,7 @@
     .badge-photo-no {
       background-color: #f1f5f9;
       color: #64748b;
-      font-size: 11px;
+      font-size: clamp(7.7px, 4vw, 11px);
       font-weight: 700;
       padding: 3px 10px;
       border-radius: 6px;
@@ -421,7 +421,7 @@
 
     .registered-web-header h3 {
       font-family: 'Anton', sans-serif;
-      font-size: 22px;
+      font-size: clamp(15.4px, 4vw, 22px);
       color: var(--kfl-blue);
       text-transform: uppercase;
       margin: 0;
@@ -434,7 +434,7 @@
       border: 1px solid #bfdbfe;
       padding: 6px 14px;
       border-radius: 20px;
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       font-weight: 800;
     }
 
@@ -455,11 +455,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
     }
 
     .badge-status {
-      font-size: 10.5px;
+      font-size: clamp(7.35px, 4vw, 10.5px);
       font-weight: 800;
       padding: 3px 8px;
       border-radius: 6px;
@@ -479,7 +479,7 @@
     .status-msg {
       padding: 12px 16px;
       border-radius: 8px;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       margin-bottom: 15px;
       display: none;
       font-weight: 600;
@@ -595,7 +595,7 @@
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <h3 style="font-family: 'Anton', sans-serif; font-size: 20px; color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
+          <h3 style="font-family: 'Anton', sans-serif; font-size: clamp(14px, 4vw, 20px); color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
             Roster Oficial de Jugadores
           </h3>
           <button type="button" class="btn-secondary" id="btnAddRowBtn" onclick="agregarFilaJugadorVacia()">+ Agregar Jugador</button>
@@ -619,7 +619,7 @@
         </div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 35px; margin-bottom: 15px;">
-          <h3 style="font-family: 'Anton', sans-serif; font-size: 20px; color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
+          <h3 style="font-family: 'Anton', sans-serif; font-size: clamp(14px, 4vw, 20px); color: var(--kfl-blue); margin: 0; text-transform: uppercase;">
             Coaching Staff
           </h3>
           <button type="button" class="btn-secondary" id="btnAddStaffBtn" onclick="agregarFilaStaffVacia()">+ Agregar Miembro del Staff</button>
@@ -648,7 +648,7 @@
           <div class="registered-web-header">
             <div>
               <h3>Jugadores registrados en la web</h3>
-              <p style="font-size: 13px; color: var(--kfl-text-muted); margin: 4px 0 0 0;">
+              <p style="font-size: clamp(9.1px, 4vw, 13px); color: var(--kfl-text-muted); margin: 4px 0 0 0;">
                 Aspirantes con registro procesado en la web general para esta categoría.
               </p>
             </div>
@@ -657,7 +657,7 @@
             </div>
           </div>
 
-          <div id="loadingRegistros" style="text-align: center; font-size: 13px; color: var(--kfl-text-muted); padding: 15px;">
+          <div id="loadingRegistros" style="text-align: center; font-size: clamp(9.1px, 4vw, 13px); color: var(--kfl-text-muted); padding: 15px;">
             Consultando registros en vivo...
           </div>
 
@@ -886,12 +886,12 @@
           listContainer.innerHTML = html;
         } else {
           counterBadge.innerText = 'Total: 0';
-          listContainer.innerHTML = '<div style="text-align:center; padding: 15px; color: var(--kfl-text-muted); font-size: 13px; grid-column: 1 / -1;">No hay registros en la web para esta categoría aún.</div>';
+          listContainer.innerHTML = '<div style="text-align:center; padding: 15px; color: var(--kfl-text-muted); font-size: clamp(9.1px, 4vw, 13px); grid-column: 1 / -1;">No hay registros en la web para esta categoría aún.</div>';
         }
       } catch (err) {
         console.error(err);
         loader.style.display = 'none';
-        listContainer.innerHTML = '<div style="text-align:center; padding: 15px; color: var(--kfl-danger); font-size: 13px; grid-column: 1 / -1;">Error al consultar registros.</div>';
+        listContainer.innerHTML = '<div style="text-align:center; padding: 15px; color: var(--kfl-danger); font-size: clamp(9.1px, 4vw, 13px); grid-column: 1 / -1;">Error al consultar registros.</div>';
       }
     }
 

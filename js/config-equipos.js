@@ -255,7 +255,7 @@ async function consultarCalendarioEquipoCategoria() {
   container.innerHTML = `
     <div style="text-align: center; padding: 30px; color: #64748b;">
       <p style="font-weight: 700; margin-bottom: 5px;">Cargando calendario oficial...</p>
-      <span style="font-size: 12px;">Consultando base de datos KFL (${modalidad.toUpperCase()} ${categoria.toUpperCase()})</span>
+      <span style="font-size: clamp(8.4px, 4vw, 12px);">Consultando base de datos KFL (${modalidad.toUpperCase()} ${categoria.toUpperCase()})</span>
     </div>
   `;
 
@@ -353,7 +353,7 @@ function cargarRosterEquipoCategoria() {
         <td style="text-align: center;"><span class="cell-jersey-badge">#10</span></td>
       </tr>
       <tr>
-        <td colspan="4" style="text-align: center; padding: 15px; color: #64748b; font-size: 12px;">
+        <td colspan="4" style="text-align: center; padding: 15px; color: #64748b; font-size: clamp(8.4px, 4vw, 12px);">
           Información sincronizada con la base de datos oficial KFL.
         </td>
       </tr>

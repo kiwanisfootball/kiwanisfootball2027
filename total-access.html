@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="KFL Total Access - Kiwanis Football League Panamá">
   <meta property="og:description" content="Videos, resúmenes y transmisiones en vivo de la KFL en Panamá.">
-  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/logos/KFL-Logo.png">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/KFL-logo.svg">
   <meta property="og:url" content="https://www.kiwanisfootball.com/total-access.html">
   <meta property="og:locale" content="es_PA">
 
@@ -48,7 +48,7 @@
         "name": "KFL Total Access",
         "description": "Programa oficial de noticias, resúmenes y transmisiones de la Kiwanis Football League Panamá.",
         "url": "https://www.kiwanisfootball.com/total-access.html",
-        "logo": "https://www.kiwanisfootball.com/assets/logos/KFL-Logo.png",
+        "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
         "founder": {
           "@type": "Person",
           "name": "Raúl Méndez de Obarrio"
@@ -70,12 +70,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Hoja de estilos global y favicon local -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <style>
     /* ==========================================================================
-       TOTAL ACCESS - ESTILOS DE LA PÁGINA (variables globales de styles.css)
+       TOTAL ACCESS - ESTILOS DE LA PÁGINA (variables globales de global.css)
        ========================================================================== */
     .ta-container {
       max-width: 1100px;
@@ -130,7 +130,7 @@
     }
 
     .ta-description {
-      font-size: 15px;
+      font-size: clamp(10.5px, 4vw, 15px);
       line-height: 1.7;
       color: #334155;
     }
@@ -174,7 +174,7 @@
       padding: 10px 20px;
       border-radius: 30px;
       font-weight: 700;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       text-decoration: none;
       color: #ffffff;
       transition: transform 0.2s ease, opacity 0.2s ease;
@@ -215,7 +215,7 @@
       gap: 8px;
       background: #dc2626;
       color: #ffffff;
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       font-weight: 800;
       padding: 6px 14px;
       border-radius: 20px;
@@ -281,7 +281,7 @@
       color: #475569;
       border: 1px solid #cbd5e1;
       padding: 9px 20px;
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       font-weight: 800;
       border-radius: 25px;
       cursor: pointer;
@@ -354,7 +354,7 @@
       left: 10px;
       background: rgba(0, 94, 170, 0.95);
       color: #ffffff;
-      font-size: 10px;
+      font-size: clamp(7px, 4vw, 10px);
       font-weight: 800;
       padding: 4px 8px;
       border-radius: 4px;
@@ -410,7 +410,7 @@
     }
 
     .ta-card-title {
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       font-weight: 700;
       color: #1e293b;
       line-height: 1.4;
@@ -423,7 +423,7 @@
     }
 
     .ta-card-date {
-      font-size: 11px;
+      font-size: clamp(7.7px, 4vw, 11px);
       color: #64748b;
       font-weight: 600;
     }
@@ -439,7 +439,7 @@
       color: var(--azul-kfl);
       border: 2px solid var(--azul-kfl);
       padding: 11px 32px;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       font-weight: 800;
       border-radius: 30px;
       cursor: pointer;
@@ -475,7 +475,7 @@
     }
 
     .ta-subscribe-text {
-      font-size: 16px;
+      font-size: clamp(11.2px, 4vw, 16px);
       font-weight: 600;
       line-height: 1.6;
       max-width: 680px;
@@ -490,7 +490,7 @@
       background: #ff0000;
       color: #ffffff;
       padding: 12px 28px;
-      font-size: 15px;
+      font-size: clamp(10.5px, 4vw, 15px);
       font-weight: 800;
       border-radius: 30px;
       text-decoration: none;
@@ -559,7 +559,7 @@
       top: 12px;
       right: 12px;
       color: #ffffff;
-      font-size: 28px;
+      font-size: clamp(19.6px, 4vw, 28px);
       font-weight: bold;
       line-height: 1;
       cursor: pointer;
@@ -591,7 +591,7 @@
     }
 
     .ta-modal-footer-text {
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       color: #94a3b8;
     }
 
@@ -601,7 +601,7 @@
       text-decoration: none;
       padding: 8px 16px;
       border-radius: 20px;
-      font-size: 12px;
+      font-size: clamp(8.4px, 4vw, 12px);
       font-weight: 800;
       display: inline-flex;
       align-items: center;
@@ -632,15 +632,15 @@
       .ta-gallery-section { padding: 20px 14px; }
       .ta-live-stream-card { padding: 16px 12px; }
       .ta-subscribe-box { padding: 26px 16px; }
-      .ta-subscribe-btn { font-size: 14px; padding: 11px 20px; }
-      .ta-social-link { padding: 9px 14px; font-size: 13px; }
+      .ta-subscribe-btn { font-size: clamp(9.8px, 4vw, 14px); padding: 11px 20px; }
+      .ta-social-link { padding: 9px 14px; font-size: clamp(9.1px, 4vw, 13px); }
     }
 
     @media (max-width: 480px) {
       .ta-container { padding: 10px 8px; }
       .ta-about-card { padding: 18px 14px; }
       .ta-gallery-section { padding: 16px 10px; }
-      .ta-filter-btn { font-size: 12px; padding: 8px 14px; }
+      .ta-filter-btn { font-size: clamp(8.4px, 4vw, 12px); padding: 8px 14px; }
       .ta-social-bar { gap: 10px; }
       .ta-video-grid { gap: 14px; }
       .ta-modal { padding: 8px; }
@@ -663,7 +663,7 @@
 
     <!-- BANNER HERO -->
     <div class="ta-banner-wrapper">
-      <img src="assets/img/total-access-banner.jpg" alt="KFL Total Access" class="ta-banner-img" onerror="this.src='assets/logos/KFL-Logo.png'">
+      <img src="assets/img/total-access-banner.jpg" alt="KFL Total Access" class="ta-banner-img" onerror="this.src='assets/img/KFL-logo.svg'">
     </div>
 
     <!-- RESEÑA INSTITUCIONAL -->

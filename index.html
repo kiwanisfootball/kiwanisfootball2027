@@ -17,9 +17,9 @@
   <meta property="og:image" content="assets/img/KFL-logo.svg">
 
   <!-- Hojas de Estilo y Favicon Local -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/home.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
   <link rel="manifest" href="manifest.json">
 
   <!-- Preconexión y Fuentes Google Optimizadas -->
@@ -232,7 +232,7 @@
           
           htmlTicker += `
             <article class="game-card">
-              <div style="font-size: 9px; font-weight: 800; color: #19547E; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px; text-transform: uppercase;">
+              <div style="font-size: clamp(6.3px, 4vw, 9px); font-weight: 800; color: #19547E; text-align: center; margin-bottom: 4px; letter-spacing: 0.5px; text-transform: uppercase;">
                 ${partido.sem} &bull; ${partido.modalidad} ${categoriaLimpia}
               </div>
               <div class="game-team">
@@ -317,7 +317,7 @@
 
         const secundarios = posts.slice(1, 5);
         if (secundarios.length === 0) {
-          sidebarContainer.innerHTML = "<p style='font-size:13px; color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
+          sidebarContainer.innerHTML = "<p style='font-size: clamp(9.1px, 4vw, 13px); color:#64748b; text-align:center; padding:20px;'>No hay más noticias recientes.</p>";
           return;
         }
 

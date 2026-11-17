@@ -19,7 +19,7 @@
 }
 
 .conocenos-hero p {
-  font-size: 16px;
+  font-size: clamp(11.2px, 4vw, 16px);
   font-weight: 600;
   color: var(--texto-suave);
   margin: 0 auto;
@@ -49,7 +49,7 @@
     padding: 16px 10px;
   }
   .counter-number {
-    font-size: 32px;
+    font-size: clamp(22.4px, 4vw, 32px);
   }
 }
 
@@ -70,7 +70,7 @@
 
 .counter-number {
   font-family: var(--fuente-titulos);
-  font-size: 42px;
+  font-size: clamp(29.4px, 4vw, 42px);
   color: var(--azul-kfl);
   line-height: 1;
   margin-bottom: 8px;
@@ -78,7 +78,7 @@
 }
 
 .counter-label {
-  font-size: 13px;
+  font-size: clamp(9.1px, 4vw, 13px);
   font-weight: 700;
   color: #4a5568;
   text-transform: uppercase;
@@ -149,7 +149,7 @@
 
 .executive-name {
   font-family: var(--fuente-titulos);
-  font-size: 22px;
+  font-size: clamp(15.4px, 4vw, 22px);
   color: var(--azul-kfl);
   margin: 0 0 4px 0;
   text-transform: uppercase;
@@ -158,7 +158,7 @@
 }
 
 .executive-role {
-  font-size: 12px;
+  font-size: clamp(8.4px, 4vw, 12px);
   font-weight: 700;
   color: var(--rojo-kfl);
   margin-bottom: 8px;
@@ -167,7 +167,7 @@
 }
 
 .executive-bio {
-  font-size: 13px;
+  font-size: clamp(9.1px, 4vw, 13px);
   line-height: 1.45;
   color: #4a5568;
   margin: 0;
@@ -191,7 +191,7 @@
 
 .league-red-box header h2 {
   font-family: var(--fuente-titulos);
-  font-size: 24px;
+  font-size: clamp(16.8px, 4vw, 24px);
   color: #ffffff;
   margin: 0 0 14px 0;
   letter-spacing: 0.8px;
@@ -201,7 +201,7 @@
 }
 
 .league-red-content {
-  font-size: 13.5px;
+  font-size: clamp(9.45px, 4vw, 13.5px);
   line-height: 1.48;
   color: #ffffff;
   display: flex;
@@ -255,7 +255,7 @@
 
 .history-banner-blue h2 {
   font-family: var(--fuente-titulos);
-  font-size: 34px;
+  font-size: clamp(23.8px, 4vw, 34px);
   color: #ffffff;
   margin: 0 0 16px 0;
   letter-spacing: 1px;
@@ -263,7 +263,7 @@
 }
 
 .history-banner-blue p {
-  font-size: 15px;
+  font-size: clamp(10.5px, 4vw, 15px);
   line-height: 1.6;
   max-width: 480px;
   margin: 0;
@@ -306,7 +306,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: clamp(9.1px, 4vw, 13px);
   font-weight: 700;
   color: var(--texto-suave);
   margin-bottom: 20px;
@@ -407,7 +407,7 @@
 
 .timeline-h-year {
   font-family: var(--fuente-titulos);
-  font-size: 30px;
+  font-size: clamp(21px, 4vw, 30px);
   color: var(--azul-kfl);
   line-height: 1;
   margin: 0;
@@ -440,7 +440,7 @@
 }
 
 .timeline-h-desc {
-  font-size: 14px;
+  font-size: clamp(9.8px, 4vw, 14px);
   color: #334155;
   line-height: 1.55;
   margin: 0;

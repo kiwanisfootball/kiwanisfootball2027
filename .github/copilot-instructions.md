@@ -23,5 +23,5 @@ Este repositorio (`kiwanisfootball2027`) es un sitio web estático en producció
 3. **Identidad Visual Intacta:** Conserva exactamente las variables de color en `:root` y las familias tipográficas (`Anton` y `Montserrat`) definidas en `css/global.css`. No inventes colores ni sustituyas fuentes.
 4. **Ruta Única del Logo Oficial:** La única ruta válida para el logo de KFL en todo el repositorio es `assets/img/KFL-logo.svg`.
 5. **Arquitectura CSS Modular:**
-   - `css/global.css` es la única hoja de estilo base compartida por las 11 páginas HTML (`css/styles.css` no debe existir).
+   - `css/global.css` es la única hoja de estilo base compartida por las 15 páginas HTML de la raíz (`css/styles.css` no debe existir).
    - Cada vista conserva su CSS específico (`css/home.css`, `css/equipos.css`, `css/campeones.css`, `css/mvp.css`, etc.) únicamente para sus componentes exclusivos.

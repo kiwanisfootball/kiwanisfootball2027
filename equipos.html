@@ -35,7 +35,7 @@
 
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/equipos.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <script src="js/config-ligas.js"></script>
 
@@ -429,7 +429,7 @@
             const scoreVis = p.scoreA ?? '';
             const scoreBox = p.hasScore
               ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${escapeHTML(scoreLoc)} - ${escapeHTML(scoreVis)}</div>`
-              : `<div class="kfl-score-vs">VS</div>${p.time ? '<span style="font-size:10px; font-weight:700; color:#64748b;">' + escapeHTML(p.time) + '</span>' : ''}`;
+              : `<div class="kfl-score-vs">VS</div>${p.time ? '<span style="font-size: clamp(7px, 4vw, 10px); font-weight:700; color:#64748b;">' + escapeHTML(p.time) + '</span>' : ''}`;
 
             html += `
               <div class="kfl-match-card">

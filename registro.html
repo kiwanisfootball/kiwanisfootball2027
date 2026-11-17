@@ -6,7 +6,7 @@
   <title>Registro de Atletas | Kiwanis Football League Panamá</title>
   
   <!-- FAVICON ACTUALIZADO -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <!-- SEO / GEO / AEO METADATOS -->
   <meta name="description" content="Formulario oficial de inscripción y registro para atletas de la Kiwanis Football League (KFL) en Panamá. Modalidades Contact Football y Flag Football Femenino.">
@@ -24,7 +24,7 @@
   <meta property="og:description" content="Inscríbete en las ligas de Contact Football y Flag Football Femenino de la KFL Panamá. Proceso seguro y oficial.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.kiwanisfootball.com/registro.html">
-  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/favicon.png">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/KFL-logo.svg">
   <meta property="og:locale" content="es_PA">
 
   <!-- SCHEMA.ORG / STRUCTURED DATA (JSON-LD PARA SEO Y AEO) -->
@@ -37,7 +37,7 @@
         "name": "Kiwanis Football League",
         "alternateName": "KFL Panamá",
         "url": "https://www.kiwanisfootball.com",
-        "logo": "https://www.kiwanisfootball.com/assets/img/favicon.png",
+        "logo": "https://www.kiwanisfootball.com/assets/img/KFL-logo.svg",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Ciudad de Panamá",
@@ -54,7 +54,7 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/global.css">
 
   <style>
     /* ESTILOS ESTRUCTURALES Y DEL FORMULARIO */
@@ -80,14 +80,14 @@
 
     .gate-title {
       font-family: var(--fuente-titulos);
-      font-size: 28px;
+      font-size: clamp(19.6px, 4vw, 28px);
       color: var(--azul-kfl);
       margin-bottom: 12px;
       text-transform: uppercase;
     }
 
     .gate-desc {
-      font-size: 14.5px;
+      font-size: clamp(10.15px, 4vw, 14.5px);
       color: var(--texto-suave);
       margin-bottom: 25px;
       line-height: 1.6;
@@ -103,14 +103,14 @@
 
     .selector-title {
       font-family: var(--fuente-titulos);
-      font-size: 32px;
+      font-size: clamp(22.4px, 4vw, 32px);
       color: var(--azul-kfl);
       text-transform: uppercase;
       margin-bottom: 10px;
     }
 
     .selector-desc {
-      font-size: 15px;
+      font-size: clamp(10.5px, 4vw, 15px);
       color: var(--texto-suave);
       margin-bottom: 30px;
     }
@@ -132,7 +132,7 @@
       border: none;
       color: #ffffff;
       font-family: var(--fuente-titulos);
-      font-size: 22px;
+      font-size: clamp(15.4px, 4vw, 22px);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       cursor: pointer;
@@ -177,7 +177,7 @@
     body.flag-theme .inscripcion-hero-title { color: var(--rojo-kfl); }
 
     .inscripcion-hero-subtitle {
-      font-size: 15px;
+      font-size: clamp(10.5px, 4vw, 15px);
       color: var(--texto-suave);
       font-weight: 700;
       text-transform: uppercase;
@@ -190,7 +190,7 @@
       padding: 18px 22px;
       border-radius: 0 12px 12px 0;
       margin-bottom: 30px;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       color: #334155;
       line-height: 1.6;
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
@@ -209,7 +209,7 @@
 
     .form-section-title {
       font-family: var(--fuente-titulos);
-      font-size: 22px;
+      font-size: clamp(15.4px, 4vw, 22px);
       color: var(--azul-kfl);
       text-transform: uppercase;
       margin-bottom: 20px;
@@ -220,7 +220,7 @@
     body.flag-theme .form-section-title { color: var(--rojo-kfl); }
 
     .form-subsection-title {
-      font-size: 15px;
+      font-size: clamp(10.5px, 4vw, 15px);
       font-weight: 800;
       color: var(--azul-kfl);
       text-transform: uppercase;
@@ -249,7 +249,7 @@
 
     .form-label {
       display: block;
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       font-weight: 800;
       color: var(--texto-oscuro);
       text-transform: uppercase;
@@ -259,7 +259,7 @@
 
     .form-note {
       display: block;
-      font-size: 12px;
+      font-size: clamp(8.4px, 4vw, 12px);
       color: var(--texto-suave);
       margin-top: 4px;
       font-weight: 600;
@@ -269,7 +269,7 @@
       width: 100%;
       padding: 12px 16px;
       font-family: var(--fuente-cuerpo);
-      font-size: 14.5px;
+      font-size: clamp(10.15px, 4vw, 14.5px);
       color: #1e293b;
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -335,7 +335,7 @@
     .file-upload-box input { display: none; }
 
     .file-upload-label {
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       font-weight: 700;
       color: #475569;
       cursor: pointer;
@@ -352,7 +352,7 @@
 
     .payment-title {
       font-family: var(--fuente-titulos);
-      font-size: 20px;
+      font-size: clamp(14px, 4vw, 20px);
       text-transform: uppercase;
       margin-bottom: 12px;
       display: flex;
@@ -363,7 +363,7 @@
     .payment-list {
       margin: 0;
       padding-left: 20px;
-      font-size: 14.5px;
+      font-size: clamp(10.15px, 4vw, 14.5px);
       line-height: 1.6;
     }
 
@@ -375,7 +375,7 @@
       color: #1e40af;
       padding: 18px;
       border-radius: 12px;
-      font-size: 14.5px;
+      font-size: clamp(10.15px, 4vw, 14.5px);
       font-weight: 700;
       text-align: center;
       margin-bottom: 25px;
@@ -391,7 +391,7 @@
     }
 
     .legal-text {
-      font-size: 13.5px;
+      font-size: clamp(9.45px, 4vw, 13.5px);
       color: #334155;
       line-height: 1.6;
       margin-bottom: 12px;
@@ -414,7 +414,7 @@
     }
 
     .legal-checkbox-label {
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       color: #1e293b;
       font-weight: 700;
       line-height: 1.4;
@@ -428,7 +428,7 @@
       border: none;
       padding: 16px;
       font-family: var(--fuente-titulos);
-      font-size: 22px;
+      font-size: clamp(15.4px, 4vw, 22px);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       border-radius: 12px;
@@ -454,7 +454,7 @@
       margin-top: 15px;
       padding: 14px;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       font-weight: 700;
       text-align: center;
     }
@@ -464,7 +464,7 @@
     .back-link {
       display: inline-block;
       margin-bottom: 20px;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       font-weight: 800;
       color: var(--azul-kfl);
       text-decoration: none;
@@ -502,7 +502,7 @@
       <h2 class="gate-title">Acceso Restringido</h2>
       <p class="gate-desc">Esta sección es exclusiva para el registro de atletas autorizados. Ingresa la contraseña de inscripción:</p>
       <input type="password" id="accessPassword" class="form-input" placeholder="Contraseña de acceso" style="margin-bottom: 15px; text-align: center;">
-      <button onclick="verifyPassword()" class="submit-btn" style="font-size: 18px; padding: 12px;">Ingresar</button>
+      <button onclick="verifyPassword()" class="submit-btn" style="font-size: clamp(12.6px, 4vw, 18px); padding: 12px;">Ingresar</button>
       <div id="gateAlert" class="alert-msg error">Contraseña incorrecta. Intenta nuevamente.</div>
     </div>
 
@@ -664,7 +664,7 @@
         <div class="form-card">
           <h3 class="form-section-title">2. Información de los Acudientes</h3>
           
-          <h4 style="color: var(--azul-kfl); font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
+          <h4 style="color: var(--azul-kfl); font-size: clamp(11.2px, 4vw, 16px); margin-bottom: 15px; text-transform: uppercase;">Padre / Tutor</h4>
           <div class="form-grid-3" style="margin-bottom: 25px;">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>
@@ -680,7 +680,7 @@
             </div>
           </div>
 
-          <h4 style="color: var(--azul-kfl); font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
+          <h4 style="color: var(--azul-kfl); font-size: clamp(11.2px, 4vw, 16px); margin-bottom: 15px; text-transform: uppercase;">Madre / Tutora</h4>
           <div class="form-grid-3">
             <div class="form-group">
               <label class="form-label">Nombre y Apellidos</label>

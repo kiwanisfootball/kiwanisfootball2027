@@ -49,7 +49,7 @@ El sistema funciona bajo una arquitectura desacoplada de 4 capas:
 
 ## 3. Estándares Técnicos del Frontend (Inquebrantables)
 
-* **CSS Modular:** `css/global.css` es la única hoja de estilo base compartida por las 11 páginas HTML (`css/styles.css` está eliminado). Cada página conserva su CSS puntual (`css/home.css`, `css/equipos.css`, `css/campeones.css`, `css/mvp.css`) únicamente para sus componentes exclusivos.
+* **CSS Modular:** `css/global.css` es la única hoja de estilo base compartida por las 15 páginas HTML de la raíz (`css/styles.css` está eliminado). Cada página conserva su CSS puntual (`css/home.css`, `css/equipos.css`, `css/campeones.css`, `css/mvp.css`) únicamente para sus componentes exclusivos.
 * **Tipografía Fluida (`clamp()`):** Todos los tamaños de fuente deben definirse con `clamp()`.
 * **Validación Móvil (`375px` - iPhone SE):** Cero textos partidos en doble línea no deseada, cero puntos suspensivos (`text-overflow: ellipsis` / `...`) y cero desalineaciones en tablas o filtros tipo píldora a `375px` de ancho.
 * **Identidad Visual:** Mantener intactas las variables `:root` de colores y las fuentes `Anton` y `Montserrat`.

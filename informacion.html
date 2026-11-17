@@ -16,21 +16,21 @@
   <meta property="og:title" content="Preguntas Frecuentes e Información - Kiwanis Football League (KFL)">
   <meta property="og:description" content="Información oficial sobre inscripciones, división de temporadas, categorías, reglamento de pesajes, sedes y contacto de la KFL en Panamá.">
   <meta property="og:url" content="https://www.kflpanama.com/informacion.html">
-  <meta property="og:image" content="assets/img/KFL-logo.png">
+  <meta property="og:image" content="https://www.kflpanama.com/assets/img/KFL-logo.svg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Preguntas Frecuentes - Kiwanis Football League (KFL)">
   <meta name="twitter:description" content="Todo lo que necesitas saber para participar en la Kiwanis Football League Panamá.">
-  <meta name="twitter:image" content="assets/img/KFL-logo.png">
+  <meta name="twitter:image" content="https://www.kflpanama.com/assets/img/KFL-logo.svg">
 
   <!-- Google Fonts: Anton & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <style>
     .contact-container {
@@ -49,7 +49,7 @@
 
     .section-header-clean h1 {
       font-family: 'Anton', sans-serif;
-      font-size: 42px;
+      font-size: clamp(29.4px, 4vw, 42px);
       color: #19547E;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -58,7 +58,7 @@
 
     .section-header-clean p {
       font-family: 'Montserrat', sans-serif;
-      font-size: 16px;
+      font-size: clamp(11.2px, 4vw, 16px);
       color: #475569;
       font-weight: 500;
       max-width: 750px;
@@ -73,7 +73,7 @@
 
     .faq-title {
       font-family: 'Anton', sans-serif;
-      font-size: 28px;
+      font-size: clamp(19.6px, 4vw, 28px);
       color: #19547E;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -97,7 +97,7 @@
 
     .faq-summary {
       font-family: 'Montserrat', sans-serif;
-      font-size: 17px;
+      font-size: clamp(11.9px, 4vw, 17px);
       font-weight: 700;
       color: #1e293b;
       padding: 18px 24px;
@@ -115,7 +115,7 @@
 
     .faq-summary::after {
       content: '+';
-      font-size: 22px;
+      font-size: clamp(15.4px, 4vw, 22px);
       font-weight: 400;
       color: #19547E;
       transition: transform 0.25s ease;
@@ -130,7 +130,7 @@
       font-family: 'Montserrat', sans-serif;
       padding: 0 24px 20px 24px;
       color: #475569;
-      font-size: 15px;
+      font-size: clamp(10.5px, 4vw, 15px);
       line-height: 1.7;
     }
 
@@ -152,7 +152,7 @@
 
     .contact-cta-banner h2 {
       font-family: 'Anton', sans-serif;
-      font-size: 30px;
+      font-size: clamp(21px, 4vw, 30px);
       color: #19547E;
       text-transform: uppercase;
       margin-bottom: 10px;
@@ -160,7 +160,7 @@
 
     .contact-cta-banner p {
       font-family: 'Montserrat', sans-serif;
-      font-size: 18px;
+      font-size: clamp(12.6px, 4vw, 18px);
       color: #475569;
       font-weight: 600;
     }
@@ -184,7 +184,7 @@
     .form-label {
       display: block;
       font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
+      font-size: clamp(9.1px, 4vw, 13px);
       font-weight: 800;
       color: #334155;
       text-transform: uppercase;
@@ -211,7 +211,7 @@
       width: 100%;
       padding: 14px 14px 14px 48px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 15px;
+      font-size: clamp(10.5px, 4vw, 15px);
       color: #1e293b;
       background: #f8fafc;
       border: 1px solid #cbd5e1;
@@ -240,7 +240,7 @@
       border: none;
       padding: 16px;
       font-family: 'Anton', sans-serif;
-      font-size: 22px;
+      font-size: clamp(15.4px, 4vw, 22px);
       letter-spacing: 1.5px;
       text-transform: uppercase;
       border-radius: 10px;
@@ -262,7 +262,7 @@
       padding: 15px;
       border-radius: 8px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       font-weight: 700;
       text-align: center;
     }
@@ -281,8 +281,8 @@
 
     @media (max-width: 768px) {
       .contact-container { padding: 15px 12px; }
-      .section-header-clean h1 { font-size: 32px; }
-      .faq-summary { font-size: 15px; padding: 16px 18px; }
+      .section-header-clean h1 { font-size: clamp(22.4px, 4vw, 32px); }
+      .faq-summary { font-size: clamp(10.5px, 4vw, 15px); padding: 16px 18px; }
       .contact-form-wrapper { padding: 25px 18px; }
     }
   </style>
@@ -304,7 +304,7 @@
         "name": "Kiwanis Football League",
         "alternateName": "KFL",
         "url": "https://www.kflpanama.com",
-        "logo": "https://www.kflpanama.com/assets/img/KFL-logo.png",
+        "logo": "https://www.kflpanama.com/assets/img/KFL-logo.svg",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Ciudad de Panamá",

@@ -87,7 +87,7 @@
   /* BOTONES DEL MENÚ: Ancho relativo, centrados y con área de clic cómoda */
   .nav-menu li a {
     font-family: 'Avenir', sans-serif !important;
-    font-size: 11.5px;
+    font-size: clamp(8.05px, 4vw, 11.5px);
     font-weight: 800;
     color: #005EAA;
     text-decoration: none;
@@ -116,7 +116,7 @@
     display: none;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: clamp(16.8px, 4vw, 24px);
     color: #005EAA;
     cursor: pointer;
   }
@@ -155,7 +155,7 @@
     }
 
     .nav-menu li a {
-      font-size: 14px;
+      font-size: clamp(9.8px, 4vw, 14px);
       padding: 10px;
     }
   }
@@ -251,21 +251,21 @@
 
   .footer-title-copy {
     color: #ffffff;
-    font-size: 14px;
+    font-size: clamp(9.8px, 4vw, 14px);
     font-weight: 800;
     letter-spacing: 0.5px;
     margin: 0;
   }
 
   .footer-desc {
-    font-size: 14px;
+    font-size: clamp(9.8px, 4vw, 14px);
     color: #94a3b8;
     line-height: 1.4;
     margin: 0;
   }
 
   .footer-rights {
-    font-size: 14px;
+    font-size: clamp(9.8px, 4vw, 14px);
     color:  #94a3b8;
     margin-top: 2px;
   }
@@ -330,7 +330,7 @@
 
   /* ==========================================================================
      BOTÓN "VOLVER ARRIBA" (GLOBAL)
-     Las reglas se inyectan aquí, así no dependen de css/styles.css publicado.
+     Las reglas se inyectan aquí, así no dependen de una hoja de estilos publicada.
      Si la página ya trae #backToTopBtn, lo usa; si no, lo crea.
      ========================================================================== */
   const BACK_TO_TOP_CSS = `

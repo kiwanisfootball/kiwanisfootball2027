@@ -501,7 +501,7 @@ body.flag-theme-active .ligas-container .kfl-match-header { background: var(--ro
 .ligas-container .kfl-score-box { width: 28%; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .ligas-container .kfl-score-num { font-size: clamp(18px, 4.5vw, 24px); font-weight: 700; color: #0f172a; letter-spacing: 0.5px; white-space: nowrap; line-height: 1.1; }
 .ligas-container .kfl-score-vs { font-size: clamp(14px, 3.5vw, 16px); font-weight: 900; color: #94a3b8; letter-spacing: 1px; white-space: nowrap; }
-.ligas-container .kfl-score-status { font-size: 10px; font-weight: 900; color: #16a34a; letter-spacing: 0.8px; margin-bottom: 2px; text-transform: uppercase; white-space: nowrap; }
+.ligas-container .kfl-score-status { font-size: clamp(7px, 4vw, 10px); font-weight: 900; color: #16a34a; letter-spacing: 0.8px; margin-bottom: 2px; text-transform: uppercase; white-space: nowrap; }
 
 .ligas-container .kfl-jamboree-card {
   background: #ffffff;
@@ -651,20 +651,20 @@ body.flag-theme-active .ligas-container .roster-detail-title-group h3 { color: v
   white-space: nowrap;
 }
 
-.ligas-container .roster-compact-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: clamp(12px, 2.2vw, 13.5px); }
+.ligas-container .roster-compact-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-bottom: 20px; font-size: clamp(12px, 2.2vw, 13.5px); }
 .ligas-container .roster-compact-table th {
   background-color: #f8fafc;
   color: var(--azul-kfl);
   font-weight: 900;
   text-transform: uppercase;
   font-size: clamp(10px, 1.8vw, 11.5px);
-  padding: 12px;
+  padding: clamp(4px, 1.5vw, 12px);
   border-bottom: 2.5px solid #cbd5e1;
   text-align: left;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 body.flag-theme-active .ligas-container .roster-compact-table th { color: var(--rojo-kfl); }
-.ligas-container .roster-compact-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+.ligas-container .roster-compact-table td { padding: clamp(4px, 1.5vw, 10px); border-bottom: 1px solid #f1f5f9; color: #334155; overflow-wrap: anywhere; }
 .ligas-container .roster-player-clickable-row { cursor: pointer; transition: background-color 0.15s; }
 .ligas-container .roster-player-clickable-row:hover { background-color: #f0f7ff; }
 body.flag-theme-active .ligas-container .roster-player-clickable-row:hover { background-color: #fff1f2; }
@@ -681,6 +681,7 @@ body.flag-theme-active .ligas-container .cell-jersey-badge { color: var(--rojo-k
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-top: 10px;
   margin-bottom: 30px;
+  table-layout: fixed;
 }
 
 .ligas-container .kfl-table th {
@@ -694,9 +695,10 @@ body.flag-theme-active .ligas-container .cell-jersey-badge { color: var(--rojo-k
   letter-spacing: 0.3px;
   cursor: pointer;
   user-select: none;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
-.ligas-container .kfl-table th::after { content: ' ↕'; font-size: 9px; opacity: 0.6; margin-left: 2px; }
+.ligas-container .kfl-table th::after { content: ' ↕'; font-size: clamp(6.3px, 4vw, 9px); opacity: 0.6; margin-left: 2px; }
 .ligas-container .kfl-table th.sort-asc::after { content: ' ▲'; opacity: 1; color: #ffffff; }
 .ligas-container .kfl-table th.sort-desc::after { content: ' ▼'; opacity: 1; color: #ffffff; }
 
@@ -708,7 +710,7 @@ body.flag-theme-active .ligas-container .kfl-table th { background: var(--rojo-k
   border-bottom: 1px solid #f1f5f9;
   font-size: clamp(12px, 2.2vw, 13.5px);
   color: #334155;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .ligas-container .kfl-table-team-cell {
@@ -717,7 +719,26 @@ body.flag-theme-active .ligas-container .kfl-table th { background: var(--rojo-k
   gap: 8px;
   text-align: left;
   font-weight: 800;
-  white-space: nowrap;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ligas-container .kfl-table-team-cell span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 400px) {
+  .ligas-container .kfl-table th,
+  .ligas-container .kfl-table td {
+    padding: 8px 4px;
+  }
+
+  .ligas-container .kfl-table-team-cell {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
 }
 
 .ligas-container .kfl-table-team-logo { 
@@ -929,9 +950,9 @@ body.flag-theme-active .player-stat-val { color: var(--rojo-kfl); }
   .ligas-container { padding: 15px 8px; }
   .ligas-container .ligas-hero-banner { padding: 25px 12px; }
   .ligas-container .ligas-modality-bar { flex-direction: column; gap: 10px; align-items: stretch; }
-  .ligas-container .ligas-modality-btn { max-width: 100%; width: 100%; font-size: 18px; padding: 12px; }
+  .ligas-container .ligas-modality-btn { max-width: 100%; width: 100%; font-size: clamp(12.6px, 4vw, 18px); padding: 12px; }
   .ligas-container .ligas-reset-wrapper { margin: 8px 0 16px 0; }
-  .ligas-container .ligas-reset-btn { width: auto; max-width: 100%; white-space: nowrap; padding: 8px 16px; font-size: 11px; }
-  .ligas-container .ligas-filter-btn { min-width: 45%; font-size: 14px; padding: 10px 14px; }
-  .ligas-container .sub-tab-btn { min-width: 45%; font-size: 12px; padding: 10px 14px; }
+  .ligas-container .ligas-reset-btn { width: auto; max-width: 100%; white-space: nowrap; padding: 8px 16px; font-size: clamp(7.7px, 4vw, 11px); }
+  .ligas-container .ligas-filter-btn { min-width: 45%; font-size: clamp(9.8px, 4vw, 14px); padding: 10px 14px; }
+  .ligas-container .sub-tab-btn { min-width: 45%; font-size: clamp(8.4px, 4vw, 12px); padding: 10px 14px; }
 }

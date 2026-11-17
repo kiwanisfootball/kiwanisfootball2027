@@ -14,7 +14,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Campeones KFL - Kiwanis Football League Panamá">
   <meta property="og:description" content="Vitrina histórica de campeones y subcampeones de la KFL en Panamá.">
-  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/logos/KFL-Logo.png">
+  <meta property="og:image" content="https://www.kiwanisfootball.com/assets/img/KFL-logo.svg">
   <meta property="og:url" content="https://www.kiwanisfootball.com/campeones.html">
   <meta property="og:locale" content="es_PA">
 
@@ -48,9 +48,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Hoja de estilos global, específica de campeones y favicon local -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/campeones.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <!-- Vercel Speed Insights -->
   <script>
@@ -68,7 +68,7 @@
     <!-- HERO -->
     <section class="champs-hero-banner">
       <div class="champs-trophy-wrapper">
-        <img src="assets/img/trophy.svg" alt="Trofeo de campeones de la Kiwanis Football League" class="champs-trophy-img" onerror="this.src='assets/logos/KFL-Logo.png'">
+        <img src="assets/img/trophy.svg" alt="Trofeo de campeones de la Kiwanis Football League" class="champs-trophy-img" onerror="this.src='assets/img/KFL-logo.svg'">
       </div>
 
       <div class="champs-hero-content">
@@ -230,7 +230,7 @@
       "TITANS": "assets/logos/titans.png"
     };
 
-    const LOGO_KFL_DEFAULT = "assets/logos/KFL-Logo.png";
+    const LOGO_KFL_DEFAULT = "assets/img/KFL-logo.svg";
 
     function getTeamLogoInfo(fullTeamName) {
       const clean = (fullTeamName || "").toUpperCase().trim();

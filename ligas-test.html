@@ -43,7 +43,7 @@
 
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/ligas.css">
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
 
   <script src="js/config-ligas.js"></script>
 
@@ -60,7 +60,7 @@
 
     <section class="ligas-hero-banner">
       <div class="ligas-badge-wrapper">
-        <img src="assets/img/KFL-logo.svg" alt="Logo Kiwanis Football League" class="ligas-badge-img" onerror="this.src='assets/logos/KFL-Logo.png'">
+        <img src="assets/img/KFL-logo.svg" alt="Logo Kiwanis Football League" class="ligas-badge-img">
       </div>
 
       <div class="ligas-hero-content">
@@ -142,7 +142,7 @@
               <img id="rosterDetailLogo" src="" alt="Equipo Logo">
               <div>
                 <h3 id="rosterDetailTeamName">EQUIPO</h3>
-                <span style="font-size: 13px; color: #64748b; font-weight: 600;">Haz clic sobre cualquier jugador para ver su tarjeta de estadísticas</span>
+                <span style="font-size: clamp(9.1px, 4vw, 13px); color: #64748b; font-weight: 600;">Haz clic sobre cualquier jugador para ver su tarjeta de estadísticas</span>
               </div>
             </div>
             <button type="button" class="btn-close-roster" onclick="cerrarDetalleRoster()">✕ Cerrar Roster</button>
@@ -163,7 +163,7 @@
           </div>
 
           <div id="staffSectionWrapper">
-            <div style="font-family: var(--fuente-titulos); font-size: 18px; color: #0f172a; margin: 24px 0 12px 0; text-transform: uppercase;">Coaching Staff</div>
+            <div style="font-family: var(--fuente-titulos); font-size: clamp(12.6px, 4vw, 18px); color: #0f172a; margin: 24px 0 12px 0; text-transform: uppercase;">Coaching Staff</div>
             <div style="overflow-x: auto;">
               <table class="roster-compact-table">
                 <thead>
@@ -202,7 +202,7 @@
         </div>
 
         <div class="search-box-stats">
-          <span style="font-weight: 800; font-size: 13px; color: #334155; text-transform: uppercase;">Buscar Jugador/Equipo:</span>
+          <span style="font-weight: 800; font-size: clamp(9.1px, 4vw, 13px); color: #334155; text-transform: uppercase;">Buscar Jugador/Equipo:</span>
           <input type="text" id="searchStatInput" class="search-stats-input" onkeyup="filtrarTablaStats()" placeholder="Escribe aquí...">
         </div>
 
@@ -900,7 +900,7 @@
                   <div class="kfl-score-box">
                     ${p.hasScore
                       ? `<div class="kfl-score-status">FINAL</div><div class="kfl-score-num">${p.scoreH} - ${p.scoreA}</div>`
-                      : `<div class="kfl-score-vs">VS</div><div style="font-size:12px; color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
+                      : `<div class="kfl-score-vs">VS</div><div style="font-size: clamp(8.4px, 4vw, 12px); color:#64748b; font-weight:600; display:flex; align-items:center; justify-content:center; gap:3px;">${SVG_ICONS.clock} ${p.time || 'TBD'}</div>`}
                   </div>
                   <div class="kfl-team-box">
                     <img src="${getTeamLogo(p.away)}" alt="${p.away}" class="kfl-team-logo" loading="lazy" width="48" height="48" onerror="this.src='assets/img/KFL-logo.svg'">
@@ -1250,7 +1250,7 @@
         statsContainer.innerHTML = statsHtml;
       } else {
         statsContainer.innerHTML = `
-          <div style="text-align: center; padding: 25px; color: #64748b; font-size: 13.5px; font-weight:600;">
+          <div style="text-align: center; padding: 25px; color: #64748b; font-size: clamp(9.45px, 4vw, 13.5px); font-weight:600;">
             Sin estadísticas acumuladas registradas esta temporada.
           </div>
         `;
@@ -1588,7 +1588,7 @@
       if (totalPaginas > 1) {
         paginationBar.innerHTML = `
           <button class="kfl-nav-btn" onclick="cambiarPaginaStats(${paginaActualStats - 1})" ${paginaActualStats === 1 ? 'disabled' : ''}>← Anterior</button>
-          <span style="font-size: 13.5px; font-weight: 800; color: #475569;">Página ${paginaActualStats} de ${totalPaginas}</span>
+          <span style="font-size: clamp(9.45px, 4vw, 13.5px); font-weight: 800; color: #475569;">Página ${paginaActualStats} de ${totalPaginas}</span>
           <button class="kfl-nav-btn" onclick="cambiarPaginaStats(${paginaActualStats + 1})" ${paginaActualStats === totalPaginas ? 'disabled' : ''}>Siguiente →</button>
         `;
       }

@@ -35,7 +35,7 @@
 
 .equipos-selector-sub {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 15px;
+  font-size: clamp(10.5px, 4vw, 15px);
   font-weight: 600;
   color: #475569;
   max-width: 780px;
@@ -111,7 +111,7 @@
 
 .equipo-card-name {
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 11px;
+  font-size: clamp(7.7px, 4vw, 11px);
   font-weight: 900;
   color: #0f172a;
   text-transform: uppercase;
@@ -121,14 +121,14 @@
 
 @media (min-width: 420px) {
   .equipo-card-name {
-    font-size: 11.5px;
+    font-size: clamp(8.05px, 4vw, 11.5px);
   }
 }
 
 .equipos-select-prompt {
   text-align: center;
   padding: 20px 16px;
-  font-size: 14px;
+  font-size: clamp(9.8px, 4vw, 14px);
   color: #64748b;
   font-weight: 700;
   display: flex;
@@ -187,7 +187,7 @@
 }
 
 .team-school-tag {
-  font-size: 13.5px;
+  font-size: clamp(9.45px, 4vw, 13.5px);
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
@@ -215,7 +215,7 @@
 }
 
 .participation-label {
-  font-size: 12px;
+  font-size: clamp(8.4px, 4vw, 12px);
   font-weight: 900;
   color: #334155;
   text-transform: uppercase;
@@ -240,7 +240,7 @@
   justify-content: center;
   width: 155px;
   height: 34px;
-  font-size: 11px;
+  font-size: clamp(7.7px, 4vw, 11px);
   font-weight: 800;
   border-radius: 20px;
   text-transform: uppercase;
@@ -284,7 +284,7 @@
   border-radius: 24px;
   color: #64748b;
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 12px;
+  font-size: clamp(8.4px, 4vw, 12px);
   font-weight: 800;
   cursor: pointer;
   text-transform: uppercase;
@@ -329,7 +329,7 @@
 
 .pane-section-title {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 20px;
+  font-size: clamp(14px, 4vw, 20px);
   color: #0f172a;
   margin: 0 0 14px 0;
   text-transform: uppercase;
@@ -340,7 +340,7 @@
 
 @media (min-width: 640px) {
   .pane-section-title {
-    font-size: 22px;
+    font-size: clamp(15.4px, 4vw, 22px);
   }
 }
 
@@ -384,7 +384,7 @@
 .school-external-link {
   display: inline-block;
   margin-top: 6px;
-  font-size: 12.5px;
+  font-size: clamp(8.75px, 4vw, 12.5px);
   font-weight: 800;
   color: var(--azul-kfl, #005eaa);
   text-decoration: none;
@@ -396,14 +396,14 @@
 }
 
 .team-description-body {
-  font-size: 14px;
+  font-size: clamp(9.8px, 4vw, 14px);
   line-height: 1.6;
   color: #334155;
 }
 
 @media (min-width: 640px) {
   .team-description-body {
-    font-size: 15px;
+    font-size: clamp(10.5px, 4vw, 15px);
   }
 }
 
@@ -444,7 +444,7 @@
   background-position: right 14px center;
   background-size: 14px;
   font-family: var(--fuente-cuerpo, 'Montserrat', sans-serif);
-  font-size: 12.5px;
+  font-size: clamp(8.75px, 4vw, 12.5px);
   font-weight: 800;
   color: #0f172a;
   cursor: pointer;
@@ -490,7 +490,7 @@
 
 .kfl-week-title {
   font-family: var(--fuente-cuerpo);
-  font-size: 15px;
+  font-size: clamp(10.5px, 4vw, 15px);
   color: var(--azul-kfl, #005eaa);
   text-transform: uppercase;
   letter-spacing: 0.8px;
@@ -603,7 +603,7 @@ body.flag-theme-active .kfl-match-header {
 }
 
 .kfl-score-status { 
-  font-size: 10px; 
+  font-size: clamp(7px, 4vw, 10px);
   font-weight: 900; 
   color: #16a34a; 
   letter-spacing: 0.8px; 
@@ -650,7 +650,7 @@ body.flag-theme-active .kfl-match-header {
 }
 
 .palmares-stat-label {
-  font-size: 11px;
+  font-size: clamp(7.7px, 4vw, 11px);
   font-weight: 800;
   color: #64748b;
   text-transform: uppercase;
@@ -690,7 +690,7 @@ body.flag-theme-active .kfl-match-header {
 
 .palmares-cat-name {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 15px;
+  font-size: clamp(10.5px, 4vw, 15px);
   color: #0f172a;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -705,7 +705,7 @@ body.flag-theme-active .kfl-match-header {
 }
 
 .palmares-badge-pill {
-  font-size: 10px;
+  font-size: clamp(7px, 4vw, 10px);
   font-weight: 800;
   padding: 4px 8px;
   border-radius: 20px;
@@ -731,7 +731,7 @@ body.flag-theme-active .kfl-match-header {
 }
 
 .palmares-years-label {
-  font-size: 10.5px;
+  font-size: clamp(7.35px, 4vw, 10.5px);
   font-weight: 700;
   color: #64748b;
   text-transform: uppercase;
@@ -749,7 +749,7 @@ body.flag-theme-active .kfl-match-header {
   background: #fef08a;
   border: 1px solid #eab308;
   color: #713f12;
-  font-size: 11px;
+  font-size: clamp(7.7px, 4vw, 11px);
   font-weight: 800;
   padding: 2px 7px;
   border-radius: 6px;
@@ -761,7 +761,8 @@ body.flag-theme-active .kfl-match-header {
 .roster-compact-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  table-layout: fixed;
+  font-size: clamp(9.1px, 4vw, 13px);
 }
 
 .roster-compact-table th {
@@ -769,20 +770,22 @@ body.flag-theme-active .kfl-match-header {
   color: var(--azul-kfl, #005eaa);
   font-weight: 900;
   text-transform: uppercase;
-  font-size: 11px;
-  padding: 10px;
+  font-size: clamp(7.7px, 4vw, 11px);
+  padding: clamp(4px, 1.5vw, 10px);
   border-bottom: 2.5px solid #cbd5e1;
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .roster-compact-table td {
-  padding: 10px;
+  padding: clamp(4px, 1.5vw, 10px);
   border-bottom: 1px solid #f1f5f9;
   color: #334155;
+  overflow-wrap: anywhere;
 }
 
 .cell-jersey-badge {
   font-family: var(--fuente-titulos, 'Anton', sans-serif);
-  font-size: 15px;
+  font-size: clamp(10.5px, 4vw, 15px);
   color: var(--azul-kfl, #005eaa);
 }

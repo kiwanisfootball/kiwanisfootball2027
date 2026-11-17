@@ -4,12 +4,20 @@
    Reemplaza a nav.html y footer.html (ya no se necesitan esos archivos).
    ========================================================================== */
 (function () {
-  /* Desregistra service workers viejos (causaban páginas con contenido antiguo, p. ej. en iPhone) */
+  /* El service worker es parte de los requisitos de instalación y del uso sin conexión. */
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations()
-      .then(function (regs) { regs.forEach(function (r) { r.unregister(); }); })
-      .catch(function () {});
+    navigator.serviceWorker.register('./sw.js')
+      .catch(function (error) {
+        console.error('No se pudo registrar el service worker de KFL:', error);
+      });
   }
+
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function (event) {
+    if (!document.getElementById('pwaBanner')) return;
+    event.preventDefault();
+    deferredPrompt = event;
+  });
 
   const NAV_HTML = `<nav class="navbar">
   <a href="index.html" class="nav-logo">
@@ -325,8 +333,64 @@
     }
 
     inicializarVolverArriba();
+    inicializarInstalacionPWA();
   }
 
+  function inicializarInstalacionPWA() {
+    const banner = document.getElementById('pwaBanner');
+    const installButton = document.getElementById('pwaInstallBtn');
+    const laterButton = document.getElementById('pwaLaterBtn');
+    if (!banner || !installButton || !laterButton) return;
+
+    const dismissKey = 'kfl-pwa-dismissed';
+    const ocultarBanner = function (guardarDescarte) {
+      banner.hidden = true;
+      if (!guardarDescarte) return;
+
+      try {
+        sessionStorage.setItem(dismissKey, 'true');
+      } catch (error) {
+        console.error('No se pudo guardar el descarte del banner PWA:', error);
+      }
+    };
+
+    let descartado = false;
+    try {
+      descartado = sessionStorage.getItem(dismissKey) === 'true';
+    } catch (error) {
+      console.error('No se pudo consultar el descarte del banner PWA:', error);
+    }
+
+    const instalado = window.matchMedia('(display-mode: standalone)').matches
+      || navigator.standalone === true;
+    banner.hidden = descartado || instalado;
+
+    laterButton.addEventListener('click', function () {
+      ocultarBanner(true);
+    });
+
+    installButton.addEventListener('click', async function () {
+      if (!deferredPrompt) {
+        window.alert("Para instalar KFL App, abre el menú de tu navegador y selecciona 'Agregar a pantalla de inicio' o 'Instalar aplicación'.");
+        return;
+      }
+
+      const promptEvent = deferredPrompt;
+      deferredPrompt = null;
+      try {
+        await promptEvent.prompt();
+        const choice = await promptEvent.userChoice;
+        if (choice.outcome === 'accepted') ocultarBanner(true);
+      } catch (error) {
+        console.error('No se pudo iniciar la instalación de KFL App:', error);
+        window.alert("No se pudo abrir la instalación. Abre el menú de tu navegador y selecciona 'Agregar a pantalla de inicio' o 'Instalar aplicación'.");
+      }
+    });
+
+    window.addEventListener('appinstalled', function () {
+      ocultarBanner(true);
+    });
+  }
 
   /* ==========================================================================
      BOTÓN "VOLVER ARRIBA" (GLOBAL)

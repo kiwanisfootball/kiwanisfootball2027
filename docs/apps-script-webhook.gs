@@ -6,9 +6,8 @@
  * 1. Guarda un token fine-grained en Project Settings > Script properties
  *    como GITHUB_TOKEN (permiso Contents: read/write en este repositorio).
  * 2. Crea un activador instalable "On edit" para handleSotEdit.
- * 3. En GitHub Actions > Secrets, configura las URLs privadas/opcionales
- *    KFL_CONTACT_CALENDAR_URL, KFL_FLAG_CALENDAR_URL, KFL_SCORES_URL y
- *    KFL_RECORDS_CSV_URL. Las URLs públicas existentes se usan como fallback.
+ * 3. Las URLs de Apps Script y CSV se mantienen en js/config-ligas.js;
+ *    este webhook solo dispara la sincronización y no transmite datos de celdas.
  */
 const KFL_GITHUB_OWNER = 'kiwanisfootball';
 const KFL_GITHUB_REPO = 'kiwanisfootball2027';

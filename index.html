@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="css/home.css">
   <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
   <link rel="manifest" href="manifest.json">
+  <script src="js/config-ligas.js"></script>
 
   <!-- Preconexión y Fuentes Google Optimizadas -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -203,7 +204,7 @@
         { name: "LIONS", file: "assets/logos/lions.png" },
         { name: "SPARTANS", file: "assets/logos/spartans.png" }
       ];
-      const MASTER_GAS_URL = 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
+      const masterGasUrl = window.KFL_CONFIG?.API_SCORES_URL;
 
       try {
         let data = null;
@@ -220,7 +221,8 @@
         }
 
         if (!data) {
-          const respuesta = await fetch(MASTER_GAS_URL);
+          if (!masterGasUrl) throw new Error('No hay URL SOT de marcadores configurada en js/config-ligas.js.');
+          const respuesta = await fetch(masterGasUrl);
           if (!respuesta.ok) throw new Error('Error al conectar con Google Sheets');
           data = await respuesta.json();
         }

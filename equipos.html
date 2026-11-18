@@ -198,20 +198,7 @@
       }
     };
 
-    const PALMARES_CSV = {
-      contact: {
-        varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1851185525&single=true&output=csv',
-        juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1923785476&single=true&output=csv',
-        mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1354661673&single=true&output=csv',
-        micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=0&single=true&output=csv'
-      },
-      flag: {
-        varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1617652434&single=true&output=csv',
-        juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1984583554&single=true&output=csv',
-        mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1736736585&single=true&output=csv',
-        micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1922547672&single=true&output=csv'
-      }
-    };
+    const PALMARES_CSV = window.KFL_CONFIG?.CHAMPIONS_CSV_LINKS || {};
 
     function normalizarTexto(txt) {
       if (txt === null || txt === undefined) return '';
@@ -606,24 +593,38 @@
           return res.json();
         })
         .then(data => {
-          const records = Array.isArray(data?.records) ? data.records : [];
-          if (!records.length) throw new Error('data/campeones.json está vacío');
           const grouped = new Map();
-          records.forEach(record => {
-            const key = `${record.modalidad}/${record.categoria}`;
-            if (!grouped.has(key)) {
-              grouped.set(key, {
+          if (Array.isArray(data?.records)) {
+            data.records.forEach(record => {
+              const key = `${record.modalidad}/${record.categoria}`;
+              if (!grouped.has(key)) grouped.set(key, {
                 modalidad: record.modalidad,
                 categoria: record.categoria,
                 filas: []
               });
-            }
-            grouped.get(key).filas.push({
-              season: record.season || '',
-              campeon: record.campeon || '',
-              subcampeon: record.subcampeon || ''
+              grouped.get(key).filas.push({
+                season: record.season || '',
+                campeon: record.campeon || '',
+                subcampeon: record.subcampeon || ''
+              });
             });
-          });
+          } else {
+            for (const modality of ['contact', 'flag']) {
+              for (const [category, rows] of Object.entries(data?.[modality] || {})) {
+                if (!Array.isArray(rows) || !rows.length) continue;
+                grouped.set(`${modality}/${category}`, {
+                  modalidad: modality,
+                  categoria: category,
+                  filas: rows.map(record => ({
+                    season: record.season || '',
+                    campeon: record.campeon || '',
+                    subcampeon: record.subcampeon || ''
+                  }))
+                });
+              }
+            }
+          }
+          if (!grouped.size) throw new Error('data/campeones.json está vacío');
           return [...grouped.values()];
         })
         .catch(async localError => {

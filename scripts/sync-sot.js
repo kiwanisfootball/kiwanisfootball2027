@@ -7,33 +7,9 @@ const vm = require('node:vm');
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
 const CATEGORIES = ['varsity', 'juvenil', 'mini', 'micro'];
-const CHAMPIONS_CSV = {
-  contact: {
-    varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1851185525&single=true&output=csv',
-    juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1923785476&single=true&output=csv',
-    mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1354661673&single=true&output=csv',
-    micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=0&single=true&output=csv'
-  },
-  flag: {
-    varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1617652434&single=true&output=csv',
-    juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1984583554&single=true&output=csv',
-    mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1736736585&single=true&output=csv',
-    micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSWsIDkP_VsRIg3JCjf9eV-pBus48ren0hn16zYVo5T4RWErbXNkDBKTXaOP_C9Spkq_K2dEpSDSThc/pub?gid=1922547672&single=true&output=csv'
-  }
-};
-
-const MVP_CSV = {
-  contact: {
-    varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv',
-    juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1923785476&single=true&output=csv',
-    mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1354661673&single=true&output=csv',
-    micro: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=0&single=true&output=csv'
-  },
-  flag: {
-    varsity: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv',
-    juvenil: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv',
-    mini: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv'
-  }
+const HISTORY_CATEGORIES = {
+  contact: ['varsity', 'juvenil', 'mini', 'micro'],
+  flag: ['juvenil', 'mini', 'micro']
 };
 
 const CALENDAR_FIELDS = [
@@ -113,7 +89,9 @@ function pickFields(source, fields) {
   for (const key of fields) {
     if (!Object.prototype.hasOwnProperty.call(source, key)) continue;
     const value = source[key];
-    if (['scoreH', 'scoreA', 'rowIndex', 'jj', 'jg', 'jp', 'je', 'pts', 'pf', 'pc', 'dif', 'rank', 'sL', 'sV'].includes(key)) {
+    if (['scoreH', 'scoreA', 'sL', 'sV'].includes(key)) {
+      result[key] = cleanString(value);
+    } else if (['rowIndex', 'jj', 'jg', 'jp', 'je', 'pts', 'pf', 'pc', 'dif', 'rank'].includes(key)) {
       result[key] = cleanNumber(value);
     } else if (['hasScore', 'isJamboree', 'active', 'final'].includes(key)) {
       result[key] = cleanBoolean(value);
@@ -282,13 +260,8 @@ function appendQuery(url, params) {
   return parsed.toString();
 }
 
-function envOr(envName, fallback) {
-  return process.env[envName] && process.env[envName].trim() ? process.env[envName].trim() : fallback;
-}
-
 function getRosterEndpoint(config, league, category) {
-  const env = `KFL_ROSTER_${league.toUpperCase()}_${category.toUpperCase()}_URL`;
-  return envOr(env, config.API_ROSTERS_URL[league][category]);
+  return config.API_ROSTERS_URL[league][category];
 }
 
 async function fetchRosters(config, league, database) {
@@ -322,30 +295,27 @@ async function fetchRosters(config, league, database) {
 }
 
 async function fetchLeague(config, league) {
-  const env = `KFL_${league.toUpperCase()}_CALENDAR_URL`;
-  const url = envOr(env, config.API_CALENDARIO_URL[league]);
+  const url = config.API_CALENDARIO_URL[league];
   const payload = await fetchJson(appendQuery(url, { modulo: 'all_data' }), `Calendario ${league}`);
   const database = normalizeLeagueDatabase(payload, league);
-  const hasData = Object.values(database).some(category => category.partidos.length || category.tabla.length);
+  const hasData = Object.values(database).some(category => category &&
+    ((Array.isArray(category.partidos) && category.partidos.length) ||
+     (Array.isArray(category.tabla) && category.tabla.length)));
   if (!hasData) throw new Error(`Calendario ${league}: el SOT no devolvió partidos ni posiciones; se cancela la escritura.`);
+  database.teams = config.CATEGORIAS_EQUIPOS[league];
   return database;
 }
 
-async function fetchScores() {
-  const url = envOr(
-    'KFL_SCORES_URL',
-    'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec'
-  );
-  const payload = await fetchJson(url, 'Scores ticker');
+async function fetchScores(config) {
+  const payload = await fetchJson(config.API_SCORES_URL, 'Scores ticker');
   return normalizeScores(payload);
 }
 
 async function fetchCsvCollection(sources, kind) {
   const entries = [];
   for (const [modality, categories] of Object.entries(sources)) {
-    for (const [category, fallback] of Object.entries(categories)) {
-      const env = `KFL_${kind.toUpperCase()}_${modality.toUpperCase()}_${category.toUpperCase()}_CSV_URL`;
-      entries.push({ modality, category, url: envOr(env, fallback) });
+    for (const [category, url] of Object.entries(categories)) {
+      if (url) entries.push({ modality, category, url });
     }
   }
   const results = await Promise.all(entries.map(async entry => {
@@ -363,12 +333,30 @@ async function fetchCsvCollection(sources, kind) {
   };
 }
 
-function mergeFailedCategories(freshRecords, oldRecords, failedCategories) {
+function groupedHistoryRecords(freshRecords, oldData, failedCategories) {
   const failed = new Set(failedCategories);
-  return [
-    ...freshRecords,
-    ...oldRecords.filter(record => failed.has(`${record.modalidad}/${record.categoria}`))
-  ];
+  const oldRecords = existingRecords(oldData);
+  const grouped = Object.fromEntries(
+    Object.entries(HISTORY_CATEGORIES).map(([league, categories]) => [
+      league,
+      Object.fromEntries(categories.map(category => [category, []]))
+    ])
+  );
+
+  for (const [league, categories] of Object.entries(HISTORY_CATEGORIES)) {
+    for (const category of categories) {
+      const sourceKey = `${league}/${category}`;
+      const records = failed.has(sourceKey)
+        ? Array.isArray(oldData?.[league]?.[category])
+          ? oldData[league][category]
+          : oldRecords.filter(record =>
+            record.modalidad === league && record.categoria === category)
+        : freshRecords.filter(record =>
+          record.modalidad === league && record.categoria === category);
+      grouped[league][category] = records.map(({ modalidad, categoria, ...record }) => record);
+    }
+  }
+  return grouped;
 }
 
 function preserveExistingRosters(database, existingDatabase) {
@@ -411,43 +399,31 @@ function writeJson(fileName, data) {
 
 async function run() {
   const config = readKflConfig();
-  const oldChampions = existingRecords(readExistingJson('campeones.json', []));
-  const oldMvps = existingRecords(readExistingJson('mvp.json', []));
   const oldContact = readExistingJson('contact-db.json', {});
   const oldFlag = readExistingJson('flag-db.json', {});
   const [contact, flag, scores] = await Promise.all([
     fetchLeague(config, 'contact'),
     fetchLeague(config, 'flag'),
-    fetchScores()
+    fetchScores(config)
   ]);
   await Promise.all([fetchRosters(config, 'contact', contact), fetchRosters(config, 'flag', flag)]);
   preserveExistingRosters(contact, oldContact);
   preserveExistingRosters(flag, oldFlag);
 
   const [champions, mvps] = await Promise.all([
-    fetchCsvCollection(CHAMPIONS_CSV, 'champions'),
-    fetchCsvCollection(MVP_CSV, 'mvp')
+    fetchCsvCollection(config.CHAMPIONS_CSV_LINKS, 'champions'),
+    fetchCsvCollection(config.MVP_CSV_LINKS, 'mvp')
   ]);
 
-  const recordUrl = process.env.KFL_RECORDS_CSV_URL && process.env.KFL_RECORDS_CSV_URL.trim();
   let records = existingRecords(readExistingJson('records.json', []));
-  if (recordUrl) {
-    try {
-      records = normalizeRecordsCSV(parseCSV(await fetchText(recordUrl, 'Récords Varsity')));
-    } catch (error) {
-      console.warn(`Aviso: ${error.message}; se conserva data/records.json.`);
-    }
-  } else {
-    console.warn('Aviso: KFL_RECORDS_CSV_URL no está configurado; se conserva data/records.json.');
-  }
 
   const changed = [
     ['contact-db.json', contact],
     ['flag-db.json', flag],
     ['scores.json', scores],
-    ['campeones.json', { records: mergeFailedCategories(champions.records, oldChampions, champions.failedCategories) }],
+    ['campeones.json', groupedHistoryRecords(champions.records, readExistingJson('campeones.json', {}), champions.failedCategories)],
     ['records.json', { records }],
-    ['mvp.json', { records: mergeFailedCategories(mvps.records, oldMvps, mvps.failedCategories) }]
+    ['mvp.json', groupedHistoryRecords(mvps.records, readExistingJson('mvp.json', {}), mvps.failedCategories)]
   ].filter(([fileName, data]) => writeJson(fileName, data)).map(([fileName]) => fileName);
 
   console.log(changed.length ? `Datos sincronizados: ${changed.join(', ')}` : 'Los datos ya están actualizados.');
@@ -461,6 +437,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  groupedHistoryRecords,
   normalizeCsvRecords,
   normalizeLeagueDatabase,
   normalizePublicRoster,

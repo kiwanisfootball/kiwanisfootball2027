@@ -8,6 +8,7 @@ const {
   normalizePublicRoster,
   normalizeRecordsCSV,
   normalizeScores,
+  groupedHistoryRecords,
   parseCSV
 } = require('./sync-sot');
 
@@ -30,7 +31,7 @@ test('calendar normalization keeps only public schedule and standings fields', (
     }
   }, 'contact');
 
-  assert.deepEqual(result.varsity.partidos, [{ home: 'OWLS', away: 'RAIDERS', scoreH: 7, scoreA: 0 }]);
+  assert.deepEqual(result.varsity.partidos, [{ home: 'OWLS', away: 'RAIDERS', scoreH: '7', scoreA: '0' }]);
   assert.deepEqual(result.varsity.tabla, [{ equipo: 'OWLS', jj: 1, pts: 3, rank: 1 }]);
   assert.deepEqual(result.juvenil, { partidos: [], tabla: [], rosters: [] });
 });
@@ -57,8 +58,16 @@ test('ticker normalization accepts only its documented display fields', () => {
     matches: [{ h: 'OWLS', v: 'EAGLES', sL: 14, sV: 7, active: 'false', email: 'hidden@example.test' }]
   }), {
     currentWeek: 'WEEK 2',
-    matches: [{ h: 'OWLS', v: 'EAGLES', sL: 14, sV: 7, active: false }]
+    matches: [{ h: 'OWLS', v: 'EAGLES', sL: '14', sV: '7', active: false }]
   });
+});
+
+test('score normalization preserves a zero as the string "0"', () => {
+  const result = normalizeScores({
+    matches: [{ h: 'EAGLES', v: 'OWLS', sL: 0, sV: 43, active: true }]
+  });
+  assert.equal(result.matches[0].sL, '0');
+  assert.equal(result.matches[0].sV, '43');
 });
 
 test('Varsity record CSV requires named public-stat columns and ignores unrelated columns', () => {
@@ -97,4 +106,22 @@ test('champions and MVP CSV rows are normalized to their frontend contract', () 
     equipo: 'OWLS',
     jugador: 'A. Player'
   }]);
+});
+
+test('history records are grouped in the seven supported league categories', () => {
+  const flatRecords = normalizeCsvRecords([
+    ['Season', 'Champion', 'Runner-up'],
+    ['2025', 'OWLS', 'EAGLES']
+  ], 'champions', 'contact', 'varsity');
+  const grouped = groupedHistoryRecords(flatRecords, {}, []);
+
+  assert.deepEqual(Object.keys(grouped), ['contact', 'flag']);
+  assert.deepEqual(Object.keys(grouped.contact), ['varsity', 'juvenil', 'mini', 'micro']);
+  assert.deepEqual(Object.keys(grouped.flag), ['juvenil', 'mini', 'micro']);
+  assert.deepEqual(grouped.contact.varsity, [{
+    season: '2025',
+    campeon: 'OWLS',
+    subcampeon: 'EAGLES'
+  }]);
+  assert.deepEqual(grouped.flag.micro, []);
 });

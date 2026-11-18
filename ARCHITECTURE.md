@@ -12,12 +12,12 @@ El sistema funciona bajo una arquitectura desacoplada de 4 capas:
    * Es la única fuente de verdad operativa de la liga. Toda la captura de datos, inscripciones, marcadores, estadísticas y credenciales de coaches ocurre en Google Drive/Sheets.
 2. **Pipeline de Sincronización Automatizada (`actualizar-datos.yml`):**
    * Un workflow de GitHub Actions (`.github/workflows/actualizar-datos.yml`) consulta/exporta los datos del SOT (CSV publicados o endpoints de Apps Script), los convierte a archivos JSON estructurados en `data/` y realiza el *commit* automático únicamente si esos JSON cambiaron.
-   * Se ejecuta manualmente, por `repository_dispatch` (`sot-updated`) y como máximo dos veces al día. Los endpoints alternativos se configuran como GitHub Secrets `KFL_*_URL`; si no se configuran se usan las URLs públicas de la configuración/frontend.
-   * `KFL_RECORDS_CSV_URL` debe apuntar al CSV público de récords Varsity. Si no está configurado, el pipeline conserva el JSON actual; el repositorio no contiene un endpoint público de récords que se pueda inferir con seguridad.
+   * Se ejecuta manualmente, por `repository_dispatch` (`sot-updated`) y dos veces al día. Los endpoints y CSV públicos se centralizan en `js/config-ligas.js`; el workflow no necesita secretos con URLs.
+   * Los historiales de campeones y MVP se guardan agrupados bajo `contact` y `flag`, por categoría. Los marcadores se serializan como cadenas para preservar el valor `0`.
 3. **Gestor Centralizado de Contenido y Datos (`Decap CMS`):**
    * Panel administrativo en `/admin/` (`admin/config.yml`) que permite gestionar tanto las noticias del blog (`blog/`) como auditar o editar de emergencia los archivos `data/*.json` sincronizados desde el SOT.
 4. **Frontend Estático y Hosting (`Vercel`):**
-   * Sitio web en HTML5, CSS3 y JavaScript Vanilla desplegado automáticamente en Vercel con cada `push` a `main`. Lee los JSON locales de `data/` a máxima velocidad y calcula criterios de desempate en JavaScript.
+   * Sitio web en HTML5, CSS3 y JavaScript Vanilla desplegado automáticamente en Vercel con cada `push` a `main`. Las vistas leen primero los JSON locales de `data/`; si faltan o están vacíos consultan los endpoints/CSVs del SOT configurados en `js/config-ligas.js`. Los criterios de desempate se calculan en JavaScript.
 
 ---
 
@@ -48,9 +48,9 @@ El sistema funciona bajo una arquitectura desacoplada de 4 capas:
   * Los artículos se redactan desde `/admin/` en formato Markdown con Frontmatter YAML (`blog/<slug>/index.md`).
   * Durante el despliegue en Vercel, `node generate-index.js` compila todos los artículos en `blog/index.json` para `blog.html` y `articulo.html`.
 
-  ### D. Webhook y Secrets del pipeline
+  ### D. Webhook del pipeline
   * `docs/apps-script-webhook.gs` envía únicamente el evento `sot-updated`, nunca los valores de celdas. Guarda el token fine-grained en `GITHUB_TOKEN` dentro de Script Properties y crea un activador instalable de edición.
-  * El workflow admite URLs de calendario, ticker, rosters, palmarés, MVP y récords Varsity como GitHub Secrets `KFL_*_URL`. No agregues tokens a los archivos del repositorio.
+  * Mantén URLs públicas de calendario, ticker, rosters, palmarés y MVP en `js/config-ligas.js`. No agregues tokens, contraseñas de coaches ni datos personales de inscripciones a los JSON.
 
 ---
 
@@ -67,6 +67,6 @@ El sistema funciona bajo una arquitectura desacoplada de 4 capas:
 ## 4. Guía de Relevo y Mantenimiento Anual
 
 1. **Actualizar marcadores, calendarios o estadísticas:** Editar directamente en el **SOT (Google Sheets)**. El workflow sincronizará los JSON hacia Decap CMS y desplegará en Vercel automáticamente.
-2. **Cambio de temporada:** Actualizar los IDs de las hojas de cálculo o URLs de despliegue de Apps Script en los *Secrets* de GitHub Actions y en `js/config-ligas.js`, conservando los nombres exactos de las pestañas.
+2. **Cambio de temporada:** Actualizar los IDs de las hojas de cálculo o URLs de despliegue de Apps Script en `js/config-ligas.js`, conservando los nombres exactos de las pestañas.
 3. **Gestionar accesos de coaches:** Editar la fila del entrenador (usuario/contraseña/colegio) directamente en la Google Sheet de Coaches. El cambio es inmediato.
 4. **Publicar noticias:** Ingresar a `https://<dominio-kfl>/admin/` con cuenta autorizada en Decap CMS.

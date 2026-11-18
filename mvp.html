@@ -54,6 +54,7 @@
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/mvp.css">
   <link rel="icon" type="image/svg+xml" href="assets/img/KFL-logo.svg">
+  <script src="js/config-ligas.js"></script>
 
   <!-- Vercel Speed Insights -->
   <script>
@@ -173,20 +174,15 @@
 
   <!-- LÓGICA DE MVP (INTACTA) -->
   <script>
-    const SHEETS_CONFIG = {
-      contact: {
-        varsity: { targetId: 'table-varsity', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1851185525&single=true&output=csv' },
-        juvenil: { targetId: 'table-juvenil', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1923785476&single=true&output=csv' },
-        mini: { targetId: 'table-mini', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1354661673&single=true&output=csv' },
-        micro: { targetId: 'table-micro', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=0&single=true&output=csv' }
-      },
-      flag: {
-        varsity: { targetId: 'table-varsity', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1617652434&single=true&output=csv' },
-        juvenil: { targetId: 'table-juvenil', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1984583554&single=true&output=csv' },
-        mini: { targetId: 'table-mini', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQZBPaF9KU4Q-eTZynwu3zjbId5ZJbd8cUFAOXkZyxfZDQ2loGXIVXy1wpq8zyv9zcAzkaHiRYIanf5/pub?gid=1736736585&single=true&output=csv' },
-        micro: null
-      }
-    };
+    const HISTORY_CATEGORIES = ['varsity', 'juvenil', 'mini', 'micro'];
+    const HISTORY_CSV_LINKS = window.KFL_CONFIG?.MVP_CSV_LINKS || {};
+    const SHEETS_CONFIG = Object.fromEntries(['contact', 'flag'].map(modality => [
+      modality,
+      Object.fromEntries(HISTORY_CATEGORIES.map(category => [category, {
+        targetId: `table-${category}`,
+        url: HISTORY_CSV_LINKS[modality]?.[category] || ''
+      }]))
+    ]));
 
     const TEAM_LOGOS_MAP = {
       "E.C.P MIGHTY EAGLES": "assets/logos/eagles.png",
@@ -260,7 +256,8 @@
         sec.style.display = 'none';
       });
 
-      document.getElementById('filter-micro').style.display = modality === 'flag' ? 'none' : 'block';
+      document.getElementById('filter-varsity').style.display = modality === 'flag' ? 'none' : 'block';
+      document.getElementById('filter-micro').style.display = 'block';
 
       loadModalityData();
     }
@@ -282,12 +279,11 @@
       if (!currentModality) return;
 
       const modalityMap = SHEETS_CONFIG[currentModality];
-      let localRecords = null;
+      let localData = null;
       try {
         const localResponse = await fetch('data/mvp.json', { cache: 'no-cache' });
         if (localResponse.ok) {
-          const localData = await localResponse.json();
-          if (Array.isArray(localData?.records)) localRecords = localData.records;
+          localData = await localResponse.json();
         }
       } catch (error) {
         console.warn('No se pudo leer data/mvp.json; se consultará el SOT.', error);
@@ -299,11 +295,19 @@
         const tbody = document.getElementById(config.targetId);
         if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>';
 
-        const rowsFromJson = (localRecords || [])
-          .filter(record => record.modalidad === currentModality && record.categoria === category)
+        const groupedRecords = localData?.[currentModality]?.[category];
+        const legacyRecords = Array.isArray(localData?.records)
+          ? localData.records.filter(record => record.modalidad === currentModality && record.categoria === category)
+          : [];
+        const rowsFromJson = (Array.isArray(groupedRecords) ? groupedRecords : legacyRecords)
           .map(record => [record.season, record.equipo, record.jugador]);
         if (rowsFromJson.length) {
           renderTableRows(config.targetId, rowsFromJson);
+          continue;
+        }
+
+        if (!config.url) {
+          renderEmptyState(config.targetId, 'Sin registros publicados aún.');
           continue;
         }
 

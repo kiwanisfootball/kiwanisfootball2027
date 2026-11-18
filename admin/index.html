@@ -14,104 +14,185 @@
     :root {
       --kfl-navy: #0a2240;
       --kfl-red: #d32f2f;
-      --kfl-gold: #f5b400;
-      --kfl-bg: #f4f6f9;
+      --kfl-blue: #0073aa;
+      --kfl-bg: #f0f0f1;
       --kfl-surface: #ffffff;
-      --kfl-text: #1a202c;
+      --kfl-border: #dcdcde;
+      --kfl-sidebar: #1d2327;
     }
 
     body {
       font-family: 'Montserrat', sans-serif !important;
       background-color: var(--kfl-bg) !important;
       margin: 0;
+      font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.875rem);
     }
 
-    /* Barra superior personalizada KFL */
-    .kfl-admin-topbar {
-      background: linear-gradient(90deg, var(--kfl-navy) 0%, #133563 100%);
-      color: #ffffff;
-      padding: 10px clamp(10px, 3vw, 20px);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 3px solid var(--kfl-red);
-      font-size: clamp(0.75rem, 1.5vw, 0.875rem);
-      position: relative;
-      z-index: 9999;
+    #nc-root {
+      min-height: 100vh;
+      background: var(--kfl-bg);
+      color: #1d2327;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.875rem);
     }
 
-    .kfl-admin-brand {
-      display: flex;
-      align-items: center;
-      gap: clamp(8px, 2vw, 12px);
-      font-family: 'Anton', sans-serif;
-      letter-spacing: 0.5px;
-      font-size: clamp(1rem, 2vw, 1.25rem);
+    #nc-root button,
+    #nc-root input,
+    #nc-root select,
+    #nc-root textarea {
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem);
     }
 
-    .kfl-admin-brand img {
-      height: 32px;
-      width: auto;
-    }
-
-    .kfl-admin-badge {
-      background: rgba(255, 255, 255, 0.14);
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: clamp(0.7rem, 1.2vw, 0.8rem);
-      white-space: nowrap;
-    }
-
-    /* Personalización de botones y encabezados internos de Decap CMS */
     [class*="AppHeader"] {
-      background-color: var(--kfl-navy) !important;
+      position: relative !important;
+      z-index: 1 !important;
+      display: flex;
+      align-items: center;
+      background: var(--kfl-navy) !important;
+      border-bottom: 3px solid var(--kfl-red);
+      box-shadow: none !important;
+    }
+
+    [class*="AppHeader"] button,
+    [class*="PublishButton"],
+    [class*="SaveButton"],
+    button[class*="Primary"] {
+      min-height: 36px;
+      padding: 7px 14px !important;
+      border: 1px solid transparent !important;
+      border-radius: 4px !important;
+      color: #ffffff !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem) !important;
+      font-weight: 700 !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      visibility: visible !important;
     }
 
     [class*="PublishButton"],
-    button[class*="Primary"] {
-      background-color: var(--kfl-red) !important;
+    [class*="AppHeader"] button[class*="Primary"] {
+      background: var(--kfl-red) !important;
       border-color: var(--kfl-red) !important;
-      font-family: 'Montserrat', sans-serif !important;
-      font-weight: 700 !important;
+    }
+
+    [class*="SaveButton"],
+    [class*="AppHeader"] button:not([class*="Publish"]) {
+      background: var(--kfl-blue) !important;
+      border-color: var(--kfl-blue) !important;
+    }
+
+    [class*="AppHeader"] button:hover,
+    [class*="PublishButton"]:hover,
+    [class*="SaveButton"]:hover {
+      filter: brightness(1.08);
+    }
+
+    [class*="SidebarContainer"] {
+      position: relative;
+      background: var(--kfl-sidebar) !important;
+      border-right: 1px solid #32373c;
+      color: #ffffff !important;
+    }
+
+    [class*="SidebarContainer"]::before {
+      content: "";
+      display: block;
+      height: 54px;
+      margin: 16px 16px 8px;
+      background: url("/assets/img/KFL-logo.svg") center / contain no-repeat;
     }
 
     [class*="SidebarContainer"] h2 {
+      margin: 8px 16px 12px;
       font-family: 'Anton', sans-serif !important;
-      letter-spacing: 0.5px;
-      color: var(--kfl-navy) !important;
+      font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem) !important;
+      letter-spacing: 0.04em;
+      color: #ffffff !important;
     }
 
-    @media (max-width: 480px) {
-      .kfl-admin-topbar {
-        flex-direction: column;
-        justify-content: center;
-        gap: 8px;
-        text-align: center;
+    [class*="SidebarContainer"] a,
+    [class*="SidebarContainer"] button {
+      color: #ffffff !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem) !important;
+    }
+
+    [class*="SidebarContainer"] a:hover,
+    [class*="SidebarContainer"] [aria-current="page"],
+    [class*="SidebarContainer"] [class*="active"] {
+      background: var(--kfl-blue) !important;
+      color: #ffffff !important;
+    }
+
+    [class*="AppMainContainer"],
+    [class*="MainContainer"],
+    [class*="CollectionPage"] {
+      background: var(--kfl-bg) !important;
+    }
+
+    [class*="ControlPaneContainer"] {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      align-items: start;
+      gap: clamp(8px, 1.2vw, 16px) !important;
+      padding: clamp(12px, 2vw, 24px) !important;
+      background: var(--kfl-surface) !important;
+      border: 1px solid var(--kfl-border) !important;
+      border-radius: 6px;
+    }
+
+    [class*="ObjectControl"] [class*="ControlPaneContainer"],
+    [class*="ListControl"] [class*="ControlPaneContainer"] {
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    }
+
+    [class*="ControlPaneContainer"] label,
+    [class*="ControlPaneContainer"] [class*="Label"] {
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem) !important;
+      font-weight: 600;
+    }
+
+    [class*="EntryCard"],
+    [class*="ListCard"],
+    [class*="ObjectControl"] [class*="ListItem"],
+    [class*="ListControl"] [class*="ListItem"] {
+      min-width: 0;
+      background: var(--kfl-surface) !important;
+      border: 1px solid var(--kfl-border) !important;
+      border-radius: 5px;
+      box-shadow: none !important;
+    }
+
+    [class*="EntryCard"] *,
+    [class*="ListCard"] * {
+      font-family: 'Montserrat', sans-serif !important;
+    }
+
+    @media (max-width: 600px) {
+      [class*="ControlPaneContainer"],
+      [class*="ObjectControl"] [class*="ControlPaneContainer"],
+      [class*="ListControl"] [class*="ControlPaneContainer"] {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 12px !important;
       }
 
-      .kfl-admin-brand {
-        justify-content: center;
-        letter-spacing: 0;
-        font-size: clamp(0.9rem, 4vw, 1.1rem);
-        white-space: nowrap;
+      [class*="AppHeader"] {
+        flex-wrap: wrap;
       }
 
-      .kfl-admin-brand img {
-        height: 28px;
+      [class*="AppHeader"] button,
+      [class*="PublishButton"],
+      [class*="SaveButton"] {
+        min-height: 34px;
+        padding: 6px 10px !important;
       }
     }
   </style>
 </head>
 <body>
-  <div class="kfl-admin-topbar">
-    <div class="kfl-admin-brand">
-      <img src="/assets/img/KFL-logo.svg" alt="KFL Logo" />
-      <span>ADMIN KFL</span>
-    </div>
-    <div class="kfl-admin-badge">SOT sincronizado</div>
-  </div>
-
   <!-- Carga de Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>

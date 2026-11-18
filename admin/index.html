@@ -118,7 +118,7 @@
       margin-bottom: 14px !important;
     }
 
-    /* Restaurar barra superior de ítems de lista (flecha expandir/contraer + icono arrastrar =) sin deformar */
+    /* Barra superior de ítems de lista (flecha expandir/contraer + icono arrastrar = intactos) */
     div[class*="ListItemTopBar"],
     div[class*="ObjectWidgetTopBar"] {
       display: flex !important;
@@ -137,15 +137,18 @@
       cursor: pointer !important;
     }
 
-    /* Contenedor exclusivo de campos internos (sin tocar TopBar ni DragHandle) */
-    div[class*="NestedObjectFields"],
-    div[class*="ListItem"] > div[class*="ObjectControl"],
-    div[class*="ListItem"] > div:last-child:not([class*="TopBar"]):not([class*="Summary"]) {
+    /* Contenedor padre e intermedio de campos internos: restaurar alineación horizontal en 4 columnas */
+    div[class*="ListItem"] > div:not([class*="TopBar"]),
+    div[class*="ListItem"] > div:not([class*="TopBar"]) > div,
+    div[class*="NestedObjectFields"] {
       display: flex !important;
       flex-wrap: wrap !important;
       align-items: flex-end !important;
       gap: 12px !important;
       width: 100% !important;
+    }
+
+    div[class*="ListItem"] > div:not([class*="TopBar"]) {
       background: #f8fafc !important;
       padding: 14px !important;
       border-radius: 0 0 8px 8px !important;
@@ -153,10 +156,10 @@
       border-top: none !important;
     }
 
-    /* Cada campo interno (4 columnas líquidas en desktop, 2 en tablet, 1 en móvil) */
+    /* Cada campo interno (4 columnas líquidas en desktop, 1 en móvil) */
     div[class*="ListItem"] div[class*="ControlContainer"] {
-      flex: 1 1 clamp(180px, 22%, 280px) !important;
-      min-width: 180px !important;
+      flex: 1 1 calc(25% - 12px) !important;
+      min-width: 185px !important;
       max-width: 100% !important;
       margin: 0 !important;
     }
@@ -171,16 +174,17 @@
       text-transform: uppercase !important;
     }
 
-    /* Uniformidad absoluta entre inputs y dropdowns (select) */
+    /* Uniformidad absoluta entre inputs de texto/número y dropdowns React-Select (38px exactos) */
     div[class*="ListItem"] input[type="text"],
     div[class*="ListItem"] input[type="number"],
     div[class*="ListItem"] select,
+    div[class*="ListItem"] div[class*="control"],
     div[class*="ListItem"] div[class*="Select"] > div {
       width: 100% !important;
       height: 38px !important;
       min-height: 38px !important;
       max-height: 38px !important;
-      padding: 6px 10px !important;
+      padding: 0 10px !important;
       font-size: 0.82rem !important;
       font-family: 'Montserrat', sans-serif !important;
       font-weight: 600 !important;
@@ -188,6 +192,18 @@
       border-radius: 5px !important;
       display: flex !important;
       align-items: center !important;
+    }
+
+    div[class*="ListItem"] div[class*="control"] > div:first-child {
+      padding: 0 !important;
+      min-height: 36px !important;
+      height: 36px !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+
+    div[class*="ListItem"] div[class*="indicatorContainer"] {
+      padding: 4px 6px !important;
     }
 
     /* Botones principales (Guardar / Publicar / Nueva entrada) */

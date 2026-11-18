@@ -78,6 +78,20 @@ p {
   line-height: 1.7;
 }
 
+table th,
+table td {
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.table-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* NAVEGACIÓN SUPERIOR */
 .header-nav {
   background-color: #ffffff;

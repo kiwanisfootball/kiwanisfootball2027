@@ -761,7 +761,6 @@ body.flag-theme-active .kfl-match-header {
 .roster-compact-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
   font-size: clamp(9.1px, 4vw, 13px);
 }
 
@@ -774,14 +773,12 @@ body.flag-theme-active .kfl-match-header {
   padding: clamp(4px, 1.5vw, 10px);
   border-bottom: 2.5px solid #cbd5e1;
   text-align: left;
-  overflow-wrap: anywhere;
 }
 
 .roster-compact-table td {
   padding: clamp(4px, 1.5vw, 10px);
   border-bottom: 1px solid #f1f5f9;
   color: #334155;
-  overflow-wrap: anywhere;
 }
 
 .cell-jersey-badge {

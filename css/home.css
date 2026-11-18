@@ -619,6 +619,13 @@
   }
 }
 
+@media (min-width: 768px) {
+  .sponsor-card {
+    flex: 0 1 160px;
+    min-width: 160px;
+  }
+}
+
 .pwa-banner {
   position: fixed;
   right: max(12px, env(safe-area-inset-right));

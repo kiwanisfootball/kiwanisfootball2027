@@ -357,17 +357,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin: 10px 0 20px 0;
   font-family: var(--fuente-cuerpo);
-  table-layout: fixed;
 }
-
-.champs-table th:nth-child(1),
-.champs-table td:nth-child(1) { width: 20%; }
-
-.champs-table th:nth-child(2),
-.champs-table td:nth-child(2) { width: 40%; }
-
-.champs-table th:nth-child(3),
-.champs-table td:nth-child(3) { width: 40%; }
 
 .champs-table th {
   background: var(--azul-kfl);
@@ -379,7 +369,6 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   text-align: left;
-  overflow-wrap: anywhere;
 }
 
 body.flag-theme-active .champs-table th {
@@ -394,7 +383,6 @@ body.flag-theme-active .champs-table th {
   font-weight: 600;
   color: #334155;
   font-family: var(--fuente-cuerpo);
-  overflow-wrap: anywhere;
   vertical-align: middle;
 }
 
@@ -408,13 +396,11 @@ body.flag-theme-active .champs-table th {
   text-align: left;
   font-weight: 700;
   min-width: 0;
-  overflow-wrap: anywhere;
   font-family: var(--fuente-cuerpo);
 }
 
 .champs-team-cell span {
   min-width: 0;
-  overflow-wrap: anywhere;
 }
 
 .champs-team-logo {
@@ -429,7 +415,6 @@ body.flag-theme-active .champs-table th {
   font-weight: 800;
   font-family: var(--fuente-cuerpo);
   min-width: 0;
-  overflow-wrap: anywhere;
 }
 
 body.flag-theme-active .champs-team-name {

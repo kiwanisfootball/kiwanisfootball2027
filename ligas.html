@@ -147,7 +147,7 @@
             <button type="button" class="btn-close-roster" onclick="cerrarDetalleRoster()">✕ Cerrar Roster</button>
           </div>
 
-          <div style="overflow-x: auto;">
+          <div class="table-scroll">
             <table class="roster-compact-table">
               <thead>
                 <tr>
@@ -163,7 +163,7 @@
 
           <div id="staffSectionWrapper">
             <div style="font-family: var(--fuente-titulos); font-size: clamp(12.6px, 4vw, 18px); color: #0f172a; margin: 24px 0 12px 0; text-transform: uppercase;">Coaching Staff</div>
-            <div style="overflow-x: auto;">
+            <div class="table-scroll">
               <table class="roster-compact-table">
                 <thead>
                   <tr>
@@ -180,7 +180,7 @@
       </div>
 
       <div class="tab-pane" id="pane-posiciones">
-        <div style="overflow-x: auto;">
+        <div class="table-scroll">
           <div id="posicionesNativeContent"></div>
         </div>
       </div>
@@ -205,7 +205,7 @@
           <input type="text" id="searchStatInput" class="search-stats-input" onkeyup="filtrarTablaStats()" placeholder="Escribe aquí...">
         </div>
 
-        <div style="overflow-x: auto;">
+        <div class="table-scroll">
           <table class="kfl-table" id="statsTable">
             <thead>
               <tr id="statsTableHeaderRow"></tr>

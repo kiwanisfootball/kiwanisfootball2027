@@ -98,10 +98,10 @@ collections:
             name: "teams"
             widget: "object"
             fields:
-              - { label: "Varsity", name: "varsity", widget: "list", field: { label: "Equipo", widget: "select", options: ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"] } }
-              - { label: "Juvenil", name: "juvenil", widget: "list", field: { label: "Equipo", widget: "select", options: ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"] } }
-              - { label: "Mini", name: "mini", widget: "list", field: { label: "Equipo", widget: "select", options: ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"] } }
-              - { label: "Micro", name: "micro", widget: "list", field: { label: "Equipo", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES"] } }
+              - { label: "Varsity", name: "varsity", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"] } }
+              - { label: "Juvenil", name: "juvenil", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"] } }
+              - { label: "Mini", name: "mini", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["KOLTS", "OWLS", "RAIDERS", "DRAGONS", "EAGLES"] } }
+              - { label: "Micro", name: "micro", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES"] } }
           - label: "Varsity"
             name: "varsity"
             widget: "object"
@@ -158,10 +158,10 @@ collections:
             name: "teams"
             widget: "object"
             fields:
-              - { label: "Varsity", name: "varsity", widget: "list", field: { label: "Equipo", widget: "select", options: ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "SPARTANS", "LIONS"] } }
-              - { label: "Juvenil", name: "juvenil", widget: "list", field: { label: "Equipo", widget: "select", options: ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "LIONS"] } }
-              - { label: "Mini", name: "mini", widget: "list", field: { label: "Equipo", widget: "select", options: ["OWLS", "KOLTS", "RAIDERS", "SPARTANS", "EAGLES", "LIONS"] } }
-              - { label: "Micro", name: "micro", widget: "list", field: { label: "Equipo", widget: "select", options: ["OWLS", "RAIDERS", "KOLTS", "LIONS"] } }
+              - { label: "Varsity", name: "varsity", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "SPARTANS", "LIONS"] } }
+              - { label: "Juvenil", name: "juvenil", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["OWLS", "KOLTS", "RAIDERS", "DRAGONS", "EAGLES", "LIONS"] } }
+              - { label: "Mini", name: "mini", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["OWLS", "KOLTS", "RAIDERS", "SPARTANS", "EAGLES", "LIONS"] } }
+              - { label: "Micro", name: "micro", widget: "list", field: { label: "Equipo", name: "item", widget: "select", options: ["OWLS", "RAIDERS", "KOLTS", "LIONS"] } }
           - label: "Varsity"
             name: "varsity"
             widget: "object"

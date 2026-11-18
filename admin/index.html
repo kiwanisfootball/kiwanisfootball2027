@@ -77,7 +77,7 @@
       color: #ffffff !important;
     }
 
-    /* Aprovechar todo el ancho disponible en el área principal (eliminar espacio vacío derecho) */
+    /* Aprovechar todo el ancho disponible en el área principal */
     main[class*="MainView"],
     div[class*="CollectionContainer"],
     div[class*="EntriesContainer"] {
@@ -85,7 +85,7 @@
       width: 100% !important;
     }
 
-    /* Filas de colecciones estilo tabla limpia (en lugar de parecer inputs) */
+    /* Filas de colecciones estilo tabla limpia */
     ul[class*="ListCards"] li,
     a[class*="ListCardLink"] {
       max-width: 100% !important;
@@ -103,30 +103,61 @@
       background-color: #f8fafc !important;
     }
 
-    /* Editor de entradas: ancho completo y sin comprimir categorías padre */
+    /* Editor de entradas: ancho completo */
     div[class*="ControlPaneContainer"] {
-      max-width: 1180px !important;
+      max-width: 1280px !important;
       width: 100% !important;
       margin: 0 auto !important;
-      padding: 20px !important;
+      padding: 16px 24px !important;
     }
 
     /* Categorías principales (VARSITY, JUVENIL, MINI, MICRO) siempre al 100% de ancho */
     div[class*="ControlPaneContainer"] > div[class*="ControlContainer"] {
       width: 100% !important;
       display: block !important;
-      margin-bottom: 16px !important;
+      margin-bottom: 14px !important;
     }
 
-    /* Solo los campos internos dentro de un ítem de lista abierto se alinean en horizontal */
+    /* Compactar barras resumen de ítems cerrados (reduce scroll vertical) */
+    div[class*="ListItemTopBar"],
+    div[class*="ObjectWidgetTopBar"] {
+      padding: 6px 12px !important;
+      min-height: 36px !important;
+      font-size: 0.84rem !important;
+      font-weight: 600 !important;
+    }
+
+    /* Campos internos de cada partido / ítem abierto en cuadrícula horizontal de 4 columnas */
+    div[class*="ListItem"] > div:last-child:not([class*="TopBar"]),
     div[class*="NestedObjectFields"] {
       display: grid !important;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
-      gap: 14px !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      gap: 10px 14px !important;
       background: #f8fafc !important;
-      padding: 16px !important;
-      border-radius: 8px !important;
+      padding: 12px 14px !important;
+      border-radius: 0 0 8px 8px !important;
       border: 1px solid var(--kfl-border) !important;
+      border-top: none !important;
+    }
+
+    @media (max-width: 900px) {
+      div[class*="ListItem"] > div:last-child:not([class*="TopBar"]),
+      div[class*="NestedObjectFields"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+    /* Compactar inputs y labels dentro de las tarjetas abiertas */
+    div[class*="ListItem"] label[class*="FieldLabel"] {
+      font-size: 0.7rem !important;
+      padding: 2px 6px !important;
+      margin-bottom: 2px !important;
+    }
+
+    div[class*="ListItem"] input {
+      padding: 6px 10px !important;
+      min-height: 34px !important;
+      font-size: 0.84rem !important;
     }
 
     /* Botones principales (Guardar / Publicar / Nueva entrada) */

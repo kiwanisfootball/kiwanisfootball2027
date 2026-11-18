@@ -1,5 +1,5 @@
 {
-  "currentWeek": "GRAN FINAL",
+  "currentWeek": "TEMPORADA_FINALIZADA",
   "matches": [
     {
       "h": "EAGLES",
@@ -1993,26 +1993,26 @@
     {
       "h": "KOLTS",
       "v": "LIONS",
-      "sL": "",
-      "sV": "",
+      "sL": 27,
+      "sV": 6,
       "cat": "FLAG MICRO",
       "modalidad": "FLAG",
       "sem": "GRAN FINAL",
-      "active": true,
-      "final": false,
+      "active": false,
+      "final": true,
       "dia": "VIERNES, 13 DE NOVIEMBRE",
       "hora": "6:00 PM"
     },
     {
       "h": "OWLS",
       "v": "EAGLES",
-      "sL": "",
-      "sV": "",
+      "sL": 24,
+      "sV": 18,
       "cat": "FLAG JUVENIL",
       "modalidad": "FLAG",
       "sem": "GRAN FINAL",
-      "active": true,
-      "final": false,
+      "active": false,
+      "final": true,
       "dia": "VIERNES, 13 DE NOVIEMBRE",
       "hora": "7:15 PM"
     }

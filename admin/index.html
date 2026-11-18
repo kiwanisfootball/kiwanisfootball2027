@@ -4,200 +4,146 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
-  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
-  <title>KFL Admin | Centro de Control Deportivo y Editorial</title>
+  <title>KFL Admin | Kiwanis Football League</title>
   <link rel="icon" type="image/svg+xml" href="/assets/img/KFL-logo.svg" />
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --kfl-navy: #0a2240;
+      --kfl-dark: #161d26;
+      --kfl-blue: #0056b3;
       --kfl-red: #d32f2f;
-      --kfl-blue: #0073aa;
-      --kfl-bg: #f0f0f1;
+      --kfl-bg: #f3f5f8;
       --kfl-surface: #ffffff;
-      --kfl-border: #dcdcde;
-      --kfl-sidebar: #1d2327;
+      --kfl-border: #dce1e8;
+      --kfl-text: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
       font-family: 'Montserrat', sans-serif !important;
       background-color: var(--kfl-bg) !important;
+      color: var(--kfl-text) !important;
       margin: 0;
-      font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.875rem);
     }
 
-    #nc-root {
-      min-height: 100vh;
-      background: var(--kfl-bg);
-      color: #1d2327;
+    /* Barra superior nativa de Decap limpia y fija */
+    header[class*="AppHeader"] {
+      background-color: var(--kfl-navy) !important;
+      border-bottom: 3px solid var(--kfl-red) !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    header[class*="AppHeader"] a,
+    header[class*="AppHeader"] button {
       font-family: 'Montserrat', sans-serif !important;
-      font-size: clamp(0.8125rem, 0.78rem + 0.12vw, 0.875rem);
+      font-weight: 600 !important;
+      font-size: clamp(0.78rem, 1vw, 0.88rem) !important;
     }
 
-    #nc-root button,
-    #nc-root input,
-    #nc-root select,
-    #nc-root textarea {
-      font-family: 'Montserrat', sans-serif !important;
-      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem);
+    /* Sidebar izquierda estilo panel deportivo */
+    aside[class*="SidebarContainer"] {
+      background-color: var(--kfl-dark) !important;
+      border-right: 1px solid #263140 !important;
+      padding-top: 16px !important;
     }
 
-    [class*="AppHeader"] {
-      position: relative !important;
-      z-index: 1 !important;
-      display: flex;
-      align-items: center;
-      background: var(--kfl-navy) !important;
-      border-bottom: 3px solid var(--kfl-red);
-      box-shadow: none !important;
-    }
-
-    [class*="AppHeader"] button,
-    [class*="PublishButton"],
-    [class*="SaveButton"],
-    button[class*="Primary"] {
-      min-height: 36px;
-      padding: 7px 14px !important;
-      border: 1px solid transparent !important;
-      border-radius: 4px !important;
-      color: #ffffff !important;
-      font-family: 'Montserrat', sans-serif !important;
-      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem) !important;
-      font-weight: 700 !important;
-      opacity: 1 !important;
-      pointer-events: auto !important;
-      visibility: visible !important;
-    }
-
-    [class*="PublishButton"],
-    [class*="AppHeader"] button[class*="Primary"] {
-      background: var(--kfl-red) !important;
-      border-color: var(--kfl-red) !important;
-    }
-
-    [class*="SaveButton"],
-    [class*="AppHeader"] button:not([class*="Publish"]) {
-      background: var(--kfl-blue) !important;
-      border-color: var(--kfl-blue) !important;
-    }
-
-    [class*="AppHeader"] button:hover,
-    [class*="PublishButton"]:hover,
-    [class*="SaveButton"]:hover {
-      filter: brightness(1.08);
-    }
-
-    [class*="SidebarContainer"] {
-      position: relative;
-      background: var(--kfl-sidebar) !important;
-      border-right: 1px solid #32373c;
-      color: #ffffff !important;
-    }
-
-    [class*="SidebarContainer"]::before {
-      content: "";
-      display: block;
-      height: 54px;
-      margin: 16px 16px 8px;
-      background: url("/assets/img/KFL-logo.svg") center / contain no-repeat;
-    }
-
-    [class*="SidebarContainer"] h2 {
-      margin: 8px 16px 12px;
+    aside[class*="SidebarContainer"] h2 {
       font-family: 'Anton', sans-serif !important;
-      font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem) !important;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.8px !important;
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem) !important;
+      color: #ffffff !important;
+      text-transform: uppercase !important;
+    }
+
+    aside[class*="SidebarContainer"] a {
+      border-radius: 6px !important;
+      margin: 4px 10px !important;
+      padding: 10px 14px !important;
+      font-weight: 600 !important;
+      font-size: clamp(0.82rem, 1vw, 0.9rem) !important;
+      transition: background-color 0.15s ease !important;
+    }
+
+    aside[class*="SidebarContainer"] a[class*="active"],
+    aside[class*="SidebarContainer"] a:hover {
+      background-color: var(--kfl-blue) !important;
       color: #ffffff !important;
     }
 
-    [class*="SidebarContainer"] a,
-    [class*="SidebarContainer"] button {
-      color: #ffffff !important;
-      font-family: 'Montserrat', sans-serif !important;
-      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem) !important;
+    /* Aprovechar todo el ancho disponible en el área principal (eliminar espacio vacío derecho) */
+    main[class*="MainView"],
+    div[class*="CollectionContainer"],
+    div[class*="EntriesContainer"] {
+      max-width: 100% !important;
+      width: 100% !important;
     }
 
-    [class*="SidebarContainer"] a:hover,
-    [class*="SidebarContainer"] [aria-current="page"],
-    [class*="SidebarContainer"] [class*="active"] {
-      background: var(--kfl-blue) !important;
-      color: #ffffff !important;
+    /* Filas de colecciones estilo tabla limpia (en lugar de parecer inputs) */
+    ul[class*="ListCards"] li,
+    a[class*="ListCardLink"] {
+      max-width: 100% !important;
+      width: 100% !important;
+      border-radius: 6px !important;
+      border: 1px solid var(--kfl-border) !important;
+      border-left: 4px solid var(--kfl-navy) !important;
+      background: var(--kfl-surface) !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+      transition: transform 0.12s ease, border-left-color 0.12s ease !important;
     }
 
-    [class*="AppMainContainer"],
-    [class*="MainContainer"],
-    [class*="CollectionPage"] {
-      background: var(--kfl-bg) !important;
+    a[class*="ListCardLink"]:hover {
+      border-left-color: var(--kfl-red) !important;
+      background-color: #f8fafc !important;
     }
 
-    [class*="ControlPaneContainer"] {
+    /* Editor de entradas: ancho completo y sin comprimir categorías padre */
+    div[class*="ControlPaneContainer"] {
+      max-width: 1180px !important;
+      width: 100% !important;
+      margin: 0 auto !important;
+      padding: 20px !important;
+    }
+
+    /* Categorías principales (VARSITY, JUVENIL, MINI, MICRO) siempre al 100% de ancho */
+    div[class*="ControlPaneContainer"] > div[class*="ControlContainer"] {
+      width: 100% !important;
+      display: block !important;
+      margin-bottom: 16px !important;
+    }
+
+    /* Solo los campos internos dentro de un ítem de lista abierto se alinean en horizontal */
+    div[class*="NestedObjectFields"] {
       display: grid !important;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      align-items: start;
-      gap: clamp(8px, 1.2vw, 16px) !important;
-      padding: clamp(12px, 2vw, 24px) !important;
-      background: var(--kfl-surface) !important;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+      gap: 14px !important;
+      background: #f8fafc !important;
+      padding: 16px !important;
+      border-radius: 8px !important;
       border: 1px solid var(--kfl-border) !important;
-      border-radius: 6px;
     }
 
-    [class*="ObjectControl"] [class*="ControlPaneContainer"],
-    [class*="ListControl"] [class*="ControlPaneContainer"] {
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    }
-
-    [class*="ControlPaneContainer"] label,
-    [class*="ControlPaneContainer"] [class*="Label"] {
-      font-family: 'Montserrat', sans-serif !important;
-      font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.875rem) !important;
-      font-weight: 600;
-    }
-
-    [class*="EntryCard"],
-    [class*="ListCard"],
-    [class*="ObjectControl"] [class*="ListItem"],
-    [class*="ListControl"] [class*="ListItem"] {
-      min-width: 0;
-      background: var(--kfl-surface) !important;
-      border: 1px solid var(--kfl-border) !important;
-      border-radius: 5px;
-      box-shadow: none !important;
-    }
-
-    [class*="EntryCard"] *,
-    [class*="ListCard"] * {
-      font-family: 'Montserrat', sans-serif !important;
-    }
-
-    @media (max-width: 600px) {
-      [class*="ControlPaneContainer"],
-      [class*="ObjectControl"] [class*="ControlPaneContainer"],
-      [class*="ListControl"] [class*="ControlPaneContainer"] {
-        grid-template-columns: minmax(0, 1fr);
-        padding: 12px !important;
-      }
-
-      [class*="AppHeader"] {
-        flex-wrap: wrap;
-      }
-
-      [class*="AppHeader"] button,
-      [class*="PublishButton"],
-      [class*="SaveButton"] {
-        min-height: 34px;
-        padding: 6px 10px !important;
-      }
+    /* Botones principales (Guardar / Publicar / Nueva entrada) */
+    button[class*="PublishButton"],
+    a[class*="CollectionTopNewButton"] {
+      background-color: var(--kfl-red) !important;
+      border-color: var(--kfl-red) !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      border-radius: 6px !important;
     }
   </style>
 </head>
 <body>
-  <!-- Carga de Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   <script>
     if (window.CMS) {
-      // Inyectar estilos reales del sitio en el panel de vista previa
       CMS.registerPreviewStyle('/css/global.css');
       CMS.registerPreviewStyle('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700&display=swap');
     }

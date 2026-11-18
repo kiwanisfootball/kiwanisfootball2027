@@ -2,8 +2,17 @@ name: Sincronizar Datos KFL
 
 on:
   schedule:
-    - cron: '0 * * * *' # Se ejecuta automáticamente cada 1 hora
-  workflow_dispatch: 
+    - cron: "0 6,18 * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [sot-updated]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sincronizar-datos-kfl
+  cancel-in-progress: false
 
 jobs:
   sincronizar:
@@ -11,18 +20,53 @@ jobs:
     steps:
       - name: Descargar código del repositorio
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
 
-      - name: Crear carpeta de datos si no existe
-        run: mkdir -p data
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Descargar JSON desde Google Apps Script
+      - name: Sincronizar datos públicos del SOT
+        env:
+          KFL_CONTACT_CALENDAR_URL: ${{ secrets.KFL_CONTACT_CALENDAR_URL }}
+          KFL_FLAG_CALENDAR_URL: ${{ secrets.KFL_FLAG_CALENDAR_URL }}
+          KFL_SCORES_URL: ${{ secrets.KFL_SCORES_URL }}
+          KFL_RECORDS_CSV_URL: ${{ secrets.KFL_RECORDS_CSV_URL }}
+          KFL_ROSTER_CONTACT_VARSITY_URL: ${{ secrets.KFL_ROSTER_CONTACT_VARSITY_URL }}
+          KFL_ROSTER_CONTACT_JUVENIL_URL: ${{ secrets.KFL_ROSTER_CONTACT_JUVENIL_URL }}
+          KFL_ROSTER_CONTACT_MINI_URL: ${{ secrets.KFL_ROSTER_CONTACT_MINI_URL }}
+          KFL_ROSTER_CONTACT_MICRO_URL: ${{ secrets.KFL_ROSTER_CONTACT_MICRO_URL }}
+          KFL_ROSTER_FLAG_VARSITY_URL: ${{ secrets.KFL_ROSTER_FLAG_VARSITY_URL }}
+          KFL_ROSTER_FLAG_JUVENIL_URL: ${{ secrets.KFL_ROSTER_FLAG_JUVENIL_URL }}
+          KFL_ROSTER_FLAG_MINI_URL: ${{ secrets.KFL_ROSTER_FLAG_MINI_URL }}
+          KFL_ROSTER_FLAG_MICRO_URL: ${{ secrets.KFL_ROSTER_FLAG_MICRO_URL }}
+          KFL_CHAMPIONS_CONTACT_VARSITY_CSV_URL: ${{ secrets.KFL_CHAMPIONS_CONTACT_VARSITY_CSV_URL }}
+          KFL_CHAMPIONS_CONTACT_JUVENIL_CSV_URL: ${{ secrets.KFL_CHAMPIONS_CONTACT_JUVENIL_CSV_URL }}
+          KFL_CHAMPIONS_CONTACT_MINI_CSV_URL: ${{ secrets.KFL_CHAMPIONS_CONTACT_MINI_CSV_URL }}
+          KFL_CHAMPIONS_CONTACT_MICRO_CSV_URL: ${{ secrets.KFL_CHAMPIONS_CONTACT_MICRO_CSV_URL }}
+          KFL_CHAMPIONS_FLAG_VARSITY_CSV_URL: ${{ secrets.KFL_CHAMPIONS_FLAG_VARSITY_CSV_URL }}
+          KFL_CHAMPIONS_FLAG_JUVENIL_CSV_URL: ${{ secrets.KFL_CHAMPIONS_FLAG_JUVENIL_CSV_URL }}
+          KFL_CHAMPIONS_FLAG_MINI_CSV_URL: ${{ secrets.KFL_CHAMPIONS_FLAG_MINI_CSV_URL }}
+          KFL_CHAMPIONS_FLAG_MICRO_CSV_URL: ${{ secrets.KFL_CHAMPIONS_FLAG_MICRO_CSV_URL }}
+          KFL_MVP_CONTACT_VARSITY_CSV_URL: ${{ secrets.KFL_MVP_CONTACT_VARSITY_CSV_URL }}
+          KFL_MVP_CONTACT_JUVENIL_CSV_URL: ${{ secrets.KFL_MVP_CONTACT_JUVENIL_CSV_URL }}
+          KFL_MVP_CONTACT_MINI_CSV_URL: ${{ secrets.KFL_MVP_CONTACT_MINI_CSV_URL }}
+          KFL_MVP_CONTACT_MICRO_CSV_URL: ${{ secrets.KFL_MVP_CONTACT_MICRO_CSV_URL }}
+          KFL_MVP_FLAG_VARSITY_CSV_URL: ${{ secrets.KFL_MVP_FLAG_VARSITY_CSV_URL }}
+          KFL_MVP_FLAG_JUVENIL_CSV_URL: ${{ secrets.KFL_MVP_FLAG_JUVENIL_CSV_URL }}
+          KFL_MVP_FLAG_MINI_CSV_URL: ${{ secrets.KFL_MVP_FLAG_MINI_CSV_URL }}
+        run: node scripts/sync-sot.js
+
+      - name: Publicar JSON solo cuando cambien
         run: |
-          curl -s "TU_URL_DE_GAS_CONTACT?modulo=all_data" -o data/contact-db.json
-          curl -s "TU_URL_DE_GAS_FLAG?modulo=all_data" -o data/flag-db.json
-
-      - name: Subir cambios al repositorio si hubo modificaciones
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto: Actualización de datos KFL" && git push)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -- 'data/*.json'
+          if git diff --cached --quiet; then
+            echo "Los datos ya están actualizados."
+            exit 0
+          fi
+          git commit -m "Auto: Actualización de datos KFL"
+          git push

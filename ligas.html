@@ -311,23 +311,35 @@ function fetchMasterDB(league, callback) {
     if (callback) callback();
     return;
   }
-  if (l !== 'contact') {
-    const apiUrl = getCalendarApiUrl(l);
-    if (!apiUrl) {
-      console.error(`URL de API no encontrada para la liga: ${l}`);
-      if (callback) callback();
-      return;
-    }
-    fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`)
-      .then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
-      .then(db => { setMasterDB(l, db); if (callback) callback(); })
-      .catch(err => { console.error(`Error BD KFL [${l}]:`, err); if (callback) callback(); });
-    return;
-  }
-  fetch('data/contact-db.json?_t=' + Date.now(), { cache: 'no-cache' })
-    .then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+  const hasData = (db) => {
+    let source = db?.data && typeof db.data === 'object' ? db.data : db?.result && typeof db.result === 'object' ? db.result : db;
+    const leagueKey = Object.keys(source || {}).find(key => key.toLowerCase() === l);
+    if (leagueKey && source[leagueKey] && typeof source[leagueKey] === 'object') source = source[leagueKey];
+    return Object.values(source || {}).some(category => category && typeof category === 'object' &&
+      ((Array.isArray(category.partidos) && category.partidos.length) ||
+       (Array.isArray(category.matches) && category.matches.length) ||
+       (Array.isArray(category.tabla) && category.tabla.length)));
+  };
+  const localUrl = `data/${l}-db.json?_t=${Date.now()}`;
+  fetch(localUrl, { cache: 'no-cache' })
+    .then(res => {
+      if (!res.ok) throw new Error(`JSON local HTTP ${res.status}`);
+      return res.json();
+    })
+    .then(db => {
+      if (!hasData(db)) throw new Error(`data/${l}-db.json está vacío`);
+      return db;
+    })
+    .catch(async localError => {
+      const apiUrl = getCalendarApiUrl(l);
+      if (!apiUrl) throw new Error(`No hay endpoint SOT configurado para ${l}: ${localError.message}`);
+      console.warn(`Fallback al SOT para ${l}:`, localError.message);
+      const response = await fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json();
+    })
     .then(db => { setMasterDB(l, db); if (callback) callback(); })
-    .catch(err => { console.error('Error leyendo data/contact-db.json:', err); if (callback) callback(); });
+    .catch(err => { console.error(`Error BD KFL [${l}]:`, err); if (callback) callback(); });
 }
     function getCategoryData(league, category) {
       const l = (league || activeLeague || 'contact').toLowerCase();
@@ -833,18 +845,39 @@ function fetchMasterDB(league, callback) {
         apiUrl = cfg.API_ROSTERS_URL;
       }
 
-      if (!apiUrl) {
-        playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b; font-weight:600;">Rosters de esta categoría próximamente disponibles.</td></tr>';
-        staffBody.innerHTML = '<tr><td colspan="3" style="text-align:center; padding: 15px; color:#64748b;">Sin cuerpo técnico registrado.</td></tr>';
-        return;
-      }
-
       try {
-        const url = `${apiUrl}?action=getPublicRoster&sheetName=${encodeURIComponent(nombreEquipo)}&_t=${Date.now()}`;
-        const res = await fetch(url);
-        const data = await res.json();
+        let data = null;
+        try {
+          const localResponse = await fetch(`data/${activeLeague}-db.json`, { cache: 'no-cache' });
+          if (localResponse.ok) {
+            const database = await localResponse.json();
+            const players = database?.[activeCategory]?.rosters
+              ?.find(roster => roster.team === nombreEquipo)?.players;
+            if (Array.isArray(players) && players.length) {
+              data = {
+                status: 'success',
+                roster: players.map((player, index) => ({
+                  cantidad: index + 1,
+                  nombre: player.nombre || '',
+                  apellido: player.apellido || '',
+                  jersey: player.jersey || '0'
+                })),
+                staff: []
+              };
+            }
+          }
+        } catch (localError) {
+          console.warn(`No se pudo leer el roster local ${activeLeague}/${activeCategory}/${nombreEquipo}:`, localError);
+        }
 
-        if (data.status === 'success') {
+        if (!data && apiUrl) {
+          const url = `${apiUrl}?action=getPublicRoster&sheetName=${encodeURIComponent(nombreEquipo)}&_t=${Date.now()}`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          data = await res.json();
+        }
+
+        if (data && data.status === 'success') {
           renderizarTablasRosterYStaff(data, nombreEquipo);
         } else {
           playerBody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding: 25px; color:#64748b;">No hay jugadores registrados oficialmente aún.</td></tr>';

@@ -279,6 +279,15 @@
     const masterDBMemoria = {};
     const masterDBPromesas = {};
 
+    function databaseHasLeagueData(db) {
+      if (!db || typeof db !== 'object') return false;
+      const source = db.data && typeof db.data === 'object' ? db.data : db.result && typeof db.result === 'object' ? db.result : db;
+      return Object.values(source).some(category => category && typeof category === 'object' &&
+        ((Array.isArray(category.partidos) && category.partidos.length) ||
+         (Array.isArray(category.matches) && category.matches.length) ||
+         (Array.isArray(category.tabla) && category.tabla.length)));
+    }
+
     function fetchMasterDB(liga) {
       const l = liga.toLowerCase();
       if (masterDBMemoria[l]) return Promise.resolve(masterDBMemoria[l]);
@@ -288,10 +297,20 @@
       const apiUrl = cfg?.API_CALENDARIO_URL?.[l];
       if (!apiUrl) return Promise.reject(new Error(`No hay URL de calendario configurada para ${liga.toUpperCase()}.`));
 
-      masterDBPromesas[l] = fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`)
+      masterDBPromesas[l] = fetch(`data/${l}-db.json`, { cache: 'no-cache' })
         .then(res => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          if (!res.ok) throw new Error(`JSON local HTTP ${res.status}`);
           return res.json();
+        })
+        .then(db => {
+          if (!databaseHasLeagueData(db)) throw new Error(`data/${l}-db.json está vacío`);
+          return db;
+        })
+        .catch(async localError => {
+          console.warn(`Fallback al SOT para ${l}:`, localError.message);
+          const response = await fetch(`${apiUrl}?modulo=all_data&_t=${Date.now()}`);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
         })
         .then(db => {
           masterDBMemoria[l] = db;
@@ -481,19 +500,38 @@
       const [modalidad, categoria] = select.value.split('_');
       const cfg = getKFLConfig();
       const apiUrl = cfg?.API_ROSTERS_URL?.[modalidad]?.[categoria] || "";
+      const teamCode = EQUIPOS_OFICIALES[currentSelectedTeam]?.codigoShort;
       const fila = (html) => `<tr><td colspan="4" style="text-align:center;padding:20px;color:#64748b;">${html}</td></tr>`;
-
-      if (!apiUrl) {
-        tbody.innerHTML = fila('Rosters de esta categoría próximamente disponibles.');
-        return;
-      }
 
       tbody.innerHTML = fila(`Consultando plantilla de ${escapeHTML(currentSelectedTeam)}...`);
 
       try {
-        const url = `${apiUrl}?action=getPublicRoster&sheetName=${encodeURIComponent(currentSelectedTeam)}&_t=${Date.now()}`;
-        const res = await fetch(url);
-        const data = await res.json();
+        let data = null;
+        try {
+          const response = await fetch(`data/${modalidad}-db.json`, { cache: 'no-cache' });
+          if (response.ok) {
+            const database = await response.json();
+            const roster = database?.[categoria]?.rosters?.find(item => item.team === teamCode);
+            if (Array.isArray(roster?.players) && roster.players.length) {
+              data = { status: 'success', players: roster.players };
+            }
+          }
+        } catch (localError) {
+          console.warn(`No se pudo leer el roster local ${modalidad}/${categoria}/${teamCode}:`, localError);
+        }
+
+        if (!data && apiUrl) {
+          const rosterSheet = teamCode || currentSelectedTeam;
+          const url = `${apiUrl}?action=getPublicRoster&sheetName=${encodeURIComponent(rosterSheet)}&_t=${Date.now()}`;
+          const res = await fetch(url);
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          data = await res.json();
+        }
+
+        if (!data) {
+          tbody.innerHTML = fila('Rosters de esta categoría próximamente disponibles.');
+          return;
+        }
 
         if (data.status !== 'success' || !Array.isArray(data.players) || data.players.length === 0) {
           tbody.innerHTML = fila('No hay jugadores registrados oficialmente aún.');
@@ -562,26 +600,55 @@
       if (palmaresMemoria.ready) return palmaresMemoria.data;
       if (palmaresMemoria.promise) return palmaresMemoria.promise;
 
-      const entradas = [];
-      for (const mod of Object.keys(PALMARES_CSV)) {
-        for (const cat of Object.keys(PALMARES_CSV[mod])) {
-          entradas.push({ modalidad: mod, categoria: cat, url: PALMARES_CSV[mod][cat] });
-        }
-      }
-
-      palmaresMemoria.promise = Promise.all(entradas.map(async e => {
-        try {
-          const filas = await leerHojaPalmares(e.url);
-          return { ...e, filas };
-        } catch (err) {
-          console.error(`Error palmarés ${e.modalidad}/${e.categoria}:`, err);
-          return { ...e, filas: [], error: err.message };
-        }
-      })).then(resultados => {
-        palmaresMemoria.data = resultados;
-        palmaresMemoria.ready = true;
-        return resultados;
-      });
+      palmaresMemoria.promise = fetch('data/campeones.json', { cache: 'no-cache' })
+        .then(res => {
+          if (!res.ok) throw new Error(`JSON local HTTP ${res.status}`);
+          return res.json();
+        })
+        .then(data => {
+          const records = Array.isArray(data?.records) ? data.records : [];
+          if (!records.length) throw new Error('data/campeones.json está vacío');
+          const grouped = new Map();
+          records.forEach(record => {
+            const key = `${record.modalidad}/${record.categoria}`;
+            if (!grouped.has(key)) {
+              grouped.set(key, {
+                modalidad: record.modalidad,
+                categoria: record.categoria,
+                filas: []
+              });
+            }
+            grouped.get(key).filas.push({
+              season: record.season || '',
+              campeon: record.campeon || '',
+              subcampeon: record.subcampeon || ''
+            });
+          });
+          return [...grouped.values()];
+        })
+        .catch(async localError => {
+          console.warn('Fallback al CSV del SOT para el palmarés:', localError.message);
+          const entradas = [];
+          for (const mod of Object.keys(PALMARES_CSV)) {
+            for (const cat of Object.keys(PALMARES_CSV[mod])) {
+              entradas.push({ modalidad: mod, categoria: cat, url: PALMARES_CSV[mod][cat] });
+            }
+          }
+          return Promise.all(entradas.map(async entrada => {
+            try {
+              const filas = await leerHojaPalmares(entrada.url);
+              return { ...entrada, filas };
+            } catch (error) {
+              console.error(`Error palmarés ${entrada.modalidad}/${entrada.categoria}:`, error);
+              return { ...entrada, filas: [], error: error.message };
+            }
+          }));
+        })
+        .then(resultados => {
+          palmaresMemoria.data = resultados;
+          palmaresMemoria.ready = true;
+          return resultados;
+        });
 
       return palmaresMemoria.promise;
     }

@@ -6,8 +6,9 @@ backend:
   auth_endpoint: api/auth
   site_domain: kiwanisfootball2027.vercel.app
 
+locale: 'es'
 display_url: "https://kiwanisfootball2027.vercel.app"
-logo_url: "assets/img/KFL-logo.svg"
+logo_url: "/assets/img/KFL-logo.svg"
 
 media_folder: "assets/uploads/blog"
 public_folder: "/assets/uploads/blog"
@@ -45,3 +46,174 @@ collections:
           - "flag mini"
           - "flag juvenil"
       - { label: "Cuerpo", name: "body", widget: "markdown" }
+
+  - name: "scores"
+    label: "Marcadores en vivo"
+    description: "Datos del ticker de la página principal, sincronizados desde el SOT."
+    files:
+      - file: "data/scores.json"
+        label: "Ticker de resultados"
+        name: "scores"
+        fields:
+          - { label: "Jornada activa", name: "currentWeek", widget: "string", hint: "Identificador de la jornada activa publicado por Google Sheets." }
+          - label: "Partidos"
+            name: "matches"
+            widget: "list"
+            hint: "Solo resultados oficiales; no agregues datos de inscripción ni credenciales."
+            fields:
+              - { label: "Equipo local", name: "h", widget: "string" }
+              - { label: "Equipo visitante", name: "v", widget: "string" }
+              - { label: "Marcador local", name: "sL", widget: "number", value_type: "int" }
+              - { label: "Marcador visitante", name: "sV", widget: "number", value_type: "int" }
+              - { label: "Categoría", name: "cat", widget: "string" }
+              - { label: "Modalidad", name: "modalidad", widget: "string" }
+              - { label: "Jornada", name: "sem", widget: "string" }
+              - { label: "Activo", name: "active", widget: "boolean", default: false }
+              - { label: "Finalizado", name: "final", widget: "boolean", default: false }
+              - { label: "Día", name: "dia", widget: "string", required: false }
+              - { label: "Hora", name: "hora", widget: "string", required: false }
+
+  - name: "contact-db"
+    label: "Liga Contact"
+    description: "Calendarios, posiciones base y rosters públicos de Contact sincronizados desde el SOT."
+    files:
+      - file: "data/contact-db.json"
+        label: "Datos Contact"
+        name: "contact"
+        fields:
+          - label: "Varsity"
+            name: "varsity"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - label: "Rosters públicos"
+                name: "rosters"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }
+                  - label: "Jugadores"
+                    name: "players"
+                    widget: "list"
+                    required: false
+                    fields:
+                      - { label: "Nombre", name: "nombre", widget: "string" }
+                      - { label: "Apellido", name: "apellido", widget: "string" }
+                      - { label: "Dorsal", name: "jersey", widget: "string" }
+          - label: "Juvenil"
+            name: "juvenil"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - { label: "Rosters públicos", name: "rosters", widget: "list", required: false, fields: [{ label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }, { label: "Jugadores", name: "players", widget: "list", required: false, fields: [{ label: "Nombre", name: "nombre", widget: "string" }, { label: "Apellido", name: "apellido", widget: "string" }, { label: "Dorsal", name: "jersey", widget: "string" }] }] }
+          - label: "Mini"
+            name: "mini"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - { label: "Rosters públicos", name: "rosters", widget: "list", required: false, fields: [{ label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }, { label: "Jugadores", name: "players", widget: "list", required: false, fields: [{ label: "Nombre", name: "nombre", widget: "string" }, { label: "Apellido", name: "apellido", widget: "string" }, { label: "Dorsal", name: "jersey", widget: "string" }] }] }
+          - label: "Micro"
+            name: "micro"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - { label: "Rosters públicos", name: "rosters", widget: "list", required: false, fields: [{ label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }, { label: "Jugadores", name: "players", widget: "list", required: false, fields: [{ label: "Nombre", name: "nombre", widget: "string" }, { label: "Apellido", name: "apellido", widget: "string" }, { label: "Dorsal", name: "jersey", widget: "string" }] }] }
+
+  - name: "flag-db"
+    label: "Liga Flag"
+    description: "Calendarios, posiciones base y rosters públicos de Flag sincronizados desde el SOT."
+    files:
+      - file: "data/flag-db.json"
+        label: "Datos Flag"
+        name: "flag"
+        fields:
+          - label: "Varsity"
+            name: "varsity"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - { label: "Rosters públicos", name: "rosters", widget: "list", required: false, fields: [{ label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }, { label: "Jugadores", name: "players", widget: "list", required: false, fields: [{ label: "Nombre", name: "nombre", widget: "string" }, { label: "Apellido", name: "apellido", widget: "string" }, { label: "Dorsal", name: "jersey", widget: "string" }] }] }
+          - label: "Juvenil"
+            name: "juvenil"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - { label: "Rosters públicos", name: "rosters", widget: "list", required: false, fields: [{ label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }, { label: "Jugadores", name: "players", widget: "list", required: false, fields: [{ label: "Nombre", name: "nombre", widget: "string" }, { label: "Apellido", name: "apellido", widget: "string" }, { label: "Dorsal", name: "jersey", widget: "string" }] }] }
+          - label: "Mini"
+            name: "mini"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - { label: "Rosters públicos", name: "rosters", widget: "list", required: false, fields: [{ label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }, { label: "Jugadores", name: "players", widget: "list", required: false, fields: [{ label: "Nombre", name: "nombre", widget: "string" }, { label: "Apellido", name: "apellido", widget: "string" }, { label: "Dorsal", name: "jersey", widget: "string" }] }] }
+          - label: "Micro"
+            name: "micro"
+            widget: "object"
+            fields:
+              - { label: "Partidos", name: "partidos", widget: "list", required: false, fields: [{ label: "Jornada", name: "week", widget: "string" }, { label: "Fecha", name: "date", widget: "string" }, { label: "Hora", name: "time", widget: "string" }, { label: "Cancha", name: "field", widget: "string" }, { label: "Local", name: "home", widget: "string" }, { label: "Visitante", name: "away", widget: "string" }, { label: "Marcador local", name: "scoreH", widget: "number", value_type: "int", required: false }, { label: "Marcador visitante", name: "scoreA", widget: "number", value_type: "int", required: false }, { label: "Tiene marcador", name: "hasScore", widget: "boolean", required: false }, { label: "Jamboree", name: "isJamboree", widget: "boolean", required: false }] }
+              - { label: "Tabla de posiciones", name: "tabla", widget: "list", required: false, fields: [{ label: "Equipo", name: "equipo", widget: "string" }, { label: "JJ", name: "jj", widget: "number", value_type: "int" }, { label: "JG", name: "jg", widget: "number", value_type: "int" }, { label: "JP", name: "jp", widget: "number", value_type: "int" }, { label: "JE", name: "je", widget: "number", value_type: "int" }, { label: "Puntos", name: "pts", widget: "number", value_type: "int" }, { label: "Favor", name: "pf", widget: "number", value_type: "int" }, { label: "Contra", name: "pc", widget: "number", value_type: "int" }, { label: "Diferencia", name: "dif", widget: "number", value_type: "int" }, { label: "Posición de origen", name: "rank", widget: "number", value_type: "int", required: false }, { label: "Desempate cara a cara", name: "h2h", widget: "object", required: false, fields: [{ label: "OWLS", name: "OWLS", widget: "number", value_type: "int", required: false }, { label: "RAIDERS", name: "RAIDERS", widget: "number", value_type: "int", required: false }, { label: "EAGLES", name: "EAGLES", widget: "number", value_type: "int", required: false }, { label: "SPARTANS", name: "SPARTANS", widget: "number", value_type: "int", required: false }, { label: "LIONS", name: "LIONS", widget: "number", value_type: "int", required: false }, { label: "DRAGONS", name: "DRAGONS", widget: "number", value_type: "int", required: false }, { label: "KOLTS", name: "KOLTS", widget: "number", value_type: "int", required: false }] }] }
+              - { label: "Rosters públicos", name: "rosters", widget: "list", required: false, fields: [{ label: "Equipo", name: "team", widget: "select", options: ["OWLS", "RAIDERS", "EAGLES", "SPARTANS", "LIONS", "DRAGONS", "KOLTS"] }, { label: "Jugadores", name: "players", widget: "list", required: false, fields: [{ label: "Nombre", name: "nombre", widget: "string" }, { label: "Apellido", name: "apellido", widget: "string" }, { label: "Dorsal", name: "jersey", widget: "string" }] }] }
+
+  - name: "campeones"
+    label: "Palmarés histórico"
+    description: "Campeones y subcampeones por modalidad y categoría."
+    files:
+      - file: "data/campeones.json"
+        label: "Campeones KFL"
+        name: "champions"
+        fields:
+          - label: "Temporadas"
+            name: "records"
+            widget: "list"
+            hint: "Mantén una fila por temporada; solo agrega campeones y subcampeones publicados oficialmente."
+            fields:
+              - { label: "Modalidad", name: "modalidad", widget: "select", options: ["contact", "flag"] }
+              - { label: "Categoría", name: "categoria", widget: "select", options: ["varsity", "juvenil", "mini", "micro"] }
+              - { label: "Temporada", name: "season", widget: "string" }
+              - { label: "Campeón", name: "campeon", widget: "string" }
+              - { label: "Subcampeón", name: "subcampeon", widget: "string", required: false }
+
+  - name: "records"
+    label: "Récords Varsity"
+    description: "Récords deportivos publicados; no agregues datos personales de inscripción."
+    files:
+      - file: "data/records.json"
+        label: "Récords Varsity"
+        name: "records"
+        fields:
+          - label: "Récords"
+            name: "records"
+            widget: "list"
+            hint: "Cada fila contiene únicamente categoría, estadística, marca, titular/equipo y temporada si están publicados."
+            fields:
+              - { label: "Categoría", name: "category", widget: "string", required: false }
+              - { label: "Estadística", name: "statistic", widget: "string" }
+              - { label: "Marca/valor", name: "mark", widget: "string" }
+              - { label: "Titular público", name: "holder", widget: "string", required: false }
+              - { label: "Equipo", name: "team", widget: "string", required: false }
+              - { label: "Temporada", name: "season", widget: "string", required: false }
+
+  - name: "mvp"
+    label: "Líderes y MVP"
+    description: "Registros deportivos de MVP por modalidad y categoría."
+    files:
+      - file: "data/mvp.json"
+        label: "MVP KFL"
+        name: "mvp"
+        fields:
+          - label: "MVP por temporada"
+            name: "records"
+            widget: "list"
+            hint: "Usa solo los datos publicados en la hoja histórica de MVP; no copies datos de inscripción."
+            fields:
+              - { label: "Modalidad", name: "modalidad", widget: "select", options: ["contact", "flag"] }
+              - { label: "Categoría", name: "categoria", widget: "select", options: ["varsity", "juvenil", "mini", "micro"] }
+              - { label: "Temporada", name: "season", widget: "string" }
+              - { label: "Equipo", name: "equipo", widget: "string", required: false }
+              - { label: "Jugador MVP", name: "jugador", widget: "string" }

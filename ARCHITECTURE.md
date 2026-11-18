@@ -11,7 +11,9 @@ El sistema funciona bajo una arquitectura desacoplada de 4 capas:
 1. **SOT (Source of Truth — Google Sheets + Google Apps Script):**
    * Es la única fuente de verdad operativa de la liga. Toda la captura de datos, inscripciones, marcadores, estadísticas y credenciales de coaches ocurre en Google Drive/Sheets.
 2. **Pipeline de Sincronización Automatizada (`actualizar-datos.yml`):**
-   * Un workflow de GitHub Actions (`.github/workflows/actualizar-datos.yml`) consulta/exporta los datos del SOT (CSV publicados o endpoints de Apps Script), los convierte a archivos JSON estructurados en `data/` y realiza el *commit* automático al repositorio.
+   * Un workflow de GitHub Actions (`.github/workflows/actualizar-datos.yml`) consulta/exporta los datos del SOT (CSV publicados o endpoints de Apps Script), los convierte a archivos JSON estructurados en `data/` y realiza el *commit* automático únicamente si esos JSON cambiaron.
+   * Se ejecuta manualmente, por `repository_dispatch` (`sot-updated`) y como máximo dos veces al día. Los endpoints alternativos se configuran como GitHub Secrets `KFL_*_URL`; si no se configuran se usan las URLs públicas de la configuración/frontend.
+   * `KFL_RECORDS_CSV_URL` debe apuntar al CSV público de récords Varsity. Si no está configurado, el pipeline conserva el JSON actual; el repositorio no contiene un endpoint público de récords que se pueda inferir con seguridad.
 3. **Gestor Centralizado de Contenido y Datos (`Decap CMS`):**
    * Panel administrativo en `/admin/` (`admin/config.yml`) que permite gestionar tanto las noticias del blog (`blog/`) como auditar o editar de emergencia los archivos `data/*.json` sincronizados desde el SOT.
 4. **Frontend Estático y Hosting (`Vercel`):**
@@ -25,6 +27,7 @@ El sistema funciona bajo una arquitectura desacoplada de 4 capas:
 * **Calendarios, Rosters y Tabla de Posiciones (`data/contact-db.json` y `data/flag-db.json`):**
   * **Origen SOT:** Hojas maestras de Contact (`1B4Swhn-LgK4AW1qZ3HcXRbtvagYtg15JJ2ZoPbFv0no`) y Flag (`1DqzUx1wACkRe4jYD1iIQR335VM3wZ_aJXRTkKxS66xg`).
   * **Funcionamiento:** Al actualizar resultados o calendarios en Google Sheets, el pipeline regenera los JSON y Decap CMS los expone en `/admin/`. El frontend calcula las tablas de posiciones y desempates en JS (`js/config-ligas.js`).
+  * Los rosters se obtienen exclusivamente mediante los endpoints `getPublicRoster` y se filtran a nombre, apellido y dorsal. No se exportan identificaciones, contactos, staff privado, contraseñas ni datos de inscripciones. Las URLs de rosters Flag aún deben configurarse si el SOT las publica.
 * **Live Score Ticker (`data/scores.json`):**
   * **Origen SOT:** Pestañas semanales de partidos en Contact y Flag.
   * **Funcionamiento:** Muestra los resultados semanales y activa el carrusel continuo de logos de equipos cuando no hay jornada programada o tras el período de gracia post-temporada.
@@ -44,6 +47,10 @@ El sistema funciona bajo una arquitectura desacoplada de 4 capas:
 * **Blog y Noticias (`blog/`):**
   * Los artículos se redactan desde `/admin/` en formato Markdown con Frontmatter YAML (`blog/<slug>/index.md`).
   * Durante el despliegue en Vercel, `node generate-index.js` compila todos los artículos en `blog/index.json` para `blog.html` y `articulo.html`.
+
+  ### D. Webhook y Secrets del pipeline
+  * `docs/apps-script-webhook.gs` envía únicamente el evento `sot-updated`, nunca los valores de celdas. Guarda el token fine-grained en `GITHUB_TOKEN` dentro de Script Properties y crea un activador instalable de edición.
+  * El workflow admite URLs de calendario, ticker, rosters, palmarés, MVP y récords Varsity como GitHub Secrets `KFL_*_URL`. No agregues tokens a los archivos del repositorio.
 
 ---
 

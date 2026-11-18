@@ -26,204 +26,204 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Montserrat', sans-serif !important;
-      background-color: var(--kfl-bg) !important;
-      color: var(--kfl-text) !important;
+    html body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--kfl-bg);
+      color: var(--kfl-text);
       margin: 0;
     }
 
-    /* Barra superior nativa de Decap limpia y fija */
-    header[class*="AppHeader"] {
-      background-color: var(--kfl-navy) !important;
-      border-bottom: 3px solid var(--kfl-red) !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+    /* Barra superior nativa de Decap */
+    html body header[class*="AppHeader"] {
+      background-color: var(--kfl-navy);
+      border-bottom: 3px solid var(--kfl-red);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     }
 
-    header[class*="AppHeader"] a,
-    header[class*="AppHeader"] button {
-      font-family: 'Montserrat', sans-serif !important;
-      font-weight: 600 !important;
-      font-size: clamp(0.76rem, 1vw, 0.88rem) !important;
+    html body header[class*="AppHeader"] a,
+    html body header[class*="AppHeader"] button {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.76rem, 1vw, 0.88rem);
     }
 
     /* Sidebar izquierda estilo panel deportivo */
-    aside[class*="SidebarContainer"] {
-      background-color: var(--kfl-dark) !important;
-      border-right: 1px solid #263140 !important;
-      padding-top: 16px !important;
+    html body aside[class*="SidebarContainer"] {
+      background-color: var(--kfl-dark);
+      border-right: 1px solid #263140;
+      padding-top: 16px;
     }
 
-    aside[class*="SidebarContainer"] h2 {
-      font-family: 'Anton', sans-serif !important;
-      letter-spacing: 0.8px !important;
-      font-size: clamp(1rem, 1.3vw, 1.2rem) !important;
-      color: #ffffff !important;
-      text-transform: uppercase !important;
+    html body aside[class*="SidebarContainer"] h2 {
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 0.8px;
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      color: #ffffff;
+      text-transform: uppercase;
     }
 
-    aside[class*="SidebarContainer"] a {
-      border-radius: 6px !important;
-      margin: 4px 10px !important;
-      padding: 10px 14px !important;
-      font-weight: 600 !important;
-      font-size: clamp(0.8rem, 0.95vw, 0.9rem) !important;
-      transition: background-color 0.15s ease !important;
+    html body aside[class*="SidebarContainer"] a {
+      border-radius: 6px;
+      margin: 4px 10px;
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: clamp(0.8rem, 0.95vw, 0.9rem);
+      transition: background-color 0.15s ease;
     }
 
-    aside[class*="SidebarContainer"] a[class*="active"],
-    aside[class*="SidebarContainer"] a:hover {
-      background-color: var(--kfl-blue) !important;
-      color: #ffffff !important;
+    html body aside[class*="SidebarContainer"] a[class*="active"],
+    html body aside[class*="SidebarContainer"] a:hover {
+      background-color: var(--kfl-blue);
+      color: #ffffff;
     }
 
-    /* Aprovechar todo el ancho disponible en el área principal */
-    main[class*="MainView"],
-    div[class*="CollectionContainer"],
-    div[class*="EntriesContainer"] {
-      max-width: 100% !important;
-      width: 100% !important;
+    /* Ancho completo en colecciones y listados */
+    html body main[class*="MainView"],
+    html body div[class*="CollectionContainer"],
+    html body div[class*="EntriesContainer"] {
+      max-width: 100%;
+      width: 100%;
     }
 
-    /* Filas de colecciones estilo tabla limpia */
-    ul[class*="ListCards"] li,
-    a[class*="ListCardLink"] {
-      max-width: 100% !important;
-      width: 100% !important;
-      border-radius: 6px !important;
-      border: 1px solid var(--kfl-border) !important;
-      border-left: 4px solid var(--kfl-navy) !important;
-      background: var(--kfl-surface) !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
-      transition: border-left-color 0.12s ease, background-color 0.12s ease !important;
+    html body ul[class*="ListCards"] li,
+    html body a[class*="ListCardLink"] {
+      max-width: 100%;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--kfl-border);
+      border-left: 4px solid var(--kfl-navy);
+      background: var(--kfl-surface);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      transition: border-left-color 0.12s ease, background-color 0.12s ease;
     }
 
-    a[class*="ListCardLink"]:hover {
-      border-left-color: var(--kfl-red) !important;
-      background-color: #f8fafc !important;
+    html body a[class*="ListCardLink"]:hover {
+      border-left-color: var(--kfl-red);
+      background-color: #f8fafc;
     }
 
-    /* Editor de entradas: ancho líquido */
-    div[class*="ControlPaneContainer"] {
-      max-width: 1400px !important;
-      width: 100% !important;
-      margin: 0 auto !important;
-      padding: clamp(12px, 2vw, 24px) !important;
+    /* Editor de entradas: contenedor líquido */
+    html body div[class*="ControlPaneContainer"] {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: clamp(12px, 2vw, 24px);
     }
 
-    /* Categorías principales siempre al 100% de ancho */
-    div[class*="ControlPaneContainer"] > div[class*="ControlContainer"] {
-      width: 100% !important;
-      display: block !important;
-      margin-bottom: 14px !important;
+    html body div[class*="ControlPaneContainer"] > div[class*="ControlContainer"] {
+      width: 100%;
+      display: block;
+      margin-bottom: 14px;
     }
 
-    /* Barra superior de ítems de lista (flecha expandir/contraer + icono arrastrar = intactos) */
-    div[class*="ListItemTopBar"],
-    div[class*="ObjectWidgetTopBar"] {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      padding: 6px 12px !important;
-      min-height: 36px !important;
-      font-size: clamp(0.78rem, 0.95vw, 0.86rem) !important;
-      font-weight: 600 !important;
+    /* Barras de colapso y botones de acordeón 100% cliqueables */
+    html body div[class*="TopBar"] {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px;
+      min-height: 36px;
+      font-size: clamp(0.78rem, 0.95vw, 0.86rem);
+      font-weight: 600;
     }
 
-    div[class*="ListItemTopBar"] button,
-    div[class*="ObjectWidgetTopBar"] button {
-      width: auto !important;
-      flex: 0 0 auto !important;
-      cursor: pointer !important;
+    html body div[class*="TopBar"] button,
+    html body button[aria-expanded],
+    html body button[class*="ExpandButton"] {
+      position: relative;
+      z-index: 6;
+      pointer-events: auto;
+      cursor: pointer;
+      width: auto;
+      flex: 0 0 auto;
     }
 
-    /* Contenedor padre e intermedio de campos internos: restaurar alineación horizontal en 4 columnas */
-    div[class*="ListItem"] > div:not([class*="TopBar"]),
-    div[class*="ListItem"] > div:not([class*="TopBar"]) > div,
-    div[class*="NestedObjectFields"] {
-      display: flex !important;
-      flex-wrap: wrap !important;
-      align-items: flex-end !important;
-      gap: 12px !important;
-      width: 100% !important;
+    /* Solo el contenedor directo de campos hijos se organiza en filas horizontales de 4 columnas */
+    html body div[class*="ListItem"] div:has(> div[class*="ControlContainer"]) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 12px;
+      width: 100%;
     }
 
-    div[class*="ListItem"] > div:not([class*="TopBar"]) {
-      background: #f8fafc !important;
-      padding: 14px !important;
-      border-radius: 0 0 8px 8px !important;
-      border: 1px solid var(--kfl-border) !important;
-      border-top: none !important;
+    html body div[class*="ListItem"] > div:has(div[class*="ControlContainer"]):not([class*="TopBar"]) {
+      background: #f8fafc;
+      padding: 14px;
+      border-radius: 0 0 8px 8px;
+      border: 1px solid var(--kfl-border);
+      border-top: none;
     }
 
-    /* Cada campo interno (4 columnas líquidas en desktop, 1 en móvil) */
-    div[class*="ListItem"] div[class*="ControlContainer"] {
-      flex: 1 1 calc(25% - 12px) !important;
-      min-width: 185px !important;
-      max-width: 100% !important;
-      margin: 0 !important;
+    html body div[class*="ListItem"] div[class*="ControlContainer"] {
+      flex: 1 1 calc(25% - 12px);
+      min-width: 185px;
+      max-width: 100%;
+      margin: 0;
     }
 
     /* Etiquetas uniformes estilo KFL */
-    div[class*="ListItem"] label[class*="FieldLabel"] {
-      font-size: 0.68rem !important;
-      font-weight: 700 !important;
-      letter-spacing: 0.4px !important;
-      padding: 3px 8px !important;
-      margin-bottom: 0 !important;
-      text-transform: uppercase !important;
+    html body div[class*="ListItem"] label[class*="FieldLabel"] {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      padding: 3px 8px;
+      margin-bottom: 0;
+      text-transform: uppercase;
     }
 
-    /* Uniformidad absoluta entre inputs de texto/número y dropdowns React-Select (38px exactos) */
-    div[class*="ListItem"] input[type="text"],
-    div[class*="ListItem"] input[type="number"],
-    div[class*="ListItem"] select,
-    div[class*="ListItem"] div[class*="control"],
-    div[class*="ListItem"] div[class*="Select"] > div {
-      width: 100% !important;
-      height: 38px !important;
-      min-height: 38px !important;
-      max-height: 38px !important;
-      padding: 0 10px !important;
-      font-size: 0.82rem !important;
-      font-family: 'Montserrat', sans-serif !important;
-      font-weight: 600 !important;
-      text-transform: uppercase !important;
-      border-radius: 5px !important;
-      display: flex !important;
-      align-items: center !important;
+    /* Altura uniforme (38px) entre inputs de texto/número y dropdowns React-Select */
+    html body div[class*="ListItem"] input[type="text"],
+    html body div[class*="ListItem"] input[type="number"],
+    html body div[class*="ListItem"] select,
+    html body div[class*="ListItem"] div[class*="control"],
+    html body div[class*="ListItem"] div[class*="Select"] > div {
+      width: 100%;
+      height: 38px;
+      min-height: 38px;
+      max-height: 38px;
+      padding: 0 10px;
+      font-size: 0.82rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      text-transform: uppercase;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
     }
 
-    div[class*="ListItem"] div[class*="control"] > div:first-child {
-      padding: 0 !important;
-      min-height: 36px !important;
-      height: 36px !important;
-      display: flex !important;
-      align-items: center !important;
+    html body div[class*="ListItem"] div[class*="control"] > div:first-child {
+      padding: 0;
+      min-height: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
     }
 
-    div[class*="ListItem"] div[class*="indicatorContainer"] {
-      padding: 4px 6px !important;
+    html body div[class*="ListItem"] div[class*="indicatorContainer"] {
+      padding: 4px 6px;
     }
 
     /* Botones principales (Guardar / Publicar / Nueva entrada) */
-    button[class*="PublishButton"],
-    a[class*="CollectionTopNewButton"] {
-      background-color: var(--kfl-red) !important;
-      border-color: var(--kfl-red) !important;
-      color: #ffffff !important;
-      font-weight: 700 !important;
-      border-radius: 6px !important;
+    html body button[class*="PublishButton"],
+    html body a[class*="CollectionTopNewButton"] {
+      background-color: var(--kfl-red);
+      border-color: var(--kfl-red);
+      color: #ffffff;
+      font-weight: 700;
+      border-radius: 6px;
     }
 
     /* Adaptación móvil para pantallas <= 768px */
     @media (max-width: 768px) {
-      aside[class*="SidebarContainer"] {
-        width: 100% !important;
-        position: relative !important;
+      html body aside[class*="SidebarContainer"] {
+        width: 100%;
+        position: relative;
       }
-      div[class*="ListItem"] div[class*="ControlContainer"] {
-        flex: 1 1 100% !important;
+      html body div[class*="ListItem"] div[class*="ControlContainer"] {
+        flex: 1 1 100%;
       }
     }
   </style>

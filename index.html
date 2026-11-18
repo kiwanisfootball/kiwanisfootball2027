@@ -206,9 +206,25 @@
       const MASTER_GAS_URL = 'https://script.google.com/macros/s/AKfycbx3_EVe78LqjDhXPdRVc4uLBKDVO1HsQgvur6JDGU76bYYEI0FWgHJVL8otRxr5ljjP/exec';
 
       try {
-        let respuesta = await fetch(MASTER_GAS_URL);
-        if (!respuesta.ok) throw new Error('Error al conectar con Google Sheets');
-        let data = await respuesta.json();
+        let data = null;
+        try {
+          const local = await fetch('data/scores.json', { cache: 'no-cache' });
+          if (local.ok) {
+            const candidate = await local.json();
+            if (candidate && !Array.isArray(candidate) && Array.isArray(candidate.matches) && candidate.matches.length) {
+              data = candidate;
+            }
+          }
+        } catch (error) {
+          console.warn('No se pudo leer data/scores.json; se consultará el SOT.', error);
+        }
+
+        if (!data) {
+          const respuesta = await fetch(MASTER_GAS_URL);
+          if (!respuesta.ok) throw new Error('Error al conectar con Google Sheets');
+          data = await respuesta.json();
+        }
+
         let semanaActiva = data.currentWeek; 
         let partidos = data.matches || [];
 
@@ -226,9 +242,14 @@
         tickerContainer.classList.remove('is-logo-slide');
         let htmlTicker = "";
         partidosSemanaActual.forEach(partido => {
-          let logoLocal = logosEquipos.find(l => l.name === partido.h)?.file || 'assets/img/KFL-logo.svg';
-          let logoVisita = logosEquipos.find(l => l.name === partido.v)?.file || 'assets/img/KFL-logo.svg';
-          let categoriaLimpia = partido.cat.replace("FLAG", "").replace("CONTACT", "").trim();
+          const local = partido.h || partido.homeTeam || '';
+          const visitante = partido.v || partido.awayTeam || '';
+          const categoria = String(partido.cat || partido.category || '');
+          const scoreLocal = partido.sL ?? partido.homeScore ?? '';
+          const scoreVisitante = partido.sV ?? partido.awayScore ?? '';
+          let logoLocal = logosEquipos.find(l => l.name === local)?.file || partido.homeLogo || 'assets/img/KFL-logo.svg';
+          let logoVisita = logosEquipos.find(l => l.name === visitante)?.file || partido.awayLogo || 'assets/img/KFL-logo.svg';
+          let categoriaLimpia = categoria.replace("FLAG", "").replace("CONTACT", "").trim();
           
           htmlTicker += `
             <article class="game-card">
@@ -237,19 +258,19 @@
               </div>
               <div class="game-team">
                 <div class="team-info">
-                  <img src="${logoLocal}" alt="${partido.h}" class="team-logo-small">
-                  <span>${partido.h}</span>
+                  <img src="${logoLocal}" alt="${local}" class="team-logo-small">
+                  <span>${local}</span>
                 </div>
-                <span class="game-score">${partido.sL}</span>
+                <span class="game-score">${scoreLocal}</span>
               </div>
               <div class="game-team">
                 <div class="team-info">
-                  <img src="${logoVisita}" alt="${partido.v}" class="team-logo-small">
-                  <span>${partido.v}</span>
+                  <img src="${logoVisita}" alt="${visitante}" class="team-logo-small">
+                  <span>${visitante}</span>
                 </div>
-                <span class="game-score">${partido.sV}</span>
+                <span class="game-score">${scoreVisitante}</span>
               </div>
-              <div class="game-status">${partido.final ? "FINAL" : partido.dia + " | " + partido.hora}</div>
+              <div class="game-status">${partido.final ? "FINAL" : (partido.dia || '') + " | " + (partido.hora || '')}</div>
             </article>
           `;
         });

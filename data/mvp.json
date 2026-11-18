@@ -1,0 +1,669 @@
+{
+  "records": [
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2012",
+      "equipo": "OWLS",
+      "jugador": "ALBERTO GARCÍA DE PAREDES"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2013",
+      "equipo": "RAIDERS",
+      "jugador": "MIGUEL ZUBIETA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2014",
+      "equipo": "OWLS",
+      "jugador": "JORGE LUIS ÁVILA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2015",
+      "equipo": "OWLS",
+      "jugador": "JORGE LUIS ÁVILA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2016",
+      "equipo": "RAIDERS",
+      "jugador": "ADRIÁN ROUX"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2017",
+      "equipo": "RAIDERS",
+      "jugador": "ADRIÁN ROUX"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2018",
+      "equipo": "RAIDERS",
+      "jugador": "ADRIÁN ROUX"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2018",
+      "equipo": "SPARTANS",
+      "jugador": "JULIO OW YOUNG"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2019",
+      "equipo": "RAIDERS",
+      "jugador": "ADRIÁN ROUX"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2021",
+      "equipo": "OWLS",
+      "jugador": "OSVALDO HEILBRON"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2022",
+      "equipo": "RAIDERS",
+      "jugador": "FELIPE RIERA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2022",
+      "equipo": "KOLTS",
+      "jugador": "JOSHUA SCOTT"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2023",
+      "equipo": "DRAGONS",
+      "jugador": "ETHAN DAVIS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2024",
+      "equipo": "OWLS",
+      "jugador": "JUAN RAMÓN ACHURRA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2025",
+      "equipo": "OWLS",
+      "jugador": "DANIEL PROENZA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2026",
+      "equipo": "OWLS",
+      "jugador": "BOLIVAR VALLARINO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2001",
+      "equipo": "OWLS",
+      "jugador": "NOEL RIANDE"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2002",
+      "equipo": "OWLS",
+      "jugador": "FERNANDO ARIAS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2003",
+      "equipo": "RAIDERS",
+      "jugador": "RAFAEL \"BILLY\" LUCK"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2004",
+      "equipo": "OWLS",
+      "jugador": "LUCAS ZARAK"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2005",
+      "equipo": "SPARTANS",
+      "jugador": "RUBEN RAMOS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2006",
+      "equipo": "OWLS",
+      "jugador": "ALEJANDRO HOYOS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2007",
+      "equipo": "SPARTANS",
+      "jugador": "DENNIS ALLEN"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2008",
+      "equipo": "OWLS",
+      "jugador": "RODRIGO HENRÍQUEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2009",
+      "equipo": "OWLS",
+      "jugador": "MATTHEW DE ROCHE"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2010",
+      "equipo": "KOLTS",
+      "jugador": "CÉSAR BRATHWAITE"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2011",
+      "equipo": "SPARTANS",
+      "jugador": "ARTURO SALCEDO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2012",
+      "equipo": "SPARTANS",
+      "jugador": "ERIC LÓPEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2012",
+      "equipo": "RAIDERS",
+      "jugador": "JOSE IGNACIO ARANGO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2013",
+      "equipo": "RAIDERS",
+      "jugador": "IGNACIO FERNÁNDEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2014",
+      "equipo": "SPARTANS",
+      "jugador": "JULIO OW YOUNG"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2015",
+      "equipo": "SPARTANS",
+      "jugador": "JULIO OW YOUNG"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2016",
+      "equipo": "RAIDERS",
+      "jugador": "ADRIÁN ROUX"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2017",
+      "equipo": "OWLS",
+      "jugador": "JOSÉ VELASCO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2018",
+      "equipo": "OWLS",
+      "jugador": "OSVALDO HEILBRON"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2019",
+      "equipo": "OWLS",
+      "jugador": "OSVALDO HEILBRON"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2021",
+      "equipo": "OWLS",
+      "jugador": "JUAN RAMÓN ACHURRA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2022",
+      "equipo": "SPARTANS",
+      "jugador": "JOSE LUIS FERNÁNDEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2023",
+      "equipo": "OWLS",
+      "jugador": "RICARDO ARIAS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2024",
+      "equipo": "OWLS",
+      "jugador": "BOLIVAR VALLARINO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2025",
+      "equipo": "OWLS",
+      "jugador": "CARLOS MOSES"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2025",
+      "equipo": "EAGLES",
+      "jugador": "NICKOLAS MARTÍNEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2026",
+      "equipo": "EAGLES",
+      "jugador": "NICKOLAS MARTÍNEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2008",
+      "equipo": "RAIDERS",
+      "jugador": "MIGUEL ZUBIETA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2009",
+      "equipo": "RAIDERS",
+      "jugador": "JOSÉ IGNACIO ARANGO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2010",
+      "equipo": "RAIDERS",
+      "jugador": "IGNACIO FERNÁNDEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2011",
+      "equipo": "DRAGONS",
+      "jugador": "ISAAC BARRIOS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2012",
+      "equipo": "SPARTANS",
+      "jugador": "JULIO OW YOUNG"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2013",
+      "equipo": "RAIDERS",
+      "jugador": "ADRIÁN ROUX"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2014",
+      "equipo": "OWLS",
+      "jugador": "MIGUEL BOYD"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2015",
+      "equipo": "RAIDERS",
+      "jugador": "ROBERTO DE ARAUJO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2016",
+      "equipo": "KOLTS",
+      "jugador": "FELIPE TRISTÁN"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2017",
+      "equipo": "RAIDERS",
+      "jugador": "FELIPE RIERA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2018",
+      "equipo": "OWLS",
+      "jugador": "JUAN RAMÓN ACHURRA"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2019",
+      "equipo": "RAIDERS",
+      "jugador": "ELÍAS SIMONS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2021",
+      "equipo": "KOLTS",
+      "jugador": "LUIS FERNANDO FERNÁNDEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2022",
+      "equipo": "OWLS",
+      "jugador": "ALFREDO MADURO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2023",
+      "equipo": "OWLS",
+      "jugador": "ALFREDO MADURO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2024",
+      "equipo": "DRAGONS",
+      "jugador": "CÉSAR RUIZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2025",
+      "equipo": "EAGLES",
+      "jugador": "ANTHONY SÁNCHEZ"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2026",
+      "equipo": "EAGLES",
+      "jugador": "AARON ARROYO"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "micro",
+      "season": "2025",
+      "equipo": "OWLS",
+      "jugador": "FERNANDO ROY"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "micro",
+      "season": "2026",
+      "equipo": "RAIDERS",
+      "jugador": "DIEGO PINZÓN"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2015",
+      "equipo": "SPARTANS",
+      "jugador": "ANA PAULA DE LEÓN"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2016",
+      "equipo": "OWLS",
+      "jugador": "JULIETTE SÁNCHEZ"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2017",
+      "equipo": "OWLS",
+      "jugador": "LAUREN DOWELL"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2017",
+      "equipo": "DRAGONS",
+      "jugador": "VALENTINA DONADO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2018",
+      "equipo": "PANTHERS",
+      "jugador": "MARÍA GUADALUPE SAAVEDRA"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2019",
+      "equipo": "OWLS",
+      "jugador": "JULIETTE COLE"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2021",
+      "equipo": "RAIDERS",
+      "jugador": "ANA PATRICIA VINCENSINI"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2022",
+      "equipo": "RAIDERS",
+      "jugador": "ANA PATRICIA VINCENSINI"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2023",
+      "equipo": "OWLS",
+      "jugador": "ANGELINA JURADO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2024",
+      "equipo": "KOLTS",
+      "jugador": "ALEJANDRA RAMOS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2025",
+      "equipo": "OWLS",
+      "jugador": "ANGELINA JURADO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2026",
+      "equipo": "OWLS",
+      "jugador": "ANGELINA JURADO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2015",
+      "equipo": "DRAGONS",
+      "jugador": "VALENTINA DONADO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2016",
+      "equipo": "SPARTANS",
+      "jugador": "ANA VICTORIA URIBE"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2017",
+      "equipo": "SPARTANS",
+      "jugador": "CATHERINE CASTILLO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2018",
+      "equipo": "OWLS",
+      "jugador": "JULIETTE COLE"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2019",
+      "equipo": "SPARTANS",
+      "jugador": "DANIELLA CÓRDOBA"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2021",
+      "equipo": "OWLS",
+      "jugador": "DANIELA HINCAPIE"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2022",
+      "equipo": "BLACK TIGERS",
+      "jugador": "BLANCA MONTEVERDE"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2023",
+      "equipo": "OWLS",
+      "jugador": "SOFÍA GAMECHO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2024",
+      "equipo": "KOLTS",
+      "jugador": "ALEJANDRA RAMOS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2025",
+      "equipo": "KOLTS",
+      "jugador": "ALEJANDRA RAMOS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2026",
+      "equipo": "EAGLES",
+      "jugador": "CLELIA ARAÚZ"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2017",
+      "equipo": "SLAVES",
+      "jugador": "JULIA MOTERA"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2018",
+      "equipo": "SPARTANS",
+      "jugador": "MARIANA TABARES"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2019",
+      "equipo": "KOLTS",
+      "jugador": "ANDREA FERRO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2021",
+      "equipo": "OWLS",
+      "jugador": "SOFIA GAMECHO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2022",
+      "equipo": "DRAGONS",
+      "jugador": "PAULA BATISTA"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2023",
+      "equipo": "KOLTS",
+      "jugador": "JIA MONG"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2024",
+      "equipo": "EAGLES",
+      "jugador": "EUGENIA LÓPEZ"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2025",
+      "equipo": "RAIDERS",
+      "jugador": "JOLIE CALVO"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2026",
+      "equipo": "RAIDERS",
+      "jugador": "JIMENA CASTILLO"
+    }
+  ]
+}

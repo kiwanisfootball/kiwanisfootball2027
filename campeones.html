@@ -176,6 +176,20 @@
         </div>
       </section>
 
+      <section id="varsityRecordsSection">
+        <h2 class="champs-hero-title" style="font-size:clamp(1.25rem, 4vw, 2rem); margin:24px 0 12px;">Récords Varsity</h2>
+        <div class="champs-single-table-container">
+          <table class="champs-table">
+            <thead>
+              <tr><th>Estadística</th><th>Marca</th><th>Titular</th><th>Equipo</th><th>Temporada</th></tr>
+            </thead>
+            <tbody id="records-varsity">
+              <tr><td colspan="5" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando récords...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
     </div>
 
   </main>
@@ -250,6 +264,7 @@
       mini: [],
       micro: []
     };
+    let recordsLoaded = false;
 
     function selectModality(modality, btnElement) {
       currentModality = modality;
@@ -304,11 +319,32 @@
     async function loadModalityData() {
       if (!currentModality) return;
 
+      let localRecords = null;
+      try {
+        const localResponse = await fetch('data/campeones.json', { cache: 'no-cache' });
+        if (localResponse.ok) {
+          const localData = await localResponse.json();
+          if (Array.isArray(localData?.records)) localRecords = localData.records;
+        }
+      } catch (error) {
+        console.warn('No se pudo leer data/campeones.json; se consultarán los CSV del SOT.', error);
+      }
+
       for (const [catKey, config] of Object.entries(SHEETS_CONFIG[currentModality])) {
         if (!config || !config.url) continue;
 
         const tbody = document.getElementById(config.targetId);
         if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>';
+
+        const rowsFromJson = (localRecords || [])
+          .filter(record => record.modalidad === currentModality && record.categoria === catKey)
+          .map(record => [record.season, record.campeon, record.subcampeon]);
+        if (rowsFromJson.length) {
+          const validRows = renderTableRows(config.targetId, rowsFromJson);
+          categoryStats[catKey] = validRows || [];
+          if (activeCategory === catKey) renderCategoryLeaderboard(catKey);
+          continue;
+        }
 
         try {
           const res = await fetch(`${config.url}&_t=${Date.now()}`);
@@ -326,6 +362,36 @@
           renderEmptyState(config.targetId, 'Error al cargar datos desde Google Sheets.');
           categoryStats[catKey] = [];
         }
+      }
+      if (!recordsLoaded) cargarRecordsVarsity();
+    }
+
+    async function cargarRecordsVarsity() {
+      recordsLoaded = true;
+      const tbody = document.getElementById('records-varsity');
+      try {
+        const response = await fetch('data/records.json', { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        const records = Array.isArray(data?.records) ? data.records : [];
+        if (!records.length) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#64748b; padding:25px;">No hay récords Varsity publicados.</td></tr>';
+          return;
+        }
+        tbody.replaceChildren();
+        records.forEach(record => {
+          const row = document.createElement('tr');
+          [record.statistic, record.mark, record.holder, record.team, record.season]
+            .forEach(value => {
+              const cell = document.createElement('td');
+              cell.textContent = value || '-';
+              row.appendChild(cell);
+            });
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error al cargar data/records.json:', error);
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#64748b; padding:25px;">Récords Varsity no disponibles.</td></tr>';
       }
     }
 

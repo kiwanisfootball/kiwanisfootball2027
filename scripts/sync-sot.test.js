@@ -1,0 +1,100 @@
+'use strict';
+
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const {
+  normalizeCsvRecords,
+  normalizeLeagueDatabase,
+  normalizePublicRoster,
+  normalizeRecordsCSV,
+  normalizeScores,
+  parseCSV
+} = require('./sync-sot');
+
+test('CSV parser handles quoted commas, escaped quotes, and embedded newlines', () => {
+  assert.deepEqual(parseCSV('season,team,player\r\n2025,"Owls, AIP","Doe, ""Ace""\nSmith"'), [
+    ['season', 'team', 'player'],
+    ['2025', 'Owls, AIP', 'Doe, "Ace"\nSmith']
+  ]);
+});
+
+test('calendar normalization keeps only public schedule and standings fields', () => {
+  const result = normalizeLeagueDatabase({
+    data: {
+      contact: {
+        varsity: {
+          partidos: [{ home: 'OWLS', away: 'RAIDERS', scoreH: 7, scoreA: 0, email: 'private@example.test' }],
+          tabla: [{ equipo: 'OWLS', jj: 1, pts: 3, rank: 1, cedula: '123' }]
+        }
+      }
+    }
+  }, 'contact');
+
+  assert.deepEqual(result.varsity.partidos, [{ home: 'OWLS', away: 'RAIDERS', scoreH: 7, scoreA: 0 }]);
+  assert.deepEqual(result.varsity.tabla, [{ equipo: 'OWLS', jj: 1, pts: 3, rank: 1 }]);
+  assert.deepEqual(result.juvenil, { partidos: [], tabla: [], rosters: [] });
+});
+
+test('public roster export discards identification, contact, and credential fields', () => {
+  assert.deepEqual(normalizePublicRoster({
+    status: 'success',
+    players: [{
+      nombre: 'Ana',
+      apellido: 'Pérez',
+      dorsal: 12,
+      cedula: '8-123-456',
+      email: 'ana@example.test',
+      password: 'secret'
+    }]
+  }), {
+    players: [{ nombre: 'Ana', apellido: 'Pérez', jersey: '12' }]
+  });
+});
+
+test('ticker normalization accepts only its documented display fields', () => {
+  assert.deepEqual(normalizeScores({
+    currentWeek: 'WEEK 2',
+    matches: [{ h: 'OWLS', v: 'EAGLES', sL: 14, sV: 7, active: 'false', email: 'hidden@example.test' }]
+  }), {
+    currentWeek: 'WEEK 2',
+    matches: [{ h: 'OWLS', v: 'EAGLES', sL: 14, sV: 7, active: false }]
+  });
+});
+
+test('Varsity record CSV requires named public-stat columns and ignores unrelated columns', () => {
+  assert.deepEqual(normalizeRecordsCSV(parseCSV(
+    'Category,Statistic,Mark,Holder,Team,Cedula\nVarsity,Most yards,1200,A. Player,OWLS,123'
+  )), [{
+    category: 'Varsity',
+    statistic: 'Most yards',
+    mark: '1200',
+    holder: 'A. Player',
+    team: 'OWLS'
+  }]);
+
+  assert.throws(() => normalizeRecordsCSV(parseCSV('Season,Name,Value\n2025,Player,12')), /encabezados/);
+});
+
+test('champions and MVP CSV rows are normalized to their frontend contract', () => {
+  assert.deepEqual(normalizeCsvRecords([
+    ['Season', 'Champion', 'Runner-up'],
+    ['2025', 'OWLS', 'EAGLES']
+  ], 'champions', 'contact', 'varsity'), [{
+    modalidad: 'contact',
+    categoria: 'varsity',
+    season: '2025',
+    campeon: 'OWLS',
+    subcampeon: 'EAGLES'
+  }]);
+
+  assert.deepEqual(normalizeCsvRecords([
+    ['Season', 'Team', 'Player'],
+    ['2025', 'OWLS', 'A. Player']
+  ], 'mvp', 'contact', 'varsity'), [{
+    modalidad: 'contact',
+    categoria: 'varsity',
+    season: '2025',
+    equipo: 'OWLS',
+    jugador: 'A. Player'
+  }]);
+});

@@ -282,12 +282,30 @@
       if (!currentModality) return;
 
       const modalityMap = SHEETS_CONFIG[currentModality];
+      let localRecords = null;
+      try {
+        const localResponse = await fetch('data/mvp.json', { cache: 'no-cache' });
+        if (localResponse.ok) {
+          const localData = await localResponse.json();
+          if (Array.isArray(localData?.records)) localRecords = localData.records;
+        }
+      } catch (error) {
+        console.warn('No se pudo leer data/mvp.json; se consultará el SOT.', error);
+      }
 
-      for (const config of Object.values(modalityMap)) {
+      for (const [category, config] of Object.entries(modalityMap)) {
         if (!config) continue;
 
         const tbody = document.getElementById(config.targetId);
         if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#94a3b8; padding: 25px;">Cargando registros...</td></tr>';
+
+        const rowsFromJson = (localRecords || [])
+          .filter(record => record.modalidad === currentModality && record.categoria === category)
+          .map(record => [record.season, record.equipo, record.jugador]);
+        if (rowsFromJson.length) {
+          renderTableRows(config.targetId, rowsFromJson);
+          continue;
+        }
 
         try {
           const res = await fetch(`${config.url}&_t=${Date.now()}`);

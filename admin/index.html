@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
   <title>KFL Admin | Centro de Control Deportivo y Editorial</title>
   <link rel="icon" type="image/svg+xml" href="/assets/img/KFL-logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,7 +30,7 @@
     .kfl-admin-topbar {
       background: linear-gradient(90deg, var(--kfl-navy) 0%, #133563 100%);
       color: #ffffff;
-      padding: 10px 20px;
+      padding: 10px clamp(10px, 3vw, 20px);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -42,7 +43,7 @@
     .kfl-admin-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: clamp(8px, 2vw, 12px);
       font-family: 'Anton', sans-serif;
       letter-spacing: 0.5px;
       font-size: clamp(1rem, 2vw, 1.25rem);
@@ -59,6 +60,7 @@
       border-radius: 999px;
       font-weight: 600;
       font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+      white-space: nowrap;
     }
 
     /* Personalización de botones y encabezados internos de Decap CMS */
@@ -79,15 +81,35 @@
       letter-spacing: 0.5px;
       color: var(--kfl-navy) !important;
     }
+
+    @media (max-width: 480px) {
+      .kfl-admin-topbar {
+        flex-direction: column;
+        justify-content: center;
+        gap: 8px;
+        text-align: center;
+      }
+
+      .kfl-admin-brand {
+        justify-content: center;
+        letter-spacing: 0;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        white-space: nowrap;
+      }
+
+      .kfl-admin-brand img {
+        height: 28px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="kfl-admin-topbar">
     <div class="kfl-admin-brand">
       <img src="/assets/img/KFL-logo.svg" alt="KFL Logo" />
-      <span>CONSOLA DE ADMINISTRACIÓN — KIWANIS FOOTBALL LEAGUE</span>
+      <span>ADMIN KFL</span>
     </div>
-    <div class="kfl-admin-badge">SOT: Google Sheets Sincronizado</div>
+    <div class="kfl-admin-badge">SOT sincronizado</div>
   </div>
 
   <!-- Carga de Decap CMS -->

@@ -1,0 +1,648 @@
+{
+  "records": [
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2012",
+      "campeon": "OWLS",
+      "subcampeon": "SAINTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2013",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2014",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2015",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2016",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2017",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2018",
+      "campeon": "RAIDERS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2019",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2021",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2022",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2023",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2024",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2025",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "varsity",
+      "season": "2026",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2001",
+      "campeon": "KOBRAS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2002",
+      "campeon": "OWLS",
+      "subcampeon": "KOBRAS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2003",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2004",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2005",
+      "campeon": "OWLS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2006",
+      "campeon": "OWLS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2007",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2008",
+      "campeon": "OWLS",
+      "subcampeon": "TITANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2009",
+      "campeon": "OWLS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2010",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2011",
+      "campeon": "OWLS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2012",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2013",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2014",
+      "campeon": "RAIDERS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2015",
+      "campeon": "SPARTANS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2016",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2017",
+      "campeon": "KOLTS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2018",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2019",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2021",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2022",
+      "campeon": "SPARTANS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2023",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2024",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2025",
+      "campeon": "OWLS",
+      "subcampeon": "EAGLES"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "juvenil",
+      "season": "2026",
+      "campeon": "OWLS",
+      "subcampeon": "EAGLES"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2008",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2009",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2010",
+      "campeon": "RAIDERS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2011",
+      "campeon": "RAIDERS",
+      "subcampeon": "DRAGONS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2012",
+      "campeon": "SPARTANS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2013",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2014",
+      "campeon": "OWLS",
+      "subcampeon": "DRAGONS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2015",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2016",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2017",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2018",
+      "campeon": "OWLS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2019",
+      "campeon": "OWLS",
+      "subcampeon": "DRAGONS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2021",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2022",
+      "campeon": "RAIDERS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2023",
+      "campeon": "OWLS",
+      "subcampeon": "DRAGONS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2024",
+      "campeon": "DRAGONS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2025",
+      "campeon": "EAGLES",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "mini",
+      "season": "2026",
+      "campeon": "OWLS",
+      "subcampeon": "EAGLES"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "micro",
+      "season": "2024",
+      "campeon": "OWLS",
+      "subcampeon": "EAGLES"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "micro",
+      "season": "2025",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "contact",
+      "categoria": "micro",
+      "season": "2026",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2015",
+      "campeon": "SPARTANS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2016",
+      "campeon": "OWLS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2017",
+      "campeon": "DRAGONS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2018",
+      "campeon": "BLACK TIGERS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2019",
+      "campeon": "OWLS",
+      "subcampeon": "BLACK TIGERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2021",
+      "campeon": "OWLS",
+      "subcampeon": "BLACK TIGERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2022",
+      "campeon": "RAIDERS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2023",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2024",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2025",
+      "campeon": "KOLTS",
+      "subcampeon": "DRAGONS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "varsity",
+      "season": "2026",
+      "campeon": "KOLTS",
+      "subcampeon": "DRAGONS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2015",
+      "campeon": "DRAGONS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2016",
+      "campeon": "SPARTANS",
+      "subcampeon": "SLAVES"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2017",
+      "campeon": "OWLS",
+      "subcampeon": "SLAVES"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2018",
+      "campeon": "SPARTANS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2019",
+      "campeon": "SPARTANS",
+      "subcampeon": "OWLS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2021",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2022",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2023",
+      "campeon": "OWLS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2024",
+      "campeon": "KOLTS",
+      "subcampeon": "EAGLES"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "juvenil",
+      "season": "2025",
+      "campeon": "LIONS",
+      "subcampeon": "KOLTS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2017",
+      "campeon": "OWLS",
+      "subcampeon": "BLACK TIGERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2018",
+      "campeon": "OWLS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2019",
+      "campeon": "KOLTS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2021",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2022",
+      "campeon": "DRAGONS",
+      "subcampeon": "EAGLES"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2023",
+      "campeon": "RAIDERS",
+      "subcampeon": "EAGLES"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2024",
+      "campeon": "EAGLES",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2025",
+      "campeon": "KOLTS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "mini",
+      "season": "2026",
+      "campeon": "RAIDERS",
+      "subcampeon": "SPARTANS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "micro",
+      "season": "2024",
+      "campeon": "OWLS",
+      "subcampeon": "RAIDERS"
+    },
+    {
+      "modalidad": "flag",
+      "categoria": "micro",
+      "season": "2025",
+      "campeon": "KOLTS",
+      "subcampeon": "RAIDERS"
+    }
+  ]
+}

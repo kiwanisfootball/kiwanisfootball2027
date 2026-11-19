@@ -106,22 +106,50 @@ test('champions and MVP CSV rows are normalized to their frontend contract', () 
     equipo: 'OWLS',
     jugador: 'A. Player'
   }]);
+
+  assert.deepEqual(normalizeCsvRecords([
+    ['Año', 'Equipo', 'Jugador'],
+    ['2015', 'SPARTANS', 'ANA PAULA DE LEÓN'],
+    ['', 'DRAGONS', 'VALENTINA DONADO'],
+    ['', 'DRAGONS', 'VALENTINA DONADO']
+  ], 'mvp', 'flag', 'varsity'), [{
+    modalidad: 'flag',
+    categoria: 'varsity',
+    season: '2015',
+    equipo: 'SPARTANS',
+    jugador: 'ANA PAULA DE LEÓN'
+  }, {
+    modalidad: 'flag',
+    categoria: 'varsity',
+    season: '2015',
+    equipo: 'DRAGONS',
+    jugador: 'VALENTINA DONADO'
+  }]);
 });
 
-test('history records are grouped in the seven supported league categories', () => {
+test('history records include Flag Varsity and group all eight league categories', () => {
   const flatRecords = normalizeCsvRecords([
     ['Season', 'Champion', 'Runner-up'],
     ['2025', 'OWLS', 'EAGLES']
   ], 'champions', 'contact', 'varsity');
-  const grouped = groupedHistoryRecords(flatRecords, {}, []);
+  const flagVarsityRecords = normalizeCsvRecords([
+    ['Año', 'Campeón', 'Sub-campeón'],
+    ['2015', 'SPARTANS', 'OWLS']
+  ], 'champions', 'flag', 'varsity');
+  const grouped = groupedHistoryRecords([...flatRecords, ...flagVarsityRecords], {}, []);
 
   assert.deepEqual(Object.keys(grouped), ['contact', 'flag']);
   assert.deepEqual(Object.keys(grouped.contact), ['varsity', 'juvenil', 'mini', 'micro']);
-  assert.deepEqual(Object.keys(grouped.flag), ['juvenil', 'mini', 'micro']);
+  assert.deepEqual(Object.keys(grouped.flag), ['varsity', 'juvenil', 'mini', 'micro']);
   assert.deepEqual(grouped.contact.varsity, [{
     season: '2025',
     campeon: 'OWLS',
     subcampeon: 'EAGLES'
+  }]);
+  assert.deepEqual(grouped.flag.varsity, [{
+    season: '2015',
+    campeon: 'SPARTANS',
+    subcampeon: 'OWLS'
   }]);
   assert.deepEqual(grouped.flag.micro, []);
 });

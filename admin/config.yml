@@ -239,6 +239,14 @@ collections:
             name: "flag"
             widget: "object"
             fields:
+              - label: "Flag Varsity"
+                name: "varsity"
+                widget: "list"
+                summary: "{{fields.season}} | {{fields.campeon}} / {{fields.subcampeon}}"
+                fields:
+                  - { label: "Temporada", name: "season", widget: "string" }
+                  - { label: "Campeón", name: "campeon", widget: "string" }
+                  - { label: "Subcampeón", name: "subcampeon", widget: "string", required: false }
               - label: "Flag Juvenil Femenino"
                 name: "juvenil"
                 widget: "list"
@@ -333,6 +341,14 @@ collections:
             name: "flag"
             widget: "object"
             fields:
+              - label: "Flag Varsity"
+                name: "varsity"
+                widget: "list"
+                summary: "{{fields.season}} | {{fields.jugador}} ({{fields.equipo}})"
+                fields:
+                  - { label: "Temporada", name: "season", widget: "string" }
+                  - { label: "Equipo", name: "equipo", widget: "string", required: false }
+                  - { label: "Jugador MVP", name: "jugador", widget: "string" }
               - label: "Flag Juvenil Femenino"
                 name: "juvenil"
                 widget: "list"

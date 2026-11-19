@@ -9,7 +9,7 @@ const DATA_DIR = path.join(ROOT, 'data');
 const CATEGORIES = ['varsity', 'juvenil', 'mini', 'micro'];
 const HISTORY_CATEGORIES = {
   contact: ['varsity', 'juvenil', 'mini', 'micro'],
-  flag: ['juvenil', 'mini', 'micro']
+  flag: ['varsity', 'juvenil', 'mini', 'micro']
 };
 
 const CALENDAR_FIELDS = [
@@ -81,6 +81,15 @@ function cleanNumber(value) {
 function cleanBoolean(value) {
   if (typeof value === 'boolean') return value;
   return ['true', '1', 'yes', 'si', 'sí'].includes(String(value).trim().toLowerCase());
+}
+
+function uniqueRecords(records) {
+  const unique = new Map();
+  for (const record of records) {
+    const key = JSON.stringify(record);
+    if (!unique.has(key)) unique.set(key, record);
+  }
+  return [...unique.values()];
 }
 
 function pickFields(source, fields) {
@@ -205,7 +214,7 @@ function normalizeCsvRecords(rows, kind, modality, category) {
       output.push({ modalidad: modality, categoria: category, season: currentSeason, equipo: team, jugador: third });
     }
   }
-  return output;
+  return uniqueRecords(output);
 }
 
 function normalizeRecordsCSV(rows) {
@@ -353,7 +362,8 @@ function groupedHistoryRecords(freshRecords, oldData, failedCategories) {
             record.modalidad === league && record.categoria === category)
         : freshRecords.filter(record =>
           record.modalidad === league && record.categoria === category);
-      grouped[league][category] = records.map(({ modalidad, categoria, ...record }) => record);
+      grouped[league][category] = uniqueRecords(records)
+        .map(({ modalidad, categoria, ...record }) => record);
     }
   }
   return grouped;

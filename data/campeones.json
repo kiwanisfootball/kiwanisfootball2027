@@ -310,6 +310,63 @@
     ]
   },
   "flag": {
+    "varsity": [
+      {
+        "season": "2015",
+        "campeon": "SPARTANS",
+        "subcampeon": "OWLS"
+      },
+      {
+        "season": "2016",
+        "campeon": "OWLS",
+        "subcampeon": "SPARTANS"
+      },
+      {
+        "season": "2017",
+        "campeon": "DRAGONS",
+        "subcampeon": "OWLS"
+      },
+      {
+        "season": "2018",
+        "campeon": "BLACK TIGERS",
+        "subcampeon": "SPARTANS"
+      },
+      {
+        "season": "2019",
+        "campeon": "OWLS",
+        "subcampeon": "BLACK TIGERS"
+      },
+      {
+        "season": "2021",
+        "campeon": "OWLS",
+        "subcampeon": "BLACK TIGERS"
+      },
+      {
+        "season": "2022",
+        "campeon": "RAIDERS",
+        "subcampeon": "KOLTS"
+      },
+      {
+        "season": "2023",
+        "campeon": "OWLS",
+        "subcampeon": "KOLTS"
+      },
+      {
+        "season": "2024",
+        "campeon": "OWLS",
+        "subcampeon": "KOLTS"
+      },
+      {
+        "season": "2025",
+        "campeon": "KOLTS",
+        "subcampeon": "DRAGONS"
+      },
+      {
+        "season": "2026",
+        "campeon": "KOLTS",
+        "subcampeon": "DRAGONS"
+      }
+    ],
     "juvenil": [
       {
         "season": "2015",

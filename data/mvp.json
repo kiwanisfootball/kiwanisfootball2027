@@ -325,6 +325,68 @@
     ]
   },
   "flag": {
+    "varsity": [
+      {
+        "season": "2015",
+        "equipo": "SPARTANS",
+        "jugador": "ANA PAULA DE LEÓN"
+      },
+      {
+        "season": "2016",
+        "equipo": "OWLS",
+        "jugador": "JULIETTE SÁNCHEZ"
+      },
+      {
+        "season": "2017",
+        "equipo": "OWLS",
+        "jugador": "LAUREN DOWELL"
+      },
+      {
+        "season": "2017",
+        "equipo": "DRAGONS",
+        "jugador": "VALENTINA DONADO"
+      },
+      {
+        "season": "2018",
+        "equipo": "PANTHERS",
+        "jugador": "MARÍA GUADALUPE SAAVEDRA"
+      },
+      {
+        "season": "2019",
+        "equipo": "OWLS",
+        "jugador": "JULIETTE COLE"
+      },
+      {
+        "season": "2021",
+        "equipo": "RAIDERS",
+        "jugador": "ANA PATRICIA VINCENSINI"
+      },
+      {
+        "season": "2022",
+        "equipo": "RAIDERS",
+        "jugador": "ANA PATRICIA VINCENSINI"
+      },
+      {
+        "season": "2023",
+        "equipo": "OWLS",
+        "jugador": "ANGELINA JURADO"
+      },
+      {
+        "season": "2024",
+        "equipo": "KOLTS",
+        "jugador": "ALEJANDRA RAMOS"
+      },
+      {
+        "season": "2025",
+        "equipo": "OWLS",
+        "jugador": "ANGELINA JURADO"
+      },
+      {
+        "season": "2026",
+        "equipo": "OWLS",
+        "jugador": "ANGELINA JURADO"
+      }
+    ],
     "juvenil": [
       {
         "season": "2015",

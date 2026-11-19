@@ -1,26 +1,45 @@
 /**
- * Notifica a GitHub Actions que el SOT cambió. No envía valores de celdas,
- * nombres de jugadores, identificaciones ni datos de hojas al repositorio.
+ * Webhook de Google Sheets para solicitar la sincronización de datos KFL.
+ * Solo notifica a GitHub; no lee ni transmite valores de celdas.
  *
- * Configuración:
- * 1. Guarda un token fine-grained en Project Settings > Script properties
- *    como GITHUB_TOKEN (permiso Contents: read/write en este repositorio).
- * 2. Crea un activador instalable "On edit" para handleSotEdit.
- * 3. Las URLs de Apps Script y CSV se mantienen en js/config-ligas.js;
- *    este webhook solo dispara la sincronización y no transmite datos de celdas.
+ * Configuración en Google Apps Script:
+ * 1. Pega este archivo en el editor Apps Script vinculado a la hoja y guarda.
+ * 2. Abre Project Settings (engranaje) > Script properties > Add script property.
+ *    Name: GITHUB_TOKEN
+ *    Value: pega aquí un fine-grained GitHub PAT con Contents: read/write
+ *    únicamente para kiwanisfootball/kiwanisfootball2027.
+ * 3. Abre Triggers (reloj) > Add Trigger:
+ *    - Function: handleSotEdit; event source: From spreadsheet;
+ *      event type: On edit.
+ *    - Añade otro trigger: handleSotChange; From spreadsheet; On change.
+ * 4. Autoriza el acceso solicitado por Google. El lock y la ventana de espera
+ *    de 2 minutos agrupan ediciones cercanas para evitar dispatches repetidos.
  */
 const KFL_GITHUB_OWNER = 'kiwanisfootball';
 const KFL_GITHUB_REPO = 'kiwanisfootball2027';
-const KFL_DISPATCH_EVENT = 'sot-updated';
+const KFL_DISPATCH_EVENT = 'sync-sot';
 const KFL_DISPATCH_COOLDOWN_MS = 120000;
 
 function handleSotEdit(event) {
   if (!event || !event.range) {
     throw new Error('handleSotEdit requiere un evento de edición instalable.');
   }
+  notifyKflSync_();
+}
 
+function handleSotChange(event) {
+  if (!event || !event.changeType) {
+    throw new Error('handleSotChange requiere un evento de cambio instalable.');
+  }
+  notifyKflSync_();
+}
+
+function notifyKflSync_() {
   const lock = LockService.getScriptLock();
-  if (!lock.tryLock(5000)) return;
+  if (!lock.tryLock(5000)) {
+    console.log('Sincronización omitida: ya hay una notificación en curso.');
+    return;
+  }
 
   try {
     const properties = PropertiesService.getScriptProperties();
@@ -28,7 +47,10 @@ function handleSotEdit(event) {
     if (!token) throw new Error('Configura GITHUB_TOKEN en las propiedades del script.');
 
     const lastDispatch = Number(properties.getProperty('KFL_LAST_DISPATCH_AT') || 0);
-    if (Date.now() - lastDispatch < KFL_DISPATCH_COOLDOWN_MS) return;
+    if (Date.now() - lastDispatch < KFL_DISPATCH_COOLDOWN_MS) {
+      console.log('Sincronización agrupada dentro de la ventana de 2 minutos.');
+      return;
+    }
 
     const url = `https://api.github.com/repos/${KFL_GITHUB_OWNER}/${KFL_GITHUB_REPO}/dispatches`;
     const response = UrlFetchApp.fetch(url, {

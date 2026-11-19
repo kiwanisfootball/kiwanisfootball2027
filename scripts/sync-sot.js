@@ -323,8 +323,13 @@ async function fetchScores(config) {
 async function fetchCsvCollection(sources, kind) {
   const entries = [];
   for (const [modality, categories] of Object.entries(sources)) {
+    if (!categories || typeof categories !== 'object' || Array.isArray(categories)) continue;
     for (const [category, url] of Object.entries(categories)) {
-      if (url) entries.push({ modality, category, url });
+      if (url === undefined || url === null || (typeof url === 'string' && !url.trim())) continue;
+      if (typeof url !== 'string') {
+        throw new Error(`URL inválida para ${kind} ${modality}/${category}.`);
+      }
+      entries.push({ modality, category, url: url.trim() });
     }
   }
   const results = await Promise.all(entries.map(async entry => {
@@ -448,6 +453,7 @@ if (require.main === module) {
 
 module.exports = {
   groupedHistoryRecords,
+  fetchCsvCollection,
   normalizeCsvRecords,
   normalizeLeagueDatabase,
   normalizePublicRoster,

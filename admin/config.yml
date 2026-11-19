@@ -294,27 +294,6 @@ collections:
                   - { label: "Campeón", name: "campeon", widget: "string" }
                   - { label: "Subcampeón", name: "subcampeon", widget: "string", required: false }
 
-  - name: "records"
-    label: "Récords Varsity"
-    description: "Récords deportivos publicados; no agregues datos personales de inscripción."
-    files:
-      - file: "data/records.json"
-        label: "Récords Varsity"
-        name: "records"
-        fields:
-          - label: "Récords"
-            name: "records"
-            widget: "list"
-            summary: "{{fields.category}} | {{fields.statistic}}: {{fields.mark}} | {{fields.holder}} / {{fields.team}} | {{fields.season}}"
-            hint: "Cada fila contiene únicamente categoría, estadística, marca, titular/equipo y temporada si están publicados."
-            fields:
-              - { label: "Categoría", name: "category", widget: "string", required: false }
-              - { label: "Estadística", name: "statistic", widget: "string" }
-              - { label: "Marca/valor", name: "mark", widget: "string" }
-              - { label: "Titular público", name: "holder", widget: "string", required: false }
-              - { label: "Equipo", name: "team", widget: "string", required: false }
-              - { label: "Temporada", name: "season", widget: "string", required: false }
-
   - name: "mvp"
     label: "Historial de MVP KFL"
     description: "Registros de jugadores MVP agrupados por liga y categoría."

@@ -9,6 +9,7 @@ const {
   normalizeRecordsCSV,
   normalizeScores,
   groupedHistoryRecords,
+  fetchCsvCollection,
   parseCSV
 } = require('./sync-sot');
 
@@ -68,6 +69,17 @@ test('score normalization preserves a zero as the string "0"', () => {
   });
   assert.equal(result.matches[0].sL, '0');
   assert.equal(result.matches[0].sV, '43');
+});
+
+test('empty SOT CSV URLs are skipped and history groups remain empty arrays', async () => {
+  const result = await fetchCsvCollection({
+    flag: { varsity: '', micro: '   ' }
+  }, 'mvp');
+  assert.deepEqual(result, { records: [], failedCategories: [] });
+
+  const grouped = groupedHistoryRecords(result.records, {}, result.failedCategories);
+  assert.deepEqual(grouped.flag.varsity, []);
+  assert.deepEqual(grouped.flag.micro, []);
 });
 
 test('Varsity record CSV requires named public-stat columns and ignores unrelated columns', () => {

@@ -638,6 +638,231 @@
         ]
       },
       {
+        "team": "EAGLES",
+        "players": [
+          {
+            "nombre": "Nicolae",
+            "apellido": "Bordanea",
+            "jersey": "0"
+          },
+          {
+            "nombre": "Luis",
+            "apellido": "Fernández",
+            "jersey": "1"
+          },
+          {
+            "nombre": "Miguel",
+            "apellido": "Hernández",
+            "jersey": "2"
+          },
+          {
+            "nombre": "Daniel",
+            "apellido": "Coronado",
+            "jersey": "3"
+          },
+          {
+            "nombre": "Otmar",
+            "apellido": "Joseph",
+            "jersey": "4"
+          },
+          {
+            "nombre": "Juan Diego",
+            "apellido": "Rodriguez",
+            "jersey": "5"
+          },
+          {
+            "nombre": "Keniel",
+            "apellido": "Scarlett",
+            "jersey": "6"
+          },
+          {
+            "nombre": "Gabriel",
+            "apellido": "Aleman",
+            "jersey": "7"
+          },
+          {
+            "nombre": "Ricardo",
+            "apellido": "De Leon",
+            "jersey": "8"
+          },
+          {
+            "nombre": "Ethan",
+            "apellido": "Diaz",
+            "jersey": "10"
+          },
+          {
+            "nombre": "Diego",
+            "apellido": "Coronado",
+            "jersey": "11"
+          },
+          {
+            "nombre": "Joseph James",
+            "apellido": "Robertson Lopez",
+            "jersey": "13"
+          },
+          {
+            "nombre": "Aizar",
+            "apellido": "Bula",
+            "jersey": "18"
+          },
+          {
+            "nombre": "Joaquín",
+            "apellido": "Dutari",
+            "jersey": "19"
+          },
+          {
+            "nombre": "Roberto",
+            "apellido": "Armijo",
+            "jersey": "20"
+          },
+          {
+            "nombre": "Carlos",
+            "apellido": "Araúz",
+            "jersey": "21"
+          },
+          {
+            "nombre": "Alezandros",
+            "apellido": "Mora",
+            "jersey": "23"
+          },
+          {
+            "nombre": "Samuel",
+            "apellido": "Sánchez",
+            "jersey": "24"
+          },
+          {
+            "nombre": "Orlando",
+            "apellido": "De los Ríos",
+            "jersey": "25"
+          },
+          {
+            "nombre": "Juan David",
+            "apellido": "Quintero",
+            "jersey": "26"
+          },
+          {
+            "nombre": "Kennell",
+            "apellido": "Gavidia",
+            "jersey": "28"
+          },
+          {
+            "nombre": "Sebastian",
+            "apellido": "Guizado",
+            "jersey": "36"
+          },
+          {
+            "nombre": "Gabriel",
+            "apellido": "Batista",
+            "jersey": "38"
+          },
+          {
+            "nombre": "Eric",
+            "apellido": "Gómez",
+            "jersey": "42"
+          },
+          {
+            "nombre": "Fabian",
+            "apellido": "Pousa",
+            "jersey": "50"
+          },
+          {
+            "nombre": "David",
+            "apellido": "Atencio",
+            "jersey": "52"
+          },
+          {
+            "nombre": "Bruno",
+            "apellido": "Vásquez",
+            "jersey": "54"
+          },
+          {
+            "nombre": "Gabriel",
+            "apellido": "Quintana",
+            "jersey": "55"
+          },
+          {
+            "nombre": "Jordy Alejandro",
+            "apellido": "Guzmán Sanjur",
+            "jersey": "59"
+          },
+          {
+            "nombre": "Arnulfo",
+            "apellido": "Checa",
+            "jersey": "60"
+          },
+          {
+            "nombre": "Jairo",
+            "apellido": "Zaldivar",
+            "jersey": "62"
+          },
+          {
+            "nombre": "Fernando",
+            "apellido": "Guevara",
+            "jersey": "65"
+          },
+          {
+            "nombre": "Gian Lucca",
+            "apellido": "Mendez",
+            "jersey": "66"
+          },
+          {
+            "nombre": "Abdiel",
+            "apellido": "Abreu",
+            "jersey": "67"
+          },
+          {
+            "nombre": "Camilo",
+            "apellido": "Barona",
+            "jersey": "69"
+          },
+          {
+            "nombre": "Dilan",
+            "apellido": "Dávila",
+            "jersey": "70"
+          },
+          {
+            "nombre": "Fabián Enrique",
+            "apellido": "Sánchez Bosquez",
+            "jersey": "71"
+          },
+          {
+            "nombre": "Alexander",
+            "apellido": "Delgado",
+            "jersey": "72"
+          },
+          {
+            "nombre": "Rodolfo",
+            "apellido": "Morales",
+            "jersey": "73"
+          },
+          {
+            "nombre": "Daniel",
+            "apellido": "Vilar",
+            "jersey": "76"
+          },
+          {
+            "nombre": "Michael",
+            "apellido": "Quiel",
+            "jersey": "77"
+          },
+          {
+            "nombre": "Brian",
+            "apellido": "De la Rosa",
+            "jersey": "80"
+          },
+          {
+            "nombre": "Juan David",
+            "apellido": "Palacios",
+            "jersey": "87"
+          },
+          {
+            "nombre": "Juan Pablo",
+            "apellido": "Cuero",
+            "jersey": "91"
+          }
+        ]
+      },
+      {
         "team": "RAIDERS",
         "players": [
           {
@@ -1326,231 +1551,6 @@
             "jersey": "92"
           }
         ]
-      },
-      {
-        "team": "EAGLES",
-        "players": [
-          {
-            "nombre": "Nicolae",
-            "apellido": "Bordanea",
-            "jersey": "0"
-          },
-          {
-            "nombre": "Luis",
-            "apellido": "Fernández",
-            "jersey": "1"
-          },
-          {
-            "nombre": "Miguel",
-            "apellido": "Hernández",
-            "jersey": "2"
-          },
-          {
-            "nombre": "Daniel",
-            "apellido": "Coronado",
-            "jersey": "3"
-          },
-          {
-            "nombre": "Otmar",
-            "apellido": "Joseph",
-            "jersey": "4"
-          },
-          {
-            "nombre": "Juan Diego",
-            "apellido": "Rodriguez",
-            "jersey": "5"
-          },
-          {
-            "nombre": "Keniel",
-            "apellido": "Scarlett",
-            "jersey": "6"
-          },
-          {
-            "nombre": "Gabriel",
-            "apellido": "Aleman",
-            "jersey": "7"
-          },
-          {
-            "nombre": "Ricardo",
-            "apellido": "De Leon",
-            "jersey": "8"
-          },
-          {
-            "nombre": "Ethan",
-            "apellido": "Diaz",
-            "jersey": "10"
-          },
-          {
-            "nombre": "Diego",
-            "apellido": "Coronado",
-            "jersey": "11"
-          },
-          {
-            "nombre": "Joseph James",
-            "apellido": "Robertson Lopez",
-            "jersey": "13"
-          },
-          {
-            "nombre": "Aizar",
-            "apellido": "Bula",
-            "jersey": "18"
-          },
-          {
-            "nombre": "Joaquín",
-            "apellido": "Dutari",
-            "jersey": "19"
-          },
-          {
-            "nombre": "Roberto",
-            "apellido": "Armijo",
-            "jersey": "20"
-          },
-          {
-            "nombre": "Carlos",
-            "apellido": "Araúz",
-            "jersey": "21"
-          },
-          {
-            "nombre": "Alezandros",
-            "apellido": "Mora",
-            "jersey": "23"
-          },
-          {
-            "nombre": "Samuel",
-            "apellido": "Sánchez",
-            "jersey": "24"
-          },
-          {
-            "nombre": "Orlando",
-            "apellido": "De los Ríos",
-            "jersey": "25"
-          },
-          {
-            "nombre": "Juan David",
-            "apellido": "Quintero",
-            "jersey": "26"
-          },
-          {
-            "nombre": "Kennell",
-            "apellido": "Gavidia",
-            "jersey": "28"
-          },
-          {
-            "nombre": "Sebastian",
-            "apellido": "Guizado",
-            "jersey": "36"
-          },
-          {
-            "nombre": "Gabriel",
-            "apellido": "Batista",
-            "jersey": "38"
-          },
-          {
-            "nombre": "Eric",
-            "apellido": "Gómez",
-            "jersey": "42"
-          },
-          {
-            "nombre": "Fabian",
-            "apellido": "Pousa",
-            "jersey": "50"
-          },
-          {
-            "nombre": "David",
-            "apellido": "Atencio",
-            "jersey": "52"
-          },
-          {
-            "nombre": "Bruno",
-            "apellido": "Vásquez",
-            "jersey": "54"
-          },
-          {
-            "nombre": "Gabriel",
-            "apellido": "Quintana",
-            "jersey": "55"
-          },
-          {
-            "nombre": "Jordy Alejandro",
-            "apellido": "Guzmán Sanjur",
-            "jersey": "59"
-          },
-          {
-            "nombre": "Arnulfo",
-            "apellido": "Checa",
-            "jersey": "60"
-          },
-          {
-            "nombre": "Jairo",
-            "apellido": "Zaldivar",
-            "jersey": "62"
-          },
-          {
-            "nombre": "Fernando",
-            "apellido": "Guevara",
-            "jersey": "65"
-          },
-          {
-            "nombre": "Gian Lucca",
-            "apellido": "Mendez",
-            "jersey": "66"
-          },
-          {
-            "nombre": "Abdiel",
-            "apellido": "Abreu",
-            "jersey": "67"
-          },
-          {
-            "nombre": "Camilo",
-            "apellido": "Barona",
-            "jersey": "69"
-          },
-          {
-            "nombre": "Dilan",
-            "apellido": "Dávila",
-            "jersey": "70"
-          },
-          {
-            "nombre": "Fabián Enrique",
-            "apellido": "Sánchez Bosquez",
-            "jersey": "71"
-          },
-          {
-            "nombre": "Alexander",
-            "apellido": "Delgado",
-            "jersey": "72"
-          },
-          {
-            "nombre": "Rodolfo",
-            "apellido": "Morales",
-            "jersey": "73"
-          },
-          {
-            "nombre": "Daniel",
-            "apellido": "Vilar",
-            "jersey": "76"
-          },
-          {
-            "nombre": "Michael",
-            "apellido": "Quiel",
-            "jersey": "77"
-          },
-          {
-            "nombre": "Brian",
-            "apellido": "De la Rosa",
-            "jersey": "80"
-          },
-          {
-            "nombre": "Juan David",
-            "apellido": "Palacios",
-            "jersey": "87"
-          },
-          {
-            "nombre": "Juan Pablo",
-            "apellido": "Cuero",
-            "jersey": "91"
-          }
-        ]
       }
     ]
   },
@@ -1973,526 +1973,6 @@
     ],
     "rosters": [
       {
-        "team": "EAGLES",
-        "players": [
-          {
-            "nombre": "Renato",
-            "apellido": "Muñoz",
-            "jersey": "0"
-          },
-          {
-            "nombre": "Sebastián",
-            "apellido": "Paredes",
-            "jersey": "1"
-          },
-          {
-            "nombre": "Nickolas",
-            "apellido": "Martínez",
-            "jersey": "2"
-          },
-          {
-            "nombre": "Osmin",
-            "apellido": "Flores-Jurado",
-            "jersey": "3"
-          },
-          {
-            "nombre": "Daniel",
-            "apellido": "Arias",
-            "jersey": "5"
-          },
-          {
-            "nombre": "Maximiliano",
-            "apellido": "Rachadell",
-            "jersey": "7"
-          },
-          {
-            "nombre": "Samuel",
-            "apellido": "Trejo",
-            "jersey": "9"
-          },
-          {
-            "nombre": "Carlos",
-            "apellido": "Sousa-Lennox",
-            "jersey": "10"
-          },
-          {
-            "nombre": "Diego",
-            "apellido": "Martinelli",
-            "jersey": "11"
-          },
-          {
-            "nombre": "Dylan",
-            "apellido": "Arias",
-            "jersey": "12"
-          },
-          {
-            "nombre": "Dustin",
-            "apellido": "Polanco",
-            "jersey": "13"
-          },
-          {
-            "nombre": "Joseph",
-            "apellido": "Vásquez",
-            "jersey": "14"
-          },
-          {
-            "nombre": "Franco",
-            "apellido": "Trujillo",
-            "jersey": "17"
-          },
-          {
-            "nombre": "Dylan",
-            "apellido": "Cooper",
-            "jersey": "18"
-          },
-          {
-            "nombre": "Diego",
-            "apellido": "Chang",
-            "jersey": "19"
-          },
-          {
-            "nombre": "Luis",
-            "apellido": "Graell",
-            "jersey": "20"
-          },
-          {
-            "nombre": "Juan",
-            "apellido": "Núñez",
-            "jersey": "21"
-          },
-          {
-            "nombre": "Fernando",
-            "apellido": "Rodríguez",
-            "jersey": "22"
-          },
-          {
-            "nombre": "Sebastián",
-            "apellido": "Castellanos",
-            "jersey": "23"
-          },
-          {
-            "nombre": "Anthony",
-            "apellido": "Sánchez",
-            "jersey": "27"
-          },
-          {
-            "nombre": "Xavier",
-            "apellido": "Barria",
-            "jersey": "28"
-          },
-          {
-            "nombre": "Daniel",
-            "apellido": "Carrizo",
-            "jersey": "32"
-          },
-          {
-            "nombre": "Yaco",
-            "apellido": "Barria",
-            "jersey": "52"
-          },
-          {
-            "nombre": "Giovanni",
-            "apellido": "Espinoza",
-            "jersey": "54"
-          },
-          {
-            "nombre": "Nikolas",
-            "apellido": "Pérez-Gionis",
-            "jersey": "56"
-          },
-          {
-            "nombre": "Juan Diego",
-            "apellido": "Ortiz",
-            "jersey": "57"
-          },
-          {
-            "nombre": "Gabriel",
-            "apellido": "Vilar",
-            "jersey": "62"
-          },
-          {
-            "nombre": "Martín",
-            "apellido": "Digerónimo",
-            "jersey": "66"
-          },
-          {
-            "nombre": "Juan Felipe",
-            "apellido": "Ortega",
-            "jersey": "67"
-          },
-          {
-            "nombre": "Damián",
-            "apellido": "Flores",
-            "jersey": "68"
-          },
-          {
-            "nombre": "Pedro F.",
-            "apellido": "Rachadell",
-            "jersey": "69"
-          },
-          {
-            "nombre": "Alcides",
-            "apellido": "Bernal",
-            "jersey": "71"
-          },
-          {
-            "nombre": "Antonio",
-            "apellido": "Guido",
-            "jersey": "74"
-          },
-          {
-            "nombre": "Nelson",
-            "apellido": "Pérez",
-            "jersey": "76"
-          },
-          {
-            "nombre": "Samuel",
-            "apellido": "Soto",
-            "jersey": "78"
-          },
-          {
-            "nombre": "Carlos",
-            "apellido": "Abadia",
-            "jersey": "99"
-          }
-        ]
-      },
-      {
-        "team": "RAIDERS",
-        "players": [
-          {
-            "nombre": "Santiago",
-            "apellido": "Sánchez",
-            "jersey": "0"
-          },
-          {
-            "nombre": "Juan",
-            "apellido": "Vincensini",
-            "jersey": "1"
-          },
-          {
-            "nombre": "Juan Manuel",
-            "apellido": "Aizpurúa",
-            "jersey": "2"
-          },
-          {
-            "nombre": "Julián",
-            "apellido": "Mcleod",
-            "jersey": "3"
-          },
-          {
-            "nombre": "Iker",
-            "apellido": "Goytia",
-            "jersey": "4"
-          },
-          {
-            "nombre": "Fabian",
-            "apellido": "Jiménez",
-            "jersey": "5"
-          },
-          {
-            "nombre": "Felipe",
-            "apellido": "Márquez",
-            "jersey": "6"
-          },
-          {
-            "nombre": "Ariel",
-            "apellido": "Barnett",
-            "jersey": "7"
-          },
-          {
-            "nombre": "Joaquin",
-            "apellido": "Pinzón",
-            "jersey": "8"
-          },
-          {
-            "nombre": "Felipe",
-            "apellido": "Ramírez",
-            "jersey": "9"
-          },
-          {
-            "nombre": "Gael",
-            "apellido": "Guzman",
-            "jersey": "10"
-          },
-          {
-            "nombre": "Diego",
-            "apellido": "Him",
-            "jersey": "11"
-          },
-          {
-            "nombre": "Javierivan",
-            "apellido": "Rodríguez",
-            "jersey": "13"
-          },
-          {
-            "nombre": "Lucas",
-            "apellido": "Campos",
-            "jersey": "14"
-          },
-          {
-            "nombre": "Roberto",
-            "apellido": "Ferrer",
-            "jersey": "17"
-          },
-          {
-            "nombre": "Ian",
-            "apellido": "Broce",
-            "jersey": "18"
-          },
-          {
-            "nombre": "Juan Alberto",
-            "apellido": "Sosa",
-            "jersey": "20"
-          },
-          {
-            "nombre": "Felipe",
-            "apellido": "Jiménez",
-            "jersey": "21"
-          },
-          {
-            "nombre": "Juan José",
-            "apellido": "Velarde",
-            "jersey": "22"
-          },
-          {
-            "nombre": "Lucas",
-            "apellido": "Espinosa",
-            "jersey": "23"
-          },
-          {
-            "nombre": "Gianluigi",
-            "apellido": "Espino",
-            "jersey": "24"
-          },
-          {
-            "nombre": "Bruno",
-            "apellido": "Giugno",
-            "jersey": "26"
-          },
-          {
-            "nombre": "Luis",
-            "apellido": "Cleghorn",
-            "jersey": "44"
-          },
-          {
-            "nombre": "Lucas",
-            "apellido": "Muñoz",
-            "jersey": "50"
-          },
-          {
-            "nombre": "Andrei",
-            "apellido": "Alvarado",
-            "jersey": "55"
-          },
-          {
-            "nombre": "Julio",
-            "apellido": "Mosquera",
-            "jersey": "56"
-          },
-          {
-            "nombre": "Joaquín",
-            "apellido": "Jiménez",
-            "jersey": "58"
-          },
-          {
-            "nombre": "Mateo",
-            "apellido": "Lyma Young",
-            "jersey": "69"
-          },
-          {
-            "nombre": "Emmanuel",
-            "apellido": "Medina",
-            "jersey": "72"
-          },
-          {
-            "nombre": "Gustavo",
-            "apellido": "Guerrero",
-            "jersey": "73"
-          },
-          {
-            "nombre": "Ibero",
-            "apellido": "Fernández",
-            "jersey": "77"
-          }
-        ]
-      },
-      {
-        "team": "DRAGONS",
-        "players": [
-          {
-            "nombre": "FABIO",
-            "apellido": "QUIROS",
-            "jersey": "1"
-          },
-          {
-            "nombre": "DYLAN",
-            "apellido": "MUSSA",
-            "jersey": "4"
-          },
-          {
-            "nombre": "ABEL",
-            "apellido": "RUIZ-DUNKLEY",
-            "jersey": "5"
-          },
-          {
-            "nombre": "NICOLAS",
-            "apellido": "BERGANZA",
-            "jersey": "7"
-          },
-          {
-            "nombre": "MARCOS",
-            "apellido": "TREJO",
-            "jersey": "8"
-          },
-          {
-            "nombre": "EMILIO",
-            "apellido": "CANDANEDO",
-            "jersey": "9"
-          },
-          {
-            "nombre": "FERMIN",
-            "apellido": "CASTAÑEDAS",
-            "jersey": "10"
-          },
-          {
-            "nombre": "CLEANDRO",
-            "apellido": "GUAMBA",
-            "jersey": "11"
-          },
-          {
-            "nombre": "FRANCISCO",
-            "apellido": "ARJONA",
-            "jersey": "13"
-          },
-          {
-            "nombre": "JUAN SEBATIAN",
-            "apellido": "MAHECHA",
-            "jersey": "14"
-          },
-          {
-            "nombre": "TAYRON",
-            "apellido": "MEJIA",
-            "jersey": "15"
-          },
-          {
-            "nombre": "ANDRES",
-            "apellido": "MIRANDA",
-            "jersey": "17"
-          },
-          {
-            "nombre": "JERMAINE",
-            "apellido": "BYNOE",
-            "jersey": "21"
-          },
-          {
-            "nombre": "JORGE LUIS",
-            "apellido": "CANO MOCK",
-            "jersey": "23"
-          },
-          {
-            "nombre": "ISMAEL",
-            "apellido": "JAEN",
-            "jersey": "30"
-          },
-          {
-            "nombre": "CESAR",
-            "apellido": "RUIZ-DUNKLEY",
-            "jersey": "40"
-          },
-          {
-            "nombre": "EDUARDO",
-            "apellido": "CRESPO",
-            "jersey": "44"
-          },
-          {
-            "nombre": "PABLO",
-            "apellido": "LUNA",
-            "jersey": "48"
-          },
-          {
-            "nombre": "ANDRES",
-            "apellido": "PEREN",
-            "jersey": "50"
-          },
-          {
-            "nombre": "SEBASTIAN",
-            "apellido": "OCA",
-            "jersey": "51"
-          },
-          {
-            "nombre": "ESQUIVEL",
-            "apellido": "DWAYNE",
-            "jersey": "52"
-          },
-          {
-            "nombre": "ORLANDO",
-            "apellido": "DE LEON",
-            "jersey": "53"
-          },
-          {
-            "nombre": "MATHIAS",
-            "apellido": "MAU",
-            "jersey": "61"
-          },
-          {
-            "nombre": "JOSUE",
-            "apellido": "GOMEZ",
-            "jersey": "64"
-          },
-          {
-            "nombre": "BRYAN",
-            "apellido": "SANCHEZ",
-            "jersey": "65"
-          },
-          {
-            "nombre": "QUINCY",
-            "apellido": "GLADDEN",
-            "jersey": "67"
-          },
-          {
-            "nombre": "KAEL",
-            "apellido": "SMITH",
-            "jersey": "68"
-          },
-          {
-            "nombre": "TRININSON",
-            "apellido": "NG WONG",
-            "jersey": "70"
-          },
-          {
-            "nombre": "RICARDO",
-            "apellido": "RAMIREZ",
-            "jersey": "72"
-          },
-          {
-            "nombre": "GABRIEL",
-            "apellido": "CANDANEDO",
-            "jersey": "73"
-          },
-          {
-            "nombre": "ALEJANDRO",
-            "apellido": "LUNA",
-            "jersey": "75"
-          },
-          {
-            "nombre": "DJBRIL",
-            "apellido": "MC CATTY",
-            "jersey": "76"
-          },
-          {
-            "nombre": "PAULO",
-            "apellido": "HERNANDEZ",
-            "jersey": "77"
-          },
-          {
-            "nombre": "JUSTIN",
-            "apellido": "MCLEAN",
-            "jersey": "79"
-          }
-        ]
-      },
-      {
         "team": "OWLS",
         "players": [
           {
@@ -2678,6 +2158,166 @@
         ]
       },
       {
+        "team": "RAIDERS",
+        "players": [
+          {
+            "nombre": "Santiago",
+            "apellido": "Sánchez",
+            "jersey": "0"
+          },
+          {
+            "nombre": "Juan",
+            "apellido": "Vincensini",
+            "jersey": "1"
+          },
+          {
+            "nombre": "Juan Manuel",
+            "apellido": "Aizpurúa",
+            "jersey": "2"
+          },
+          {
+            "nombre": "Julián",
+            "apellido": "Mcleod",
+            "jersey": "3"
+          },
+          {
+            "nombre": "Iker",
+            "apellido": "Goytia",
+            "jersey": "4"
+          },
+          {
+            "nombre": "Fabian",
+            "apellido": "Jiménez",
+            "jersey": "5"
+          },
+          {
+            "nombre": "Felipe",
+            "apellido": "Márquez",
+            "jersey": "6"
+          },
+          {
+            "nombre": "Ariel",
+            "apellido": "Barnett",
+            "jersey": "7"
+          },
+          {
+            "nombre": "Joaquin",
+            "apellido": "Pinzón",
+            "jersey": "8"
+          },
+          {
+            "nombre": "Felipe",
+            "apellido": "Ramírez",
+            "jersey": "9"
+          },
+          {
+            "nombre": "Gael",
+            "apellido": "Guzman",
+            "jersey": "10"
+          },
+          {
+            "nombre": "Diego",
+            "apellido": "Him",
+            "jersey": "11"
+          },
+          {
+            "nombre": "Javierivan",
+            "apellido": "Rodríguez",
+            "jersey": "13"
+          },
+          {
+            "nombre": "Lucas",
+            "apellido": "Campos",
+            "jersey": "14"
+          },
+          {
+            "nombre": "Roberto",
+            "apellido": "Ferrer",
+            "jersey": "17"
+          },
+          {
+            "nombre": "Ian",
+            "apellido": "Broce",
+            "jersey": "18"
+          },
+          {
+            "nombre": "Juan Alberto",
+            "apellido": "Sosa",
+            "jersey": "20"
+          },
+          {
+            "nombre": "Felipe",
+            "apellido": "Jiménez",
+            "jersey": "21"
+          },
+          {
+            "nombre": "Juan José",
+            "apellido": "Velarde",
+            "jersey": "22"
+          },
+          {
+            "nombre": "Lucas",
+            "apellido": "Espinosa",
+            "jersey": "23"
+          },
+          {
+            "nombre": "Gianluigi",
+            "apellido": "Espino",
+            "jersey": "24"
+          },
+          {
+            "nombre": "Bruno",
+            "apellido": "Giugno",
+            "jersey": "26"
+          },
+          {
+            "nombre": "Luis",
+            "apellido": "Cleghorn",
+            "jersey": "44"
+          },
+          {
+            "nombre": "Lucas",
+            "apellido": "Muñoz",
+            "jersey": "50"
+          },
+          {
+            "nombre": "Andrei",
+            "apellido": "Alvarado",
+            "jersey": "55"
+          },
+          {
+            "nombre": "Julio",
+            "apellido": "Mosquera",
+            "jersey": "56"
+          },
+          {
+            "nombre": "Joaquín",
+            "apellido": "Jiménez",
+            "jersey": "58"
+          },
+          {
+            "nombre": "Mateo",
+            "apellido": "Lyma Young",
+            "jersey": "69"
+          },
+          {
+            "nombre": "Emmanuel",
+            "apellido": "Medina",
+            "jersey": "72"
+          },
+          {
+            "nombre": "Gustavo",
+            "apellido": "Guerrero",
+            "jersey": "73"
+          },
+          {
+            "nombre": "Ibero",
+            "apellido": "Fernández",
+            "jersey": "77"
+          }
+        ]
+      },
+      {
         "team": "KOLTS",
         "players": [
           {
@@ -2859,6 +2499,366 @@
             "nombre": "JAY",
             "apellido": "EDWARDS",
             "jersey": "92"
+          }
+        ]
+      },
+      {
+        "team": "EAGLES",
+        "players": [
+          {
+            "nombre": "Renato",
+            "apellido": "Muñoz",
+            "jersey": "0"
+          },
+          {
+            "nombre": "Sebastián",
+            "apellido": "Paredes",
+            "jersey": "1"
+          },
+          {
+            "nombre": "Nickolas",
+            "apellido": "Martínez",
+            "jersey": "2"
+          },
+          {
+            "nombre": "Osmin",
+            "apellido": "Flores-Jurado",
+            "jersey": "3"
+          },
+          {
+            "nombre": "Daniel",
+            "apellido": "Arias",
+            "jersey": "5"
+          },
+          {
+            "nombre": "Maximiliano",
+            "apellido": "Rachadell",
+            "jersey": "7"
+          },
+          {
+            "nombre": "Samuel",
+            "apellido": "Trejo",
+            "jersey": "9"
+          },
+          {
+            "nombre": "Carlos",
+            "apellido": "Sousa-Lennox",
+            "jersey": "10"
+          },
+          {
+            "nombre": "Diego",
+            "apellido": "Martinelli",
+            "jersey": "11"
+          },
+          {
+            "nombre": "Dylan",
+            "apellido": "Arias",
+            "jersey": "12"
+          },
+          {
+            "nombre": "Dustin",
+            "apellido": "Polanco",
+            "jersey": "13"
+          },
+          {
+            "nombre": "Joseph",
+            "apellido": "Vásquez",
+            "jersey": "14"
+          },
+          {
+            "nombre": "Franco",
+            "apellido": "Trujillo",
+            "jersey": "17"
+          },
+          {
+            "nombre": "Dylan",
+            "apellido": "Cooper",
+            "jersey": "18"
+          },
+          {
+            "nombre": "Diego",
+            "apellido": "Chang",
+            "jersey": "19"
+          },
+          {
+            "nombre": "Luis",
+            "apellido": "Graell",
+            "jersey": "20"
+          },
+          {
+            "nombre": "Juan",
+            "apellido": "Núñez",
+            "jersey": "21"
+          },
+          {
+            "nombre": "Fernando",
+            "apellido": "Rodríguez",
+            "jersey": "22"
+          },
+          {
+            "nombre": "Sebastián",
+            "apellido": "Castellanos",
+            "jersey": "23"
+          },
+          {
+            "nombre": "Anthony",
+            "apellido": "Sánchez",
+            "jersey": "27"
+          },
+          {
+            "nombre": "Xavier",
+            "apellido": "Barria",
+            "jersey": "28"
+          },
+          {
+            "nombre": "Daniel",
+            "apellido": "Carrizo",
+            "jersey": "32"
+          },
+          {
+            "nombre": "Yaco",
+            "apellido": "Barria",
+            "jersey": "52"
+          },
+          {
+            "nombre": "Giovanni",
+            "apellido": "Espinoza",
+            "jersey": "54"
+          },
+          {
+            "nombre": "Nikolas",
+            "apellido": "Pérez-Gionis",
+            "jersey": "56"
+          },
+          {
+            "nombre": "Juan Diego",
+            "apellido": "Ortiz",
+            "jersey": "57"
+          },
+          {
+            "nombre": "Gabriel",
+            "apellido": "Vilar",
+            "jersey": "62"
+          },
+          {
+            "nombre": "Martín",
+            "apellido": "Digerónimo",
+            "jersey": "66"
+          },
+          {
+            "nombre": "Juan Felipe",
+            "apellido": "Ortega",
+            "jersey": "67"
+          },
+          {
+            "nombre": "Damián",
+            "apellido": "Flores",
+            "jersey": "68"
+          },
+          {
+            "nombre": "Pedro F.",
+            "apellido": "Rachadell",
+            "jersey": "69"
+          },
+          {
+            "nombre": "Alcides",
+            "apellido": "Bernal",
+            "jersey": "71"
+          },
+          {
+            "nombre": "Antonio",
+            "apellido": "Guido",
+            "jersey": "74"
+          },
+          {
+            "nombre": "Nelson",
+            "apellido": "Pérez",
+            "jersey": "76"
+          },
+          {
+            "nombre": "Samuel",
+            "apellido": "Soto",
+            "jersey": "78"
+          },
+          {
+            "nombre": "Carlos",
+            "apellido": "Abadia",
+            "jersey": "99"
+          }
+        ]
+      },
+      {
+        "team": "DRAGONS",
+        "players": [
+          {
+            "nombre": "FABIO",
+            "apellido": "QUIROS",
+            "jersey": "1"
+          },
+          {
+            "nombre": "DYLAN",
+            "apellido": "MUSSA",
+            "jersey": "4"
+          },
+          {
+            "nombre": "ABEL",
+            "apellido": "RUIZ-DUNKLEY",
+            "jersey": "5"
+          },
+          {
+            "nombre": "NICOLAS",
+            "apellido": "BERGANZA",
+            "jersey": "7"
+          },
+          {
+            "nombre": "MARCOS",
+            "apellido": "TREJO",
+            "jersey": "8"
+          },
+          {
+            "nombre": "EMILIO",
+            "apellido": "CANDANEDO",
+            "jersey": "9"
+          },
+          {
+            "nombre": "FERMIN",
+            "apellido": "CASTAÑEDAS",
+            "jersey": "10"
+          },
+          {
+            "nombre": "CLEANDRO",
+            "apellido": "GUAMBA",
+            "jersey": "11"
+          },
+          {
+            "nombre": "FRANCISCO",
+            "apellido": "ARJONA",
+            "jersey": "13"
+          },
+          {
+            "nombre": "JUAN SEBATIAN",
+            "apellido": "MAHECHA",
+            "jersey": "14"
+          },
+          {
+            "nombre": "TAYRON",
+            "apellido": "MEJIA",
+            "jersey": "15"
+          },
+          {
+            "nombre": "ANDRES",
+            "apellido": "MIRANDA",
+            "jersey": "17"
+          },
+          {
+            "nombre": "JERMAINE",
+            "apellido": "BYNOE",
+            "jersey": "21"
+          },
+          {
+            "nombre": "JORGE LUIS",
+            "apellido": "CANO MOCK",
+            "jersey": "23"
+          },
+          {
+            "nombre": "ISMAEL",
+            "apellido": "JAEN",
+            "jersey": "30"
+          },
+          {
+            "nombre": "CESAR",
+            "apellido": "RUIZ-DUNKLEY",
+            "jersey": "40"
+          },
+          {
+            "nombre": "EDUARDO",
+            "apellido": "CRESPO",
+            "jersey": "44"
+          },
+          {
+            "nombre": "PABLO",
+            "apellido": "LUNA",
+            "jersey": "48"
+          },
+          {
+            "nombre": "ANDRES",
+            "apellido": "PEREN",
+            "jersey": "50"
+          },
+          {
+            "nombre": "SEBASTIAN",
+            "apellido": "OCA",
+            "jersey": "51"
+          },
+          {
+            "nombre": "ESQUIVEL",
+            "apellido": "DWAYNE",
+            "jersey": "52"
+          },
+          {
+            "nombre": "ORLANDO",
+            "apellido": "DE LEON",
+            "jersey": "53"
+          },
+          {
+            "nombre": "MATHIAS",
+            "apellido": "MAU",
+            "jersey": "61"
+          },
+          {
+            "nombre": "JOSUE",
+            "apellido": "GOMEZ",
+            "jersey": "64"
+          },
+          {
+            "nombre": "BRYAN",
+            "apellido": "SANCHEZ",
+            "jersey": "65"
+          },
+          {
+            "nombre": "QUINCY",
+            "apellido": "GLADDEN",
+            "jersey": "67"
+          },
+          {
+            "nombre": "KAEL",
+            "apellido": "SMITH",
+            "jersey": "68"
+          },
+          {
+            "nombre": "TRININSON",
+            "apellido": "NG WONG",
+            "jersey": "70"
+          },
+          {
+            "nombre": "RICARDO",
+            "apellido": "RAMIREZ",
+            "jersey": "72"
+          },
+          {
+            "nombre": "GABRIEL",
+            "apellido": "CANDANEDO",
+            "jersey": "73"
+          },
+          {
+            "nombre": "ALEJANDRO",
+            "apellido": "LUNA",
+            "jersey": "75"
+          },
+          {
+            "nombre": "DJBRIL",
+            "apellido": "MC CATTY",
+            "jersey": "76"
+          },
+          {
+            "nombre": "PAULO",
+            "apellido": "HERNANDEZ",
+            "jersey": "77"
+          },
+          {
+            "nombre": "JUSTIN",
+            "apellido": "MCLEAN",
+            "jersey": "79"
           }
         ]
       }
@@ -3185,6 +3185,466 @@
     ],
     "rosters": [
       {
+        "team": "DRAGONS",
+        "players": [
+          {
+            "nombre": "AELOZ",
+            "apellido": "COGLEY",
+            "jersey": "9"
+          },
+          {
+            "nombre": "ADRIAN",
+            "apellido": "DONADI",
+            "jersey": "15"
+          },
+          {
+            "nombre": "HAROLD",
+            "apellido": "AMANZA",
+            "jersey": "16"
+          },
+          {
+            "nombre": "LIAM",
+            "apellido": "WRIGHT",
+            "jersey": "17"
+          },
+          {
+            "nombre": "GABRIEL",
+            "apellido": "GETMAN",
+            "jersey": "20"
+          },
+          {
+            "nombre": "SANTIAGO",
+            "apellido": "CAMBEFORT",
+            "jersey": "21"
+          },
+          {
+            "nombre": "JUAN CARLOS",
+            "apellido": "CHEN PROENZA",
+            "jersey": "22"
+          },
+          {
+            "nombre": "PATRICK",
+            "apellido": "MARSHALL",
+            "jersey": "24"
+          },
+          {
+            "nombre": "JOSUE",
+            "apellido": "LOWE",
+            "jersey": "25"
+          },
+          {
+            "nombre": "VICTOR",
+            "apellido": "TEJADA",
+            "jersey": "29"
+          },
+          {
+            "nombre": "RICARDO",
+            "apellido": "CRISSÓN",
+            "jersey": "44"
+          },
+          {
+            "nombre": "SANTIAGO",
+            "apellido": "BARRIGA SANTOS",
+            "jersey": "51"
+          },
+          {
+            "nombre": "BRANDON",
+            "apellido": "STRANG",
+            "jersey": "52"
+          },
+          {
+            "nombre": "JOSE ELIAS",
+            "apellido": "GABRIEL",
+            "jersey": "53"
+          },
+          {
+            "nombre": "JAIME",
+            "apellido": "GUERRA",
+            "jersey": "55"
+          },
+          {
+            "nombre": "JUAN DIEGO",
+            "apellido": "OLIVER",
+            "jersey": "56"
+          },
+          {
+            "nombre": "ROBERTO",
+            "apellido": "DUARTE",
+            "jersey": "60"
+          },
+          {
+            "nombre": "CALEB",
+            "apellido": "MATOS",
+            "jersey": "63"
+          },
+          {
+            "nombre": "EMILIO",
+            "apellido": "BERRIO",
+            "jersey": "64"
+          },
+          {
+            "nombre": "ISAAC",
+            "apellido": "CALDERON",
+            "jersey": "70"
+          },
+          {
+            "nombre": "THIAGO",
+            "apellido": "ORTEGA",
+            "jersey": "72"
+          },
+          {
+            "nombre": "DIEGO",
+            "apellido": "DE PUENTE",
+            "jersey": "77"
+          },
+          {
+            "nombre": "ANDRES",
+            "apellido": "RAJOY",
+            "jersey": "78"
+          },
+          {
+            "nombre": "ANTONIO",
+            "apellido": "CARBONELL",
+            "jersey": "79"
+          },
+          {
+            "nombre": "OCTAVIO",
+            "apellido": "HESS",
+            "jersey": "82"
+          },
+          {
+            "nombre": "MILAN",
+            "apellido": "CASTILLO",
+            "jersey": "85"
+          },
+          {
+            "nombre": "IÑAKI",
+            "apellido": "NAVARRO",
+            "jersey": "92"
+          },
+          {
+            "nombre": "ISAAC",
+            "apellido": "DELGADO",
+            "jersey": "99"
+          }
+        ]
+      },
+      {
+        "team": "RAIDERS",
+        "players": [
+          {
+            "nombre": "OSCAR",
+            "apellido": "RAMOS TAPIA",
+            "jersey": "0"
+          },
+          {
+            "nombre": "MATIAS",
+            "apellido": "CUKIER",
+            "jersey": "1"
+          },
+          {
+            "nombre": "SANTIAGO",
+            "apellido": "SOTELO",
+            "jersey": "2"
+          },
+          {
+            "nombre": "ROBERTO",
+            "apellido": "CALVO",
+            "jersey": "4"
+          },
+          {
+            "nombre": "JUAN",
+            "apellido": "SAÍZ",
+            "jersey": "5"
+          },
+          {
+            "nombre": "ANTONIO",
+            "apellido": "SAÍZ",
+            "jersey": "8"
+          },
+          {
+            "nombre": "MAYER",
+            "apellido": "SABONGE",
+            "jersey": "11"
+          },
+          {
+            "nombre": "LUCAS",
+            "apellido": "CANDANEDO",
+            "jersey": "22"
+          },
+          {
+            "nombre": "JANSON",
+            "apellido": "JAN PETER",
+            "jersey": "23"
+          },
+          {
+            "nombre": "GIAN LUC",
+            "apellido": "BELANGER",
+            "jersey": "24"
+          },
+          {
+            "nombre": "ALEJANDRO",
+            "apellido": "STANZIOLA",
+            "jersey": "25"
+          },
+          {
+            "nombre": "FRANCISCO",
+            "apellido": "VELTMAN",
+            "jersey": "26"
+          },
+          {
+            "nombre": "XAVIER",
+            "apellido": "BLANCO",
+            "jersey": "30"
+          },
+          {
+            "nombre": "JOSEPH",
+            "apellido": "COLLINS",
+            "jersey": "31"
+          },
+          {
+            "nombre": "ALEJANDRO",
+            "apellido": "FELIÚ",
+            "jersey": "33"
+          },
+          {
+            "nombre": "LUCAS",
+            "apellido": "DE LEÓN",
+            "jersey": "38"
+          },
+          {
+            "nombre": "ALEJANDRO",
+            "apellido": "KAM",
+            "jersey": "42"
+          },
+          {
+            "nombre": "MIGUEL",
+            "apellido": "YOUNG",
+            "jersey": "44"
+          },
+          {
+            "nombre": "AURELIO",
+            "apellido": "GOMEZ",
+            "jersey": "50"
+          },
+          {
+            "nombre": "FELIPE",
+            "apellido": "MOSQUERA",
+            "jersey": "51"
+          },
+          {
+            "nombre": "JOSE",
+            "apellido": "PINILLA",
+            "jersey": "52"
+          },
+          {
+            "nombre": "MANUEL",
+            "apellido": "GARCÍA",
+            "jersey": "54"
+          },
+          {
+            "nombre": "JUAN RAÚL",
+            "apellido": "CRUZ",
+            "jersey": "55"
+          },
+          {
+            "nombre": "ANDRÉS",
+            "apellido": "MAURA",
+            "jersey": "58"
+          },
+          {
+            "nombre": "JOAQUIN",
+            "apellido": "CORREA",
+            "jersey": "66"
+          },
+          {
+            "nombre": "MATIAS",
+            "apellido": "ÁLVAREZ",
+            "jersey": "67"
+          },
+          {
+            "nombre": "PAOLO",
+            "apellido": "NATIVI",
+            "jersey": "68"
+          },
+          {
+            "nombre": "JUAN",
+            "apellido": "GONZÁLEZ",
+            "jersey": "78"
+          },
+          {
+            "nombre": "MATIAS",
+            "apellido": "ARJONA",
+            "jersey": "79"
+          },
+          {
+            "nombre": "SPIROS",
+            "apellido": "YANOPULOS",
+            "jersey": "87"
+          }
+        ]
+      },
+      {
+        "team": "EAGLES",
+        "players": [
+          {
+            "nombre": "DANIEL",
+            "apellido": "GUIDO",
+            "jersey": "0"
+          },
+          {
+            "nombre": "JAD",
+            "apellido": "MAHMOUD",
+            "jersey": "1"
+          },
+          {
+            "nombre": "FIMA",
+            "apellido": "FALIC",
+            "jersey": "4"
+          },
+          {
+            "nombre": "LUIS FELIPE",
+            "apellido": "CLEMENT",
+            "jersey": "5"
+          },
+          {
+            "nombre": "JOSHUA",
+            "apellido": "VASQUEZ",
+            "jersey": "6"
+          },
+          {
+            "nombre": "ANDRES",
+            "apellido": "BARAKAT",
+            "jersey": "7"
+          },
+          {
+            "nombre": "NICOLAS",
+            "apellido": "PAREDES",
+            "jersey": "9"
+          },
+          {
+            "nombre": "MAURO",
+            "apellido": "CASTRO",
+            "jersey": "10"
+          },
+          {
+            "nombre": "MATIAS",
+            "apellido": "RAMIREZ",
+            "jersey": "11"
+          },
+          {
+            "nombre": "MATIAS",
+            "apellido": "MIRONES",
+            "jersey": "12"
+          },
+          {
+            "nombre": "JULIO",
+            "apellido": "GROSSMANN",
+            "jersey": "13"
+          },
+          {
+            "nombre": "JOAQUIN",
+            "apellido": "ROMERO",
+            "jersey": "14"
+          },
+          {
+            "nombre": "MATIAS",
+            "apellido": "RODRIGUEZ",
+            "jersey": "18"
+          },
+          {
+            "nombre": "CARLOS",
+            "apellido": "SALAZAR",
+            "jersey": "19"
+          },
+          {
+            "nombre": "ORLANDO",
+            "apellido": "MARIN",
+            "jersey": "21"
+          },
+          {
+            "nombre": "AARON",
+            "apellido": "ARROYO",
+            "jersey": "24"
+          },
+          {
+            "nombre": "GIANLUCA",
+            "apellido": "ZAMBRANO",
+            "jersey": "27"
+          },
+          {
+            "nombre": "ENZO",
+            "apellido": "MORENO",
+            "jersey": "28"
+          },
+          {
+            "nombre": "CARLOS",
+            "apellido": "PENNA",
+            "jersey": "30"
+          },
+          {
+            "nombre": "FRANCISCO",
+            "apellido": "GUEVARA",
+            "jersey": "34"
+          },
+          {
+            "nombre": "JOEL",
+            "apellido": "JIMENEZ",
+            "jersey": "40"
+          },
+          {
+            "nombre": "ITAI",
+            "apellido": "MIGUEZ",
+            "jersey": "43"
+          },
+          {
+            "nombre": "JUAN JOSE",
+            "apellido": "DURAN",
+            "jersey": "51"
+          },
+          {
+            "nombre": "ALONSO",
+            "apellido": "DEL RIO",
+            "jersey": "52"
+          },
+          {
+            "nombre": "JORGE",
+            "apellido": "SLOCUM",
+            "jersey": "54"
+          },
+          {
+            "nombre": "ALCIDES",
+            "apellido": "BERNAL",
+            "jersey": "57"
+          },
+          {
+            "nombre": "THIAGO",
+            "apellido": "BERMÚDEZ",
+            "jersey": "65"
+          },
+          {
+            "nombre": "ANTONIO",
+            "apellido": "GUIDO",
+            "jersey": "70"
+          },
+          {
+            "nombre": "THEO",
+            "apellido": "PAOLUCCI",
+            "jersey": "74"
+          },
+          {
+            "nombre": "ADRIAN",
+            "apellido": "ICAZA",
+            "jersey": "75"
+          },
+          {
+            "nombre": "ESPINOZA",
+            "apellido": "LUCAS",
+            "jersey": "79"
+          }
+        ]
+      },
+      {
         "team": "OWLS",
         "players": [
           {
@@ -3365,166 +3825,6 @@
         ]
       },
       {
-        "team": "EAGLES",
-        "players": [
-          {
-            "nombre": "DANIEL",
-            "apellido": "GUIDO",
-            "jersey": "0"
-          },
-          {
-            "nombre": "JAD",
-            "apellido": "MAHMOUD",
-            "jersey": "1"
-          },
-          {
-            "nombre": "FIMA",
-            "apellido": "FALIC",
-            "jersey": "4"
-          },
-          {
-            "nombre": "LUIS FELIPE",
-            "apellido": "CLEMENT",
-            "jersey": "5"
-          },
-          {
-            "nombre": "JOSHUA",
-            "apellido": "VASQUEZ",
-            "jersey": "6"
-          },
-          {
-            "nombre": "ANDRES",
-            "apellido": "BARAKAT",
-            "jersey": "7"
-          },
-          {
-            "nombre": "NICOLAS",
-            "apellido": "PAREDES",
-            "jersey": "9"
-          },
-          {
-            "nombre": "MAURO",
-            "apellido": "CASTRO",
-            "jersey": "10"
-          },
-          {
-            "nombre": "MATIAS",
-            "apellido": "RAMIREZ",
-            "jersey": "11"
-          },
-          {
-            "nombre": "MATIAS",
-            "apellido": "MIRONES",
-            "jersey": "12"
-          },
-          {
-            "nombre": "JULIO",
-            "apellido": "GROSSMANN",
-            "jersey": "13"
-          },
-          {
-            "nombre": "JOAQUIN",
-            "apellido": "ROMERO",
-            "jersey": "14"
-          },
-          {
-            "nombre": "MATIAS",
-            "apellido": "RODRIGUEZ",
-            "jersey": "18"
-          },
-          {
-            "nombre": "CARLOS",
-            "apellido": "SALAZAR",
-            "jersey": "19"
-          },
-          {
-            "nombre": "ORLANDO",
-            "apellido": "MARIN",
-            "jersey": "21"
-          },
-          {
-            "nombre": "AARON",
-            "apellido": "ARROYO",
-            "jersey": "24"
-          },
-          {
-            "nombre": "GIANLUCA",
-            "apellido": "ZAMBRANO",
-            "jersey": "27"
-          },
-          {
-            "nombre": "ENZO",
-            "apellido": "MORENO",
-            "jersey": "28"
-          },
-          {
-            "nombre": "CARLOS",
-            "apellido": "PENNA",
-            "jersey": "30"
-          },
-          {
-            "nombre": "FRANCISCO",
-            "apellido": "GUEVARA",
-            "jersey": "34"
-          },
-          {
-            "nombre": "JOEL",
-            "apellido": "JIMENEZ",
-            "jersey": "40"
-          },
-          {
-            "nombre": "ITAI",
-            "apellido": "MIGUEZ",
-            "jersey": "43"
-          },
-          {
-            "nombre": "JUAN JOSE",
-            "apellido": "DURAN",
-            "jersey": "51"
-          },
-          {
-            "nombre": "ALONSO",
-            "apellido": "DEL RIO",
-            "jersey": "52"
-          },
-          {
-            "nombre": "JORGE",
-            "apellido": "SLOCUM",
-            "jersey": "54"
-          },
-          {
-            "nombre": "ALCIDES",
-            "apellido": "BERNAL",
-            "jersey": "57"
-          },
-          {
-            "nombre": "THIAGO",
-            "apellido": "BERMÚDEZ",
-            "jersey": "65"
-          },
-          {
-            "nombre": "ANTONIO",
-            "apellido": "GUIDO",
-            "jersey": "70"
-          },
-          {
-            "nombre": "THEO",
-            "apellido": "PAOLUCCI",
-            "jersey": "74"
-          },
-          {
-            "nombre": "ADRIAN",
-            "apellido": "ICAZA",
-            "jersey": "75"
-          },
-          {
-            "nombre": "ESPINOZA",
-            "apellido": "LUCAS",
-            "jersey": "79"
-          }
-        ]
-      },
-      {
         "team": "KOLTS",
         "players": [
           {
@@ -3671,306 +3971,6 @@
             "nombre": "PATRICK",
             "apellido": "MORRELL",
             "jersey": "77"
-          }
-        ]
-      },
-      {
-        "team": "RAIDERS",
-        "players": [
-          {
-            "nombre": "OSCAR",
-            "apellido": "RAMOS TAPIA",
-            "jersey": "0"
-          },
-          {
-            "nombre": "MATIAS",
-            "apellido": "CUKIER",
-            "jersey": "1"
-          },
-          {
-            "nombre": "SANTIAGO",
-            "apellido": "SOTELO",
-            "jersey": "2"
-          },
-          {
-            "nombre": "ROBERTO",
-            "apellido": "CALVO",
-            "jersey": "4"
-          },
-          {
-            "nombre": "JUAN",
-            "apellido": "SAÍZ",
-            "jersey": "5"
-          },
-          {
-            "nombre": "ANTONIO",
-            "apellido": "SAÍZ",
-            "jersey": "8"
-          },
-          {
-            "nombre": "MAYER",
-            "apellido": "SABONGE",
-            "jersey": "11"
-          },
-          {
-            "nombre": "LUCAS",
-            "apellido": "CANDANEDO",
-            "jersey": "22"
-          },
-          {
-            "nombre": "JANSON",
-            "apellido": "JAN PETER",
-            "jersey": "23"
-          },
-          {
-            "nombre": "GIAN LUC",
-            "apellido": "BELANGER",
-            "jersey": "24"
-          },
-          {
-            "nombre": "ALEJANDRO",
-            "apellido": "STANZIOLA",
-            "jersey": "25"
-          },
-          {
-            "nombre": "FRANCISCO",
-            "apellido": "VELTMAN",
-            "jersey": "26"
-          },
-          {
-            "nombre": "XAVIER",
-            "apellido": "BLANCO",
-            "jersey": "30"
-          },
-          {
-            "nombre": "JOSEPH",
-            "apellido": "COLLINS",
-            "jersey": "31"
-          },
-          {
-            "nombre": "ALEJANDRO",
-            "apellido": "FELIÚ",
-            "jersey": "33"
-          },
-          {
-            "nombre": "LUCAS",
-            "apellido": "DE LEÓN",
-            "jersey": "38"
-          },
-          {
-            "nombre": "ALEJANDRO",
-            "apellido": "KAM",
-            "jersey": "42"
-          },
-          {
-            "nombre": "MIGUEL",
-            "apellido": "YOUNG",
-            "jersey": "44"
-          },
-          {
-            "nombre": "AURELIO",
-            "apellido": "GOMEZ",
-            "jersey": "50"
-          },
-          {
-            "nombre": "FELIPE",
-            "apellido": "MOSQUERA",
-            "jersey": "51"
-          },
-          {
-            "nombre": "JOSE",
-            "apellido": "PINILLA",
-            "jersey": "52"
-          },
-          {
-            "nombre": "MANUEL",
-            "apellido": "GARCÍA",
-            "jersey": "54"
-          },
-          {
-            "nombre": "JUAN RAÚL",
-            "apellido": "CRUZ",
-            "jersey": "55"
-          },
-          {
-            "nombre": "ANDRÉS",
-            "apellido": "MAURA",
-            "jersey": "58"
-          },
-          {
-            "nombre": "JOAQUIN",
-            "apellido": "CORREA",
-            "jersey": "66"
-          },
-          {
-            "nombre": "MATIAS",
-            "apellido": "ÁLVAREZ",
-            "jersey": "67"
-          },
-          {
-            "nombre": "PAOLO",
-            "apellido": "NATIVI",
-            "jersey": "68"
-          },
-          {
-            "nombre": "JUAN",
-            "apellido": "GONZÁLEZ",
-            "jersey": "78"
-          },
-          {
-            "nombre": "MATIAS",
-            "apellido": "ARJONA",
-            "jersey": "79"
-          },
-          {
-            "nombre": "SPIROS",
-            "apellido": "YANOPULOS",
-            "jersey": "87"
-          }
-        ]
-      },
-      {
-        "team": "DRAGONS",
-        "players": [
-          {
-            "nombre": "AELOZ",
-            "apellido": "COGLEY",
-            "jersey": "9"
-          },
-          {
-            "nombre": "ADRIAN",
-            "apellido": "DONADI",
-            "jersey": "15"
-          },
-          {
-            "nombre": "HAROLD",
-            "apellido": "AMANZA",
-            "jersey": "16"
-          },
-          {
-            "nombre": "LIAM",
-            "apellido": "WRIGHT",
-            "jersey": "17"
-          },
-          {
-            "nombre": "GABRIEL",
-            "apellido": "GETMAN",
-            "jersey": "20"
-          },
-          {
-            "nombre": "SANTIAGO",
-            "apellido": "CAMBEFORT",
-            "jersey": "21"
-          },
-          {
-            "nombre": "JUAN CARLOS",
-            "apellido": "CHEN PROENZA",
-            "jersey": "22"
-          },
-          {
-            "nombre": "PATRICK",
-            "apellido": "MARSHALL",
-            "jersey": "24"
-          },
-          {
-            "nombre": "JOSUE",
-            "apellido": "LOWE",
-            "jersey": "25"
-          },
-          {
-            "nombre": "VICTOR",
-            "apellido": "TEJADA",
-            "jersey": "29"
-          },
-          {
-            "nombre": "RICARDO",
-            "apellido": "CRISSÓN",
-            "jersey": "44"
-          },
-          {
-            "nombre": "SANTIAGO",
-            "apellido": "BARRIGA SANTOS",
-            "jersey": "51"
-          },
-          {
-            "nombre": "BRANDON",
-            "apellido": "STRANG",
-            "jersey": "52"
-          },
-          {
-            "nombre": "JOSE ELIAS",
-            "apellido": "GABRIEL",
-            "jersey": "53"
-          },
-          {
-            "nombre": "JAIME",
-            "apellido": "GUERRA",
-            "jersey": "55"
-          },
-          {
-            "nombre": "JUAN DIEGO",
-            "apellido": "OLIVER",
-            "jersey": "56"
-          },
-          {
-            "nombre": "ROBERTO",
-            "apellido": "DUARTE",
-            "jersey": "60"
-          },
-          {
-            "nombre": "CALEB",
-            "apellido": "MATOS",
-            "jersey": "63"
-          },
-          {
-            "nombre": "EMILIO",
-            "apellido": "BERRIO",
-            "jersey": "64"
-          },
-          {
-            "nombre": "ISAAC",
-            "apellido": "CALDERON",
-            "jersey": "70"
-          },
-          {
-            "nombre": "THIAGO",
-            "apellido": "ORTEGA",
-            "jersey": "72"
-          },
-          {
-            "nombre": "DIEGO",
-            "apellido": "DE PUENTE",
-            "jersey": "77"
-          },
-          {
-            "nombre": "ANDRES",
-            "apellido": "RAJOY",
-            "jersey": "78"
-          },
-          {
-            "nombre": "ANTONIO",
-            "apellido": "CARBONELL",
-            "jersey": "79"
-          },
-          {
-            "nombre": "OCTAVIO",
-            "apellido": "HESS",
-            "jersey": "82"
-          },
-          {
-            "nombre": "MILAN",
-            "apellido": "CASTILLO",
-            "jersey": "85"
-          },
-          {
-            "nombre": "IÑAKI",
-            "apellido": "NAVARRO",
-            "jersey": "92"
-          },
-          {
-            "nombre": "ISAAC",
-            "apellido": "DELGADO",
-            "jersey": "99"
           }
         ]
       }
